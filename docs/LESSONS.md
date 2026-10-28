@@ -13,3 +13,6 @@
 - Instantiating Better Auth at module scope made Next.js try to open Prisma during page-data collection, logging `DatabaseNotConfiguredError` on every route even though the build exited zero. Create database-backed clients lazily on the first request, and verify a clean build log, not just the exit code.
 
 - When `.gitignore` patterns are added at the root, verify with `git check-ignore` rather than assuming; generated Prisma output and Vercel's local `.env.local` must never appear in `git status`.
+
+- The product page compiled and built but failed at runtime on the deployment because a Server Component passed the whole dictionary, including formatter functions, to the client variant picker. Only plain strings can cross that boundary. Typecheck and build do not prove a server/client prop is serializable; exercise the route and keep client props to primitives or plain arrays/objects.
+- Matching a search term against a vendor name produced unrelated products (a vendor named for jamdani matched its whole catalogue). Search the fields a shopper expects to match, and verify a craft term returns only relevant items before shipping.

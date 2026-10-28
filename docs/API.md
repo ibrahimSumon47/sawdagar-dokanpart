@@ -12,6 +12,8 @@ Better Auth serves authentication endpoints under `/api/auth/*` through [the rou
 
 Requests are rate limited with a database-backed counter: 10 sign-in attempts per minute and 30 requests per minute per key. The public demo action accepts only the eight seeded demo emails; it does not accept a role or user id from the client. Next.js Server Actions handle theme, language, profile and sign-in forms; they are page actions, not versioned API endpoints.
 
+The catalog has no HTTP API in Phase 3. The listing and product pages query Prisma directly on the server and read filters from validated URL parameters. This keeps prices, stock and seller data out of client-controlled requests until the cart needs an API.
+
 ## Not yet implemented
 
 There are no marketplace REST endpoints, OpenAPI document or SDK yet. The [architecture specification](spec/03-architecture.md) proposes a versioned `/api/v1` API with RFC 9457 errors and an OpenAPI document. Document endpoints here as they land.

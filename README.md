@@ -6,16 +6,18 @@ A non-commercial marketplace demonstration inspired by the independent makers an
 
 ## Current state
 
-Phases 0, 1 and 2 are complete. The authentication and role model is deployed and verified:
+Phases 0, 1, 2 and 3 are complete. The catalog, authentication and role model are deployed:
 
-- [Home](https://sawdagar-dokanpart.vercel.app/) — the storefront shell, bilingual copy and the current phase.
+- [Home](https://sawdagar-dokanpart.vercel.app/) — departments, featured products, trusted vendors and the bilingual shell.
+- [Catalog](https://sawdagar-dokanpart.vercel.app/catalog) — 432 products across 84 categories from 24 vendors, with search, filters and pagination.
+- [A product page](https://sawdagar-dokanpart.vercel.app/product/handwoven-jamdani-saree-indigo) — variants, stock, vendor details and related items (open any card from the catalog).
 - [Design system](https://sawdagar-dokanpart.vercel.app/design) — tokens, type, components, states, both themes and frames at six widths.
 - [Sign in](https://sawdagar-dokanpart.vercel.app/sign-in) — one-click demo access for eight roles.
 - [Account](https://sawdagar-dokanpart.vercel.app/account) — profile editing, role and store membership.
 - [Seller Center](https://sawdagar-dokanpart.vercel.app/seller) — the vendor's store and team, limited to vendor roles.
 - [Admin](https://sawdagar-dokanpart.vercel.app/admin) — accounts and audit log, filtered by the role's permissions.
 
-Sessions are validated on the server. The seller area rejects buyers and platform staff; the admin area rejects buyers and vendors; panels inside the admin area follow the role's permissions, and the audit log is visible only to the Super Admin. Theme and language are read from cookies before the first paint.
+Search and sort run on the server. A query matches English or Bangla product titles and leaf-category names. Prices are integer poisha formatted in Bengali or Western numerals. Sessions are validated on the server: the seller area rejects buyers and platform staff, the admin area rejects buyers and vendors, and panels inside the admin area follow the role's permissions. Theme and language are read from cookies before the first paint.
 
 ## Demo accounts
 
@@ -36,18 +38,20 @@ Demo accounts cannot change their email or password. The seed is idempotent and 
 
 ## Workspace
 
-- `apps/web` — Next.js App Router storefront, auth routes and role-guarded pages; Prisma schema, migration and seed.
+- `apps/web` — Next.js App Router storefront, catalog queries and routes, auth routes and role-guarded pages; Prisma schema, migrations and seed.
 - `packages/ui` — design tokens and shared components with skeleton pairs.
-- `packages/domain` — pure helpers for money, categories, roles, permissions and demo accounts.
+- `packages/domain` — pure helpers for money, categories, catalog seed generation, roles, permissions and demo accounts.
 
 ## Quality checks
 
-CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 43 unit tests include role boundaries, the demo allowlist, safe redirects, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
+CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 58 unit tests include catalog filter validation, the deterministic 432-product seed, role boundaries, the demo allowlist, safe redirects, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
 
 ## Known limitations
 
-- No catalog, cart, checkout or payments exist yet; the gallery products and vendors are design fixtures.
+- There is no cart, checkout, order or payment flow yet. Product pages say so instead of offering a dead button.
+- Catalog photography is an original SVG jamdani pattern per product tone; no image host is integrated.
+- Ratings, review counts and follower counts are seeded display summaries; there is no review or follow table yet.
+- Search is a bounded substring match, not full-text search: no typo tolerance, stemming or autocomplete, and it does not match a vendor name from the search box. Vendor name matches were removed because they returned unrelated products.
 - The seller and admin pages are read-only foundations. Catalog, order, finance and CMS tools arrive with later phases.
 - Demo sign-in is not yet covered by an automated integration test, and there is no browser or accessibility suite yet.
 - Password reset, email verification, two-factor authentication and Google sign-in are not enabled.
-- Product imagery is an original SVG jamdani pattern until real photography and media hosting are added.

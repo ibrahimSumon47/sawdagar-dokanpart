@@ -1,18 +1,18 @@
-import { topLevelCategories } from '@sd/domain';
 import { ButtonLink, SectionHeading } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
-import type { CatalogProduct } from '../../queries';
+import type { CatalogCategory, CatalogProduct } from '../../queries';
 import { CategoryTiles } from '../CategoryTiles';
 import { ProductGrid } from '../ProductGrid';
 
 export interface HomeCatalogProps {
+  categories: readonly CatalogCategory[];
   featured: readonly CatalogProduct[];
   locale: Locale;
   copy: Dictionary;
 }
 
-/** Home page catalog block: twelve departments followed by featured products. */
-export function HomeCatalog({ featured, locale, copy }: HomeCatalogProps) {
+/** Home page catalog block: live departments followed by featured products. */
+export function HomeCatalog({ categories, featured, locale, copy }: HomeCatalogProps) {
   return (
     <>
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -22,7 +22,7 @@ export function HomeCatalog({ featured, locale, copy }: HomeCatalogProps) {
           description={copy.home.categoriesDescription}
         />
         <div className="mt-6">
-          <CategoryTiles categories={topLevelCategories} locale={locale} />
+          <CategoryTiles categories={categories} locale={locale} />
         </div>
       </section>
 

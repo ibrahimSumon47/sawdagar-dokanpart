@@ -91,7 +91,7 @@ export function ProductDetail({ product, related, locale, copy }: ProductDetailP
           </p>
         </section>
 
-        <ProductVendorCard vendor={product.vendor} copy={catalog} />
+        <ProductVendorCard vendor={product.vendor} locale={locale} copy={catalog} />
       </div>
 
       {related.length > 0 ? (

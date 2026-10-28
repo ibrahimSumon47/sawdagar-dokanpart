@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import type { Dictionary } from '../../../../i18n';
+import type { Dictionary, Locale } from '../../../../i18n';
 import { catalogHref, type CatalogFilters } from '../../catalogQuery';
 
 export interface PaginationProps {
   filters: CatalogFilters;
   page: number;
   pageCount: number;
+  locale: Locale;
   copy: Dictionary['catalog'];
 }
 
@@ -15,8 +16,9 @@ const disabledClass =
   'inline-flex min-h-10 items-center rounded-sm border border-line bg-surface px-4 text-sm font-medium text-ink-muted opacity-50';
 
 /** Prev/next pagination that keeps every active filter in the URL. */
-export function Pagination({ filters, page, pageCount, copy }: PaginationProps) {
+export function Pagination({ filters, page, pageCount, locale, copy }: PaginationProps) {
   if (pageCount <= 1) return null;
+  const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB');
 
   return (
     <nav
@@ -32,7 +34,9 @@ export function Pagination({ filters, page, pageCount, copy }: PaginationProps) 
           {copy.previous}
         </span>
       )}
-      <p className="text-sm tabular-nums text-ink-muted">{copy.pageOf(page, pageCount)}</p>
+      <p className="text-sm tabular-nums text-ink-muted">
+        {copy.pageOf(number.format(page), number.format(pageCount))}
+      </p>
       {page < pageCount ? (
         <Link href={catalogHref(filters, { page: page + 1 })} className={linkClass}>
           {copy.next}

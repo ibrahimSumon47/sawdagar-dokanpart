@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add the catalog schema, migration and deterministic seed for 12 departments, 72 leaf categories, 24 vendors, 432 products and 1,296 variants.
+- Add the `/catalog` listing with URL-synced search, category, vendor, price, rating, stock and sort filters, pagination, empty states and layout-matching skeletons.
+- Add the `/product/[slug]` page with variant selection, stock, vendor summary, breadcrumbs, related products and Product JSON-LD.
+- Build the home department tiles and featured products from the seeded database, and support English and Bangla catalog search.
+- Add catalog filter and seed invariant tests; document the catalog, search limits and seed decisions.
+
 - Add Better Auth email/password sessions on Neon, with admin and organization plugins, database rate limiting and an eight-role permission model.
 - Add one-click demo sign-in for eight allowlisted roles, with server-side role guards, safe redirects and audit logging.
 - Add the account profile, vendor store summary, permission-filtered admin overview and audit log, plus a forbidden page and route error boundary.

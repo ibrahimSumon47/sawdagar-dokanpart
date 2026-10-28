@@ -31,6 +31,7 @@ export function CatalogView({
 }: CatalogViewProps) {
   const title = category ? category.name[locale] : copy.catalog.title;
   const description = category ? category.description[locale] : copy.catalog.description;
+  const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB');
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
@@ -66,7 +67,7 @@ export function CatalogView({
         <section aria-live="polite">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <p className="text-sm tabular-nums text-ink-muted">
-              {copy.catalog.results(result.total)}
+              {copy.catalog.results(number.format(result.total))}
             </p>
             {filters.q ? (
               <p className="text-sm text-ink">{copy.catalog.matchesFor(filters.q)}</p>
@@ -93,6 +94,7 @@ export function CatalogView({
             filters={filters}
             page={result.page}
             pageCount={result.pageCount}
+            locale={locale}
             copy={copy.catalog}
           />
         </section>

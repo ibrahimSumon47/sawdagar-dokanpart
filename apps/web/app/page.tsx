@@ -1,5 +1,5 @@
 import { HomeCatalog } from '../features/catalog/components/HomeCatalog';
-import { getFeaturedProducts } from '../features/catalog/queries';
+import { getCatalogCategories, getFeaturedProducts } from '../features/catalog/queries';
 import { HomeIntro } from '../features/home/components/HomeIntro';
 import { getDictionary } from '../i18n';
 import { getLocale } from '../i18n/getLocale';
@@ -8,12 +8,15 @@ import { getLocale } from '../i18n/getLocale';
 export default async function HomePage() {
   const locale = await getLocale();
   const copy = getDictionary(locale);
-  const featured = await getFeaturedProducts(4);
+  const [categories, featured] = await Promise.all([
+    getCatalogCategories(),
+    getFeaturedProducts(4),
+  ]);
 
   return (
     <>
       <HomeIntro copy={copy} />
-      <HomeCatalog featured={featured} locale={locale} copy={copy} />
+      <HomeCatalog categories={categories} featured={featured} locale={locale} copy={copy} />
     </>
   );
 }
