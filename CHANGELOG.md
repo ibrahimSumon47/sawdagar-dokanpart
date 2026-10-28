@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a double-entry ledger with commission per store, delivery, payout and refund transactions, and idempotent posting by kind and reference.
+- Add seller finance: available balance, minimum payout requests, payout history and a delivered statement with commission.
+- Add the platform finance queue: cash, commission and seller payable balances, payout approval, payment and rejection, and refunds for approved returns.
+- Settle approved returns with a refund row and a reversing ledger transaction, and carry a negative store balance forward.
+- Give the seed a negotiated 7% commission rate on every fourth store and keep the standard 8% elsewhere.
+
 - Add the Seller Center with dashboard totals, product create/edit, variant price and stock editing, inventory adjustments with history, sub-order fulfillment, buyer questions, return decisions, store promotions, ninety-day analytics and store settings.
 - Add store approval and KYC state, bilingual storefront CMS fields, fulfillment timestamps and courier details, and an append-only inventory adjustment table.
 - Add a public store page with the store banner, verification, announcement, active products, about text and policies.

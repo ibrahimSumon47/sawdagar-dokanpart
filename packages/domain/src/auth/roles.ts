@@ -32,6 +32,7 @@ export type Permission =
   | 'admin:moderate:catalog'
   | 'admin:moderate:reviews'
   | 'admin:finance:read'
+  | 'admin:finance:write'
   | 'admin:cms:write'
   | 'admin:audit:read'
   | 'admin:settings:write';
@@ -48,6 +49,7 @@ const allPermissions: readonly Permission[] = [
   'admin:moderate:catalog',
   'admin:moderate:reviews',
   'admin:finance:read',
+  'admin:finance:write',
   'admin:cms:write',
   'admin:audit:read',
   'admin:settings:write',
@@ -64,7 +66,7 @@ const rolePermissions: Record<PlatformRole, readonly Permission[]> = {
     'admin:moderate:catalog',
     'admin:moderate:reviews',
   ],
-  finance: [...buyerPermissions, 'admin:access', 'admin:finance:read'],
+  finance: [...buyerPermissions, 'admin:access', 'admin:finance:read', 'admin:finance:write'],
   content_editor: [...buyerPermissions, 'admin:access', 'admin:cms:write'],
   super_admin: allPermissions,
 };

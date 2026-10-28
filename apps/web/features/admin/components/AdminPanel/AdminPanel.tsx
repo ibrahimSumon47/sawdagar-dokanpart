@@ -1,4 +1,5 @@
 import type { Permission, PlatformRole } from '@sd/domain';
+import { ButtonLink } from '@sd/ui';
 import type { Dictionary } from '../../../../i18n';
 import type { Locale } from '../../../../i18n';
 import { RoleBadge } from '../../../auth/components/RoleBadge';
@@ -36,6 +37,8 @@ export function AdminPanel({
   const number = (value: number) =>
     new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB').format(value);
 
+  const canReadFinance = permissions.includes('admin:finance:read');
+
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <header className="max-w-2xl">
@@ -50,6 +53,14 @@ export function AdminPanel({
         <StatTile label={copy.admin.totalUsers} value={number(totalUsers)} />
         <StatTile label={copy.admin.demoAccounts} value={number(demoUsers)} />
       </div>
+
+      {canReadFinance ? (
+        <div className="mt-4">
+          <ButtonLink href="/admin/finance" variant="secondary" size="sm">
+            {copy.admin.financeLink}
+          </ButtonLink>
+        </div>
+      ) : null}
 
       <div className="mt-10 space-y-10">
         <section>

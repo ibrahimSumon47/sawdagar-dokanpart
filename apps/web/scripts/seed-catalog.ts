@@ -45,6 +45,9 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
 
   for (const [index, vendor] of seed.vendors.entries()) {
     const seedValue = hashSeedValue(vendor.slug);
+    // Established stores on the demo platform negotiated a 7% take rate; the
+    // rest sit on the standard 8%.
+    const commissionRateBps = index % 4 === 0 ? 700 : 800;
     const storefront = {
       status: 'approved',
       kycStatus: 'approved',
@@ -68,6 +71,7 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         'Orders are packed within two working days and shipped by courier across Bangladesh.',
       shippingPolicyBn:
         'অর্ডার দুই কর্মদিবসের মধ্যে প্যাক হয়ে সারা বাংলাদেশে কুরিয়ারে পাঠানো হয়।',
+      commissionRateBps,
     };
 
     const saved = await prisma.organization.upsert({

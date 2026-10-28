@@ -27,12 +27,15 @@
 - Phase 7 implementation: seller-center migration for store approval and KYC fields, bilingual storefront CMS fields, fulfillment timestamps, courier and tracking on sub-orders, and an append-only `inventory_adjustments` table; owner-only Seller Center pages for dashboard, products, inventory, orders, questions, returns, promotions, analytics and store settings; product create/edit and activation gated by store and KYC approval; signed stock adjustments with history; sub-order fulfillment with a shipping requirement and stock-restoring cancellation; seller answers and return decisions; store coupons; ninety-day analytics; CSV export; and a public store page.
 - Phase 7 seed: every seeded vendor is approved for store and KYC with business details, bilingual announcements, about text and policies; the demo store has 18 active products and 54 variants; a third, confirmed COD sub-order is seeded for the Rupsha store so fulfillment can be exercised. A `৳60` shipping seed bug (stored as 60 poisha) and stale timestamps on reseed were fixed.
 - Phase 7 production check: signed in as the vendor owner, the dashboard showed the approved store, pipeline revenue, one order to pack and 17 low-stock variants; products listed 18 rows; edit prefilled all fields and three variants and saved; inventory accepted a +2 restock adjustment; the seeded order moved through confirm, pack, ship with courier and tracking, and deliver; `RUPSHA10` was created and listed; store settings saved and the public store rendered 18 products; CI is green on the final commit and the Vercel deployment is Ready.
+- Phase 8 implementation: `20261028230000_finance` migration for `ledger_transactions`, `ledger_entries`, `payouts` and `refunds`, plus `organizations.commissionRateBps`; double-entry rules in `@sd/domain` for delivery, payout and refund, with commission on discounted goods and shipping passed to the seller; idempotent posting by kind and reference inside the caller's transaction; `/seller/finance` with balance tiles, a ৳1,000 minimum withdrawal request, payout history and a delivered statement; `/admin/finance` with cash, commission and seller payable balances, payout approve, pay and reject, and refunds for approved returns; finance links on the admin overview and the Seller Center nav.
+- Phase 8 seed: every fourth vendor gets a negotiated 7% commission rate, the rest keep the standard 8%, so the take rate is visible in the seller statement.
 
 ## Now
-- Phase 7 (Seller Center) is complete and verified. Phase 8 (Finance) has not started.
+- Phase 8 (Finance) code, unit tests, lint and build are complete. Production migration, seed refresh and browser verification are next.
 
 ## Next
-- Start Phase 8 (Finance): ledger, commissions, payouts, refunds and statements, including the refund path for approved return requests.
+- Apply the finance migration and reseed through the `Database` workflow, then verify the seller payout and admin refund flows on the deployment.
+- Start Phase 9 (Admin and CMS): store approvals, catalog and review moderation, Storefront CMS, Journal CMS, feature flags and platform analytics.
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
@@ -51,7 +54,9 @@
 - There is no new-store application flow; the Seller Center assumes the demo vendor already belongs to a seeded store.
 - Bulk CSV import, packing-slip PDFs, seller replies to reviews, staff management, featured collections and a block-based store page builder are not implemented. CSV export is available.
 - Seller analytics show ninety-day totals, best sellers and low stock without charts, a date-range picker or conversion metrics.
-- Return requests can be approved or rejected with a note, but no money is refunded until the finance phase.
+- Payouts are marked paid by the finance team; there is no bKash, Nagad or bank payout API and no settlement file. Refunds write a ledger transaction and a refund row, but no gateway refund is sent because payments are sandbox.
+- The finance pages derive balances from every ledger entry in JavaScript. This is fine at demo volume; aggregate in SQL once transactions grow.
+- There is no buyer-facing payment statement or downloadable ledger export yet.
 - Listing pagination uses an offset `page` parameter; the specification's cursor pagination is deferred.
 - The catalog seed is below the full data-spec target of 800+ products and 40+ vendors; see [decisions](DECISIONS.md).
 - Vercel can queue production builds for several minutes.

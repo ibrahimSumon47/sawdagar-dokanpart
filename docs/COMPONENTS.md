@@ -73,7 +73,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| SellerNav | Horizontal section switcher for the nine Seller Center pages, with `aria-current` on the open one. | `active`, `copy` | [SellerNav.tsx](../apps/web/features/seller/components/SellerNav/SellerNav.tsx) |
+| SellerNav | Horizontal section switcher for the ten Seller Center pages, with `aria-current` on the open one. | `active`, `copy` | [SellerNav.tsx](../apps/web/features/seller/components/SellerNav/SellerNav.tsx) |
 | SellerSection | Seller page frame: title, description, section tabs and content. | `active`, `title`, `description`, `copy`, `children` | [SellerSection.tsx](../apps/web/features/seller/components/SellerSection/SellerSection.tsx) |
 | SellerNotice | Inline success or error line above a Seller Center form or table. | `message`, `tone` | [SellerNotice.tsx](../apps/web/features/seller/components/SellerNotice/SellerNotice.tsx) |
 | SellerStat | One labelled number with an optional hint on the dashboard or analytics page. | `label`, `value`, `hint`, `className` | [SellerStat.tsx](../apps/web/features/seller/components/SellerStat/SellerStat.tsx) |
@@ -107,6 +107,19 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | AuditList | Newest audit entries with actor and time. | `entries`, `copy`, `locale` | [AuditList.tsx](../apps/web/features/admin/components/AuditList/AuditList.tsx) |
 | PermissionList | Permission codes held by the signed-in admin role. | `permissions`, `copy` | [PermissionList.tsx](../apps/web/features/admin/components/PermissionList/PermissionList.tsx) |
 | AdminPanel | Admin layout whose panels follow role permissions. | `role`, `permissions`, `totalUsers`, `demoUsers`, `users`, `auditEntries`, `canReadUsers`, `canReadAudit`, `copy`, `locale` | [AdminPanel.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanel.tsx) |
+
+## Finance (`apps/web/features/finance`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| SellerFinanceView | Seller finance page body: notice, balance tiles, withdrawal form, payout history and delivered statement. | `finance`, `copy`, `locale`, `canManage`, `notice` | [SellerFinanceView.tsx](../apps/web/features/finance/components/SellerFinanceView/SellerFinanceView.tsx) |
+| SellerFinanceStats | Four balance tiles: available, in progress, paid out and commission rate. | `finance`, `copy`, `locale` | [SellerFinanceStats.tsx](../apps/web/features/finance/components/SellerFinanceStats/SellerFinanceStats.tsx) |
+| PayoutRequestForm | Owner-only withdrawal form with an amount and optional note. | `copy` | [PayoutRequestForm.tsx](../apps/web/features/finance/components/PayoutRequestForm/PayoutRequestForm.tsx) |
+| PayoutHistoryList | A store's withdrawal requests with status badges and amounts. | `payouts`, `copy`, `locale` | [PayoutHistoryList.tsx](../apps/web/features/finance/components/PayoutHistoryList/PayoutHistoryList.tsx) |
+| StatementTable | Delivered sub-orders with goods, commission and net payout columns. | `statement`, `copy`, `locale` | [StatementTable.tsx](../apps/web/features/finance/components/StatementTable/StatementTable.tsx) |
+| FinanceOverviewView | Platform finance body: ledger balances, payout queue, refund queue and recent refunds. | `overview`, `copy`, `locale`, `notice` | [FinanceOverviewView.tsx](../apps/web/features/finance/components/FinanceOverviewView/FinanceOverviewView.tsx) |
+| PayoutQueue | Platform payout rows with approve, pay and reject controls allowed by the current state. | `payouts`, `copy`, `locale` | [PayoutQueue.tsx](../apps/web/features/finance/components/PayoutQueue/PayoutQueue.tsx) |
+| RefundQueue | Approved return lines waiting for a refund, with the amount and one refund action. | `refundable`, `copy`, `locale` | [RefundQueue.tsx](../apps/web/features/finance/components/RefundQueue/RefundQueue.tsx) |
 
 ## Shell (`apps/web/features/shell`)
 

@@ -11,6 +11,7 @@ export type SellerTab =
   | 'returns'
   | 'promotions'
   | 'analytics'
+  | 'finance'
   | 'store';
 
 export interface SellerNavProps {
@@ -30,6 +31,7 @@ export function SellerNav({ active, copy }: SellerNavProps) {
     { key: 'returns', href: '/seller/returns', label: copy.tabReturns },
     { key: 'promotions', href: '/seller/promotions', label: copy.tabPromotions },
     { key: 'analytics', href: '/seller/analytics', label: copy.tabAnalytics },
+    { key: 'finance', href: '/seller/finance', label: copy.tabFinance },
     { key: 'store', href: '/seller/store', label: copy.tabStore },
   ];
 

@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getPrisma } from '../../lib/prisma';
+import { postDeliveryLedger } from '../finance/ledgerService';
 import { auditSeller } from './actionHelpers';
 import { answerSchema, returnDecisionSchema } from './inputs';
 import { requireSellerAction } from './session';
@@ -48,8 +49,13 @@ export async function advanceSubOrderAction(formData: FormData): Promise<void> {
     where: { id: subOrderId, organizationId: access.organizationId },
     select: {
       id: true,
+      number: true,
       status: true,
       orderId: true,
+      subtotalMinor: true,
+      discountMinor: true,
+      totalMinor: true,
+      organization: { select: { commissionRateBps: true } },
       items: { select: { variantId: true, productId: true, quantity: true } },
       order: { select: { subOrders: { select: { id: true, status: true } } } },
     },
@@ -122,6 +128,17 @@ export async function advanceSubOrderAction(formData: FormData): Promise<void> {
           ? 'cancelled'
           : 'confirmed';
       await tx.order.update({ where: { id: subOrder.orderId }, data: { status: orderStatus } });
+
+      if (target === 'delivered') {
+        await postDeliveryLedger(tx, {
+          subOrderId: subOrder.id,
+          number: subOrder.number,
+          totalMinor: subOrder.totalMinor,
+          goodsMinor: subOrder.subtotalMinor - subOrder.discountMinor,
+          organizationId: access.organizationId,
+          commissionRateBps: subOrder.organization.commissionRateBps,
+        });
+      }
     });
     await auditSeller(access, 'seller.suborder.advanced', 'subOrder', subOrder.id, {
       from: subOrder.status,

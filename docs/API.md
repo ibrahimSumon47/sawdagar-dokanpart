@@ -65,6 +65,16 @@ Defined in [storeActions.ts](../apps/web/features/seller/storeActions.ts), [prod
 
 `GET /seller/products/export` returns a private CSV download of every variant in the signed-in owner's store, one row per SKU with product, slug, status, price in poisha and stock. It returns 401 for guests and 403 for accounts without an owner membership.
 
+## Finance Server Actions
+
+Defined in [actions.ts](../apps/web/features/finance/actions.ts) and [refundActions.ts](../apps/web/features/finance/refundActions.ts). Every action resolves the session first: a payout request needs an owner membership in the signed-in store, and a queue decision needs `admin:finance:write`. Amounts, target ids and decisions come from the form, but the balance, payout state and refund eligibility are re-read on the server.
+
+| Action | Input | Behaviour |
+|---|---|---|
+| `requestPayoutAction` | `amount` in taka, optional `note` | Converts the amount to poisha, requires ৳1,000 and no more than the available balance after in-flight payouts, creates a `requested` payout and audits it |
+| `processPayoutAction` | `payoutId`, `decision` (`approve`, `pay`, `reject`) | Allows only the transition the current status permits; paying posts the payout ledger transaction and marks it paid in one database transaction |
+| `refundReturnAction` | `returnRequestId` | Requires an approved request with no refund; creates the refund, marks the return `refunded` and posts a transaction that reverses the store's payable and the commission proportionally |
+
 ## Not yet implemented
 
 There are no marketplace REST endpoints, OpenAPI document or SDK yet. The [architecture specification](spec/03-architecture.md) proposes a versioned `/api/v1` API with RFC 9457 errors and an OpenAPI document. Document endpoints here as they land.

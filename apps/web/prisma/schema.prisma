@@ -125,6 +125,7 @@ model Organization {
   returnPolicyBn  String?
   shippingPolicyEn String?
   shippingPolicyBn String?
+  commissionRateBps Int      @default(800)
   rating        Float        @default(0)
   reviewCount   Int          @default(0)
   followers     Int          @default(0)
@@ -136,6 +137,8 @@ model Organization {
   products      Product[]
   coupons       Coupon[]
   subOrders     SubOrder[]
+  payouts       Payout[]
+  refunds       Refund[]
 
   @@map("organizations")
 }
@@ -394,6 +397,7 @@ model Order {
   reservations   StockReservation[]
   redemption     CouponRedemption?
   mailOutbox     MailOutbox[]
+  refunds        Refund[]
 
   @@index([userId, placedAt])
   @@index([status, placedAt])
@@ -596,6 +600,71 @@ model ProductQuestion {
   @@map("product_questions")
 }
 
+model LedgerTransaction {
+  id          String        @id
+  kind        String
+  referenceId String
+  memo        String?
+  createdAt   DateTime      @default(now())
+  entries     LedgerEntry[]
+
+  @@unique([kind, referenceId])
+  @@index([createdAt])
+  @@map("ledger_transactions")
+}
+
+model LedgerEntry {
+  id            String            @id
+  transactionId String
+  accountCode   String
+  direction     String
+  amountMinor   Int
+  createdAt     DateTime          @default(now())
+  transaction   LedgerTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@index([transactionId])
+  @@index([accountCode, createdAt])
+  @@map("ledger_entries")
+}
+
+model Payout {
+  id              String       @id
+  number          String       @unique
+  organizationId  String
+  amountMinor     Int
+  status          String       @default("requested")
+  note            String?
+  requestedByUserId String
+  requestedAt     DateTime     @default(now())
+  processedAt     DateTime?
+  processedByUserId String?
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId, requestedAt])
+  @@index([status, requestedAt])
+  @@map("payouts")
+}
+
+model Refund {
+  id              String         @id
+  orderId         String
+  returnRequestId String         @unique
+  organizationId  String
+  amountMinor     Int
+  commissionMinor Int
+  status          String         @default("paid")
+  note            String?
+  createdAt       DateTime       @default(now())
+  processedAt     DateTime?
+  order           Order          @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  returnRequest   ReturnRequest  @relation(fields: [returnRequestId], references: [id], onDelete: Restrict)
+  organization    Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId, createdAt])
+  @@index([status, createdAt])
+  @@map("refunds")
+}
+
 model InventoryAdjustment {
   id          String         @id
   variantId   String
@@ -623,6 +692,7 @@ model ReturnRequest {
   updatedAt      DateTime  @updatedAt
   orderItem      OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
   user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refund         Refund?
 
   @@index([userId, createdAt])
   @@index([status, createdAt])

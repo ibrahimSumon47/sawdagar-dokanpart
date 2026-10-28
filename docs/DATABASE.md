@@ -49,6 +49,11 @@ erDiagram
   products ||--o{ product_questions : answered_on
   users ||--o{ return_requests : opens
   order_items ||--o| return_requests : returned_by
+  organizations ||--o{ payouts : withdraws
+  organizations ||--o{ refunds : refunded_for
+  orders ||--o{ refunds : refunded_on
+  return_requests ||--o| refunds : settled_by
+  ledger_transactions ||--o{ ledger_entries : posts
 ```
 
 ## Tables
@@ -59,7 +64,7 @@ erDiagram
 | `sessions` | Session token, expiry, client details, active organization and impersonation |
 | `accounts` | Credential and future OAuth accounts, unique by provider and account id |
 | `verifications` | Better Auth verification tokens and expiry |
-| `organizations` | Vendor stores, unique by slug, with approval and KYC state, legal business details and the bilingual storefront CMS fields |
+| `organizations` | Vendor stores, unique by slug, with approval and KYC state, legal business details, the bilingual storefront CMS fields and a commission rate in basis points |
 | `members` | Store membership with owner or staff role, unique per user and store |
 | `invitations` | Pending store invitations and expiry |
 | `rate_limits` | Database-backed Better Auth request counters |
@@ -86,6 +91,10 @@ erDiagram
 | `stock_reservations` | Ordered quantity per variant, held for MockPay or confirmed for COD, with an expiry for future cleanup |
 | `coupon_redemptions` | Coupon, order, user and the goods-plus-shipping discount recorded once per order |
 | `mail_outbox` | In-app copy of a transactional message, with recipient, subject, body and read state |
+| `ledger_transactions` | One balanced money movement, unique by kind (`delivery`, `payout`, `refund`) and the row it settles, with an optional memo |
+| `ledger_entries` | Debit or credit line in poisha against an account code such as `platform:cash` or `seller:<id>:payable` |
+| `payouts` | A store's withdrawal request: number, amount, requested and processing users, status and note |
+| `refunds` | One paid refund per approved return request, with the amount, the reversed commission and the order link |
 
 ## Catalog shape
 
@@ -125,6 +134,15 @@ erDiagram
 - A sub-order carries its own timestamps for confirmed, packed, shipped, delivered and cancelled. Shipping requires a courier and tracking number in the action and input schema. Cancelling before dispatch restores each line's stock and records a `return` adjustment; after delivery, a return request takes over.
 - The store's `orders.total` is not rewritten during fulfillment. The order becomes `completed` only when every sub-order is delivered, and `cancelled` when every sub-order is cancelled.
 - A store coupon is still a `coupons` row with `scope = 'vendor'` and `organizationId`; promotion history and redemptions are preserved when a seller deactivates it.
+
+## Finance shape
+
+- Money is double-entry. Every `ledger_transactions` row has `ledger_entries` whose debits equal credits, and the account codes are stable strings rather than a second table. `@sd/domain` holds the entry builders, `commissionFor`, `sellerNetFor`, `signedBalance` and `availableForPayout`, and their unit tests assert that every transaction balances.
+- Commission is taken from goods after discount, never from shipping; the seller receives the goods minus commission plus the shipping fee. `organizations.commissionRateBps` defaults to 800 (8%) and the seed gives every fourth store 700 (7%) to exercise a negotiated rate.
+- Delivering a sub-order posts one `delivery` transaction: cash is debited, the store's payable is credited with total minus commission, and commission revenue is credited. The unique `(kind, referenceId)` pair makes a repeated delivery a no-op instead of a double payment.
+- A payout is requested only by an owner, needs at least ৳1,000 and cannot exceed the payable balance minus payouts already in flight. Approval, payment and rejection are separate states; paying it posts the `payout` transaction and settles the store's payable in cash.
+- Refunding an approved return creates one `refunds` row, marks the return `refunded` and posts a `refund` transaction that debits the store's payable and the commission revenue and credits cash. A store can end up owing the platform after a refund of an already-paid order; the negative payable is carried forward rather than clamped.
+- Ledger balances are never edited or deleted. Corrections are new transactions, and the finance pages derive every number from entries, payouts and refunds rather than stored totals.
 
 ## Checkout and order shape
 
@@ -177,6 +195,14 @@ erDiagram
 | `return_requests(order_item_id)` unique | One open request per line |
 | `return_requests(user_id, created_at)` and `return_requests(status, created_at)` | Buyer history and the seller queue |
 | `inventory_adjustments(variant_id, created_at)` | A variant's stock history, newest first |
+| `ledger_transactions(kind, reference_id)` unique | Idempotent delivery, payout and refund posting |
+| `ledger_transactions(created_at)` | Newest transactions for the finance audit view |
+| `ledger_entries(transaction_id)` | Entries of one balanced transaction |
+| `ledger_entries(account_code, created_at)` | An account's running balance |
+| `payouts(number)` unique | Payout reference lookup |
+| `payouts(organization_id, requested_at)` and `payouts(status, requested_at)` | A store's history and the platform queue |
+| `refunds(return_request_id)` unique | One refund per return request |
+| `refunds(organization_id, created_at)` and `refunds(status, created_at)` | Store and platform refund history |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 
