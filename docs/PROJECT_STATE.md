@@ -8,7 +8,7 @@
 - Phase 3: catalog migration for categories, vendor profile fields, products and product variants; deterministic original seed of 12 departments, 72 leaf categories, 24 vendors, 432 products and 1,296 variants; `/catalog` listing with URL-validated search, category, vendor, price, rating, stock and sort filters; `/product/[slug]` page with variants, stock, vendor card, related products, breadcrumbs and Product JSON-LD; home departments and featured products now come from the database.
 - Phase 3 pages have layout-matching loading skeletons, empty results and a route error boundary. The catalog is in both languages: Bangla numerals, category names, descriptions, variant names and search.
 - Neon migration and two idempotent seeds ran successfully through the `Database` GitHub Actions workflow.
-- Unit tests: 58 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants and catalog filter validation.
+- Unit tests: 59 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants and catalog filter validation.
 - Lint, typecheck, tests and build pass locally; the build does not touch the database.
 - Production verification: the catalog returned 200 with 432 products, a department filter changed the result count, English `jamdani` returned six sarees, Bangla `শাড়ি` returned 36, and a product page switched variants with the correct price and SKU. Phase 2 demo sign-in and role guards were re-verified earlier on the same deployment.
 

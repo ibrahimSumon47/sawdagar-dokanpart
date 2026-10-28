@@ -30,7 +30,12 @@ const slug = z
   .optional()
   .catch(undefined);
 
-const price = z.coerce.number().int().min(0).max(10_000_000).optional().catch(undefined);
+const price = z
+  .preprocess(
+    (value) => (value === '' ? undefined : value),
+    z.coerce.number().int().min(0).max(10_000_000).optional(),
+  )
+  .catch(undefined);
 
 const querySchema = z.object({
   q: z.string().trim().max(80).catch(''),

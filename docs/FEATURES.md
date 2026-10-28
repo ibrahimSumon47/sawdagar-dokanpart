@@ -2,14 +2,14 @@
 
 | Feature | Implementation | Status |
 |---|---|---|
-| Catalog schema for categories, vendors, products, variants and tags | [schema.prisma](../apps/web/prisma/schema.prisma), [catalog migration](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql) | Phase 3 |
+| Catalog schema for categories, vendors, products and variants | [schema.prisma](../apps/web/prisma/schema.prisma), [catalog migration](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql) | Phase 3 |
 | Deterministic 432-product seed across 84 categories and 24 vendors | [catalogSeed.ts](../packages/domain/src/catalog/catalogSeed.ts), [catalogSeedData.ts](../packages/domain/src/catalog/catalogSeedData.ts), [seed script](../apps/web/scripts/seed-demo.ts) | Phase 3 |
 | Catalog listing with validated URL filters, category tree and pagination | [catalog page](../apps/web/app/catalog/page.tsx), [queries.ts](../apps/web/features/catalog/queries.ts), [catalogQuery.ts](../apps/web/features/catalog/catalogQuery.ts), [CatalogView](../apps/web/features/catalog/components/CatalogView/CatalogView.tsx) | Phase 3 |
 | English and Bangla search over product titles and category names | [queries.ts](../apps/web/features/catalog/queries.ts), [CatalogSearch](../apps/web/features/catalog/components/CatalogSearch/CatalogSearch.tsx) | Phase 3 |
 | Price, rating, stock, sort and vendor filters with empty state | [CatalogFilters](../apps/web/features/catalog/components/CatalogFilters/CatalogFilters.tsx), [Pagination](../apps/web/features/catalog/components/Pagination/Pagination.tsx) | Phase 3 |
 | Product page with variant selection, stock, vendor card and related items | [product page](../apps/web/app/product/%5Bslug%5D/page.tsx), [ProductDetail](../apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx), [VariantPicker](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) | Phase 3 |
 | Product JSON-LD, breadcrumbs and per-product metadata | [ProductJsonLd](../apps/web/features/catalog/components/ProductJsonLd/ProductJsonLd.tsx), [ProductBreadcrumbs](../apps/web/features/catalog/components/ProductBreadcrumbs/ProductBreadcrumbs.tsx), [product metadata](../apps/web/app/product/%5Bslug%5D/page.tsx) | Phase 3 |
-| Home catalog: departments, featured products and trusted vendors | [home page](../apps/web/app/page.tsx), [HomeCatalog](../apps/web/features/catalog/components/HomeCatalog/HomeCatalog.tsx) | Phase 3 |
+| Home catalog: live departments and featured products | [home page](../apps/web/app/page.tsx), [HomeCatalog](../apps/web/features/catalog/components/HomeCatalog/HomeCatalog.tsx) | Phase 3 |
 | Catalog loading skeletons, route error boundary and empty results | [catalog loading](../apps/web/app/catalog/loading.tsx), [product loading](../apps/web/app/product/%5Bslug%5D/loading.tsx), [error boundary](../apps/web/app/error.tsx), [EmptyState](../packages/ui/src/components/EmptyState/EmptyState.tsx) | Phase 3 |
 | Better Auth email/password sessions on Neon | [auth.ts](../apps/web/lib/auth.ts), [route handler](../apps/web/app/api/auth/%5B...all%5D/route.ts) | Phase 2 |
 | One-click demo sign-in for eight roles | [demo accounts](../packages/domain/src/auth/demoAccounts.ts), [action](../apps/web/features/auth/actions.ts), [sign-in page](../apps/web/app/sign-in/page.tsx) | Phase 2 |

@@ -47,7 +47,7 @@ erDiagram
 - `products.priceMinor` is the lowest default variant price and `products.totalStock` is the sum of variant stock, so listing filters can run on one table without joins. The seed keeps both in sync; a future seller editor must update them in the same transaction as variants.
 - Prices are integer poisha in Bangladeshi taka. They are never floats and never sent from the client.
 - `products.rating` and `reviewCount` are seeded display summaries. There is no reviews table yet, so a review cannot change these values until Phase 8.
-- Search matches the English and Bangla product title and the English and Bangla leaf-category name. Descriptions and tags are not searched yet; a future search phase can add a text index without changing the UI.
+- Search matches the English and Bangla product title and the English and Bangla leaf-category name. Descriptions are not searched yet; a future search phase can add a text index without changing the UI.
 - No product photos exist. `products.tone` picks one of the original SVG pattern tones until a media phase adds a URL and an image host.
 
 ## Indexes
@@ -71,4 +71,4 @@ Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size
 - `DIRECT_DATABASE_URL` is used by the Prisma CLI; `DATABASE_URL` is the pooled runtime connection.
 - No images or files are stored in PostgreSQL.
 - The seeded catalog fits comfortably in the Neon Free storage and compute budget. No database size or query-plan measurement has been recorded yet; add one if the catalog grows or a page becomes slow.
-- The seed is idempotent. It upserts users, profiles, the demo store, categories, vendors and products, replaces a product's variants and tags, and never duplicates rows. Re-running it restores the same 432-product catalog.
+- The seed is idempotent. It upserts users, profiles, the demo store, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog.

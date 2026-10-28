@@ -38,7 +38,7 @@ The category tree is two levels deep: departments (`depth: 0`) contain leaf cate
 
 ## Seeding
 
-[buildCatalogSeed](../packages/domain/src/catalog/catalogSeed.ts) expands curated inputs in [catalogSeedData.ts](../packages/domain/src/catalog/catalogSeedData.ts) deterministically: 12 departments x 6 leaves x 3 styles x 2 colours gives 6 products per leaf, 432 products in total. FNV-1a hashes set stock, ratings, review counts and creation dates, so every run produces identical values. The seed script upserts categories, vendors and products, and replaces variants and tags for each product.
+[buildCatalogSeed](../packages/domain/src/catalog/catalogSeed.ts) expands curated inputs in [catalogSeedData.ts](../packages/domain/src/catalog/catalogSeedData.ts) deterministically: 12 departments x 6 leaves x 3 styles x 2 colours gives 6 products per leaf, 432 products in total. FNV-1a hashes set stock, ratings, review counts and creation dates, so every run produces identical values. The seed script upserts categories, vendors and products, and replaces the variants of each product.
 
 The [CI workflow](.github/workflows/ci.yml) runs on Linux, Windows and macOS. The [Vercel project](https://sawdagar-dokanpart.vercel.app/) deploys `main`. Migrations and seeds run only through the manual [Database workflow](.github/workflows/db.yml), which holds the direct Neon connection.
 

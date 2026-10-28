@@ -101,7 +101,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | ProductBreadcrumbs | Home, catalog, department, category and product trail. | `category`, `productTitle`, `locale`, `copy` | [ProductBreadcrumbs.tsx](../apps/web/features/catalog/components/ProductBreadcrumbs/ProductBreadcrumbs.tsx) |
 | ProductMedia | Original SVG pattern that stands in for photography, toned per product. | `tone`, `className` | [ProductMedia.tsx](../apps/web/features/catalog/components/ProductMedia/ProductMedia.tsx) |
 | ProductVendorCard | Vendor summary with district, rating, verification and product count; links to the vendor-filtered catalog. | `vendor`, `locale`, `copy` | [ProductVendorCard.tsx](../apps/web/features/catalog/components/ProductVendorCard/ProductVendorCard.tsx) |
-| VariantPicker | Client-side variant radios that show the selected SKU, price, compare-at price and stock. | `variants`, `locale`, `copy` | [VariantPicker.tsx](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) |
+| VariantPicker | Client-side variant radios that show the selected SKU, price, compare-at price and stock. | `variants`, `locale`, `labels` (`chooseVariant`, `stockIn`, `stockLow`, `stockOut`, `sku`, `cartNote`) | [VariantPicker.tsx](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) |
 | ProductJsonLd | Schema.org Product structured data with escaped text for a script context. | `product`, `locale` | [ProductJsonLd.tsx](../apps/web/features/catalog/components/ProductJsonLd/ProductJsonLd.tsx) |
 
 ## Design gallery (`apps/web/features/design`)

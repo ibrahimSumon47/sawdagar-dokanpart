@@ -58,6 +58,14 @@ describe('catalog filters', () => {
     expect(filters.page).toBe(1);
   });
 
+  it('treats blank price fields from the filter form as absent', () => {
+    const filters = parseCatalogFilters({ minPrice: '', maxPrice: '', category: 'sarees' });
+
+    expect(filters.minPrice).toBeUndefined();
+    expect(filters.maxPrice).toBeUndefined();
+    expect(catalogHref(filters)).toBe('/catalog?category=sarees');
+  });
+
   it('swaps a reversed price range instead of returning nothing', () => {
     const filters = parseCatalogFilters({ minPrice: '9000', maxPrice: '2000' });
     expect(filters.minPrice).toBe(2000);

@@ -8,7 +8,7 @@ A non-commercial marketplace demonstration inspired by the independent makers an
 
 Phases 0, 1, 2 and 3 are complete. The catalog, authentication and role model are deployed:
 
-- [Home](https://sawdagar-dokanpart.vercel.app/) — departments, featured products, trusted vendors and the bilingual shell.
+- [Home](https://sawdagar-dokanpart.vercel.app/) — departments, featured products and the bilingual shell.
 - [Catalog](https://sawdagar-dokanpart.vercel.app/catalog) — 432 products across 84 categories from 24 vendors, with search, filters and pagination.
 - [A product page](https://sawdagar-dokanpart.vercel.app/product/handwoven-jamdani-saree-indigo) — variants, stock, vendor details and related items (open any card from the catalog).
 - [Design system](https://sawdagar-dokanpart.vercel.app/design) — tokens, type, components, states, both themes and frames at six widths.
@@ -44,7 +44,7 @@ Demo accounts cannot change their email or password. The seed is idempotent and 
 
 ## Quality checks
 
-CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 58 unit tests include catalog filter validation, the deterministic 432-product seed, role boundaries, the demo allowlist, safe redirects, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
+CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 59 unit tests include catalog filter validation, the deterministic 432-product seed, role boundaries, the demo allowlist, safe redirects, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
 
 ## Known limitations
 
