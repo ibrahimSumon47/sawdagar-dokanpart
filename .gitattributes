@@ -1,6 +1,13 @@
-# Keep formatting-checked web source consistent across Git checkouts.
+# Keep every formatting-checked source file consistent across Git checkouts.
 /apps/web/app/**/*.ts text eol=lf
 /apps/web/app/**/*.tsx text eol=lf
 /apps/web/app/**/*.css text eol=lf
 /apps/web/features/**/*.ts text eol=lf
 /apps/web/features/**/*.tsx text eol=lf
+/apps/web/i18n/**/*.ts text eol=lf
+/apps/web/lib/**/*.ts text eol=lf
+/apps/web/*.ts text eol=lf
+/apps/web/*.mjs text eol=lf
+/packages/*/src/**/*.ts text eol=lf
+/packages/*/src/**/*.tsx text eol=lf
+/packages/*/src/**/*.css text eol=lf
