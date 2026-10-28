@@ -32,7 +32,7 @@ The auth deployment was also exercised through the real sign-in page: buyer, ven
 
 On 2026-10-28 the full gate passed after the shop slice: `pnpm lint` (Prettier plus ESLint), `pnpm typecheck`, `pnpm test` (65 tests) and `pnpm build`. The build listed `/wishlist` and `/compare` as dynamic routes and did not connect to the database. The cart migration was applied to Neon by the `Database` workflow (run 40672398462).
 
-The coupon slice then passed the same gate with 74 tests: seven in `@sd/domain` cover percentage, fixed and free-shipping discounts, caps, vendor scope, minimum subtotal and expiry, and two in `@sd/web` cover a discount subtracted from the estimated total and an ineligible coupon being ignored. The deployed build was then exercised on the production origin:
+The coupon slice then passed the same gate with 74 tests: seven in `@sd/domain` cover percentage, fixed and free-shipping discounts, caps, vendor scope, minimum subtotal and expiry, and two in `@sd/web` cover a discount subtracted from the estimated total and an ineligible coupon being ignored. The coupon migration (run 40678423792) and seed (run 40678549502) completed. On production, `BOISHAKH10` reduced the ৳3,840 cart by ৳384 to ৳3,576; after a reload in a fresh tab the code and discount were still applied. The deployed build was then exercised on the production origin:
 
 - a guest added the small leather belt, the drawer opened at ৳1,280 and the quantity stepper moved it to two at ৳2,560 with a ৳120 delivery fee;
 - a full reload kept the guest cart at two items, confirming the `sd_cart` cookie and database row;
