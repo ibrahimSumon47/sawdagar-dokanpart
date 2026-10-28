@@ -56,7 +56,14 @@ export function ProductDetail({ product, related, locale, copy }: ProductDetailP
             key={product.id}
             variants={product.variants}
             locale={locale}
-            copy={catalog}
+            labels={{
+              chooseVariant: catalog.chooseVariant,
+              stockIn: catalog.stockIn,
+              stockLow: catalog.stockLow,
+              stockOut: catalog.stockOut,
+              sku: catalog.sku,
+              cartNote: catalog.cartNote,
+            }}
           />
 
           <dl className="mt-8 grid gap-4 border-t border-line pt-5 text-sm sm:grid-cols-2">

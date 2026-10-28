@@ -2,17 +2,27 @@
 
 import { Badge, Price } from '@sd/ui';
 import { useState } from 'react';
-import type { Dictionary, Locale } from '../../../../i18n';
+import type { Locale } from '../../../../i18n';
 import type { ProductDetail } from '../../queries';
+
+export interface VariantPickerLabels {
+  chooseVariant: string;
+  stockIn: string;
+  stockLow: string;
+  stockOut: string;
+  sku: string;
+  cartNote: string;
+}
 
 export interface VariantPickerProps {
   variants: ProductDetail['variants'];
   locale: Locale;
-  copy: Dictionary['catalog'];
+  /** Plain strings only: functions cannot cross into a Client Component. */
+  labels: VariantPickerLabels;
 }
 
 /** Variant radios with the selected SKU, price, compare-at price and stock. */
-export function VariantPicker({ variants, locale, copy }: VariantPickerProps) {
+export function VariantPicker({ variants, locale, labels }: VariantPickerProps) {
   const [selectedId, setSelectedId] = useState(
     variants.find((variant) => variant.isDefault)?.id ?? variants[0]?.id,
   );
@@ -22,11 +32,11 @@ export function VariantPicker({ variants, locale, copy }: VariantPickerProps) {
 
   const stockTone = selected.stock === 0 ? 'danger' : selected.stock <= 5 ? 'warning' : 'success';
   const stockLabel =
-    selected.stock === 0 ? copy.stockOut : selected.stock <= 5 ? copy.stockLow : copy.stockIn;
+    selected.stock === 0 ? labels.stockOut : selected.stock <= 5 ? labels.stockLow : labels.stockIn;
 
   return (
     <fieldset className="mt-6">
-      <legend className="text-sm font-semibold text-ink">{copy.chooseVariant}</legend>
+      <legend className="text-sm font-semibold text-ink">{labels.chooseVariant}</legend>
       <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {variants.map((variant) => (
           <label
@@ -66,10 +76,10 @@ export function VariantPicker({ variants, locale, copy }: VariantPickerProps) {
         <Badge tone={stockTone}>{stockLabel}</Badge>
       </div>
       <p className="mt-2 text-xs text-ink-muted">
-        {copy.sku}: {selected.sku}
+        {labels.sku}: {selected.sku}
       </p>
       <p className="mt-4 rounded-sm border border-dashed border-line bg-surface px-3 py-2 text-sm text-ink-muted">
-        {copy.cartNote}
+        {labels.cartNote}
       </p>
     </fieldset>
   );
