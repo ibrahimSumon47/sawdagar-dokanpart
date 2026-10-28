@@ -1008,6 +1008,15 @@ export const bn: Dictionary = {
     backToJournal: 'সব জার্নাল পোস্ট',
     publishedOn: 'প্রকাশিত',
   },
+  credits: {
+    eyebrow: 'আলোকচিত্র',
+    title: 'ছবির স্বীকৃতি',
+    description:
+      'ক্যাটালগের ছবিগুলো উইকিমিডিয়া কমন্সের অবদানকারীদের, নিচের লাইসেন্সে ব্যবহৃত। জামদানি নকশা, ব্র্যান্ড চিহ্ন ও অলংকরণ মূল কাজ।',
+    author: 'আলোকচিত্রী',
+    license: 'লাইসেন্স',
+    source: 'মূল ফাইল দেখুন',
+  },
   csLab: {
     eyebrow: 'পর্ব ১০',
     title: 'সিএস কোর',
@@ -1046,6 +1055,7 @@ export const bn: Dictionary = {
     catalog: 'ক্যাটালগ',
     design: 'ডিজাইন সিস্টেম',
     csLab: 'সিএস কোর',
+    credits: 'ছবির স্বীকৃতি',
     help: 'সহায়তা কেন্দ্র',
     journal: 'জার্নাল',
     repository: 'সোর্স কোড',

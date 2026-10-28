@@ -29,6 +29,8 @@ export interface CatalogProduct {
   reviewCount: number;
   tone: ProductTone;
   totalStock: number;
+  /** Top-level category slug, used to pick the department photograph. */
+  departmentSlug: string;
 }
 
 export interface CatalogResult {
@@ -78,7 +80,10 @@ export function normaliseProductTone(value: string): ProductTone {
 }
 
 type ProductWithVendor = Prisma.ProductGetPayload<{
-  include: { organization: { select: { name: true; slug: true } } };
+  include: {
+    organization: { select: { name: true; slug: true } };
+    category: { select: { path: true } };
+  };
 }>;
 
 export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
@@ -94,6 +99,7 @@ export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
     reviewCount: product.reviewCount,
     tone: normaliseProductTone(product.tone),
     totalStock: product.totalStock,
+    departmentSlug: product.category.path.split('/')[0] ?? '',
   };
 }
 
@@ -226,7 +232,10 @@ export async function searchCatalog(filters: CatalogFilters): Promise<CatalogRes
     orderBy: orderFor(filters.sort),
     skip: ranked ? 0 : (page - 1) * CATALOG_PAGE_SIZE,
     take: ranked ? SEARCH_RANK_LIMIT : CATALOG_PAGE_SIZE,
-    include: { organization: { select: { name: true, slug: true } } },
+    include: {
+      organization: { select: { name: true, slug: true } },
+      category: { select: { path: true } },
+    },
   });
 
   const mapped = products.map(toCatalogProduct);
@@ -261,7 +270,10 @@ export async function getFeaturedProducts(limit = 8): Promise<CatalogProduct[]> 
     where: { status: 'active', totalStock: { gt: 0 } },
     orderBy: [{ rating: 'desc' }, { reviewCount: 'desc' }],
     take: limit,
-    include: { organization: { select: { name: true, slug: true } } },
+    include: {
+      organization: { select: { name: true, slug: true } },
+      category: { select: { path: true } },
+    },
   });
 
   return products.map(toCatalogProduct);
@@ -293,6 +305,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
     reviewCount: product.reviewCount,
     tone: normaliseProductTone(product.tone),
     totalStock: product.totalStock,
+    departmentSlug: product.category.parent?.slug ?? product.category.slug,
     createdAt: product.createdAt,
     category: {
       slug: product.category.slug,
@@ -340,7 +353,10 @@ export async function getRelatedProducts(
     },
     orderBy: [{ rating: 'desc' }, { reviewCount: 'desc' }],
     take: limit,
-    include: { organization: { select: { name: true, slug: true } } },
+    include: {
+      organization: { select: { name: true, slug: true } },
+      category: { select: { path: true } },
+    },
   });
 
   return products.map(toCatalogProduct);

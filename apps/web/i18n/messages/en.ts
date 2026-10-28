@@ -1019,6 +1019,15 @@ export const en = {
     backToJournal: 'All journal posts',
     publishedOn: 'Published',
   },
+  credits: {
+    eyebrow: 'Photography',
+    title: 'Image credits',
+    description:
+      'Catalog photographs come from Wikimedia Commons contributors and are used under the licences below. The jamdani motif, brand mark and illustrations are original work.',
+    author: 'Photographer',
+    license: 'Licence',
+    source: 'View the original file',
+  },
   csLab: {
     eyebrow: 'Phase 10',
     title: 'CS core',
@@ -1058,6 +1067,7 @@ export const en = {
     catalog: 'Catalog',
     design: 'Design system',
     csLab: 'CS core',
+    credits: 'Image credits',
     help: 'Help Center',
     journal: 'Journal',
     repository: 'Source code',

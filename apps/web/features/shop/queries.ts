@@ -120,7 +120,10 @@ export async function getWishlistProducts(viewerId: string): Promise<CatalogProd
     orderBy: { createdAt: 'desc' },
     include: {
       product: {
-        include: { organization: { select: { name: true, slug: true } } },
+        include: {
+          organization: { select: { name: true, slug: true } },
+          category: { select: { path: true } },
+        },
       },
     },
   });

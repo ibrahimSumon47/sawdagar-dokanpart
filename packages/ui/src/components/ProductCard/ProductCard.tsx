@@ -17,6 +17,8 @@ export interface ProductCardProduct {
   tone?: ProductTone;
   /** When zero, the card can show a sold-out badge. */
   totalStock?: number;
+  /** Representative department photograph; the pattern shows when absent. */
+  image?: { src: string; alt: string; objectPosition?: string };
 }
 
 export interface ProductCardProps {
@@ -66,7 +68,20 @@ export function ProductCard({
           toneClass[product.tone ?? 'accent'],
         )}
       >
-        <JamdaniPattern className="transition-transform duration-300 group-hover:scale-[1.03]" />
+        {product.image ? (
+          <img
+            src={product.image.src}
+            alt={product.image.alt}
+            width={960}
+            height={720}
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: product.image.objectPosition }}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <JamdaniPattern className="transition-transform duration-300 group-hover:scale-[1.03]" />
+        )}
         {discounted ? (
           <Badge tone="accent" className="absolute left-2 top-2">
             {saleLabel}

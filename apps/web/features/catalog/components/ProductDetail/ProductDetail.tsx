@@ -13,6 +13,7 @@ import { ProductMedia } from '../ProductMedia';
 import { ProductVendorCard } from '../ProductVendorCard';
 import { ProductGrid, productGridLabels } from '../ProductGrid';
 import { ProductBuyBox } from '../../../shop/components/ProductBuyBox';
+import { departmentPhoto } from '../../media';
 
 export interface ProductDetailProps {
   product: Product;
@@ -37,6 +38,7 @@ export function ProductDetail({
   copy,
 }: ProductDetailProps) {
   const catalog = copy.catalog;
+  const photo = departmentPhoto(product.departmentSlug, product.slug);
 
   return (
     <article className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
@@ -49,7 +51,7 @@ export function ProductDetail({
       />
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
-        <ProductMedia tone={product.tone} />
+        <ProductMedia tone={product.tone} image={photo ?? undefined} />
 
         <div className="min-w-0">
           <Link

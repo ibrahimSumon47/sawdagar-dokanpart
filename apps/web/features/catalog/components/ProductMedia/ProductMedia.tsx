@@ -3,6 +3,8 @@ import { cn, JamdaniPattern } from '@sd/ui';
 
 export interface ProductMediaProps {
   tone: ProductTone;
+  /** Representative department photograph; the pattern shows when absent. */
+  image?: { src: string; alt: string; objectPosition?: string };
   className?: string;
 }
 
@@ -14,20 +16,34 @@ const toneClass: Record<ProductTone, string> = {
 };
 
 /**
- * Product visual until photography lands. The motif is an original SVG, so the
- * page stays free of licensed imagery and remains sharp at every width.
+ * Product visual: the department photograph when one is licensed, otherwise the
+ * original jamdani pattern. The pattern stays sharp at every width, so a missing
+ * photo never leaves an empty frame.
  */
-export function ProductMedia({ tone, className }: ProductMediaProps) {
+export function ProductMedia({ tone, image, className }: ProductMediaProps) {
   return (
     <div
-      aria-hidden="true"
       className={cn(
         'relative aspect-square overflow-hidden rounded-sm border border-line sm:aspect-[4/5]',
-        toneClass[tone],
+        !image && toneClass[tone],
         className,
       )}
     >
-      <JamdaniPattern />
+      {image ? (
+        <img
+          src={image.src}
+          alt={image.alt}
+          width={960}
+          height={720}
+          fetchPriority="high"
+          style={{ objectPosition: image.objectPosition }}
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <div aria-hidden="true" className="h-full w-full">
+          <JamdaniPattern />
+        </div>
+      )}
     </div>
   );
 }

@@ -54,6 +54,11 @@ export function SiteFooter({ copy }: SiteFooterProps) {
               </Link>
             </li>
             <li>
+              <Link href="/credits" className="text-ink-muted transition-colors hover:text-accent">
+                {copy.footer.credits}
+              </Link>
+            </li>
+            <li>
               <a
                 href={site.repositoryUrl}
                 className="text-ink-muted transition-colors hover:text-accent"

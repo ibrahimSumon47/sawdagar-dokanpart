@@ -34,6 +34,22 @@ describe('ProductCard', () => {
     expect(html).toContain('Sale');
   });
 
+  it('shows a department photograph instead of the pattern when one is supplied', () => {
+    const html = renderToStaticMarkup(
+      <ProductCard
+        product={{
+          ...sample,
+          image: { src: '/media/departments/sarees.jpg', alt: 'Saree photograph' },
+        }}
+        ratingLabel="Rated 4.8 out of 5"
+        saleLabel="Sale"
+      />,
+    );
+
+    expect(html).toContain('/media/departments/sarees.jpg');
+    expect(html).toContain('alt="Saree photograph"');
+  });
+
   it('keeps the same reserved layout as its skeleton', () => {
     const card = layoutAttributes(
       renderToStaticMarkup(
