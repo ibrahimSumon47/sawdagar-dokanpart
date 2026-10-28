@@ -74,10 +74,10 @@ export const en = {
       { title: 'English and Bangla', body: 'Every surface is written for both languages.' },
       { title: 'Free plans only', body: 'Hosting and data stay on free tiers.' },
     ],
-    statusEyebrow: 'Phase 4',
-    statusTitle: 'The cart is open',
+    statusEyebrow: 'Phase 11',
+    statusTitle: 'Ready to show',
     statusBody:
-      'Add a variant, open the cart drawer and keep a wishlist or a comparison. Checkout follows in the next phase.',
+      'Licensed photography, complete Bangla copy, accessibility and performance budgets, and search-engine surfaces across the storefront.',
     statusLink: 'Follow the build on GitHub',
     categoriesTitle: 'Browse by category',
     categoriesDescription: 'Twelve departments, from handloom textiles to books and stationery.',

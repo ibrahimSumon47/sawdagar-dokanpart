@@ -38,8 +38,8 @@ export function HomeIntro({ copy }: HomeIntroProps) {
               <img
                 src={heroPhoto.src}
                 alt={copy.home.heroImageAlt}
-                width={960}
-                height={720}
+                width={800}
+                height={600}
                 fetchPriority="high"
                 className="h-full w-full object-cover"
               />
