@@ -9,6 +9,7 @@ import { SiteFooter } from '../features/shell/components/SiteFooter';
 import { SiteHeader } from '../features/shell/components/SiteHeader';
 import { getDictionary } from '../i18n';
 import { getLocale } from '../i18n/getLocale';
+import { site } from '../lib/site';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -21,11 +22,29 @@ const notoSansBengali = Noto_Sans_Bengali({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const copy = getDictionary(await getLocale());
+  const locale = await getLocale();
+  const copy = getDictionary(locale);
 
   return {
+    metadataBase: new URL(site.demoUrl),
+    applicationName: site.name,
     title: { default: copy.meta.title, template: `%s · ${copy.meta.title}` },
     description: copy.meta.description,
+    alternates: { canonical: '/' },
+    openGraph: {
+      type: 'website',
+      siteName: site.name,
+      url: site.demoUrl,
+      locale: locale === 'bn' ? 'bn_BD' : 'en_US',
+      title: copy.meta.title,
+      description: copy.meta.description,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: copy.meta.title,
+      description: copy.meta.description,
+    },
+    robots: { index: true, follow: true },
   };
 }
 
