@@ -601,6 +601,7 @@ export const en = {
     newProduct: 'New product',
     noProducts: 'This store has no products yet. Create the first one to start selling.',
     productName: 'Product',
+    quantity: 'Quantity',
     category: 'Category',
     price: 'Price (৳)',
     stock: 'Stock',

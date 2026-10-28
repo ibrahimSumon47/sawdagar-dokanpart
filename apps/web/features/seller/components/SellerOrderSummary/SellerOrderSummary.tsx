@@ -34,7 +34,7 @@ export function SellerOrderSummary({ order, copy, locale }: SellerOrderSummaryPr
                 {copy.orderLines}
               </th>
               <th scope="col" className="px-4 py-3 text-right font-medium">
-                {copy.stock}
+                {copy.quantity}
               </th>
               <th scope="col" className="px-4 py-3 text-right font-medium">
                 {copy.total}

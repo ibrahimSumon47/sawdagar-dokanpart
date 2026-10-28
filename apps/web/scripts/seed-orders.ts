@@ -32,7 +32,7 @@ const seedOrders: SeedOrder[] = [
       { productIndex: 0, quantity: 1 },
       { productIndex: 1, quantity: 2 },
     ],
-    shippingPerSeller: 60,
+    shippingPerSeller: 6_000,
   },
   {
     id: 'seed_order_older',
@@ -42,7 +42,7 @@ const seedOrders: SeedOrder[] = [
     placedDaysAgo: 22,
     deliveredDaysAgo: 20,
     lines: [{ productIndex: 2, quantity: 1 }],
-    shippingPerSeller: 60,
+    shippingPerSeller: 6_000,
   },
 ];
 
@@ -228,7 +228,7 @@ async function seedSellerOrder(
   if (!product || !variant) return false;
 
   const placedAt = new Date(now - 1 * DAY_MS);
-  const shippingMinor = 60;
+  const shippingMinor = 6_000;
   const lineTotal = variant.priceMinor;
   const totalMinor = lineTotal + shippingMinor;
 

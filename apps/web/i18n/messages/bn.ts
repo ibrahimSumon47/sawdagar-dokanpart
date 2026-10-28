@@ -596,6 +596,7 @@ export const bn: Dictionary = {
     newProduct: 'নতুন পণ্য',
     noProducts: 'এই দোকানে এখনো কোনো পণ্য নেই। বিক্রি শুরু করতে প্রথমটি তৈরি করুন।',
     productName: 'পণ্য',
+    quantity: 'পরিমাণ',
     category: 'ক্যাটাগরি',
     price: 'দাম (৳)',
     stock: 'স্টক',
