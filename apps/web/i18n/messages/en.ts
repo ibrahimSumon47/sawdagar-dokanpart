@@ -769,6 +769,11 @@ export const en = {
     payoutStatusApproved: 'Approved',
     payoutStatusPaid: 'Paid',
     payoutStatusRejected: 'Rejected',
+    refundHistoryTitle: 'Refunds',
+    refundHistoryDescription:
+      'Returns refunded by the finance team. The amount and the reversed commission come out of the store balance.',
+    refundedToBuyer: 'Refunded',
+    noRefunds: 'No refunds have been issued against this store.',
     statementTitle: 'Delivered statement',
     statementDescription: 'Recent delivered sub-orders and the commission taken from each.',
     goods: 'Goods',

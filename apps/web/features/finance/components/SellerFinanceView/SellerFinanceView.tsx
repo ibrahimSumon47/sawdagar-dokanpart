@@ -5,6 +5,7 @@ import type { SellerNoticeResult } from '../../../seller/notice';
 import type { SellerFinance } from '../../queries';
 import { PayoutHistoryList } from '../PayoutHistoryList';
 import { PayoutRequestForm } from '../PayoutRequestForm';
+import { RefundHistoryList } from '../RefundHistoryList';
 import { SellerFinanceStats } from '../SellerFinanceStats';
 import { StatementTable } from '../StatementTable';
 
@@ -47,6 +48,18 @@ export function SellerFinanceView({
           </p>
         ) : (
           <PayoutHistoryList payouts={finance.payouts} copy={copy} locale={locale} />
+        )}
+      </section>
+
+      <section className="mt-8">
+        <h2 className="font-serif text-xl text-ink">{copy.refundHistoryTitle}</h2>
+        <p className="mt-1 text-sm text-ink-muted">{copy.refundHistoryDescription}</p>
+        {finance.refunds.length === 0 ? (
+          <p className="mt-3 rounded-sm border border-line bg-surface p-4 text-sm text-ink-muted">
+            {copy.noRefunds}
+          </p>
+        ) : (
+          <RefundHistoryList refunds={finance.refunds} copy={copy} locale={locale} />
         )}
       </section>
 

@@ -24,6 +24,14 @@ export interface StatementRow {
   netMinor: number;
 }
 
+export interface RefundRecord {
+  id: string;
+  orderNumber: string;
+  amountMinor: number;
+  commissionMinor: number;
+  createdAt: Date;
+}
+
 export interface SellerFinance {
   commissionRateBps: number;
   availableMinor: number;
@@ -31,6 +39,7 @@ export interface SellerFinance {
   paidOutMinor: number;
   statement: StatementRow[];
   payouts: PayoutRecord[];
+  refunds: RefundRecord[];
 }
 
 /** A store's payable balance, pending withdrawals and recent delivered lines. */
@@ -38,7 +47,7 @@ export async function getSellerFinance(organizationId: string): Promise<SellerFi
   const prisma = getPrisma();
   const payable = sellerPayableAccount(organizationId);
 
-  const [organization, entries, payouts, delivered] = await Promise.all([
+  const [organization, entries, payouts, delivered, refunds] = await Promise.all([
     prisma.organization.findUnique({
       where: { id: organizationId },
       select: { commissionRateBps: true },
@@ -56,6 +65,12 @@ export async function getSellerFinance(organizationId: string): Promise<SellerFi
       where: { organizationId, status: 'delivered' },
       orderBy: { deliveredAt: 'desc' },
       take: 25,
+      include: { order: { select: { number: true } } },
+    }),
+    prisma.refund.findMany({
+      where: { organizationId },
+      orderBy: { createdAt: 'desc' },
+      take: 10,
       include: { order: { select: { number: true } } },
     }),
   ]);
@@ -104,6 +119,13 @@ export async function getSellerFinance(organizationId: string): Promise<SellerFi
       requestedAt: payout.requestedAt,
       processedAt: payout.processedAt,
       note: payout.note,
+    })),
+    refunds: refunds.map((refund) => ({
+      id: refund.id,
+      orderNumber: refund.order.number,
+      amountMinor: refund.amountMinor,
+      commissionMinor: refund.commissionMinor,
+      createdAt: refund.createdAt,
     })),
   };
 }

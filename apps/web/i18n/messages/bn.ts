@@ -761,6 +761,11 @@ export const bn: Dictionary = {
     payoutStatusApproved: 'অনুমোদিত',
     payoutStatusPaid: 'পরিশোধিত',
     payoutStatusRejected: 'প্রত্যাখ্যাত',
+    refundHistoryTitle: 'ফেরত',
+    refundHistoryDescription:
+      'হিসাব দল যে ফেরতগুলো দিয়েছে। পরিমাণ ও ফিরিয়ে নেওয়া কমিশন দোকানের ব্যালেন্স থেকে কমে।',
+    refundedToBuyer: 'ফেরত দেওয়া',
+    noRefunds: 'এই দোকানের বিরুদ্ধে কোনো ফেরত দেওয়া হয়নি।',
     statementTitle: 'পৌঁছানো বিক্রির বিবরণ',
     statementDescription: 'সাম্প্রতিক পৌঁছানো সাব-অর্ডার ও প্রতিটির কমিশন।',
     goods: 'পণ্যের মূল্য',
