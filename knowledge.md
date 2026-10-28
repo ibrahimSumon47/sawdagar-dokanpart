@@ -1,0 +1,2 @@
+# knowledge.md
+Read `AGENTS.md` first, then `docs/PROJECT_STATE.md`, `docs/LESSONS.md`, `docs/REQUIREMENTS_LOG.md` and the relevant file in `docs/spec/`. Those files are the source of truth for this project: Sawdagar Dokanpat, a multi-vendor marketplace for Bangladesh. All rules (git, free-only, no localhost, quality bar) are in `AGENTS.md`.
