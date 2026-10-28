@@ -50,7 +50,7 @@ export function CsLabView({ copy, locale }: CsLabViewProps) {
         <CsModuleSection
           title={copy.insightsTitle}
           body={copy.insightsBody}
-          meta={`${copy.engine}: Python · ${copy.signal}`}
+          meta={`${copy.engine}: ${copy.typescript} · ${copy.signal}`}
         >
           <InsightTable rows={insightRows} copy={copy} />
         </CsModuleSection>
@@ -58,7 +58,7 @@ export function CsLabView({ copy, locale }: CsLabViewProps) {
         <CsModuleSection
           title={copy.settlementTitle}
           body={copy.settlementBody}
-          meta={`${copy.engine}: Java · ${copy.paid}`}
+          meta={`${copy.engine}: ${copy.typescript} · ${copy.paid}`}
         >
           <SettlementTable rows={settlementRows} run={settlementRun} copy={copy} locale={locale} />
         </CsModuleSection>

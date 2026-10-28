@@ -83,7 +83,9 @@ export function SellerAnalyticsView({ analytics, copy, locale }: SellerAnalytics
                     <td className="px-4 py-3">
                       <span className="font-medium text-ink">{signalLabel[product.signal]}</span>
                       <span className="mt-0.5 block text-xs text-ink-muted">
-                        {copy.coverDays(String(product.daysOfCover))}
+                        {copy.coverDays(
+                          product.daysOfCover === 999 ? '999+' : String(product.daysOfCover),
+                        )}
                       </span>
                       {product.restockUnits > 0 ? (
                         <span className="mt-0.5 block text-xs text-ink-muted">

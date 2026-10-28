@@ -29,6 +29,15 @@ On 2026-10-28 the CS core slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test
 
 The build is 2.7 KB for search-core and 1.1 KB for sku-kit. Two defects were caught by the parity tests while building them: the C bump allocator returned heap-relative offsets while the loader wrote at absolute addresses, and the SKU state machine left a pending dash armed after the first letter, producing `S-D-0001-1`. Both were fixed in the C source and the tests now pin the behaviour.
 
+## Phase 10 production check
+
+On 2026-10-28 commit `40d423d` deployed and CI run 40717345571 passed all four jobs: the Linux, Windows and macOS checks and the new `Reference modules` job. On the deployment:
+
+- `/cs-lab` reported `ENGINE: WEBASSEMBLY` for both native modules, all six query/document pairs returned the same score from the compiled module and the port, the SKU rows showed `sd - 0001/1` → `SD-0001-1` with check `Y`, and the demand and settlement tables showed the fixture values (৳3,734 paid, ৳1,000.55 carried).
+- `/catalog?q=jamdani` served the six sarees with the relevance note "Ordered by search-core, compiled to WebAssembly" above the grid, so the production server instantiated the committed WASM.
+- Signed in as the vendor owner, `/seller/analytics` showed the new Demand column with a Rising label and a days-of-cover line. Signed in as the finance admin, `/admin/finance` showed the settlement card and its empty state, because no payout was waiting at that moment.
+- The CS core commit did not change the schema, so no migration or seed run was needed.
+
 ## Phase 9 local checks
 
 On 2026-10-28 the admin and CMS slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (139 tests) and `pnpm build`. The build listed `/admin/stores`, `/admin/reviews`, `/admin/content`, `/admin/content/[id]`, `/admin/content/new`, `/admin/analytics`, `/admin/flags`, `/admin/audit`, `/help`, `/help/[slug]`, `/journal`, `/journal/[slug]` and `/pages/[slug]` as dynamic routes and did not connect to the database.
