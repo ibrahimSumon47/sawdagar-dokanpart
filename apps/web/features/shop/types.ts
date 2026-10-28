@@ -1,4 +1,4 @@
-import type { LocalisedName, ProductTone } from '@sd/domain';
+import type { CouponErrorCode, CouponRule, LocalisedName, ProductTone } from '@sd/domain';
 
 /** One variant in the cart, with the product and vendor details the drawer needs. */
 export interface CartLine {
@@ -33,8 +33,10 @@ export interface CartSummary {
   count: number;
   subtotalMinor: number;
   deliveryMinor: number;
+  discountMinor: number;
   totalMinor: number;
   freeDeliveryRemainingMinor: number;
+  couponCode?: string;
 }
 
 export type ShopErrorCode =
@@ -50,6 +52,12 @@ export interface ShopError {
 export type CartResult = { ok: true; items: CartLine[] } | ShopError;
 
 export type IdsResult = { ok: true; ids: string[] } | ShopError;
+
+export type CouponApplyError = CouponErrorCode | 'empty' | 'failed';
+
+export type CouponApplyResult =
+  | { ok: true; coupon: CouponRule }
+  | { ok: false; code: CouponApplyError; minSubtotalMinor?: number };
 
 /** Product fields used by the comparison table. */
 export interface CompareProduct {
@@ -106,6 +114,21 @@ export interface ShopCopy {
   unavailable: string;
   saveFailed: string;
   removeFailed: string;
+  coupon: string;
+  couponLabel: string;
+  couponPlaceholder: string;
+  couponApply: string;
+  couponApplying: string;
+  couponRemove: string;
+  couponApplied: string;
+  couponRemoved: string;
+  couponDiscount: string;
+  couponInvalid: string;
+  couponExpired: string;
+  couponNotEligible: string;
+  couponMinSubtotal: string;
+  couponEmpty: string;
+  couponFailed: string;
   shipsFrom: string;
   shipsFromBangladesh: string;
   wishlist: string;

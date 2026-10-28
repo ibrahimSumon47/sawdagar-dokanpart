@@ -108,14 +108,15 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| ShopProvider | One client boundary for cart, wishlist, comparison, drawer and toast; receives the server-rendered cart and saved ids. | `children`, `initialItems`, `initialWishlistIds`, `initialCompareIds`, `signedIn`, `locale`, `copy` | [ShopProvider.tsx](../apps/web/features/shop/components/ShopProvider/ShopProvider.tsx) |
+| ShopProvider | One client boundary for cart, coupons, wishlist, comparison, drawer and toast; receives the server-rendered cart, coupon and saved ids. | `children`, `initialItems`, `initialCoupon`, `initialWishlistIds`, `initialCompareIds`, `signedIn`, `locale`, `copy` | [ShopProvider.tsx](../apps/web/features/shop/components/ShopProvider/ShopProvider.tsx) |
 | ShopToast | Bottom notification with an action link and optional undo callback. | none; reads `useShop` | [ShopToast.tsx](../apps/web/features/shop/components/ShopToast/ShopToast.tsx) |
 | CartTrigger | Header cart button with a count badge and a short bump when the count grows. | none; reads `useShop` | [CartTrigger.tsx](../apps/web/features/shop/components/CartTrigger/CartTrigger.tsx) |
 | CompareTrigger | Header comparison shortcut with its count, shown only while products are selected. | none; reads `useShop` | [CompareTrigger.tsx](../apps/web/features/shop/components/CompareTrigger/CompareTrigger.tsx) |
 | CartDrawer | Native modal drawer on desktop and bottom sheet on phones; owns the empty state and vendor groups. | none; reads `useShop` | [CartDrawer.tsx](../apps/web/features/shop/components/CartDrawer/CartDrawer.tsx) |
 | CartGroup | One vendor's heading, shipping origin and cart rows. | `group` (`vendor`, `items`, `subtotalMinor`) | [CartGroup.tsx](../apps/web/features/shop/components/CartDrawer/CartGroup.tsx) |
 | CartLineItem | Thumbnail, title, variant, quantity stepper, line price, save-for-later and remove with inline stock errors. | `line` (`CartLine`) | [CartLineItem.tsx](../apps/web/features/shop/components/CartDrawer/CartLineItem.tsx) |
-| CartSummary | Free-delivery progress, subtotal, delivery, estimated total and the disabled checkout note. | none; reads `useShop` | [CartSummary.tsx](../apps/web/features/shop/components/CartDrawer/CartSummary.tsx) |
+| CartSummary | Free-delivery progress, coupon entry, subtotal, delivery, discount, estimated total and the disabled checkout note. | none; reads `useShop` | [CartSummary.tsx](../apps/web/features/shop/components/CartDrawer/CartSummary.tsx) |
+| CouponForm | Coupon code field with inline validation, the applied code and a remove action. | none; reads `useShop` | [CouponForm.tsx](../apps/web/features/shop/components/CouponForm/CouponForm.tsx) |
 | AddToCartButton | Adds the selected variant through idle, spinner and check states, with an inline error. | `variantId`, `quantity`, `disabled`, `className` | [AddToCartButton.tsx](../apps/web/features/shop/components/AddToCartButton/AddToCartButton.tsx) |
 | WishlistButton | Heart that saves or removes one product and prompts guests to sign in. | `productId`, `showLabel`, `className` | [WishlistButton.tsx](../apps/web/features/shop/components/WishlistButton/WishlistButton.tsx) |
 | CompareButton | Adds or removes one product from the four-product comparison. | `productId`, `className` | [CompareButton.tsx](../apps/web/features/shop/components/CompareButton/CompareButton.tsx) |

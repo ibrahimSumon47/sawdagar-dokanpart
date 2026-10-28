@@ -1,6 +1,18 @@
+import type { CouponRule } from '@sd/domain';
 import { describe, expect, it } from 'vitest';
 import { DELIVERY_FEE_MINOR, FREE_DELIVERY_THRESHOLD_MINOR, summariseCart } from './cartTotals';
 import type { CartLine } from './types';
+
+const now = new Date('2026-10-28T12:00:00.000Z');
+
+const percentCoupon: CouponRule = {
+  code: 'BOISHAKH10',
+  type: 'percent',
+  value: 1_000,
+  scope: 'global',
+  minSubtotalMinor: 0,
+  endsAt: '2027-04-30T23:59:59.000Z',
+};
 
 function line(overrides: Partial<CartLine> = {}): CartLine {
   return {
@@ -26,6 +38,7 @@ describe('cart totals', () => {
       count: 0,
       subtotalMinor: 0,
       deliveryMinor: 0,
+      discountMinor: 0,
       totalMinor: 0,
       freeDeliveryRemainingMinor: FREE_DELIVERY_THRESHOLD_MINOR,
     });
@@ -66,5 +79,24 @@ describe('cart totals', () => {
     expect(atThreshold.deliveryMinor).toBe(0);
     expect(atThreshold.totalMinor).toBe(FREE_DELIVERY_THRESHOLD_MINOR);
     expect(atThreshold.freeDeliveryRemainingMinor).toBe(0);
+  });
+
+  it('subtracts a valid coupon from the estimated total', () => {
+    const summary = summariseCart([line({ priceMinor: 500_000 })], percentCoupon, now);
+
+    expect(summary.discountMinor).toBe(50_000);
+    expect(summary.totalMinor).toBe(500_000 + DELIVERY_FEE_MINOR - 50_000);
+    expect(summary.couponCode).toBe('BOISHAKH10');
+  });
+
+  it('ignores a coupon that no longer meets its minimum', () => {
+    const summary = summariseCart(
+      [line({ priceMinor: 10_000 })],
+      { ...percentCoupon, minSubtotalMinor: 100_000 },
+      now,
+    );
+
+    expect(summary.discountMinor).toBe(0);
+    expect(summary.totalMinor).toBe(10_000 + DELIVERY_FEE_MINOR);
   });
 });

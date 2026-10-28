@@ -4,6 +4,7 @@ import { formatTaka } from '@sd/domain';
 import { Price, buttonStyles } from '@sd/ui';
 import { FREE_DELIVERY_THRESHOLD_MINOR } from '../../cartTotals';
 import { formatTemplate } from '../../formatTemplate';
+import { CouponForm } from '../CouponForm';
 import { useShop } from '../ShopProvider';
 
 /** Free-delivery progress, estimated totals and the next-phase checkout note. */
@@ -39,6 +40,10 @@ export function CartSummary() {
         </div>
       </div>
 
+      <div className="mt-4">
+        <CouponForm />
+      </div>
+
       <dl className="mt-4 space-y-2 text-sm">
         <div className="flex items-center justify-between gap-3">
           <dt className="text-ink-muted">{copy.subtotal}</dt>
@@ -56,6 +61,14 @@ export function CartSummary() {
             )}
           </dd>
         </div>
+        {summary.discountMinor > 0 ? (
+          <div className="flex items-center justify-between gap-3">
+            <dt className="text-success">{copy.couponDiscount}</dt>
+            <dd className="text-success">
+              − <Price amountMinor={summary.discountMinor} locale={locale} size="sm" />
+            </dd>
+          </div>
+        ) : null}
         <div className="flex items-center justify-between gap-3 border-t border-line pt-2">
           <dt className="font-semibold text-ink">{copy.total}</dt>
           <dd>

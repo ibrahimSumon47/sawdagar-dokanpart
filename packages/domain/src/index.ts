@@ -12,6 +12,16 @@ export type {
   SeedVariant,
   SeedVendor,
 } from './catalog/seedTypes';
+export { couponScopes, couponTypes, evaluateCoupon } from './shop/coupons';
+export type {
+  CouponCartItem,
+  CouponErrorCode,
+  CouponEvaluation,
+  CouponRejection,
+  CouponRule,
+  CouponScope,
+  CouponType,
+} from './shop/coupons';
 export { demoAccounts, findDemoAccount } from './auth/demoAccounts';
 export type { DemoAccount } from './auth/demoAccounts';
 export {

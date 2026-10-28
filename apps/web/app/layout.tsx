@@ -54,6 +54,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         </a>
         <ShopProvider
           initialItems={shopState.cartItems}
+          initialCoupon={shopState.cartCoupon}
           initialWishlistIds={shopState.wishlistIds}
           initialCompareIds={shopState.compareIds}
           signedIn={Boolean(viewer)}

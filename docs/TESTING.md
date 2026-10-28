@@ -6,9 +6,9 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 | Package | Tests | What they cover |
 |---|---|---|
-| `@sd/domain` | 26 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; plus the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify |
+| `@sd/domain` | 33 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
 | `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
-| `@sd/web` | 26 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold and free-delivery progress; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+| `@sd/web` | 28 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
 
 ## Production smoke check
 
@@ -30,7 +30,9 @@ The auth deployment was also exercised through the real sign-in page: buyer, ven
 
 ## Phase 4 local checks
 
-On 2026-10-28 the full gate passed after the shop slice: `pnpm lint` (Prettier plus ESLint), `pnpm typecheck`, `pnpm test` (65 tests) and `pnpm build`. The build listed `/wishlist` and `/compare` as dynamic routes and did not connect to the database.The cart migration was applied to Neon by the `Database` workflow (run 40672398462). The deployed build was then exercised on the production origin:
+On 2026-10-28 the full gate passed after the shop slice: `pnpm lint` (Prettier plus ESLint), `pnpm typecheck`, `pnpm test` (65 tests) and `pnpm build`. The build listed `/wishlist` and `/compare` as dynamic routes and did not connect to the database. The cart migration was applied to Neon by the `Database` workflow (run 40672398462).
+
+The coupon slice then passed the same gate with 74 tests: seven in `@sd/domain` cover percentage, fixed and free-shipping discounts, caps, vendor scope, minimum subtotal and expiry, and two in `@sd/web` cover a discount subtracted from the estimated total and an ineligible coupon being ignored. The deployed build was then exercised on the production origin:
 
 - a guest added the small leather belt, the drawer opened at ৳1,280 and the quantity stepper moved it to two at ৳2,560 with a ৳120 delivery fee;
 - a full reload kept the guest cart at two items, confirming the `sd_cart` cookie and database row;

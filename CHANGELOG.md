@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add percentage, fixed and free-shipping coupons with server-side eligibility, four seeded codes and a cart drawer form that shows the discount and can remove the code.
 - Add guest and signed-in carts with a 30-day lifetime, guest-cart merge on sign-in, and server-side stock checks.
 - Add the add-to-cart flow with spinner and check states, a toast with undo, and optimistic drawer updates that roll back on failure.
 - Add the vendor-grouped cart drawer with quantity steppers, remove, save-for-later, free-delivery progress and an estimated total.

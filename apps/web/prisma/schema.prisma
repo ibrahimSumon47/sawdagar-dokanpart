@@ -106,6 +106,7 @@ model Organization {
   members       Member[]
   invitations   Invitation[]
   products      Product[]
+  coupons       Coupon[]
 
   @@map("organizations")
 }
@@ -254,6 +255,7 @@ model Cart {
   id         String     @id
   userId     String?    @unique
   guestToken String?    @unique
+  couponCode String?
   expiresAt  DateTime
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
@@ -277,6 +279,27 @@ model CartItem {
   @@unique([cartId, variantId])
   @@index([variantId])
   @@map("cart_items")
+}
+
+model Coupon {
+  id                String        @id
+  code              String        @unique
+  type              String
+  value             Int           @default(0)
+  scope             String        @default("global")
+  organizationId    String?
+  minSubtotalMinor  Int           @default(0)
+  maxDiscountMinor  Int?
+  startsAt          DateTime?
+  endsAt            DateTime?
+  active            Boolean       @default(true)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  organization      Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([active, endsAt])
+  @@map("coupons")
 }
 
 model WishlistItem {

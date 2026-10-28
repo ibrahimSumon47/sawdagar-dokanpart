@@ -3,6 +3,7 @@ import { demoAccounts } from '@sd/domain';
 import { getAuth } from '../lib/auth';
 import { getPrisma } from '../lib/prisma';
 import { seedCatalog } from './seed-catalog';
+import { seedCoupons } from './seed-coupons';
 
 interface DemoProfile {
   phone: string | null;
@@ -37,7 +38,8 @@ function write(message: string): void {
 async function main(): Promise<void> {
   const password = process.env.DEMO_ACCOUNT_PASSWORD;
   if (!password) throw new Error('DEMO_ACCOUNT_PASSWORD is required to seed demo accounts.');
-  if (password.length < 12) throw new Error('DEMO_ACCOUNT_PASSWORD must be at least 12 characters.');
+  if (password.length < 12)
+    throw new Error('DEMO_ACCOUNT_PASSWORD must be at least 12 characters.');
 
   const prisma = getPrisma();
   let created = 0;
@@ -97,7 +99,10 @@ async function main(): Promise<void> {
 
   const started = Date.now();
   const summary = await seedCatalog(prisma);
-  write(`${summary} Completed in ${Math.round((Date.now() - started) / 1000)}s.`);
+  const couponCount = await seedCoupons(prisma);
+  write(
+    `${summary} ${couponCount} coupons ready. Completed in ${Math.round((Date.now() - started) / 1000)}s.`,
+  );
 }
 
 main().catch((error: unknown) => {

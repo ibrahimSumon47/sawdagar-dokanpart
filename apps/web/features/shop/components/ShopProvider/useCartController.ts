@@ -1,5 +1,6 @@
 'use client';
 
+import type { CouponRule } from '@sd/domain';
 import { useCallback, useMemo, useState } from 'react';
 import type { Locale } from '../../../../i18n';
 import { addCartItem, removeCartItem, updateCartItem } from '../../actions';
@@ -11,6 +12,7 @@ import type { AddItemResult, ShowShopToast } from './context';
 
 interface UseCartControllerOptions {
   initialItems: CartLine[];
+  coupon: CouponRule | null;
   locale: Locale;
   copy: ShopCopy;
   showToast: ShowShopToast;
@@ -20,6 +22,7 @@ interface UseCartControllerOptions {
 /** Owns cart rows for the client shell, including optimistic row updates. */
 export function useCartController({
   initialItems,
+  coupon,
   locale,
   copy,
   showToast,
@@ -28,7 +31,7 @@ export function useCartController({
   const [items, setItems] = useServerState<CartLine[]>(initialItems);
   const [pendingVariants, setPendingVariants] = useState<readonly string[]>([]);
   const [lineErrors, setLineErrors] = useState<Record<string, string>>({});
-  const summary = useMemo(() => summariseCart(items), [items]);
+  const summary = useMemo(() => summariseCart(items, coupon), [coupon, items]);
   const number = useMemo(
     () => new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB'),
     [locale],

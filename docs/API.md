@@ -26,6 +26,8 @@ Defined in [actions.ts](../apps/web/features/shop/actions.ts). Every action acce
 | `toggleWishlist` | `productId` | Requires a session; adds or removes an active product and enforces the 100-item cap |
 | `toggleCompare` | `productId` | Adds or removes one active product in the `sd_compare` cookie, capped at four |
 | `clearCompare` | none | Deletes the comparison cookie |
+| `applyCartCoupon` | `code` (3–24 letters, digits or hyphens) | Looks up an active coupon, evaluates it against the server-side cart rows, saves the code on the cart and returns the rule; rejects expired, vendor-mismatched and below-minimum codes with a code the drawer translates |
+| `clearCartCoupon` | none | Removes the code saved on the current cart |
 
 Cart rows include server-side variant prices, stock and vendor details. The client never computes the amount sent to the server, and totals shown in the drawer are an estimate until checkout.
 

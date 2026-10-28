@@ -1,5 +1,6 @@
 'use client';
 
+import type { CouponRule } from '@sd/domain';
 import type { Locale } from '../../../../i18n';
 import type { CartSummary, ShopCopy } from '../../types';
 import { createContext, useContext } from 'react';
@@ -35,6 +36,11 @@ export interface ShopContextValue {
   removeItem: (variantId: string) => Promise<void>;
   pendingVariants: readonly string[];
   lineErrors: Record<string, string>;
+  coupon: CouponRule | null;
+  couponPending: boolean;
+  couponError: string | null;
+  applyCoupon: (code: string) => Promise<boolean>;
+  removeCoupon: () => Promise<void>;
   signedIn: boolean;
   wishlistIds: readonly string[];
   /** Resolves true when the product ended up saved. */

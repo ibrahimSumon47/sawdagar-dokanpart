@@ -1,3 +1,4 @@
+import { evaluateCoupon, type CouponRule } from '@sd/domain';
 import type { CartGroup, CartLine, CartSummary } from './types';
 
 /** Flat demo delivery fee for orders below the free-delivery threshold. */
@@ -25,13 +26,33 @@ function groupByVendor(items: readonly CartLine[]): CartGroup[] {
 
 /**
  * Turns cart rows into grouped totals. Prices come from server-side variant
- * rows; the taka arithmetic here is integer poisha and never floats.
+ * rows; the taka arithmetic here is integer poisha and never floats. An
+ * applied coupon is re-evaluated against the current rows, so a coupon that
+ * no longer qualifies simply stops discounting.
  */
-export function summariseCart(items: readonly CartLine[]): CartSummary {
+export function summariseCart(
+  items: readonly CartLine[],
+  coupon: CouponRule | null = null,
+  now: Date = new Date(),
+): CartSummary {
   const count = items.reduce((total, item) => total + item.quantity, 0);
   const subtotalMinor = items.reduce((total, item) => total + item.priceMinor * item.quantity, 0);
   const deliveryMinor =
     items.length > 0 && subtotalMinor < FREE_DELIVERY_THRESHOLD_MINOR ? DELIVERY_FEE_MINOR : 0;
+
+  const evaluation = coupon
+    ? evaluateCoupon(
+        coupon,
+        items.map((item) => ({
+          priceMinor: item.priceMinor,
+          quantity: item.quantity,
+          vendorSlug: item.vendor.slug,
+        })),
+        deliveryMinor,
+        now,
+      )
+    : null;
+  const discountMinor = evaluation?.ok ? evaluation.discountMinor : 0;
 
   return {
     items: [...items],
@@ -39,7 +60,9 @@ export function summariseCart(items: readonly CartLine[]): CartSummary {
     count,
     subtotalMinor,
     deliveryMinor,
-    totalMinor: subtotalMinor + deliveryMinor,
+    discountMinor,
+    totalMinor: Math.max(0, subtotalMinor + deliveryMinor - discountMinor),
     freeDeliveryRemainingMinor: Math.max(0, FREE_DELIVERY_THRESHOLD_MINOR - subtotalMinor),
+    couponCode: coupon?.code,
   };
 }
