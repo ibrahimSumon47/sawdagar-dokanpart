@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add the Seller Center with dashboard totals, product create/edit, variant price and stock editing, inventory adjustments with history, sub-order fulfillment, buyer questions, return decisions, store promotions, ninety-day analytics and store settings.
+- Add store approval and KYC state, bilingual storefront CMS fields, fulfillment timestamps and courier details, and an append-only inventory adjustment table.
+- Add a public store page with the store banner, verification, announcement, active products, about text and policies.
+- Add CSV export of every store variant and a seeded confirmed COD order for the demo store.
+- Fix seeded order shipping to store ৳60 as 6,000 poisha instead of ৳0.60, and clear stale fulfillment fields when the demo order is reseeded.
+
 - Add verified-purchase reviews with stars, headline, body and up to three photos resized in the browser, and recompute each product's rating and count from published rows.
 - Add product questions with public seller answers, a five-per-hour limit and an account view of the answers received.
 - Add seven-day return requests for delivered order lines, with a reason, optional note and status.

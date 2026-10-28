@@ -43,7 +43,12 @@ export default async function SellerReturnsPage({ searchParams }: ReturnsPagePro
             {copy.seller.noReturns}
           </p>
         ) : (
-          <SellerReturnList returns={returns} copy={copy.seller} locale={locale} />
+          <SellerReturnList
+            returns={returns}
+            copy={copy.seller}
+            returnsCopy={copy.returns}
+            locale={locale}
+          />
         )}
       </div>
     </SellerSection>

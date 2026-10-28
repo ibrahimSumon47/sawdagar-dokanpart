@@ -7,6 +7,8 @@ import type { SellerReturnRecord } from '../../queries';
 export interface SellerReturnListProps {
   returns: readonly SellerReturnRecord[];
   copy: Dictionary['seller'];
+  /** Buyer-facing return copy, used to translate the stored reason code. */
+  returnsCopy: Dictionary['returns'];
   locale: Locale;
 }
 
@@ -17,7 +19,7 @@ function statusTone(status: string): 'warning' | 'success' | 'danger' {
 }
 
 /** Return requests with approve and reject controls while they are open. */
-export function SellerReturnList({ returns, copy, locale }: SellerReturnListProps) {
+export function SellerReturnList({ returns, copy, returnsCopy, locale }: SellerReturnListProps) {
   const label = (status: string) =>
     status === 'approved'
       ? copy.returnApproved
@@ -43,7 +45,10 @@ export function SellerReturnList({ returns, copy, locale }: SellerReturnListProp
             <Badge tone={statusTone(request.status)}>{label(request.status)}</Badge>
           </div>
 
-          <p className="mt-3 text-sm text-ink">{request.reason}</p>
+          <p className="mt-3 text-sm text-ink">
+            {returnsCopy.reasons[request.reason as keyof typeof returnsCopy.reasons] ??
+              request.reason}
+          </p>
           {request.note ? <p className="mt-1 text-sm text-ink-muted">{request.note}</p> : null}
 
           {request.status === 'requested' ? (

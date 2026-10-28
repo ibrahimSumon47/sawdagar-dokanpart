@@ -6,7 +6,7 @@ A non-commercial marketplace demonstration inspired by the independent makers an
 
 ## Current state
 
-Phases 0 to 3 are complete and deployed. The Phase 4 cart, wishlist and compare slice is implemented and passes local checks. The catalog, authentication and role model are live:
+Phases 0 to 7 are complete and deployed: foundation and design system, authentication and roles, catalog, cart and wishlist, checkout and orders, the buyer account, and the Seller Center. The catalog, authentication and role model are live:
 
 - [Home](https://sawdagar-dokanpart.vercel.app/) — departments, featured products and the bilingual shell.
 - [Catalog](https://sawdagar-dokanpart.vercel.app/catalog) — 432 products across 84 categories from 24 vendors, with search, filters and pagination.
@@ -18,10 +18,11 @@ Phases 0 to 3 are complete and deployed. The Phase 4 cart, wishlist and compare 
 The cart works for guests and signed-in buyers: it survives a reload for 30 days, merges the guest cart on sign-in, groups rows by vendor, and keeps totals in integer poisha. Products can be saved to a DB-backed wishlist or added to a four-product comparison.
 - [Sign in](https://sawdagar-dokanpart.vercel.app/sign-in) — one-click demo access for eight roles.
 - [Account](https://sawdagar-dokanpart.vercel.app/account) — profile editing, role and store membership.
-- [Seller Center](https://sawdagar-dokanpart.vercel.app/seller) — the vendor's store and team, limited to vendor roles.
+- [Seller Center](https://sawdagar-dokanpart.vercel.app/seller) — dashboard, product editing, inventory, fulfillment, questions, returns, promotions, analytics and store settings, limited to vendor roles.
+- [Public store](https://sawdagar-dokanpart.vercel.app/store/rupsha-tangail-weavers) — a vendor's public page with announcement, active products, about text and policies.
 - [Admin](https://sawdagar-dokanpart.vercel.app/admin) — accounts and audit log, filtered by the role's permissions.
 
-Search and sort run on the server. A query matches English or Bangla product titles and leaf-category names. Prices are integer poisha formatted in Bengali or Western numerals. Sessions are validated on the server: the seller area rejects buyers and platform staff, the admin area rejects buyers and vendors, and panels inside the admin area follow the role's permissions. Theme and language are read from cookies before the first paint. Cart, wishlist and comparison writes are Server Actions that validate ids and re-read stock; no price is accepted from the browser.
+Search and sort run on the server. A query matches English or Bangla product titles and leaf-category names. Prices are integer poisha formatted in Bengali or Western numerals. Sessions are validated on the server: the seller area rejects buyers and platform staff, the admin area rejects buyers and vendors, and Seller Center writes require a store owner. Theme and language are read from cookies before the first paint. Cart, wishlist, checkout and Seller Center writes are Server Actions that validate ids and resolve ownership from the session; no price, store id or actor id is accepted from the browser.
 
 ## Demo accounts
 
@@ -48,15 +49,18 @@ Demo accounts cannot change their email or password. The seed is idempotent and 
 
 ## Quality checks
 
-CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 65 unit tests include catalog filter validation, the deterministic 432-product seed, role boundaries, the demo allowlist, safe redirects, cart totals, comparison cookie limits, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
+CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 118 unit tests include catalog filter validation, the deterministic 432-product seed, role boundaries, the demo allowlist, safe redirects, cart and coupon totals, order and stock rules, review and return rules, seller approval and stock rules, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
 
 ## Known limitations
 
-- The cart, wishlist and comparison stop at an estimated total. Checkout, coupons, payment, orders and fulfilment arrive in Phase 5.
-- The add-to-cart thumbnail flight, count roll and the drawer's recommendation strip are not implemented; the button pressed/spinner/check states, bounce, toast and undo are.
-- Catalog photography is an original SVG jamdani pattern per product tone; no image host is integrated.
-- Ratings, review counts and follower counts are seeded display summaries; there is no review or follow table yet.
-- Search is a bounded substring match, not full-text search: no typo tolerance, stemming or autocomplete, and it does not match a vendor name from the search box. Vendor name matches were removed because they returned unrelated products.
-- The seller and admin pages are read-only foundations. Catalog, order, finance and CMS tools arrive with later phases.
-- Demo sign-in is not yet covered by an automated integration test, and there is no browser or accessibility suite yet.
+- Seller staff can read the Seller Center but cannot write until staff permission sets land.
+- KYC is a text-only demo submission; there are no document uploads or admin review screen yet, and there is no new-store application flow.
+- Bulk CSV import, packing-slip PDFs, seller replies to reviews, featured collections and a block-based store builder are not implemented. CSV export is.
+- Seller analytics show ninety-day totals, best sellers and low stock without charts, a date picker or conversion metrics.
+- Coupons are one per cart; stacking and free-shipping coupons alongside a discount code are not supported.
+- Catalog photography is an original SVG jamdani pattern per product tone; no image host is integrated. Review photos are bounded data URLs in PostgreSQL.
+- Ratings and review counts come from published review rows, but seeded reviews belong to synthetic buyers without login accounts. Follower counts are still display data.
+- Search is a bounded substring match, not full-text search: no typo tolerance, stemming or autocomplete, and it does not match a vendor name from the search box.
+- MockPay reservations are held for 30 minutes but no scheduled job releases abandoned ones yet. SSLCommerz sandbox and Stripe test mode need owner credentials and are not wired.
+- Demo sign-in is not covered by an automated integration test; there is no browser or accessibility suite, and no nightly demo reset yet.
 - Password reset, email verification, two-factor authentication and Google sign-in are not enabled.

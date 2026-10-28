@@ -73,10 +73,30 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| StoreCard | Store identity and the viewer's owner or staff role. | `name`, `slug`, `joinedAt`, `roleLabel`, `copy`, `locale` | [StoreCard.tsx](../apps/web/features/seller/components/StoreCard/StoreCard.tsx) |
-| TeamMemberRow | One store team member with role and join date. | `name`, `email`, `roleLabel`, `joinedLabel`, `joinedAt` | [TeamMemberRow.tsx](../apps/web/features/seller/components/TeamMemberRow/TeamMemberRow.tsx) |
-| SellerEmpty | Shown when a vendor account has no store membership. | `copy` | [SellerEmpty.tsx](../apps/web/features/seller/components/SellerEmpty/SellerEmpty.tsx) |
-| SellerPanel | Read-only store summary and team list. | `membership`, `copy`, `locale` | [SellerPanel.tsx](../apps/web/features/seller/components/SellerPanel/SellerPanel.tsx) |
+| SellerNav | Horizontal section switcher for the nine Seller Center pages, with `aria-current` on the open one. | `active`, `copy` | [SellerNav.tsx](../apps/web/features/seller/components/SellerNav/SellerNav.tsx) |
+| SellerSection | Seller page frame: title, description, section tabs and content. | `active`, `title`, `description`, `copy`, `children` | [SellerSection.tsx](../apps/web/features/seller/components/SellerSection/SellerSection.tsx) |
+| SellerNotice | Inline success or error line above a Seller Center form or table. | `message`, `tone` | [SellerNotice.tsx](../apps/web/features/seller/components/SellerNotice/SellerNotice.tsx) |
+| SellerStat | One labelled number with an optional hint on the dashboard or analytics page. | `label`, `value`, `hint`, `className` | [SellerStat.tsx](../apps/web/features/seller/components/SellerStat/SellerStat.tsx) |
+| SellerEmpty | Shown when a vendor-area account has no store membership. | `copy` | [SellerEmpty.tsx](../apps/web/features/seller/components/SellerEmpty/SellerEmpty.tsx) |
+| SellerDashboard | Store status, six sales and queue totals and the newest sub-orders. | `store`, `dashboard`, `copy`, `checkoutCopy`, `locale` | [SellerDashboard.tsx](../apps/web/features/seller/components/SellerDashboard/SellerDashboard.tsx) |
+| SellerProductTable | Product rows with category, status, price, stock and an edit link. | `products`, `copy`, `locale`, `canManage` | [SellerProductTable.tsx](../apps/web/features/seller/components/SellerProductTable/SellerProductTable.tsx) |
+| SellerProductForm | Create or edit English and Bangla product fields, category, price, stock, tone and status. | `product?`, `categories`, `copy` | [SellerProductForm.tsx](../apps/web/features/seller/components/SellerProductForm/SellerProductForm.tsx) |
+| SellerVariantForm | Inline price and stock editor for one variant. | `variant`, `copy` | [SellerVariantForm.tsx](../apps/web/features/seller/components/SellerVariantForm/SellerVariantForm.tsx) |
+| SellerInventoryTable | Every variant with its SKU, price and stock, lowest stock first. | `variants`, `copy`, `locale` | [SellerInventoryTable.tsx](../apps/web/features/seller/components/SellerInventoryTable/SellerInventoryTable.tsx) |
+| StockAdjustForm | Signed stock change with a reason and optional note for one selected variant. | `variants`, `copy`, `locale` | [StockAdjustForm.tsx](../apps/web/features/seller/components/StockAdjustForm/StockAdjustForm.tsx) |
+| SellerOrderTable | Sub-order rows with buyer, status, item count, total and a detail link. | `orders`, `copy`, `checkoutCopy`, `locale` | [SellerOrderTable.tsx](../apps/web/features/seller/components/SellerOrderTable/SellerOrderTable.tsx) |
+| SellerOrderSummary | Delivery address, buyer note, order lines and money breakdown for one sub-order. | `order`, `copy`, `locale` | [SellerOrderSummary.tsx](../apps/web/features/seller/components/SellerOrderSummary/SellerOrderSummary.tsx) |
+| SellerFulfillmentPanel | Current sub-order status, timestamps and the next allowed confirm, pack, ship, deliver or cancel action. | `order`, `copy`, `checkoutCopy`, `locale` | [SellerFulfillmentPanel.tsx](../apps/web/features/seller/components/SellerFulfillmentPanel/SellerFulfillmentPanel.tsx) |
+| SellerQuestionList | Buyer questions with their answer or an inline answer form. | `questions`, `copy`, `locale` | [SellerQuestionList.tsx](../apps/web/features/seller/components/SellerQuestionList/SellerQuestionList.tsx) |
+| SellerReturnList | Return requests with approve and reject controls while open. | `returns`, `copy`, `locale` | [SellerReturnList.tsx](../apps/web/features/seller/components/SellerReturnList/SellerReturnList.tsx) |
+| SellerPromotionForm | Creates or updates a store coupon by code, type, value, minimum and end date. | `copy` | [SellerPromotionForm.tsx](../apps/web/features/seller/components/SellerPromotionForm/SellerPromotionForm.tsx) |
+| SellerPromotionList | Coupon rows with rule, use count and an activate or deactivate action. | `promotions`, `copy`, `locale` | [SellerPromotionList.tsx](../apps/web/features/seller/components/SellerPromotionList/SellerPromotionList.tsx) |
+| SellerAnalyticsView | Ninety-day revenue and unit totals, best sellers and low-stock variants. | `analytics`, `copy`, `locale` | [SellerAnalyticsView.tsx](../apps/web/features/seller/components/SellerAnalyticsView/SellerAnalyticsView.tsx) |
+| StoreSettingsForm | Public storefront identity, bilingual announcement, about, return and shipping policies, accent and cover tone. | `store`, `copy` | [StoreSettingsForm.tsx](../apps/web/features/seller/components/StoreSettingsForm/StoreSettingsForm.tsx) |
+| KycForm | Business name, type, trade licence, payout phone and district for review. | `store`, `copy` | [KycForm.tsx](../apps/web/features/seller/components/KycForm/KycForm.tsx) |
+| SellerStoreView | KYC status, storefront settings and the business verification form. | `store`, `copy`, `canManage` | [SellerStoreView.tsx](../apps/web/features/seller/components/SellerStoreView/SellerStoreView.tsx) |
+| PublicStoreHeader | Public store banner, identity, verification, rating, followers, announcement and description. | `store`, `copy`, `locale` | [PublicStoreHeader.tsx](../apps/web/features/seller/components/PublicStoreHeader/PublicStoreHeader.tsx) |
+| PublicStoreView | Public store products, about text and return and shipping policies. | `store`, `copy`, `locale` | [PublicStoreView.tsx](../apps/web/features/seller/components/PublicStoreView/PublicStoreView.tsx) |
 
 ## Admin (`apps/web/features/admin`)
 

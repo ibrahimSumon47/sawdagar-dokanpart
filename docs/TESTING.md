@@ -6,9 +6,13 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 | Package | Tests | What they cover |
 |---|---|---|
-| `@sd/domain` | 58 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
+| `@sd/domain` | 63 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules; plus seller approval, signed stock changes and their limits, product-status narrowing and sales summaries |
 | `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
 | `@sd/web` | 42 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+
+## Phase 7 local checks
+
+On 2026-10-28 the Seller Center slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (118 tests) and `pnpm build`. The build listed `/seller`, all eight seller sub-pages, `/seller/products/export` and `/store/[slug]` as dynamic routes and did not connect to the database. New domain tests cover store and KYC approval, signed stock changes including zero, fractional, negative and oversized values, product-status narrowing, and delivered/pipeline/cancelled sales totals.
 
 ## Phase 6 local checks
 
@@ -30,6 +34,21 @@ On 2026-10-28 the review/returns migration and two seed runs completed through t
 - CI run 40687496385 passed on Linux, Windows and macOS, and the Vercel deployment was Ready.
 
 Two defects found in this pass were fixed: passing formatter-bearing dictionaries to the client review and profile forms, and validating seeded readable ids as UUIDs. The seed now reads rating aggregates back from the database so a reseed keeps buyer-written reviews in the average.
+
+## Phase 7 production check
+
+On 2026-10-28 the seller-center migration (run 40691015764) and seed (run 40692357548, repeated after the shipping fix) completed through the `Database` workflow. On the deployment, signed in as `vendor@demo.sawdagar.test`:
+
+- `/seller` showed the Rupsha Tangail Weavers store as approved, its KYC-approved notice, delivered and pipeline revenue, one order to pack, 17 low-stock variants and the seeded confirmed sub-order;
+- `/seller/products` listed 18 products with status, category, price, stock and edit links, and the new-product and CSV-export links;
+- the product edit page prefilled both titles, both descriptions, the category and all three variants, and saving it returned the success notice;
+- `/seller/inventory` listed 54 variants; a +2 adjustment with the reason restock and a note saved and refreshed the product total;
+- `/seller/orders` listed the seeded sub-order; confirming, packing, shipping with `Sundarban Courier` and `SD-4471-8820`, then delivering each saved and advanced the timeline, and the courier and tracking number were displayed;
+- `/seller/promotions` created `RUPSHA10`, a 10% store coupon with a ৳500 minimum, and the row appeared with its rule and zero redemptions;
+- `/seller/store` prefilled the approved KYC record and storefront copy, saved an edited announcement, and the public `/store/rupsha-tangail-weavers` page rendered 18 active products with no horizontal overflow;
+- the reseed exposed that `৳60` shipping had been stored as 60 poisha (৳0.60) and that a reset kept old fulfillment timestamps; both seed bugs were fixed, and the final seeded order shows ৳60 shipping and ৳3,310 total with a clean confirmed state.
+
+The cross-account path was then exercised in full: the demo buyer asked a question on a Rupsha product and opened a not-as-described return for the delivered seller order; the vendor answered the question and approved the return with a resolution note. The return list exposed the stored reason code instead of its localized label, which was fixed by passing the buyer returns copy into the seller card. CI passed on the final commit, and the Vercel production deployment reported Ready.
 
 ## Production smoke check
 

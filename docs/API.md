@@ -46,6 +46,25 @@ Cart rows include server-side variant prices, stock and vendor details. The clie
 
 All three accept only ids, enums, text and already-resized image data URLs; ownership, prices and the verified-purchase badge are decided from the session and stored rows. Reviews and questions are visible to everyone; return requests are visible only to their owner until the Seller Center and finance phases add queues.
 
+## Seller Center Server Actions
+
+Defined in [storeActions.ts](../apps/web/features/seller/storeActions.ts), [productActions.ts](../apps/web/features/seller/productActions.ts), [inventoryActions.ts](../apps/web/features/seller/inventoryActions.ts) and [orderActions.ts](../apps/web/features/seller/orderActions.ts). Every action resolves the signed-in membership from the session, requires the owner role and `seller:manage`, and scopes the target row by that store's `organizationId`; no store, user or actor id is accepted from the form.
+
+| Action | Input | Behaviour |
+|---|---|---|
+| `saveStoreAction` | store name, bilingual announcement, about, return and shipping policies, accent, cover tone | Updates the store's public CMS fields; rejects overlong text with an error flag |
+| `submitKycAction` | legal name, business type, trade licence, payout phone, district | Stores the business details, sets KYC and store status to pending and clears the previous review note |
+| `savePromotionAction` | code, type (`percent`, `fixed`, `free_shipping`), value, minimum subtotal, end date, active | Creates or updates one coupon owned by the store; rejects a code that belongs to another store |
+| `togglePromotionAction` | `promotionId` | Flips the active flag without deleting redemption history |
+| `saveProductAction` | product id or fields, bilingual title and description, category, price, stock, tone, status | Creates a product with one default variant or updates an owned product; activation requires store and KYC approval |
+| `saveVariantAction` | `variantId`, price, stock | Updates an owned variant and records the stock difference as a correction |
+| `adjustStockAction` | `variantId`, signed delta, reason, note | Applies the domain stock rule, writes an `inventory_adjustments` row and refreshes the product total |
+| `advanceSubOrderAction` | `subOrderId`, next status, courier and tracking for shipping | Enforces the sub-order state machine; cancelling restores stock and the order closes when every sub-order is delivered or cancelled |
+| `answerQuestionAction` | `questionId`, answer body | Answers a question only when its product belongs to the store; publishes the answer on the product page |
+| `resolveReturnAction` | `returnRequestId`, approved or rejected, optional note | Decides a return request from this store; refunds wait for the finance phase |
+
+`GET /seller/products/export` returns a private CSV download of every variant in the signed-in owner's store, one row per SKU with product, slug, status, price in poisha and stock. It returns 401 for guests and 403 for accounts without an owner membership.
+
 ## Not yet implemented
 
 There are no marketplace REST endpoints, OpenAPI document or SDK yet. The [architecture specification](spec/03-architecture.md) proposes a versioned `/api/v1` API with RFC 9457 errors and an OpenAPI document. Document endpoints here as they land.
