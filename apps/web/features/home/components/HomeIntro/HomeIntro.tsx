@@ -1,6 +1,7 @@
-import { ButtonLink, JamdaniPattern, SectionHeading } from '@sd/ui';
+import { ButtonLink, SectionHeading } from '@sd/ui';
 import type { Dictionary } from '../../../../i18n';
 import { site } from '../../../../lib/site';
+import { departmentPhoto } from '../../../catalog/media';
 import { TrustStrip } from '../../../shell/components/TrustStrip';
 
 export interface HomeIntroProps {
@@ -9,6 +10,8 @@ export interface HomeIntroProps {
 
 /** Opening statement, three promises and the current phase note. */
 export function HomeIntro({ copy }: HomeIntroProps) {
+  const heroPhoto = departmentPhoto('handloom', 'home-hero');
+
   return (
     <>
       <section className="mx-auto w-full max-w-7xl px-4 pb-14 pt-12 sm:px-6 sm:pt-16 lg:px-8">
@@ -30,11 +33,17 @@ export function HomeIntro({ copy }: HomeIntroProps) {
               </ButtonLink>
             </div>
           </div>
-          <div
-            aria-hidden="true"
-            className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line bg-accent/10 text-accent sm:aspect-[5/4] lg:aspect-[4/5]"
-          >
-            <JamdaniPattern className="opacity-70" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line bg-accent/10 text-accent sm:aspect-[5/4] lg:aspect-[4/5]">
+            {heroPhoto ? (
+              <img
+                src={heroPhoto.src}
+                alt={copy.home.heroImageAlt}
+                width={960}
+                height={720}
+                fetchPriority="high"
+                className="h-full w-full object-cover"
+              />
+            ) : null}
             <div className="absolute inset-x-0 bottom-0 border-t border-line bg-surface/95 p-4 text-ink backdrop-blur">
               <p className="font-serif text-lg">{copy.common.brand}</p>
               <p className="text-xs text-ink-muted">{copy.common.demoNotice}</p>

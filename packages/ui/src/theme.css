@@ -121,12 +121,6 @@
 }
 
 @layer components {
-  .sd-marquee {
-    display: flex;
-    width: max-content;
-    animation: sd-marquee 26s linear infinite;
-  }
-
   .sd-skeleton {
     position: relative;
     overflow: hidden;
@@ -148,22 +142,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sd-marquee {
-      animation: none;
-    }
-
     .sd-skeleton::after {
       display: none;
     }
-  }
-}
-
-@keyframes sd-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
   }
 }
 

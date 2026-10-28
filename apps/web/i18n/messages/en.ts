@@ -66,6 +66,7 @@ export const en = {
     title: 'Every dokan, one marketplace.',
     description:
       'Sawdagar Dokanpat follows independent Bangladeshi sellers into one shared storefront, from handloom sarees to terracotta tea sets. Browse the seeded catalog, open a product and follow the build in public.',
+    heroImageAlt: 'A weaver working at a handloom in Bangladesh.',
     primaryCta: 'Browse the catalog',
     secondaryCta: 'Open the design system',
     trust: [
