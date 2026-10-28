@@ -171,7 +171,6 @@ function buildWhere(filters: CatalogFilters, categoryPath?: string): Prisma.Prod
       OR: [
         { titleEn: contains },
         { titleBn: contains },
-        { organization: { name: contains } },
         { category: { nameEn: contains } },
         { category: { nameBn: contains } },
       ],

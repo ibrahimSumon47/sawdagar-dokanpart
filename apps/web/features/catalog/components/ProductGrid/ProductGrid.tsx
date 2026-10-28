@@ -20,6 +20,7 @@ export function ProductGrid({ products, locale, copy }: ProductGridProps) {
         <li key={product.id}>
           <Link
             href={`/product/${product.slug}`}
+            aria-label={product.title[locale]}
             className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
             <ProductCard
