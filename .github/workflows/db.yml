@@ -39,7 +39,7 @@ jobs:
       - name: Apply migrations
         if: inputs.task == 'migrate'
         run: pnpm --filter @sd/web db:migrate
-      - name: Seed demo accounts
+      - name: Seed demo data
         if: inputs.task == 'seed'
         run: pnpm --filter @sd/web db:seed
       - name: Migration status

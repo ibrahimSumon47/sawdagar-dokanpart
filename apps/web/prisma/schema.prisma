@@ -88,14 +88,22 @@ model Verification {
 }
 
 model Organization {
-  id          String   @id
-  name        String
-  slug        String   @unique
-  logo        String?
-  createdAt   DateTime @default(now())
-  metadata    String?
-  members     Member[]
-  invitations Invitation[]
+  id            String   @id
+  name          String
+  slug          String   @unique
+  logo          String?
+  district      String?
+  descriptionEn String?
+  descriptionBn String?
+  verified      Boolean  @default(false)
+  rating        Float    @default(0)
+  reviewCount   Int      @default(0)
+  followers     Int      @default(0)
+  createdAt     DateTime @default(now())
+  metadata      String?
+  members       Member[]
+  invitations   Invitation[]
+  products      Product[]
 
   @@map("organizations")
 }
@@ -168,4 +176,72 @@ model AuditLog {
   @@index([createdAt])
   @@index([actorUserId])
   @@map("audit_logs")
+}
+
+model Category {
+  id            String     @id
+  slug          String     @unique
+  nameEn        String
+  nameBn        String
+  descriptionEn String
+  descriptionBn String
+  path          String     @unique
+  depth         Int        @default(0)
+  sortOrder     Int        @default(0)
+  parentId      String?
+  parent        Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children      Category[] @relation("CategoryTree")
+  products      Product[]
+
+  @@index([parentId])
+  @@index([sortOrder])
+  @@map("categories")
+}
+
+model Product {
+  id             String           @id
+  slug           String           @unique
+  titleEn        String
+  titleBn        String
+  descriptionEn  String
+  descriptionBn  String
+  status         String           @default("active")
+  tone           String           @default("accent")
+  priceMinor     Int
+  compareAtMinor Int?
+  totalStock     Int              @default(0)
+  rating         Float            @default(0)
+  reviewCount    Int              @default(0)
+  categoryId     String
+  organizationId String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  category       Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  variants       ProductVariant[]
+
+  @@index([categoryId, status])
+  @@index([organizationId])
+  @@index([status, createdAt])
+  @@index([priceMinor])
+  @@index([rating])
+  @@map("products")
+}
+
+model ProductVariant {
+  id             String   @id
+  productId      String
+  sku            String   @unique
+  nameEn         String
+  nameBn         String
+  priceMinor     Int
+  compareAtMinor Int?
+  stock          Int      @default(0)
+  isDefault      Boolean  @default(false)
+  sortOrder      Int      @default(0)
+  createdAt      DateTime @default(now())
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_variants")
 }

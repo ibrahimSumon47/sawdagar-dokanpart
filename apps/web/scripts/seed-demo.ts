@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { demoAccounts } from '@sd/domain';
 import { getAuth } from '../lib/auth';
 import { getPrisma } from '../lib/prisma';
+import { seedCatalog } from './seed-catalog';
 
 interface DemoProfile {
   phone: string | null;
@@ -93,6 +94,10 @@ async function main(): Promise<void> {
   }
 
   write(`Demo accounts ready: ${demoAccounts.length} (${created} created, ${updated} refreshed).`);
+
+  const started = Date.now();
+  const summary = await seedCatalog(prisma);
+  write(`${summary} Completed in ${Math.round((Date.now() - started) / 1000)}s.`);
 }
 
 main().catch((error: unknown) => {
