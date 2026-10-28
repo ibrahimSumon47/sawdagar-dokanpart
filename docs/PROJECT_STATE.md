@@ -8,7 +8,7 @@
 - Lint, typecheck, tests and production build pass locally; the production CSS contains both theme token sets and the utilities used by the gallery.
 
 ## Now
-- Phase 1 is complete and being committed. The next slice starts Phase 2: Better Auth with roles and demo sign-in.
+- Phase 1 is complete, committed and live: `/design` is served by Vercel, the production page renders the dark theme and Bangla copy from cookies, and CI passed on Linux, Windows and macOS after the CRLF fix. The next slice starts Phase 2: Better Auth with roles and demo sign-in.
 
 ## Next
 - Phase 2: Prisma schema for users/sessions/organizations on Neon, Better Auth, role and permission guards, Try-demo logins, audit log, basic profiles.
