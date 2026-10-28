@@ -10,7 +10,7 @@ Phase 0 is establishing the workspace, automated quality checks, and first page.
 
 ## Quality checks
 
-CI runs lint, type checking, unit tests, and a production build on Linux, Windows, and macOS. See [testing](docs/TESTING.md) and [deployment](docs/DEPLOYMENT.md).
+CI runs lint, type checking, unit tests, and a production build on Linux, Windows, and macOS. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md), and [deployment](docs/DEPLOYMENT.md).
 
 ## Known limitations
 
