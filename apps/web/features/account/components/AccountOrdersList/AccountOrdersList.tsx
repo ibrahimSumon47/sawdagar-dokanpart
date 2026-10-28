@@ -32,8 +32,12 @@ export function AccountOrdersList({ orders, copy, checkoutCopy, locale }: Accoun
           <div className="min-w-0">
             <p className="font-medium text-ink">{order.number}</p>
             <p className="mt-0.5 text-xs text-ink-muted">
-              {formatDate(order.placedAt, locale)} · {copy.orderItems(String(order.itemCount))} ·{' '}
-              {copy.orderSellers(String(order.sellerCount))}
+              {formatDate(order.placedAt, locale)} ·{' '}
+              {order.itemCount === 1 ? copy.orderItemOne : copy.orderItems(String(order.itemCount))}{' '}
+              ·{' '}
+              {order.sellerCount === 1
+                ? copy.orderSellerOne
+                : copy.orderSellers(String(order.sellerCount))}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">

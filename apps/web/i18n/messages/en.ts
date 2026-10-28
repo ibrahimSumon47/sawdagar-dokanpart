@@ -447,7 +447,9 @@ export const en = {
     ordersEmptyBody: 'Orders placed at checkout appear here with their sellers and totals.',
     ordersEmptyAction: 'Browse the catalog',
     orderItems: (count: string) => `${count} items`,
+    orderItemOne: '1 item',
     orderSellers: (count: string) => `${count} sellers`,
+    orderSellerOne: '1 seller',
     viewOrder: 'Open order',
     reviewsTitle: 'Your reviews',
     reviewsDescription:
@@ -490,6 +492,7 @@ export const en = {
     photos: 'Photos (optional)',
     photosHint: 'Up to three photos, resized in your browser.',
     addPhotos: 'Choose photos',
+    resizing: 'Resizing…',
     removePhoto: 'Remove photo {index}',
     publish: 'Publish review',
     publishing: 'Publishing…',

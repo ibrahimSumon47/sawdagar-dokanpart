@@ -442,7 +442,9 @@ export const bn: Dictionary = {
     ordersEmptyBody: 'চেকআউটে দেওয়া অর্ডার বিক্রেতা ও মোটসহ এখানে দেখা যাবে।',
     ordersEmptyAction: 'ক্যাটালগ দেখুন',
     orderItems: (count: string) => `${count}টি পণ্য`,
+    orderItemOne: '১টি পণ্য',
     orderSellers: (count: string) => `${count} জন বিক্রেতা`,
+    orderSellerOne: '১ জন বিক্রেতা',
     viewOrder: 'অর্ডার খুলুন',
     reviewsTitle: 'আপনার রিভিউ',
     reviewsDescription:
@@ -485,6 +487,7 @@ export const bn: Dictionary = {
     photos: 'ছবি (ঐচ্ছিক)',
     photosHint: 'সর্বোচ্চ তিনটি ছবি, ব্রাউজারেই ছোট করা হবে।',
     addPhotos: 'ছবি বেছে নিন',
+    resizing: 'ছোট করা হচ্ছে…',
     removePhoto: 'ছবি {index} সরান',
     publish: 'রিভিউ প্রকাশ করুন',
     publishing: 'প্রকাশ হচ্ছে…',

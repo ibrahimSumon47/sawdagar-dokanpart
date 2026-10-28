@@ -2,14 +2,29 @@
 
 import { Button } from '@sd/ui';
 import { useActionState } from 'react';
-import type { Dictionary } from '../../../../i18n';
 import { updateProfile, type ProfileState } from '../../actions';
 import { FormField } from '../FormField';
+
+/** Plain strings only: a server component renders this form. */
+export interface ProfileFormLabels {
+  name: string;
+  phone: string;
+  phoneHint: string;
+  district: string;
+  districtHint: string;
+  bio: string;
+  bioHint: string;
+  save: string;
+  saving: string;
+  saveSuccess: string;
+  saveInvalid: string;
+  saveFailed: string;
+}
 
 export interface ProfileFormProps {
   /** Current stored values, rendered as uncontrolled defaults. */
   initial: { name: string; phone: string; district: string; bio: string };
-  copy: Dictionary['account'];
+  labels: ProfileFormLabels;
 }
 
 const initialState: ProfileState = { status: 'idle' };
@@ -18,12 +33,12 @@ const fieldClass =
   'mt-1 w-full rounded-sm border border-line bg-background px-3 py-2 text-sm text-ink';
 
 /** Editable name, phone, district and bio for the signed-in account. */
-export function ProfileForm({ initial, copy }: ProfileFormProps) {
+export function ProfileForm({ initial, labels }: ProfileFormProps) {
   const [state, formAction, pending] = useActionState(updateProfile, initialState);
 
   return (
     <form action={formAction} className="mt-5 grid gap-4 sm:grid-cols-2">
-      <FormField htmlFor="profile-name" label={copy.name}>
+      <FormField htmlFor="profile-name" label={labels.name}>
         <input
           id="profile-name"
           name="name"
@@ -35,7 +50,7 @@ export function ProfileForm({ initial, copy }: ProfileFormProps) {
         />
       </FormField>
 
-      <FormField htmlFor="profile-phone" label={copy.phone} hint={copy.phoneHint}>
+      <FormField htmlFor="profile-phone" label={labels.phone} hint={labels.phoneHint}>
         <input
           id="profile-phone"
           name="phone"
@@ -48,7 +63,7 @@ export function ProfileForm({ initial, copy }: ProfileFormProps) {
         />
       </FormField>
 
-      <FormField htmlFor="profile-district" label={copy.district} hint={copy.districtHint}>
+      <FormField htmlFor="profile-district" label={labels.district} hint={labels.districtHint}>
         <input
           id="profile-district"
           name="district"
@@ -60,7 +75,7 @@ export function ProfileForm({ initial, copy }: ProfileFormProps) {
       </FormField>
 
       <div className="sm:col-span-2">
-        <FormField htmlFor="profile-bio" label={copy.bio} hint={copy.bioHint}>
+        <FormField htmlFor="profile-bio" label={labels.bio} hint={labels.bioHint}>
           <textarea
             id="profile-bio"
             name="bio"
@@ -75,21 +90,21 @@ export function ProfileForm({ initial, copy }: ProfileFormProps) {
 
       <div className="flex flex-wrap items-center gap-3 sm:col-span-2">
         <Button type="submit" disabled={pending}>
-          {pending ? copy.saving : copy.save}
+          {pending ? labels.saving : labels.save}
         </Button>
         {state.status === 'success' ? (
           <p role="status" className="text-sm text-success">
-            {copy.saveSuccess}
+            {labels.saveSuccess}
           </p>
         ) : null}
         {state.status === 'invalid' ? (
           <p role="alert" className="text-sm text-danger">
-            {copy.saveInvalid}
+            {labels.saveInvalid}
           </p>
         ) : null}
         {state.status === 'failed' ? (
           <p role="alert" className="text-sm text-danger">
-            {copy.saveFailed}
+            {labels.saveFailed}
           </p>
         ) : null}
       </div>

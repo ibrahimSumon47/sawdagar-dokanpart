@@ -1,2 +1,2 @@
 export { ReviewForm } from './ReviewForm';
-export type { ReviewFormProps } from './ReviewForm';
+export type { ReviewFormLabels, ReviewFormProps } from './ReviewForm';

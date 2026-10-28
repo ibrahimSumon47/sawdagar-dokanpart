@@ -54,7 +54,20 @@ export function AccountPanel({ viewer, profile, memberships, copy, locale }: Acc
                 district: profile?.district ?? '',
                 bio: profile?.bio ?? '',
               }}
-              copy={copy.account}
+              labels={{
+                name: copy.account.name,
+                phone: copy.account.phone,
+                phoneHint: copy.account.phoneHint,
+                district: copy.account.district,
+                districtHint: copy.account.districtHint,
+                bio: copy.account.bio,
+                bioHint: copy.account.bioHint,
+                save: copy.account.save,
+                saving: copy.account.saving,
+                saveSuccess: copy.account.saveSuccess,
+                saveInvalid: copy.account.saveInvalid,
+                saveFailed: copy.account.saveFailed,
+              }}
             />
           </section>
 

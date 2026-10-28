@@ -19,6 +19,31 @@ export function AccountReviewsPanel({
   reviewsCopy,
   locale,
 }: AccountReviewsPanelProps) {
+  // The form is a client component, so it receives plain strings only.
+  const formLabels = {
+    reviewItem: reviewsCopy.reviewItem,
+    deliveredOn: reviewsCopy.deliveredOn,
+    writeDescription: reviewsCopy.writeDescription,
+    rating: reviewsCopy.rating,
+    ratingHint: reviewsCopy.ratingHint,
+    titleLabel: reviewsCopy.titleLabel,
+    titlePlaceholder: reviewsCopy.titlePlaceholder,
+    bodyLabel: reviewsCopy.bodyLabel,
+    bodyPlaceholder: reviewsCopy.bodyPlaceholder,
+    photos: reviewsCopy.photos,
+    photosHint: reviewsCopy.photosHint,
+    addPhotos: reviewsCopy.addPhotos,
+    resizing: reviewsCopy.resizing,
+    removePhoto: reviewsCopy.removePhoto,
+    invalid: reviewsCopy.invalid,
+    publish: reviewsCopy.publish,
+    publishing: reviewsCopy.publishing,
+    success: reviewsCopy.success,
+    duplicate: reviewsCopy.duplicate,
+    failed: reviewsCopy.failed,
+    photo: reviewsCopy.photo,
+  };
+
   return (
     <div className="space-y-10">
       <section>
@@ -30,7 +55,7 @@ export function AccountReviewsPanel({
         ) : (
           <div className="mt-3 space-y-3">
             {awaiting.map((item) => (
-              <ReviewForm key={item.orderItemId} item={item} copy={reviewsCopy} locale={locale} />
+              <ReviewForm key={item.orderItemId} item={item} labels={formLabels} locale={locale} />
             ))}
           </div>
         )}
