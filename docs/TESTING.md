@@ -16,6 +16,18 @@ On 2026-10-28 the finance slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test
 
 The production payout run then exposed a rendering crash that local tests missed: refunding a ৳3,250 order after a ৳1,500 payout left platform cash at -৳1,440, and `formatTaka` rejects negative amounts. The action had already committed, but the redirected page hit the error boundary. `formatTakaSigned` and an opt-in `allowNegative` on `Price` now render ledger balances with a leading minus, and the platform payable keeps its sign instead of being clamped at zero.
 
+## Phase 8 production check
+
+On 2026-10-28 the finance migration (run 40696952497) and seed (run 40697066479) completed through the `Database` workflow. On the deployment:
+
+- `/seller/finance` showed the Rupsha store's negotiated 7% rate, ৳0 paid out and an empty statement before a sale; delivering the seeded sub-order posted the ledger and moved the page to ৳3,082.50 available, ৳227.50 commission and one statement row of ৳3,082.50 net;
+- a ৳1,500 payout request succeeded with a note, the notice appeared, available fell to ৳1,582.50 and payouts in progress rose to ৳1,500;
+- as `finance@demo.sawdagar.test`, `/admin/finance` showed ৳3,310 cash, ৳227.50 commission and ৳3,082.50 owed to sellers; the payout moved Requested → Approved → Paid, leaving ৳1,810 cash and ৳1,582.50 owed;
+- refunding the approved ৳3,250 return emptied the refund queue, listed the refund under recent refunds, and left cash at -৳1,440, commission at ৳0 and a negative seller payable. The buyer's `/account/returns` showed the request as Refunded with its resolution note;
+- `/seller/finance` then showed ৳0 available, ৳1,500 paid out, the refund and its ৳227.50 reversed commission, and the delivered statement; the same page rendered in Bangla.
+
+Two defects were found and fixed in this pass: the page crashed when negative cash reached `Price`, and a fully reversed commission printed `৳-0`. `formatTakaSigned`, an opt-in `allowNegative` on `Price` and a negative-zero guard now handle both, and the tests cover them. A third gap was closed by listing refunds on the seller page, so a refunded sale no longer looks unpaid.
+
 ## Phase 7 local checks
 
 On 2026-10-28 the Seller Center slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (118 tests) and `pnpm build`. The build listed `/seller`, all eight seller sub-pages, `/seller/products/export` and `/store/[slug]` as dynamic routes and did not connect to the database. New domain tests cover store and KYC approval, signed stock changes including zero, fractional, negative and oversized values, product-status narrowing, and delivered/pipeline/cancelled sales totals.

@@ -29,13 +29,14 @@
 - Phase 7 production check: signed in as the vendor owner, the dashboard showed the approved store, pipeline revenue, one order to pack and 17 low-stock variants; products listed 18 rows; edit prefilled all fields and three variants and saved; inventory accepted a +2 restock adjustment; the seeded order moved through confirm, pack, ship with courier and tracking, and deliver; `RUPSHA10` was created and listed; store settings saved and the public store rendered 18 products; CI is green on the final commit and the Vercel deployment is Ready.
 - Phase 8 implementation: `20261028230000_finance` migration for `ledger_transactions`, `ledger_entries`, `payouts` and `refunds`, plus `organizations.commissionRateBps`; double-entry rules in `@sd/domain` for delivery, payout and refund, with commission on discounted goods and shipping passed to the seller; idempotent posting by kind and reference inside the caller's transaction; `/seller/finance` with balance tiles, a ৳1,000 minimum withdrawal request, payout history and a delivered statement; `/admin/finance` with cash, commission and seller payable balances, payout approve, pay and reject, and refunds for approved returns; finance links on the admin overview and the Seller Center nav.
 - Phase 8 seed: every fourth vendor gets a negotiated 7% commission rate, the rest keep the standard 8%, so the take rate is visible in the seller statement.
+- Phase 8 production check: the finance migration (run 40696952497) and seed (run 40697066479) completed; delivering the seeded sub-order, requesting a ৳1,500 payout, approving and paying it, and refunding the ৳3,250 return all worked on the deployment. The pass exposed and fixed a crash on negative platform cash, a `৳-0` commission display and a missing refund history on the seller page; the buyer's return now shows Refunded, and the finance pages render in both languages.
 
 ## Now
-- Phase 8 (Finance) code, unit tests, lint and build are complete. Production migration, seed refresh and browser verification are next.
+- Phase 8 (Finance) is complete and verified. Phase 9 (Admin and CMS) has not started.
 
 ## Next
-- Apply the finance migration and reseed through the `Database` workflow, then verify the seller payout and admin refund flows on the deployment.
-- Start Phase 9 (Admin and CMS): store approvals, catalog and review moderation, Storefront CMS, Journal CMS, feature flags and platform analytics.
+- Start Phase 9 (Admin and CMS): store approvals, catalog and review moderation, Storefront CMS, Journal CMS, feature flags and platform analytics, with drafts, scheduling and version history for the CMS modules.
+- Add a real product-media plan: the owner asked for images, and the catalog still renders an SVG pattern per tone.
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
