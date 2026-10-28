@@ -21,6 +21,9 @@ The deployed build was then exercised in a browser:
 - English `jamdani` returned six sarees and Bangla `শাড়ি` returned 36;
 - the product page rendered media, title, rating, variant radios, stock, vendor card and related products;
 - selecting the second variant changed the displayed price and SKU;
+- submitting the filter form with both price boxes empty returned all 432 products after blank fields were treated as absent, instead of the zero-taka maximum that hid every result;
+- the home page listed all 12 departments from the live category tree;
+- the product page had no horizontal overflow at 360 px and the catalog had none at 360 or 768 px;
 - the variant-picker deployment error caused by passing formatter functions across the server/client boundary was fixed and the page re-verified.
 
 The auth deployment was also exercised through the real sign-in page: buyer, vendor owner, vendor staff, support, finance and super admin opened their demo sessions. Vendor staff saw only the account and Seller Center links, support saw the user directory but not the audit log, finance saw neither, and the super admin saw both. Opening `/admin` as a vendor redirected to `/forbidden`.

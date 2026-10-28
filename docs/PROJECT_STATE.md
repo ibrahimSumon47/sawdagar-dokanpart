@@ -10,7 +10,7 @@
 - Neon migration and two idempotent seeds ran successfully through the `Database` GitHub Actions workflow.
 - Unit tests: 59 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants and catalog filter validation.
 - Lint, typecheck, tests and build pass locally; the build does not touch the database.
-- Production verification: the catalog returned 200 with 432 products, a department filter changed the result count, English `jamdani` returned six sarees, Bangla `শাড়ি` returned 36, and a product page switched variants with the correct price and SKU. Phase 2 demo sign-in and role guards were re-verified earlier on the same deployment.
+- Production verification: the catalog returned 200 with 432 products, a department filter changed the result count, English `jamdani` returned six sarees, Bangla `শাড়ি` returned 36, and a product page switched variants with the correct price and SKU. The home page showed 12 live departments, blank price fields no longer hid results, and the catalog and product page had no horizontal overflow at 360 px. Phase 2 demo sign-in and role guards were re-verified earlier on the same deployment.
 
 ## Now
 - Phase 3 is complete. Phase 4 (cart and wishlist) is next and has not started.
