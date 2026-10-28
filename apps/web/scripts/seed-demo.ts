@@ -3,6 +3,7 @@ import { demoAccounts } from '@sd/domain';
 import { getAuth } from '../lib/auth';
 import { getPrisma } from '../lib/prisma';
 import { seedCatalog } from './seed-catalog';
+import { seedContent } from './seed-content';
 import { seedCoupons } from './seed-coupons';
 import { seedDemoOrders } from './seed-orders';
 import { seedReviews } from './seed-reviews';
@@ -104,8 +105,9 @@ async function main(): Promise<void> {
   const couponCount = await seedCoupons(prisma);
   const reviewSummary = await seedReviews(prisma);
   const orderSummary = await seedDemoOrders(prisma);
+  const contentSummary = await seedContent(prisma);
   write(
-    `${summary} ${couponCount} coupons ready. ${reviewSummary} ${orderSummary} Completed in ${Math.round((Date.now() - started) / 1000)}s.`,
+    `${summary} ${couponCount} coupons ready. ${reviewSummary} ${orderSummary} ${contentSummary} Completed in ${Math.round((Date.now() - started) / 1000)}s.`,
   );
 }
 

@@ -75,6 +75,20 @@ Defined in [actions.ts](../apps/web/features/finance/actions.ts) and [refundActi
 | `processPayoutAction` | `payoutId`, `decision` (`approve`, `pay`, `reject`) | Allows only the transition the current status permits; paying posts the payout ledger transaction and marks it paid in one database transaction |
 | `refundReturnAction` | `returnRequestId` | Requires an approved request with no refund; creates the refund, marks the return `refunded` and posts a transaction that reverses the store's payable and the commission proportionally |
 
+## Admin and CMS Server Actions
+
+Defined in [admin/actions.ts](../apps/web/features/admin/actions.ts), [admin/flagActions.ts](../apps/web/features/admin/flagActions.ts) and [content/actions.ts](../apps/web/features/content/actions.ts). Every action resolves the session and checks a specific admin permission before reading the form: `admin:moderate:catalog` for stores, `admin:moderate:reviews` for reviews, `admin:settings:write` for flags and `admin:cms:write` for content. The target row and its current state are re-read from the database; the browser sends only ids, decisions and editable text.
+
+| Action | Input | Behaviour |
+|---|---|---|
+| `reviewStoreAction` | `storeId`, `decision` (`approve` or `reject`), optional note | Sets the store and KYC status together, marks the store verified on approval, records the review time and note, and audits the decision |
+| `moderateReviewAction` | `reviewId`, `decision` (`publish` or `hide`) | Changes the review status, recomputes the product's rating and count from published rows in the same transaction, and revalidates the product and catalog |
+| `toggleFeatureFlagAction` | `key`, `enabled` (`on` or `off`) | Updates an existing flag and its editor; an unknown key is rejected rather than created from the form |
+| `saveContentAction` | `id` or new entry fields, kind, slug, bilingual title, excerpt, body and SEO text, status, publish date | Creates or updates one CMS entry and appends a version snapshot in one transaction; a duplicate `(kind, slug)` returns `conflict`; scheduled entries need a date, which is stored at 09:00 Dhaka time |
+| `restoreContentVersionAction` | `versionId` | Reads the snapshot from the database, updates the entry, appends a new version with a restore note and audits it; old versions stay untouched |
+
+Public content routes read only entries that are published or scheduled and due; drafts are invisible even with a direct URL. `/help` and `/journal` return 404 while their feature flag is off. The admin CMS actions and pages are covered by the `admin:cms:write` permission, which the content editor and super admin roles hold.
+
 ## Not yet implemented
 
 There are no marketplace REST endpoints, OpenAPI document or SDK yet. The [architecture specification](spec/03-architecture.md) proposes a versioned `/api/v1` API with RFC 9457 errors and an OpenAPI document. Document endpoints here as they land.

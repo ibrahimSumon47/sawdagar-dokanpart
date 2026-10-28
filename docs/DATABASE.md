@@ -4,7 +4,7 @@
 
 The `sawdagar-dokanpat` project in a Neon Free organization (`aws-us-east-1`, PostgreSQL 18) holds the authentication, catalog, cart, checkout, review, Seller Center and finance schemas. The initial migration was applied through the [Database workflow](../.github/workflows/db.yml) on 2026-10-28, followed by the feature migrations and seed runs. Connection strings live only in the Vercel and GitHub dashboards; the application uses the pooled Neon URL, while Prisma CLI commands use the direct URL.
 
-Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql), [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql), [20261028200000_checkout_orders](../apps/web/prisma/migrations/20261028200000_checkout_orders/migration.sql), [20261028220000_reviews_returns](../apps/web/prisma/migrations/20261028220000_reviews_returns/migration.sql), [20261028220000_seller_center](../apps/web/prisma/migrations/20261028220000_seller_center/migration.sql) and [20261028230000_finance](../apps/web/prisma/migrations/20261028230000_finance/migration.sql). All eight are applied to Neon through the `Database` workflow on 2026-10-28; the checkout migration ran in run 40684155525, the review/returns and seller-center migrations and seeds in the following runs, and the finance migration in run 40696952497 with a seed in run 40697066479. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
+Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql), [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql), [20261028200000_checkout_orders](../apps/web/prisma/migrations/20261028200000_checkout_orders/migration.sql), [20261028220000_reviews_returns](../apps/web/prisma/migrations/20261028220000_reviews_returns/migration.sql), [20261028220000_seller_center](../apps/web/prisma/migrations/20261028220000_seller_center/migration.sql), [20261028230000_finance](../apps/web/prisma/migrations/20261028230000_finance/migration.sql) and [20261028233000_admin_cms](../apps/web/prisma/migrations/20261028233000_admin_cms/migration.sql). All nine are applied to Neon through the `Database` workflow on 2026-10-28; the checkout migration ran in run 40684155525, the review/returns and seller-center migrations and seeds in the following runs, the finance migration in run 40696952497 with a seed in run 40697066479, and the admin/CMS migration in the run recorded in `docs/PROJECT_STATE.md`. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
 
 ```mermaid
 erDiagram
@@ -54,6 +54,7 @@ erDiagram
   orders ||--o{ refunds : refunded_on
   return_requests ||--o| refunds : settled_by
   ledger_transactions ||--o{ ledger_entries : posts
+  cms_entries ||--o{ cms_versions : snapshots
 ```
 
 ## Tables
@@ -95,6 +96,9 @@ erDiagram
 | `ledger_entries` | Debit or credit line in poisha against an account code such as `platform:cash` or `seller:<id>:payable` |
 | `payouts` | A store's withdrawal request: number, amount, requested and processing users, status and note |
 | `refunds` | One paid refund per approved return request, with the amount, the reversed commission and the order link |
+| `cms_entries` | Storefront page, Help Center article or Journal post: bilingual title, excerpt, body and SEO fields, draft/scheduled/published status, publish instant and author |
+| `cms_versions` | Immutable JSON snapshot of one entry after each save, with a version number, note, author and time |
+| `feature_flags` | Storefront switches keyed by a stable string such as `help_center_enabled`, with bilingual labels and the last editor |
 
 ## Catalog shape
 
@@ -143,6 +147,14 @@ erDiagram
 - A payout is requested only by an owner, needs at least ৳1,000 and cannot exceed the payable balance minus payouts already in flight. Approval, payment and rejection are separate states; paying it posts the `payout` transaction and settles the store's payable in cash.
 - Refunding an approved return creates one `refunds` row, marks the return `refunded` and posts a `refund` transaction that debits the store's payable and the commission revenue and credits cash. A store can end up owing the platform after a refund of an already-paid order; the negative payable is carried forward rather than clamped, and the platform finance page shows it with a minus sign. Platform cash can also go negative when a refund is larger than the cash on hand, for the same reason.
 - Ledger balances are never edited or deleted. Corrections are new transactions, and the finance pages derive every number from entries, payouts and refunds rather than stored totals.
+
+## Content and flags shape
+
+- `cms_entries` holds three areas in one table: `page` (a static storefront page at `/pages/[slug]`), `help` (a Help Center article at `/help/[slug]`) and `journal` (a post at `/journal/[slug]`). The unique pair `(kind, slug)` means the same slug can exist in two areas without colliding, and the public query filters by kind.
+- Every save writes a `cms_versions` snapshot of the editable fields inside the same transaction as the entry update. The version number is `max + 1`, guarded by a unique `(entryId, version)`. Restoring an old snapshot writes its fields back to the entry and appends a **new** version with the note `Restored from version N`; history is never rewritten.
+- A scheduled entry becomes visible when `status = 'scheduled'` and `publishAt <= now()`. A published entry is visible regardless of date. Drafts are never returned by the public queries, so an unfinished article cannot leak through a direct URL.
+- The editor stores plain text. Paragraphs are split on blank lines when rendered; there is no HTML field, so admin-authored content cannot inject markup.
+- `feature_flags` rows are read by the public Help and Journal routes; a missing row falls back to the seeded default in `features/content/flags.ts`, so the storefront still builds without a database. The flag table has no delete path; disabling is the reversible state.
 
 ## Checkout and order shape
 
@@ -203,6 +215,10 @@ erDiagram
 | `payouts(organization_id, requested_at)` and `payouts(status, requested_at)` | A store's history and the platform queue |
 | `refunds(return_request_id)` unique | One refund per return request |
 | `refunds(organization_id, created_at)` and `refunds(status, created_at)` | Store and platform refund history |
+| `cms_entries(kind, slug)` unique | One URL per content area, and the public lookup by kind and slug |
+| `cms_entries(kind, status, publish_at)` | The public index of published and due scheduled entries |
+| `cms_entries(updated_at)` | The admin content list, newest edit first |
+| `cms_versions(entry_id, version)` unique | Immutable version numbers per entry |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 
@@ -212,4 +228,4 @@ Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size
 - `DIRECT_DATABASE_URL` is used by the Prisma CLI; `DATABASE_URL` is the pooled runtime connection.
 - No uploaded media library exists. The only image bytes in PostgreSQL are the bounded review thumbnails described above.
 - The seeded catalog fits comfortably in the Neon Free storage and compute budget. No database size or query-plan measurement has been recorded yet; add one if the catalog grows or a page becomes slow.
-- The seed is idempotent. It upserts users, profiles, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog, store approvals and CMS copy, 1,755 seeded reviews and three demo orders (two delivered for the buyer account and one confirmed for the demo store), and recomputes product ratings from all published review rows. Because it is a demo reset, it also restores the seeded stock and product fields, so seller edits are intentionally replaced on the next seed run.
+- The seed is idempotent. It upserts users, profiles, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog, store approvals and storefront copy, 1,755 seeded reviews, three demo orders (two delivered for the buyer account and one confirmed for the demo store), eleven CMS entries with their first version, two feature flags, and recomputes product ratings from all published review rows. Because it is a demo reset, it also restores the seeded stock and product fields, so seller edits are intentionally replaced on the next seed run.

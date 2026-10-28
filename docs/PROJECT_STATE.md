@@ -30,13 +30,17 @@
 - Phase 8 implementation: `20261028230000_finance` migration for `ledger_transactions`, `ledger_entries`, `payouts` and `refunds`, plus `organizations.commissionRateBps`; double-entry rules in `@sd/domain` for delivery, payout and refund, with commission on discounted goods and shipping passed to the seller; idempotent posting by kind and reference inside the caller's transaction; `/seller/finance` with balance tiles, a ৳1,000 minimum withdrawal request, payout history and a delivered statement; `/admin/finance` with cash, commission and seller payable balances, payout approve, pay and reject, and refunds for approved returns; finance links on the admin overview and the Seller Center nav.
 - Phase 8 seed: every fourth vendor gets a negotiated 7% commission rate, the rest keep the standard 8%, so the take rate is visible in the seller statement.
 - Phase 8 production check: the finance migration (run 40696952497) and seed (run 40697066479) completed; delivering the seeded sub-order, requesting a ৳1,500 payout, approving and paying it, and refunding the ৳3,250 return all worked on the deployment. The pass exposed and fixed a crash on negative platform cash, a `৳-0` commission display and a missing refund history on the seller page; the buyer's return now shows Refunded, and the finance pages render in both languages.
+- Phase 9 implementation: `20261028233000_admin_cms` migration for `cms_entries`, `cms_versions` and `feature_flags`; role-filtered admin navigation and shared page frame; store approval queue with the KYC business record; review moderation that recomputes the product rating; Storefront, Help and Journal CMS with bilingual fields, SEO text, drafts, scheduled publishing, preview and immutable version history with restore-as-new-version; feature flags that gate the Help Center and Journal; platform analytics; a paginated audit viewer; and public `/help`, `/help/[slug]`, `/journal`, `/journal/[slug]` and `/pages/[slug]` routes linked from the footer.
+- Phase 9 seed: eleven bilingual entries (three published Help articles, a scheduled Eid cut-off article, three published Journal posts, one draft, two static pages) and two feature flags. Every seeded entry gets version 1.
+- Phase 9 local checks: `pnpm lint`, `pnpm typecheck`, `pnpm test` (139 tests) and `pnpm build` pass. The build lists every new admin and public content route as dynamic and does not connect to the database. New tests cover CMS input validation and the role-filtered admin navigation. The CMS schema was fixed after a test exposed that a new entry sent `id: null` and an empty publish date, which the first Zod shape rejected.
 
 ## Now
-- Phase 8 (Finance) is complete and verified. Phase 9 (Admin and CMS) has not started.
+- Phase 9 (Admin and CMS) is implemented and locally verified; the production migration, seed and smoke test are in progress.
 
 ## Next
-- Start Phase 9 (Admin and CMS): store approvals, catalog and review moderation, Storefront CMS, Journal CMS, feature flags and platform analytics, with drafts, scheduling and version history for the CMS modules.
-- Add a real product-media plan: the owner asked for images, and the catalog still renders an SVG pattern per tone.
+- Finish Phase 9 production verification: apply the migration and seed through the `Database` workflow, then exercise store approval, review moderation, a CMS draft, scheduling, version restore, a feature flag and the audit viewer on the deployment.
+- Add a real product-media plan: the owner asked for images, and the catalog still renders an SVG pattern per tone. This fits the Phase 11 polish pass.
+- Phase 10 (CS Core) remains blocked on a free Java host; the C++, C and Python modules can be built while that is resolved.
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
@@ -51,7 +55,7 @@
 - Seeded reviews belong to synthetic demo buyers without login accounts. Reviewer names and bodies are demo content, not real customers; the storefront labels the whole site as demo data.
 - Review photos are bounded data URLs in PostgreSQL because there is no free object-storage host yet. Product media itself is still an SVG pattern.
 - Vendor staff can read the Seller Center but cannot write; staff permission sets arrive with staff management in a later phase.
-- KYC is a text-only submission in this demo: there are no document uploads, and the admin review screen that approves or rejects a store arrives with the admin phase. Seeded stores start approved.
+- KYC is a text-only submission in this demo: there are no document uploads. Seeded stores start approved, so the admin queue shows only stores a seller has resubmitted.
 - There is no new-store application flow; the Seller Center assumes the demo vendor already belongs to a seeded store.
 - Bulk CSV import, packing-slip PDFs, seller replies to reviews, staff management, featured collections and a block-based store page builder are not implemented. CSV export is available.
 - Seller analytics show ninety-day totals, best sellers and low stock without charts, a date-range picker or conversion metrics.
@@ -62,7 +66,8 @@
 - The catalog seed is below the full data-spec target of 800+ products and 40+ vendors; see [decisions](DECISIONS.md).
 - Vercel can queue production builds for several minutes.
 - Moderator and content editor production logins were not exercised individually; their role checks share the restricted admin branch verified with finance and are covered by unit tests.
-- Seller and admin pages remain read-only foundations. Catalog editing, orders, finance and CMS tools arrive with their phases.
+- The CMS edits plain text with paragraphs split on blank lines; there is no rich text, embedded image, block layout or per-locale publish date. Feature flags cover only the Help Center and Journal, and the audit viewer has no action or actor filter and no export.
+- Platform analytics are lifetime totals plus a 30-day delivered figure, without charts, date ranges, cohorts or conversion funnels.
 - Rotating `DEMO_ACCOUNT_PASSWORD` requires re-running the seed workflow so existing demo passwords match.
 - Cart totals are an estimate: the drawer uses a flat ৳120 below the free-delivery threshold, while checkout charges per seller by destination zone.
 - MockPay reservations are held for 30 minutes but no scheduled job releases abandoned ones yet; a later job must restore stock and cancel the pending order.

@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add the admin store approval queue with the submitted KYC record, approve and reject decisions, and an audit entry for every decision.
+- Add review moderation that publishes or hides a review and recomputes the product rating from the remaining visible rows.
+- Add the Storefront CMS: static pages, Help Center articles and Journal posts with bilingual fields, SEO text, drafts, scheduled publishing and version history.
+- Add version restore as a new snapshot, so admin edits never rewrite the history.
+- Add the public Help Center, Journal and static page routes, linked from the footer and gated by feature flags.
+- Add feature flags with bilingual labels and an admin switch that revalidates the storefront.
+- Add platform analytics and a paginated audit viewer, plus role-filtered admin navigation for every admin page.
+- Seed eleven bilingual content entries (four Help articles, three Journal posts, two static pages, one draft and one scheduled entry) and two feature flags.
+- Fix the CMS schema rejecting a new entry because an empty id and empty publish date arrive from the form as null or empty strings.
+
 - Add a double-entry ledger with commission per store, delivery, payout and refund transactions, and idempotent posting by kind and reference.
 - Add seller finance: available balance, minimum payout requests, payout history and a delivered statement with commission.
 - Add the platform finance queue: cash, commission and seller payable balances, payout approval, payment and rejection, and refunds for approved returns.

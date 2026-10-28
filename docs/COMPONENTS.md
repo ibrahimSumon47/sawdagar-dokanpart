@@ -106,7 +106,30 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | UserList | Newest accounts with role and demo flag. | `users`, `copy`, `locale` | [UserList.tsx](../apps/web/features/admin/components/UserList/UserList.tsx) |
 | AuditList | Newest audit entries with actor and time. | `entries`, `copy`, `locale` | [AuditList.tsx](../apps/web/features/admin/components/AuditList/AuditList.tsx) |
 | PermissionList | Permission codes held by the signed-in admin role. | `permissions`, `copy` | [PermissionList.tsx](../apps/web/features/admin/components/PermissionList/PermissionList.tsx) |
-| AdminPanel | Admin layout whose panels follow role permissions. | `role`, `permissions`, `totalUsers`, `demoUsers`, `users`, `auditEntries`, `canReadUsers`, `canReadAudit`, `copy`, `locale` | [AdminPanel.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanel.tsx) |
+| AdminPanel | Admin overview whose sections, people and audit trail follow role permissions. | `role`, `permissions`, `totalUsers`, `demoUsers`, `users`, `auditEntries`, `canReadUsers`, `canReadAudit`, `copy`, `locale` | [AdminPanel.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanel.tsx) |
+| AdminNav | Admin section switcher filtered by the signed-in role. | `active`, `role`, `copy` | [AdminNav.tsx](../apps/web/features/admin/components/AdminNav/AdminNav.tsx) |
+| AdminSection | Shared admin page frame: heading, role-filtered tabs and content. | `active`, `title`, `description`, `role`, `copy`, `actions`, `children` | [AdminSection.tsx](../apps/web/features/admin/components/AdminSection/AdminSection.tsx) |
+| StoreApprovalCard | One store's business record with approve and reject controls. | `store`, `copy`, `locale` | [StoreApprovalCard.tsx](../apps/web/features/admin/components/StoreApprovalCard/StoreApprovalCard.tsx) |
+| StoreApprovalList | Pending stores first, then the decided stores. | `stores`, `copy`, `locale` | [StoreApprovalList.tsx](../apps/web/features/admin/components/StoreApprovalList/StoreApprovalList.tsx) |
+| ReviewModerationRow | One review with product, author and a publish or hide control. | `review`, `copy`, `locale` | [ReviewModerationRow.tsx](../apps/web/features/admin/components/ReviewModerationRow/ReviewModerationRow.tsx) |
+| ReviewModerationList | Published and hidden counts plus the newest reviews. | `moderation`, `copy`, `locale` | [ReviewModerationList.tsx](../apps/web/features/admin/components/ReviewModerationList/ReviewModerationList.tsx) |
+| PlatformAnalytics | GMV, delivered sales, commission, refunds and marketplace counts. | `analytics`, `copy`, `locale` | [PlatformAnalytics.tsx](../apps/web/features/admin/components/PlatformAnalytics/PlatformAnalytics.tsx) |
+| FeatureFlagList | Feature flags with their state, last edit and an on or off form. | `flags`, `copy`, `locale` | [FeatureFlagList.tsx](../apps/web/features/admin/components/FeatureFlagList/FeatureFlagList.tsx) |
+| AuditLogTable | One page of the audit log as a table. | `audit`, `copy`, `locale` | [AuditLogTable.tsx](../apps/web/features/admin/components/AuditLogTable/AuditLogTable.tsx) |
+| AuditPager | Previous and next links with the current audit page. | `page`, `pageCount`, `copy` | [AuditPager.tsx](../apps/web/features/admin/components/AuditPager/AuditPager.tsx) |
+| ContentList | All CMS entries with area, status, edit date and editor link. | `entries`, `copy`, `locale` | [ContentList.tsx](../apps/web/features/admin/components/ContentList/ContentList.tsx) |
+| ContentEditorForm | Creates or updates one CMS entry. | `entry`, `defaultKind`, `copy` | [ContentEditorForm.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorForm.tsx) |
+| ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
+| ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
+| ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
+
+## Content (`apps/web/features/content`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| ArticleBody | Renders stored plain text as paragraphs split on blank lines. | `body` | [ArticleBody.tsx](../apps/web/features/content/components/ArticleBody/ArticleBody.tsx) |
+| ContentIndexView | Public index for Help Center articles or Journal posts with a patterned card head. | `kind`, `entries`, `copy`, `locale` | [ContentIndexView.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexView.tsx) |
+| ContentArticleView | One published Help article, Journal post or static page with a back link and patterned hero. | `entry`, `kind`, `copy`, `locale` | [ContentArticleView.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleView.tsx) |
 
 ## Finance (`apps/web/features/finance`)
 
