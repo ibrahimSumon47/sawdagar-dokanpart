@@ -38,3 +38,19 @@ export function formatTaka(amountMinor: number, locale: PriceLocale = 'en'): str
 
   return `৳${locale === 'bn' ? toBanglaDigits(grouped) : grouped}`;
 }
+
+/**
+ * Formats a ledger balance that may be negative, such as platform cash after a
+ * refund the platform had to front. The sign sits before the taka symbol.
+ *
+ * @param amountMinor Signed amount in poisha. Must be a safe integer.
+ * @param locale Locale used to choose Western or Bengali digits.
+ * @returns A signed taka string, for example `-৳1,440`.
+ */
+export function formatTakaSigned(amountMinor: number, locale: PriceLocale = 'en'): string {
+  if (!Number.isSafeInteger(amountMinor)) {
+    throw new RangeError('Amount must be an integer number of poisha.');
+  }
+  const sign = amountMinor < 0 ? '-' : '';
+  return `${sign}${formatTaka(Math.abs(amountMinor), locale)}`;
+}

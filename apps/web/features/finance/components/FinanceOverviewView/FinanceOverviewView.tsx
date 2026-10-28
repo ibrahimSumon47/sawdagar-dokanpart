@@ -38,7 +38,7 @@ export function FinanceOverviewView({ overview, copy, locale, notice }: FinanceO
         <div className="rounded-sm border border-line bg-surface p-4">
           <p className="text-xs uppercase tracking-wider text-ink-muted">{copy.cashBalance}</p>
           <p className="mt-2 font-serif text-2xl text-ink">
-            <Price amountMinor={overview.cashMinor} locale={locale} size="md" />
+            <Price amountMinor={overview.cashMinor} locale={locale} size="md" allowNegative />
           </p>
         </div>
         <div className="rounded-sm border border-line bg-surface p-4">
@@ -50,7 +50,12 @@ export function FinanceOverviewView({ overview, copy, locale, notice }: FinanceO
         <div className="rounded-sm border border-line bg-surface p-4">
           <p className="text-xs uppercase tracking-wider text-ink-muted">{copy.sellerPayable}</p>
           <p className="mt-2 font-serif text-2xl text-ink">
-            <Price amountMinor={overview.sellerPayableMinor} locale={locale} size="md" />
+            <Price
+              amountMinor={overview.sellerPayableMinor}
+              locale={locale}
+              size="md"
+              allowNegative
+            />
           </p>
         </div>
       </div>

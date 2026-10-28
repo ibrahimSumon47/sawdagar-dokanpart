@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatTaka, toBanglaDigits } from './formatTaka';
+import { formatTaka, formatTakaSigned, toBanglaDigits } from './formatTaka';
 
 describe('formatTaka', () => {
   it('groups whole taka amounts in the South Asian style', () => {
@@ -19,6 +19,21 @@ describe('formatTaka', () => {
   it('rejects negative and fractional poisha values', () => {
     expect(() => formatTaka(-1)).toThrow(RangeError);
     expect(() => formatTaka(10.5)).toThrow(RangeError);
+  });
+});
+
+describe('formatTakaSigned', () => {
+  it('puts the minus before the taka symbol', () => {
+    expect(formatTakaSigned(-144_000)).toBe('-৳1,440');
+    expect(formatTakaSigned(-144_000, 'bn')).toBe('-৳১,৪৪০');
+  });
+
+  it('formats a positive balance like formatTaka', () => {
+    expect(formatTakaSigned(1_250_000)).toBe('৳12,500');
+  });
+
+  it('rejects fractional poisha values', () => {
+    expect(() => formatTakaSigned(10.5)).toThrow(RangeError);
   });
 });
 

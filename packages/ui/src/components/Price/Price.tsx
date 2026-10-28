@@ -1,4 +1,4 @@
-import { formatTaka, type PriceLocale } from '@sd/domain';
+import { formatTaka, formatTakaSigned, type PriceLocale } from '@sd/domain';
 import { cn } from '../../lib/cn';
 
 export interface PriceProps {
@@ -8,6 +8,11 @@ export interface PriceProps {
   compareAtMinor?: number;
   /** Locale used for numerals; default is English digits. */
   locale?: PriceLocale;
+  /**
+   * Allows a negative ledger balance and renders it with a leading minus.
+   * Product prices leave this off so a bad amount fails loudly.
+   */
+  allowNegative?: boolean;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -23,6 +28,7 @@ export function Price({
   amountMinor,
   compareAtMinor,
   locale = 'en',
+  allowNegative = false,
   size = 'md',
   className,
 }: PriceProps) {
@@ -32,7 +38,7 @@ export function Price({
   return (
     <span className={cn('inline-flex flex-wrap items-baseline gap-2', className)}>
       <span className={cn('font-serif tabular-nums text-ink', sizeClass[size])}>
-        {formatTaka(amountMinor, locale)}
+        {allowNegative ? formatTakaSigned(amountMinor, locale) : formatTaka(amountMinor, locale)}
       </span>
       {originalPrice !== undefined ? (
         <span className="text-xs tabular-nums text-ink-muted line-through">

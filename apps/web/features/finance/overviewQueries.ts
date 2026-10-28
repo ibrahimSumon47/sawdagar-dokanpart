@@ -77,7 +77,7 @@ export async function getFinanceOverview(): Promise<FinanceOverview> {
   return {
     cashMinor: signedBalance(lines, PLATFORM_CASH),
     commissionMinor: -signedBalance(lines, PLATFORM_COMMISSION_REVENUE),
-    sellerPayableMinor: sellerPayableMinor > 0 ? sellerPayableMinor : 0,
+    sellerPayableMinor,
     payouts: payouts.map((payout) => ({
       id: payout.id,
       number: payout.number,

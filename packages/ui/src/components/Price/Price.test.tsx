@@ -22,4 +22,11 @@ describe('Price', () => {
 
     expect(html).toContain('৳১২,৫০০');
   });
+
+  it('renders a negative ledger balance only when allowed', () => {
+    const html = renderToStaticMarkup(<Price amountMinor={-144_000} allowNegative />);
+
+    expect(html).toContain('-৳1,440');
+    expect(() => renderToStaticMarkup(<Price amountMinor={-144_000} />)).toThrow(RangeError);
+  });
 });

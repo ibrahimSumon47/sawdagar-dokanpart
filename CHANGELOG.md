@@ -7,6 +7,7 @@
 - Add the platform finance queue: cash, commission and seller payable balances, payout approval, payment and rejection, and refunds for approved returns.
 - Settle approved returns with a refund row and a reversing ledger transaction, and carry a negative store balance forward.
 - Give the seed a negotiated 7% commission rate on every fourth store and keep the standard 8% elsewhere.
+- Fix the finance page crashing after a refund that leaves platform cash negative by adding a signed taka format and an opt-in negative balance on `Price`.
 
 - Add the Seller Center with dashboard totals, product create/edit, variant price and stock editing, inventory adjustments with history, sub-order fulfillment, buyer questions, return decisions, store promotions, ninety-day analytics and store settings.
 - Add store approval and KYC state, bilingual storefront CMS fields, fulfillment timestamps and courier details, and an append-only inventory adjustment table.
