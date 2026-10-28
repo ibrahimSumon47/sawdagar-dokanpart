@@ -29,8 +29,11 @@ export function formatTaka(amountMinor: number, locale: PriceLocale = 'en'): str
     throw new RangeError('Amount must be a non-negative integer number of poisha.');
   }
 
-  const hasPoisha = amountMinor % 100 !== 0;
-  const taka = amountMinor / 100;
+  // Negating a zero balance produces -0; treat it as a plain zero so the
+  // formatter cannot print "-0".
+  const minor = amountMinor === 0 ? 0 : amountMinor;
+  const hasPoisha = minor % 100 !== 0;
+  const taka = minor / 100;
   const grouped = new Intl.NumberFormat('en-IN', {
     minimumFractionDigits: hasPoisha ? 2 : 0,
     maximumFractionDigits: hasPoisha ? 2 : 0,

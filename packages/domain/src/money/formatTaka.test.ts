@@ -20,6 +20,11 @@ describe('formatTaka', () => {
     expect(() => formatTaka(-1)).toThrow(RangeError);
     expect(() => formatTaka(10.5)).toThrow(RangeError);
   });
+
+  it('prints negative zero as a plain zero', () => {
+    expect(formatTaka(-0)).toBe('৳0');
+    expect(formatTakaSigned(-0)).toBe('৳0');
+  });
 });
 
 describe('formatTakaSigned', () => {
