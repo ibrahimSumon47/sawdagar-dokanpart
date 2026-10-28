@@ -1,0 +1,6 @@
+# Keep formatting-checked web source consistent across Git checkouts.
+/apps/web/app/**/*.ts text eol=lf
+/apps/web/app/**/*.tsx text eol=lf
+/apps/web/app/**/*.css text eol=lf
+/apps/web/features/**/*.ts text eol=lf
+/apps/web/features/**/*.tsx text eol=lf
