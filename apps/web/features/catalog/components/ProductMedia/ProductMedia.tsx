@@ -33,8 +33,8 @@ export function ProductMedia({ tone, image, className }: ProductMediaProps) {
         <img
           src={image.src}
           alt={image.alt}
-          width={960}
-          height={720}
+          width={800}
+          height={600}
           fetchPriority="high"
           style={{ objectPosition: image.objectPosition }}
           className="h-full w-full object-cover"

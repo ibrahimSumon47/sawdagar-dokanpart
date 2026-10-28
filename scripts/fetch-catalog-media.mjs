@@ -80,8 +80,8 @@ async function download(department) {
     if (buffer.length < 20_000 || buffer.length > 900_000) continue;
 
     const resized = await sharp(buffer)
-      .resize(960, 720, { fit: 'cover', position: 'centre' })
-      .jpeg({ quality: 80, progressive: true })
+      .resize(800, 600, { fit: 'cover', position: 'centre' })
+      .jpeg({ quality: 74, progressive: true, mozjpeg: true })
       .toBuffer();
 
     return {

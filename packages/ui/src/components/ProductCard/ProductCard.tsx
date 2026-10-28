@@ -72,8 +72,8 @@ export function ProductCard({
           <img
             src={product.image.src}
             alt={product.image.alt}
-            width={960}
-            height={720}
+            width={800}
+            height={600}
             loading="lazy"
             decoding="async"
             style={{ objectPosition: product.image.objectPosition }}
