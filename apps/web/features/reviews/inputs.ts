@@ -17,7 +17,9 @@ export const reviewPhotoSchema = z
 
 /** Server-side shape of the review form. */
 export const reviewSchema = z.object({
-  orderItemId: z.string().uuid(),
+  // Any stored id is accepted; the action checks that the line belongs to the
+  // viewer. Seeded demo orders use readable ids rather than UUIDs.
+  orderItemId: z.string().trim().min(1).max(80),
   rating: z.coerce.number().int().min(REVIEW_MIN_RATING).max(REVIEW_MAX_RATING),
   title: z.string().trim().min(4).max(80),
   body: z.string().trim().min(20).max(1200),

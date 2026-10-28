@@ -18,6 +18,12 @@ describe('reviewSchema', () => {
     expect(parsed.success && parsed.data.rating).toBe(5);
   });
 
+  it('accepts a seeded readable order line id', () => {
+    expect(
+      reviewSchema.safeParse({ ...base, orderItemId: 'seed_order_recent_sub_1_item_1' }).success,
+    ).toBe(true);
+  });
+
   it('rejects ratings outside one to five and short bodies', () => {
     expect(reviewSchema.safeParse({ ...base, rating: '0' }).success).toBe(false);
     expect(reviewSchema.safeParse({ ...base, rating: '6' }).success).toBe(false);

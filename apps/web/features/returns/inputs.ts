@@ -13,7 +13,8 @@ export type ReturnReason = (typeof returnReasons)[number];
 
 /** Server-side shape of the return request form. */
 export const returnRequestSchema = z.object({
-  orderItemId: z.string().uuid(),
+  // Ownership is checked in the action; seeded rows use readable ids.
+  orderItemId: z.string().trim().min(1).max(80),
   reason: z.enum(returnReasons),
   note: z
     .string()
