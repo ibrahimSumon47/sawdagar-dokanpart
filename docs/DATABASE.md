@@ -2,7 +2,7 @@
 
 ## Current status
 
-No database, schema, migrations, seed pipeline, or database connection is implemented or verified. The static home page does not persist or query data.
+The `sawdagar-dokanpat` project exists in a Neon Free organization in `aws-us-east-1`. No application schema, migrations, seed pipeline, or database connection is implemented or verified. The static home page does not persist or query data.
 
 ## Planned direction and budget
 

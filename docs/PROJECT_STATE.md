@@ -4,16 +4,19 @@
 - Product, design, architecture, data, and roadmap specifications are documented.
 - Phase 0 foundation slice implemented: pnpm/Turborepo workspace, static bilingual demo landing page, and CI workflow. Local checks and the first GitHub Actions run passed.
 - Phase 0 documentation baseline records current architecture, security, API, database, credits, and owner setup actions.
+- The Vercel page returned the expected English and Bangla content, and the latest GitHub Actions run passed. A Neon project named `sawdagar-dokanpat` exists in a Free organization in `aws-us-east-1`; application connectivity has not been tested.
+- Reviewed Phase 0 free-service constraints; future integrations still require verification before adoption.
 
 ## Now
-- Phase 0: verify the first Vercel deployment and Neon project setup, then complete the remaining foundation acceptance criteria.
+- Phase 0: verify the latest CI and deployment, then review the remaining foundation acceptance criteria.
 
 ## Next
-- Connect the repository to Vercel and verify the deployed page and CI.
-- Complete Phase 0 service decisions, project setup, and documentation.
+- Review remaining Phase 0 acceptance criteria before starting the design system.
+- Verify the Neon connection when an application feature requires it.
 
 ## Blocked
-- A Vercel project must be connected by the owner before a deployment can be verified; the Neon Free project also requires an owner account action.
+- Phase 10 Java hosting: Hugging Face Docker Spaces currently require a paid plan; a free-compliant alternative must be verified before that phase.
+- The database connection, schema, and migrations have not been implemented; credentials will need to be configured in service dashboards when required.
 
 ## Known issues
 - Marketplace functionality, localization controls, and the design system have not been implemented. ESLint 9 is deprecated; the Next.js plugins currently do not declare ESLint 10 support.

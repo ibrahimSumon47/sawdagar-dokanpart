@@ -6,7 +6,7 @@ A non-commercial marketplace demonstration inspired by the independent makers an
 
 ## Current state
 
-Phase 0 is establishing the workspace, automated quality checks, and first page. See the [project state](docs/PROJECT_STATE.md) and [roadmap](docs/spec/05-roadmap.md).
+Phase 0 is establishing the workspace, automated quality checks, and first page. The [demo page](https://sawdagar-dokanpart.vercel.app/) is live. See the [project state](docs/PROJECT_STATE.md) and [roadmap](docs/spec/05-roadmap.md).
 
 ## Quality checks
 
@@ -14,4 +14,4 @@ CI runs lint, type checking, unit tests, and a production build on Linux, Window
 
 ## Known limitations
 
-The marketplace, demo data, accounts, payments, language switcher, and dark theme have not been implemented. The current page is static and its English and Bangla text appears together. No live deployment is verified yet.
+The marketplace, demo data, accounts, payments, language switcher, and dark theme have not been implemented. The current page is static and its English and Bangla text appears together. The deployed page was checked for its rendered text; marketplace functionality is not available.

@@ -10,7 +10,7 @@ flowchart LR
   GitHub[Push to main] --> CI[GitHub Actions: lint, typecheck, test, build]
 ```
 
-The [CI workflow](.github/workflows/ci.yml) runs the quality gates on Linux, Windows, and macOS. Vercel deployment is intended but has not been verified. The repository does not currently contain a database, authentication service, API, shared domain package, or seed data.
+The [CI workflow](.github/workflows/ci.yml) runs the quality gates on Linux, Windows, and macOS. The [Vercel page](https://sawdagar-dokanpart.vercel.app/) has been checked for its rendered text. A Neon project exists, but the application does not connect to it. The repository does not currently contain an application database schema, authentication service, API, shared domain package, or seed data.
 
 ## Planned architecture
 
