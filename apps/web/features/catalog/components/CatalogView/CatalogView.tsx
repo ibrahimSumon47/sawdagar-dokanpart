@@ -7,7 +7,7 @@ import { CategoryNav } from '../CategoryNav';
 import { CatalogFilters as FilterForm } from '../CatalogFilters';
 import { CatalogSearch } from '../CatalogSearch';
 import { Pagination } from '../Pagination';
-import { ProductGrid } from '../ProductGrid';
+import { ProductGrid, productGridLabels } from '../ProductGrid';
 
 export interface CatalogViewProps {
   filters: CatalogFilters;
@@ -86,7 +86,11 @@ export function CatalogView({
                 }
               />
             ) : (
-              <ProductGrid products={result.products} locale={locale} copy={copy.catalog} />
+              <ProductGrid
+                products={result.products}
+                locale={locale}
+                labels={productGridLabels(result.products, copy.catalog)}
+              />
             )}
           </div>
 

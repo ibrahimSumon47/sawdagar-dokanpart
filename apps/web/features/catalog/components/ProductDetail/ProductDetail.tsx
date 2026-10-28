@@ -6,8 +6,8 @@ import { ProductBreadcrumbs } from '../ProductBreadcrumbs';
 import { ProductJsonLd } from '../ProductJsonLd';
 import { ProductMedia } from '../ProductMedia';
 import { ProductVendorCard } from '../ProductVendorCard';
-import { ProductGrid } from '../ProductGrid';
-import { VariantPicker } from '../VariantPicker';
+import { ProductGrid, productGridLabels } from '../ProductGrid';
+import { ProductBuyBox } from '../../../shop/components/ProductBuyBox';
 
 export interface ProductDetailProps {
   product: Product;
@@ -52,17 +52,16 @@ export function ProductDetail({ product, related, locale, copy }: ProductDetailP
             />
           </div>
 
-          <VariantPicker
-            key={product.id}
+          <ProductBuyBox
+            productId={product.id}
             variants={product.variants}
             locale={locale}
-            labels={{
+            stockLabels={{
               chooseVariant: catalog.chooseVariant,
-              stockIn: catalog.stockIn,
-              stockLow: catalog.stockLow,
-              stockOut: catalog.stockOut,
+              inStock: catalog.stockIn,
+              lowStock: catalog.stockLow,
+              outOfStock: catalog.stockOut,
               sku: catalog.sku,
-              cartNote: catalog.cartNote,
             }}
           />
 
@@ -108,7 +107,11 @@ export function ProductDetail({ product, related, locale, copy }: ProductDetailP
             }
           />
           <div className="mt-6">
-            <ProductGrid products={related} locale={locale} copy={catalog} />
+            <ProductGrid
+              products={related}
+              locale={locale}
+              labels={productGridLabels(related, catalog)}
+            />
           </div>
         </section>
       ) : null}

@@ -1,4 +1,4 @@
-export { ProductGrid } from './ProductGrid';
-export type { ProductGridProps } from './ProductGrid';
+export { ProductGrid, productGridLabels } from './ProductGrid';
+export type { ProductGridLabels, ProductGridProps } from './ProductGrid';
 export { ProductGridSkeleton } from './ProductGridSkeleton';
 export type { ProductGridSkeletonProps } from './ProductGridSkeleton';

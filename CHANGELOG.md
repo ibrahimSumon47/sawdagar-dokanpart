@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add guest and signed-in carts with a 30-day lifetime, guest-cart merge on sign-in, and server-side stock checks.
+- Add the add-to-cart flow with spinner and check states, a toast with undo, and optimistic drawer updates that roll back on failure.
+- Add the vendor-grouped cart drawer with quantity steppers, remove, save-for-later, free-delivery progress and an estimated total.
+- Add the DB-backed wishlist with heart controls on catalog cards and product pages, guest sign-in prompts, and `/wishlist`.
+- Add four-product comparison with a header count, product-page controls and the `/compare` table.
+- Add comparison-cookie and cart-total unit tests; document the cart, wishlist, comparison and server actions.
 - Add the catalog schema, migration and deterministic seed for 12 departments, 72 leaf categories, 24 vendors, 432 products and 1,296 variants.
 - Add the `/catalog` listing with URL-synced search, category, vendor, price, rating, stock and sort filters, pagination, empty states and layout-matching skeletons.
 - Add the `/product/[slug]` page with variant selection, stock, vendor summary, breadcrumbs, related products and Product JSON-LD.

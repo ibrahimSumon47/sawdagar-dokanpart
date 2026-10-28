@@ -94,15 +94,36 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | CatalogSearch | GET search form that carries the active facets in hidden fields. | `filters`, `copy` | [CatalogSearch.tsx](../apps/web/features/catalog/components/CatalogSearch/CatalogSearch.tsx) |
 | CatalogFilters | Price, rating, stock and sort facets as a plain GET form, so every value stays in the URL. | `filters`, `copy` | [CatalogFilters.tsx](../apps/web/features/catalog/components/CatalogFilters/CatalogFilters.tsx) |
 | CatalogView | Full listing body shared by search, category and vendor views; owns the results heading, grid, empty state and pagination. | `filters`, `categories`, `category`, `vendor`, `result`, `copy`, `locale` | [CatalogView.tsx](../apps/web/features/catalog/components/CatalogView/CatalogView.tsx) |
-| ProductGrid | Responsive one-to-four-column product grid whose cards link to product pages. | `products`, `locale`, `copy` | [ProductGrid.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGrid.tsx) |
+| ProductGrid | Responsive one-to-four-column product grid with wishlist hearts; accepts plain labels so it also renders inside client views. | `products`, `locale`, `labels` (`sale`, `soldOut`, `ratingLabels`) | [ProductGrid.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGrid.tsx) |
 | ProductGridSkeleton | Matches the responsive columns of `ProductGrid` while the page loads. | `count`, `label` | [ProductGridSkeleton.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGridSkeleton.tsx) |
 | Pagination | Previous/next pagination that keeps every active filter in the URL. | `filters`, `page`, `pageCount`, `locale`, `copy` | [Pagination.tsx](../apps/web/features/catalog/components/Pagination/Pagination.tsx) |
 | ProductDetail | Product page body: breadcrumbs, media, title, rating, variants, shipping, description, vendor and related products. | `product`, `related`, `locale`, `copy` | [ProductDetail.tsx](../apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx) |
 | ProductBreadcrumbs | Home, catalog, department, category and product trail. | `category`, `productTitle`, `locale`, `copy` | [ProductBreadcrumbs.tsx](../apps/web/features/catalog/components/ProductBreadcrumbs/ProductBreadcrumbs.tsx) |
 | ProductMedia | Original SVG pattern that stands in for photography, toned per product. | `tone`, `className` | [ProductMedia.tsx](../apps/web/features/catalog/components/ProductMedia/ProductMedia.tsx) |
 | ProductVendorCard | Vendor summary with district, rating, verification and product count; links to the vendor-filtered catalog. | `vendor`, `locale`, `copy` | [ProductVendorCard.tsx](../apps/web/features/catalog/components/ProductVendorCard/ProductVendorCard.tsx) |
-| VariantPicker | Client-side variant radios that show the selected SKU, price, compare-at price and stock. | `variants`, `locale`, `labels` (`chooseVariant`, `stockIn`, `stockLow`, `stockOut`, `sku`, `cartNote`) | [VariantPicker.tsx](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) |
+| VariantPicker | Controlled variant radios; the buy box owns selection and renders price, SKU and stock. | `variants`, `selectedId`, `onSelect`, `name`, `locale`, `label` | [VariantPicker.tsx](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) |
 | ProductJsonLd | Schema.org Product structured data with escaped text for a script context. | `product`, `locale` | [ProductJsonLd.tsx](../apps/web/features/catalog/components/ProductJsonLd/ProductJsonLd.tsx) |
+
+## Shop (`apps/web/features/shop`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| ShopProvider | One client boundary for cart, wishlist, comparison, drawer and toast; receives the server-rendered cart and saved ids. | `children`, `initialItems`, `initialWishlistIds`, `initialCompareIds`, `signedIn`, `locale`, `copy` | [ShopProvider.tsx](../apps/web/features/shop/components/ShopProvider/ShopProvider.tsx) |
+| ShopToast | Bottom notification with an action link and optional undo callback. | none; reads `useShop` | [ShopToast.tsx](../apps/web/features/shop/components/ShopToast/ShopToast.tsx) |
+| CartTrigger | Header cart button with a count badge and a short bump when the count grows. | none; reads `useShop` | [CartTrigger.tsx](../apps/web/features/shop/components/CartTrigger/CartTrigger.tsx) |
+| CompareTrigger | Header comparison shortcut with its count, shown only while products are selected. | none; reads `useShop` | [CompareTrigger.tsx](../apps/web/features/shop/components/CompareTrigger/CompareTrigger.tsx) |
+| CartDrawer | Native modal drawer on desktop and bottom sheet on phones; owns the empty state and vendor groups. | none; reads `useShop` | [CartDrawer.tsx](../apps/web/features/shop/components/CartDrawer/CartDrawer.tsx) |
+| CartGroup | One vendor's heading, shipping origin and cart rows. | `group` (`vendor`, `items`, `subtotalMinor`) | [CartGroup.tsx](../apps/web/features/shop/components/CartDrawer/CartGroup.tsx) |
+| CartLineItem | Thumbnail, title, variant, quantity stepper, line price, save-for-later and remove with inline stock errors. | `line` (`CartLine`) | [CartLineItem.tsx](../apps/web/features/shop/components/CartDrawer/CartLineItem.tsx) |
+| CartSummary | Free-delivery progress, subtotal, delivery, estimated total and the disabled checkout note. | none; reads `useShop` | [CartSummary.tsx](../apps/web/features/shop/components/CartDrawer/CartSummary.tsx) |
+| AddToCartButton | Adds the selected variant through idle, spinner and check states, with an inline error. | `variantId`, `quantity`, `disabled`, `className` | [AddToCartButton.tsx](../apps/web/features/shop/components/AddToCartButton/AddToCartButton.tsx) |
+| WishlistButton | Heart that saves or removes one product and prompts guests to sign in. | `productId`, `showLabel`, `className` | [WishlistButton.tsx](../apps/web/features/shop/components/WishlistButton/WishlistButton.tsx) |
+| CompareButton | Adds or removes one product from the four-product comparison. | `productId`, `className` | [CompareButton.tsx](../apps/web/features/shop/components/CompareButton/CompareButton.tsx) |
+| ProductBuyBox | Variant picker, price, stock, quantity, add-to-cart, wishlist and compare actions. | `productId`, `variants`, `locale`, `stockLabels` | [ProductBuyBox.tsx](../apps/web/features/shop/components/ProductBuyBox/ProductBuyBox.tsx) |
+| WishlistView | Saved-product grid filtered live as hearts are switched off. | `products`, `locale`, `labels`, `empty` | [WishlistView.tsx](../apps/web/features/shop/components/WishlistView/WishlistView.tsx) |
+| CompareView | Comparison page body with empty state, single-item notice, clear action and the table. | `products`, `locale`, `labels` | [CompareView.tsx](../apps/web/features/shop/components/CompareView/CompareView.tsx) |
+| CompareTable | Accessible side-by-side attribute table with one removable column per product. | `products`, `locale`, `labels` (`title`, `remove`, rows, stock labels, rating labels) | [CompareTable.tsx](../apps/web/features/shop/components/CompareView/CompareTable.tsx) |
+| CompareRow | One labelled attribute across every compared product. | `label`, `values` | [CompareRow.tsx](../apps/web/features/shop/components/CompareView/CompareRow.tsx) |
 
 ## Design gallery (`apps/web/features/design`)
 

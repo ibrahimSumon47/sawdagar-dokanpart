@@ -1,0 +1,1 @@
+export { CompareTrigger } from './CompareTrigger';

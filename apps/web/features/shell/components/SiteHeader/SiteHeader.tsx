@@ -5,6 +5,8 @@ import type { Dictionary, Locale } from '../../../../i18n';
 import { site } from '../../../../lib/site';
 import { LocaleSwitcher } from '../../../preferences/components/LocaleSwitcher';
 import { ThemeToggle } from '../../../preferences/components/ThemeToggle';
+import { CartTrigger } from '../../../shop/components/CartTrigger';
+import { CompareTrigger } from '../../../shop/components/CompareTrigger';
 import type { Theme } from '../../../preferences/theme';
 import { MobileMenu } from './MobileMenu';
 
@@ -20,6 +22,7 @@ export interface SiteHeaderProps {
 export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
   const links = [
     { label: copy.nav.catalog, href: '/catalog' },
+    { label: copy.nav.wishlist, href: '/wishlist' },
     { label: copy.nav.design, href: '/design' },
     ...(viewer
       ? [
@@ -58,6 +61,8 @@ export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
             theme={theme}
             labels={{ useLight: copy.preferences.useLight, useDark: copy.preferences.useDark }}
           />
+          <CompareTrigger />
+          <CartTrigger />
           <MobileMenu
             links={links}
             labels={{

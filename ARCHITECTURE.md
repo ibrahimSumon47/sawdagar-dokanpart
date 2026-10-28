@@ -32,7 +32,16 @@ Both themes share one set of custom properties; `[data-theme='dark']` overrides 
 3. One query returns the page of products with their vendor; a second returns the filtered count. Page size is 12. Both run on the server, so no price or filter is trusted from the client.
 4. The product route loads one product by slug with its variants, vendor and leaf category, then fetches four related active products from the same category. It returns 404 for unknown or inactive products.
 5. Listing and detail pages render shared cards, price and rating components. The variant picker is the only client component on the product page; it selects among server-provided options and does not calculate prices.
-6. There is no catalog API route yet. Pages query Prisma directly; a later phase can add route handlers for cart and checkout without changing the schema.
+6. There is no catalog HTTP API. Pages query Prisma directly; the shop uses Server Actions so the client never sends a price or a user id.
+
+## Cart, wishlist and compare flow
+
+1. [getShopState](../apps/web/features/shop/queries.ts) runs in the root layout. It resolves the signed-in user's cart, else the guest cart behind the `sd_cart` cookie, plus the wishlist ids and the `sd_compare` cookie, and passes them to the client [ShopProvider](../apps/web/features/shop/components/ShopProvider/ShopProvider.tsx).
+2. Cart writes call Server Actions in [actions.ts](../apps/web/features/shop/actions.ts). Each validates ids and quantity, resolves the viewer, checks the product status and variant stock, and returns the full cart rows. The controller applies the result optimistically and rolls back on failure.
+3. Guest carts live in `carts` with a random `guestToken`. Sign-in runs `mergeGuestCartIntoUser`, which folds rows into the user cart, caps quantity at stock, deletes the guest cart and clears the cookie.
+4. Wishlist rows are per user in `wishlist_items`; guests get a sign-in prompt. Compare is deliberately cookie-only (`sd_compare`, max four) because it must work signed out.
+5. `/wishlist` requires a session. `/compare` reads the cookie on the server and renders the selected products; both pages filter their list in the client as items are removed.
+6. Totals come from [summariseCart](../apps/web/features/shop/cartTotals.ts) in integer poisha with a flat ৳120 delivery fee below ৳10,000. They are an estimate; checkout pricing belongs to Phase 5.
 
 The category tree is two levels deep: departments (`depth: 0`) contain leaf categories (`depth: 1`). A catalog request for a department includes all of its leaves. A request for a vendor shows that store's products without a category restriction.
 
@@ -48,7 +57,8 @@ The [architecture specification](docs/spec/03-architecture.md) describes the API
 
 ## Limitations
 
-- The marketplace transaction flow, seller catalog editing, order management and finance do not exist yet.
+- The marketplace transaction flow (checkout, payments, orders), seller catalog editing and finance do not exist yet. The cart stops at an estimated total and a disabled checkout button.
+- Coupons, the flight animation and the drawer's recommendation strip from the design specification are not implemented.
 - There is no browser, end-to-end or visual-regression suite. The gallery frames are fixed-width previews, not automated responsive tests.
 - Media is an SVG pattern because no photography or media host is integrated.
 - Search is SQL `ILIKE` over a small catalog, not a full-text index. Vendor names are intentionally excluded from the search box; use the vendor link on a product page.

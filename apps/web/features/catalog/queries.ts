@@ -67,7 +67,7 @@ export interface ProductDetail extends CatalogProduct {
   }[];
 }
 
-function normaliseTone(value: string): ProductTone {
+export function normaliseProductTone(value: string): ProductTone {
   return (productTones as readonly string[]).includes(value) ? (value as ProductTone) : 'accent';
 }
 
@@ -75,7 +75,7 @@ type ProductWithVendor = Prisma.ProductGetPayload<{
   include: { organization: { select: { name: true; slug: true } } };
 }>;
 
-function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
+export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
   return {
     id: product.id,
     slug: product.slug,
@@ -86,7 +86,7 @@ function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
     compareAtMinor: product.compareAtMinor ?? undefined,
     rating: product.rating,
     reviewCount: product.reviewCount,
-    tone: normaliseTone(product.tone),
+    tone: normaliseProductTone(product.tone),
     totalStock: product.totalStock,
   };
 }
@@ -265,7 +265,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
     compareAtMinor: product.compareAtMinor ?? undefined,
     rating: product.rating,
     reviewCount: product.reviewCount,
-    tone: normaliseTone(product.tone),
+    tone: normaliseProductTone(product.tone),
     totalStock: product.totalStock,
     createdAt: product.createdAt,
     category: {

@@ -2,7 +2,7 @@ import { ButtonLink, SectionHeading } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
 import type { CatalogCategory, CatalogProduct } from '../../queries';
 import { CategoryTiles } from '../CategoryTiles';
-import { ProductGrid } from '../ProductGrid';
+import { ProductGrid, productGridLabels } from '../ProductGrid';
 
 export interface HomeCatalogProps {
   categories: readonly CatalogCategory[];
@@ -37,7 +37,11 @@ export function HomeCatalog({ categories, featured, locale, copy }: HomeCatalogP
           }
         />
         <div className="mt-6">
-          <ProductGrid products={featured} locale={locale} copy={copy.catalog} />
+          <ProductGrid
+            products={featured}
+            locale={locale}
+            labels={productGridLabels(featured, copy.catalog)}
+          />
         </div>
       </section>
     </>

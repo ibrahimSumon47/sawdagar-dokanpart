@@ -3,6 +3,8 @@ import { Fraunces, Inter, Noto_Sans_Bengali } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { getViewer } from '../features/auth/session';
 import { getTheme } from '../features/preferences/getTheme';
+import { ShopProvider } from '../features/shop/components/ShopProvider';
+import { getShopState } from '../features/shop/queries';
 import { SiteFooter } from '../features/shell/components/SiteFooter';
 import { SiteHeader } from '../features/shell/components/SiteHeader';
 import { getDictionary } from '../i18n';
@@ -34,6 +36,7 @@ interface RootLayoutProps {
 /** Renders the shell, theme attributes and language for every route. */
 export default async function RootLayout({ children }: RootLayoutProps) {
   const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
+  const shopState = await getShopState(viewer?.id ?? null);
   const copy = getDictionary(locale);
 
   return (
@@ -49,18 +52,27 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         >
           {copy.common.skipToContent}
         </a>
-        <div className="flex min-h-svh flex-col">
-          <SiteHeader
-            copy={copy}
-            locale={locale}
-            theme={theme}
-            viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
-          />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter copy={copy} />
-        </div>
+        <ShopProvider
+          initialItems={shopState.cartItems}
+          initialWishlistIds={shopState.wishlistIds}
+          initialCompareIds={shopState.compareIds}
+          signedIn={Boolean(viewer)}
+          locale={locale}
+          copy={copy.shop}
+        >
+          <div className="flex min-h-svh flex-col">
+            <SiteHeader
+              copy={copy}
+              locale={locale}
+              theme={theme}
+              viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
+            />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter copy={copy} />
+          </div>
+        </ShopProvider>
       </body>
     </html>
   );

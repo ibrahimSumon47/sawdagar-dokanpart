@@ -4,6 +4,7 @@ import { findDemoAccount } from '@sd/domain';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getAuth } from '../../lib/auth';
+import { mergeGuestCartIntoUser } from '../shop/cartMutations';
 import { recordAuditLog, requestDetails } from './audit';
 import { safeNextPath } from './safeNextPath';
 import { isAuthConfigured } from './session';
@@ -41,6 +42,7 @@ export async function signInWithDemo(formData: FormData): Promise<void> {
     });
     const details = requestDetails(requestHeaders);
 
+    await mergeGuestCartIntoUser(result.user.id);
     await recordAuditLog({
       actorUserId: result.user.id,
       actorEmail: result.user.email,
