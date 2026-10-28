@@ -2,7 +2,7 @@ import { JamdaniPattern } from '../JamdaniPattern/JamdaniPattern';
 import { Price } from '../Price/Price';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { Badge } from '../Badge/Badge';
-import type { PriceLocale } from '@sd/domain';
+import type { PriceLocale, ProductTone } from '@sd/domain';
 import { cn } from '../../lib/cn';
 import { productCardLayout } from './productCardLayout';
 
@@ -14,7 +14,9 @@ export interface ProductCardProduct {
   compareAtMinor?: number;
   rating: number;
   reviewCount: number;
-  tone?: 'accent' | 'secondary' | 'highlight' | 'ink';
+  tone?: ProductTone;
+  /** When zero, the card can show a sold-out badge. */
+  totalStock?: number;
 }
 
 export interface ProductCardProps {
@@ -24,6 +26,8 @@ export interface ProductCardProps {
   ratingLabel: string;
   /** Localised sale badge text. */
   saleLabel: string;
+  /** Localised sold-out badge text, shown only when totalStock is zero. */
+  soldOutLabel?: string;
   className?: string;
 }
 
@@ -43,9 +47,11 @@ export function ProductCard({
   locale = 'en',
   ratingLabel,
   saleLabel,
+  soldOutLabel,
   className,
 }: ProductCardProps) {
   const discounted = product.compareAtMinor !== undefined;
+  const soldOut = product.totalStock === 0;
 
   return (
     <article
@@ -64,6 +70,11 @@ export function ProductCard({
         {discounted ? (
           <Badge tone="accent" className="absolute left-2 top-2">
             {saleLabel}
+          </Badge>
+        ) : null}
+        {soldOut && soldOutLabel ? (
+          <Badge tone="neutral" className="absolute right-2 top-2 bg-surface">
+            {soldOutLabel}
           </Badge>
         ) : null}
       </div>

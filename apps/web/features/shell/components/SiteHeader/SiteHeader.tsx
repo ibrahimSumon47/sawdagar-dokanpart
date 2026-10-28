@@ -19,6 +19,7 @@ export interface SiteHeaderProps {
 /** Sticky storefront header with the announcement strip, wordmark and controls. */
 export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
   const links = [
+    { label: copy.nav.catalog, href: '/catalog' },
     { label: copy.nav.design, href: '/design' },
     ...(viewer
       ? [
