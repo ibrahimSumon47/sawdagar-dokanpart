@@ -197,5 +197,139 @@ export async function seedDemoOrders(prisma: PrismaClient): Promise<string> {
     orderCount += 1;
   }
 
-  return `${orderCount} demo orders ready for the buyer account.`;
+  const sellerReady = await seedSellerOrder(prisma, buyer.id, now);
+  return `${orderCount} demo orders ready for the buyer account.${
+    sellerReady ? ' One confirmed order waits in the demo store.' : ''
+  }`;
+}
+
+/**
+ * Adds one confirmed COD sub-order for the Rupsha store so the Seller Center
+ * has a live order to confirm, pack, ship and deliver without a buyer checkout.
+ */
+async function seedSellerOrder(
+  prisma: PrismaClient,
+  buyerId: string,
+  now: number,
+): Promise<boolean> {
+  const product = await prisma.product.findFirst({
+    where: {
+      organization: { slug: 'rupsha-tangail-weavers' },
+      status: 'active',
+      totalStock: { gt: 0 },
+    },
+    orderBy: { slug: 'asc' },
+    include: {
+      variants: { orderBy: { sortOrder: 'asc' }, take: 1 },
+      organization: { select: { id: true } },
+    },
+  });
+  const variant = product?.variants[0];
+  if (!product || !variant) return false;
+
+  const placedAt = new Date(now - 1 * DAY_MS);
+  const shippingMinor = 60;
+  const lineTotal = variant.priceMinor;
+  const totalMinor = lineTotal + shippingMinor;
+
+  await prisma.$transaction(async (tx) => {
+    await tx.order.upsert({
+      where: { id: 'seed_order_seller' },
+      create: {
+        id: 'seed_order_seller',
+        number: 'SD-20261027-410003',
+        userId: buyerId,
+        status: 'confirmed',
+        paymentStatus: 'pending',
+        paymentMethod: 'cod',
+        subtotalMinor: lineTotal,
+        shippingMinor,
+        discountMinor: 0,
+        totalMinor,
+        shippingName: 'Nusrat Jahan',
+        shippingPhone: '01712345678',
+        shippingDivision: 'Dhaka',
+        shippingDistrict: 'Dhaka',
+        shippingUpazila: 'Dhanmondi',
+        shippingArea: 'Road 27',
+        shippingLine: 'House 14, near Rifles Square',
+        notes: 'Please pack the saree in the gift wrap.',
+        placedAt,
+        confirmedAt: placedAt,
+      },
+      update: {
+        status: 'confirmed',
+        paymentStatus: 'pending',
+        subtotalMinor: lineTotal,
+        shippingMinor,
+        totalMinor,
+        placedAt,
+        confirmedAt: placedAt,
+      },
+    });
+
+    await tx.subOrder.upsert({
+      where: { id: 'seed_order_seller_sub_1' },
+      create: {
+        id: 'seed_order_seller_sub_1',
+        number: 'SD-20261027-410003-1',
+        orderId: 'seed_order_seller',
+        organizationId: product.organization.id,
+        status: 'confirmed',
+        subtotalMinor: lineTotal,
+        shippingMinor,
+        discountMinor: 0,
+        totalMinor,
+        confirmedAt: placedAt,
+        createdAt: placedAt,
+      },
+      update: {
+        status: 'confirmed',
+        subtotalMinor: lineTotal,
+        shippingMinor,
+        totalMinor,
+        confirmedAt: placedAt,
+      },
+    });
+
+    await tx.orderItem.upsert({
+      where: { id: 'seed_order_seller_item_1' },
+      create: {
+        id: 'seed_order_seller_item_1',
+        orderId: 'seed_order_seller',
+        subOrderId: 'seed_order_seller_sub_1',
+        productId: product.id,
+        variantId: variant.id,
+        titleEn: product.titleEn,
+        titleBn: product.titleBn,
+        variantNameEn: variant.nameEn,
+        variantNameBn: variant.nameBn,
+        sku: variant.sku,
+        tone: product.tone,
+        unitPriceMinor: variant.priceMinor,
+        quantity: 1,
+        lineTotalMinor: lineTotal,
+        createdAt: placedAt,
+      },
+      update: {
+        quantity: 1,
+        unitPriceMinor: variant.priceMinor,
+        lineTotalMinor: lineTotal,
+      },
+    });
+
+    await tx.payment.upsert({
+      where: { id: 'seed_order_seller_payment' },
+      create: {
+        id: 'seed_order_seller_payment',
+        orderId: 'seed_order_seller',
+        provider: 'cod',
+        status: 'pending',
+        amountMinor: totalMinor,
+      },
+      update: { status: 'pending', amountMinor: totalMinor },
+    });
+  });
+
+  return true;
 }

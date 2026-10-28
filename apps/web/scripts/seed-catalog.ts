@@ -1,4 +1,4 @@
-import { buildCatalogSeed } from '@sd/domain';
+import { buildCatalogSeed, hashSeedValue, productTones } from '@sd/domain';
 import type { PrismaClient } from '../generated/prisma/client';
 
 /**
@@ -43,7 +43,33 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
     categoryIds.set(category.slug, saved.id);
   }
 
-  for (const vendor of seed.vendors) {
+  for (const [index, vendor] of seed.vendors.entries()) {
+    const seedValue = hashSeedValue(vendor.slug);
+    const storefront = {
+      status: 'approved',
+      kycStatus: 'approved',
+      kycSubmittedAt: new Date(Date.UTC(2026, 3, 1)),
+      kycReviewedAt: new Date(Date.UTC(2026, 3, 3)),
+      legalName: vendor.name,
+      businessType: 'sole_proprietor',
+      tradeLicense: `TRAD-${seedValue.toString().padStart(6, '0')}`,
+      payoutPhone: `017${String(10_000_000 + (seedValue % 90_000_000)).slice(0, 8)}`,
+      accent: productTones[index % productTones.length],
+      coverTone: productTones[(index + 2) % productTones.length],
+      announcementEn: `Small-batch work from ${vendor.district}. Message the store for custom orders.`,
+      announcementBn: `${vendor.district}-এর ছোট ব্যাচের কাজ। কাস্টম অর্ডারের জন্য দোকানে বার্তা দিন।`,
+      aboutEn: `${vendor.description.en} The store ships from ${vendor.district} and packs each order by hand.`,
+      aboutBn: `${vendor.description.bn} ${vendor.district} থেকে পাঠানো হয়, প্রতিটি অর্ডার হাতে প্যাক করা হয়।`,
+      returnPolicyEn:
+        'Returns are accepted within seven days of delivery if the item is unused and in its original packing.',
+      returnPolicyBn:
+        'পণ্য অব্যবহৃত ও আসল প্যাকিংয়ে থাকলে ডেলিভারির সাত দিনের মধ্যে ফেরত নেওয়া হয়।',
+      shippingPolicyEn:
+        'Orders are packed within two working days and shipped by courier across Bangladesh.',
+      shippingPolicyBn:
+        'অর্ডার দুই কর্মদিবসের মধ্যে প্যাক হয়ে সারা বাংলাদেশে কুরিয়ারে পাঠানো হয়।',
+    };
+
     const saved = await prisma.organization.upsert({
       where: { slug: vendor.slug },
       create: {
@@ -57,6 +83,7 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         rating: vendor.rating,
         reviewCount: vendor.reviewCount,
         followers: vendor.followers,
+        ...storefront,
       },
       update: {
         name: vendor.name,
@@ -67,6 +94,7 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         rating: vendor.rating,
         reviewCount: vendor.reviewCount,
         followers: vendor.followers,
+        ...storefront,
       },
     });
     vendorIds.set(vendor.slug, saved.id);

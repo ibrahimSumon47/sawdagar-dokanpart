@@ -65,6 +65,28 @@ export {
   summariseRatings,
 } from './reviews/reviewRules';
 export type { RatingDistribution, RatingSummary } from './reviews/reviewRules';
+export {
+  INVENTORY_ADJUSTMENT_LIMIT,
+  applyInventoryAdjustment,
+  businessTypes,
+  canSell,
+  inventoryReasons,
+  isSellerProductStatus,
+  kycStatuses,
+  sellerProductStatuses,
+  summariseSellerSales,
+  vendorStatuses,
+} from './seller/sellerRules';
+export type {
+  BusinessType,
+  InventoryAdjustmentResult,
+  InventoryReason,
+  KycStatus,
+  SellerSaleLine,
+  SellerSalesSummary,
+  SellerProductStatus,
+  VendorStatus,
+} from './seller/sellerRules';
 export { demoAccounts, findDemoAccount } from './auth/demoAccounts';
 export type { DemoAccount } from './auth/demoAccounts';
 export {

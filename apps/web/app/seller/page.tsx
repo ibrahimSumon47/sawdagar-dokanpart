@@ -1,54 +1,36 @@
 import type { Metadata } from 'next';
-import { requireArea } from '../../features/auth/session';
+import { requireSellerPage } from '../../features/seller/session';
+import { SellerDashboard } from '../../features/seller/components/SellerDashboard';
 import { SellerEmpty } from '../../features/seller/components/SellerEmpty';
-import { SellerPanel } from '../../features/seller/components/SellerPanel';
+import { getSellerDashboard, getSellerStore } from '../../features/seller/queries';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
-import { getPrisma } from '../../lib/prisma';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
   return { title: copy.seller.title, description: copy.seller.description };
 }
 
-/** Vendor store summary, guarded to vendor owners and staff. */
+/** Seller home with store status, totals and recent sub-orders. */
 export default async function SellerPage() {
-  const { viewer } = await requireArea('seller', '/seller');
+  const { access } = await requireSellerPage('/seller');
   const locale = await getLocale();
   const copy = getDictionary(locale);
 
-  const membership = await getPrisma().member.findFirst({
-    where: { userId: viewer.id },
-    include: {
-      organization: {
-        include: {
-          members: { include: { user: true }, orderBy: { createdAt: 'asc' } },
-        },
-      },
-    },
-    orderBy: { createdAt: 'asc' },
-  });
+  if (!access) return <SellerEmpty copy={copy.seller} />;
 
-  if (!membership) return <SellerEmpty copy={copy.seller} />;
+  const [store, dashboard] = await Promise.all([
+    getSellerStore(access.organizationId),
+    getSellerDashboard(access.organizationId),
+  ]);
+  if (!store) return <SellerEmpty copy={copy.seller} />;
 
   return (
-    <SellerPanel
-      membership={{
-        organization: {
-          name: membership.organization.name,
-          slug: membership.organization.slug,
-        },
-        memberRole: membership.role,
-        joinedAt: membership.createdAt,
-        members: membership.organization.members.map((member) => ({
-          id: member.id,
-          name: member.user.name,
-          email: member.user.email,
-          role: member.role,
-          createdAt: member.createdAt,
-        })),
-      }}
-      copy={copy}
+    <SellerDashboard
+      store={store}
+      dashboard={dashboard}
+      copy={copy.seller}
+      checkoutCopy={copy.checkout}
       locale={locale}
     />
   );

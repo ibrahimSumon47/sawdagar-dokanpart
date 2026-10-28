@@ -105,10 +105,31 @@ model Organization {
   descriptionEn String?
   descriptionBn String?
   verified      Boolean      @default(false)
+  // Seller Center onboarding and storefront CMS fields.
+  status          String   @default("pending")
+  kycStatus       String   @default("not_started")
+  kycSubmittedAt  DateTime?
+  kycReviewedAt   DateTime?
+  kycNote         String?
+  legalName       String?
+  businessType    String?
+  tradeLicense    String?
+  payoutPhone     String?
+  accent          String   @default("accent")
+  coverTone       String   @default("highlight")
+  announcementEn  String?
+  announcementBn  String?
+  aboutEn         String?
+  aboutBn         String?
+  returnPolicyEn  String?
+  returnPolicyBn  String?
+  shippingPolicyEn String?
+  shippingPolicyBn String?
   rating        Float        @default(0)
   reviewCount   Int          @default(0)
   followers     Int          @default(0)
   createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
   metadata      String?
   members       Member[]
   invitations   Invitation[]
@@ -259,6 +280,7 @@ model ProductVariant {
   cartItems      CartItem[]
   orderItems     OrderItem[]
   stockReservations StockReservation[]
+  adjustments    InventoryAdjustment[]
 
   @@index([productId])
   @@map("product_variants")
@@ -388,7 +410,13 @@ model SubOrder {
   shippingMinor  Int         @default(0)
   discountMinor  Int         @default(0)
   totalMinor     Int
+  confirmedAt    DateTime?
+  packedAt       DateTime?
+  shippedAt      DateTime?
   deliveredAt    DateTime?
+  cancelledAt    DateTime?
+  courier        String?
+  trackingNumber String?
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   order          Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -566,6 +594,21 @@ model ProductQuestion {
   @@index([productId, createdAt])
   @@index([userId, createdAt])
   @@map("product_questions")
+}
+
+model InventoryAdjustment {
+  id          String         @id
+  variantId   String
+  actorUserId String
+  delta       Int
+  reason      String
+  note        String?
+  stockAfter  Int
+  createdAt   DateTime       @default(now())
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  @@index([variantId, createdAt])
+  @@map("inventory_adjustments")
 }
 
 model ReturnRequest {
