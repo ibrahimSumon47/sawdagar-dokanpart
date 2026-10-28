@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter, Noto_Sans_Bengali } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { getViewer } from '../features/auth/session';
 import { getTheme } from '../features/preferences/getTheme';
 import { SiteFooter } from '../features/shell/components/SiteFooter';
 import { SiteHeader } from '../features/shell/components/SiteHeader';
@@ -32,7 +33,7 @@ interface RootLayoutProps {
 
 /** Renders the shell, theme attributes and language for every route. */
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const [locale, theme] = await Promise.all([getLocale(), getTheme()]);
+  const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
   const copy = getDictionary(locale);
 
   return (
@@ -49,7 +50,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           {copy.common.skipToContent}
         </a>
         <div className="flex min-h-svh flex-col">
-          <SiteHeader copy={copy} locale={locale} theme={theme} />
+          <SiteHeader
+            copy={copy}
+            locale={locale}
+            theme={theme}
+            viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
+          />
           <main id="main" className="flex-1">
             {children}
           </main>

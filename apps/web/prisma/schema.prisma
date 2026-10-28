@@ -1,0 +1,171 @@
+// Authentication, profiles and audit tables for Phase 2.
+//
+// The authentication models follow the Better Auth schema for its admin and
+// organization plugins. Extra columns (isDemo, role defaults) are declared so
+// the demo accounts can be recognised without a second lookup.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          String    @default("buyer")
+  banned        Boolean   @default(false)
+  banReason     String?
+  banExpires    DateTime?
+  isDemo        Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions    Session[]
+  accounts    Account[]
+  members     Member[]
+  invitations Invitation[] @relation("InvitationInviter")
+  profile     Profile?
+  auditLogs   AuditLog[]   @relation("AuditActor")
+
+  @@map("users")
+}
+
+model Session {
+  id                   String   @id
+  expiresAt            DateTime
+  token                String   @unique
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  ipAddress            String?
+  userAgent            String?
+  userId               String
+  impersonatedBy       String?
+  activeOrganizationId String?
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+model Organization {
+  id          String   @id
+  name        String
+  slug        String   @unique
+  logo        String?
+  createdAt   DateTime @default(now())
+  metadata    String?
+  members     Member[]
+  invitations Invitation[]
+
+  @@map("organizations")
+}
+
+model Member {
+  id             String       @id
+  organizationId String
+  userId         String
+  role           String
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("members")
+}
+
+model Invitation {
+  id             String       @id
+  organizationId String
+  email          String
+  role           String?
+  status         String
+  expiresAt      DateTime
+  createdAt      DateTime     @default(now())
+  inviterId      String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  inviter        User         @relation("InvitationInviter", fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, email])
+  @@map("invitations")
+}
+
+model RateLimit {
+  id          String @id
+  key         String @unique
+  count       Int    @default(0)
+  lastRequest BigInt @default(0)
+
+  @@map("rate_limits")
+}
+
+model Profile {
+  id        String   @id
+  userId    String   @unique
+  phone     String?
+  district  String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model AuditLog {
+  id          String   @id
+  actorUserId String?
+  actorEmail  String
+  action      String
+  targetType  String?
+  targetId    String?
+  ipAddress   String?
+  userAgent   String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  actor       User?    @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([actorUserId])
+  @@map("audit_logs")
+}

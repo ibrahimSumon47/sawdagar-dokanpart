@@ -2,6 +2,7 @@ node_modules/
 .next/
 .turbo/
 coverage/
+apps/web/generated/
 *.tsbuildinfo
 .env*
 !.env.example

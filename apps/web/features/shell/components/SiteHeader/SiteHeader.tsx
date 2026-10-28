@@ -1,3 +1,4 @@
+import { hasArea, type PlatformRole } from '@sd/domain';
 import Link from 'next/link';
 import { AnnouncementBar, BrandMark } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
@@ -11,12 +12,21 @@ export interface SiteHeaderProps {
   copy: Dictionary;
   locale: Locale;
   theme: Theme;
+  /** Signed-in visitor, or null for guests. */
+  viewer: { name: string; role: PlatformRole } | null;
 }
 
 /** Sticky storefront header with the announcement strip, wordmark and controls. */
-export function SiteHeader({ copy, locale, theme }: SiteHeaderProps) {
+export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
   const links = [
     { label: copy.nav.design, href: '/design' },
+    ...(viewer
+      ? [
+          { label: copy.nav.account, href: '/account' },
+          ...(hasArea(viewer.role, 'seller') ? [{ label: copy.nav.seller, href: '/seller' }] : []),
+          ...(hasArea(viewer.role, 'admin') ? [{ label: copy.nav.admin, href: '/admin' }] : []),
+        ]
+      : [{ label: copy.nav.signIn, href: '/sign-in' }]),
     { label: copy.nav.repository, href: site.repositoryUrl, external: true },
   ];
 
@@ -30,21 +40,18 @@ export function SiteHeader({ copy, locale, theme }: SiteHeaderProps) {
             {copy.common.brand}
           </span>
         </Link>
-        <nav aria-label={copy.nav.label} className="ml-auto hidden items-center gap-1 md:flex">
-          <Link
-            href="/design"
-            className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
-          >
-            {copy.nav.design}
-          </Link>
-          <a
-            href={site.repositoryUrl}
-            className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
-          >
-            {copy.nav.repository}
-          </a>
+        <nav aria-label={copy.nav.label} className="ml-auto hidden items-center gap-1 lg:flex">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
-        <div className="ml-auto flex items-center gap-1 md:ml-0">
+        <div className="ml-auto flex items-center gap-1 lg:ml-0">
           <LocaleSwitcher locale={locale} label={copy.preferences.language} />
           <ThemeToggle
             theme={theme}

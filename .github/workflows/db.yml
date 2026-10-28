@@ -1,0 +1,47 @@
+name: Database
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Operation to run against the demo database
+        type: choice
+        options:
+          - migrate
+          - seed
+          - status
+        default: migrate
+
+permissions:
+  contents: read
+
+concurrency:
+  group: demo-database
+  cancel-in-progress: false
+
+jobs:
+  run:
+    name: Database ${{ inputs.task }}
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+      BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+      DEMO_ACCOUNT_PASSWORD: ${{ secrets.DEMO_ACCOUNT_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Apply migrations
+        if: inputs.task == 'migrate'
+        run: pnpm --filter @sd/web db:migrate
+      - name: Seed demo accounts
+        if: inputs.task == 'seed'
+        run: pnpm --filter @sd/web db:seed
+      - name: Migration status
+        if: inputs.task == 'status'
+        run: pnpm --filter @sd/web exec prisma migrate status
