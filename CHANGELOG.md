@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add verified-purchase reviews with stars, headline, body and up to three photos resized in the browser, and recompute each product's rating and count from published rows.
+- Add product questions with public seller answers, a five-per-hour limit and an account view of the answers received.
+- Add seven-day return requests for delivered order lines, with a reason, optional note and status.
+- Add account tabs with order history, reviews, questions, returns and the mail outbox, plus two delivered demo orders and 1,755 seeded reviews for the demo buyer.
+- Fix the account overview and review page by passing plain labels rather than formatter-bearing dictionaries to client forms.
 - Add checkout with 64-district addresses, saved addresses, per-seller shipping zones, COD and MockPay.
 - Add the order, seller sub-order, order-item, payment, stock-reservation, coupon-redemption and mail-outbox schema.
 - Add conditional stock decrement in the order transaction, signed 30-minute MockPay links, an idempotent payment callback, receipts, printable invoices and the in-app outbox.

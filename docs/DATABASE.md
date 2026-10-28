@@ -4,7 +4,7 @@
 
 The `sawdagar-dokanpat` project in a Neon Free organization (`aws-us-east-1`, PostgreSQL 18) holds the authentication, catalog and cart schemas. The initial migration was applied through the [Database workflow](../.github/workflows/db.yml) on 2026-10-28, followed by the catalog migration and two seed runs. Connection strings live only in the Vercel and GitHub dashboards; the application uses the pooled Neon URL, while Prisma CLI commands use the direct URL.
 
-Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql), [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql) and [20261028200000_checkout_orders](../apps/web/prisma/migrations/20261028200000_checkout_orders/migration.sql). The first four are applied to Neon; the cart/wishlist migration ran through the `Database` workflow on 2026-10-28, and the coupon migration and seed followed in runs 40678423792 and 40678549502. The checkout migration is committed and awaiting its workflow run. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
+Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql), [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql), [20261028200000_checkout_orders](../apps/web/prisma/migrations/20261028200000_checkout_orders/migration.sql) and [20261028220000_reviews_returns](../apps/web/prisma/migrations/20261028220000_reviews_returns/migration.sql). All six are applied to Neon through the `Database` workflow on 2026-10-28; the checkout migration ran in run 40684155525 and the review/returns migration plus its seed in the following runs. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
 
 ```mermaid
 erDiagram
@@ -40,6 +40,14 @@ erDiagram
   orders ||--o| coupon_redemptions : uses
   coupons ||--o{ coupon_redemptions : redeemed_as
   users ||--o{ mail_outbox : receives
+  users ||--o{ reviews : writes
+  products ||--o{ reviews : reviewed_by
+  order_items ||--o| reviews : verifies
+  reviews ||--o{ review_photos : has
+  users ||--o{ product_questions : asks
+  products ||--o{ product_questions : answered_on
+  users ||--o{ return_requests : opens
+  order_items ||--o| return_requests : returned_by
 ```
 
 ## Tables
@@ -65,8 +73,12 @@ erDiagram
 | `coupons` | Code, type (`percent`, `fixed`, `free_shipping`), basis-points or poisha value, global or vendor scope, minimum subtotal, optional cap, start and end time, and active flag |
 | `addresses` | Saved delivery address per user: recipient, Bangladeshi phone, division, district, upazila, optional area and street line, with one default |
 | `orders` | One buyer order with number, status, payment state and method, money totals, coupon code, an immutable shipping snapshot and an optional link to the saved address |
-| `sub_orders` | One seller's part of an order, with its own number, status and money totals |
+| `sub_orders` | One seller's part of an order, with its own number, status, money totals and the `deliveredAt` time that starts the return window |
 | `order_items` | Product, variant, localised title and variant name, SKU, unit price, quantity and line total captured at purchase time |
+| `reviews` | One rating, headline, body and status per order line; seeded historical reviews have no `orderItemId`, so only UI-written reviews carry the verified-purchase badge |
+| `review_photos` | Up to three resized JPEG data URLs per review, ordered by `sortOrder` |
+| `product_questions` | Buyer question, optional seller answer with timestamp and answering user |
+| `return_requests` | One request per delivered order line: reason, note, status and optional resolution note |
 | `payments` | Provider (`cod` or `mockpay`), status, amount, unique provider reference and failure code |
 | `payment_attempts` | Append-only attempts for one payment, including the demo gateway's initiated, paid and failed events |
 | `stock_reservations` | Ordered quantity per variant, held for MockPay or confirmed for COD, with an expiry for future cleanup |
@@ -79,7 +91,7 @@ erDiagram
 - A leaf category holds exactly 6 products: 3 styles x 2 colours. Every vendor sells in one department, across its six leaf categories, for 18 products per vendor.
 - `products.priceMinor` is the lowest default variant price and `products.totalStock` is the sum of variant stock, so listing filters can run on one table without joins. The seed keeps both in sync; a future seller editor must update them in the same transaction as variants.
 - Prices are integer poisha in Bangladeshi taka. They are never floats and never sent from the client.
-- `products.rating` and `reviewCount` are seeded display summaries. There is no reviews table yet, so a review cannot change these values until Phase 8.
+- `products.rating` and `reviewCount` are aggregates of published rows in `reviews`, not independent display counters. The seed writes the historical reviews first and then sets each product from their average and count; a buyer review recomputes both inside its transaction. The old formula that produced 6 to 150 synthetic review counts is gone.
 - Search matches the English and Bangla product title and the English and Bangla leaf-category name. Descriptions are not searched yet; a future search phase can add a text index without changing the UI.
 - No product photos exist. `products.tone` picks one of the original SVG pattern tones until a media phase adds a URL and an image host.
 
@@ -93,6 +105,14 @@ erDiagram
 - Comparison is deliberately cookie-only (`sd_compare`, JSON array, max four ids) because it is a short-lived, non-sensitive browsing aid and must work before sign-in. Removing a stale product is allowed; adding checks that the product is active.
 - No cleanup job deletes expired carts yet. They are ignored after expiry and will need a scheduled delete when the demo has real traffic.
 - A coupon is evaluated on the server with integer poisha before it is saved on the cart. The cart re-evaluates the saved rule on every visit and silently drops it if it expired, no longer meets its minimum, or no longer matches a vendor-scoped cart. Four seeded codes cover the three coupon types: `BOISHAKH10`, `DHAKA200`, `FREESHIP` and vendor-scoped `TANGAIL15`.
+
+## Reviews, questions and returns
+
+- Ownership and timing are both enforced on the server. A review requires the order line to belong to the session user, its sub-order to be `delivered`, and no existing review; a return additionally needs `deliveredAt` inside the seven-day window. `isReviewable` and `isReturnable` in `@sd/domain` hold the rules and are unit-tested.
+- Reviews carry the verified-purchase badge only when `orderItemId` is set. Seeded reviews are written by synthetic buyer rows with no login account, so they never claim a purchase.
+- `review_photos.dataUrl` keeps a browser-resized JPEG (maximum 960 px, under 220,000 characters) with the row. There is no object-storage host on the free plan yet; the cap keeps the request inside the Server Action body limit. Moving to R2 later means adding a URL column and one upload step, not changing the review model.
+- A question is public once asked and can be answered only by a store member; the answer fields are on the question row for the Seller Center, which arrives in Phase 7. Questions are rate-limited to five per user per hour.
+- Product rating and review count are recomputed with a single aggregate query inside the same transaction as the review insert, so a failed photo write cannot leave the card showing a rating that has no row.
 
 ## Checkout and order shape
 
@@ -136,6 +156,14 @@ erDiagram
 | `stock_reservations(expires_at, status)` | Future reservation cleanup |
 | `coupon_redemptions(order_id)` unique | One coupon record per order |
 | `mail_outbox(user_id, created_at)` | The buyer's outbox |
+| `reviews(product_id, status, created_at)` | Published reviews for a product, newest first |
+| `reviews(user_id, created_at)` | A buyer's own reviews |
+| `reviews(order_item_id)` unique | One review per delivered line |
+| `review_photos(review_id)` | Photos for one review |
+| `product_questions(product_id, created_at)` | Recent questions on a product |
+| `product_questions(user_id, created_at)` | A buyer's questions and the hourly limit |
+| `return_requests(order_item_id)` unique | One open request per line |
+| `return_requests(user_id, created_at)` and `return_requests(status, created_at)` | Buyer history and the future seller queue |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 
@@ -143,6 +171,6 @@ Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size
 
 - Migrations and seeding run only through the `Database` workflow (`workflow_dispatch` with `migrate`, `seed` or `status`); never locally.
 - `DIRECT_DATABASE_URL` is used by the Prisma CLI; `DATABASE_URL` is the pooled runtime connection.
-- No images or files are stored in PostgreSQL.
+- No uploaded media library exists. The only image bytes in PostgreSQL are the bounded review thumbnails described above.
 - The seeded catalog fits comfortably in the Neon Free storage and compute budget. No database size or query-plan measurement has been recorded yet; add one if the catalog grows or a page becomes slow.
-- The seed is idempotent. It upserts users, profiles, the demo store, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog.
+- The seed is idempotent. It upserts users, profiles, the demo store, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog, 1,755 seeded reviews and two demo orders, and recomputes product ratings from all published review rows.

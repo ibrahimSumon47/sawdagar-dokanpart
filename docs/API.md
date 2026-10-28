@@ -36,6 +36,16 @@ MockPay also exposes `POST /api/payments/mockpay` with JSON `{ paymentId, token 
 
 Cart rows include server-side variant prices, stock and vendor details. The client never computes the amount sent to the server, and totals shown in the drawer are an estimate until checkout.
 
+## Review, question and return Server Actions
+
+| Action | Input | Behaviour |
+|---|---|---|
+| `submitReview` | `orderItemId`, `rating` (1–5), `title`, `body`, up to three `photos` | Requires a session; finds the line by id **and** viewer, requires a delivered sub-order and no existing review, inserts the review and photos, recomputes the product's rating and count in one transaction and writes an audit entry |
+| `askQuestion` | `productId`, `body` (10–400 characters) | Requires a session; checks the product is active, limits a user to five questions an hour, then stores the public question |
+| `requestReturn` | `orderItemId`, `reason` (fixed set), optional `note` | Requires a session; checks line ownership, delivery and the seven-day `deliveredAt` window on the server before inserting one request per line |
+
+All three accept only ids, enums, text and already-resized image data URLs; ownership, prices and the verified-purchase badge are decided from the session and stored rows. Reviews and questions are visible to everyone; return requests are visible only to their owner until the Seller Center and finance phases add queues.
+
 ## Not yet implemented
 
 There are no marketplace REST endpoints, OpenAPI document or SDK yet. The [architecture specification](spec/03-architecture.md) proposes a versioned `/api/v1` API with RFC 9457 errors and an OpenAPI document. Document endpoints here as they land.

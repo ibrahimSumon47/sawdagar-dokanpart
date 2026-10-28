@@ -47,7 +47,27 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | SignOutButton | Form that revokes the session and returns home. | `label` | [SignOutButton.tsx](../apps/web/features/account/components/SignOutButton/SignOutButton.tsx) |
 | AccountHeader | Avatar initials, identity, role, demo flag and account actions. | `viewer`, `copy`, `roleLabel`, `locale`, `links` | [AccountHeader.tsx](../apps/web/features/account/components/AccountHeader/AccountHeader.tsx) |
 | MembershipCard | One vendor store membership with role and join date. | `name`, `slug`, `joinedAt`, `roleLabel`, `copy`, `locale` | [MembershipCard.tsx](../apps/web/features/account/components/MembershipCard/MembershipCard.tsx) |
-| AccountPanel | Account page layout: identity, profile form and memberships. | `viewer`, `profile`, `memberships`, `copy`, `locale` | [AccountPanel.tsx](../apps/web/features/account/components/AccountPanel/AccountPanel.tsx) |
+| AccountPanel | Account page layout: tabs, identity, profile form and memberships. | `viewer`, `profile`, `memberships`, `copy`, `locale` | [AccountPanel.tsx](../apps/web/features/account/components/AccountPanel/AccountPanel.tsx) |
+| AccountTabs | Section switcher shared by every account page, with `aria-current` on the active tab. | `active`, `copy` | [AccountTabs.tsx](../apps/web/features/account/components/AccountTabs/AccountTabs.tsx) |
+| AccountSection | Account sub-page frame: heading, description, tabs and content. | `active`, `title`, `description`, `copy`, `children` | [AccountSection.tsx](../apps/web/features/account/components/AccountSection/AccountSection.tsx) |
+| AccountOrdersList | Order history rows with status, total and receipt link, or an empty state. | `orders`, `copy`, `checkoutCopy`, `locale` | [AccountOrdersList.tsx](../apps/web/features/account/components/AccountOrdersList/AccountOrdersList.tsx) |
+| AccountReviewsPanel | Delivered items awaiting a review, then the buyer's published reviews. | `awaiting`, `published`, `copy`, `reviewsCopy`, `locale` | [AccountReviewsPanel.tsx](../apps/web/features/account/components/AccountReviewsPanel/AccountReviewsPanel.tsx) |
+| AccountQuestionsPanel | The buyer's questions with product links and seller answers. | `questions`, `copy`, `questionsCopy`, `locale` | [AccountQuestionsPanel.tsx](../apps/web/features/account/components/AccountQuestionsPanel/AccountQuestionsPanel.tsx) |
+| AccountReturnsPanel | Returnable delivered lines, then the requests already opened. | `items`, `requests`, `copy`, `locale` | [AccountReturnsPanel.tsx](../apps/web/features/account/components/AccountReturnsPanel/AccountReturnsPanel.tsx) |
+
+## Reviews, questions and returns
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| ProductReviews | Review summary and the latest published reviews, or the no-review state. | `summary`, `reviews`, `copy`, `locale` | [ProductReviews.tsx](../apps/web/features/reviews/components/ProductReviews/ProductReviews.tsx) |
+| ReviewSummary | Average score and five distribution bars. | `summary`, `copy` | [ReviewSummary.tsx](../apps/web/features/reviews/components/ReviewSummary/ReviewSummary.tsx) |
+| ReviewCard | One review with author initials, stars, verified badge, text and photos. | `review`, `copy`, `locale` | [ReviewCard.tsx](../apps/web/features/reviews/components/ReviewCard/ReviewCard.tsx) |
+| ReviewForm | Collapsed form for one delivered line, with stars, text and photos. | `item`, `labels`, `locale` | [ReviewForm.tsx](../apps/web/features/reviews/components/ReviewForm/ReviewForm.tsx) |
+| RatingInput | Five-star radio group with a visible selected state. | `label`, `hint`, `defaultValue` | [RatingInput.tsx](../apps/web/features/reviews/components/RatingInput/RatingInput.tsx) |
+| ReviewPhotoPicker | Chooses up to three photos, resizes them in the browser and posts data URLs. | `labels` | [ReviewPhotoPicker.tsx](../apps/web/features/reviews/components/ReviewPhotoPicker/ReviewPhotoPicker.tsx) |
+| ProductQuestions | Public questions and seller answers, with the ask form or a sign-in link. | `productId`, `productSlug`, `questions`, `copy`, `signInLabel`, `signedIn`, `locale` | [ProductQuestions.tsx](../apps/web/features/questions/components/ProductQuestions/ProductQuestions.tsx) |
+| AskQuestionForm | Signed-in buyer's question form with validation feedback. | `productId`, `copy` | [AskQuestionForm.tsx](../apps/web/features/questions/components/AskQuestionForm/AskQuestionForm.tsx) |
+| ReturnForm | Reason, note and submit action for one delivered line. | `orderItemId`, `copy` | [ReturnForm.tsx](../apps/web/features/returns/components/ReturnForm/ReturnForm.tsx) |
 
 ## Seller (`apps/web/features/seller`)
 
@@ -97,7 +117,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | ProductGrid | Responsive one-to-four-column product grid with wishlist hearts; accepts plain labels so it also renders inside client views. | `products`, `locale`, `labels` (`sale`, `soldOut`, `ratingLabels`) | [ProductGrid.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGrid.tsx) |
 | ProductGridSkeleton | Matches the responsive columns of `ProductGrid` while the page loads. | `count`, `label` | [ProductGridSkeleton.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGridSkeleton.tsx) |
 | Pagination | Previous/next pagination that keeps every active filter in the URL. | `filters`, `page`, `pageCount`, `locale`, `copy` | [Pagination.tsx](../apps/web/features/catalog/components/Pagination/Pagination.tsx) |
-| ProductDetail | Product page body: breadcrumbs, media, title, rating, variants, shipping, description, vendor and related products. | `product`, `related`, `locale`, `copy` | [ProductDetail.tsx](../apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx) |
+| ProductDetail | Product page body: breadcrumbs, media, title, rating, variants, shipping, description, vendor, reviews, questions and related products. | `product`, `related`, `reviews`, `reviewSummary`, `questions`, `signedIn`, `locale`, `copy` | [ProductDetail.tsx](../apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx) |
 | ProductBreadcrumbs | Home, catalog, department, category and product trail. | `category`, `productTitle`, `locale`, `copy` | [ProductBreadcrumbs.tsx](../apps/web/features/catalog/components/ProductBreadcrumbs/ProductBreadcrumbs.tsx) |
 | ProductMedia | Original SVG pattern that stands in for photography, toned per product. | `tone`, `className` | [ProductMedia.tsx](../apps/web/features/catalog/components/ProductMedia/ProductMedia.tsx) |
 | ProductVendorCard | Vendor summary with district, rating, verification and product count; links to the vendor-filtered catalog. | `vendor`, `locale`, `copy` | [ProductVendorCard.tsx](../apps/web/features/catalog/components/ProductVendorCard/ProductVendorCard.tsx) |

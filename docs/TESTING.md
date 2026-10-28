@@ -6,13 +6,30 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 | Package | Tests | What they cover |
 |---|---|---|
-| `@sd/domain` | 51 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
+| `@sd/domain` | 58 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
 | `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
-| `@sd/web` | 35 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+| `@sd/web` | 42 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+
+## Phase 6 local checks
+
+On 2026-10-28 the reviews, questions and returns slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (113 tests) and `pnpm build`. The build listed the four new account routes as dynamic and did not need a database. New domain tests cover rating averages and distribution, invalid rating values, review eligibility and the seven-day return window including its closing minute. The web tests cover review input validation (rating bounds, short text, bounded image data URLs and seeded order-line ids) and question validation (length bounds and seeded product ids).
 
 ## Phase 5 local checks
 
 On 2026-10-28 the checkout slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (99 tests) and `pnpm build`. The build listed `/checkout`, `/checkout/pay/[paymentId]`, `/orders/[number]`, `/orders/[number]/invoice`, `/account/mail` and `/api/payments/mockpay` as dynamic routes and did not connect to the database. The new domain tests cover 64 districts, zone rates, per-seller shipping, exact discount allocation, order/sub-order/payment transitions and order numbers. The web tests cover MockPay token signing and expiry, address validation and mass-assignment-safe form reading.
+
+## Phase 6 production check
+
+On 2026-10-28 the review/returns migration and two seed runs completed through the `Database` workflow: 1,755 reviews across 432 products and two delivered orders for `buyer@demo.sawdagar.test`. On the deployment, as that buyer:
+
+- `/account/orders` listed both seeded orders with their seller counts;
+- `/account/reviews` listed the three delivered lines, published a five-star review with a verified-purchase badge, and the product page average moved from 4.3 with 6 reviews to 4.4 with 7;
+- `/account/returns` opened a not-as-described request and removed that line from the returnable list;
+- a product question was sent, appeared under Questions and answers, and the account's Questions tab listed it as awaiting the seller;
+- the Bangla account pages rendered the new copy, and the account pages had no horizontal overflow at 360 px;
+- CI run 40687496385 passed on Linux, Windows and macOS, and the Vercel deployment was Ready.
+
+Two defects found in this pass were fixed: passing formatter-bearing dictionaries to the client review and profile forms, and validating seeded readable ids as UUIDs. The seed now reads rating aggregates back from the database so a reseed keeps buyer-written reviews in the average.
 
 ## Production smoke check
 
