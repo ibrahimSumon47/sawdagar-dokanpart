@@ -16,6 +16,7 @@
     "test": "turbo run test",
     "cs:build-wasm": "node scripts/build-wasm.mjs",
     "cs:check-reference": "node scripts/check-reference-modules.mjs",
+    "perf:budget": "node scripts/check-perf-budget.mjs",
     "prepare": "husky"
   },
   "devDependencies": {
