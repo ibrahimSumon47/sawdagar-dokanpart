@@ -4,10 +4,13 @@
   "private": true,
   "description": "A non-commercial Bangladeshi marketplace demonstration.",
   "packageManager": "pnpm@12.15.0",
-  "engines": { "node": ">=24.15.0 <25" },
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
   "scripts": {
     "build": "turbo run build",
-    "lint": "turbo run lint",
+    "lint": "pnpm format:check && turbo run lint",
+    "format:check": "prettier --check \"apps/web/app/**/*.{ts,tsx,css}\" \"apps/web/features/**/*.{ts,tsx}\"",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "prepare": "husky"
@@ -16,6 +19,7 @@
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
     "husky": "9.1.7",
+    "prettier": "3.9.10",
     "turbo": "2.11.10"
   }
 }

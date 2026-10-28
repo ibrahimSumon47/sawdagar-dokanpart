@@ -6,9 +6,10 @@
 - Phase 0 documentation baseline records current architecture, security, API, database, credits, and owner setup actions.
 - The Vercel page returned the expected English and Bangla content, and the latest GitHub Actions run passed. A Neon project named `sawdagar-dokanpat` exists in a Free organization in `aws-us-east-1`; application connectivity has not been tested.
 - Reviewed Phase 0 free-service constraints; future integrations still require verification before adoption.
+- Added pinned Prettier configuration and a web source formatting check; local lint, typecheck, test, and build passed.
 
 ## Now
-- Phase 0: verify the latest CI and deployment, then review the remaining foundation acceptance criteria.
+- Phase 0: verify CI and deployment for the formatting slice, then review remaining foundation acceptance criteria.
 
 ## Next
 - Review remaining Phase 0 acceptance criteria before starting the design system.

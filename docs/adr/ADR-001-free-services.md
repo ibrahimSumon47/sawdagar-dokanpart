@@ -19,6 +19,8 @@ The project is a non-commercial portfolio demo, with sandbox payments only. Serv
 - [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces-overview) now states that creating a Docker Space running on compute requires a paid plan, even though CPU Basic has no hourly charge. This conflicts with the free-only policy, so the proposed Phase 10 Java hosting is blocked pending an independently verified free alternative. Static Spaces do not provide the required Java server.
 - [Stripe sandboxes](https://docs.stripe.com/sandboxes) and the [SSLCOMMERZ sandbox](https://developer.sslcommerz.com/registration/) support simulated payments without real transactions. The reviewed pages do not establish all card, expiry, or branding requirements; verify them before adopting either provider. No payment provider is integrated.
 
+- [Prettier 3.9.10](https://www.npmjs.com/package/prettier) is an MIT-licensed open-source formatter. It is a development dependency and requires no hosted service, account, or payment.
+
 ## Decision and alternatives
 
 The owner connected the specified Vercel Hobby project; a Neon project was created in a Free organization. Keep the database unconnected until its implementation phase. Vercel's documented project limit does not currently require consolidating the web and API, but quotas and workload compatibility should be checked again when the API is built. A self-hosted database or alternate hosting would introduce maintenance or a separate eligibility review. Other services in the architecture are not approved or integrated by this slice; unresolved card, expiry, branding, quota, and eligibility terms must be checked before use. The Phase 10 Java hosting proposal must be replaced with a free-compliant option before implementation.
