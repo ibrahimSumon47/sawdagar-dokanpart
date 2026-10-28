@@ -6,6 +6,7 @@ import { SellerNotice } from '../../../seller/components/SellerNotice';
 import type { SellerNoticeResult } from '../../../seller/notice';
 import { PayoutQueue } from '../PayoutQueue';
 import { RefundQueue } from '../RefundQueue';
+import { SettlementPreview } from '../SettlementPreview';
 
 export interface FinanceOverviewViewProps {
   overview: FinanceOverview;
@@ -59,6 +60,8 @@ export function FinanceOverviewView({ overview, copy, locale, notice }: FinanceO
           </p>
         </div>
       </div>
+
+      <SettlementPreview payouts={overview.payouts} copy={copy} locale={locale} />
 
       <section className="mt-8">
         <h2 className="font-serif text-xl text-ink">{copy.payoutQueue}</h2>

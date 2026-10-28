@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add the CS core package: C++ search ranking and a C SKU kit compiled to WebAssembly, plus Python demand insights and Java settlement reference implementations with TypeScript ports.
+- Order catalog search results by relevance and typo tolerance instead of insertion order, with a WebAssembly-first engine and a port fallback.
+- Give every new product SKU a position-weighted check character, and show trend, days of cover and restock hints on seller analytics.
+- Preview the next payout settlement on admin finance, including whole-taka rounding and the amount carried forward.
+- Add `/cs-lab`, which runs every module and shows whether the native or fallback engine answered.
+- Add a CI reference job that runs the Python and Java modules over shared fixtures on every push.
+
 - Add the admin store approval queue with the submitted KYC record, approve and reject decisions, and an audit entry for every decision.
 - Add review moderation that publishes or hides a review and recomputes the product rating from the remaining visible rows.
 - Add the Storefront CMS: static pages, Help Center articles and Journal posts with bilingual fields, SEO text, drafts, scheduled publishing and version history.

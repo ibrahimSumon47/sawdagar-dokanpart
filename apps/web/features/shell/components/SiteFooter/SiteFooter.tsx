@@ -49,6 +49,11 @@ export function SiteFooter({ copy }: SiteFooterProps) {
               </Link>
             </li>
             <li>
+              <Link href="/cs-lab" className="text-ink-muted transition-colors hover:text-accent">
+                {copy.footer.csLab}
+              </Link>
+            </li>
+            <li>
               <a
                 href={site.repositoryUrl}
                 className="text-ink-muted transition-colors hover:text-accent"

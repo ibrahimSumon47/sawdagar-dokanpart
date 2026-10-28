@@ -1,0 +1,13 @@
+{
+  "cases": [
+    { "input": " sd - 0001/1 ", "normalized": "SD-0001-1", "valid": true, "check": "Y" },
+    { "input": "sd/0002/2", "normalized": "SD-0002-2", "valid": true, "check": "E" },
+    { "input": " SD--X 9 ", "normalized": "SD-X-9", "valid": true, "check": "O" },
+    { "input": "ab", "normalized": "AB", "valid": false, "check": "W" },
+    { "input": "SD-0001-1-", "normalized": "SD-0001-1", "valid": true, "check": "Y" },
+    { "input": "SD_0009_4", "normalized": "SD-0009-4", "valid": true, "check": "9" },
+    { "input": "এসডি-১", "normalized": "", "valid": false, "check": "" },
+    { "input": "SD-ABCDEFGHIJKLMNOPQRST", "normalized": "SD-ABCDEFGHIJKLMNOPQRST", "valid": true, "check": "8" },
+    { "input": "XX-0001-1", "normalized": "XX-0001-1", "valid": false, "check": "7" }
+  ]
+}

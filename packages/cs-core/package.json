@@ -1,0 +1,23 @@
+{
+  "name": "@sd/cs-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CS core modules for the Sawdagar Dokanpat demo: search ranking, SKU kit, demand insights and settlement, each with a native reference and a TypeScript port.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./fixtures/*": "./fixtures/*"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.3",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}

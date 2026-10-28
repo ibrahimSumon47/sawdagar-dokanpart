@@ -35,24 +35,26 @@
 - Phase 9 local checks: `pnpm lint`, `pnpm typecheck`, `pnpm test` (139 tests) and `pnpm build` pass. The build lists every new admin and public content route as dynamic and does not connect to the database. New tests cover CMS input validation and the role-filtered admin navigation. The CMS schema was fixed after a test exposed that a new entry sent `id: null` and an empty publish date, which the first Zod shape rejected.
 - Phase 9 production check: the migration (run 40706126268) and seed (run 40706283350) succeeded with 11 content entries and two feature flags. On the deployment, a content editor saw only Overview, Content and Analytics, saved a changed excerpt (version 2), restored version 1 as a new version 3, and both actions appeared in the audit viewer; turning the Journal flag off made `/journal` return 404 and turning it back on restored three posts; hiding and publishing one review moved the published count from 1,756 to 1,755 and back; the vendor resubmitted KYC, the admin store queue showed one pending store, and approving it returned the store to the 24 approved; platform analytics showed GMV ৳16,916, delivered ৳10,090, refunds ৳3,250, 4 orders, 24 active stores, 25 buyers, 432 active products and 1 open return; the audit log paginated 40 rows per page. `/help` and `/journal` render in English and Bangla, the scheduled article and draft post stay hidden, and `/help` has no horizontal overflow at 360 px.
 - Phase 9 CI run 40706100315 passed on Linux, Windows and macOS, and the Vercel deployment was Ready. A follow-up commit localises store and KYC status labels in the admin queue and fixes the static page back link.
+- Phase 10 implementation: `@sd/cs-core` with a C++ relevance ranker and a C SKU kit compiled to freestanding WebAssembly (2.7 KB and 1.1 KB), Python demand insights and Java settlement reference implementations, each with an integer-only TypeScript port and shared fixtures; a clang build script that rewrites the committed base64 modules; a CI reference job that runs the Python and Java modules with `--require`; catalog search ordered by relevance with a WebAssembly-first engine and a visible fallback label; new product SKUs carrying a check character; a demand column on seller analytics; a whole-taka settlement preview on admin finance; and `/cs-lab`, which runs every module and reports the active engine.
 
 ## Now
-- Phase 9 (Admin and CMS) is complete and verified. Phase 10 (CS Core) is next, with its Java hosting requirement still unresolved.
+- Phase 10 (CS Core) implementation and local checks are complete. The production verification pass is the remaining step for this phase.
 
 ## Next
-- Start Phase 10 (CS Core): search-core in C++/WASM, sku-kit in C/WASM, insights in Python and settlement in Java, each with a tested fallback and a `/cs-lab` page. Build the C++, C and Python modules while the Java host is resolved.
-- Add a real product-media plan: the owner asked for images, and the catalog still renders an SVG pattern per tone. This fits the Phase 11 polish pass.
+- Start Phase 11 (Polish and hardening): replace the SVG-toned product media with real photographs stored in the app, finish the remaining Bangla strings, run the accessibility and six-width responsive pass, add performance budgets, and check the error and SEO surfaces.
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
 
 ## Blocked
-- Phase 10 Java hosting: Hugging Face Docker Spaces currently require a paid plan; a free-compliant alternative must be verified before that phase.
+- Nothing blocks Phase 11. The Python and Java modules no longer need a host: they are reference implementations verified in CI, and the site uses their TypeScript ports.
 
 ## Known issues
 - Search matches only English and Bangla product titles and leaf-category names. Descriptions, variants and vendor names are not searched; there is no typo tolerance, stemming or autosuggest yet.
-- Product imagery is an original SVG jamdani pattern per department tone. There is no media host, photo, gallery or zoom.
+- Product imagery is an original SVG jamdani pattern per department tone. There is no media host, photo, gallery or zoom; Phase 11 adds local photographs.
+- Search ranking reorders at most 120 matches and never overrides an explicit price or rating sort. Byte tokenization has no stemming, Unicode normalization or autosuggest.
+- The Python and Java modules run in CI only; a request uses the TypeScript port. The compiled WASM artifacts are regenerated by hand with `pnpm cs:build-wasm` and CI tests the committed bytes.
 - Seeded reviews belong to synthetic demo buyers without login accounts. Reviewer names and bodies are demo content, not real customers; the storefront labels the whole site as demo data.
 - Review photos are bounded data URLs in PostgreSQL because there is no free object-storage host yet. Product media itself is still an SVG pattern.
 - Vendor staff can read the Seller Center but cannot write; staff permission sets arrive with staff management in a later phase.

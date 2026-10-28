@@ -73,6 +73,13 @@ export function CatalogView({
               <p className="text-sm text-ink">{copy.catalog.matchesFor(filters.q)}</p>
             ) : null}
           </div>
+          {result.searchEngine ? (
+            <p className="mt-1 text-xs text-ink-muted">
+              {result.searchEngine === 'wasm'
+                ? copy.catalog.rankedByWasm
+                : copy.catalog.rankedByFallback}
+            </p>
+          ) : null}
 
           <div className="mt-5">
             {result.products.length === 0 ? (

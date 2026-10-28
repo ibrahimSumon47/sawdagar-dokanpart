@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "minimumPoisha": 100000,
+      "amounts": [150000, 99999, 100000, 123456, 50],
+      "expected": { "count": 3, "paidPoisha": 373400, "carriedPoisha": 100105 }
+    },
+    {
+      "minimumPoisha": 100000,
+      "amounts": [100000],
+      "expected": { "count": 1, "paidPoisha": 100000, "carriedPoisha": 0 }
+    },
+    {
+      "minimumPoisha": 100000,
+      "amounts": [12345, 99999],
+      "expected": { "count": 0, "paidPoisha": 0, "carriedPoisha": 112344 }
+    },
+    {
+      "minimumPoisha": 100000,
+      "amounts": [],
+      "expected": { "count": 0, "paidPoisha": 0, "carriedPoisha": 0 }
+    },
+    {
+      "minimumPoisha": 50000,
+      "amounts": [50000, 50099],
+      "expected": { "count": 2, "paidPoisha": 100000, "carriedPoisha": 99 }
+    }
+  ]
+}

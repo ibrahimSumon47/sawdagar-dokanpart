@@ -1,3 +1,4 @@
+import { demandSignal, type DemandSignal } from '@sd/cs-core';
 import { summariseSellerSales, type SellerSalesSummary } from '@sd/domain';
 import { getPrisma } from '../../lib/prisma';
 
@@ -556,7 +557,16 @@ export async function getSellerInventory(organizationId: string): Promise<Seller
 
 export interface SellerAnalytics {
   sales: SellerSalesSummary;
-  topProducts: { titleEn: string; titleBn: string; units: number; revenueMinor: number }[];
+  topProducts: {
+    titleEn: string;
+    titleBn: string;
+    units: number;
+    units30: number;
+    revenueMinor: number;
+    signal: DemandSignal['signal'];
+    daysOfCover: number;
+    restockUnits: number;
+  }[];
   lowStock: { id: string; sku: string; nameEn: string; nameBn: string; stock: number }[];
 }
 
@@ -565,7 +575,7 @@ export async function getSellerAnalytics(organizationId: string): Promise<Seller
   const since = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
   const prisma = getPrisma();
 
-  const [subOrders, items, lowStock] = await Promise.all([
+  const [subOrders, items, lowStock, products] = await Promise.all([
     prisma.subOrder.findMany({
       where: { organizationId, createdAt: { gte: since } },
       select: { status: true, totalMinor: true, items: { select: { quantity: true } } },
@@ -574,7 +584,13 @@ export async function getSellerAnalytics(organizationId: string): Promise<Seller
       where: {
         subOrder: { organizationId, status: { not: 'cancelled' }, createdAt: { gte: since } },
       },
-      select: { titleEn: true, titleBn: true, quantity: true, lineTotalMinor: true },
+      select: {
+        titleEn: true,
+        titleBn: true,
+        quantity: true,
+        lineTotalMinor: true,
+        createdAt: true,
+      },
     }),
     prisma.productVariant.findMany({
       where: { stock: { lte: 5 }, product: { organizationId, status: 'active' } },
@@ -588,11 +604,22 @@ export async function getSellerAnalytics(organizationId: string): Promise<Seller
         stock: true,
       },
     }),
+    prisma.product.findMany({
+      where: { organizationId },
+      select: { titleEn: true, variants: { select: { stock: true } } },
+    }),
   ]);
 
+  const stockByTitle = new Map<string, number>();
+  for (const product of products) {
+    const stock = product.variants.reduce((total, variant) => total + variant.stock, 0);
+    stockByTitle.set(product.titleEn, (stockByTitle.get(product.titleEn) ?? 0) + stock);
+  }
+
+  const monthAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
   const productTotals = new Map<
     string,
-    { titleEn: string; titleBn: string; units: number; revenueMinor: number }
+    { titleEn: string; titleBn: string; units: number; units30: number; revenueMinor: number }
   >();
   for (const item of items) {
     const key = item.titleEn;
@@ -600,9 +627,11 @@ export async function getSellerAnalytics(organizationId: string): Promise<Seller
       titleEn: item.titleEn,
       titleBn: item.titleBn,
       units: 0,
+      units30: 0,
       revenueMinor: 0,
     };
     current.units += item.quantity;
+    if (item.createdAt.getTime() >= monthAgo) current.units30 += item.quantity;
     current.revenueMinor += item.lineTotalMinor;
     productTotals.set(key, current);
   }
@@ -617,7 +646,15 @@ export async function getSellerAnalytics(organizationId: string): Promise<Seller
     ),
     topProducts: [...productTotals.values()]
       .sort((left, right) => right.units - left.units)
-      .slice(0, 8),
+      .slice(0, 8)
+      .map((product) => ({
+        ...product,
+        ...demandSignal({
+          units30: product.units30,
+          units90: product.units,
+          stock: stockByTitle.get(product.titleEn) ?? 0,
+        }),
+      })),
     lowStock,
   };
 }

@@ -16,6 +16,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
+    "@sd/cs-core": "workspace:*",
     "@sd/domain": "workspace:*",
     "@sd/ui": "workspace:*",
     "better-auth": "1.7.14",

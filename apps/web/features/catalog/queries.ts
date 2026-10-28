@@ -1,10 +1,14 @@
 import { productTones, type LocalisedName, type ProductTone } from '@sd/domain';
 import { cache } from 'react';
 import type { Prisma } from '../../generated/prisma/client';
+import { rankCatalogMatches } from '@sd/cs-core';
 import { getPrisma } from '../../lib/prisma';
 import type { CatalogFilters } from './catalogQuery';
 
 export const CATALOG_PAGE_SIZE = 12;
+
+/** Largest result set the relevance ranker reorders in memory. */
+const SEARCH_RANK_LIMIT = 120;
 
 export interface CatalogCategory {
   slug: string;
@@ -32,6 +36,8 @@ export interface CatalogResult {
   total: number;
   page: number;
   pageCount: number;
+  /** Set when a text query reordered the page; the CS lab page explains both. */
+  searchEngine?: 'wasm' | 'typescript';
 }
 
 export interface CatalogCategoryDetail {
@@ -210,15 +216,35 @@ export async function searchCatalog(filters: CatalogFilters): Promise<CatalogRes
   const pageCount = Math.max(1, Math.ceil(total / CATALOG_PAGE_SIZE));
   const page = Math.min(filters.page, pageCount);
 
+  /* A text query is ordered by relevance rather than by the newest row. The
+   * ranker only sees the first SEARCH_RANK_LIMIT matches, so a search that
+   * broad is left to the database instead of showing a truncated list. */
+  const ranked = filters.q !== undefined && filters.sort === 'newest' && total <= SEARCH_RANK_LIMIT;
+
   const products = await prisma.product.findMany({
     where,
     orderBy: orderFor(filters.sort),
-    skip: (page - 1) * CATALOG_PAGE_SIZE,
-    take: CATALOG_PAGE_SIZE,
+    skip: ranked ? 0 : (page - 1) * CATALOG_PAGE_SIZE,
+    take: ranked ? SEARCH_RANK_LIMIT : CATALOG_PAGE_SIZE,
     include: { organization: { select: { name: true, slug: true } } },
   });
 
-  return { products: products.map(toCatalogProduct), total, page, pageCount };
+  const mapped = products.map(toCatalogProduct);
+  if (!ranked) return { products: mapped, total, page, pageCount };
+
+  const result = rankCatalogMatches(
+    filters.q ?? '',
+    mapped,
+    (product) => `${product.title.en} ${product.title.bn}`,
+  );
+
+  return {
+    products: result.items.slice((page - 1) * CATALOG_PAGE_SIZE, page * CATALOG_PAGE_SIZE),
+    total,
+    page,
+    pageCount,
+    searchEngine: result.engine,
+  };
 }
 
 /** Vendor name for the active vendor filter, if it exists. */

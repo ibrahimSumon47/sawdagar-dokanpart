@@ -7,6 +7,7 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 | Package | Tests | What they cover |
 |---|---|---|
 | `@sd/domain` | 73 | Taka formatting in English and Bangla numerals, including signed and negative-zero ledger balances, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules; seller approval, signed stock changes and their limits, product-status narrowing and sales summaries; commission rounding, seller net after discount and shipping, balanced delivery, payout and refund entries, account balances, the payout minimum and available balance |
+| `@sd/cs-core` | 15 | WebAssembly and TypeScript parity for every search fixture pair, including Bangla; search ordering rules (exact above prefix above fuzzy, coverage over one strong token, stable ties); SKU normalization, validation and check characters with WASM parity; demand signal values against the Python fixtures; settlement values against the Java fixtures |
 | `@sd/ui` | 14 | Button markup, price rendering and discounts, signed balances only when allowed, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
 | `@sd/web` | 52 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses; CMS slug, status, scheduling and optional-field validation, and the admin navigation each role receives |
 
@@ -21,6 +22,12 @@ On 2026-10-28 the admin/CMS migration (run 40706126268) and seed (run 4070628335
 - `/admin/audit` listed `feature_flag.updated`, `cms.*`, store decisions, finance actions and demo sign-ins with a working second page.
 
 Two presentation gaps found in the pass were fixed: the store queue showed raw `pending`/`sole_proprietor` codes, and the back link on a static page pointed at the Journal. The queue now uses translated status and business-type labels, and the static page returns to the storefront.
+
+## Phase 10 local checks
+
+On 2026-10-28 the CS core slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (154 tests) and `pnpm build`. The build listed `/cs-lab` as dynamic and did not connect to the database. The new package tests load the compiled WASM and compare it with the port: 108 search query/document pairs, nine SKU cases, seven demand fixtures and five settlement fixtures. `node scripts/check-reference-modules.mjs` ran `insights.py` (seven fixtures) and compiled and ran `Settlement.java` (five fixtures) locally. CI runs the same script with `--require` in a dedicated `Reference modules` job, so a missing or broken Python or JDK install fails the build.
+
+The build is 2.7 KB for search-core and 1.1 KB for sku-kit. Two defects were caught by the parity tests while building them: the C bump allocator returned heap-relative offsets while the loader wrote at absolute addresses, and the SKU state machine left a pending dash armed after the first letter, producing `S-D-0001-1`. Both were fixed in the C source and the tests now pin the behaviour.
 
 ## Phase 9 local checks
 

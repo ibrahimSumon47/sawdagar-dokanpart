@@ -14,6 +14,8 @@
     "format:check": "prettier --check \"apps/web/{app,features,i18n,lib}/**/*.{ts,tsx,css}\" \"apps/web/*.{ts,mjs}\" \"packages/*/src/**/*.{ts,tsx,css}\"",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
+    "cs:build-wasm": "node scripts/build-wasm.mjs",
+    "cs:check-reference": "node scripts/check-reference-modules.mjs",
     "prepare": "husky"
   },
   "devDependencies": {

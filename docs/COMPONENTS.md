@@ -233,3 +233,15 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | SkeletonSection | Loaded and loading pairs for the product card and vendor row. | `copy`, `locale` | [SkeletonSection.tsx](../apps/web/features/design/components/SkeletonSection/SkeletonSection.tsx) |
 | NavigationSection | Mega menu demo and the category list its links point at. | `copy`, `locale` | [NavigationSection.tsx](../apps/web/features/design/components/NavigationSection/NavigationSection.tsx) |
 | QuantityDemo | Client wrapper that holds quantity state for the gallery. | `label`, `decrease`, `increase` | [QuantityDemo.tsx](../apps/web/features/design/components/QuantityDemo/QuantityDemo.tsx) |
+
+## CS lab (`apps/web/features/lab`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| CsLabView | Composes the four module sections with real output from the server process. | `copy`, `locale` | [CsLabView.tsx](../apps/web/features/lab/components/CsLabView/CsLabView.tsx) |
+| CsModuleSection | Titled module card with its engine badge and table slot. | `title`, `body`, `meta`, `children` | [CsModuleSection.tsx](../apps/web/features/lab/components/CsModuleSection/CsModuleSection.tsx) |
+| ScoreTable | Query/document scores from WebAssembly and the port, and whether they match. | `rows`, `copy` | [ScoreTable.tsx](../apps/web/features/lab/components/ScoreTable/ScoreTable.tsx) |
+| SkuTable | Normalized SKU, validity and check character for sample inputs. | `rows`, `copy` | [SkuTable.tsx](../apps/web/features/lab/components/SkuTable/SkuTable.tsx) |
+| InsightTable | Demand signal, days of cover and restock units for sales/stock pairs. | `rows`, `copy` | [InsightTable.tsx](../apps/web/features/lab/components/InsightTable/InsightTable.tsx) |
+| SettlementTable | One settlement run's paid and carried amounts. | `rows`, `run`, `copy`, `locale` | [SettlementTable.tsx](../apps/web/features/lab/components/SettlementTable/SettlementTable.tsx) |
+| SettlementPreview | Admin finance card showing what the next payout batch pays and carries. | `payouts`, `copy`, `locale` | [SettlementPreview.tsx](../apps/web/features/finance/components/SettlementPreview/SettlementPreview.tsx) |

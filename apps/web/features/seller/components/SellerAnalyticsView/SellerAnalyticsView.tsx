@@ -12,6 +12,15 @@ export interface SellerAnalyticsViewProps {
 
 /** Ninety-day totals, best-selling products and low-stock variants. */
 export function SellerAnalyticsView({ analytics, copy, locale }: SellerAnalyticsViewProps) {
+  const signalLabel = {
+    rising: copy.signalRising,
+    steady: copy.signalSteady,
+    falling: copy.signalFalling,
+    new: copy.signalNew,
+    stalled: copy.signalStalled,
+    idle: copy.signalIdle,
+  };
+
   return (
     <SellerSection
       active="analytics"
@@ -42,7 +51,7 @@ export function SellerAnalyticsView({ analytics, copy, locale }: SellerAnalytics
           </p>
         ) : (
           <div className="mt-3 overflow-x-auto rounded-sm border border-line bg-surface">
-            <table className="w-full min-w-[28rem] border-collapse text-sm">
+            <table className="w-full min-w-[36rem] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-line text-left text-xs uppercase tracking-wider text-ink-muted">
                   <th scope="col" className="px-4 py-3 font-medium">
@@ -53,6 +62,9 @@ export function SellerAnalyticsView({ analytics, copy, locale }: SellerAnalytics
                   </th>
                   <th scope="col" className="px-4 py-3 text-right font-medium">
                     {copy.revenueDelivered}
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-medium">
+                    {copy.demand}
                   </th>
                 </tr>
               </thead>
@@ -67,6 +79,17 @@ export function SellerAnalyticsView({ analytics, copy, locale }: SellerAnalytics
                     </td>
                     <td className="px-4 py-3 text-right">
                       <Price amountMinor={product.revenueMinor} locale={locale} size="sm" />
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-medium text-ink">{signalLabel[product.signal]}</span>
+                      <span className="mt-0.5 block text-xs text-ink-muted">
+                        {copy.coverDays(String(product.daysOfCover))}
+                      </span>
+                      {product.restockUnits > 0 ? (
+                        <span className="mt-0.5 block text-xs text-ink-muted">
+                          {copy.restockHint(String(product.restockUnits))}
+                        </span>
+                      ) : null}
                     </td>
                   </tr>
                 ))}

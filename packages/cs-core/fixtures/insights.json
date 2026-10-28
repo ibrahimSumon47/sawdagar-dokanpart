@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "input": { "units30": 12, "units90": 30, "stock": 4 },
+      "expected": { "velocityMilli": 400, "trendBps": 12000, "signal": "rising", "daysOfCover": 10, "restockUnits": 14 }
+    },
+    {
+      "input": { "units30": 0, "units90": 0, "stock": 5 },
+      "expected": { "velocityMilli": 0, "trendBps": 0, "signal": "idle", "daysOfCover": 999, "restockUnits": 0 }
+    },
+    {
+      "input": { "units30": 5, "units90": 0, "stock": 0 },
+      "expected": { "velocityMilli": 166, "trendBps": 0, "signal": "new", "daysOfCover": 0, "restockUnits": 8 }
+    },
+    {
+      "input": { "units30": 0, "units90": 20, "stock": 3 },
+      "expected": { "velocityMilli": 0, "trendBps": 0, "signal": "stalled", "daysOfCover": 999, "restockUnits": 0 }
+    },
+    {
+      "input": { "units30": 6, "units90": 90, "stock": 40 },
+      "expected": { "velocityMilli": 200, "trendBps": 2000, "signal": "falling", "daysOfCover": 200, "restockUnits": 0 }
+    },
+    {
+      "input": { "units30": 30, "units90": 90, "stock": 2 },
+      "expected": { "velocityMilli": 1000, "trendBps": 10000, "signal": "steady", "daysOfCover": 2, "restockUnits": 43 }
+    },
+    {
+      "input": { "units30": 9, "units90": 30, "stock": 0 },
+      "expected": { "velocityMilli": 300, "trendBps": 9000, "signal": "steady", "daysOfCover": 0, "restockUnits": 14 }
+    }
+  ]
+}

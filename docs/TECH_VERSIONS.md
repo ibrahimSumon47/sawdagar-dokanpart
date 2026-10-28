@@ -30,6 +30,10 @@ Versions and package licenses checked against the npm registry on 2026-10-28; ex
 | @types/node | 24.19.2 | MIT |
 | @types/react and @types/react-dom | 19.3.0 | MIT |
 | @types/pg | 8.23.1 | MIT |
+| @sd/cs-core (workspace package) | 0.1.0 | private, no third-party code |
+| clang and wasm-ld (LLVM) | 23.1.4 locally; CI runner default | Apache-2.0 with LLVM exception |
 | Fraunces, Inter, Noto Sans Bengali | current Google Fonts releases fetched by `next/font` | SIL Open Font License 1.1 |
 
 Packages are open-source and locally installed. Prisma 7 uses the Rust-free client with the `pg` driver adapter; the generated client is produced during build and seed, and is not committed. Better Auth is MIT-licensed and self-hosted, with no paid tier needed. The font files are downloaded at build time by `next/font` and served from the deployment; they are not committed. ESLint 9 is pinned because the Next.js ESLint plugins do not yet declare support for ESLint 10. The MIT-licensed `unrs-resolver` native-binding installer is allowed by pnpm. Prettier 3.9.10 is a development-only formatter (registry unpacked size 9,959,033 bytes); it is not shipped to users. No application bundle-size budget has yet been measured; Tailwind emitted 34 KB of uncompressed CSS in the Phase 1 build.
+
+The CS core WASM modules are built with clang and wasm-ld, not with a package dependency. LLVM ships with the Linux, macOS and Windows GitHub runners and on the owner's machine, so `pnpm cs:build-wasm` works without an install. The compiled modules (2.7 KB and 1.1 KB) are committed as base64 TypeScript so install, test and deploy never need a compiler; see [ADR-002](adr/ADR-002-cs-core.md). Python 3 and a JDK are used only by the CI reference job and are never installed by the project.

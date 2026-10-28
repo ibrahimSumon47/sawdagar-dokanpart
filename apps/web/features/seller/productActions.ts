@@ -1,5 +1,6 @@
 'use server';
 
+import { skuWithCheckCharacter } from '@sd/cs-core';
 import { canSell, slugify } from '@sd/domain';
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
@@ -95,7 +96,7 @@ export async function saveProductAction(formData: FormData): Promise<void> {
           variants: {
             create: {
               id: randomUUID(),
-              sku: `SD-${randomUUID().slice(0, 8).toUpperCase()}`,
+              sku: skuWithCheckCharacter(`SD-${randomUUID().slice(0, 8)}`),
               nameEn: 'Standard',
               nameBn: 'স্ট্যান্ডার্ড',
               priceMinor: toMinor(data.price),
