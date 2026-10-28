@@ -10,6 +10,18 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 | `@sd/ui` | 14 | Button markup, price rendering and discounts, signed balances only when allowed, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
 | `@sd/web` | 52 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses; CMS slug, status, scheduling and optional-field validation, and the admin navigation each role receives |
 
+## Phase 9 production check
+
+On 2026-10-28 the admin/CMS migration (run 40706126268) and seed (run 40706283350) completed through the `Database` workflow: 11 bilingual entries with their first version and two feature flags. On the deployment:
+
+- `/help` listed the four published articles in English and Bangla, hid the scheduled Eid article, and had no horizontal overflow at 360 px; `/journal` listed three posts and kept the draft out; an article page rendered its title, date, excerpt and paragraphs, and the dark theme applied;
+- as `editor@demo.sawdagar.test`, `/admin/content` showed 11 entries across published, scheduled and draft states and the admin navigation offered only Overview, Content and Analytics; saving a contact-page excerpt created version 2 with a success notice, restoring version 1 created version 3 with `Restored from version 1`, and the audit log listed both `cms.updated` and `cms.version.restored`;
+- as `admin@demo.sawdagar.test`, turning the Journal flag off made `/journal` return the 404 page and turning it on restored the three posts; the store queue went from 0 to 1 pending when the vendor resubmitted KYC, and approving it returned 24 approved and 0 pending; hiding one review moved the published count from 1,756 to 1,755 and publishing it restored the count;
+- `/admin/analytics` showed GMV ৳16,916, delivered ৳10,090, commission ৳0 after the refund, refunds ৳3,250, 4 orders, 24 active stores, 25 buyers, 432 active products, 1,756 published reviews and 1 open return;
+- `/admin/audit` listed `feature_flag.updated`, `cms.*`, store decisions, finance actions and demo sign-ins with a working second page.
+
+Two presentation gaps found in the pass were fixed: the store queue showed raw `pending`/`sole_proprietor` codes, and the back link on a static page pointed at the Journal. The queue now uses translated status and business-type labels, and the static page returns to the storefront.
+
 ## Phase 9 local checks
 
 On 2026-10-28 the admin and CMS slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (139 tests) and `pnpm build`. The build listed `/admin/stores`, `/admin/reviews`, `/admin/content`, `/admin/content/[id]`, `/admin/content/new`, `/admin/analytics`, `/admin/flags`, `/admin/audit`, `/help`, `/help/[slug]`, `/journal`, `/journal/[slug]` and `/pages/[slug]` as dynamic routes and did not connect to the database.

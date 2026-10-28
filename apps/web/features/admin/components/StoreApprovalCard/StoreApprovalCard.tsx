@@ -12,9 +12,29 @@ export interface StoreApprovalCardProps {
 
 /** One store's business record with approve and reject controls. */
 export function StoreApprovalCard({ store, copy, locale }: StoreApprovalCardProps) {
+  const storeStatus: Record<string, string> = {
+    pending: copy.storeStatusPending,
+    approved: copy.storeStatusApproved,
+    rejected: copy.storeStatusRejected,
+    suspended: copy.storeStatusSuspended,
+  };
+  const kycStatus: Record<string, string> = {
+    not_started: copy.kycNotStarted,
+    pending: copy.kycPending,
+    approved: copy.kycApproved,
+    rejected: copy.kycRejected,
+  };
+  const businessType: Record<string, string> = {
+    sole_proprietor: copy.businessSole,
+    partnership: copy.businessPartnership,
+    company: copy.businessCompany,
+  };
   const details = [
     { label: copy.legalNameLabel, value: store.legalName },
-    { label: copy.businessTypeLabel, value: store.businessType },
+    {
+      label: copy.businessTypeLabel,
+      value: store.businessType ? (businessType[store.businessType] ?? store.businessType) : null,
+    },
     { label: copy.tradeLicenseLabel, value: store.tradeLicense },
     { label: copy.payoutPhoneLabel, value: store.payoutPhone },
     { label: copy.districtLabel, value: store.district },
@@ -32,8 +52,19 @@ export function StoreApprovalCard({ store, copy, locale }: StoreApprovalCardProp
               : ''}
           </p>
         </div>
-        <Badge tone={store.status === 'pending' ? 'warning' : 'neutral'}>
-          {copy.kycStatusColumn}: {store.kycStatus}
+        <Badge
+          tone={
+            store.status === 'pending'
+              ? 'warning'
+              : store.status === 'approved'
+                ? 'success'
+                : store.status === 'rejected'
+                  ? 'danger'
+                  : 'neutral'
+          }
+        >
+          {storeStatus[store.status] ?? store.status} · {copy.kycStatusColumn}:{' '}
+          {kycStatus[store.kycStatus] ?? store.kycStatus}
         </Badge>
       </div>
 

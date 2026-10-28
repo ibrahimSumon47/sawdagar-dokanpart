@@ -26,7 +26,7 @@ export function ContentArticleView({ entry, kind, copy, locale }: ContentArticle
       ? copy.content.backToHelp
       : kind === 'journal'
         ? copy.content.backToJournal
-        : copy.content.journalTitle;
+        : copy.nav.home;
 
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
