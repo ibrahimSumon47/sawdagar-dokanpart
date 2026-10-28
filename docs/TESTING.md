@@ -30,9 +30,15 @@ The auth deployment was also exercised through the real sign-in page: buyer, ven
 
 ## Phase 4 local checks
 
-On 2026-10-28 the full gate passed after the shop slice: `pnpm lint` (Prettier plus ESLint), `pnpm typecheck`, `pnpm test` (65 tests) and `pnpm build`. The build listed `/wishlist` and `/compare` as dynamic routes and did not connect to the database.
+On 2026-10-28 the full gate passed after the shop slice: `pnpm lint` (Prettier plus ESLint), `pnpm typecheck`, `pnpm test` (65 tests) and `pnpm build`. The build listed `/wishlist` and `/compare` as dynamic routes and did not connect to the database.The cart migration was applied to Neon by the `Database` workflow (run 40672398462). The deployed build was then exercised on the production origin:
 
-The cart migration was applied to Neon by the `Database` workflow (run 40672398462), but no production cart, wishlist or comparison action has run yet. The production smoke check must cover: adding a variant as a guest, reloading and keeping the guest cart, signing in and seeing the guest row merged, changing quantity past stock to see the inline error, removing a row, saving to the wishlist and opening `/wishlist`, adding four products to compare and confirming a fifth is refused, and removing a column on `/compare`.
+- a guest added the small leather belt, the drawer opened at ৳1,280 and the quantity stepper moved it to two at ৳2,560 with a ৳120 delivery fee;
+- a full reload kept the guest cart at two items, confirming the `sd_cart` cookie and database row;
+- after signing out, the guest added one more belt and signed in through the support demo account; the cart showed three, so the guest row had merged into the existing user cart and the cookie was cleared;
+- the product-page heart saved the belt and `/wishlist` listed it; removing the heart left the wishlist empty state without a reload;
+- adding the belt to compare created the header count link, and `/compare` rendered the one-column table with an "add another product" notice and its vendor, price, rating, category, variant and stock rows.
+
+Still to exercise on production: changing quantity past stock to see the inline row error, saving a cart row for later, adding four products and confirming the fifth is refused, and removing a column or clearing the comparison.
 
 ## Not yet covered
 

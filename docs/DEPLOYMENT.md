@@ -7,7 +7,7 @@
 - The `sawdagar-dokanpat` Neon Free project holds the migrated auth, catalog and cart schemas. The `20261028170000_cart_wishlist` migration was applied by the `Database` workflow on 2026-10-28. The catalog seed created 12 departments, 72 leaf categories, 24 vendors, 432 products and 1,296 variants. Do not share its connection strings in chat.
 - Re-running `seed` is not required for the cart migration; the seed restores catalog rows only.
 - If the catalog is reset, run the `Database` workflow with `migrate` only when a new migration exists, then with `seed`. The seed restores the same deterministic catalog and does not duplicate rows.
-- After the migration, smoke-test a guest cart, sign-in merge, wishlist, compare limit and clearing the comparison on the production origin.
+- The deployed Phase 4 build passed the guest-cart, reload, sign-in merge, wishlist and comparison smoke checks. Re-run them after a schema or auth change; the stock-limit and four-product compare-cap edge cases still need a manual pass.
 - Rotating the demo password requires updating `DEMO_ACCOUNT_PASSWORD` in both dashboards and re-running the `Database` workflow with `seed`, so the stored hashes match the new value.
 
 ## Environment variables

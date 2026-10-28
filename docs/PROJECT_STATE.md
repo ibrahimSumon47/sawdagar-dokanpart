@@ -15,13 +15,14 @@
 - Unit tests: 65 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants, catalog filter validation, cart grouping and delivery totals, and comparison cookie parsing and limits.
 - Lint, typecheck, tests and build pass locally; the build does not touch the database.
 - Production verification: the catalog returned 200 with 432 products, a department filter changed the result count, English `jamdani` returned six sarees, Bangla `শাড়ি` returned 36, and a product page switched variants with the correct price and SKU. The home page showed 12 live departments, blank price fields no longer hid results, and the catalog and product page had no horizontal overflow at 360 px. Phase 2 demo sign-in and role guards were re-verified earlier on the same deployment.
+- Phase 4 production smoke test: a guest cart survived a reload, the drawer totalled correctly after a quantity change, demo sign-in merged the guest row into the user cart (2 + 1 = 3), wishlist save and removal updated the page live, and the comparison page rendered from the cookie. CI run 40675747563 passed on all three operating systems and the Vercel deployment reported Ready.
 
 ## Now
-- Phase 4 cart, wishlist and compare are implemented and pass local checks; the migration is applied. The new pages and actions now need a production smoke test after deployment.
+- Phase 4 cart, wishlist and compare are implemented, the migration is applied, CI is green on Linux, Windows and macOS, and the deployed build passed its production smoke test. Phase 4 is complete except the roadmap's coupon rules.
 - Coupons, the product-thumbnail flight animation and the "you may also like" strip from the design spec are not part of this slice.
 
 ## Next
-- Verify cart actions, wishlist, compare and sign-in merge on the deployment after it goes live.
+- Verify the remaining production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Coupon validation and its tests are the remaining Phase 4 roadmap item.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
