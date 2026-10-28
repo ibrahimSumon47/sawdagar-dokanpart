@@ -27,12 +27,14 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  sessions    Session[]
-  accounts    Account[]
-  members     Member[]
-  invitations Invitation[] @relation("InvitationInviter")
-  profile     Profile?
-  auditLogs   AuditLog[]   @relation("AuditActor")
+  sessions      Session[]
+  accounts      Account[]
+  members       Member[]
+  invitations   Invitation[]   @relation("InvitationInviter")
+  profile       Profile?
+  auditLogs     AuditLog[]     @relation("AuditActor")
+  cart          Cart?
+  wishlistItems WishlistItem[]
 
   @@map("users")
 }
@@ -88,18 +90,18 @@ model Verification {
 }
 
 model Organization {
-  id            String   @id
+  id            String       @id
   name          String
-  slug          String   @unique
+  slug          String       @unique
   logo          String?
   district      String?
   descriptionEn String?
   descriptionBn String?
-  verified      Boolean  @default(false)
-  rating        Float    @default(0)
-  reviewCount   Int      @default(0)
-  followers     Int      @default(0)
-  createdAt     DateTime @default(now())
+  verified      Boolean      @default(false)
+  rating        Float        @default(0)
+  reviewCount   Int          @default(0)
+  followers     Int          @default(0)
+  createdAt     DateTime     @default(now())
   metadata      String?
   members       Member[]
   invitations   Invitation[]
@@ -219,6 +221,7 @@ model Product {
   category       Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   variants       ProductVariant[]
+  wishlistItems  WishlistItem[]
 
   @@index([categoryId, status])
   @@index([organizationId])
@@ -229,19 +232,62 @@ model Product {
 }
 
 model ProductVariant {
-  id             String   @id
+  id             String     @id
   productId      String
-  sku            String   @unique
+  sku            String     @unique
   nameEn         String
   nameBn         String
   priceMinor     Int
   compareAtMinor Int?
-  stock          Int      @default(0)
-  isDefault      Boolean  @default(false)
-  sortOrder      Int      @default(0)
-  createdAt      DateTime @default(now())
-  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  stock          Int        @default(0)
+  isDefault      Boolean    @default(false)
+  sortOrder      Int        @default(0)
+  createdAt      DateTime   @default(now())
+  product        Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartItems      CartItem[]
 
   @@index([productId])
   @@map("product_variants")
+}
+
+model Cart {
+  id         String     @id
+  userId     String?    @unique
+  guestToken String?    @unique
+  expiresAt  DateTime
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  user       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items      CartItem[]
+
+  @@index([expiresAt])
+  @@map("carts")
+}
+
+model CartItem {
+  id        String         @id
+  cartId    String
+  variantId String
+  quantity  Int            @default(1)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  cart      Cart           @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, variantId])
+  @@index([variantId])
+  @@map("cart_items")
+}
+
+model WishlistItem {
+  id        String   @id
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([productId])
+  @@map("wishlist_items")
 }
