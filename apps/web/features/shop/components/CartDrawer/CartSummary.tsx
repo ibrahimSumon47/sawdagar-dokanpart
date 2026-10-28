@@ -1,15 +1,15 @@
 'use client';
 
 import { formatTaka } from '@sd/domain';
-import { Price, buttonStyles } from '@sd/ui';
+import { ButtonLink, Price } from '@sd/ui';
 import { FREE_DELIVERY_THRESHOLD_MINOR } from '../../cartTotals';
 import { formatTemplate } from '../../formatTemplate';
 import { CouponForm } from '../CouponForm';
 import { useShop } from '../ShopProvider';
 
-/** Free-delivery progress, estimated totals and the next-phase checkout note. */
+/** Free-delivery progress, coupon entry, estimated totals and the checkout link. */
 export function CartSummary() {
-  const { copy, locale, summary } = useShop();
+  const { copy, locale, summary, signedIn, closeCart } = useShop();
   const progress = Math.min(
     100,
     Math.round((summary.subtotalMinor / FREE_DELIVERY_THRESHOLD_MINOR) * 100),
@@ -77,13 +77,13 @@ export function CartSummary() {
         </div>
       </dl>
 
-      <button
-        type="button"
-        disabled
-        className={buttonStyles({ variant: 'primary' }) + ' mt-4 w-full'}
+      <ButtonLink
+        href={signedIn ? '/checkout' : '/sign-in?next=%2Fcheckout'}
+        onClick={closeCart}
+        className="mt-4 w-full"
       >
         {copy.checkout}
-      </button>
+      </ButtonLink>
       <p className="mt-2 text-xs leading-relaxed text-ink-muted">{copy.checkoutNote}</p>
     </div>
   );

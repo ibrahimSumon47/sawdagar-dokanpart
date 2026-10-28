@@ -1,11 +1,10 @@
-import { evaluateCoupon, type CouponRule } from '@sd/domain';
+import { evaluateCoupon, FREE_DELIVERY_THRESHOLD_MINOR, type CouponRule } from '@sd/domain';
 import type { CartGroup, CartLine, CartSummary } from './types';
+
+export { FREE_DELIVERY_THRESHOLD_MINOR };
 
 /** Flat demo delivery fee for orders below the free-delivery threshold. */
 export const DELIVERY_FEE_MINOR = 12_000;
-
-/** Free delivery starts at ৳10,000. */
-export const FREE_DELIVERY_THRESHOLD_MINOR = 1_000_000;
 
 function groupByVendor(items: readonly CartLine[]): CartGroup[] {
   const groups = new Map<string, CartGroup>();

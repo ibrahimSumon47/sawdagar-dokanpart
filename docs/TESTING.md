@@ -6,9 +6,13 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 | Package | Tests | What they cover |
 |---|---|---|
-| `@sd/domain` | 33 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
+| `@sd/domain` | 51 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role; the deterministic catalog seed, 84-category tree, 432 products and 1,296 variants, unique slugs and SKUs, whole-taka prices, stock totals, leaf-category and vendor references, sale/out-of-stock coverage, and slugify; plus percentage, fixed and free-shipping coupons, caps, vendor scope, minimum subtotal, and expiry rules |
 | `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
-| `@sd/web` | 28 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+| `@sd/web` | 35 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses |
+
+## Phase 5 local checks
+
+On 2026-10-28 the checkout slice passed `pnpm lint`, `pnpm typecheck`, `pnpm test` (99 tests) and `pnpm build`. The build listed `/checkout`, `/checkout/pay/[paymentId]`, `/orders/[number]`, `/orders/[number]/invoice`, `/account/mail` and `/api/payments/mockpay` as dynamic routes and did not connect to the database. The new domain tests cover 64 districts, zone rates, per-seller shipping, exact discount allocation, order/sub-order/payment transitions and order numbers. The web tests cover MockPay token signing and expiry, address validation and mass-assignment-safe form reading.
 
 ## Production smoke check
 

@@ -126,6 +126,22 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | CompareTable | Accessible side-by-side attribute table with one removable column per product. | `products`, `locale`, `labels` (`title`, `remove`, rows, stock labels, rating labels) | [CompareTable.tsx](../apps/web/features/shop/components/CompareView/CompareTable.tsx) |
 | CompareRow | One labelled attribute across every compared product. | `label`, `values` | [CompareRow.tsx](../apps/web/features/shop/components/CompareView/CompareRow.tsx) |
 
+## Checkout and orders (`apps/web/features/checkout`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| CheckoutView | Client checkout form with saved-address choice, new-address fields, payment selection and live totals. | `items`, `coupon`, `addresses`, `copy`, `locale` | [CheckoutView.tsx](../apps/web/features/checkout/components/CheckoutView/CheckoutView.tsx) |
+| AddressFields | Name, phone, division, district, upazila, area and street fields with district options from the selected division. | `value`, `onChange`, `copy` | [AddressFields.tsx](../apps/web/features/checkout/components/AddressFields/AddressFields.tsx) |
+| PaymentOptions | Accessible radio cards for cash on delivery and MockPay. | `value`, `onChange`, `copy` | [PaymentOptions.tsx](../apps/web/features/checkout/components/PaymentOptions/PaymentOptions.tsx) |
+| CheckoutSummary | Server-priced subtotal, shipping, coupon, included VAT and total beside the form. | `totals`, `count`, `couponCode`, `locale`, `copy` | [CheckoutSummary.tsx](../apps/web/features/checkout/components/CheckoutSummary/CheckoutSummary.tsx) |
+| MockPayPanel | The sandbox gateway page with pay and cancel actions. | `paymentId`, `token`, `orderNumber`, `amountMinor`, `locale`, `copy` | [MockPayPanel.tsx](../apps/web/features/checkout/components/MockPayPanel/MockPayPanel.tsx) |
+| OrderConfirmation | Receipt with placed/payment banners, seller groups, totals, address and invoice link. | `order`, `copy`, `locale`, `placed`, `paymentNotice`, `paymentHref` | [OrderConfirmation.tsx](../apps/web/features/checkout/components/OrderConfirmation/OrderConfirmation.tsx) |
+| OrderItems | Seller sub-orders with item thumbnails, variant, SKU, quantity and line totals. | `order`, `copy`, `locale` | [OrderItems.tsx](../apps/web/features/checkout/components/OrderItems/OrderItems.tsx) |
+| OrderTotals | Subtotal, shipping, coupon, included VAT and total for a stored order. | `order`, `copy`, `locale`, `className` | [OrderTotals.tsx](../apps/web/features/checkout/components/OrderTotals/OrderTotals.tsx) |
+| InvoiceView | Printable invoice with bill-to, payment state, item table and totals. | `order`, `copy`, `locale` | [InvoiceView.tsx](../apps/web/features/checkout/components/InvoiceView/InvoiceView.tsx) |
+| PrintButton | Opens the browser print dialog and hides itself in print. | `label` | [PrintButton.tsx](../apps/web/features/checkout/components/PrintButton/PrintButton.tsx) |
+| MailOutboxList | Read-only list of in-app confirmation messages with their order links. | `messages`, `copy`, `locale` | [MailOutboxList.tsx](../apps/web/features/checkout/components/MailOutboxList/MailOutboxList.tsx) |
+
 ## Design gallery (`apps/web/features/design`)
 
 | Component | Purpose | Props | Path |

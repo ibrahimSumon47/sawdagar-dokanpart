@@ -4,6 +4,8 @@ import type { CouponErrorCode, CouponRule, LocalisedName, ProductTone } from '@s
 export interface CartLine {
   variantId: string;
   productId: string;
+  vendorId: string;
+  sku: string;
   productSlug: string;
   title: LocalisedName;
   variantName: LocalisedName;

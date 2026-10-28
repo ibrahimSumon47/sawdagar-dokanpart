@@ -4,7 +4,7 @@
 
 The `sawdagar-dokanpat` project in a Neon Free organization (`aws-us-east-1`, PostgreSQL 18) holds the authentication, catalog and cart schemas. The initial migration was applied through the [Database workflow](../.github/workflows/db.yml) on 2026-10-28, followed by the catalog migration and two seed runs. Connection strings live only in the Vercel and GitHub dashboards; the application uses the pooled Neon URL, while Prisma CLI commands use the direct URL.
 
-Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql) and [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql). All four are applied to Neon; the cart/wishlist migration ran through the `Database` workflow on 2026-10-28, and the coupon migration and seed followed in runs 40678423792 and 40678549502. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
+Schema source: [schema.prisma](../apps/web/prisma/schema.prisma). Migrations: [20261028090000_init](../apps/web/prisma/migrations/20261028090000_init/migration.sql), [20261028140000_catalog](../apps/web/prisma/migrations/20261028140000_catalog/migration.sql), [20261028170000_cart_wishlist](../apps/web/prisma/migrations/20261028170000_cart_wishlist/migration.sql), [20261028190000_coupons](../apps/web/prisma/migrations/20261028190000_coupons/migration.sql) and [20261028200000_checkout_orders](../apps/web/prisma/migrations/20261028200000_checkout_orders/migration.sql). The first four are applied to Neon; the cart/wishlist migration ran through the `Database` workflow on 2026-10-28, and the coupon migration and seed followed in runs 40678423792 and 40678549502. The checkout migration is committed and awaiting its workflow run. Prisma 7 requires a driver adapter, so the app builds a client from `@prisma/adapter-pg` with `pg`; the generated client is not committed and is produced by `prisma generate`.
 
 ```mermaid
 erDiagram
@@ -26,6 +26,20 @@ erDiagram
   users ||--o{ wishlist_items : saves
   products ||--o{ wishlist_items : saved_as
   organizations ||--o{ coupons : offers
+  users ||--o{ addresses : saves
+  users ||--o{ orders : places
+  addresses ||--o{ orders : ships_to
+  orders ||--o{ sub_orders : splits_into
+  orders ||--o{ order_items : contains
+  sub_orders ||--o{ order_items : groups
+  organizations ||--o{ sub_orders : fulfils
+  orders ||--o{ payments : paid_by
+  payments ||--o{ payment_attempts : logs
+  orders ||--o{ stock_reservations : holds
+  product_variants ||--o{ stock_reservations : reserved
+  orders ||--o| coupon_redemptions : uses
+  coupons ||--o{ coupon_redemptions : redeemed_as
+  users ||--o{ mail_outbox : receives
 ```
 
 ## Tables
@@ -49,6 +63,15 @@ erDiagram
 | `cart_items` | Variant, quantity and timestamps, unique per cart and variant |
 | `wishlist_items` | Saved product per user, unique per user and product |
 | `coupons` | Code, type (`percent`, `fixed`, `free_shipping`), basis-points or poisha value, global or vendor scope, minimum subtotal, optional cap, start and end time, and active flag |
+| `addresses` | Saved delivery address per user: recipient, Bangladeshi phone, division, district, upazila, optional area and street line, with one default |
+| `orders` | One buyer order with number, status, payment state and method, money totals, coupon code, an immutable shipping snapshot and an optional link to the saved address |
+| `sub_orders` | One seller's part of an order, with its own number, status and money totals |
+| `order_items` | Product, variant, localised title and variant name, SKU, unit price, quantity and line total captured at purchase time |
+| `payments` | Provider (`cod` or `mockpay`), status, amount, unique provider reference and failure code |
+| `payment_attempts` | Append-only attempts for one payment, including the demo gateway's initiated, paid and failed events |
+| `stock_reservations` | Ordered quantity per variant, held for MockPay or confirmed for COD, with an expiry for future cleanup |
+| `coupon_redemptions` | Coupon, order, user and the goods-plus-shipping discount recorded once per order |
+| `mail_outbox` | In-app copy of a transactional message, with recipient, subject, body and read state |
 
 ## Catalog shape
 
@@ -71,6 +94,15 @@ erDiagram
 - No cleanup job deletes expired carts yet. They are ignored after expiry and will need a scheduled delete when the demo has real traffic.
 - A coupon is evaluated on the server with integer poisha before it is saved on the cart. The cart re-evaluates the saved rule on every visit and silently drops it if it expired, no longer meets its minimum, or no longer matches a vendor-scoped cart. Four seeded codes cover the three coupon types: `BOISHAKH10`, `DHAKA200`, `FREESHIP` and vendor-scoped `TANGAIL15`.
 
+## Checkout and order shape
+
+- The checkout migration adds `addresses`, `orders`, `sub_orders`, `order_items`, `payments`, `payment_attempts`, `stock_reservations`, `coupon_redemptions` and `mail_outbox`. Its SQL was generated with `prisma migrate diff` from the coupon schema so the hand-written models and migration agree.
+- The browser sends only an address choice or address fields, a payment method and a note. The server re-reads the cart, evaluates the coupon, computes shipping per seller and recalculates VAT before writing anything.
+- Stock is decremented with `UPDATE ... WHERE stock >= quantity` inside the same transaction as the order. If either the variant or the product summary update matches no row, the whole transaction rolls back with a stock failure. Two buyers cannot both take the last unit.
+- A COD order is confirmed immediately and its payment stays pending until the courier collects. A MockPay order starts as `pending_payment`; the signed callback marks the payment paid, confirms the order and the seller sub-orders, and converts held reservations to confirmed. Repeating the callback finds no pending payment row and returns `alreadyPaid`.
+- The address snapshot on `orders` is written even when a saved address is later edited or deleted. `addressId` is only a convenience link.
+- The confirmation message is written to `mail_outbox` in the same transaction. No mail provider is required, so the order flow stays inspectable on the free plan.
+
 ## Indexes
 
 | Index | Query it serves |
@@ -92,6 +124,18 @@ erDiagram
 | `coupons(code)` unique | Coupon lookup at apply time |
 | `coupons(organization_id)` | Vendor-scoped coupon checks |
 | `coupons(active, ends_at)` | Active coupon filtering |
+| `addresses(user_id, created_at)` | Checkout address book |
+| `orders(number)` unique | Order receipt lookup |
+| `orders(user_id, placed_at)` | A buyer's recent orders |
+| `orders(status, placed_at)` | Operational order queues |
+| `sub_orders(order_id)` and `sub_orders(organization_id, status)` | Order detail and seller queues |
+| `order_items(variant_id)` | Stock and sales lookups |
+| `payments(provider_ref)` unique | Idempotent gateway callback lookup |
+| `payments(order_id, status)` | Order payment summary |
+| `stock_reservations(variant_id, status)` | Held stock by variant |
+| `stock_reservations(expires_at, status)` | Future reservation cleanup |
+| `coupon_redemptions(order_id)` unique | One coupon record per order |
+| `mail_outbox(user_id, created_at)` | The buyer's outbox |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 

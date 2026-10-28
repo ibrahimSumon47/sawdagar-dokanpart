@@ -19,6 +19,7 @@ export function AccountPanel({ viewer, profile, memberships, copy, locale }: Acc
   const links = [
     ...(hasArea(viewer.role, 'seller') ? [{ href: '/seller', label: copy.nav.seller }] : []),
     ...(hasArea(viewer.role, 'admin') ? [{ href: '/admin', label: copy.nav.admin }] : []),
+    { href: '/account/mail', label: copy.account.mail },
   ];
 
   return (

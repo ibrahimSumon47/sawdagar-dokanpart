@@ -28,6 +28,11 @@ Defined in [actions.ts](../apps/web/features/shop/actions.ts). Every action acce
 | `clearCompare` | none | Deletes the comparison cookie |
 | `applyCartCoupon` | `code` (3–24 letters, digits or hyphens) | Looks up an active coupon, evaluates it against the server-side cart rows, saves the code on the cart and returns the rule; rejects expired, vendor-mismatched and below-minimum codes with a code the drawer translates |
 | `clearCartCoupon` | none | Removes the code saved on the current cart |
+| `placeOrder` | address id or address fields, `paymentMethod` (`cod` or `mockpay`), notes | Requires a session; re-reads the cart, re-prices shipping and coupons, decrements stock conditionally, creates the order, seller sub-orders, payment, reservation, coupon redemption, confirmation mail and audit row in one transaction |
+| `payMockPaymentAction` | `paymentId`, signed `token` form fields | Checks the viewer owns the payment and completes the MockPay attempt, then redirects to the receipt |
+| `failMockPaymentAction` | `paymentId`, signed `token` form fields | Marks a pending MockPay attempt as failed without touching reserved stock |
+
+MockPay also exposes `POST /api/payments/mockpay` with JSON `{ paymentId, token }`. The token is an HMAC of the payment id and a 30-minute expiry signed with `BETTER_AUTH_SECRET`; the endpoint returns `{ ok, orderNumber, alreadyPaid }` and is safe to call more than once. It is the gateway callback, not a public completion endpoint without the signed token.
 
 Cart rows include server-side variant prices, stock and vendor details. The client never computes the amount sent to the server, and totals shown in the drawer are an estimate until checkout.
 

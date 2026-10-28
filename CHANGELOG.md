@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add checkout with 64-district addresses, saved addresses, per-seller shipping zones, COD and MockPay.
+- Add the order, seller sub-order, order-item, payment, stock-reservation, coupon-redemption and mail-outbox schema.
+- Add conditional stock decrement in the order transaction, signed 30-minute MockPay links, an idempotent payment callback, receipts, printable invoices and the in-app outbox.
 - Add percentage, fixed and free-shipping coupons with server-side eligibility, four seeded codes and a cart drawer form that shows the discount and can remove the code.
 - Add guest and signed-in carts with a 30-day lifetime, guest-cart merge on sign-in, and server-side stock checks.
 - Add the add-to-cart flow with spinner and check states, a toast with undo, and optimistic drawer updates that roll back on failure.

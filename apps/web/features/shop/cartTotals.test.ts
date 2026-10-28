@@ -18,6 +18,8 @@ function line(overrides: Partial<CartLine> = {}): CartLine {
   return {
     variantId: 'var_1',
     productId: 'prd_1',
+    vendorId: 'org_1',
+    sku: 'SD-0001-1',
     productSlug: 'jamdani-saree',
     title: { en: 'Jamdani saree', bn: 'জামদানি শাড়ি' },
     variantName: { en: 'Free size', bn: 'ফ্রি সাইজ' },

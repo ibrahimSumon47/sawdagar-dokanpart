@@ -12,22 +12,21 @@
 - Phase 4 compare: a four-product `sd_compare` cookie, product-page compare control, header count link, `/compare` table with category, vendor, price, rating, variant count and stock, and clearing/removal that updates in place.
 - Phase 4 coupons: `coupons` migration and a vendor relation; percentage, fixed and free-shipping rules in `@sd/domain`; four seeded codes; server-side code validation, eligibility and integer-poisha pricing; coupon entry in the drawer with applied-code removal; discount row in the totals. The migration ran through the `Database` workflow (run 40678423792) and the seed (run 40678549502) loaded the four codes.
 - Coupon production check: `BOISHAKH10` reduced the ৳3,840 leather-belt cart by ৳384 and showed a ৳3,576 estimated total; the code and discount survived a reload, so the cart row and rule were persisted server-side.
+- Phase 5 implementation: checkout migration for addresses, orders, sub-orders, order items, payments, attempts, stock reservations, coupon redemptions and the mail outbox; 64-district address data and validation; per-seller shipping with Dhaka, outside-Dhaka and remote zones; integer discount allocation; COD and MockPay order placement; signed 30-minute MockPay links and an idempotent callback; receipt, printable invoice and in-app outbox.
 - Product cards, buy boxes and the cart drawer are bilingual in English and Bangla; shortage messages and totals use the active language.
 - Neon migration and two idempotent seeds ran successfully through the `Database` GitHub Actions workflow. The Phase 4 cart/wishlist migration was applied by the `Database` workflow (run 40672398462) and reported all migrations successful.
-- Unit tests: 74 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants, catalog filter validation, cart grouping and delivery totals, coupon rules and comparison cookie parsing and limits.
+- Unit tests: 99 across `@sd/domain`, `@sd/ui` and `@sd/web`, including deterministic seed invariants, catalog filter validation, cart grouping and delivery totals, coupon rules and comparison cookie parsing and limits.
 - Lint, typecheck, tests and build pass locally; the build does not touch the database.
 - Production verification: the catalog returned 200 with 432 products, a department filter changed the result count, English `jamdani` returned six sarees, Bangla `শাড়ি` returned 36, and a product page switched variants with the correct price and SKU. The home page showed 12 live departments, blank price fields no longer hid results, and the catalog and product page had no horizontal overflow at 360 px. Phase 2 demo sign-in and role guards were re-verified earlier on the same deployment.
 - Phase 4 production smoke test: a guest cart survived a reload, the drawer totalled correctly after a quantity change, demo sign-in merged the guest row into the user cart (2 + 1 = 3), wishlist save and removal updated the page live, and the comparison page rendered from the cookie. CI run 40675747563 passed on all three operating systems and the Vercel deployment reported Ready.
 
 ## Now
-- Phase 4 is complete: cart, wishlist, compare and coupons are deployed and production-verified; the full gate passes with 74 tests.
-- Phase 5 is starting with the database and domain foundation for addresses, shipping zones, orders, sub-orders, payments and stock reservations.
+- Phase 5 checkout is implemented and passes lint, typecheck, 99 tests and build. The checkout migration still needs to run through the `Database` workflow before the deployed checkout can be exercised.
 
 ## Next
+- Apply the `20261028200000_checkout_orders` migration, then place one COD order and one MockPay order on production, check the receipt, invoice and outbox, and repeat the MockPay callback to confirm it does not duplicate.
+- Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
-- Build the Phase 5 checkout page and order confirmation with saved addresses, per-vendor shipping, COD and MockPay.
-- Add the MockPay callback with an idempotent payment record, then the concurrency test for stock reservations.
-- Follow with invoices, the in-app mail outbox and sub-order state transitions.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
 
@@ -44,4 +43,7 @@
 - Moderator and content editor production logins were not exercised individually; their role checks share the restricted admin branch verified with finance and are covered by unit tests.
 - Seller and admin pages remain read-only foundations. Catalog editing, orders, finance and CMS tools arrive with their phases.
 - Rotating `DEMO_ACCOUNT_PASSWORD` requires re-running the seed workflow so existing demo passwords match.
-- Cart totals are an estimate: delivery is free from ৳10,000 and otherwise a flat ৳120. Per-vendor shipping and checkout pricing arrive in Phase 5.
+- Cart totals are an estimate: the drawer uses a flat ৳120 below the free-delivery threshold, while checkout charges per seller by destination zone.
+- MockPay reservations are held for 30 minutes but no scheduled job releases abandoned ones yet; a later job must restore stock and cancel the pending order.
+- SSLCommerz sandbox and Stripe test mode are not wired because both need owner accounts and sandbox credentials. The checkout currently offers COD and MockPay only.
+- Order emails are captured in the in-app outbox; no mail provider is configured.

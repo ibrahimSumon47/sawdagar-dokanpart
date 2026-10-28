@@ -48,6 +48,8 @@ export async function readCartItems(cartId: string): Promise<CartLine[]> {
       {
         variantId: item.variant.id,
         productId: product.id,
+        vendorId: product.organizationId,
+        sku: item.variant.sku,
         productSlug: product.slug,
         title: { en: product.titleEn, bn: product.titleBn },
         variantName: { en: item.variant.nameEn, bn: item.variant.nameBn },

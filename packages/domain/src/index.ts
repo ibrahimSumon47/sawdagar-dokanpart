@@ -22,6 +22,39 @@ export type {
   CouponScope,
   CouponType,
 } from './shop/coupons';
+export {
+  districts,
+  districtsForDivision,
+  divisions,
+  findDivisionForDistrict,
+} from './checkout/bangladesh';
+export type { Division } from './checkout/bangladesh';
+export {
+  FREE_DELIVERY_THRESHOLD_MINOR,
+  shippingFeeForZone,
+  shippingMinorForOrder,
+  shippingRatesMinor,
+  shippingZoneForDistrict,
+  shippingZones,
+} from './checkout/shipping';
+export type { ShippingZone } from './checkout/shipping';
+export {
+  canTransitionOrder,
+  canTransitionPayment,
+  canTransitionSubOrder,
+  orderStatusForPayment,
+  orderStatuses,
+  paymentStatuses,
+  subOrderStatuses,
+} from './checkout/orderState';
+export type { OrderStatus, PaymentStatus, SubOrderStatus } from './checkout/orderState';
+export { formatOrderNumber, formatSubOrderNumber } from './checkout/orderNumber';
+export {
+  allocateAmount,
+  calculateCheckoutTotals,
+  VAT_RATE_BASIS_POINTS,
+} from './checkout/checkoutTotals';
+export type { CheckoutItem, CheckoutTotals, CheckoutVendorTotal } from './checkout/checkoutTotals';
 export { demoAccounts, findDemoAccount } from './auth/demoAccounts';
 export type { DemoAccount } from './auth/demoAccounts';
 export {

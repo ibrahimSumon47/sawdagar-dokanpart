@@ -35,6 +35,10 @@ model User {
   auditLogs     AuditLog[]     @relation("AuditActor")
   cart          Cart?
   wishlistItems WishlistItem[]
+  addresses     Address[]
+  orders        Order[]
+  couponRedemptions CouponRedemption[]
+  mailOutbox    MailOutbox[]
 
   @@map("users")
 }
@@ -107,6 +111,7 @@ model Organization {
   invitations   Invitation[]
   products      Product[]
   coupons       Coupon[]
+  subOrders     SubOrder[]
 
   @@map("organizations")
 }
@@ -223,6 +228,7 @@ model Product {
   organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   variants       ProductVariant[]
   wishlistItems  WishlistItem[]
+  orderItems     OrderItem[]
 
   @@index([categoryId, status])
   @@index([organizationId])
@@ -246,6 +252,8 @@ model ProductVariant {
   createdAt      DateTime   @default(now())
   product        Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
   cartItems      CartItem[]
+  orderItems     OrderItem[]
+  stockReservations StockReservation[]
 
   @@index([productId])
   @@map("product_variants")
@@ -296,10 +304,206 @@ model Coupon {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   organization      Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  redemptions       CouponRedemption[]
 
   @@index([organizationId])
   @@index([active, endsAt])
   @@map("coupons")
+}
+
+model Address {
+  id            String   @id
+  userId        String
+  label         String
+  recipientName String
+  phone         String
+  division      String
+  district      String
+  upazila       String
+  area          String?
+  addressLine   String
+  isDefault     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders        Order[]
+
+  @@index([userId, createdAt])
+  @@map("addresses")
+}
+
+model Order {
+  id             String          @id
+  number         String          @unique
+  userId         String
+  status         String          @default("pending_payment")
+  // Set after the order is placed; the snapshot above keeps the address readable.
+  paymentStatus  String          @default("pending")
+  paymentMethod  String
+  currency       String          @default("BDT")
+  subtotalMinor  Int
+  shippingMinor  Int
+  discountMinor  Int             @default(0)
+  vatMinor       Int             @default(0)
+  totalMinor     Int
+  couponCode     String?
+  shippingName   String
+  shippingPhone  String
+  shippingDivision String
+  shippingDistrict String
+  shippingUpazila  String
+  shippingArea     String?
+  shippingLine     String
+  notes          String?
+  addressId      String?
+  placedAt       DateTime        @default(now())
+  confirmedAt    DateTime?
+  cancelledAt    DateTime?
+  user           User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  address        Address?        @relation(fields: [addressId], references: [id], onDelete: SetNull)
+  items          OrderItem[]
+  subOrders      SubOrder[]
+  payments       Payment[]
+  reservations   StockReservation[]
+  redemption     CouponRedemption?
+  mailOutbox     MailOutbox[]
+
+  @@index([userId, placedAt])
+  @@index([status, placedAt])
+  @@map("orders")
+}
+
+model SubOrder {
+  id             String      @id
+  number         String      @unique
+  orderId        String
+  organizationId String
+  status         String      @default("pending")
+  subtotalMinor  Int
+  shippingMinor  Int         @default(0)
+  discountMinor  Int         @default(0)
+  totalMinor     Int
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  order          Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  items          OrderItem[]
+
+  @@index([orderId])
+  @@index([organizationId, status])
+  @@map("sub_orders")
+}
+
+model OrderItem {
+  id             String         @id
+  orderId        String
+  subOrderId     String
+  productId      String
+  variantId      String
+  titleEn        String
+  titleBn        String
+  variantNameEn  String
+  variantNameBn  String
+  sku            String
+  tone           String         @default("accent")
+  unitPriceMinor Int
+  quantity       Int
+  lineTotalMinor Int
+  createdAt      DateTime       @default(now())
+  order          Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  subOrder       SubOrder       @relation(fields: [subOrderId], references: [id], onDelete: Cascade)
+  product        Product        @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant        ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([subOrderId])
+  @@index([variantId])
+  @@map("order_items")
+}
+
+model Payment {
+  id           String           @id
+  orderId      String
+  provider     String
+  status       String           @default("pending")
+  amountMinor  Int
+  currency     String           @default("BDT")
+  providerRef  String?          @unique
+  failureCode  String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  paidAt       DateTime?
+  order        Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  attempts     PaymentAttempt[]
+
+  @@index([orderId, status])
+  @@index([provider, status])
+  @@map("payments")
+}
+
+model PaymentAttempt {
+  id          String   @id
+  paymentId   String
+  provider    String
+  status      String
+  message     String?
+  createdAt   DateTime @default(now())
+  payment     Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([paymentId, createdAt])
+  @@map("payment_attempts")
+}
+
+model StockReservation {
+  id        String   @id
+  orderId   String
+  variantId String
+  quantity  Int
+  status    String   @default("held")
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  @@unique([orderId, variantId])
+  @@index([variantId, status])
+  @@index([expiresAt, status])
+  @@map("stock_reservations")
+}
+
+model CouponRedemption {
+  id            String   @id
+  couponId      String
+  couponCode    String
+  orderId       String   @unique
+  userId        String
+  discountMinor Int
+  createdAt     DateTime @default(now())
+  coupon        Coupon   @relation(fields: [couponId], references: [id], onDelete: Restrict)
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([couponId])
+  @@index([userId, createdAt])
+  @@map("coupon_redemptions")
+}
+
+model MailOutbox {
+  id        String    @id
+  userId    String?
+  orderId   String?
+  toEmail   String
+  subject   String
+  bodyText  String
+  status    String    @default("queued")
+  createdAt DateTime  @default(now())
+  readAt    DateTime?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  order     Order?    @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([toEmail, createdAt])
+  @@index([userId, createdAt])
+  @@map("mail_outbox")
 }
 
 model WishlistItem {
