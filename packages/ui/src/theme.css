@@ -1,0 +1,177 @@
+/*
+ * Editorial Heritage design tokens.
+ *
+ * The `@theme` block is the single source of truth for every colour, font,
+ * radius and type size used by the interface. Components must reference these
+ * tokens through Tailwind utilities instead of hard-coded values so the light
+ * and dark themes stay consistent.
+ *
+ * Dark mode overrides the same custom properties on any element carrying
+ * `data-theme="dark"`, which lets the design gallery show both themes side by
+ * side while the real document uses the cookie-backed root attribute.
+ */
+
+@theme {
+  --color-background: #faf7f2;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-ink: #141414;
+  --color-ink-muted: #57534e;
+  --color-line: #e7e1d8;
+  --color-accent: #c2410c;
+  --color-accent-hover: #9a3412;
+  --color-accent-contrast: #ffffff;
+  --color-secondary: #166534;
+  --color-highlight: #b45309;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+  --color-info: #1d4ed8;
+  --color-skeleton-base: #ece5da;
+  --color-skeleton-shine: #f6f1e8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, georgia, serif;
+  --font-bangla: var(--font-noto-bengali), var(--font-inter), sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  --text-hero: clamp(2.6rem, 6vw, 4.75rem);
+  --text-display: clamp(2rem, 4vw, 3rem);
+  --text-title: clamp(1.5rem, 2.5vw, 2rem);
+  --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+
+  --shadow-float: 0 18px 40px -28px rgb(20 20 20 / 0.45);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --duration-fast: 120ms;
+    --duration-base: 200ms;
+    --duration-slow: 320ms;
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-theme='dark'] {
+    color-scheme: dark;
+    --color-background: #0f0e0c;
+    --color-surface: #1a1816;
+    --color-surface-elevated: #24211e;
+    --color-ink: #f5f1ea;
+    --color-ink-muted: #a8a29e;
+    --color-line: #2e2a26;
+    --color-accent: #f97316;
+    --color-accent-hover: #fb923c;
+    --color-accent-contrast: #1a0d05;
+    --color-secondary: #4ade80;
+    --color-highlight: #fbbf24;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-danger: #f87171;
+    --color-info: #60a5fa;
+    --color-skeleton-base: #25211d;
+    --color-skeleton-shine: #332e29;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+
+  :lang(bn) {
+    font-family: var(--font-bangla);
+    line-height: 1.7;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .sd-marquee {
+    display: flex;
+    width: max-content;
+    animation: sd-marquee 26s linear infinite;
+  }
+
+  .sd-skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-skeleton-base);
+  }
+
+  .sd-skeleton::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      100deg,
+      transparent,
+      var(--color-skeleton-shine),
+      transparent
+    );
+    animation: sd-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sd-marquee {
+      animation: none;
+    }
+
+    .sd-skeleton::after {
+      display: none;
+    }
+  }
+}
+
+@keyframes sd-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes sd-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

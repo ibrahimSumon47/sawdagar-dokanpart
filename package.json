@@ -10,7 +10,8 @@
   "scripts": {
     "build": "turbo run build",
     "lint": "pnpm format:check && turbo run lint",
-    "format:check": "prettier --check \"apps/web/app/**/*.{ts,tsx,css}\" \"apps/web/features/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"apps/web/{app,features,i18n,lib}/**/*.{ts,tsx,css}\" \"apps/web/*.{ts,mjs}\" \"packages/*/src/**/*.{ts,tsx,css}\"",
+    "format:check": "prettier --check \"apps/web/{app,features,i18n,lib}/**/*.{ts,tsx,css}\" \"apps/web/*.{ts,mjs}\" \"packages/*/src/**/*.{ts,tsx,css}\"",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "prepare": "husky"
