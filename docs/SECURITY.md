@@ -2,11 +2,11 @@
 
 ## Current scope
 
-The current application renders public static content. It has no accounts, forms, application API, database, file uploads, or payment integration. Its sandbox-payment notice describes the intended demo; it does not imply that a payment system exists.
+The application renders public content and has two preference forms (theme and language) implemented as Server Actions that only set cookies with `path=/`, `sameSite=lax`, a one-year lifetime and `secure` in production. There are no accounts, user records, application API, database, file uploads or payment integration. The sandbox-payment notice describes the intended demo; it does not imply that a payment system exists.
 
 ## Threats and planned controls
 
-As the application gains features, relevant threats include unauthorized access to other users' data, forged mutations, untrusted prices, malicious uploads, webhook replay, and exposure of credentials. The [architecture specification](spec/03-architecture.md) describes planned validation, authorization, secure headers, rate limiting, and audit logging. Those controls have not yet been implemented or independently assessed. An OWASP ASVS mapping and feature-specific threat models must accompany the relevant implementations.
+As the application gains features, relevant threats include unauthorized access to other users' data, forged mutations, untrusted prices, malicious uploads, webhook replay, cookie tampering and exposure of credentials. Cookies currently hold only a validated `light`/`dark` value and an `en`/`bn` value; unknown values fall back to the defaults. The [architecture specification](spec/03-architecture.md) describes planned validation, authorization, secure headers, rate limiting and audit logging. Those controls are not implemented or independently assessed. An OWASP ASVS mapping and feature-specific threat models must accompany the relevant implementations.
 
 ## Reporting and secrets
 

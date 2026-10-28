@@ -1,21 +1,31 @@
 # Architecture
 
-## Implemented foundation
+## Implemented
 
-This repository is a pnpm workspace orchestrated by Turborepo. The only application is [@sd/web](apps/web/package.json), a Next.js App Router application. Its [home route](apps/web/app/page.tsx) renders a static [welcome component](apps/web/features/welcome/components/Welcome/Welcome.tsx); the page does not fetch data or call an API. English and Bangla appear together, and the default styling is light.
+This repository is a pnpm workspace orchestrated by Turborepo with three packages:
+
+- [@sd/web](apps/web/package.json): Next.js App Router application. The [root layout](apps/web/app/layout.tsx) reads the theme and language cookies and renders the shell around each route. Routes: the [home page](apps/web/app/page.tsx) and the [design gallery](apps/web/app/design/page.tsx).
+- [@sd/ui](packages/ui/package.json): design tokens in [theme.css](packages/ui/src/theme.css), an original brand mark and pattern, and small components with skeleton pairs.
+- [@sd/domain](packages/domain/package.json): pure helpers for taka formatting and the top-level category list.
 
 ```mermaid
 flowchart LR
-  Visitor --> Web[Next.js static welcome page]
+  Visitor -->|cookie: theme, locale| Web[Next.js app]
+  Web --> UI["@sd/ui: tokens and components"]
+  Web --> Domain["@sd/domain: money and categories"]
+  UI --> Tokens[theme.css]
   GitHub[Push to main] --> CI[GitHub Actions: lint, typecheck, test, build]
+  GitHub --> Vercel[Vercel deployment]
 ```
 
-The [CI workflow](.github/workflows/ci.yml) runs the quality gates on Linux, Windows, and macOS. The [Vercel page](https://sawdagar-dokanpart.vercel.app/) has been checked for its rendered text. A Neon project exists, but the application does not connect to it. The repository does not currently contain an application database schema, authentication service, API, shared domain package, or seed data.
+Both themes share one set of custom properties; `[data-theme='dark']` overrides them on the document root, and the gallery repeats the attribute on a nested section to show the two themes side by side. The server reads `sd_theme` and `sd_locale` before rendering, so there is no theme flash and no client-side language patch. Preference forms are Server Actions that only set those cookies; no user data is stored.
 
-## Planned architecture
+The [CI workflow](.github/workflows/ci.yml) runs on Linux, Windows and macOS. The [Vercel project](https://sawdagar-dokanpart.vercel.app/) deploys `main`. There is no database connection, API, authentication or seeded catalog yet.
 
-The [architecture specification](docs/spec/03-architecture.md) describes the proposed web, API, domain, database, and integration layers. These are design goals, not implemented services. Check free-tier eligibility and record decisions before integrating external providers.
+## Planned
+
+The [architecture specification](docs/spec/03-architecture.md) describes the API, database, authentication and integration layers. Those are design goals; check free-tier eligibility and record decisions before integrating providers.
 
 ## Limitations
 
-There is no marketplace transaction flow, server-side authorization, localization switcher, or dark theme yet. The current test covers rendered welcome text, not browser interaction, accessibility, or performance.
+The marketplace transaction flow, server-side authorization, catalog data and browser test suite do not exist yet. The gallery frames are fixed-width previews, not automated responsive tests. Media is an SVG pattern because no photography or media host is integrated.

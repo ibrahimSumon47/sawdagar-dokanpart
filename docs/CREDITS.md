@@ -1,9 +1,11 @@
 # Credits
 
-## Current assets
+## Fonts and icons
 
-The foundation page uses text and CSS, with system font fallbacks; it does not include third-party images, icons, or downloaded font files. Third-party software and its licenses are listed in [technology versions](TECH_VERSIONS.md).
+- Fraunces, Inter and Noto Sans Bengali are loaded through `next/font` from Google Fonts and are licensed under the SIL Open Font License 1.1. No font files are committed.
+- Icons come from [Lucide](https://lucide.dev/) (`lucide-react`, ISC licence).
+- The jamdani brand mark and pattern are original SVGs drawn for this project; no third-party logo or motif is copied.
 
-## Future assets and data
+## Imagery and data
 
-Record the author, source, license, and attribution requirements before adding any third-party imagery, fonts, or datasets. The planned seed data and sources are described in the [data specification](spec/04-data-and-seed.md); they have not been imported.
+The gallery uses original SVG patterns instead of stock photography, and its product and vendor names are design fixtures written for the demo. Record the author, source, licence and attribution requirements before adding any third-party imagery, fonts or datasets. The planned seed sources are described in the [data specification](spec/04-data-and-seed.md); they have not been imported. Third-party software and its licences are listed in [technology versions](TECH_VERSIONS.md).
