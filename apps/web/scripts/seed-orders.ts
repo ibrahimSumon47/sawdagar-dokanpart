@@ -289,6 +289,12 @@ async function seedSellerOrder(
         shippingMinor,
         totalMinor,
         confirmedAt: placedAt,
+        packedAt: null,
+        shippedAt: null,
+        deliveredAt: null,
+        cancelledAt: null,
+        courier: null,
+        trackingNumber: null,
       },
     });
 
