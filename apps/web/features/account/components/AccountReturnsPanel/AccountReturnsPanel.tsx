@@ -49,7 +49,7 @@ export function AccountReturnsPanel({ items, requests, copy, locale }: AccountRe
                   <Price amountMinor={item.lineTotalMinor} locale={locale} size="sm" />
                 </div>
                 <p className="mt-0.5 text-xs text-ink-muted">
-                  {item.vendorName} · {item.orderNumber} · {copy.requestedOn}{' '}
+                  {item.vendorName} · {item.orderNumber} · {copy.deliveredOn}{' '}
                   {formatDate(item.deliveredAt, locale)}
                 </p>
                 <ReturnForm orderItemId={item.orderItemId} copy={copy} />

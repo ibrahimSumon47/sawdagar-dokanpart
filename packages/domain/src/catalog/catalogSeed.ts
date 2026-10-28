@@ -142,7 +142,7 @@ export function buildCatalogSeed(): CatalogSeed {
               bn: `${style.bn} ${sub.name.bn}, ${colour.bn}`,
             },
             description: {
-              en: `From ${vendor.name} in ${vendor.district}. ${top.description.en} ${top.craftNote.en} This ${lowerFirst(sub.name.en)} has a ${colour.en} finish. Each piece is made in small batches, so slight differences in finish and colour are part of the work.`,
+              en: `From ${vendor.name} in ${vendor.district}. ${top.description.en} ${top.craftNote.en} This ${lowerFirst(sub.name.en)} comes in ${colour.en}. Each piece is made in small batches, so slight differences in finish and colour are part of the work.`,
               bn: `${vendor.name}-এর ${vendor.district} কারখানা থেকে। ${top.description.bn} ${top.craftNote.bn} এই ${sub.name.bn} ${colour.bn} রঙে তৈরি। ছোট ব্যাচে তৈরি হয়, তাই রঙ ও ফিনিশে সামান্য পার্থক্য থাকতে পারে।`,
             },
             categorySlug: sub.slug,

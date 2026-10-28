@@ -541,6 +541,7 @@ export const bn: Dictionary = {
     noRequests: 'এখনো কোনো ফেরতের অনুরোধ নেই।',
     noItems: 'ফেরতের সময়সীমার ভেতরে কোনো পৌঁছে যাওয়া পণ্য নেই।',
     requestedOn: 'অনুরোধ',
+    deliveredOn: 'পৌঁছেছে',
     resolution: 'সমাধান',
     item: 'পণ্য',
   },

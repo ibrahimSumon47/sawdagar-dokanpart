@@ -1,4 +1,4 @@
-import { hashSeedValue, summariseRatings } from '@sd/domain';
+import { hashSeedValue } from '@sd/domain';
 import type { PrismaClient } from '../generated/prisma/client';
 
 const DAY_MS = 86_400_000;
@@ -19,7 +19,7 @@ const englishTemplates: ReviewTemplate[] = [
   {
     rating: 5,
     title: 'The finish is careful',
-    body: 'You can see the handwork up close on this {title}. No loose threads, no chips, and the seller answered my question before I ordered.',
+    body: 'You can see the handwork up close on this {title}. The edges are clean, and the seller answered my question before I ordered.',
   },
   {
     rating: 5,
@@ -29,12 +29,12 @@ const englishTemplates: ReviewTemplate[] = [
   {
     rating: 4,
     title: 'Good value for the price',
-    body: 'The {title} is a little smaller than I pictured, but the material is honest and it has held up through two washes.',
+    body: 'The {title} is a little smaller than I pictured, but the material is honest and it has held up well so far.',
   },
   {
     rating: 4,
     title: 'Happy with it',
-    body: 'Delivery took four days to Chattogram. The {title} is comfortable and the stitching is even.',
+    body: 'Delivery took four days to Chattogram. The {title} matches the description and the finish is even.',
   },
   {
     rating: 4,
@@ -72,12 +72,12 @@ const banglaTemplates: ReviewTemplate[] = [
   {
     rating: 4,
     title: 'দামের তুলনায় ভালো',
-    body: '“{title}” ভেবেছিলাম তার চেয়ে একটু ছোট, তবে কাপড় ভালো আর দুইবার ধোয়ার পরও ঠিক আছে।',
+    body: '“{title}” ভেবেছিলাম তার চেয়ে একটু ছোট, তবে গড়ন ভালো আর ব্যবহারের পরও ঠিক আছে।',
   },
   {
     rating: 4,
     title: 'সন্তুষ্ট',
-    body: 'চট্টগ্রামে পৌঁছাতে চার দিন লেগেছে। “{title}” আরামদায়ক, সেলাই সমান।',
+    body: 'চট্টগ্রামে পৌঁছাতে চার দিন লেগেছে। “{title}” বর্ণনার সঙ্গে মেলে, ফিনিশও সমান।',
   },
   {
     rating: 3,
@@ -163,7 +163,6 @@ export async function seedReviews(prisma: PrismaClient): Promise<string> {
 
   for (const product of products) {
     const reviewCount = 2 + (hashSeedValue(`${product.slug}-review-count`) % 5);
-    const ratings: number[] = [];
 
     for (let index = 0; index < reviewCount; index += 1) {
       const seed = hashSeedValue(`${product.slug}-review-${index}`);
@@ -173,8 +172,6 @@ export async function seedReviews(prisma: PrismaClient): Promise<string> {
       const title = bangla ? product.titleBn : product.titleEn;
       const reviewer = reviewerUsers[seed % reviewerUsers.length] ?? reviewerUsers[0];
       const id = `seed_review_${product.slug}_${index}`;
-
-      ratings.push(rating);
 
       await prisma.review.upsert({
         where: { id },
@@ -201,10 +198,19 @@ export async function seedReviews(prisma: PrismaClient): Promise<string> {
       written += 1;
     }
 
-    const summary = summariseRatings(ratings);
+    // Read the aggregate back instead of using the generated ratings: a buyer
+    // review written on the live demo must stay in the average after a reseed.
+    const aggregate = await prisma.review.aggregate({
+      where: { productId: product.id, status: 'published' },
+      _avg: { rating: true },
+      _count: { _all: true },
+    });
     await prisma.product.update({
       where: { id: product.id },
-      data: { rating: summary.average, reviewCount: summary.count },
+      data: {
+        rating: Math.round((aggregate._avg.rating ?? 0) * 10) / 10,
+        reviewCount: aggregate._count._all,
+      },
     });
   }
 
