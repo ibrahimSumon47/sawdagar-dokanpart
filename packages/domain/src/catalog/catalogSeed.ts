@@ -15,8 +15,11 @@ export function slugify(value: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-/** FNV-1a hash used for deterministic stock, ratings and review counts. */
-function hash(value: string): number {
+/**
+ * FNV-1a hash used for deterministic stock, ratings and review counts. Seed
+ * scripts reuse it so a rebuild produces the same demo content on every run.
+ */
+export function hashSeedValue(value: string): number {
   let result = 0x811c9dc5;
   for (let index = 0; index < value.length; index += 1) {
     result ^= value.charCodeAt(index);
@@ -77,7 +80,7 @@ function buildVariants(
 
   return variantSpecs.map((variant, index) => {
     const priceMinor = toMinor((product.priceMinor / 100) * variant.priceFactor);
-    const stock = outOfStock ? 0 : 2 + (hash(`${product.slug}-${index}`) % 18);
+    const stock = outOfStock ? 0 : 2 + (hashSeedValue(`${product.slug}-${index}`) % 18);
 
     return {
       id: `var_${product.slug}_${index + 1}`,
@@ -148,8 +151,8 @@ export function buildCatalogSeed(): CatalogSeed {
             priceMinor,
             compareAtMinor,
             totalStock: variants.reduce((total, variant) => total + variant.stock, 0),
-            rating: Number((4.2 + (hash(slug) % 8) / 10).toFixed(1)),
-            reviewCount: 6 + (hash(`${slug}-reviews`) % 145),
+            rating: Number((4.2 + (hashSeedValue(slug) % 8) / 10).toFixed(1)),
+            reviewCount: 6 + (hashSeedValue(`${slug}-reviews`) % 145),
             createdAt: new Date(Date.UTC(2026, 4, 10) + ((productNumber * 37) % 160) * DAY_MS),
             variants,
           });

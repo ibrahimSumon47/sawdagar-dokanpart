@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { AccountTabs } from '../../../features/account/components/AccountTabs';
 import { requireViewer } from '../../../features/auth/session';
 import { MailOutboxList } from '../../../features/checkout/components/MailOutboxList';
 import { getMailForUser } from '../../../features/checkout/queries';
@@ -25,6 +26,9 @@ export default async function MailOutboxPage() {
         <h1 className="font-serif text-title leading-tight text-ink">{copy.mail.title}</h1>
         <p className="mt-2 text-ink-muted">{copy.mail.description}</p>
       </header>
+      <div className="mt-6">
+        <AccountTabs active="mail" copy={copy.account} />
+      </div>
       <div className="mt-8">
         <MailOutboxList messages={messages} copy={copy.mail} locale={locale} />
       </div>

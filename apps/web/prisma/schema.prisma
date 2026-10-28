@@ -39,6 +39,9 @@ model User {
   orders        Order[]
   couponRedemptions CouponRedemption[]
   mailOutbox    MailOutbox[]
+  reviews       Review[]
+  questions     ProductQuestion[]
+  returnRequests ReturnRequest[]
 
   @@map("users")
 }
@@ -229,6 +232,8 @@ model Product {
   variants       ProductVariant[]
   wishlistItems  WishlistItem[]
   orderItems     OrderItem[]
+  reviews        Review[]
+  questions      ProductQuestion[]
 
   @@index([categoryId, status])
   @@index([organizationId])
@@ -383,6 +388,7 @@ model SubOrder {
   shippingMinor  Int         @default(0)
   discountMinor  Int         @default(0)
   totalMinor     Int
+  deliveredAt    DateTime?
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   order          Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -414,6 +420,8 @@ model OrderItem {
   subOrder       SubOrder       @relation(fields: [subOrderId], references: [id], onDelete: Cascade)
   product        Product        @relation(fields: [productId], references: [id], onDelete: Restrict)
   variant        ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+  review         Review?
+  returnRequest  ReturnRequest?
 
   @@index([orderId])
   @@index([subOrderId])
@@ -504,6 +512,78 @@ model MailOutbox {
   @@index([toEmail, createdAt])
   @@index([userId, createdAt])
   @@map("mail_outbox")
+}
+
+model Review {
+  id          String        @id
+  // Set for buyer reviews written from a delivered order line; seeded demo
+  // reviews predate the order and keep it empty so they cannot fake a purchase.
+  orderItemId String?       @unique
+  productId   String
+  userId      String
+  rating      Int
+  title       String
+  body        String
+  status      String        @default("published")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  orderItem   OrderItem?    @relation(fields: [orderItemId], references: [id], onDelete: SetNull)
+  product     Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  photos      ReviewPhoto[]
+
+  @@index([productId, status, createdAt])
+  @@index([userId, createdAt])
+  @@map("reviews")
+}
+
+model ReviewPhoto {
+  id        String @id
+  reviewId  String
+  // A resized JPEG data URL. Product media has no object-storage host on the
+  // free plan yet, so the demo keeps bounded thumbnails with the review row.
+  dataUrl   String
+  sortOrder Int    @default(0)
+  review    Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+  @@map("review_photos")
+}
+
+model ProductQuestion {
+  id                String    @id
+  productId         String
+  userId            String
+  body              String
+  status            String    @default("open")
+  answerBody        String?
+  answeredAt        DateTime?
+  answeredByUserId  String?
+  createdAt         DateTime  @default(now())
+  product           Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([productId, createdAt])
+  @@index([userId, createdAt])
+  @@map("product_questions")
+}
+
+model ReturnRequest {
+  id             String    @id
+  orderItemId    String    @unique
+  userId         String
+  reason         String
+  note           String?
+  status         String    @default("requested")
+  resolutionNote String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  orderItem      OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+  @@map("return_requests")
 }
 
 model WishlistItem {

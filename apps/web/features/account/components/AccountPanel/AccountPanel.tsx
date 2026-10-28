@@ -3,6 +3,7 @@ import type { Dictionary } from '../../../../i18n';
 import type { Locale } from '../../../../i18n';
 import type { Viewer } from '../../../auth/session';
 import { AccountHeader } from '../AccountHeader';
+import { AccountTabs } from '../AccountTabs';
 import { MembershipCard } from '../MembershipCard';
 import { ProfileForm } from '../ProfileForm';
 
@@ -28,6 +29,10 @@ export function AccountPanel({ viewer, profile, memberships, copy, locale }: Acc
         <h1 className="text-display font-serif leading-tight text-ink">{copy.account.title}</h1>
         <p className="mt-3 text-lead leading-relaxed text-ink-muted">{copy.account.description}</p>
       </header>
+
+      <div className="mt-6">
+        <AccountTabs active="overview" copy={copy.account} />
+      </div>
 
       <div className="mt-8 space-y-6">
         <AccountHeader

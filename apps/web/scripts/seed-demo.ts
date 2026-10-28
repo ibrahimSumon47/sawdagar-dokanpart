@@ -4,6 +4,8 @@ import { getAuth } from '../lib/auth';
 import { getPrisma } from '../lib/prisma';
 import { seedCatalog } from './seed-catalog';
 import { seedCoupons } from './seed-coupons';
+import { seedDemoOrders } from './seed-orders';
+import { seedReviews } from './seed-reviews';
 
 interface DemoProfile {
   phone: string | null;
@@ -100,8 +102,10 @@ async function main(): Promise<void> {
   const started = Date.now();
   const summary = await seedCatalog(prisma);
   const couponCount = await seedCoupons(prisma);
+  const reviewSummary = await seedReviews(prisma);
+  const orderSummary = await seedDemoOrders(prisma);
   write(
-    `${summary} ${couponCount} coupons ready. Completed in ${Math.round((Date.now() - started) / 1000)}s.`,
+    `${summary} ${couponCount} coupons ready. ${reviewSummary} ${orderSummary} Completed in ${Math.round((Date.now() - started) / 1000)}s.`,
   );
 }
 

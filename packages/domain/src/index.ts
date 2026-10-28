@@ -2,7 +2,7 @@ export { formatTaka, toBanglaDigits } from './money/formatTaka';
 export type { PriceLocale } from './money/formatTaka';
 export { topLevelCategories } from './catalog/categories';
 export type { Category, LocalisedName } from './catalog/categories';
-export { buildCatalogSeed, slugify } from './catalog/catalogSeed';
+export { buildCatalogSeed, hashSeedValue, slugify } from './catalog/catalogSeed';
 export { productTones } from './catalog/seedTypes';
 export type {
   CatalogSeed,
@@ -55,6 +55,16 @@ export {
   VAT_RATE_BASIS_POINTS,
 } from './checkout/checkoutTotals';
 export type { CheckoutItem, CheckoutTotals, CheckoutVendorTotal } from './checkout/checkoutTotals';
+export {
+  REVIEW_MAX_RATING,
+  REVIEW_MIN_RATING,
+  RETURN_WINDOW_DAYS,
+  isReturnable,
+  isReviewable,
+  returnWindowEndsAt,
+  summariseRatings,
+} from './reviews/reviewRules';
+export type { RatingDistribution, RatingSummary } from './reviews/reviewRules';
 export { demoAccounts, findDemoAccount } from './auth/demoAccounts';
 export type { DemoAccount } from './auth/demoAccounts';
 export {

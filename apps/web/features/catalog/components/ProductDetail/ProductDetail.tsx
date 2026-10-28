@@ -1,6 +1,11 @@
+import type { RatingSummary } from '@sd/domain';
 import { RatingStars, SectionHeading } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
+import type { QuestionRecord } from '../../../questions/queries';
+import type { ReviewRecord } from '../../../reviews/queries';
+import { ProductQuestions } from '../../../questions/components/ProductQuestions';
+import { ProductReviews } from '../../../reviews/components/ProductReviews';
 import type { CatalogProduct, ProductDetail as Product } from '../../queries';
 import { ProductBreadcrumbs } from '../ProductBreadcrumbs';
 import { ProductJsonLd } from '../ProductJsonLd';
@@ -12,12 +17,25 @@ import { ProductBuyBox } from '../../../shop/components/ProductBuyBox';
 export interface ProductDetailProps {
   product: Product;
   related: readonly CatalogProduct[];
+  reviews: ReviewRecord[];
+  reviewSummary: RatingSummary;
+  questions: QuestionRecord[];
+  signedIn: boolean;
   locale: Locale;
   copy: Dictionary;
 }
 
 /** Product page: one product, its variants, vendor and four related items. */
-export function ProductDetail({ product, related, locale, copy }: ProductDetailProps) {
+export function ProductDetail({
+  product,
+  related,
+  reviews,
+  reviewSummary,
+  questions,
+  signedIn,
+  locale,
+  copy,
+}: ProductDetailProps) {
   const catalog = copy.catalog;
 
   return (
@@ -92,6 +110,23 @@ export function ProductDetail({ product, related, locale, copy }: ProductDetailP
 
         <ProductVendorCard vendor={product.vendor} locale={locale} copy={catalog} />
       </div>
+
+      <ProductReviews
+        summary={reviewSummary}
+        reviews={reviews}
+        copy={copy.reviews}
+        locale={locale}
+      />
+
+      <ProductQuestions
+        productId={product.id}
+        productSlug={product.slug}
+        questions={questions}
+        copy={copy.questions}
+        signInLabel={copy.nav.signIn}
+        signedIn={signedIn}
+        locale={locale}
+      />
 
       {related.length > 0 ? (
         <section aria-label={catalog.relatedTitle} className="mt-14">
