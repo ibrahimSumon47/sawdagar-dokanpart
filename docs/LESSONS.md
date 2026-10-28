@@ -7,3 +7,9 @@
 - A staged whitespace check caught trailing whitespace in a new ADR. Run `git diff --check` before committing and avoid Markdown trailing spaces.
 - An initial install failed because pnpm rejected an unapproved transitive native-binding installer, and ESLint 10 exceeded the declared peer ranges of the Next.js plugins. Inspect peer ranges and build-script requirements before selecting the newest compatible tool versions; explicitly approve only reviewed build scripts.
 - The Windows CI check failed a second time on CRLF because `.gitattributes` only covered `apps/web`, while the formatting check also covers `packages/*/src`. When a formatting scope grows, extend the line-ending rules and run `git add --renormalize` in the same change instead of waiting for CI.
+
+- The first seed run failed with `ERR_MODULE_NOT_FOUND` for the generated Prisma client because the client is deliberately not committed. Any workflow command that imports the client must run `prisma generate` first; the `db:seed` script now does.
+
+- Instantiating Better Auth at module scope made Next.js try to open Prisma during page-data collection, logging `DatabaseNotConfiguredError` on every route even though the build exited zero. Create database-backed clients lazily on the first request, and verify a clean build log, not just the exit code.
+
+- When `.gitignore` patterns are added at the root, verify with `git check-ignore` rather than assuming; generated Prisma output and Vercel's local `.env.local` must never appear in `git status`.

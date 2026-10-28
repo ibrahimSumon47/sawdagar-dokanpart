@@ -2,24 +2,28 @@
 
 ## Done
 - Product, design, architecture, data and roadmap specifications are documented.
-- Phase 0: pnpm/Turborepo workspace, CI on Linux/Windows/macOS, Vercel deployment at https://sawdagar-dokanpart.vercel.app/, pinned formatting, and the documentation baseline. The Windows line-ending failure was fixed in `fix(ci)`.
-- Phase 1: Editorial Heritage tokens in `packages/ui/src/theme.css` with light and dark themes, Fraunces/Inter/Noto Sans Bengali via `next/font`, server-rendered theme and language cookies, English and Bangla catalogs, storefront shell (announcement strip, header, mobile menu, footer, trust strip), a shared component library with product card and vendor row skeleton pairs, and the `/design` gallery showing tokens, components, states, both themes and frames at 360/640/768/1024/1280/1536 px.
-- Unit tests: 28 across `@sd/domain`, `@sd/ui` and `@sd/web`, including WCAG AA token contrast and skeleton layout parity.
-- Lint, typecheck, tests and production build pass locally; the production CSS contains both theme token sets and the utilities used by the gallery.
+- Phase 0: pnpm/Turborepo workspace, CI on Linux/Windows/macOS, Vercel deployment, pinned formatting and the documentation baseline.
+- Phase 1: Editorial Heritage tokens and themes, fonts, server-rendered theme and language cookies, English and Bangla catalogs, storefront shell, shared components with skeleton pairs, and the `/design` gallery at six widths. CI passed on all three systems after the CRLF fix.
+- Phase 2 auth slice: Prisma 7 schema and initial migration for Better Auth users, sessions, accounts, organizations, members, invitations, rate limits, profiles and audit logs; Better Auth email/password with the admin, organization and Next.js cookie plugins; eight allowlisted demo accounts; role permissions in `@sd/domain`; server guards for the account, seller and admin areas; profile editing with Zod; audit logging; `/sign-in`, `/account`, `/seller`, `/admin` and `/forbidden`.
+- Neon migration and demo seed both ran successfully through the `Database` GitHub Actions workflow. The migration was applied before the seed.
+- Unit tests: 43 across `@sd/domain`, `@sd/ui` and `@sd/web`, covering role boundaries, the demo allowlist and safe redirects as well as the Phase 1 checks.
+- Lint, typecheck, tests and build pass locally; the build no longer touches the database.
+- Production verification on 2026-10-28: buyer, vendor owner, vendor staff, support, finance and super admin signed in with Try demo. A vendor opening `/admin` was redirected to `/forbidden`; vendor staff saw no Admin link; support saw the user directory but not the audit log; finance saw neither; the super admin saw both, with each demo sign-in appended to the audit log.
 
 ## Now
-- Phase 1 is complete, committed and live: `/design` is served by Vercel, the production page renders the dark theme and Bangla copy from cookies, and CI passed on Linux, Windows and macOS after the CRLF fix. The next slice starts Phase 2: Better Auth with roles and demo sign-in.
+- Phase 2 is complete and verified on the production deployment.
+- Phase 3: catalog schema, seed pipeline, listing, filters, product page and bilingual search.
 
 ## Next
-- Phase 2: Prisma schema for users/sessions/organizations on Neon, Better Auth, role and permission guards, Try-demo logins, audit log, basic profiles.
-- Configure the Neon connection string and any auth secret in the Vercel and GitHub dashboards; migrations run in GitHub Actions, never locally.
-- Add Playwright with axe and the bounding-box skeleton parity test when browser tests enter CI.
+- Phase 3: design the catalog schema and deterministic seed, then build the listing, filters, product page and English/Bangla search.
+- Add an integration test for demo sign-in once a test database or a mocked adapter is available.
 
 ## Blocked
 - Phase 10 Java hosting: Hugging Face Docker Spaces currently require a paid plan; a free-compliant alternative must be verified before that phase.
-- Phase 2 cannot finish until the database connection and auth secret are present in the dashboards, since migrations and sign-in cannot be verified without them.
 
 ## Known issues
-- The gallery's six width frames are laid out from fixed pixel widths; a person still has to inspect each frame, because there is no automated visual or browser check yet.
-- ESLint 9 is deprecated; the Next.js plugins do not yet declare ESLint 10 support.
-- Media is represented by the original jamdani SVG pattern until product photography and Cloudinary integration arrive.
+- Vercel can queue production builds for several minutes; the auth deployment may show `Queued` before it serves.
+- Moderator and content editor production logins were not exercised individually; their role checks share the restricted admin branch verified with finance and are covered by unit tests. Rate limiting uses the database but is per-window, not distributed per account.
+- Passwords, password reset, email verification, two-factor authentication and Google sign-in are not enabled yet; only email/password and the demo allowlist exist.
+- Seller and admin pages are read-only foundations. Catalog, order, finance and CMS tools arrive with their phases.
+- Rotating `DEMO_ACCOUNT_PASSWORD` requires re-running the seed workflow so existing demo passwords match.

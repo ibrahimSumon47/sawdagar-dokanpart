@@ -8,4 +8,4 @@
 
 ## Imagery and data
 
-The gallery uses original SVG patterns instead of stock photography, and its product and vendor names are design fixtures written for the demo. Record the author, source, licence and attribution requirements before adding any third-party imagery, fonts or datasets. The planned seed sources are described in the [data specification](spec/04-data-and-seed.md); they have not been imported. Third-party software and its licences are listed in [technology versions](TECH_VERSIONS.md).
+The gallery uses original SVG patterns instead of stock photography, and its product and vendor names are design fixtures written for the demo. Demo mobile numbers such as `01712345678` are fabricated examples in the public Bangladeshi format; they are not real customers. Record the author, source, licence and attribution requirements before adding any third-party imagery, fonts or datasets. The planned seed sources are described in the [data specification](spec/04-data-and-seed.md); they have not been imported. Third-party software and its licences are listed in [technology versions](TECH_VERSIONS.md).

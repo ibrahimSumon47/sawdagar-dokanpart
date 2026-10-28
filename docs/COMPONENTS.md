@@ -28,11 +28,51 @@ Every component has one job, a typed props interface and a short TSDoc block. Sh
 
 Layout constants shared by the product card and its skeleton live in [productCardLayout.ts](../packages/ui/src/components/ProductCard/productCardLayout.ts). Theme tokens live in [theme.css](../packages/ui/src/theme.css).
 
+## Authentication (`apps/web/features/auth`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| SubmitButton | Submit control that reports its pending state through `useFormStatus`. | `label`, `pendingLabel`, `size`, `className` | [SubmitButton.tsx](../apps/web/features/auth/components/SubmitButton/SubmitButton.tsx) |
+| DemoAccountCard | One allowlisted demo login form with role badge and email. | `email`, `name`, `roleLabel`, `next`, `labels` | [DemoAccountCard.tsx](../apps/web/features/auth/components/DemoAccountCard/DemoAccountCard.tsx) |
+| SetupNotice | Explains missing database or auth secrets and names the variables. | `title`, `body`, `hint` | [SetupNotice.tsx](../apps/web/features/auth/components/SetupNotice/SetupNotice.tsx) |
+| SignInPanel | Sign-in page body with the eight demo cards or the setup notice. | `copy`, `next`, `configured`, `error` | [SignInPanel.tsx](../apps/web/features/auth/components/SignInPanel/SignInPanel.tsx) |
+| RoleBadge | Role label with a tone for buyer, vendor or admin areas. | `role`, `label` | [RoleBadge.tsx](../apps/web/features/auth/components/RoleBadge/RoleBadge.tsx) |
+
+## Account (`apps/web/features/account`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| FormField | Label, hint and control wrapper for the profile form. | `htmlFor`, `label`, `hint`, `children` | [FormField.tsx](../apps/web/features/account/components/FormField/FormField.tsx) |
+| ProfileForm | Editable name, phone, district and bio with server validation feedback. | `initial`, `copy` | [ProfileForm.tsx](../apps/web/features/account/components/ProfileForm/ProfileForm.tsx) |
+| SignOutButton | Form that revokes the session and returns home. | `label` | [SignOutButton.tsx](../apps/web/features/account/components/SignOutButton/SignOutButton.tsx) |
+| AccountHeader | Avatar initials, identity, role, demo flag and account actions. | `viewer`, `copy`, `roleLabel`, `locale`, `links` | [AccountHeader.tsx](../apps/web/features/account/components/AccountHeader/AccountHeader.tsx) |
+| MembershipCard | One vendor store membership with role and join date. | `name`, `slug`, `joinedAt`, `roleLabel`, `copy`, `locale` | [MembershipCard.tsx](../apps/web/features/account/components/MembershipCard/MembershipCard.tsx) |
+| AccountPanel | Account page layout: identity, profile form and memberships. | `viewer`, `profile`, `memberships`, `copy`, `locale` | [AccountPanel.tsx](../apps/web/features/account/components/AccountPanel/AccountPanel.tsx) |
+
+## Seller (`apps/web/features/seller`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| StoreCard | Store identity and the viewer's owner or staff role. | `name`, `slug`, `joinedAt`, `roleLabel`, `copy`, `locale` | [StoreCard.tsx](../apps/web/features/seller/components/StoreCard/StoreCard.tsx) |
+| TeamMemberRow | One store team member with role and join date. | `name`, `email`, `roleLabel`, `joinedLabel`, `joinedAt` | [TeamMemberRow.tsx](../apps/web/features/seller/components/TeamMemberRow/TeamMemberRow.tsx) |
+| SellerEmpty | Shown when a vendor account has no store membership. | `copy` | [SellerEmpty.tsx](../apps/web/features/seller/components/SellerEmpty/SellerEmpty.tsx) |
+| SellerPanel | Read-only store summary and team list. | `membership`, `copy`, `locale` | [SellerPanel.tsx](../apps/web/features/seller/components/SellerPanel/SellerPanel.tsx) |
+
+## Admin (`apps/web/features/admin`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| StatTile | Count tile for the admin overview. | `label`, `value` | [StatTile.tsx](../apps/web/features/admin/components/StatTile/StatTile.tsx) |
+| UserList | Newest accounts with role and demo flag. | `users`, `copy`, `locale` | [UserList.tsx](../apps/web/features/admin/components/UserList/UserList.tsx) |
+| AuditList | Newest audit entries with actor and time. | `entries`, `copy`, `locale` | [AuditList.tsx](../apps/web/features/admin/components/AuditList/AuditList.tsx) |
+| PermissionList | Permission codes held by the signed-in admin role. | `permissions`, `copy` | [PermissionList.tsx](../apps/web/features/admin/components/PermissionList/PermissionList.tsx) |
+| AdminPanel | Admin layout whose panels follow role permissions. | `role`, `permissions`, `totalUsers`, `demoUsers`, `users`, `auditEntries`, `canReadUsers`, `canReadAudit`, `copy`, `locale` | [AdminPanel.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanel.tsx) |
+
 ## Shell (`apps/web/features/shell`)
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| SiteHeader | Sticky storefront header with notice strip, wordmark, links and preferences. | `copy`, `locale`, `theme` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
+| SiteHeader | Sticky storefront header with notice strip, wordmark, role-aware links and preferences. | `copy`, `locale`, `theme`, `viewer` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
 | SiteFooter | Footer with the project notice, explore links and demo disclaimer. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
 | TrustStrip | Three short promises under the home hero. | `points` | [TrustStrip.tsx](../apps/web/features/shell/components/TrustStrip/TrustStrip.tsx) |

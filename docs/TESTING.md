@@ -6,12 +6,16 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 | Package | Tests | What they cover |
 |---|---|---|
-| `@sd/domain` | 8 | Taka formatting in English and Bangla numerals, category tree shape |
-| `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast for the token pairs in both themes, quantity clamping state |
-| `@sd/web` | 7 | English/Bangla catalogs share keys and contain no empty strings, Bangla copy uses Bengali script, sentence templates interpolate, locale and theme guards, default light theme |
+| `@sd/domain` | 18 | Taka formatting in English and Bangla numerals, category tree shape, the eight platform roles, area boundaries, vendor staff limits, super-admin coverage, the demo allowlist and one account per role |
+| `@sd/ui` | 13 | Button markup, price rendering and discounts, product card content, skeleton parity via shared layout constants, WCAG AA contrast in both themes, quantity clamping |
+| `@sd/web` | 12 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting |
 
-The skeleton parity test renders the product card and its skeleton and compares the `data-layout` and `data-media-aspect` attributes both read from `productCardLayout`. It checks the shared constants, not pixel geometry; the Playwright bounding-box comparison required by the design specification arrives with browser testing.
+## Production smoke check
+
+On 2026-10-28 the deployed build was exercised through the real sign-in page: buyer, vendor owner, vendor staff, support, finance and super admin opened their demo sessions. Vendor staff saw only the account and Seller Center links, support saw the user directory but not the audit log, finance saw neither, and the super admin saw both. Opening `/admin` as a vendor redirected to `/forbidden`. Moderator and content editor share finance's restricted admin branch and were not exercised individually.
 
 ## Not yet covered
 
-There is no browser, end-to-end, accessibility or visual-regression test, and no automated check of the six gallery widths. The gallery is rendered from the same components and tokens as the storefront, but a person has to confirm the frames at each width. Lighthouse budgets, axe and Playwright are scheduled with the phases that add data and interaction.
+- No test signs in against a database. The role model, allowlist and redirect rules are unit-tested, but the Better Auth session round trip, rate limiting and audit write still need an integration test with a test database or a mocked adapter.
+- There is no browser, end-to-end, accessibility or visual-regression test, and no automated check of the six gallery widths.
+- Lighthouse budgets, axe and Playwright are scheduled with later phases.

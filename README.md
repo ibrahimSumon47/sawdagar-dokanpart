@@ -6,28 +6,48 @@ A non-commercial marketplace demonstration inspired by the independent makers an
 
 ## Current state
 
-Phase 1 is complete. The deployed site has the storefront shell and a design system page:
+Phases 0, 1 and 2 are complete. The authentication and role model is deployed and verified:
 
-- [Home](https://sawdagar-dokanpart.vercel.app/) — the shell, bilingual copy and a short note on the current phase.
-- [Design system](https://sawdagar-dokanpart.vercel.app/design) — tokens, typography, components, empty and error states, both themes, and header/product frames at 360, 640, 768, 1024, 1280 and 1536 px, with skeleton pairs.
+- [Home](https://sawdagar-dokanpart.vercel.app/) — the storefront shell, bilingual copy and the current phase.
+- [Design system](https://sawdagar-dokanpart.vercel.app/design) — tokens, type, components, states, both themes and frames at six widths.
+- [Sign in](https://sawdagar-dokanpart.vercel.app/sign-in) — one-click demo access for eight roles.
+- [Account](https://sawdagar-dokanpart.vercel.app/account) — profile editing, role and store membership.
+- [Seller Center](https://sawdagar-dokanpart.vercel.app/seller) — the vendor's store and team, limited to vendor roles.
+- [Admin](https://sawdagar-dokanpart.vercel.app/admin) — accounts and audit log, filtered by the role's permissions.
 
-The theme and language are chosen on the server from a cookie, so the first paint is already correct in either theme and either language. English is the default; Bangla uses Noto Sans Bengali with a taller line height.
+Sessions are validated on the server. The seller area rejects buyers and platform staff; the admin area rejects buyers and vendors; panels inside the admin area follow the role's permissions, and the audit log is visible only to the Super Admin. Theme and language are read from cookies before the first paint.
 
-The catalog, accounts, cart and checkout are not built yet. See the [project state](docs/PROJECT_STATE.md) and the [roadmap](docs/spec/05-roadmap.md).
+## Demo accounts
+
+Use the **Try demo** buttons on the sign-in page. No password is shown or needed.
+
+| Role | Demo email |
+|---|---|
+| Buyer | `buyer@demo.sawdagar.test` |
+| Vendor owner | `vendor@demo.sawdagar.test` |
+| Vendor staff | `staff@demo.sawdagar.test` |
+| Support agent | `support@demo.sawdagar.test` |
+| Moderator | `moderator@demo.sawdagar.test` |
+| Finance admin | `finance@demo.sawdagar.test` |
+| Content editor | `editor@demo.sawdagar.test` |
+| Super Admin | `admin@demo.sawdagar.test` |
+
+Demo accounts cannot change their email or password. The seed is idempotent and runs only through the `Database` GitHub Actions workflow.
 
 ## Workspace
 
-- `apps/web` — Next.js App Router storefront and shell.
+- `apps/web` — Next.js App Router storefront, auth routes and role-guarded pages; Prisma schema, migration and seed.
 - `packages/ui` — design tokens and shared components with skeleton pairs.
-- `packages/domain` — pure helpers such as taka formatting and the category list.
+- `packages/domain` — pure helpers for money, categories, roles, permissions and demo accounts.
 
 ## Quality checks
 
-CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 28 unit tests include WCAG AA contrast for the token pairs in both themes and layout parity between the product card and its skeleton. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
+CI runs lint, type checking, unit tests and a production build on Linux, Windows and macOS. The 43 unit tests include role boundaries, the demo allowlist, safe redirects, WCAG AA token contrast and skeleton layout parity. See [testing](docs/TESTING.md), [architecture](ARCHITECTURE.md), [security](docs/SECURITY.md) and [deployment](docs/DEPLOYMENT.md).
 
 ## Known limitations
 
-- No accounts, catalog, cart, checkout or payments exist; the gallery products and vendors are design fixtures.
-- Payments are sandbox only, and the demo plans to use free service tiers throughout.
-- There is no browser, end-to-end or accessibility test yet, and the six gallery widths still need a human check.
-- Product imagery is an original SVG jamdani pattern until real photography and hosting are added.
+- No catalog, cart, checkout or payments exist yet; the gallery products and vendors are design fixtures.
+- The seller and admin pages are read-only foundations. Catalog, order, finance and CMS tools arrive with later phases.
+- Demo sign-in is not yet covered by an automated integration test, and there is no browser or accessibility suite yet.
+- Password reset, email verification, two-factor authentication and Google sign-in are not enabled.
+- Product imagery is an original SVG jamdani pattern until real photography and media hosting are added.
