@@ -5,7 +5,7 @@
 - Add a public `/case-study` page with project numbers, engineering decisions, hard problems, links and `SoftwareSourceCode` structured data, linked from the footer and sitemap.
 - Rewrite the README as a portfolio overview with an original banner, six production screenshots, demo credentials, per-role features, architecture and ER diagrams, measured numbers and known limitations; add the MIT licence.
 - Complete the architecture decision record set to ten records, index them from `docs/DECISIONS.md`, and refresh the free-service record to match the deployed services.
-- Add `llms.txt` at the repository root and at `/llms.txt`, with a parity test, plus generated `docs/PROJECT_FACTS.json` and `docs/repo-map.md` and CI checks that fail when either generated file drifts.
+- Add `llms.txt` at the repository root and at `/llms.txt`, with a parity test, plus generated `docs/PROJECT_FACTS.json` (including twelve feature-to-file mappings and an explicit unmeasured-coverage note) and `docs/repo-map.md`, with CI checks that fail when either generated file drifts.
 - Replace the catalog's "Phase 3" eyebrow with storefront copy and recapture every README screenshot from production without the browser overlay.
 - Fix the generated-file drift checks on Windows by normalising CRLF and pinning generated files to LF.
 - Run Lighthouse against the deployed storefront in a manual and weekly workflow, with mobile budgets for performance, accessibility, best practices, SEO and layout shift.

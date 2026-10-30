@@ -228,6 +228,7 @@ After the first deploy, run the **Database** workflow with `migrate`, then `seed
 - Bulk CSV import, packing-slip PDFs and seller replies to reviews are not implemented; CSV export is.
 - The CMS edits plain text without rich text or embedded images. Feature flags cover only the Help Center and Journal.
 - Finance balances are summed in JavaScript from every ledger entry, which is fine at demo volume but should become a SQL aggregate.
+- There is no marketplace REST API or OpenAPI document. Writes are Server Actions, and the only HTTP routes are Better Auth and the MockPay callback; [docs/API.md](docs/API.md) records the boundary instead of publishing a contract for endpoints that do not exist.
 - There is no automated browser or visual-regression suite. axe and the six-width review were manual; Lighthouse is the only browser check that runs in CI.
 - Seeded reviews belong to synthetic buyers without login accounts. The storefront labels the whole site as demo data.
 
@@ -262,7 +263,7 @@ Next candidates, recorded honestly rather than promised: a released-reservation 
 ## AI-readable repository
 
 - [`llms.txt`](llms.txt) and [`/llms.txt`](https://sawdagar-dokanpart.vercel.app/llms.txt): the project summary for assistants and crawlers.
-- [`docs/PROJECT_FACTS.json`](docs/PROJECT_FACTS.json): name, stack, test counts, seed volumes, demo accounts and links.
+- [`docs/PROJECT_FACTS.json`](docs/PROJECT_FACTS.json): name, stack, test counts, seed volumes, feature-to-file paths, demo accounts and links.
 - [`docs/repo-map.md`](docs/repo-map.md): folder tree with one-line purposes.
 - [`docs/adr/`](docs/adr): ten architecture decision records.
 

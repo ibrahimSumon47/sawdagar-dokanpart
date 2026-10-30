@@ -15,6 +15,7 @@
 
 The dated entries below record smaller choices that did not need an ADR.
 
+- 2026-10-30: Do not invent a `/api/v1` REST surface to satisfy the showcase checklist. The app has exactly two route handlers (Better Auth and the MockPay callback); every other write is a Server Action with the same session, Zod and ownership checks. [API.md](API.md) documents both boundaries and states that there is no OpenAPI document, rather than publishing a contract for endpoints that do not exist. Revisit when an external client needs one.
 - 2026-10-30: Measure Lighthouse and accessibility against the deployed site in GitHub Actions instead of starting a local server. The project forbids localhost development servers, and the deployment is what visitors actually load. The `Lighthouse` workflow runs on demand and weekly; axe is also checked in the browser against the deployment.
 
 - 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes, so the loading state never reflows, and the production review confirmed 2 to 5 columns depending on the space each page gives the grid.

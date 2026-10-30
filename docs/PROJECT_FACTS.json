@@ -49,6 +49,109 @@
     },
     "total": 170
   },
+  "coverage": {
+    "measured": false,
+    "note": "No coverage tool is configured; tests target the domain rules, generated-file parity and critical user paths."
+  },
+  "features": [
+    {
+      "name": "Catalog listing, URL filters and relevance search",
+      "paths": [
+        "apps/web/features/catalog/queries.ts",
+        "apps/web/features/catalog/catalogQuery.ts",
+        "apps/web/features/catalog/components/CatalogView/CatalogView.tsx"
+      ]
+    },
+    {
+      "name": "Product page, variants, stock and structured data",
+      "paths": [
+        "apps/web/app/product/[slug]/page.tsx",
+        "apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx",
+        "apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx"
+      ]
+    },
+    {
+      "name": "Guest and user cart, wishlist, comparison and coupons",
+      "paths": [
+        "apps/web/features/shop/actions.ts",
+        "apps/web/features/shop/cartMutations.ts",
+        "apps/web/features/shop/components/CartDrawer/CartDrawer.tsx"
+      ]
+    },
+    {
+      "name": "Checkout, per-seller shipping, MockPay and invoices",
+      "paths": [
+        "apps/web/features/checkout/orderPlacement.ts",
+        "apps/web/features/checkout/components/MockPayPanel/MockPayPanel.tsx",
+        "packages/domain/src/checkout/checkoutTotals.ts"
+      ]
+    },
+    {
+      "name": "Reviews, product questions and return requests",
+      "paths": [
+        "apps/web/features/reviews/actions.ts",
+        "apps/web/features/questions/actions.ts",
+        "packages/domain/src/reviews/reviewRules.ts"
+      ]
+    },
+    {
+      "name": "Seller Center, stock adjustments and fulfillment",
+      "paths": [
+        "apps/web/app/seller/page.tsx",
+        "apps/web/features/seller/orderActions.ts",
+        "apps/web/features/seller/components/SellerProductForm/SellerProductForm.tsx"
+      ]
+    },
+    {
+      "name": "Double-entry ledger, payouts and refunds",
+      "paths": [
+        "packages/domain/src/finance/ledger.ts",
+        "apps/web/features/finance/actions.ts",
+        "apps/web/app/admin/finance/page.tsx"
+      ]
+    },
+    {
+      "name": "Admin approvals, moderation, CMS, flags and audit",
+      "paths": [
+        "apps/web/features/admin/actions.ts",
+        "apps/web/features/content/actions.ts",
+        "apps/web/app/admin/page.tsx"
+      ]
+    },
+    {
+      "name": "Sessions, roles and server-side guards",
+      "paths": [
+        "apps/web/lib/auth.ts",
+        "apps/web/features/auth/session.ts",
+        "packages/domain/src/auth/roles.ts"
+      ]
+    },
+    {
+      "name": "Native WebAssembly search and SKU modules with tested ports",
+      "paths": [
+        "packages/cs-core/native/search_core.cpp",
+        "packages/cs-core/native/sku_kit.c",
+        "packages/cs-core/python/insights.py",
+        "packages/cs-core/java/Settlement.java"
+      ]
+    },
+    {
+      "name": "Bilingual interface and localized places",
+      "paths": [
+        "apps/web/i18n/messages/en.ts",
+        "apps/web/i18n/messages/bn.ts",
+        "apps/web/i18n/places.ts"
+      ]
+    },
+    {
+      "name": "AI-readable summary, project facts and repository map",
+      "paths": [
+        "llms.txt",
+        "docs/PROJECT_FACTS.json",
+        "docs/repo-map.md"
+      ]
+    }
+  ],
   "lighthouses": {
     "run": 41067055369,
     "strategy": "mobile, median of three runs",

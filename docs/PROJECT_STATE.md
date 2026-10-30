@@ -53,6 +53,7 @@
 - No confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
+- There is no marketplace REST API or OpenAPI document. The only HTTP routes are Better Auth and the MockPay callback; every other write is a Server Action, as recorded in ADR-006 and [API.md](API.md).
 - Search matches only English and Bangla product titles and leaf-category names. Descriptions, variants and vendor names are not searched; there is no typo tolerance, stemming or autosuggest yet.
 - Catalog products share one representative locally stored photograph per department rather than a photograph of the exact product; there is no gallery or zoom. The credits are listed in [CREDITS.md](CREDITS.md).
 - Search ranking reorders at most 120 matches and never overrides an explicit price or rating sort. Byte tokenization has no stemming, Unicode normalization or autosuggest.
