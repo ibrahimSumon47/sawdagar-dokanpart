@@ -157,7 +157,7 @@ ${rootFileRows.join('\n')}
 `;
 
 if (check) {
-  const committed = readFileSync(outputPath, 'utf8');
+  const committed = readFileSync(outputPath, 'utf8').replace(/\r\n/g, '\n');
   if (committed !== markdown) {
     console.error('docs/repo-map.md is stale. Run `pnpm repo-map:generate`.');
     process.exitCode = 1;

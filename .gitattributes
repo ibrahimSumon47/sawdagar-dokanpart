@@ -11,3 +11,8 @@
 /packages/*/src/**/*.ts text eol=lf
 /packages/*/src/**/*.tsx text eol=lf
 /packages/*/src/**/*.css text eol=lf
+
+# Generated or machine-readable files are compared byte for byte.
+/docs/PROJECT_FACTS.json text eol=lf
+/docs/repo-map.md text eol=lf
+/llms.txt text eol=lf

@@ -15,6 +15,18 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 
 The `Lighthouse` workflow (`.github/workflows/lighthouse.yml`, configured by `.lighthouserc.json`) audits the deployed home, catalog and product pages with mobile emulation. It runs manually and every Monday, because it measures the live deployment rather than a local server. The job fails when performance, accessibility, best practices or SEO fall below 90, or when cumulative layout shift exceeds 0.1. Reports are kept as workflow artifacts for 14 days.
 
+## Phase 12 checks
+
+On 2026-10-30, `pnpm lint`, `pnpm typecheck`, `pnpm test` (170 tests), `pnpm build` and `pnpm perf:budget` passed, along with the new `pnpm facts:check` and `pnpm repo-map:check` jobs. Lint reported the four known `next/image` warnings and no errors. The budget measured 249.1 KiB gzipped client JavaScript, 10.0 KiB gzipped CSS, a 71.8 KiB largest chunk, 852.0 KiB of catalog photographs and a 144.8 KiB largest photograph.
+
+The first typecheck of the slice failed: the `/llms.txt` route imported `../../../lib/llmsText`, one directory above the application. The import now resolves to `../../lib/llmsText`, and the parity test checks that the served text matches the committed `llms.txt`. The test counts in `docs/PROJECT_FACTS.json` are counted from `it(` declarations by `scripts/gen-project-facts.mjs`, so the facts file and the test table cannot drift silently; CI reruns both generators with `--check`.
+
+The first CI run for the showcase commit then failed only on Windows, at `pnpm facts:check`: Git checked the generated JSON out with CRLF while the generator wrote LF, so the byte comparison failed on that runner alone. Both generators now normalise CRLF before comparing, and `PROJECT_FACTS.json`, `repo-map.md` and `llms.txt` are pinned to LF in `.gitattributes`. The tolerance was verified by converting both generated files to CRLF and rerunning the checks before restoring them.
+
+On the deployment, `/case-study` returned 200 with a self-referencing canonical, `SoftwareSourceCode` JSON-LD, the footer link and an entry in the 473-URL sitemap. `/llms.txt` returned 200 as `text/plain; charset=utf-8` and was byte-identical to the root file, including the product link to the in-stock leather belt. The six README screenshots were captured from production at 1280 × 860 and 390 × 844 in a fresh headless browser, so no signed-in state or browser overlay appears; the catalog shot shows the replaced "Independent sellers" eyebrow instead of the old development label.
+
+The prior CI run 41069451787 passed on three operating systems; the final showcase run and Vercel deployment are recorded in [PROJECT_STATE.md](PROJECT_STATE.md).
+
 ## Phase 11 checks
 
 On 2026-10-30, `pnpm lint`, `pnpm typecheck`, `pnpm test` (170 tests, including the later `llms.txt` parity check), `pnpm build` and `pnpm perf:budget` passed. Lint reported four `next/image` warnings for plain image elements. The budget check measured 249.0 KiB gzipped client JavaScript, 9.8 KiB gzipped CSS, a 71.8 KiB largest gzipped chunk, 852.0 KiB of catalog photographs and a 144.8 KiB largest photograph; all were within their configured limits.
@@ -33,7 +45,7 @@ Lighthouse CI (run 41067055369, median of three mobile runs per URL) scored:
 | Catalog | 95 | 100 | 100 | 100 | 2.78 s | 71 ms | 0 |
 | Product | 93 | 100 | 100 | 100 | 3.19 s | 68 ms | 0 |
 
-The workflow asserts 90 for each category and 0.1 for cumulative layout shift. The home page had one 83 run in the same batch, which is why the job uses a median of three.
+The workflow asserts 90 for each category and 0.1 for cumulative layout shift. The home page had one 83 run in the same batch, which is why the job uses a median of three. An artifact check on the same run confirmed 100 SEO on all three URLs, with no failed SEO audit.
 
 SEO checks on the deployment found and fixed two defects: every route inherited a canonical URL pointing at the home page, and dynamic product metadata streamed into the body instead of the head. Product and catalog canonicals are now self-referencing, product and store descriptions are shortened to at most 160 characters, and `htmlLimitedBots: /.*/` makes metadata blocking so titles and descriptions are in the head. `robots.txt` returned 200 with the private routes disallowed, the sitemap returned 472 URLs (432 products and 24 stores), and an unknown route returned the localized 404 page with status 404. The custom error boundary was not triggered in production; its retry and storefront actions are covered by the build and manual inspection only.
 

@@ -130,7 +130,7 @@ const facts = {
 const serialised = `${JSON.stringify(facts, null, 2)}\n`;
 
 if (check) {
-  const committed = read('docs/PROJECT_FACTS.json');
+  const committed = read('docs/PROJECT_FACTS.json').replace(/\r\n/g, '\n');
   if (committed !== serialised) {
     console.error('docs/PROJECT_FACTS.json is stale. Run `pnpm facts:generate`.');
     process.exitCode = 1;
