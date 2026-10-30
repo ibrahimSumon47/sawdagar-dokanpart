@@ -50,7 +50,7 @@ export function CategoryNav({ categories, filters, locale, copy }: CategoryNavPr
               }`}
             >
               {category.name[locale]}
-              <span className="text-xs opacity-75">{number.format(category.productCount)}</span>
+              <span className="text-xs">{number.format(category.productCount)}</span>
             </Link>
           );
         })}

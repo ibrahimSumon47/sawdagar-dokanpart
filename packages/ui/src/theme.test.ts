@@ -31,6 +31,17 @@ function luminance(hex: string): number {
   return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 }
 
+function mix(foreground: string, background: string, opacity: number): string {
+  const components = [1, 3, 5].map((offset) => {
+    const fg = Number.parseInt(foreground.slice(offset, offset + 2), 16);
+    const bg = Number.parseInt(background.slice(offset, offset + 2), 16);
+    return Math.round(fg * opacity + bg * (1 - opacity))
+      .toString(16)
+      .padStart(2, '0');
+  });
+  return `#${components.join('')}`;
+}
+
 function contrast(foreground: string, background: string): number {
   const lighter = Math.max(luminance(foreground), luminance(background));
   const darker = Math.min(luminance(foreground), luminance(background));
@@ -42,7 +53,11 @@ const textPairs = [
   ['ink', 'surface'],
   ['ink-muted', 'background'],
   ['accent', 'background'],
+  ['accent-hover', 'background'],
   ['accent-contrast', 'accent'],
+  ['success-strong', 'background'],
+  ['warning-strong', 'background'],
+  ['danger-strong', 'background'],
 ] as const;
 
 describe('design tokens', () => {
@@ -64,6 +79,31 @@ describe('design tokens', () => {
     for (const [foreground, background] of textPairs) {
       const ratio = contrast(dark.get(foreground)!, dark.get(background)!);
       expect(ratio, `${foreground} on ${background}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it('keeps tinted status labels and initials legible on theme surfaces', () => {
+    const tintedPairs = [
+      ['accent-hover', 'accent'],
+      ['success-strong', 'success'],
+      ['warning-strong', 'warning'],
+      ['danger-strong', 'danger'],
+    ] as const;
+
+    for (const [name, theme] of [
+      ['light', light],
+      ['dark', dark],
+    ] as const) {
+      for (const [foreground, tint] of tintedPairs) {
+        for (const surface of ['background', 'surface', 'surface-elevated'] as const) {
+          const background = mix(theme.get(tint)!, theme.get(surface)!, 0.1);
+          const ratio = contrast(theme.get(foreground)!, background);
+          expect(
+            ratio,
+            `${name}: ${foreground} on ${tint}/10 over ${surface}`,
+          ).toBeGreaterThanOrEqual(4.5);
+        }
+      }
     }
   });
 

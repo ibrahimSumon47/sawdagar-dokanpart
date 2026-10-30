@@ -10,9 +10,9 @@ export interface BadgeProps extends ComponentProps<'span'> {
 const toneClass: Record<BadgeTone, string> = {
   neutral: 'border-line bg-surface text-ink-muted',
   accent: 'border-transparent bg-accent text-accent-contrast',
-  success: 'border-success/30 bg-success/10 text-success',
-  warning: 'border-warning/30 bg-warning/10 text-warning',
-  danger: 'border-danger/30 bg-danger/10 text-danger',
+  success: 'border-success/30 bg-success/10 text-success-strong',
+  warning: 'border-warning/30 bg-warning/10 text-warning-strong',
+  danger: 'border-danger/30 bg-danger/10 text-danger-strong',
 };
 
 /** Renders a compact status label such as a sale flag or order state. */

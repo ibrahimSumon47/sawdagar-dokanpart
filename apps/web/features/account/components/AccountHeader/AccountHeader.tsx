@@ -33,7 +33,7 @@ export function AccountHeader({ viewer, copy, roleLabel, locale, links }: Accoun
       <div className="flex flex-wrap items-start gap-4">
         <span
           aria-hidden="true"
-          className="grid size-16 shrink-0 place-items-center rounded-full bg-accent/10 font-serif text-xl text-accent"
+          className="grid size-16 shrink-0 place-items-center rounded-full bg-accent/10 font-serif text-xl text-accent-hover"
         >
           {initials(viewer.name)}
         </span>

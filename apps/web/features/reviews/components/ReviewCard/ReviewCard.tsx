@@ -24,7 +24,7 @@ export function ReviewCard({ review, copy, locale }: ReviewCardProps) {
       <div className="flex items-start gap-3">
         <span
           aria-hidden="true"
-          className="grid size-9 shrink-0 place-items-center rounded-full bg-accent/10 text-xs font-semibold text-accent"
+          className="grid size-9 shrink-0 place-items-center rounded-full bg-accent/10 text-xs font-semibold text-accent-hover"
         >
           {initials(review.authorName)}
         </span>
