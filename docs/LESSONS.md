@@ -1,5 +1,13 @@
 # Lessons
 
+- A Lighthouse run reported no product meta description even though the deployed HTML contained one; the tag had streamed into the body after the head. Check where metadata lands in the raw HTML (`indexOf('</head>')`) before trusting it, and remember that `htmlLimitedBots` controls blocking metadata.
+
+- The first Lighthouse workflow run failed because `.lighthouserc.json` used `preset: "lighthouse:default"`; LHCI only accepts `perf`, `experimental` and `desktop`, and mobile is already the default. Read the tool's preset options instead of assuming a Lighthouse CLI preset name.
+
+- The Lighthouse artifact upload silently skipped `.lighthouseci` because `actions/upload-artifact` ignores hidden files by default. Set `include-hidden-files: true` when uploading dot-directories.
+
+- A macOS CI job failed with "not acquired by Runner of type hosted"; that is GitHub capacity, not a code failure. Check the annotation before debugging the build.
+
 - A newly added contrast test failed the Prettier gate on its first full check. Format edited source files before running the full quality gate, then rerun the affected checks.
 
 - The first Prettier CI check failed on Windows because Git checked out source with CRLF endings while Prettier expected LF. Define source line endings in Git attributes and verify the checkout policy when introducing format checks across platforms.

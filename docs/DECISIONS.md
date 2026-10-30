@@ -2,7 +2,11 @@
 
 - 2026-10-30: Measure Lighthouse and accessibility against the deployed site in GitHub Actions instead of starting a local server. The project forbids localhost development servers, and the deployment is what visitors actually load. The `Lighthouse` workflow runs on demand and weekly; axe is also checked in the browser against the deployment.
 
-- 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes; browser verification remains outstanding.
+- 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes, so the loading state never reflows, and the production review confirmed 2 to 5 columns depending on the space each page gives the grid.
+
+- 2026-10-30: Keep route metadata blocking with `htmlLimitedBots: /.*/`. Next.js otherwise streams metadata for slow dynamic routes after the shell, putting the title and description in the body; Lighthouse and search crawlers look for them in the head. The product query is request-cached, so the metadata and the page share one database read, and blocking adds only that read to the response.
+
+- 2026-10-30: Declare a canonical URL per public route (home, catalog, product, store) instead of one canonical in the root layout. A global canonical made every page claim to be the home page.
 
 - 2026-10-30: Translate known Bangladesh place names at display time and keep canonical English division and district values in forms and storage. This avoids changing shipping calculations and existing addresses; unknown user-entered place names are displayed unchanged.
 
