@@ -4,6 +4,7 @@ import type { Locale } from '../../../../i18n';
 import type { CatalogProduct } from '../../queries';
 import { WishlistButton } from '../../../shop/components/WishlistButton';
 import { departmentPhoto } from '../../media';
+import { productGridClass } from './productGridLayout';
 
 export interface ProductGridLabels {
   sale: string;
@@ -39,48 +40,47 @@ export function productGridLabels(
   };
 }
 
-/** Four-column product grid at wide widths; one column on phones. */
+/** Product grid that adapts its columns to the space available. */
 export function ProductGrid({ products, locale, labels }: ProductGridProps) {
   return (
-    <ul
-      role="list"
-      className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-    >
-      {products.map((product) => {
-        const photo = departmentPhoto(product.departmentSlug, product.slug);
-        return (
-          <li key={product.id} className="relative">
-            <Link
-              href={`/product/${product.slug}`}
-              aria-label={product.title[locale]}
-              className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-            >
-              <ProductCard
-                product={{
-                  id: product.id,
-                  title: product.title[locale],
-                  vendorName: product.vendorName,
-                  priceMinor: product.priceMinor,
-                  compareAtMinor: product.compareAtMinor,
-                  rating: product.rating,
-                  reviewCount: product.reviewCount,
-                  tone: product.tone,
-                  totalStock: product.totalStock,
-                  image: photo ?? undefined,
-                }}
-                locale={locale}
-                ratingLabel={labels.ratingLabels[product.id] ?? ''}
-                saleLabel={labels.sale}
-                soldOutLabel={labels.soldOut}
+    <div className="@container min-w-0">
+      <ul role="list" className={productGridClass}>
+        {products.map((product) => {
+          const photo = departmentPhoto(product.departmentSlug, product.slug, locale);
+          return (
+            <li key={product.id} className="relative min-w-0">
+              <Link
+                href={`/product/${product.slug}`}
+                aria-label={product.title[locale]}
+                className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              >
+                <ProductCard
+                  product={{
+                    id: product.id,
+                    title: product.title[locale],
+                    vendorName: product.vendorName,
+                    priceMinor: product.priceMinor,
+                    compareAtMinor: product.compareAtMinor,
+                    rating: product.rating,
+                    reviewCount: product.reviewCount,
+                    tone: product.tone,
+                    totalStock: product.totalStock,
+                    image: photo ?? undefined,
+                  }}
+                  locale={locale}
+                  ratingLabel={labels.ratingLabels[product.id] ?? ''}
+                  saleLabel={labels.sale}
+                  soldOutLabel={labels.soldOut}
+                />
+              </Link>
+              <WishlistButton
+                productId={product.id}
+                className="absolute right-2 top-2 z-10 bg-surface/95 backdrop-blur"
               />
-            </Link>
-            <WishlistButton
-              productId={product.id}
-              className="absolute right-2 top-2 z-10 bg-surface/95 backdrop-blur"
-            />
-          </li>
-        );
-      })}
-    </ul>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

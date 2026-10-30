@@ -50,6 +50,20 @@ describe('ProductCard', () => {
     expect(html).toContain('alt="Saree photograph"');
   });
 
+  it('places the sold-out badge away from the wishlist control', () => {
+    const html = renderToStaticMarkup(
+      <ProductCard
+        product={{ ...sample, totalStock: 0 }}
+        ratingLabel="Rated 4.8 out of 5"
+        saleLabel="Sale"
+        soldOutLabel="Sold out"
+      />,
+    );
+
+    expect(html).toContain('absolute bottom-2 left-2');
+    expect(html).toContain('Sold out');
+  });
+
   it('keeps the same reserved layout as its skeleton', () => {
     const card = layoutAttributes(
       renderToStaticMarkup(

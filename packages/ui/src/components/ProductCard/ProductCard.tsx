@@ -88,7 +88,10 @@ export function ProductCard({
           </Badge>
         ) : null}
         {soldOut && soldOutLabel ? (
-          <Badge tone="neutral" className="absolute right-2 top-2 bg-surface">
+          <Badge
+            tone="neutral"
+            className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] bg-surface"
+          >
             {soldOutLabel}
           </Badge>
         ) : null}
