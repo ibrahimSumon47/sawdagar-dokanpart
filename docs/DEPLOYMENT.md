@@ -33,6 +33,10 @@ Run `Database` from the Actions tab or with `gh workflow run db.yml -f task=migr
 
 ## GitHub description and topics
 
+Set on the repository on 2026-10-30 with the authenticated GitHub CLI.
+
 Description: A non-commercial Bangladeshi multi-vendor marketplace demonstration.
+
+Homepage: https://sawdagar-dokanpart.vercel.app
 
 Topics: `marketplace`, `bangladesh`, `nextjs`, `typescript`, `monorepo`, `tailwindcss`, `design-system`, `better-auth`, `prisma`.

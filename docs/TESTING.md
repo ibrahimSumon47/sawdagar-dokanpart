@@ -25,6 +25,8 @@ The first CI run for the showcase commit then failed only on Windows, at `pnpm f
 
 On the deployment, `/case-study` returned 200 with a self-referencing canonical, `SoftwareSourceCode` JSON-LD, the footer link and an entry in the 473-URL sitemap. `/llms.txt` returned 200 as `text/plain; charset=utf-8` and was byte-identical to the root file, including the product link to the in-stock leather belt. The six README screenshots were captured from production at 1280 × 860 and 390 × 844 in a fresh headless browser, so no signed-in state or browser overlay appears; the catalog shot shows the replaced "Independent sellers" eyebrow instead of the old development label.
 
+The case-study page was exercised at 360 px in dark theme and with the Bangla locale: `scrollWidth` equalled `clientWidth`, all five sections and the eight repository links rendered, and 340 Bengali characters appeared in the localized shell. The article body stays English by design, like the README and architecture document; only the shared shell is translated.
+
 The prior CI run 41069451787 passed on three operating systems; the final showcase run and Vercel deployment are recorded in [PROJECT_STATE.md](PROJECT_STATE.md).
 
 ## Phase 11 checks
