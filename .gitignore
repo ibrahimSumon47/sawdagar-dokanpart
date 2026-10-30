@@ -8,3 +8,4 @@ apps/web/generated/
 .env*
 !.env.example
 .vercel/
+.lighthouseci/

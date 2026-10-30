@@ -1,5 +1,7 @@
 # Decisions
 
+- 2026-10-30: Measure Lighthouse and accessibility against the deployed site in GitHub Actions instead of starting a local server. The project forbids localhost development servers, and the deployment is what visitors actually load. The `Lighthouse` workflow runs on demand and weekly; axe is also checked in the browser against the deployment.
+
 - 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes; browser verification remains outstanding.
 
 - 2026-10-30: Translate known Bangladesh place names at display time and keep canonical English division and district values in forms and storage. This avoids changing shipping calculations and existing addresses; unknown user-entered place names are displayed unchanged.

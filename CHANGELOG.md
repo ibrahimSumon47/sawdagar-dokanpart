@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Run Lighthouse against the deployed storefront in a manual and weekly workflow, with mobile budgets for performance, accessibility, best practices, SEO and layout shift.
+- Localize the retry and storefront actions on the root error page.
 - Use licensed, locally stored department photography as representative catalog imagery, localize image descriptions and publish the attribution at `/credits`.
 - Add SEO and error surfaces and enforce client asset budgets after builds.
 - Include only approved, KYC-approved stores in the sitemap, matching the public store page.

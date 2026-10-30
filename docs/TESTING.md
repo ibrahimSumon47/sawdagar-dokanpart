@@ -11,6 +11,10 @@ The quality gates are `pnpm lint` (format check plus ESLint), `pnpm typecheck`, 
 | `@sd/ui` | 17 | Button markup, price rendering and discounts, signed balances only when allowed, product card content, skeleton parity via shared layout constants, selected token contrast on plain and tinted backgrounds in both themes, quantity clamping |
 | `@sd/web` | 60 | Catalog key parity and Bengali script, locale and theme guards, safe post-sign-in redirects, English and Bangla date formatting; catalog filter parsing, invalid-value fallbacks, price-range swapping, canonical filter links, page reset rules and Bangla query encoding; cart grouping, quantity counts, delivery threshold, free-delivery progress, coupon discount totals, and an ineligible coupon falling back to no discount; comparison cookie parsing, deduplication, the four-product cap and limit responses; CMS slug, status, scheduling and optional-field validation, and the admin navigation each role receives |
 
+## Lighthouse
+
+The `Lighthouse` workflow (`.github/workflows/lighthouse.yml`, configured by `.lighthouserc.json`) audits the deployed home, catalog and product pages with mobile emulation. It runs manually and every Monday, because it measures the live deployment rather than a local server. The job fails when performance, accessibility, best practices or SEO fall below 90, or when cumulative layout shift exceeds 0.1. Reports are kept as workflow artifacts for 14 days.
+
 ## Phase 11 local checks
 
 On 2026-10-30, `pnpm lint`, `pnpm typecheck`, `pnpm test` (165 tests), `pnpm build` and `pnpm perf:budget` passed. Lint reported four existing warnings for plain image elements. The budget check measured 249.0 KiB gzipped client JavaScript, 9.8 KiB gzipped CSS, a 71.8 KiB largest gzipped chunk, 852.0 KiB of catalog photographs and a 144.8 KiB largest photograph; all were within their configured limits.
