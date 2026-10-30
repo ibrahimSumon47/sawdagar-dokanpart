@@ -12,7 +12,11 @@ import { getLocale } from '../../i18n/getLocale';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
-  return { title: copy.catalog.title, description: copy.catalog.description };
+  return {
+    title: copy.catalog.title,
+    description: copy.catalog.description,
+    alternates: { canonical: '/catalog' },
+  };
 }
 
 interface CatalogPageProps {

@@ -20,10 +20,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: product.title[locale],
     description: product.description[locale],
+    alternates: { canonical: `/product/${product.slug}` },
     openGraph: {
       title: product.title[locale],
       description: product.description[locale],
       type: 'website',
+      images: ['/opengraph-image'],
     },
   };
 }

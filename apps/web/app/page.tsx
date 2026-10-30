@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import { HomeCatalog } from '../features/catalog/components/HomeCatalog';
 import { getCatalogCategories, getFeaturedProducts } from '../features/catalog/queries';
 import { HomeIntro } from '../features/home/components/HomeIntro';
 import { getDictionary } from '../i18n';
 import { getLocale } from '../i18n/getLocale';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 /** Storefront introduction with departments and four featured products. */
 export default async function HomePage() {
