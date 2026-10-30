@@ -5,6 +5,7 @@
 - Run Lighthouse against the deployed storefront in a manual and weekly workflow, with mobile budgets for performance, accessibility, best practices, SEO and layout shift.
 - Localize the retry and storefront actions on the root error page.
 - Give the home, catalog and product routes self-referencing canonical URLs and keep the shared social card on product pages.
+- Keep product and store meta descriptions within search-snippet length and use the store's description in the active language.
 - Use licensed, locally stored department photography as representative catalog imagery, localize image descriptions and publish the attribution at `/credits`.
 - Add SEO and error surfaces and enforce client asset budgets after builds.
 - Include only approved, KYC-approved stores in the sitemap, matching the public store page.

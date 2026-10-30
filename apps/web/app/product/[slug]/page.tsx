@@ -7,6 +7,7 @@ import { getProductQuestions } from '../../../features/questions/queries';
 import { getProductReviews, getReviewSummary } from '../../../features/reviews/queries';
 import { getDictionary } from '../../../i18n';
 import { getLocale } from '../../../i18n/getLocale';
+import { metaDescription } from '../../../lib/meta';
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -19,11 +20,11 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   return {
     title: product.title[locale],
-    description: product.description[locale],
+    description: metaDescription(product.description[locale]),
     alternates: { canonical: `/product/${product.slug}` },
     openGraph: {
       title: product.title[locale],
-      description: product.description[locale],
+      description: metaDescription(product.description[locale]),
       type: 'website',
       images: ['/opengraph-image'],
     },
