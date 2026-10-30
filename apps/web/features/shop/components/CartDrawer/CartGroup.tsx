@@ -1,5 +1,6 @@
 'use client';
 
+import { placeName } from '../../../../i18n/places';
 import { formatTemplate } from '../../formatTemplate';
 import { useShop } from '../ShopProvider';
 import { CartLineItem } from './CartLineItem';
@@ -11,9 +12,9 @@ export interface CartGroupProps {
 
 /** Vendor heading, shipping origin and that store's cart rows. */
 export function CartGroup({ group }: CartGroupProps) {
-  const { copy } = useShop();
+  const { copy, locale } = useShop();
   const shipping = group.vendor.district
-    ? formatTemplate(copy.shipsFrom, { district: group.vendor.district })
+    ? formatTemplate(copy.shipsFrom, { district: placeName(group.vendor.district, locale) })
     : copy.shipsFromBangladesh;
 
   return (

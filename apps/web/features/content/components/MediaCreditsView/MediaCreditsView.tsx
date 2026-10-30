@@ -1,12 +1,14 @@
-import type { Dictionary } from '../../../../i18n';
+import { topLevelCategories } from '@sd/domain';
+import type { Dictionary, Locale } from '../../../../i18n';
 import { mediaCredits } from '../../../catalog/mediaCredits';
 
 export interface MediaCreditsViewProps {
   copy: Dictionary['credits'];
+  locale: Locale;
 }
 
 /** Photograph attribution for every department image used in the catalog. */
-export function MediaCreditsView({ copy }: MediaCreditsViewProps) {
+export function MediaCreditsView({ copy, locale }: MediaCreditsViewProps) {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <header className="max-w-2xl">
@@ -23,7 +25,7 @@ export function MediaCreditsView({ copy }: MediaCreditsViewProps) {
           >
             <img
               src={credit.file}
-              alt={`${credit.label} photograph`}
+              alt=""
               width={960}
               height={720}
               loading="lazy"
@@ -31,7 +33,11 @@ export function MediaCreditsView({ copy }: MediaCreditsViewProps) {
               className="aspect-[4/3] w-full object-cover"
             />
             <div className="p-4 text-sm">
-              <p className="font-medium text-ink">{credit.label}</p>
+              <p className="font-medium text-ink">
+                {topLevelCategories.find((category) => category.slug === credit.slug)?.name[
+                  locale
+                ] ?? credit.label}
+              </p>
               <dl className="mt-2 space-y-1 text-xs text-ink-muted">
                 <div>
                   <dt className="inline">{copy.author}: </dt>

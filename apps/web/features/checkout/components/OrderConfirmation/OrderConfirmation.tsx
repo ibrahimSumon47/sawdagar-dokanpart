@@ -1,6 +1,7 @@
 import { Badge, ButtonLink } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import { formatDate } from '../../../../lib/formatDate';
 import { orderStatusLabel, paymentStatusLabel, statusTone } from '../../labels';
 import type { OrderRecord } from '../../queries';
@@ -106,7 +107,8 @@ export function OrderConfirmation({
                 {order.shippingArea ? `, ${order.shippingArea}` : ''}
               </span>
               <span className="block">
-                {order.shippingDistrict}, {order.shippingDivision}
+                {placeName(order.shippingDistrict, locale)},{' '}
+                {placeName(order.shippingDivision, locale)}
               </span>
             </address>
           </section>

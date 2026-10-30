@@ -6,6 +6,7 @@ import { ShoppingBag } from 'lucide-react';
 import { useActionState, useMemo, useState } from 'react';
 import { initialCheckoutState } from '../../state';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import { placeOrder } from '../../actions';
 import type { PaymentMethod } from '../../inputs';
 import type { AddressRecord } from '../../queries';
@@ -100,7 +101,8 @@ export function CheckoutView({ items, coupon, addresses, copy, locale }: Checkou
                       {address.recipientName} · {address.phone}
                     </span>
                     <span className="mt-0.5 block text-ink-muted">
-                      {address.addressLine}, {address.upazila}, {address.district}
+                      {address.addressLine}, {address.upazila},{' '}
+                      {placeName(address.district, locale)}
                     </span>
                   </span>
                 </label>
@@ -123,7 +125,7 @@ export function CheckoutView({ items, coupon, addresses, copy, locale }: Checkou
 
           {addressId === '' ? (
             <div className="mt-4">
-              <AddressFields value={draft} onChange={setDraft} copy={copy} />
+              <AddressFields value={draft} onChange={setDraft} copy={copy} locale={locale} />
             </div>
           ) : null}
         </section>

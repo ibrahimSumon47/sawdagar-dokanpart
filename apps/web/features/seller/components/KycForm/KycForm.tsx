@@ -1,19 +1,21 @@
 import { districts } from '@sd/domain';
 import { Button } from '@sd/ui';
-import type { Dictionary } from '../../../../i18n';
+import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import type { SellerStoreRecord } from '../../queries';
 import { submitKycAction } from '../../storeActions';
 
 export interface KycFormProps {
   store: SellerStoreRecord;
   copy: Dictionary['seller'];
+  locale: Locale;
 }
 
 const fieldClass =
   'mt-1 block w-full rounded-sm border border-line bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
 
 /** Business details a vendor submits for marketplace KYC review. */
-export function KycForm({ store, copy }: KycFormProps) {
+export function KycForm({ store, copy, locale }: KycFormProps) {
   return (
     <form
       action={submitKycAction}
@@ -93,7 +95,7 @@ export function KycForm({ store, copy }: KycFormProps) {
         >
           {districts.map((district) => (
             <option key={district} value={district}>
-              {district}
+              {placeName(district, locale)}
             </option>
           ))}
         </select>

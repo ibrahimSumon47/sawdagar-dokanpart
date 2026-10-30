@@ -1,5 +1,6 @@
 import { Badge, ButtonLink, Price } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import { formatDate } from '../../../../lib/formatDate';
 import { paymentStatusLabel, statusTone } from '../../labels';
 import type { OrderRecord } from '../../queries';
@@ -53,7 +54,8 @@ export function InvoiceView({ order, copy, locale }: InvoiceViewProps) {
                 {order.shippingLine}, {order.shippingUpazila}
               </span>
               <span className="block">
-                {order.shippingDistrict}, {order.shippingDivision}
+                {placeName(order.shippingDistrict, locale)},{' '}
+                {placeName(order.shippingDivision, locale)}
               </span>
             </address>
           </section>

@@ -1,6 +1,7 @@
 import { Badge, JamdaniPattern } from '@sd/ui';
 import { MapPin, ShieldCheck, Star, Users } from 'lucide-react';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import { formatDate } from '../../../../lib/formatDate';
 
 export interface PublicStoreHeaderProps {
@@ -59,7 +60,7 @@ export function PublicStoreHeader({ store, copy, locale }: PublicStoreHeaderProp
             {store.district ? (
               <span className="inline-flex items-center gap-1">
                 <MapPin aria-hidden="true" className="size-4" />
-                {store.district}
+                {placeName(store.district, locale)}
               </span>
             ) : null}
             <span className="inline-flex items-center gap-1">

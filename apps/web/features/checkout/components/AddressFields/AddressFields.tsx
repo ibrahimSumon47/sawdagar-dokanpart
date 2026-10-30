@@ -1,7 +1,8 @@
 'use client';
 
 import { districtsForDivision, divisions } from '@sd/domain';
-import type { Dictionary } from '../../../../i18n';
+import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 
 export interface AddressDraft {
   recipientName: string;
@@ -17,6 +18,7 @@ export interface AddressFieldsProps {
   value: AddressDraft;
   onChange: (next: AddressDraft) => void;
   copy: Dictionary['checkout'];
+  locale: Locale;
 }
 
 const inputClass =
@@ -25,7 +27,7 @@ const inputClass =
 const labelClass = 'text-sm font-medium text-ink';
 
 /** The address form fields shared by checkout and future account pages. */
-export function AddressFields({ value, onChange, copy }: AddressFieldsProps) {
+export function AddressFields({ value, onChange, copy, locale }: AddressFieldsProps) {
   const set = (field: keyof AddressDraft, next: string) => onChange({ ...value, [field]: next });
   const districts = districtsForDivision(value.division);
 
@@ -86,7 +88,7 @@ export function AddressFields({ value, onChange, copy }: AddressFieldsProps) {
         >
           {divisions.map((division) => (
             <option key={division.name} value={division.name}>
-              {division.name}
+              {placeName(division.name, locale)}
             </option>
           ))}
         </select>
@@ -106,7 +108,7 @@ export function AddressFields({ value, onChange, copy }: AddressFieldsProps) {
         >
           {districts.map((district) => (
             <option key={district} value={district}>
-              {district}
+              {placeName(district, locale)}
             </option>
           ))}
         </select>

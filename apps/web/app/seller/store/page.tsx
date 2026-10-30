@@ -37,7 +37,12 @@ export default async function SellerStorePage({ searchParams }: StoreSettingsPag
           <SellerNotice message={notice.message} tone={notice.tone} />
         </div>
       ) : null}
-      <SellerStoreView store={store} copy={copy.seller} canManage={access.canManage} />
+      <SellerStoreView
+        store={store}
+        copy={copy.seller}
+        canManage={access.canManage}
+        locale={locale}
+      />
     </div>
   );
 }

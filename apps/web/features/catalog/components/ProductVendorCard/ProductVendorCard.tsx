@@ -1,6 +1,7 @@
 import { VendorRow } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import type { ProductDetail } from '../../queries';
 
 export interface ProductVendorCardProps {
@@ -25,7 +26,7 @@ export function ProductVendorCard({ vendor, locale, copy }: ProductVendorCardPro
       >
         <VendorRow
           name={vendor.name}
-          location={vendor.district ?? 'Bangladesh'}
+          location={placeName(vendor.district ?? 'Bangladesh', locale)}
           rating={vendor.rating}
           reviewCount={vendor.reviewCount}
           ratingLabel={copy.ratingLabel(vendor.rating.toFixed(1), vendor.reviewCount)}

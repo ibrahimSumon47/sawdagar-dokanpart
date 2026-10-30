@@ -1,16 +1,17 @@
 import { ButtonLink, SectionHeading } from '@sd/ui';
-import type { Dictionary } from '../../../../i18n';
+import type { Dictionary, Locale } from '../../../../i18n';
 import { site } from '../../../../lib/site';
 import { departmentPhoto } from '../../../catalog/media';
 import { TrustStrip } from '../../../shell/components/TrustStrip';
 
 export interface HomeIntroProps {
   copy: Dictionary;
+  locale: Locale;
 }
 
 /** Opening statement, three promises and the current phase note. */
-export function HomeIntro({ copy }: HomeIntroProps) {
-  const heroPhoto = departmentPhoto('handloom', 'home-hero');
+export function HomeIntro({ copy, locale }: HomeIntroProps) {
+  const heroPhoto = departmentPhoto('handloom', 'home-hero', locale);
 
   return (
     <>

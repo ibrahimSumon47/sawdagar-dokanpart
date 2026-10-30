@@ -2,6 +2,7 @@ import type { RatingSummary } from '@sd/domain';
 import { RatingStars, SectionHeading } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import type { QuestionRecord } from '../../../questions/queries';
 import type { ReviewRecord } from '../../../reviews/queries';
 import { ProductQuestions } from '../../../questions/components/ProductQuestions';
@@ -38,7 +39,7 @@ export function ProductDetail({
   copy,
 }: ProductDetailProps) {
   const catalog = copy.catalog;
-  const photo = departmentPhoto(product.departmentSlug, product.slug);
+  const photo = departmentPhoto(product.departmentSlug, product.slug, locale);
 
   return (
     <article className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
@@ -89,7 +90,8 @@ export function ProductDetail({
             <div>
               <dt className="font-semibold text-ink">{catalog.shippingTitle}</dt>
               <dd className="mt-1 leading-relaxed text-ink-muted">
-                {catalog.shipsFrom(product.vendor.district ?? 'Bangladesh')} {catalog.shippingBody}
+                {catalog.shipsFrom(placeName(product.vendor.district ?? 'Bangladesh', locale))}{' '}
+                {catalog.shippingBody}
               </dd>
             </div>
             <div>

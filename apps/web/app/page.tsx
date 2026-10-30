@@ -15,7 +15,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HomeIntro copy={copy} />
+      <HomeIntro copy={copy} locale={locale} />
       <HomeCatalog categories={categories} featured={featured} locale={locale} copy={copy} />
     </>
   );

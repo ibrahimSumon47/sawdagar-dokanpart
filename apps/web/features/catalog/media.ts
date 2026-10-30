@@ -1,3 +1,5 @@
+import { topLevelCategories } from '@sd/domain';
+import type { Locale } from '../../i18n';
 import { mediaCredits } from './mediaCredits';
 
 /** A department photograph and the crop that suits a given product. */
@@ -26,14 +28,19 @@ function seedValue(seed: string): number {
 export function departmentPhoto(
   departmentSlug: string | undefined,
   seed: string,
+  locale: Locale,
 ): DepartmentPhoto | null {
   if (!departmentSlug) return null;
   const credit = bySlug.get(departmentSlug);
-  if (!credit) return null;
+  const category = topLevelCategories.find((item) => item.slug === departmentSlug);
+  if (!credit || !category) return null;
 
   return {
     src: credit.file,
-    alt: `${credit.label} photograph`,
+    alt:
+      locale === 'bn'
+        ? `${category.name.bn} বিভাগের প্রতিনিধিত্বমূলক ছবি`
+        : `Representative photograph for ${category.name.en}`,
     objectPosition: crops[seedValue(seed) % crops.length] ?? '50% 50%',
   };
 }

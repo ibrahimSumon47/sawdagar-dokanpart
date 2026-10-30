@@ -20,7 +20,7 @@ export function CategoryTiles({ categories, locale }: CategoryTilesProps) {
   return (
     <ul role="list" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {categories.map((category, index) => {
-        const photo = departmentPhoto(category.slug, category.slug);
+        const photo = departmentPhoto(category.slug, category.slug, locale);
         return (
           <li key={category.slug}>
             <Link

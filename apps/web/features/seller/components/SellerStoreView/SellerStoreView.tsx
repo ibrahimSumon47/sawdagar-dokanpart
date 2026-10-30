@@ -1,5 +1,5 @@
 import { Badge, ButtonLink } from '@sd/ui';
-import type { Dictionary } from '../../../../i18n';
+import type { Dictionary, Locale } from '../../../../i18n';
 import type { SellerStoreRecord } from '../../queries';
 import { KycForm } from '../KycForm';
 import { SellerSection } from '../SellerSection';
@@ -9,6 +9,7 @@ export interface SellerStoreViewProps {
   store: SellerStoreRecord;
   copy: Dictionary['seller'];
   canManage: boolean;
+  locale: Locale;
 }
 
 const kycNoticeKey = {
@@ -19,7 +20,7 @@ const kycNoticeKey = {
 } as const;
 
 /** Storefront settings and the business verification section. */
-export function SellerStoreView({ store, copy, canManage }: SellerStoreViewProps) {
+export function SellerStoreView({ store, copy, canManage, locale }: SellerStoreViewProps) {
   const notice =
     copy[kycNoticeKey[store.kycStatus as keyof typeof kycNoticeKey] ?? 'kycNoticeNotStarted'];
   const kycLabel =
@@ -75,7 +76,9 @@ export function SellerStoreView({ store, copy, canManage }: SellerStoreViewProps
         <section>
           <h2 className="font-serif text-xl text-ink">{copy.kycTitle}</h2>
           <p className="mt-1 text-sm text-ink-muted">{copy.kycDescription}</p>
-          <div className="mt-3">{canManage ? <KycForm store={store} copy={copy} /> : null}</div>
+          <div className="mt-3">
+            {canManage ? <KycForm store={store} copy={copy} locale={locale} /> : null}
+          </div>
         </section>
       </div>
     </SellerSection>

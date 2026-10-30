@@ -10,7 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /** Public attribution page for the catalog photography. */
 export default async function CreditsPage() {
-  const copy = getDictionary(await getLocale());
+  const locale = await getLocale();
+  const copy = getDictionary(locale);
 
-  return <MediaCreditsView copy={copy.credits} />;
+  return <MediaCreditsView copy={copy.credits} locale={locale} />;
 }

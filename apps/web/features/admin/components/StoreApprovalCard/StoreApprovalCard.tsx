@@ -1,5 +1,6 @@
 import { Badge, Button } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import { formatDate } from '../../../../lib/formatDate';
 import type { AdminStoreRecord } from '../../storeQueries';
 import { reviewStoreAction } from '../../actions';
@@ -37,7 +38,7 @@ export function StoreApprovalCard({ store, copy, locale }: StoreApprovalCardProp
     },
     { label: copy.tradeLicenseLabel, value: store.tradeLicense },
     { label: copy.payoutPhoneLabel, value: store.payoutPhone },
-    { label: copy.districtLabel, value: store.district },
+    { label: copy.districtLabel, value: store.district ? placeName(store.district, locale) : null },
   ].filter((detail) => detail.value);
 
   return (

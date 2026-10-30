@@ -1,5 +1,6 @@
 import { Price } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { placeName } from '../../../../i18n/places';
 import type { SellerOrderDetail } from '../../queries';
 
 export interface SellerOrderSummaryProps {
@@ -17,7 +18,7 @@ export function SellerOrderSummary({ order, copy, locale }: SellerOrderSummaryPr
         <p className="mt-2 text-sm text-ink">{order.buyerName}</p>
         <p className="text-sm text-ink-muted">{order.shippingPhone}</p>
         <p className="mt-1 text-sm text-ink-muted">
-          {order.shippingLine}, {order.shippingUpazila}, {order.shippingDistrict}
+          {order.shippingLine}, {order.shippingUpazila}, {placeName(order.shippingDistrict, locale)}
         </p>
         {order.notes ? (
           <p className="mt-3 border-t border-line pt-3 text-sm text-ink-muted">
