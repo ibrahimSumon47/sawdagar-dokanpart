@@ -44,6 +44,14 @@ export function SiteFooter({ copy }: SiteFooterProps) {
               </Link>
             </li>
             <li>
+              <Link
+                href="/case-study"
+                className="text-ink-muted transition-colors hover:text-accent"
+              >
+                {copy.footer.caseStudy}
+              </Link>
+            </li>
+            <li>
               <Link href="/design" className="text-ink-muted transition-colors hover:text-accent">
                 {copy.footer.design}
               </Link>

@@ -236,6 +236,19 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | NavigationSection | Mega menu demo and the category list its links point at. | `copy`, `locale` | [NavigationSection.tsx](../apps/web/features/design/components/NavigationSection/NavigationSection.tsx) |
 | QuantityDemo | Client wrapper that holds quantity state for the gallery. | `label`, `decrease`, `increase` | [QuantityDemo.tsx](../apps/web/features/design/components/QuantityDemo/QuantityDemo.tsx) |
 
+## Showcase (`apps/web/features/showcase`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| CaseStudyHero | Opening block of `/case-study`: the pitch, the sandbox notice and the storefront and source actions. | none | [CaseStudyHero.tsx](../apps/web/features/showcase/components/CaseStudyHero/CaseStudyHero.tsx) |
+| CaseStudyMetrics | Headline numbers as a ruled grid: catalog, roles, tests, Lighthouse medians, layout shift and CS modules. | `metrics` | [CaseStudyMetrics.tsx](../apps/web/features/showcase/components/CaseStudyMetrics/CaseStudyMetrics.tsx) |
+| CaseStudyDecisions | Engineering choices and their reasoning as a two-column definition list. | `decisions` | [CaseStudyDecisions.tsx](../apps/web/features/showcase/components/CaseStudyDecisions/CaseStudyDecisions.tsx) |
+| CaseStudyChallenges | Four hard problems with the problem and the shipped fix side by side. | `challenges` | [CaseStudyChallenges.tsx](../apps/web/features/showcase/components/CaseStudyChallenges/CaseStudyChallenges.tsx) |
+| CaseStudyLinks | Links to the deployment, repository, architecture, features, testing and CS notes. | `links` | [CaseStudyLinks.tsx](../apps/web/features/showcase/components/CaseStudyLinks/CaseStudyLinks.tsx) |
+| CaseStudyJsonLd | Schema.org `SoftwareSourceCode` structured data for the case study page. | none | [CaseStudyJsonLd.tsx](../apps/web/features/showcase/components/CaseStudyJsonLd/CaseStudyJsonLd.tsx) |
+
+Content constants for the page live in [caseStudy.ts](../apps/web/features/showcase/caseStudy.ts).
+
 ## CS lab (`apps/web/features/lab`)
 
 | Component | Purpose | Props | Path |

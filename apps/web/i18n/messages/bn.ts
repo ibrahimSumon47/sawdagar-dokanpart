@@ -88,7 +88,7 @@ export const bn: Dictionary = {
     browseAll: 'সব পণ্য দেখুন',
   },
   catalog: {
-    eyebrow: 'ধাপ ৩',
+    eyebrow: 'স্বাধীন বিক্রেতা',
     title: 'ক্যাটালগ',
     description: 'বাংলাদেশের স্বাধীন কারখানার তাঁত, মাটি, পাট ও প্রতিদিনের পণ্য।',
     searchTitle: 'ক্যাটালগে খুঁজুন',
@@ -1059,6 +1059,7 @@ export const bn: Dictionary = {
     credits: 'ছবির স্বীকৃতি',
     help: 'সহায়তা কেন্দ্র',
     journal: 'জার্নাল',
+    caseStudy: 'কেস স্টাডি',
     repository: 'সোর্স কোড',
     demoTitle: 'এই ডেমো সম্পর্কে',
     demoBody: 'সব ডেটা নমুনা। কোনো অর্ডার সম্পন্ন হয় না, কোনো টাকা লেনদেন হয় না।',

@@ -1,0 +1,1 @@
+export { CaseStudyHero } from './CaseStudyHero';

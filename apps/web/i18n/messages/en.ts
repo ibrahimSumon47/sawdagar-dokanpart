@@ -86,7 +86,7 @@ export const en = {
     browseAll: 'Browse all products',
   },
   catalog: {
-    eyebrow: 'Phase 3',
+    eyebrow: 'Independent sellers',
     title: 'Catalog',
     description:
       'Handloom, clay, jute and everyday goods from independent workshops across Bangladesh.',
@@ -1071,6 +1071,7 @@ export const en = {
     credits: 'Image credits',
     help: 'Help Center',
     journal: 'Journal',
+    caseStudy: 'Case study',
     repository: 'Source code',
     demoTitle: 'About this demo',
     demoBody: 'All data is sample data. No orders are fulfilled and no money changes hands.',
