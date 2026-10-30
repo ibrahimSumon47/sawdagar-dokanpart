@@ -1,5 +1,7 @@
 # Lessons
 
+- The six-width overflow check reported no horizontal scrolling at 390 px, yet the header wordmark was clipped to a single letter. Inspect a screenshot at each breakpoint, not only `scrollWidth`, because content can be truncated without overflowing.
+
 - A Lighthouse run reported no product meta description even though the deployed HTML contained one; the tag had streamed into the body after the head. Check where metadata lands in the raw HTML (`indexOf('</head>')`) before trusting it, and remember that `htmlLimitedBots` controls blocking metadata.
 
 - The first Lighthouse workflow run failed because `.lighthouserc.json` used `preset: "lighthouse:default"`; LHCI only accepts `perf`, `experimental` and `desktop`, and mobile is already the default. Read the tool's preset options instead of assuming a Lighthouse CLI preset name.

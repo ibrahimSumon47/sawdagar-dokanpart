@@ -7,6 +7,7 @@
 - Give the home, catalog and product routes self-referencing canonical URLs and keep the shared social card on product pages.
 - Keep product and store meta descriptions within search-snippet length and use the store's description in the active language.
 - Keep route titles and descriptions in the document head by making metadata blocking for every user agent.
+- Hide the wordmark text on narrow headers so the logo is not clipped to a single letter, and label the home link for screen readers.
 - Use licensed, locally stored department photography as representative catalog imagery, localize image descriptions and publish the attribution at `/credits`.
 - Add SEO and error surfaces and enforce client asset budgets after builds.
 - Include only approved, KYC-approved stores in the sitemap, matching the public store page.

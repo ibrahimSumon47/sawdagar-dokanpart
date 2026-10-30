@@ -38,9 +38,13 @@ export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
     <header className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur">
       <AnnouncementBar message={copy.common.demoNotice} />
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex min-h-11 min-w-0 items-center gap-2 text-ink">
+        <Link
+          href="/"
+          aria-label={copy.common.brand}
+          className="flex min-h-11 min-w-0 items-center gap-2 text-ink"
+        >
           <BrandMark className="size-7 shrink-0 text-accent" />
-          <span className="truncate font-serif text-lg tracking-tight sm:text-xl">
+          <span className="hidden truncate font-serif text-lg tracking-tight sm:inline sm:text-xl">
             {copy.common.brand}
           </span>
         </Link>
