@@ -1,0 +1,96 @@
+# Sawdagar Dokanpat
+
+> A non-commercial, bilingual multi-vendor marketplace demonstration for Bangladesh, built as a portfolio project with Next.js 16, Prisma 7, Better Auth and Tailwind CSS 4.
+
+Demo store: payments are sandbox only. No real money is accepted, and every product, seller, review and order is seeded demo data.
+
+## What this is
+
+Sawdagar Dokanpat gives independent Bangladeshi sellers one shared storefront. The seeded catalog has 12 departments, 84 categories, 24 vendors, 432 products and 1,296 variants, all written in English and Bangla.
+
+Buyers can browse and search the catalog, choose a variant, keep a cart as a guest or signed-in user, save a wishlist, compare four products, apply a coupon, check out with a saved or new 64-district address, pay by cash on delivery or the MockPay sandbox, print an invoice, review a delivered product, ask a question and request a return within seven days.
+
+Vendor owners get a Seller Center for store and KYC details, products, variants, stock adjustments, fulfillment, questions, returns, promotions, analytics, finance and a public store page. Platform staff get store approvals, review moderation, a Storefront/Help/Journal CMS with drafts, scheduling and version history, feature flags, platform analytics, finance decisions and an audit log.
+
+The repository is a pnpm workspace orchestrated by Turborepo:
+
+- apps/web: the Next.js App Router application, Prisma schema, migrations and seed scripts.
+- packages/ui: design tokens, the brand mark and shared components with matching skeleton pairs.
+- packages/domain: pure money, category, seed, role, coupon, order, finance and seller rules.
+- packages/cs-core: a C++ search ranker and C SKU kit compiled to WebAssembly, with Python and Java reference modules and TypeScript ports.
+
+## Live demo
+
+- Home: https://sawdagar-dokanpart.vercel.app/
+- Catalog: https://sawdagar-dokanpart.vercel.app/catalog
+- Product page: https://sawdagar-dokanpart.vercel.app/product/full-grain-leather-belt-black
+- Sign in with a demo role: https://sawdagar-dokanpart.vercel.app/sign-in
+- Seller Center: https://sawdagar-dokanpart.vercel.app/seller
+- Admin: https://sawdagar-dokanpart.vercel.app/admin
+- Design system gallery: https://sawdagar-dokanpart.vercel.app/design
+- CS core lab: https://sawdagar-dokanpart.vercel.app/cs-lab
+- Help Center: https://sawdagar-dokanpart.vercel.app/help
+- Journal: https://sawdagar-dokanpart.vercel.app/journal
+- Image credits: https://sawdagar-dokanpart.vercel.app/credits
+
+## Architecture
+
+- Next.js 16 App Router with React 19. Pages are Server Components; client components hold only interaction state such as the cart drawer and variant picker.
+- Mutations are Server Actions that validate input with Zod, resolve the viewer from the session and re-read prices and stock on the server. No price, role, user id or total is accepted from the browser.
+- Prisma 7 with the pg driver adapter on Neon PostgreSQL. Migrations and seeds run only through the Database GitHub Actions workflow, never from a developer machine.
+- Better Auth provides email/password sessions and rate limits. Role areas are enforced by server guards, and the eight demo accounts are allowlisted.
+- Tailwind CSS 4 tokens in packages/ui/src/theme.css drive both themes. The theme and locale are read from cookies before the first paint, so there is no flash or client-side patch.
+- Catalog search is ordered by a C++ relevance ranker compiled to WebAssembly, with an integer-only TypeScript port as the fallback. SKU check characters come from a C module; demand signals and payout settlement have Python and Java reference implementations.
+- CI runs lint, typecheck, 170 unit tests and a production build on Linux, Windows and macOS, plus a reference-module job. A manual and weekly Lighthouse workflow audits the deployment with three mobile runs per URL.
+- Deployed on Vercel Hobby, with the database on Neon Free. Full detail: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/ARCHITECTURE.md
+
+## Features and where they live
+
+- Catalog listing, URL filters and search: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/catalog
+- Product page, variants and JSON-LD: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx
+- Cart, wishlist, compare and coupons: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/shop
+- Checkout, addresses, MockPay, invoices and the mail outbox: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/checkout
+- Reviews, questions and returns: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/reviews
+- Seller Center and public store pages: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/seller
+- Double-entry finance, payouts and refunds: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/packages/domain/src/finance/ledger.ts
+- Admin approvals, CMS, flags, analytics and audit: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/apps/web/features/admin
+- WebAssembly search and SKU modules: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/packages/cs-core
+- Design tokens and shared components: https://github.com/ibrahimSumon47/sawdagar-dokanpart/tree/main/packages/ui/src
+- Feature-to-file index: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/FEATURES.md
+- Component index: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/COMPONENTS.md
+
+More documentation:
+
+- README: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/README.md
+- Database schema and migrations: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/DATABASE.md
+- API routes and Server Actions: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/API.md
+- Testing and Lighthouse results: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/TESTING.md
+- Security controls and residual risks: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/SECURITY.md
+- Deployment, workflows and environment variables: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/DEPLOYMENT.md
+- CS fundamentals behind the four modules: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/CS_FUNDAMENTALS.md
+- Machine-readable project facts: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/PROJECT_FACTS.json
+
+## Demo accounts
+
+Open https://sawdagar-dokanpart.vercel.app/sign-in and use a Try demo button. No password is shown or needed. The allowlist is:
+
+- Buyer: buyer@demo.sawdagar.test
+- Vendor owner: vendor@demo.sawdagar.test
+- Vendor staff: staff@demo.sawdagar.test
+- Support agent: support@demo.sawdagar.test
+- Moderator: moderator@demo.sawdagar.test
+- Finance admin: finance@demo.sawdagar.test
+- Content editor: editor@demo.sawdagar.test
+- Super admin: admin@demo.sawdagar.test
+
+Demo accounts cannot change their email or password. Signing in as the super admin opens the full admin area by design, because the data is non-sensitive demo content.
+
+## Constraints
+
+- The demo is non-commercial, required by Vercel Hobby. There are no ads, affiliate links or real transactions.
+- Payments are cash on delivery and the MockPay sandbox only. SSLCommerz sandbox and Stripe test mode need owner accounts and are not wired; refunds are ledger entries, not gateway refunds.
+- Each department has one licensed representative photograph shared by its products, not a photograph of each item. Review photos are bounded data URLs in PostgreSQL because no object storage is configured.
+- The Python and Java modules are reference implementations checked in CI; requests use the TypeScript ports.
+- Search matches English and Bangla titles and leaf-category names, ranks at most 120 matches, and has no stemming, transliteration or autocomplete.
+- Seeded reviews belong to synthetic buyers without login accounts. Cart totals in the drawer are estimates; checkout charges shipping per seller and destination zone.
+- Known limitations: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/README.md#known-limitations

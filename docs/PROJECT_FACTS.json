@@ -1,0 +1,126 @@
+{
+  "name": "Sawdagar Dokanpat",
+  "pitch": "A non-commercial, bilingual multi-vendor marketplace demonstration for Bangladesh.",
+  "demoUrl": "https://sawdagar-dokanpart.vercel.app",
+  "repositoryUrl": "https://github.com/ibrahimSumon47/sawdagar-dokanpart",
+  "license": "MIT",
+  "updated": "2026-10-30",
+  "stack": {
+    "node": "24 LTS",
+    "pnpm": "12.15.0",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "typescript": "5.9.3",
+    "prisma": "7.10.1",
+    "betterAuth": "1.7.14",
+    "tailwind": "4.3.3",
+    "zod": "4.6.7"
+  },
+  "counts": {
+    "departments": 12,
+    "categories": 84,
+    "vendors": 24,
+    "products": 432,
+    "variants": 1296,
+    "seededReviews": 1755,
+    "demoRoles": 8,
+    "models": 38,
+    "migrations": 9,
+    "pages": 50,
+    "apiRoutes": 2,
+    "unitTests": 170
+  },
+  "unitTests": {
+    "domain": {
+      "files": 13,
+      "cases": 73
+    },
+    "csCore": {
+      "files": 4,
+      "cases": 15
+    },
+    "ui": {
+      "files": 5,
+      "cases": 17
+    },
+    "web": {
+      "files": 20,
+      "cases": 65
+    },
+    "total": 170
+  },
+  "lighthouses": {
+    "run": 41067055369,
+    "strategy": "mobile, median of three runs",
+    "home": {
+      "performance": 93,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "cls": 0
+    },
+    "catalog": {
+      "performance": 95,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "cls": 0
+    },
+    "product": {
+      "performance": 93,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "cls": 0
+    }
+  },
+  "demoAccounts": [
+    {
+      "email": "buyer@demo.sawdagar.test",
+      "name": "Nusrat Jahan",
+      "role": "buyer"
+    },
+    {
+      "email": "vendor@demo.sawdagar.test",
+      "name": "Farhana Rahman",
+      "role": "vendor_owner"
+    },
+    {
+      "email": "staff@demo.sawdagar.test",
+      "name": "Shahidul Islam",
+      "role": "vendor_staff"
+    },
+    {
+      "email": "support@demo.sawdagar.test",
+      "name": "Tanvir Ahmed",
+      "role": "support"
+    },
+    {
+      "email": "moderator@demo.sawdagar.test",
+      "name": "Sabrina Chowdhury",
+      "role": "moderator"
+    },
+    {
+      "email": "finance@demo.sawdagar.test",
+      "name": "Rezaul Karim",
+      "role": "finance"
+    },
+    {
+      "email": "editor@demo.sawdagar.test",
+      "name": "Ayesha Siddiqua",
+      "role": "content_editor"
+    },
+    {
+      "email": "admin@demo.sawdagar.test",
+      "name": "Imran Hossain",
+      "role": "super_admin"
+    }
+  ],
+  "links": {
+    "caseStudy": "https://sawdagar-dokanpart.vercel.app/case-study",
+    "llms": "https://sawdagar-dokanpart.vercel.app/llms.txt",
+    "architecture": "https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/ARCHITECTURE.md",
+    "features": "https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/FEATURES.md",
+    "testing": "https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/TESTING.md"
+  }
+}

@@ -42,3 +42,5 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm perf:budget
+      - run: pnpm facts:check
+      - run: pnpm repo-map:check

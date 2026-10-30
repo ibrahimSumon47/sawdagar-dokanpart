@@ -17,6 +17,10 @@
     "cs:build-wasm": "node scripts/build-wasm.mjs",
     "cs:check-reference": "node scripts/check-reference-modules.mjs",
     "perf:budget": "node scripts/check-perf-budget.mjs",
+    "facts:generate": "node scripts/gen-project-facts.mjs",
+    "facts:check": "node scripts/gen-project-facts.mjs --check",
+    "repo-map:generate": "node scripts/gen-repo-map.mjs",
+    "repo-map:check": "node scripts/gen-repo-map.mjs --check",
     "prepare": "husky"
   },
   "devDependencies": {
