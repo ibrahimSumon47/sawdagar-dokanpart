@@ -1,7 +1,7 @@
-# ADR-002: Double-entry ledger, commissions and payouts
+# ADR-003: Double-entry ledger, commissions and payouts
 
-- Date: 2026-10-28
 - Status: accepted
+- Date: 2026-10-28
 
 ## Context
 

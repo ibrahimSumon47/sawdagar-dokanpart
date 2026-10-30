@@ -1,5 +1,20 @@
 # Decisions
 
+## Architecture decision records
+
+- [ADR-001: Free service evaluation](adr/ADR-001-free-services.md)
+- [ADR-002: Native CS modules with tested ports](adr/ADR-002-cs-core.md)
+- [ADR-003: Double-entry ledger, commissions and payouts](adr/ADR-003-ledger-and-payouts.md)
+- [ADR-004: PostgreSQL on Neon with Prisma 7 and a driver adapter](adr/ADR-004-postgres-and-prisma.md)
+- [ADR-005: Better Auth sessions with an explicit platform role model](adr/ADR-005-better-auth-roles.md)
+- [ADR-006: Server Actions as the write boundary](adr/ADR-006-server-actions-validation.md)
+- [ADR-007: A deterministic, idempotent demo seed](adr/ADR-007-deterministic-seed.md)
+- [ADR-008: Integer poisha for money, with pure ledger builders](adr/ADR-008-integer-money-ledger.md)
+- [ADR-009: Design tokens, skeleton parity and container-query layouts](adr/ADR-009-design-tokens-container-queries.md)
+- [ADR-010: Quality gates on three operating systems and in Actions](adr/ADR-010-ci-migrations-and-lighthouse.md)
+
+The dated entries below record smaller choices that did not need an ADR.
+
 - 2026-10-30: Measure Lighthouse and accessibility against the deployed site in GitHub Actions instead of starting a local server. The project forbids localhost development servers, and the deployment is what visitors actually load. The `Lighthouse` workflow runs on demand and weekly; axe is also checked in the browser against the deployment.
 
 - 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes, so the loading state never reflows, and the production review confirmed 2 to 5 columns depending on the space each page gives the grid.
