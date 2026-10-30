@@ -8,6 +8,7 @@
 - Add `llms.txt` at the repository root and at `/llms.txt`, with a parity test, plus generated `docs/PROJECT_FACTS.json` (including twelve feature-to-file mappings and an explicit unmeasured-coverage note) and `docs/repo-map.md`, with CI checks that fail when either generated file drifts.
 - Replace the catalog's "Phase 3" eyebrow with storefront copy and recapture every README screenshot from production without the browser overlay.
 - Fix the generated-file drift checks on Windows by normalising CRLF and pinning generated files to LF.
+- Refresh the deployment owner actions with the final migration, seed volumes and the case-study, LLM and sitemap URLs.
 - Run Lighthouse against the deployed storefront in a manual and weekly workflow, with mobile budgets for performance, accessibility, best practices, SEO and layout shift.
 - Localize the retry and storefront actions on the root error page.
 - Give the home, catalog and product routes self-referencing canonical URLs and keep the shared social card on product pages.
