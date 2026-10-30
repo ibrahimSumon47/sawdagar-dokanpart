@@ -6,10 +6,7 @@
         "https://sawdagar-dokanpart.vercel.app/catalog",
         "https://sawdagar-dokanpart.vercel.app/product/handwoven-jamdani-saree-indigo"
       ],
-      "numberOfRuns": 1,
-      "settings": {
-        "preset": "lighthouse:default"
-      }
+      "numberOfRuns": 1
     },
     "assert": {
       "assertions": {
