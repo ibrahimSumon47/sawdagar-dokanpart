@@ -1,5 +1,7 @@
 # Lessons
 
+- A newly added contrast test failed the Prettier gate on its first full check. Format edited source files before running the full quality gate, then rerun the affected checks.
+
 - The first Prettier CI check failed on Windows because Git checked out source with CRLF endings while Prettier expected LF. Define source line endings in Git attributes and verify the checkout policy when introducing format checks across platforms.
 
 - I asked the owner to create a Neon project without checking the existing authenticated CLI. Before requesting account actions, check whether the necessary CLI and authenticated access are already available, and avoid displaying credentials.

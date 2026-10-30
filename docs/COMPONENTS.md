@@ -93,8 +93,8 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | SellerPromotionList | Coupon rows with rule, use count and an activate or deactivate action. | `promotions`, `copy`, `locale` | [SellerPromotionList.tsx](../apps/web/features/seller/components/SellerPromotionList/SellerPromotionList.tsx) |
 | SellerAnalyticsView | Ninety-day revenue and unit totals, best sellers and low-stock variants. | `analytics`, `copy`, `locale` | [SellerAnalyticsView.tsx](../apps/web/features/seller/components/SellerAnalyticsView/SellerAnalyticsView.tsx) |
 | StoreSettingsForm | Public storefront identity, bilingual announcement, about, return and shipping policies, accent and cover tone. | `store`, `copy` | [StoreSettingsForm.tsx](../apps/web/features/seller/components/StoreSettingsForm/StoreSettingsForm.tsx) |
-| KycForm | Business name, type, trade licence, payout phone and district for review. | `store`, `copy` | [KycForm.tsx](../apps/web/features/seller/components/KycForm/KycForm.tsx) |
-| SellerStoreView | KYC status, storefront settings and the business verification form. | `store`, `copy`, `canManage` | [SellerStoreView.tsx](../apps/web/features/seller/components/SellerStoreView/SellerStoreView.tsx) |
+| KycForm | Business name, type, trade licence, payout phone and localized district options for review. | `store`, `copy`, `locale` | [KycForm.tsx](../apps/web/features/seller/components/KycForm/KycForm.tsx) |
+| SellerStoreView | KYC status, storefront settings and the business verification form. | `store`, `copy`, `canManage`, `locale` | [SellerStoreView.tsx](../apps/web/features/seller/components/SellerStoreView/SellerStoreView.tsx) |
 | PublicStoreHeader | Public store banner, identity, verification, rating, followers, announcement and description. | `store`, `copy`, `locale` | [PublicStoreHeader.tsx](../apps/web/features/seller/components/PublicStoreHeader/PublicStoreHeader.tsx) |
 | PublicStoreView | Public store products, about text and return and shipping policies. | `store`, `copy`, `locale` | [PublicStoreView.tsx](../apps/web/features/seller/components/PublicStoreView/PublicStoreView.tsx) |
 
@@ -127,6 +127,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
+| MediaCreditsView | Displays photograph attribution and localized department names. | `copy`, `locale` | [MediaCreditsView.tsx](../apps/web/features/content/components/MediaCreditsView/MediaCreditsView.tsx) |
 | ArticleBody | Renders stored plain text as paragraphs split on blank lines. | `body` | [ArticleBody.tsx](../apps/web/features/content/components/ArticleBody/ArticleBody.tsx) |
 | ContentIndexView | Public index for Help Center articles or Journal posts with a patterned card head. | `kind`, `entries`, `copy`, `locale` | [ContentIndexView.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexView.tsx) |
 | ContentArticleView | One published Help article, Journal post or static page with a back link and patterned hero. | `entry`, `kind`, `copy`, `locale` | [ContentArticleView.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleView.tsx) |
@@ -149,6 +150,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
+| HomeIntro | Storefront opening, hero photograph, trust strip and build status. | `copy`, `locale` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
 | SiteHeader | Sticky storefront header with notice strip, wordmark, role-aware links and preferences. | `copy`, `locale`, `theme`, `viewer` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
 | SiteFooter | Footer with the project notice, explore links and demo disclaimer. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
@@ -171,12 +173,12 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | CatalogSearch | GET search form that carries the active facets in hidden fields. | `filters`, `copy` | [CatalogSearch.tsx](../apps/web/features/catalog/components/CatalogSearch/CatalogSearch.tsx) |
 | CatalogFilters | Price, rating, stock and sort facets as a plain GET form, so every value stays in the URL. | `filters`, `copy` | [CatalogFilters.tsx](../apps/web/features/catalog/components/CatalogFilters/CatalogFilters.tsx) |
 | CatalogView | Full listing body shared by search, category and vendor views; owns the results heading, grid, empty state and pagination. | `filters`, `categories`, `category`, `vendor`, `result`, `copy`, `locale` | [CatalogView.tsx](../apps/web/features/catalog/components/CatalogView/CatalogView.tsx) |
-| ProductGrid | Responsive one-to-four-column product grid with wishlist hearts; accepts plain labels so it also renders inside client views. | `products`, `locale`, `labels` (`sale`, `soldOut`, `ratingLabels`) | [ProductGrid.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGrid.tsx) |
-| ProductGridSkeleton | Matches the responsive columns of `ProductGrid` while the page loads. | `count`, `label` | [ProductGridSkeleton.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGridSkeleton.tsx) |
+| ProductGrid | Container-responsive two-to-five-column product grid with wishlist hearts; accepts plain labels so it also renders inside client views. | `products`, `locale`, `labels` (`sale`, `soldOut`, `ratingLabels`) | [ProductGrid.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGrid.tsx) |
+| ProductGridSkeleton | Matches the container-responsive columns of `ProductGrid` while the page loads. | `count`, `label` | [ProductGridSkeleton.tsx](../apps/web/features/catalog/components/ProductGrid/ProductGridSkeleton.tsx) |
 | Pagination | Previous/next pagination that keeps every active filter in the URL. | `filters`, `page`, `pageCount`, `locale`, `copy` | [Pagination.tsx](../apps/web/features/catalog/components/Pagination/Pagination.tsx) |
 | ProductDetail | Product page body: breadcrumbs, media, title, rating, variants, shipping, description, vendor, reviews, questions and related products. | `product`, `related`, `reviews`, `reviewSummary`, `questions`, `signedIn`, `locale`, `copy` | [ProductDetail.tsx](../apps/web/features/catalog/components/ProductDetail/ProductDetail.tsx) |
 | ProductBreadcrumbs | Home, catalog, department, category and product trail. | `category`, `productTitle`, `locale`, `copy` | [ProductBreadcrumbs.tsx](../apps/web/features/catalog/components/ProductBreadcrumbs/ProductBreadcrumbs.tsx) |
-| ProductMedia | Original SVG pattern that stands in for photography, toned per product. | `tone`, `className` | [ProductMedia.tsx](../apps/web/features/catalog/components/ProductMedia/ProductMedia.tsx) |
+| ProductMedia | Representative department photograph, or a toned original SVG pattern when no photo is available. | `tone`, `image`, `className` | [ProductMedia.tsx](../apps/web/features/catalog/components/ProductMedia/ProductMedia.tsx) |
 | ProductVendorCard | Vendor summary with district, rating, verification and product count; links to the vendor-filtered catalog. | `vendor`, `locale`, `copy` | [ProductVendorCard.tsx](../apps/web/features/catalog/components/ProductVendorCard/ProductVendorCard.tsx) |
 | VariantPicker | Controlled variant radios; the buy box owns selection and renders price, SKU and stock. | `variants`, `selectedId`, `onSelect`, `name`, `locale`, `label` | [VariantPicker.tsx](../apps/web/features/catalog/components/VariantPicker/VariantPicker.tsx) |
 | ProductJsonLd | Schema.org Product structured data with escaped text for a script context. | `product`, `locale` | [ProductJsonLd.tsx](../apps/web/features/catalog/components/ProductJsonLd/ProductJsonLd.tsx) |
@@ -208,7 +210,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | Component | Purpose | Props | Path |
 |---|---|---|---|
 | CheckoutView | Client checkout form with saved-address choice, new-address fields, payment selection and live totals. | `items`, `coupon`, `addresses`, `copy`, `locale` | [CheckoutView.tsx](../apps/web/features/checkout/components/CheckoutView/CheckoutView.tsx) |
-| AddressFields | Name, phone, division, district, upazila, area and street fields with district options from the selected division. | `value`, `onChange`, `copy` | [AddressFields.tsx](../apps/web/features/checkout/components/AddressFields/AddressFields.tsx) |
+| AddressFields | Name, phone, division, district, upazila, area and street fields with localized division and district options. | `value`, `onChange`, `copy`, `locale` | [AddressFields.tsx](../apps/web/features/checkout/components/AddressFields/AddressFields.tsx) |
 | PaymentOptions | Accessible radio cards for cash on delivery and MockPay. | `value`, `onChange`, `copy` | [PaymentOptions.tsx](../apps/web/features/checkout/components/PaymentOptions/PaymentOptions.tsx) |
 | CheckoutSummary | Server-priced subtotal, shipping, coupon, included VAT and total beside the form. | `totals`, `count`, `couponCode`, `locale`, `copy` | [CheckoutSummary.tsx](../apps/web/features/checkout/components/CheckoutSummary/CheckoutSummary.tsx) |
 | MockPayPanel | The sandbox gateway page with pay and cancel actions. | `paymentId`, `token`, `orderNumber`, `amountMinor`, `locale`, `copy` | [MockPayPanel.tsx](../apps/web/features/checkout/components/MockPayPanel/MockPayPanel.tsx) |

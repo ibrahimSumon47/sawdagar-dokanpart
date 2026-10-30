@@ -8,7 +8,7 @@
 
 ## Catalog photography
 
-Twelve department photographs are stored in `apps/web/public/media/departments` (960 × 720, JPEG). They stand in for the whole department, so a product card shows a representative photograph rather than the exact item; the site labels the catalog as demo data. The same credits are published at `/credits`, which is linked from the footer.
+Twelve department photographs are stored in `apps/web/public/media/departments` (800 × 600, JPEG). They stand in for the whole department, so a product card shows a representative photograph rather than the exact item; the site labels the catalog as demo data. The same credits are published at `/credits`, which is linked from the footer.
 
 | Department | File | Photographer | Licence | Source |
 |---|---|---|---|---|
@@ -25,7 +25,7 @@ Twelve department photographs are stored in `apps/web/public/media/departments` 
 | Beauty and care | `beauty-care.jpg` | Malene Thyssen | CC BY 2.5 | [Handmade soap](https://commons.wikimedia.org/wiki/File:Handmade_soap.jpg) |
 | Books and stationery | `books-stationery.jpg` | Ch. Maderthoner | CC0 | [Old Books 01](https://commons.wikimedia.org/wiki/File:Old_Books_01.JPG) |
 
-The images were resized and centre-cropped to 960 × 720; no other alterations were made. CC BY and CC BY-SA files remain under their original licences, and the table above provides the attribution those licences require. `scripts/fetch-catalog-media.mjs` records the same metadata and regenerates `apps/web/features/catalog/mediaCredits.ts`. Before replacing any file, check its licence and update both this table and that manifest.
+The images were resized and centre-cropped to 800 × 600; no other alterations were made. CC BY and CC BY-SA files remain under their original licences, and the table above provides the attribution those licences require. `scripts/fetch-catalog-media.mjs` records the same metadata and regenerates `apps/web/features/catalog/mediaCredits.ts`. Before replacing any file, check its licence and update both this table and that manifest.
 
 ## Seed data
 

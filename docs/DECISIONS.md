@@ -1,5 +1,9 @@
 # Decisions
 
+- 2026-10-30: Size product grids from their container rather than viewport breakpoints, because the catalog's filters reduce the space available for cards. The loaded grid and skeleton share the same column classes; browser verification remains outstanding.
+
+- 2026-10-30: Translate known Bangladesh place names at display time and keep canonical English division and district values in forms and storage. This avoids changing shipping calculations and existing addresses; unknown user-entered place names are displayed unchanged.
+
 - 2026-10-28: Start Phase 0 with a static, bilingual landing page and workspace quality gates. It does not require data loading, so no skeleton, empty state, or retry state is shown for this static content. Interactive localization and the design system remain Phase 1 work.
 - 2026-10-28: Use ESLint 9.39.5 rather than ESLint 10 because the current Next.js plugins declare support only through ESLint 9; revisit when their peer ranges support the newer major version.
 - 2026-10-28: Check formatting for web application source with the pinned Prettier configuration as part of lint. Documentation and generated files remain outside this first formatting scope to avoid unrelated rewrites.

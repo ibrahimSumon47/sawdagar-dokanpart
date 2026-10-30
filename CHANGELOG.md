@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Use licensed, locally stored department photography as representative catalog imagery, localize image descriptions and publish the attribution at `/credits`.
+- Add SEO and error surfaces and enforce client asset budgets after builds.
+- Include only approved, KYC-approved stores in the sitemap, matching the public store page.
+- Improve status badge, seller notice and avatar contrast on tinted backgrounds in light and dark themes.
+- Localize Bangladesh division and district display names without changing stored address identifiers.
+- Make product grids and loading skeletons adapt to available width, and separate the sold-out badge from the wishlist control.
+
 - Add the CS core package: C++ search ranking and a C SKU kit compiled to WebAssembly, plus Python demand insights and Java settlement reference implementations with TypeScript ports.
 - Order catalog search results by relevance and typo tolerance instead of insertion order, with a WebAssembly-first engine and a port fallback.
 - Give every new product SKU a position-weighted check character, and show trend, days of cover and restock hints on seller analytics.
