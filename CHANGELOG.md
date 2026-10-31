@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Revision 1, phase R1: remove the demo framing. Delete the top notice strip, give the header a Catalog, Categories mega menu and Sell on Sawdagar navigation with a search field, move the design system, case study, CS core, image credits and repository links into a footer Project column and a new `/about/project` page, replace the footer's demo disclaimer with the single test-mode payments line, label the checkout payment method as test mode, and rewrite the home, sign-in and catalog copy in both languages.
+
 - Add a public `/case-study` page with project numbers, engineering decisions, hard problems, links and `SoftwareSourceCode` structured data, linked from the footer and sitemap.
 - Rewrite the README as a portfolio overview with an original banner, six production screenshots, demo credentials, per-role features, architecture and ER diagrams, measured numbers and known limitations; add the MIT licence.
 - Complete the architecture decision record set to ten records, index them from `docs/DECISIONS.md`, and refresh the free-service record to match the deployed services.

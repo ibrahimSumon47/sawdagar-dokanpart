@@ -65,7 +65,7 @@ export function CheckoutSummary({ totals, count, couponCode, locale, copy }: Che
       </dl>
 
       <p className="mt-4 border-t border-line pt-3 text-xs leading-relaxed text-ink-muted">
-        {copy.sandboxNote}
+        {copy.testModeLabel}
       </p>
     </div>
   );

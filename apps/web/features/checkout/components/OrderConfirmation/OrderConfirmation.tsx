@@ -132,8 +132,6 @@ export function OrderConfirmation({
               {copy.mailLink}
             </Link>
           </div>
-
-          <p className="text-xs leading-relaxed text-ink-muted">{copy.demoNotice}</p>
         </aside>
       </div>
     </div>

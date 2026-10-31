@@ -41,7 +41,7 @@
 - Phase 12 production check: `/case-study` returned 200 with a self-referencing canonical, structured data and a footer link, and the sitemap listed 473 URLs including it. `/llms.txt` returned 200 as plain text and matched the root copy byte for byte. The six README screenshots were recaptured from production in a fresh headless browser at 1280 × 860 and 390 × 844, so they show no signed-in state or browser overlay. The new case-study page was checked at 360 px in dark theme and in the Bangla shell: no horizontal overflow, every section rendered, and the localized footer held its layout. Local lint, typecheck, 170 tests, build, asset budgets and both drift checks passed. The first CI run failed only on Windows in `facts:check` because the generated JSON was checked out with CRLF; both checks now normalise line endings and the generated files are pinned to LF, and the final CI run and Vercel deployment are green.
 
 ## Now
-- All twelve roadmap phases are complete and verified on production. The repository is ready for the owner's review and the changes that follow it.
+- Revision 1, phase R1 (remove the demo framing): the notice strip, header project links and demo disclaimers are gone; the header carries Catalog, Categories, Sell on Sawdagar and search; project links live in the footer Project column and on `/about/project`; the footer shows one test-mode payments line and the checkout payment method carries a test-mode label. R2 (product images) is next.
 
 ## Next
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.

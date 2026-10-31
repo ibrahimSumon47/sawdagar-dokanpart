@@ -23,13 +23,19 @@ If sources conflict, priority is: newest owner instruction in REQUIREMENTS_LOG >
 ## 3. Free-only policy
 - Every service must be free forever, with no credit card and no time-limited trial, and must not add watermarks or expire. Before adopting any service or package, check its current free terms and license. Record the result in `docs/adr/ADR-001-free-services.md`.
 - If a limit could be hit, design around it (cache, paginate, batch, degrade gracefully with a friendly message). Never silently depend on a paid feature.
-- Vercel Hobby is non-commercial: this is a demo store. No real money, ads or affiliate links. Show a visible "Demo store, sandbox payments" notice.
+- Vercel Hobby is non-commercial: this is a portfolio store, not a shop that takes money. No real payments, ads or affiliate links. Test-mode payments are disclosed in exactly two places, nowhere else: one footer line, "Payments run in test mode. No real money is charged.", and a small "Test-mode payment" label beside the payment method at checkout. `README.md`, `/about/project` and `llms.txt` may say plainly that this is a portfolio project with seeded data; the storefront and the rest of the documentation should read as a real store.
 
 ## 4. Environment policy (no localhost)
 - Do NOT start dev servers and never put localhost URLs in code, config or docs.
 - Allowed locally: install, lint, typecheck, unit tests, `build`. Everything else (database migrations, seeding, end-to-end tests, Lighthouse, deployment) runs in GitHub Actions or on Vercel.
 - Secrets live only in the Vercel and GitHub dashboards. Never ask the owner to paste a secret into chat. Instead, list the variable names the owner must add in `docs/DEPLOYMENT.md` under "Owner actions".
 - Tooling must work on Windows, macOS and Linux: automation scripts are Node `.mjs`, use `path` helpers, no bash-only syntax.
+- One exception covers a localhost service: the agentmemory daemon, which runs on the developer's own machine only. It is allowed because it is free, local and account-free, it never appears in application code, config or deployment, and the repository's own `docs/` memory files stay the source of truth. Nothing else may listen on or reference a local address.
+
+## 4a. Global tooling
+- Agent skills and reference repositories live outside this project, in `~/.agents/`, and are installed by the two-tier method in [docs/spec/06-revision-1.md](docs/spec/06-revision-1.md) section 9: clone references read-only, then install only the few skills this project uses.
+- [docs/TOOLING.md](docs/TOOLING.md) records every tool with its version, install location and the reason any tool was skipped. It also carries a "Reproduce on your machine" section. Update it in the same commit that installs or skips a tool.
+- Never load a whole skill library into a session and never copy third-party code, assets or text into this repository.
 
 ## 5. Work protocol (the slice loop)
 1. Read the reading-order files. State in `docs/PROJECT_STATE.md` under "Now" exactly what slice you are doing.

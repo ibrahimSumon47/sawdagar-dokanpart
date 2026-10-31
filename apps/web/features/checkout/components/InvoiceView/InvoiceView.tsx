@@ -31,7 +31,7 @@ export function InvoiceView({ order, copy, locale }: InvoiceViewProps) {
         <header className="flex flex-wrap items-start justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-serif text-2xl text-ink">{copy.common.brand}</p>
-            <p className="mt-1 text-xs text-ink-muted">{copy.checkout.demoNotice}</p>
+            <p className="mt-1 text-xs text-ink-muted">{copy.checkout.placedOn}</p>
           </div>
           <div className="text-right">
             <h1 className="font-serif text-3xl text-ink">{copy.checkout.invoiceTitle}</h1>
@@ -140,7 +140,7 @@ export function InvoiceView({ order, copy, locale }: InvoiceViewProps) {
         </div>
 
         <footer className="mt-8 border-t border-line pt-4 text-xs leading-relaxed text-ink-muted">
-          {copy.checkout.vatIncluded} · {copy.checkout.demoNotice}
+          {copy.checkout.vatIncluded}
         </footer>
       </article>
     </div>

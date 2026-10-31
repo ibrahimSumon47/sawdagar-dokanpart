@@ -1,8 +1,7 @@
 import { hasArea, type PlatformRole } from '@sd/domain';
 import Link from 'next/link';
-import { AnnouncementBar, BrandMark } from '@sd/ui';
+import { BrandMark, MegaMenu } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
-import { site } from '../../../../lib/site';
 import { LocaleSwitcher } from '../../../preferences/components/LocaleSwitcher';
 import { ThemeToggle } from '../../../preferences/components/ThemeToggle';
 import { CartTrigger } from '../../../shop/components/CartTrigger';
@@ -16,27 +15,39 @@ export interface SiteHeaderProps {
   theme: Theme;
   /** Signed-in visitor, or null for guests. */
   viewer: { name: string; role: PlatformRole } | null;
+  /** Top departments for the Categories panel, already in the active language. */
+  categories: readonly { slug: string; label: string }[];
 }
 
-/** Sticky storefront header with the announcement strip, wordmark and controls. */
-export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
-  const links = [
+/**
+ * Sticky storefront header: wordmark, catalog and category navigation, search,
+ * and the language, theme, compare, cart and account controls. Project links
+ * live in the footer instead, so the header reads as a shop.
+ */
+export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHeaderProps) {
+  const accountLinks = viewer
+    ? [
+        { label: copy.nav.account, href: '/account' },
+        ...(hasArea(viewer.role, 'seller') ? [{ label: copy.nav.seller, href: '/seller' }] : []),
+        ...(hasArea(viewer.role, 'admin') ? [{ label: copy.nav.admin, href: '/admin' }] : []),
+      ]
+    : [{ label: copy.nav.signIn, href: '/sign-in' }];
+
+  const menuLinks = [
     { label: copy.nav.catalog, href: '/catalog' },
+    { label: copy.nav.sell, href: '/seller' },
     { label: copy.nav.wishlist, href: '/wishlist' },
-    { label: copy.nav.design, href: '/design' },
-    ...(viewer
-      ? [
-          { label: copy.nav.account, href: '/account' },
-          ...(hasArea(viewer.role, 'seller') ? [{ label: copy.nav.seller, href: '/seller' }] : []),
-          ...(hasArea(viewer.role, 'admin') ? [{ label: copy.nav.admin, href: '/admin' }] : []),
-        ]
-      : [{ label: copy.nav.signIn, href: '/sign-in' }]),
-    { label: copy.nav.repository, href: site.repositoryUrl, external: true },
+    ...accountLinks,
   ];
+
+  const categoryLinks = categories.map((category) => ({
+    key: category.slug,
+    label: category.label,
+    href: `/catalog?category=${category.slug}`,
+  }));
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur">
-      <AnnouncementBar message={copy.common.demoNotice} />
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -48,18 +59,41 @@ export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
             {copy.common.brand}
           </span>
         </Link>
-        <nav aria-label={copy.nav.label} className="ml-auto hidden items-center gap-1 lg:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
-            >
-              {link.label}
-            </Link>
-          ))}
+
+        <nav aria-label={copy.nav.label} className="hidden items-center gap-1 lg:flex">
+          <Link
+            href="/catalog"
+            className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
+          >
+            {copy.nav.catalog}
+          </Link>
+          <MegaMenu label={copy.nav.categories} links={categoryLinks} />
+          <Link
+            href="/seller"
+            className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
+          >
+            {copy.nav.sell}
+          </Link>
         </nav>
-        <div className="ml-auto flex items-center gap-1 lg:ml-0">
+
+        <form
+          action="/catalog"
+          role="search"
+          className="ml-auto hidden max-w-xs items-center gap-2 xl:flex"
+        >
+          <label htmlFor="header-search" className="sr-only">
+            {copy.nav.search}
+          </label>
+          <input
+            id="header-search"
+            name="q"
+            type="search"
+            placeholder={copy.catalog.searchPlaceholder}
+            className="min-h-11 w-full rounded-sm border border-line bg-surface px-3 text-sm text-ink placeholder:text-ink-muted focus:border-accent focus:outline-none"
+          />
+        </form>
+
+        <div className="ml-auto flex items-center gap-1 xl:ml-0">
           <LocaleSwitcher locale={locale} label={copy.preferences.language} />
           <ThemeToggle
             theme={theme}
@@ -68,13 +102,24 @@ export function SiteHeader({ copy, locale, theme, viewer }: SiteHeaderProps) {
           <CompareTrigger />
           <CartTrigger />
           <MobileMenu
-            links={links}
+            links={menuLinks}
             labels={{
               menu: copy.nav.menu,
               open: copy.nav.openMenu,
               close: copy.nav.closeMenu,
             }}
           />
+        </div>
+      </div>
+      <div className="border-t border-line lg:hidden">
+        <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
+          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="lg:hidden" />
+          <Link
+            href="/seller"
+            className="text-sm font-medium text-ink-muted transition-colors hover:text-accent"
+          >
+            {copy.nav.sell}
+          </Link>
         </div>
       </div>
     </header>

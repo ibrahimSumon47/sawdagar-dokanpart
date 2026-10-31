@@ -1,6 +1,5 @@
-import { ButtonLink, SectionHeading } from '@sd/ui';
+import { ButtonLink } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
-import { site } from '../../../../lib/site';
 import { departmentPhoto } from '../../../catalog/media';
 import { TrustStrip } from '../../../shell/components/TrustStrip';
 
@@ -9,7 +8,7 @@ export interface HomeIntroProps {
   locale: Locale;
 }
 
-/** Opening statement, three promises and the current phase note. */
+/** Opening statement and the three delivery promises under the hero. */
 export function HomeIntro({ copy, locale }: HomeIntroProps) {
   const heroPhoto = departmentPhoto('handloom', 'home-hero', locale);
 
@@ -29,7 +28,7 @@ export function HomeIntro({ copy, locale }: HomeIntroProps) {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/catalog">{copy.home.primaryCta}</ButtonLink>
-              <ButtonLink href="/design" variant="secondary">
+              <ButtonLink href="/seller" variant="secondary">
                 {copy.home.secondaryCta}
               </ButtonLink>
             </div>
@@ -47,7 +46,6 @@ export function HomeIntro({ copy, locale }: HomeIntroProps) {
             ) : null}
             <div className="absolute inset-x-0 bottom-0 border-t border-line bg-surface/95 p-4 text-ink backdrop-blur">
               <p className="font-serif text-lg">{copy.common.brand}</p>
-              <p className="text-xs text-ink-muted">{copy.common.demoNotice}</p>
             </div>
           </div>
         </div>
@@ -55,19 +53,6 @@ export function HomeIntro({ copy, locale }: HomeIntroProps) {
 
       <section className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <TrustStrip points={copy.home.trust} />
-      </section>
-
-      <section className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow={copy.home.statusEyebrow}
-          title={copy.home.statusTitle}
-          description={copy.home.statusBody}
-          action={
-            <ButtonLink href={site.repositoryUrl} variant="ghost">
-              {copy.home.statusLink}
-            </ButtonLink>
-          }
-        />
       </section>
     </>
   );

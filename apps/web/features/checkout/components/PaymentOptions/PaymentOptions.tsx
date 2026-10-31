@@ -12,7 +12,7 @@ export interface PaymentOptionsProps {
 const cardClass =
   'flex cursor-pointer gap-3 rounded-sm border border-line bg-surface p-4 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/5';
 
-/** Cash on delivery and the sandbox gateway, as one accessible radio group. */
+/** Cash on delivery and the test-mode gateway, as one accessible radio group. */
 export function PaymentOptions({ value, onChange, copy }: PaymentOptionsProps) {
   return (
     <fieldset className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -42,7 +42,12 @@ export function PaymentOptions({ value, onChange, copy }: PaymentOptionsProps) {
           className="mt-1 size-4 accent-[var(--color-accent)]"
         />
         <span>
-          <span className="block text-sm font-semibold text-ink">{copy.mockPayTitle}</span>
+          <span className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
+            {copy.mockPayTitle}
+            <span className="rounded-sm bg-ink/5 px-2 py-0.5 text-xs font-medium text-ink-muted">
+              {copy.testModeLabel}
+            </span>
+          </span>
           <span className="mt-1 block text-sm leading-relaxed text-ink-muted">
             {copy.mockPayBody}
           </span>

@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Sawdagar Dokanpat, a Bangladeshi marketplace demonstration';
+export const alt = 'Sawdagar Dokanpat, a multi-vendor marketplace for Bangladesh';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -34,7 +34,7 @@ export default function OpengraphImage() {
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 24 }}>
-        <div style={{ color: '#57534e' }}>Demo store · sandbox payments</div>
+        <div style={{ color: '#57534e' }}>Independent sellers across Bangladesh</div>
         <div style={{ color: '#c2410c' }}>sawdagar-dokanpart.vercel.app</div>
       </div>
     </div>,

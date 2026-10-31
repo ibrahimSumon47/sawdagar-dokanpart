@@ -6,7 +6,7 @@ Every component has one job, a typed props interface and a short TSDoc block. Sh
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| AnnouncementBar | Thin moving strip for the demo notice; the moving copy is hidden from assistive technology and announced once. | `message`, `className` | [AnnouncementBar.tsx](../packages/ui/src/components/AnnouncementBar/AnnouncementBar.tsx) |
+| AnnouncementBar | Thin notice strip, shown in the design gallery; the storefront header no longer uses it. | `message`, `className` | [AnnouncementBar.tsx](../packages/ui/src/components/AnnouncementBar/AnnouncementBar.tsx) |
 | Badge | Compact status label for sale flags and order states. | `tone` (`neutral`, `accent`, `success`, `warning`, `danger`), span attributes | [Badge.tsx](../packages/ui/src/components/Badge/Badge.tsx) |
 | BrandMark | Original jamdani-inspired wordmark glyph drawn in the current text colour. | `className` | [BrandMark.tsx](../packages/ui/src/components/BrandMark/BrandMark.tsx) |
 | Button | Action button in three variants and two sizes. | `variant`, `size`, button attributes | [Button.tsx](../packages/ui/src/components/Button/Button.tsx) |
@@ -151,9 +151,15 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | Component | Purpose | Props | Path |
 |---|---|---|---|
 | HomeIntro | Storefront opening, hero photograph, trust strip and build status. | `copy`, `locale` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
-| SiteHeader | Sticky storefront header with notice strip, wordmark, role-aware links and preferences. | `copy`, `locale`, `theme`, `viewer` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
+| SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search and the role-aware controls. | `copy`, `locale`, `theme`, `viewer`, `categories` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
-| SiteFooter | Footer with the project notice, explore links and demo disclaimer. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+| SiteFooter | Footer with the Shop and Project link columns and the test-mode payments line. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+
+## About (`apps/web/features/about`)
+
+| Component | Purpose | Props | Path |
+|---|---|---|---|
+| ProjectAbout | `/about/project` body: what the store is, what the seeded data represents, how it is built and the project links. | `copy`, `repositoryUrl` | [ProjectAbout.tsx](../apps/web/features/about/components/ProjectAbout/ProjectAbout.tsx) |
 | TrustStrip | Three short promises under the home hero. | `points` | [TrustStrip.tsx](../apps/web/features/shell/components/TrustStrip/TrustStrip.tsx) |
 
 ## Preferences (`apps/web/features/preferences`)

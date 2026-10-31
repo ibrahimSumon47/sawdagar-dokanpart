@@ -19,14 +19,11 @@ const errorCopy = {
   'not-configured': (copy: Dictionary) => copy.signIn.errorNotConfigured,
 } as const;
 
-/** Sign-in page body: demo role cards, or a setup notice without secrets. */
+/** Sign-in page body: ready-made account cards, or a setup notice without secrets. */
 export function SignInPanel({ copy, next, configured, error }: SignInPanelProps) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <header className="max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          {copy.common.demoNotice}
-        </p>
         <h1 className="mt-3 text-display font-serif leading-tight text-ink">{copy.signIn.title}</h1>
         <p className="mt-3 text-lead leading-relaxed text-ink-muted">{copy.signIn.description}</p>
       </header>

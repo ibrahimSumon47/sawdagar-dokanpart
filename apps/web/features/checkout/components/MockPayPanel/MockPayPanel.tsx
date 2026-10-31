@@ -35,7 +35,7 @@ export function MockPayPanel({
           <Price amountMinor={amountMinor} locale={locale} size="lg" />
         </p>
 
-        <p className="mt-4 text-sm leading-relaxed text-ink-muted">{copy.sandboxNote}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink-muted">{copy.testModeLabel}</p>
 
         <form action={payMockPaymentAction} className="mt-6">
           <input type="hidden" name="paymentId" value={paymentId} />

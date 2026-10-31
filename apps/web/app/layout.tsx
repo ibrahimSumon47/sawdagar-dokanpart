@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Fraunces, Inter, Noto_Sans_Bengali } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { getViewer } from '../features/auth/session';
+import { getCatalogCategories } from '../features/catalog/queries';
 import { getTheme } from '../features/preferences/getTheme';
 import { ShopProvider } from '../features/shop/components/ShopProvider';
 import { getShopState } from '../features/shop/queries';
@@ -54,8 +55,15 @@ interface RootLayoutProps {
 /** Renders the shell, theme attributes and language for every route. */
 export default async function RootLayout({ children }: RootLayoutProps) {
   const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
-  const shopState = await getShopState(viewer?.id ?? null);
+  const [shopState, categories] = await Promise.all([
+    getShopState(viewer?.id ?? null),
+    getCatalogCategories(),
+  ]);
   const copy = getDictionary(locale);
+  const headerCategories = categories.map((category) => ({
+    slug: category.slug,
+    label: category.name[locale],
+  }));
 
   return (
     <html
@@ -85,6 +93,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               locale={locale}
               theme={theme}
               viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
+              categories={headerCategories}
             />
             <main id="main" className="flex-1">
               {children}

@@ -7,9 +7,35 @@ export interface SiteFooterProps {
   copy: Dictionary;
 }
 
-/** Site footer with the project notice, explore links and demo disclaimer. */
+interface FooterLink {
+  label: string;
+  href: string;
+  /** Opens the public repository in a new tab. */
+  external?: boolean;
+}
+
+/**
+ * Site footer: the store blurb, shopping links, the project links that used to
+ * sit in the header, and the one permitted test-payment disclosure line.
+ */
 export function SiteFooter({ copy }: SiteFooterProps) {
   const year = new Date().getFullYear();
+
+  const shopLinks: FooterLink[] = [
+    { label: copy.footer.catalog, href: '/catalog' },
+    { label: copy.footer.wishlist, href: '/wishlist' },
+    { label: copy.footer.help, href: '/help' },
+    { label: copy.footer.journal, href: '/journal' },
+  ];
+
+  const projectLinks: FooterLink[] = [
+    { label: copy.footer.aboutProject, href: '/about/project' },
+    { label: copy.footer.design, href: '/design' },
+    { label: copy.footer.csLab, href: '/cs-lab' },
+    { label: copy.footer.caseStudy, href: '/case-study' },
+    { label: copy.footer.credits, href: '/credits' },
+    { label: copy.footer.repository, href: site.repositoryUrl, external: true },
+  ];
 
   return (
     <footer className="mt-20 border-t border-line bg-surface">
@@ -23,70 +49,58 @@ export function SiteFooter({ copy }: SiteFooterProps) {
             {copy.footer.blurb}
           </p>
         </div>
-        <nav aria-label={copy.footer.exploreTitle}>
+
+        <nav aria-label={copy.footer.shopTitle}>
           <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink">
-            {copy.footer.exploreTitle}
+            {copy.footer.shopTitle}
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
-            <li>
-              <Link href="/catalog" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.catalog}
-              </Link>
-            </li>
-            <li>
-              <Link href="/help" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.help}
-              </Link>
-            </li>
-            <li>
-              <Link href="/journal" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.journal}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/case-study"
-                className="text-ink-muted transition-colors hover:text-accent"
-              >
-                {copy.footer.caseStudy}
-              </Link>
-            </li>
-            <li>
-              <Link href="/design" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.design}
-              </Link>
-            </li>
-            <li>
-              <Link href="/cs-lab" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.csLab}
-              </Link>
-            </li>
-            <li>
-              <Link href="/credits" className="text-ink-muted transition-colors hover:text-accent">
-                {copy.footer.credits}
-              </Link>
-            </li>
-            <li>
-              <a
-                href={site.repositoryUrl}
-                className="text-ink-muted transition-colors hover:text-accent"
-              >
-                {copy.footer.repository}
-              </a>
-            </li>
+            {shopLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-ink-muted transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
-        <div>
+
+        <nav aria-label={copy.footer.projectTitle}>
           <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink">
-            {copy.footer.demoTitle}
+            {copy.footer.projectTitle}
           </h2>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
-            {copy.footer.demoBody}
-          </p>
-        </div>
+          <ul className="mt-3 space-y-2 text-sm">
+            {projectLinks.map((link) => (
+              <li key={link.href}>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    className="text-ink-muted transition-colors hover:text-accent"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="text-ink-muted transition-colors hover:text-accent"
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
+
       <div className="border-t border-line px-4 py-4 text-center text-xs text-ink-muted">
-        <span className="tabular-nums">© {year}</span> {copy.common.brand} · {copy.footer.legal}
+        <p>{copy.common.testMode}</p>
+        <p className="mt-1">
+          <span className="tabular-nums">© {year}</span> {copy.common.brand} · {copy.footer.legal}
+        </p>
       </div>
     </footer>
   );
