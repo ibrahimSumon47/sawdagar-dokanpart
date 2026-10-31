@@ -60,7 +60,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           </span>
         </Link>
 
-        <nav aria-label={copy.nav.label} className="hidden items-center gap-1 lg:flex">
+        <nav aria-label={copy.nav.label} className="hidden items-center gap-1 md:flex">
           <Link
             href="/catalog"
             className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
@@ -111,9 +111,9 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           />
         </div>
       </div>
-      <div className="border-t border-line lg:hidden">
+      <div className="border-t border-line md:hidden">
         <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
-          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="lg:hidden" />
+          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="md:hidden" />
           <Link
             href="/seller"
             className="text-sm font-medium text-ink-muted transition-colors hover:text-accent"
