@@ -23,6 +23,13 @@
 
 Vercel stores the three production values as hidden secrets. `DIRECT_DATABASE_URL` is intentionally not present in Vercel, because the runtime uses the pooled connection and never runs migrations.
 
+## Build and deploy behaviour
+
+- Vercel installs from the workspace root even though the Root Directory is `apps/web`, so `pnpm install` covers all five workspace projects (897 package directories). With the build cache present (478 MiB of the 1.5 GiB limit) a rebuild restores it, the install finishes in milliseconds and Turbo replays the `@sd/web` build from its remote cache: the rebuild at `1eb44a8` took 15 seconds.
+- A cache-miss build skips all of that and downloads the full dependency tree, which can take minutes on a slow registry. A `[WARN] Tarball download average speed` line is pnpm reporting throughput below its threshold and retrying; it is a warning, not a failure, and the deployment stays in Building while the downloads finish.
+- Do not trim the install to speed up cache-miss builds. CI-only tooling (Lighthouse, commitlint, husky, Prettier) is 28 of those 897 directories, and any filter that drops the workspace root also drops `turbo`, which costs the remote cache that keeps normal rebuilds at 15 seconds.
+- Keep a single Vercel project for this repository. A second import gets a suffixed project name and no environment variables, so it would build cleanly and then fail on the first database or session read.
+
 ## Database workflow
 
 Run `Database` from the Actions tab or with `gh workflow run db.yml -f task=migrate`. Tasks:

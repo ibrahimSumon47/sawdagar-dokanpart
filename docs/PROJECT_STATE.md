@@ -70,7 +70,7 @@
 - There is no buyer-facing payment statement or downloadable ledger export yet.
 - Listing pagination uses an offset `page` parameter; the specification's cursor pagination is deferred.
 - The catalog seed is below the full data-spec target of 800+ products and 40+ vendors; see [decisions](DECISIONS.md).
-- Vercel can queue production builds for several minutes, and a GitHub macOS runner can fail to acquire capacity (run 40724888199) without any code fault; rerun the job.
+- Vercel can queue production builds for several minutes, and a cache-miss build downloads the whole workspace, so it can spend minutes inside `pnpm install` before Next.js starts; cached rebuilds take about 15 seconds. See [DEPLOYMENT.md](DEPLOYMENT.md) for the build behaviour. A GitHub macOS runner can fail to acquire capacity (run 40724888199) without any code fault; rerun the job.
 - Lint reports four existing `next/image` warnings for standard image elements; the images are locally stored and the current build remains within the asset budgets.
 - axe and the six-width review were run by hand in a browser against production. There is no automated accessibility or visual-regression job yet; only Lighthouse runs in CI.
 - Moderator and content editor production logins were not exercised individually; their role checks share the restricted admin branch verified with finance and are covered by unit tests.
