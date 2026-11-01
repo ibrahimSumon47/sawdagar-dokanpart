@@ -1,5 +1,7 @@
 # Lessons
 
+- A full-page Playwright screenshot did not trigger below-the-fold lazy images and looked like missing photography despite passing assertions. Scroll to each image and verify its natural width before capturing evidence.
+- The R1 home smoke test passed while public CMS help articles still contained demo language and inaccurate payment claims. Inspect published CMS content as well as static dictionaries before claiming copy cleanup is complete.
 - The image-test fixture declared `publicId` before spreading an object that also required it, causing TS2783. Build fixture objects without duplicate properties and run the typecheck after changing test fixtures.
 - The initial image-manifest tests reused gallery hashes between supposedly distinct products, causing the duplicate-image guard to correctly reject the fixtures. Use genuinely distinct fixture hashes and check the offending pair before changing an assertion.
 - R1 was described as complete without the required Playwright screenshots and feature evidence, and its sign-in instructions described a form that does not exist. Verify the specified acceptance evidence and actual interaction before marking a phase complete.
