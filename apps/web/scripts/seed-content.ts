@@ -27,43 +27,35 @@ const entries: SeedEntry[] = [
     excerptEn:
       'Browse the catalog, add items from one or more stores, and place one order at checkout.',
     excerptBn: 'ক্যাটালগ দেখুন, এক বা একাধিক দোকানের পণ্য কার্টে নিন, তারপর একবারেই অর্ডার করুন।',
-    bodyEn: `Every item on Sawdagar Dokanpat comes from an independent store. You can mix stores in one cart: the cart groups the lines by seller, and checkout creates one sub-order for each store so each seller packs and ships their own part.
+    bodyEn: `You can mix stores in one cart: the cart groups the lines by seller, and checkout creates one sub-order for each store.
 
-Choose a variant and quantity on the product page, then open the cart from the header. Enter a delivery address in Bangladesh, pick cash on delivery, and confirm. You will receive an order number such as SD-20261028-410004 on the confirmation page and in your account.
+Choose a variant and quantity on the product page, then open the cart from the header. Enter a delivery address in Bangladesh, choose a payment method, and confirm. Your order number appears on the confirmation page and in your account.`,
+    bodyBn: `এক কার্টে একাধিক দোকানের পণ্য রাখা যায়: কার্টে পণ্যগুলো বিক্রেতা অনুযায়ী সাজানো থাকে, আর চেকআউটে প্রতিটি দোকানের জন্য আলাদা সাব-অর্ডার তৈরি হয়।
 
-This is a demonstration store. Payments are sandboxed, no courier is booked, and the order flow is there to show how the marketplace works.`,
-    bodyBn: `সাওদাগর দোকানপাটের প্রতিটি পণ্য আলাদা দোকান থেকে আসে। এক কার্টে একাধিক দোকানের পণ্য রাখা যায়: কার্টে পণ্যগুলো বিক্রেতা অনুযায়ী সাজানো থাকে, আর চেকআউটে প্রতিটি দোকানের জন্য আলাদা সাব-অর্ডার তৈরি হয়, যাতে প্রত্যেকে নিজের অংশ প্যাক করে পাঠাতে পারে।
-
-পণ্যের পাতায় ভ্যারিয়েন্ট ও পরিমাণ বেছে নিন, তারপর হেডার থেকে কার্ট খুলুন। বাংলাদেশের ঠিকানা দিন, ক্যাশ অন ডেলিভারি বেছে নিন এবং নিশ্চিত করুন। কনফার্মেশন পাতায় SD-20261028-410004 ধাঁচের একটি অর্ডার নম্বর পাবেন, যা আপনার অ্যাকাউন্টেও থাকবে।
-
-এটি একটি ডেমো দোকান। পেমেন্ট স্যান্ডবক্সে হয়, কোনো কুরিয়ার বুকিং হয় না; অর্ডার প্রবাহটি শুধু মার্কেটপ্লেসের কাজ দেখানোর জন্য।`,
+পণ্যের পাতায় ভ্যারিয়েন্ট ও পরিমাণ বেছে নিন, তারপর হেডার থেকে কার্ট খুলুন। বাংলাদেশের ঠিকানা ও পেমেন্ট পদ্ধতি বেছে নিয়ে নিশ্চিত করুন। অর্ডার নম্বর কনফার্মেশন পাতায় ও আপনার অ্যাকাউন্টে থাকবে।`,
     status: 'published',
     publishAt: '2026-09-12T09:00:00+06:00',
-    seoDescriptionEn: 'How cart, checkout and per-store sub-orders work in the marketplace demo.',
-    seoDescriptionBn: 'মার্কেটপ্লেস ডেমোতে কার্ট, চেকআউট ও দোকানভিত্তিক সাব-অর্ডার যেভাবে কাজ করে।',
+    seoDescriptionEn: 'How cart, checkout and per-store sub-orders work on Sawdagar Dokanpat.',
+    seoDescriptionBn: 'সওদাগর দোকানপাটে কার্ট, চেকআউট ও দোকানভিত্তিক সাব-অর্ডার যেভাবে কাজ করে।',
   },
   {
     id: 'cms_help_delivery_times',
     kind: 'help',
     slug: 'delivery-times',
-    titleEn: 'Delivery times across Bangladesh',
-    titleBn: 'সারা বাংলাদেশে ডেলিভারির সময়',
-    excerptEn: 'Most stores pack within two working days. Dhaka usually arrives first.',
-    excerptBn: 'বেশিরভাগ দোকান দুই কর্মদিবসে প্যাক করে। ঢাকায় সাধারণত আগে পৌঁছায়।',
-    bodyEn: `Sellers pack orders within two working days of confirmation. From there, a courier needs one to two days inside Dhaka and two to five days for other districts, depending on the route and the weather.
+    titleEn: 'Checking your order status',
+    titleBn: 'অর্ডারের অবস্থা দেখবেন যেভাবে',
+    excerptEn: 'View each store’s order status in your account.',
+    excerptBn: 'অ্যাকাউন্টে প্রতিটি দোকানের অর্ডারের অবস্থা দেখুন।',
+    bodyEn: `An order with items from more than one store has a separate sub-order for each seller. Open the order in your account to see the status of each one.
 
-Each sub-order travels separately, so a cart with three stores can arrive on three different days. The order page lists a tracking number for each seller as soon as they hand the parcel to the courier.
+Delivery dates and courier tracking are not available.`,
+    bodyBn: `একাধিক দোকানের পণ্য নিয়ে অর্ডার করলে প্রতিটি বিক্রেতার জন্য আলাদা সাব-অর্ডার তৈরি হয়। প্রতিটির অবস্থা দেখতে অ্যাকাউন্ট থেকে অর্ডার খুলুন।
 
-During Eid and the winter wedding season, handloom stores often need an extra day to finish weaving. Their store page carries any announcement about current lead times.`,
-    bodyBn: `নিশ্চিত করার দুই কর্মদিবসের মধ্যে বিক্রেতারা অর্ডার প্যাক করেন। এরপর ঢাকার ভেতরে কুরিয়ারে এক থেকে দুই দিন, অন্য জেলায় দুই থেকে পাঁচ দিন লাগে; রুট ও আবহাওয়ার ওপর নির্ভর করে।
-
-প্রতিটি সাব-অর্ডার আলাদা যায়, তাই তিনটি দোকানের একটি কার্ট তিনটি ভিন্ন দিনে পৌঁছাতে পারে। বিক্রেতা পার্সেল কুরিয়ারে দেওয়ার সাথে সাথে অর্ডার পাতায় ট্র্যাকিং নম্বর দেখা যায়।
-
-ঈদ ও শীতের বিয়ের মরশুমে তাঁতের দোকানে এক দিন বেশি লাগতে পারে। চলতি সময়ের ঘোষণা ওই দোকানের পাতায় থাকে।`,
+ডেলিভারির তারিখ ও কুরিয়ার ট্র্যাকিং তথ্য দেওয়া হয় না।`,
     status: 'published',
     publishAt: '2026-09-18T09:00:00+06:00',
-    seoDescriptionEn: 'Packing and courier timelines for Dhaka and other districts.',
-    seoDescriptionBn: 'ঢাকা ও অন্য জেলার জন্য প্যাকিং ও কুরিয়ারের সময়সূচি।',
+    seoDescriptionEn: 'Where to find the status of each store’s sub-order.',
+    seoDescriptionBn: 'প্রতিটি দোকানের সাব-অর্ডারের অবস্থা কোথায় পাবেন।',
   },
   {
     id: 'cms_help_returns',
@@ -73,43 +65,35 @@ During Eid and the winter wedding season, handloom stores often need an extra da
     titleBn: 'ফেরত ও রিফান্ড',
     excerptEn: 'Ask for a return within seven days of delivery; the seller reviews it first.',
     excerptBn: 'ডেলিভারির সাত দিনের মধ্যে ফেরত চাইতে পারেন; প্রথমে বিক্রেতা দেখেন।',
-    bodyEn: `Open the order from your account and choose Return next to a delivered line. You have seven days from delivery. Say what is wrong, and add a photo if the item arrived damaged.
+    bodyEn: `Open Returns in your account and choose a delivered item. You can request a return within seven days of delivery by selecting a reason and adding an optional note.
 
-The seller approves or declines the request. If approved, the platform finance team issues the refund to the original payment method. Cash-on-delivery orders are refunded to the payout number you provide.
+The seller approves or declines the request. An approved request can be recorded as refunded by the finance team; no payment is sent to an external provider.`,
+    bodyBn: `অ্যাকাউন্টের ফেরত পাতায় একটি ডেলিভারি হওয়া পণ্য বেছে নিন। ডেলিভারির সাত দিনের মধ্যে কারণ বেছে ও চাইলে নোট যোগ করে ফেরতের অনুরোধ করা যায়।
 
-Items that were used, washed or altered cannot be returned. Made-to-order pieces are only returnable when they arrive damaged or different from the description.`,
-    bodyBn: `অ্যাকাউন্ট থেকে অর্ডার খুলে ডেলিভারি হওয়া লাইনের পাশে ফেরত চাপুন। ডেলিভারির দিন থেকে সাত দিন সময় আছে। সমস্যাটি লিখুন; পণ্য ভাঙা এলে ছবিও যোগ করতে পারেন।
-
-বিক্রেতা অনুরোধটি অনুমোদন বা প্রত্যাখ্যান করেন। অনুমোদিত হলে প্ল্যাটফর্মের হিসাব দল মূল পেমেন্ট পদ্ধতিতে রিফান্ড দেয়। ক্যাশ অন ডেলিভারির ক্ষেত্রে আপনি দেওয়া পেআউট নম্বরে টাকা ফেরত যায়।
-
-ব্যবহৃত, ধোয়া বা পরিবর্তিত পণ্য ফেরত নেওয়া হয় না। অর্ডার অনুযায়ী বানানো পণ্য কেবল ভাঙা অবস্থায় বা বিবরণের সাথে না মিললে ফেরতযোগ্য।`,
+বিক্রেতা অনুরোধ অনুমোদন বা প্রত্যাখ্যান করেন। অনুমোদিত অনুরোধ হিসাব দল রিফান্ড হয়েছে বলে নথিভুক্ত করতে পারে; বাইরের কোনো পেমেন্ট সেবায় টাকা পাঠানো হয় না।`,
     status: 'published',
     publishAt: '2026-09-25T09:00:00+06:00',
-    seoDescriptionEn: 'The seven-day return window, seller review and refund timing.',
-    seoDescriptionBn: 'সাত দিনের ফেরতের সময়, বিক্রেতার পর্যালোচনা ও রিফান্ডের সময়।',
+    seoDescriptionEn: 'The seven-day return window and how requests are reviewed.',
+    seoDescriptionBn: 'সাত দিনের ফেরতের সময় ও অনুরোধ পর্যালোচনার নিয়ম।',
   },
   {
     id: 'cms_help_payments',
     kind: 'help',
     slug: 'payments',
-    titleEn: 'Payment methods in the demo',
-    titleBn: 'ডেমোতে পেমেন্টের পদ্ধতি',
-    excerptEn: 'Cash on delivery and two sandbox wallet options; no real money moves.',
-    excerptBn: 'ক্যাশ অন ডেলিভারি ও দুটি স্যান্ডবক্স ওয়ালেট; আসল টাকা চলে না।',
-    bodyEn: `Checkout offers cash on delivery and two sandbox wallets, bKash and Nagad. The wallets open a mock confirmation screen: it records the payment against the demo order but never contacts a real provider.
+    titleEn: 'Payment methods',
+    titleBn: 'পেমেন্ট পদ্ধতি',
+    excerptEn: 'Payment options and applying coupons at checkout.',
+    excerptBn: 'চেকআউটে পেমেন্টের পদ্ধতি ও কুপন ব্যবহারের নিয়ম।',
+    bodyEn: `Checkout offers cash on delivery and a card and wallet option. The payment page does not collect card details or connect to a payment provider.
 
-Coupons are applied in the cart before checkout. Only one coupon can be used per order, and a store coupon only covers that store's lines.
+Coupons are applied in the cart before checkout. Only one coupon can be used per order, and a store coupon only covers that store's lines.`,
+    bodyBn: `চেকআউটে ক্যাশ অন ডেলিভারি এবং কার্ড ও ওয়ালেটের বিকল্প আছে। পেমেন্ট পাতায় কার্ডের তথ্য নেওয়া হয় না এবং কোনো পেমেন্ট সেবার সাথে সংযোগ করা হয় না।
 
-Because this is a portfolio demonstration, no card details are collected and no money changes hands. The ledger behind the admin finance screen uses the same sandbox payments.`,
-    bodyBn: `চেকআউটে ক্যাশ অন ডেলিভারি এবং বিকাশ ও নগদ—দুটি স্যান্ডবক্স ওয়ালেট আছে। ওয়ালেট খুললে একটি নকল কনফার্মেশন স্ক্রিন আসে: এটি ডেমো অর্ডারের বিপরীতে পেমেন্ট লিখে রাখে, কিন্তু কোনো আসল প্রতিষ্ঠানের সাথে যোগাযোগ করে না।
-
-কুপন চেকআউটের আগে কার্টে প্রয়োগ হয়। এক অর্ডারে একটি কুপন; দোকানের কুপন শুধু ওই দোকানের পণ্যে খাটে।
-
-যেহেতু এটি পোর্টফোলিও ডেমো, কোনো কার্ডের তথ্য নেওয়া হয় না এবং টাকা আদান-প্রদান হয় না। অ্যাডমিনের হিসাব পাতার লেজারও একই স্যান্ডবক্স পেমেন্ট ব্যবহার করে।`,
+কুপন চেকআউটের আগে কার্টে প্রয়োগ হয়। এক অর্ডারে একটি কুপন ব্যবহার করা যায়; দোকানের কুপন শুধু ওই দোকানের পণ্যে খাটে।`,
     status: 'published',
     publishAt: '2026-10-02T09:00:00+06:00',
-    seoDescriptionEn: 'Cash on delivery and sandbox wallet payments, and how coupons apply.',
-    seoDescriptionBn: 'ক্যাশ অন ডেলিভারি ও স্যান্ডবক্স ওয়ালেট, এবং কুপন প্রয়োগের নিয়ম।',
+    seoDescriptionEn: 'Payment options at checkout and how coupons apply.',
+    seoDescriptionBn: 'চেকআউটে পেমেন্টের পদ্ধতি ও কুপন প্রয়োগের নিয়ম।',
   },
   {
     id: 'cms_journal_tangail_weavers',
@@ -229,25 +213,18 @@ Orders placed after the cut-off are still accepted. Sellers pack them after the 
     slug: 'about',
     titleEn: 'About this marketplace',
     titleBn: 'এই মার্কেটপ্লেস সম্পর্কে',
-    excerptEn:
-      'A multi-vendor store built as a portfolio project, with sandbox payments and demo data.',
-    excerptBn:
-      'পোর্টফোলিও প্রকল্প হিসেবে তৈরি বহু-বিক্রেতার দোকান; স্যান্ডবক্স পেমেন্ট ও ডেমো ডেটা।',
-    bodyEn: `Sawdagar Dokanpat is a demonstration of a multi-vendor marketplace for Bangladesh. It is built in public as a portfolio project by one developer, using free hosting and a sandbox payment flow.
+    excerptEn: 'A bilingual marketplace for Bangladeshi sellers and shoppers.',
+    excerptBn: 'বাংলাদেশের বিক্রেতা ও ক্রেতাদের জন্য দ্বিভাষিক একটি মার্কেটপ্লেস।',
+    bodyEn: `Sawdagar Dokanpat brings handloom, clay, jute and everyday goods together in one marketplace.
 
-The catalog, stores and reviews are sample data. No order is fulfilled, no courier is booked and no money changes hands. Demo accounts exist so that each part of the product can be opened and reviewed from the right role.
+The design draws on Bangla storefronts: jamdani motifs, warm paper tones, serif headings and prices in taka. Read more about the build on the About this project page.`,
+    bodyBn: `সওদাগর দোকানপাটে তাঁত, মাটি, পাট ও দৈনন্দিন পণ্য এক মার্কেটপ্লেসে পাওয়া যায়।
 
-The design borrows from the rhythm of a Bangla storefront: jamdani motifs, warm paper tones, serif headings and prices in taka. The journal and Help Center are managed through the same admin area as the catalog.`,
-    bodyBn: `সাওদাগর দোকানপাট বাংলাদেশের একটি বহু-বিক্রেতার মার্কেটপ্লেসের ডেমো। একজন ডেভেলপার পোর্টফোলিও হিসেবে এটি প্রকাশ্যে তৈরি করছেন, বিনামূল্যের হোস্টিং ও স্যান্ডবক্স পেমেন্ট ব্যবহার করে।
-
-ক্যাটালগ, দোকান ও রিভিউ নমুনা ডেটা। কোনো অর্ডার পূরণ হয় না, কুরিয়ার বুক হয় না, টাকা আদান-প্রদানও হয় না। ডেমো অ্যাকাউন্টগুলো আছে যাতে প্রতিটি অংশ সঠিক ভূমিকা থেকে খুলে দেখা যায়।
-
-ডিজাইনে বাংলা দোকানের ছন্দ ধরা হয়েছে: জামদানির নকশা, উষ্ণ কাগজের রঙ, সেরিফ শিরোনাম আর টাকায় দাম। জার্নাল ও সহায়তা কেন্দ্র ক্যাটালগের মতোই একই অ্যাডমিন এলাকা থেকে চালানো হয়।`,
+ডিজাইনে বাংলা দোকানের ছন্দ ধরা হয়েছে: জামদানির নকশা, উষ্ণ কাগজের রঙ, সেরিফ শিরোনাম আর টাকায় দাম। প্রকল্প সম্পর্কে আরও জানতে প্রকল্প পরিচিতি পাতা দেখুন।`,
     status: 'published',
     publishAt: '2026-09-01T09:00:00+06:00',
-    seoDescriptionEn:
-      'What this marketplace demo is, how it is built and what the data represents.',
-    seoDescriptionBn: 'এই মার্কেটপ্লেস ডেমো কী, কীভাবে তৈরি এবং ডেটা কী বোঝায়।',
+    seoDescriptionEn: 'About the Sawdagar Dokanpat marketplace.',
+    seoDescriptionBn: 'সওদাগর দোকানপাট মার্কেটপ্লেস সম্পর্কে।',
   },
   {
     id: 'cms_page_contact',
@@ -255,22 +232,18 @@ The design borrows from the rhythm of a Bangla storefront: jamdani motifs, warm 
     slug: 'contact',
     titleEn: 'Contact the project',
     titleBn: 'প্রকল্পের সাথে যোগাযোগ',
-    excerptEn: 'Bug reports and questions about the demo belong in the public repository.',
-    excerptBn: 'ডেমোর ত্রুটি বা প্রশ্নের জন্য পাবলিক রিপোজিটরি ব্যবহার করুন।',
-    bodyEn: `This is a demo, so there is no support desk and no phone number. The source code, open issues and the roadmap live in the public repository linked from the footer.
+    excerptEn: 'Find the source code and report issues in the public repository.',
+    excerptBn: 'পাবলিক রিপোজিটরিতে সোর্স কোড দেখুন ও সমস্যা জানান।',
+    bodyEn: `The source code, issue tracker and roadmap are available in the public repository linked from the footer.
 
-If you are reviewing the project for a role, the sign-in page lists one account per platform role. Start with the buyer to place an order, then sign in as the vendor to fulfil it, and as finance to pay out the seller.
+There is no support desk or phone number for this project.`,
+    bodyBn: `ফুটারে দেওয়া পাবলিক রিপোজিটরিতে সোর্স কোড, সমস্যা জানানোর ব্যবস্থা ও রোডম্যাপ আছে।
 
-Messages sent through any store's contact details in the demo are not delivered.`,
-    bodyBn: `এটি ডেমো, তাই কোনো সহায়তা ডেস্ক বা ফোন নম্বর নেই। সোর্স কোড, খোলা সমস্যা ও রোডম্যাপ ফুটারের লিংক করা পাবলিক রিপোজিটরিতে আছে।
-
-কোনো পদে পর্যালোচনার জন্য প্রকল্পটি দেখলে, সাইন-ইন পাতায় প্রতিটি ভূমিকার একটি অ্যাকাউন্ট আছে। ক্রেতা দিয়ে অর্ডার দিন, তারপর বিক্রেতা দিয়ে পূরণ করুন, আর হিসাব দল দিয়ে বিক্রেতাকে পেমেন্ট দিন।
-
-ডেমোর কোনো দোকানের যোগাযোগের ঠিকানায় পাঠানো বার্তা পৌঁছায় না।`,
+এই প্রকল্পের কোনো সহায়তা ডেস্ক বা ফোন নম্বর নেই।`,
     status: 'published',
     publishAt: '2026-09-05T09:00:00+06:00',
-    seoDescriptionEn: 'How to review the demo, and where to report issues.',
-    seoDescriptionBn: 'ডেমো কীভাবে দেখবেন এবং সমস্যা কোথায় জানাবেন।',
+    seoDescriptionEn: 'Where to find the repository and report issues.',
+    seoDescriptionBn: 'রিপোজিটরি ও সমস্যা জানানোর ঠিকানা।',
   },
 ];
 

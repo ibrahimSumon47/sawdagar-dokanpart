@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Correct bilingual Help Center and static-page content through versioned CMS edits, update the seed copy and prepare deployed checks.
+
 - Add a deployed-site Playwright workflow for R1 viewport checks and screenshots, and restore responsive header search, wishlist and account access. R1 verification remains in progress.
 
 - Revision 1, phase R1: remove the demo framing. Delete the top notice strip, give the header a Catalog, Categories mega menu and Sell on Sawdagar navigation with a search field, move the design system, case study, CS core, image credits and repository links into a footer Project column and a new `/about/project` page, replace the footer's demo disclaimer with the single test-mode payments line, label the checkout payment method as test mode, and rewrite the home, sign-in and catalog copy in both languages.

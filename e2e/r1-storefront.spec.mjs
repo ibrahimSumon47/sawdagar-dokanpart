@@ -49,3 +49,58 @@ for (const width of [375, 768, 1440]) {
     );
   });
 }
+
+const contentChecks = {
+  en: {
+    payments: 'Payment methods',
+    paymentDetails:
+      'The payment page does not collect card details or connect to a payment provider.',
+    orderStatus: 'Checking your order status',
+    deliveryDetails: 'Delivery dates and courier tracking are not available.',
+    refundDetails: 'no payment is sent to an external provider',
+    about: 'A bilingual marketplace for Bangladeshi sellers and shoppers.',
+    contact: 'There is no support desk or phone number for this project.',
+  },
+  bn: {
+    payments: 'পেমেন্ট পদ্ধতি',
+    paymentDetails:
+      'পেমেন্ট পাতায় কার্ডের তথ্য নেওয়া হয় না এবং কোনো পেমেন্ট সেবার সাথে সংযোগ করা হয় না।',
+    orderStatus: 'অর্ডারের অবস্থা দেখবেন যেভাবে',
+    deliveryDetails: 'ডেলিভারির তারিখ ও কুরিয়ার ট্র্যাকিং তথ্য দেওয়া হয় না।',
+    refundDetails: 'বাইরের কোনো পেমেন্ট সেবায় টাকা পাঠানো হয় না।',
+    about: 'বাংলাদেশের বিক্রেতা ও ক্রেতাদের জন্য দ্বিভাষিক একটি মার্কেটপ্লেস।',
+    contact: 'এই প্রকল্পের কোনো সহায়তা ডেস্ক বা ফোন নম্বর নেই।',
+  },
+};
+
+for (const [locale, copy] of Object.entries(contentChecks)) {
+  test(`R1 published Help and pages copy in ${locale}`, async ({ page }) => {
+    await page.goto('/help');
+    await page.context().addCookies([{ name: 'sd_locale', value: locale, url: page.url() }]);
+    await page.reload();
+    await expect(page.locator('main')).toContainText(copy.payments);
+    await expect(page.locator('main')).not.toContainText(/demo|sample|fictional|ডেমো|নমুনা/i);
+
+    for (const [path, expected] of [
+      ['/help/payments', copy.paymentDetails],
+      ['/help/how-to-order', null],
+      ['/help/delivery-times', copy.deliveryDetails],
+      ['/help/returns-and-refunds', copy.refundDetails],
+      ['/pages/about', copy.about],
+      ['/pages/contact', copy.contact],
+    ]) {
+      const response = await page.goto(path);
+      expect(response?.status()).toBe(200);
+      const article = page.locator('article');
+      await expect(article).not.toContainText(/demo|sample|fictional|ডেমো|নমুনা/i);
+      if (expected) await expect(article).toContainText(expected);
+      if (path === '/help/payments') {
+        await expect(article.getByRole('heading', { level: 1 })).toHaveText(copy.payments);
+        await expect(article).not.toContainText(/bKash|Nagad|বিকাশ|নগদ/i);
+      }
+      if (path === '/help/delivery-times') {
+        await expect(article.getByRole('heading', { level: 1 })).toHaveText(copy.orderStatus);
+      }
+    }
+  });
+}
