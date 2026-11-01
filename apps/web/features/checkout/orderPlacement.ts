@@ -246,7 +246,7 @@ export async function placeOrderInDatabase(params: PlaceOrderParams): Promise<st
             totals.totalMinor,
           )}. Delivery is to ${params.address.recipientName}, ${params.address.addressLine}, ${
             params.address.upazila
-          }, ${params.address.district}. This is a demo store; no payment will be captured outside the sandbox.`,
+          }, ${params.address.district}. Payments run in test mode; no real money is charged.`,
           status: 'queued',
         },
       });
