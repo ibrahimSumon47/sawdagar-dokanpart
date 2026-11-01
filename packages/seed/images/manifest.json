@@ -32,43 +32,39 @@
         "height": 2752,
         "phash": "1c167e1e1c5e1e00",
         "alt": "Katha stiching"
-      }
-    ],
-    "tangail-saree": [
-      {
-        "publicId": "sawdagar/products/tangail-saree/1",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BD_Tangail_3.JPG",
-        "license": "Public domain",
-        "author": "P.K.Niyogi",
-        "width": 1600,
-        "height": 1200,
-        "phash": "6080e66470f4e8c4",
-        "alt": "BD Tangail 3"
       },
       {
-        "publicId": "sawdagar/products/tangail-saree/2",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_village_pathway,_Tangail.JPG",
-        "license": "Public domain",
-        "author": "P.K.Niyogi",
-        "width": 1600,
-        "height": 1200,
-        "phash": "80000203e3f37ffb",
-        "alt": "A village pathway, Tangail"
+        "publicId": "sawdagar/products/jamdani-saree/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jamdani_Saree_shop_in_sonargaon.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Fahad Faisal",
+        "width": 6000,
+        "height": 4000,
+        "phash": "f0fefcf8c080828f",
+        "alt": "Jamdani Saree shop in sonargaon"
       },
       {
-        "publicId": "sawdagar/products/tangail-saree/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Border_of_Tangail_sari,from_the_1970s.jpg",
-        "license": "CC BY-SA 3.0",
-        "author": "Subornolota",
-        "width": 1315,
-        "height": 846,
-        "phash": "ffff0e00000040cf",
-        "alt": "Border of Tangail sari,from the 1970s"
-      }
-    ],
-    "katan-silk-saree": [
+        "publicId": "sawdagar/products/jamdani-saree/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jamdani_Saree_Sale_center.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Fahad Faisal",
+        "width": 6000,
+        "height": 4000,
+        "phash": "3f0c090f0605ffff",
+        "alt": "Jamdani Saree Sale center"
+      },
       {
-        "publicId": "sawdagar/products/katan-silk-saree/1",
+        "publicId": "sawdagar/products/jamdani-saree/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_delicate_process_of_making_a_Jamdani_saree_has_been_passed_down_from_generation_to_generation.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Syed Sajidul Islam",
+        "width": 5700,
+        "height": 3798,
+        "phash": "30323130f4f8fecb",
+        "alt": "The delicate process of making a Jamdani saree has been passed down from generation to generation"
+      },
+      {
+        "publicId": "sawdagar/products/jamdani-saree/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baba_Saree_Centre.jpg",
         "license": "CC BY-SA 4.0",
         "author": "BABA SAREE CENTRE",
@@ -76,8 +72,30 @@
         "height": 864,
         "phash": "00ffbe7efef80000",
         "alt": "Baba Saree Centre"
+      },
+      {
+        "publicId": "sawdagar/products/jamdani-saree/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheikh_Hasina_at_Jamdani_Gallery_during_Joyita_Tower_inauguration_Dhanmondi_Dhaka_2023-10-17_(PID-0013057).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 1890,
+        "height": 1165,
+        "phash": "93b71a1ebebcb233",
+        "alt": "Sheikh Hasina at Jamdani Gallery during Joyita Tower inauguration Dhanmondi Dhaka 2023 10 17 (PID 0013057)"
+      },
+      {
+        "publicId": "sawdagar/products/jamdani-saree/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2023-10-17_Prime_Minister_Sheikh_Hasina_inaugurates_Joyita_Tower_Jamdani_Gallery_Dhanmondi_Dhaka_(PID-0013056).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 1890,
+        "height": 1328,
+        "phash": "7efe75040006fef8",
+        "alt": "2023 10 17 Prime Minister Sheikh Hasina inaugurates Joyita Tower Jamdani Gallery Dhanmondi Dhaka (PID 0013056)"
       }
     ],
+    "tangail-saree": [],
+    "katan-silk-saree": [],
     "rajshahi-silk-saree": [],
     "cotton-saree": [
       {
@@ -109,6 +127,66 @@
         "height": 4624,
         "phash": "ff07231903070303",
         "alt": "A young artist weaving creativity into every thread, crafting a beautiful handicraft saree with precision and passion"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "fefefee0eee20000",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 01"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "f7fff7f0c0808080",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 03"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "ffbf9f8393810000",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 02"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "fcfefebe38000000",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 05"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_07.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "e0f0e0e4e7872606",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 07"
+      },
+      {
+        "publicId": "sawdagar/products/cotton-saree/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chanderi_Craft_Village_%E2%80%93_Traditional_Weaving_and_Handicrafts_in_Madhya_Pradesh_09.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shoot stufz",
+        "width": 3072,
+        "height": 4096,
+        "phash": "bf030383331f3fbf",
+        "alt": "Chanderi Craft Village – Traditional Weaving and Handicrafts in Madhya Pradesh 09"
       }
     ],
     "muslin-saree": [],
@@ -128,6 +206,16 @@
       },
       {
         "publicId": "sawdagar/products/short-kurta/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pobjoy_Short_Scion_Palestine_Airways_1934.jpg",
+        "license": "Public domain",
+        "author": "Zoltan Kluger",
+        "width": 4000,
+        "height": 2989,
+        "phash": "fff4e0f0f0f1e1c0",
+        "alt": "Pobjoy Short Scion Palestine Airways 1934"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Unidentified_newborn_bat.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Anton",
@@ -137,7 +225,7 @@
         "alt": "Unidentified newborn bat"
       },
       {
-        "publicId": "sawdagar/products/short-kurta/3",
+        "publicId": "sawdagar/products/short-kurta/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Artist%27s_impression_of_an_ultra-short-period_planet.jpg",
         "license": "CC BY 4.0",
         "author": "NASA, ESA and A. Schaller",
@@ -145,6 +233,56 @@
         "height": 4800,
         "phash": "00000c6cf0f0f060",
         "alt": "Artist's impression of an ultra short period planet"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:19th_century_Punjabi_Sikh_woman_in_Punjabi_suthan_and_short_kurta.jpg",
+        "license": "Public domain",
+        "author": "\"Letters from India and Kashmir: written 1870; illustrated and annotated 1873. [By J. Duguid. With plates.]\", \"Appendix\"",
+        "width": 262,
+        "height": 500,
+        "phash": "ffe7c3c38383c7ff",
+        "alt": "19th century Punjabi Sikh woman in Punjabi suthan and short kurta"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20160602-Wikicup_2015_5754-short_Version.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Hubertl",
+        "width": 3429,
+        "height": 4907,
+        "phash": "ffbc3c04343c3c10",
+        "alt": "20160602 Wikicup 2015 5754 short Version"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang%27s_short_tail_blue_(Leptotes_pirithous)_male_underside.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Charles J. Sharp",
+        "width": 3723,
+        "height": 2482,
+        "phash": "fdffd9fed0021024",
+        "alt": "Lang's short tail blue (Leptotes pirithous) male underside"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-chested_snake-eagle_(Circaetus_pectoralis).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Charles J. Sharp",
+        "width": 2659,
+        "height": 2180,
+        "phash": "fffff3e38387cfcf",
+        "alt": "Black chested snake eagle (Circaetus pectoralis)"
+      },
+      {
+        "publicId": "sawdagar/products/short-kurta/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Python_brongersmai,_Brongersma%27s_short-tailed_python.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Rushenb",
+        "width": 8256,
+        "height": 5504,
+        "phash": "00707e7f3c786000",
+        "alt": "Python brongersmai, Brongersma's short tailed python"
       }
     ],
     "pathani-kurta": [],
@@ -178,11 +316,91 @@
         "height": 1467,
         "phash": "ffffff1700080000",
         "alt": "Beware of warthog"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beware_11.jpg",
+        "license": "Public domain",
+        "author": "Ed Goldfarb (pencils) and Bob Baer (inks)",
+        "width": 722,
+        "height": 1007,
+        "phash": "81872764c4f3c6d0",
+        "alt": "Beware 11"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:MNP_Beware_of_crocodile.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Marcus334",
+        "width": 3072,
+        "height": 2304,
+        "phash": "33383c3cbef03333",
+        "alt": "MNP Beware of crocodile"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beware_of_Dog.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Adam Roush",
+        "width": 252,
+        "height": 188,
+        "phash": "60a28f8f8e82ffff",
+        "alt": "Beware of Dog"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beware_(3113792185).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Marcus Quigmire from Florida, USA",
+        "width": 4272,
+        "height": 2840,
+        "phash": "3838f07060600000",
+        "alt": "Beware (3113792185)"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BEWARE_of_DOG_(7554396890).jpg",
+        "license": "CC BY 2.0",
+        "author": "Kenny Louie from Vancouver, Canada",
+        "width": 4577,
+        "height": 3051,
+        "phash": "203838080cfefe00",
+        "alt": "BEWARE of DOG (7554396890)"
+      },
+      {
+        "publicId": "sawdagar/products/boys-panjabi/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beware_Of_Darkness_at_013_-_1.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Vera de Kok",
+        "width": 3264,
+        "height": 2448,
+        "phash": "003838183c000000",
+        "alt": "Beware Of Darkness at 013   1"
       }
     ],
     "lungi": [
       {
         "publicId": "sawdagar/products/lungi/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calcutta_rickshaw.jpg",
+        "license": "Public domain",
+        "author": "Axel Boldt",
+        "width": 1906,
+        "height": 1659,
+        "phash": "ccc088009e0ec0ff",
+        "alt": "Calcutta rickshaw"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mumbai_street_scene.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Bruce Tan",
+        "width": 1024,
+        "height": 768,
+        "phash": "80e1000a0e362eef",
+        "alt": "Mumbai street scene"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:LungiBoypagne.jpg",
         "license": "CC BY 2.5",
         "author": "Laportechicago at English Wikipedia  (Paul La Porte).",
@@ -192,7 +410,7 @@
         "alt": "LungiBoypagne"
       },
       {
-        "publicId": "sawdagar/products/lungi/2",
+        "publicId": "sawdagar/products/lungi/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uzhavar_Santhai2.jpg",
         "license": "Public domain",
         "author": "Gopipedia",
@@ -202,14 +420,54 @@
         "alt": "Uzhavar Santhai2"
       },
       {
-        "publicId": "sawdagar/products/lungi/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boy_lungi.jpg",
+        "publicId": "sawdagar/products/lungi/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lungi1.jpg",
+        "license": "CC BY 3.0",
+        "author": "Paul La Porte",
+        "width": 1330,
+        "height": 922,
+        "phash": "076c6e7878787c00",
+        "alt": "Lungi1"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:LungiBorder.jpg",
+        "license": "CC BY 3.0",
+        "author": "Paul La Porte",
+        "width": 966,
+        "height": 691,
+        "phash": "18585858585a5838",
+        "alt": "LungiBorder"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:5-Silver_ornamental_making-_Kolusu.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Parvathisri",
+        "width": 2576,
+        "height": 1936,
+        "phash": "30130060e0e0f0e0",
+        "alt": "5 Silver ornamental making  Kolusu"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Talpur_Mir_dynasty_(1783-1843),_Pakistan_-_Nobleman%27s_waist_wrap_(lungi)_-_Google_Art_Project.jpg",
         "license": "Public domain",
-        "author": "Infanaz",
-        "width": 360,
-        "height": 481,
-        "phash": "ff9fbf91b1800000",
-        "alt": "Boy lungi"
+        "author": "Talpur Mir dynasty (1783-1843), Pakistan Details on Google Art Project",
+        "width": 1711,
+        "height": 8181,
+        "phash": "8181818181818183",
+        "alt": "Talpur Mir dynasty (1783 1843), Pakistan   Nobleman's waist wrap (lungi)   Google Art Project"
+      },
+      {
+        "publicId": "sawdagar/products/lungi/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lungi_Government_Hospital.jpg",
+        "license": "CC BY 2.0",
+        "author": "CDC Global",
+        "width": 2592,
+        "height": 1936,
+        "phash": "f9f8000000070600",
+        "alt": "Lungi Government Hospital"
       }
     ],
     "gamcha": [
@@ -242,6 +500,66 @@
         "height": 2592,
         "phash": "10100001013c7dff",
         "alt": "ଖୋରଧା ଗାମୁଛା"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:GAMUCHA.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Hellohappy",
+        "width": 2592,
+        "height": 1944,
+        "phash": "7ec3c3c3c3c3c3c7",
+        "alt": "GAMUCHA"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D9%84%D9%86%DA%AF_%D9%88_%DA%A9%DB%8C%D8%B3%D9%87_%D8%AD%D9%85%D8%A7%D9%85_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Sandman q23",
+        "width": 800,
+        "height": 600,
+        "phash": "bf3773210101179f",
+        "alt": "لنگ و کیسه حمام ایرانی"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gamucha.jpeg",
+        "license": "Public domain",
+        "author": "Abha S Pradhan",
+        "width": 2560,
+        "height": 1536,
+        "phash": "d8c1c1c1c1c1c0d8",
+        "alt": "Gamucha"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ghater_Gamcha_-_Kojagari_Lakshmi_Puja_Offering_-_Bengali_Brahman_Family_-_Howrah_20171005173446.jpg",
+        "license": "CC BY 3.0",
+        "author": "Biswarup Ganguly",
+        "width": 3264,
+        "height": 2448,
+        "phash": "0410d8c00f0f0fcf",
+        "alt": "Ghater Gamcha   Kojagari Lakshmi Puja Offering   Bengali Brahman Family   Howrah 20171005173446"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ricksha_Driver_and_Vehicle_-_Dhaka_-_Bangladesh_(12831375333).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Adam Jones from Kelowna, BC, Canada",
+        "width": 2736,
+        "height": 3648,
+        "phash": "fe9cfc78f8d8f820",
+        "alt": "Ricksha Driver and Vehicle   Dhaka   Bangladesh (12831375333)"
+      },
+      {
+        "publicId": "sawdagar/products/gamcha/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gamcha.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Rokib_Khan",
+        "width": 2048,
+        "height": 1150,
+        "phash": "e027676767e7e767",
+        "alt": "Gamcha"
       }
     ],
     "handloom-shawl": [
@@ -274,6 +592,66 @@
         "height": 4160,
         "phash": "7c646c7c6c6c6c64",
         "alt": "Dimasa Kachari Eri Shawl"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dimasa_Eri_Shawl.jpg",
+        "license": "CC BY 4.0",
+        "author": "Gautam Daniel",
+        "width": 3120,
+        "height": 4160,
+        "phash": "00ffff03f8ffc100",
+        "alt": "Dimasa Eri Shawl"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dimasa_Silk_Shawl.jpg",
+        "license": "CC BY 4.0",
+        "author": "Gautam Daniel",
+        "width": 3120,
+        "height": 4160,
+        "phash": "fefefee6c3c28000",
+        "alt": "Dimasa Silk Shawl"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dimasa_Tribal_Silk_Shawl.jpg",
+        "license": "CC BY 4.0",
+        "author": "Gautam Daniel",
+        "width": 3120,
+        "height": 4160,
+        "phash": "00fefec03fff3000",
+        "alt": "Dimasa Tribal Silk Shawl"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dimasa_Tribal_Design_Silk_Shawl.jpg",
+        "license": "CC BY 4.0",
+        "author": "Gautam Daniel",
+        "width": 3120,
+        "height": 4160,
+        "phash": "ffffff000001df03",
+        "alt": "Dimasa Tribal Design Silk Shawl"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khadi_Weaving_in_Kinnaur,_Himachal_Pradesh.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sapna Sony",
+        "width": 4080,
+        "height": 2634,
+        "phash": "00003e7efc7e3c3e",
+        "alt": "Khadi Weaving in Kinnaur, Himachal Pradesh"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-shawl/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rakhaine_Handloom_Weaver.jpg",
+        "license": "CC0",
+        "author": "Anaumhassan2014",
+        "width": 1299,
+        "height": 599,
+        "phash": "fde1f7f6e2e0c080",
+        "alt": "Rakhaine Handloom Weaver"
       }
     ],
     "handloom-bedcover": [],
@@ -307,38 +685,158 @@
         "height": 2028,
         "phash": "ff7d1930345e0004",
         "alt": "A Brazilian family in Rio de Janeiro by Jean Baptiste Debret 1839"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_runner_MET_205777.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 127,
+        "height": 367,
+        "phash": "8000ff7f3fff8080",
+        "alt": "Table runner MET 205777"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_runner_(AM_1991.48-2).jpg",
+        "license": "CC BY 4.0",
+        "author": "not researched",
+        "width": 5257,
+        "height": 3157,
+        "phash": "ffff81010101ffff",
+        "alt": "Table runner (AM 1991.48 2)"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_runner_(AM_1991.48-4).jpg",
+        "license": "CC BY 4.0",
+        "author": "not researched",
+        "width": 639,
+        "height": 390,
+        "phash": "ff02009cde00c0ff",
+        "alt": "Table runner (AM 1991.48 4)"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_runner_(AM_1991.48-6).jpg",
+        "license": "CC BY 4.0",
+        "author": "not researched",
+        "width": 640,
+        "height": 480,
+        "phash": "7f03011909017f7f",
+        "alt": "Table runner (AM 1991.48 6)"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_runner_(AM_1991.48-7).jpg",
+        "license": "CC BY 4.0",
+        "author": "not researched",
+        "width": 480,
+        "height": 640,
+        "phash": "7f0e067e383c3400",
+        "alt": "Table runner (AM 1991.48 7)"
+      },
+      {
+        "publicId": "sawdagar/products/handloom-table-runner/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Runner,_table_(AM_11338-2).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1944,
+        "phash": "fffd4181a13151e1",
+        "alt": "Runner, table (AM 11338 2)"
       }
     ],
     "fabric-by-metre": [
       {
         "publicId": "sawdagar/products/fabric-by-metre/1",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Santorin_(GR),_Fira_--_2017_--_2598.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Merfeld,_Wildpferdebahn,_Trib%C3%BCne_--_2014_--_0452.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Dietmar Rabich",
-        "width": 5410,
-        "height": 3607,
-        "phash": "00000c0fffefffff",
-        "alt": "Santorin (GR), Fira   2017   2598"
+        "width": 5399,
+        "height": 3310,
+        "phash": "01010000fd02ffff",
+        "alt": "Merfeld, Wildpferdebahn, Tribüne   2014   0452"
       },
       {
         "publicId": "sawdagar/products/fabric-by-metre/2",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabric_samples,_German_(AM_834768).jpg",
-        "license": "CC BY 4.0",
-        "author": "Unknown author",
-        "width": 3024,
-        "height": 4032,
-        "phash": "e381a1918181d7ff",
-        "alt": "Fabric samples, German (AM 834768)"
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ritning-VALBORG_-_Sj%C3%B6historiska_museet_-_1968-123.tif",
+        "license": "CC BY-SA 3.0",
+        "author": "Tore Herlin",
+        "width": 6306,
+        "height": 6445,
+        "phash": "0030f3fbffff0030",
+        "alt": "Ritning VALBORG   Sjöhistoriska museet   1968 123"
       },
       {
         "publicId": "sawdagar/products/fabric-by-metre/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_Aasee,_Pier_--_2020_--_9215-7.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hamburg,_Jungfernstieg_--_2016_--_4182.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Dietmar Rabich",
-        "width": 6701,
-        "height": 4467,
-        "phash": "ffffd800c0d90000",
-        "alt": "Münster, Aasee, Pier   2020   9215 7"
+        "width": 3850,
+        "height": 2942,
+        "phash": "f9ff0f00000090f9",
+        "alt": "Hamburg, Jungfernstieg   2016   4182"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Heiliggrabkapelle_--_2017_--_7314-20.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5567,
+        "height": 3711,
+        "phash": "03c3e7e6002c6c7c",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Heiliggrabkapelle   2017   7314 20"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Abtei,_Konferenzraum_--_2017_--_7061-7.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5587,
+        "height": 3614,
+        "phash": "ff3f60701141c4c6",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Abtei, Konferenzraum   2017   7061 7"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Abtei,_Meditationsraum_--_2017_--_7090-6.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5590,
+        "height": 3728,
+        "phash": "a6fcdbcfc8840333",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Abtei, Meditationsraum   2017   7090 6"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Abtei,_Speiseraum_--_2017_--_7082-8.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5697,
+        "height": 3798,
+        "phash": "3ef8b39393c0a62f",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Abtei, Speiseraum   2017   7082 8"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Heiliggrabkapelle_--_2017_--_7321.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5744,
+        "height": 3829,
+        "phash": "18d9bc7e72e3e380",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Heiliggrabkapelle   2017   7321"
+      },
+      {
+        "publicId": "sawdagar/products/fabric-by-metre/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heiligengrabe,_Kloster_Stift_zum_Heiligengrabe,_Abtei,_Bibliothek_--_2017_--_0128.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5472,
+        "height": 3648,
+        "phash": "3f7b4383c3839f9e",
+        "alt": "Heiligengrabe, Kloster Stift zum Heiligengrabe, Abtei, Bibliothek   2017   0128"
       }
     ],
     "kantha-bedcover": [],
@@ -385,6 +883,66 @@
         "height": 778,
         "phash": "7f7b013c1e085959",
         "alt": "Baby quilt detail"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baby_quilt_in_pinwheel_pattern.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Jim from Lexington, KY, USA",
+        "width": 2048,
+        "height": 1365,
+        "phash": "7e7cfc3c3c3e3f3b",
+        "alt": "Baby quilt in pinwheel pattern"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Woman_making_a_baby_quilt.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Jim from Lexington, KY, USA",
+        "width": 2048,
+        "height": 1365,
+        "phash": "05003e7f1f0f0c3e",
+        "alt": "Woman making a baby quilt"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabric_-_Yunnan_Nationalities_Museum_-_DSC04140.JPG",
+        "license": "Public domain",
+        "author": "Daderot",
+        "width": 3240,
+        "height": 4320,
+        "phash": "c1bd3d1c642d017b",
+        "alt": "Fabric   Yunnan Nationalities Museum   DSC04140"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabric_-_Yunnan_Nationalities_Museum_-_DSC04141.JPG",
+        "license": "Public domain",
+        "author": "Daderot",
+        "width": 3240,
+        "height": 4320,
+        "phash": "00be807e7e3e0078",
+        "alt": "Fabric   Yunnan Nationalities Museum   DSC04141"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabric_-_Yunnan_Nationalities_Museum_-_DSC04142.JPG",
+        "license": "Public domain",
+        "author": "Daderot",
+        "width": 3013,
+        "height": 3961,
+        "phash": "b7bdbefe0000fbff",
+        "alt": "Fabric   Yunnan Nationalities Museum   DSC04142"
+      },
+      {
+        "publicId": "sawdagar/products/baby-quilt/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabric_-_Yunnan_Nationalities_Museum_-_DSC04143.JPG",
+        "license": "Public domain",
+        "author": "Daderot",
+        "width": 3240,
+        "height": 4320,
+        "phash": "00fe7e7e7e00007f",
+        "alt": "Fabric   Yunnan Nationalities Museum   DSC04143"
       }
     ],
     "kantha-runner": [],
@@ -420,6 +978,56 @@
         "height": 1160,
         "phash": "ff3f1cbfff435100",
         "alt": "Brigadier General M Sakhawat Hossain Inaugurates Jute Bag Campaign Dhaka 2024 10 01 (PID 0006051)"
+      },
+      {
+        "publicId": "sawdagar/products/jute-shopping-bag/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jute_Bag_Promotion_Inauguration_Dhaka_2024-10-01_(PID-0006052).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 1800,
+        "height": 1018,
+        "phash": "fffbe3f3fe9a0000",
+        "alt": "Jute Bag Promotion Inauguration Dhaka 2024 10 01 (PID 0006052)"
+      },
+      {
+        "publicId": "sawdagar/products/jute-shopping-bag/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brigadier_General_Retd_Dr_M_Sakhawat_Hossain_Adviser_Ministry_of_Textiles_and_Jute_Briefs_Journalists_Jute_Bag_Incentive_Program_Gulshan_Dhaka_2024-10-01_(PID-0006054).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 1800,
+        "height": 1066,
+        "phash": "fffc7f7f78080060",
+        "alt": "Brigadier General Retd Dr M Sakhawat Hossain Adviser Ministry of Textiles and Jute Briefs Journalists Jute Bag Incentive Program Gulshan Dhaka 2024 10 01 (PID 0006054)"
+      },
+      {
+        "publicId": "sawdagar/products/jute-shopping-bag/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Syeda_Rizwana_Hasan_Visiting_Jute,_Paper,_Cloth_Bag_Fair_Dhaka_2024-09-29_(PID-0006095).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 1800,
+        "height": 1426,
+        "phash": "1f1e187d47777f40",
+        "alt": "Syeda Rizwana Hasan Visiting Jute, Paper, Cloth Bag Fair Dhaka 2024 09 29 (PID 0006095)"
+      },
+      {
+        "publicId": "sawdagar/products/jute-shopping-bag/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golam_Dastagir_Gazi_inspecting_jute_bag_production_Latif_Bawani_Jute_Mills_Demra_2019-01-29_(PID-0040408).jpg",
+        "license": "Public domain",
+        "author": "Press Information Department",
+        "width": 2100,
+        "height": 1496,
+        "phash": "00e0bdbe7e40c840",
+        "alt": "Golam Dastagir Gazi inspecting jute bag production Latif Bawani Jute Mills Demra 2019 01 29 (PID 0040408)"
+      },
+      {
+        "publicId": "sawdagar/products/jute-shopping-bag/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tourist_with_shopping_bag_PEACE_in_Cienfuegos_Cuba.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Marc-Lautenbacher",
+        "width": 3744,
+        "height": 4510,
+        "phash": "ffffffe3c1810000",
+        "alt": "Tourist with shopping bag PEACE in Cienfuegos Cuba"
       }
     ],
     "jute-rug": [
@@ -452,6 +1060,66 @@
         "height": 1920,
         "phash": "183e3e7e7e7e3e08",
         "alt": "Hard wearing grey carpet texture"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_carpet.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "ProjectManhattan",
+        "width": 2940,
+        "height": 3920,
+        "phash": "008f8fdffff5c000",
+        "alt": "Black carpet"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:St_Albans_Wallingford_Screen_2,_Hertfordshire,_UK_-_Diliff.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Diliff",
+        "width": 4855,
+        "height": 7000,
+        "phash": "dbffff99d9880000",
+        "alt": "St Albans Wallingford Screen 2, Hertfordshire, UK   Diliff"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nasir-al_molk_-1.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ayyoubsabawiki",
+        "width": 4538,
+        "height": 3513,
+        "phash": "00c0f0d018f8fcff",
+        "alt": "Nasir al molk  1"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:EB1911_Carpet_-_Fig._3.%E2%80%94Cut_pile_Turkish_Carpet.jpg",
+        "license": "Public domain",
+        "author": "AnonymousUnknown author",
+        "width": 852,
+        "height": 557,
+        "phash": "ff2fc38103032ff7",
+        "alt": "EB1911 Carpet   Fig. 3.—Cut pile Turkish Carpet"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palacio_de_Golest%C3%A1n,_Teher%C3%A1n,_Ir%C3%A1n,_2016-09-17,_DD_27-36_HDR_PAN.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Diego Delso",
+        "width": 9240,
+        "height": 4016,
+        "phash": "3c44c37cbd3c1c1c",
+        "alt": "Palacio de Golestán, Teherán, Irán, 2016 09 17, DD 27 36 HDR PAN"
+      },
+      {
+        "publicId": "sawdagar/products/jute-rug/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rugs_and_carpets_of_Iran_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Mostafameraji",
+        "width": 3648,
+        "height": 2736,
+        "phash": "1b43993d3d194218",
+        "alt": "Rugs and carpets of Iran 03"
       }
     ],
     "jute-storage-basket": [],
@@ -486,6 +1154,66 @@
         "height": 2448,
         "phash": "00000147c7e7efc7",
         "alt": "Mokha Art2"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Payar_Art1.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 2592,
+        "height": 1944,
+        "phash": "00005020fefbffff",
+        "alt": "Payar Art1"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Payar_Art2.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 2592,
+        "height": 1944,
+        "phash": "0000b8fcfefefefe",
+        "alt": "Payar Art2"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Payar3.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 2592,
+        "height": 1944,
+        "phash": "00041f0f1f7f7f7f",
+        "alt": "Payar3"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mokha_Art4.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 3264,
+        "height": 2448,
+        "phash": "00e3c3c3e3e3e3e7",
+        "alt": "Mokha Art4"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mokha_Art5.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 4000,
+        "height": 3000,
+        "phash": "20e0c3e7e7e7e901",
+        "alt": "Mokha Art5"
+      },
+      {
+        "publicId": "sawdagar/products/jute-wall-art/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mokha_Art6.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Sanjib Chaudhary",
+        "width": 3264,
+        "height": 2448,
+        "phash": "ffffffc080c8c810",
+        "alt": "Mokha Art6"
       }
     ],
     "cane-basket": [
@@ -518,6 +1246,66 @@
         "height": 4000,
         "phash": "ffe3830090828383",
         "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 02"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_01.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "f7c70700b0138383",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 01"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_03.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "ff63230000707373",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 03"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_05.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "7727000067f7e7f7",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 05"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_04.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "ff7363600040f2fd",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 04"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_08.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "bf270010363767f7",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 08"
+      },
+      {
+        "publicId": "sawdagar/products/cane-basket/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phingaluk_(Phingailuk_or_Philuk),_a_traditional_Meitei_basket_used_exclusively_for_Meitei_wedding_ceremonies_%E2%80%94_Classical_Meitei_basketry_handicraft_%E2%80%94_statue_of_a_Meitei_lady_wearing_Innaphi_%26_Phanek_clothes_and_holding_the_basket_07.jpg",
+        "license": "CC0",
+        "author": "Haoreima",
+        "width": 2992,
+        "height": 4000,
+        "phash": "3f270000302f6fef",
+        "alt": "Phingaluk (Phingailuk or Philuk), a traditional Meitei basket used exclusively for Meitei wedding ceremonies — Classical Meitei basketry handicraft — statue of a Meitei lady wearing Innaphi & Phanek clothes and holding the basket 07"
       }
     ],
     "cane-tray": [
@@ -536,6 +1324,16 @@
     "cane-stool": [
       {
         "publicId": "sawdagar/products/cane-stool/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:StateLibQld_2_242427_Parlour_at_Wolverton,_Townsville_residence_of_the_Tunbridge_family,_ca._1895.jpg",
+        "license": "Public domain",
+        "author": "Unknown author",
+        "width": 1000,
+        "height": 792,
+        "phash": "3f1f1f07050c0c04",
+        "alt": "StateLibQld 2 242427 Parlour at Wolverton, Townsville residence of the Tunbridge family, ca. 1895"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:SWVA_Museum_Artisan_Series_(May)_Chair_Caning_(8947717799).jpg",
         "license": "CC BY 2.0",
         "author": "Virginia State Parks staff",
@@ -545,7 +1343,7 @@
         "alt": "SWVA Museum Artisan Series (May) Chair Caning (8947717799)"
       },
       {
-        "publicId": "sawdagar/products/cane-stool/2",
+        "publicId": "sawdagar/products/cane-stool/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-2).jpg",
         "license": "CC BY 4.0",
         "author": "Unknown authorUnknown author",
@@ -555,7 +1353,7 @@
         "alt": "Stool (AM 1963.157 2)"
       },
       {
-        "publicId": "sawdagar/products/cane-stool/3",
+        "publicId": "sawdagar/products/cane-stool/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-3).jpg",
         "license": "CC BY 4.0",
         "author": "Unknown authorUnknown author",
@@ -563,6 +1361,56 @@
         "height": 312,
         "phash": "ef9100003c7f3dff",
         "alt": "Stool (AM 1963.157 3)"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-4).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 461,
+        "height": 273,
+        "phash": "ffbd818180813c7e",
+        "alt": "Stool (AM 1963.157 4)"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-1).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1944,
+        "phash": "fb11818183efcfff",
+        "alt": "Stool (AM 1963.157 1)"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-7).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1944,
+        "phash": "8f8f0000400001ff",
+        "alt": "Stool (AM 1963.157 7)"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-6).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1944,
+        "phash": "ff8181818181818f",
+        "alt": "Stool (AM 1963.157 6)"
+      },
+      {
+        "publicId": "sawdagar/products/cane-stool/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stool_(AM_1963.157-8).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1944,
+        "phash": "ff0f000000020000",
+        "alt": "Stool (AM 1963.157 8)"
       }
     ],
     "bamboo-mat": [
@@ -595,11 +1443,131 @@
         "height": 3199,
         "phash": "40fcfcee8f8f8c84",
         "alt": "Shattered light fixture 1"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_2.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 4601,
+        "height": 3228,
+        "phash": "60feffe7c7c7c700",
+        "alt": "Shattered light fixture 2"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_5.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 3416,
+        "height": 5038,
+        "phash": "f0f0ffbf64e4e000",
+        "alt": "Shattered light fixture 5"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_4.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 4940,
+        "height": 3305,
+        "phash": "fcbcfc686880e040",
+        "alt": "Shattered light fixture 4"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_6.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 3395,
+        "height": 5078,
+        "phash": "00f0fcf0feece020",
+        "alt": "Shattered light fixture 6"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_7.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 4973,
+        "height": 3336,
+        "phash": "e0c0f4e8b8b06060",
+        "alt": "Shattered light fixture 7"
+      },
+      {
+        "publicId": "sawdagar/products/bamboo-mat/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shattered_light_fixture_8.jpg",
+        "license": "CC0",
+        "author": "W.carter",
+        "width": 4817,
+        "height": 3053,
+        "phash": "0090fefee6e600ff",
+        "alt": "Shattered light fixture 8"
       }
     ],
     "kitchen-basket": [
       {
         "publicId": "sawdagar/products/kitchen-basket/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Mother%27s_basket-_yellow_gold,_birthstones_%26_diamonds.jpg",
+        "license": "CC BY 2.0",
+        "author": "gemteck1",
+        "width": 1024,
+        "height": 1019,
+        "phash": "0171d183fcc1f7ff",
+        "alt": "A Mother's basket  yellow gold, birthstones & diamonds"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kessel,_Ferdinand_van_-_Apes_celebrating_in_the_kitchen_-_17th_century.jpg",
+        "license": "Public domain",
+        "author": "Formerly attributed to Ferdinand van Kessel the Elder",
+        "width": 830,
+        "height": 577,
+        "phash": "170100011f3f53fe",
+        "alt": "Kessel, Ferdinand van   Apes celebrating in the kitchen   17th century"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Frans_Snyders_-_Kitchen_Still-Life_-_WGA21517.jpg",
+        "license": "Public domain",
+        "author": "Frans Snyders",
+        "width": 993,
+        "height": 550,
+        "phash": "20685b3b3f3f3f0c",
+        "alt": "Frans Snyders   Kitchen Still Life   WGA21517"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Floris_Gerritsz._van_Schooten_-_Kitchen_Still-Life_-_WGA21045.jpg",
+        "license": "Public domain",
+        "author": "Floris van Schooten",
+        "width": 1141,
+        "height": 880,
+        "phash": "716143f3e7ee0000",
+        "alt": "Floris Gerritsz. van Schooten   Kitchen Still Life   WGA21045"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jan_Miense_Molenaer_(circle)_Two_peasants_in_a_kitchen_interior.jpg",
+        "license": "Public domain",
+        "author": "Circle of Jan Miense Molenaer",
+        "width": 1242,
+        "height": 1542,
+        "phash": "808084e6f6f60600",
+        "alt": "Jan Miense Molenaer (circle) Two peasants in a kitchen interior"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dirck_de_Vries_-_Kitchen_Interior_-_Walters_372651.jpg",
+        "license": "Public domain",
+        "author": "Dirck de Vries",
+        "width": 1755,
+        "height": 1267,
+        "phash": "80c0c6ece0c4c0f0",
+        "alt": "Dirck de Vries   Kitchen Interior   Walters 372651"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-basket/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Matham_Kitchen_scene.jpg",
         "license": "Public domain",
         "author": "Attributed to Jacob Matham",
@@ -609,7 +1577,7 @@
         "alt": "Matham Kitchen scene"
       },
       {
-        "publicId": "sawdagar/products/kitchen-basket/2",
+        "publicId": "sawdagar/products/kitchen-basket/8",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baskets_hanging_from_kitchen_and_stuff_(339954435).jpg",
         "license": "CC BY 2.0",
         "author": "Angelo DeSantis from Berkeley, US",
@@ -619,7 +1587,7 @@
         "alt": "Baskets hanging from kitchen and stuff (339954435)"
       },
       {
-        "publicId": "sawdagar/products/kitchen-basket/3",
+        "publicId": "sawdagar/products/kitchen-basket/9",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen_cupboards_with_integrated_dishwasher.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Kotivalo",
@@ -644,6 +1612,16 @@
     "pottery-dinner-set": [
       {
         "publicId": "sawdagar/products/pottery-dinner-set/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spode.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "VAwebteam at English Wikipedia",
+        "width": 487,
+        "height": 696,
+        "phash": "18003c3c3c3c0800",
+        "alt": "Spode"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinner_service_Cesarevitch_Pavel_Petrovich_01.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Andrey Korzun",
@@ -653,7 +1631,7 @@
         "alt": "Dinner service Cesarevitch Pavel Petrovich 01"
       },
       {
-        "publicId": "sawdagar/products/pottery-dinner-set/2",
+        "publicId": "sawdagar/products/pottery-dinner-set/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Babigonsky_service_-_sauceboat_01.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Andrey Korzun",
@@ -663,14 +1641,64 @@
         "alt": "Babigonsky service   sauceboat 01"
       },
       {
-        "publicId": "sawdagar/products/pottery-dinner-set/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Items_from_the_etruscan-style_service_01.jpg",
+        "publicId": "sawdagar/products/pottery-dinner-set/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Babigonsky_service_-_painted_plate_01.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Andrey Korzun",
-        "width": 2291,
-        "height": 2112,
-        "phash": "3f3f37e301710706",
-        "alt": "Items from the etruscan style service 01"
+        "width": 2334,
+        "height": 1900,
+        "phash": "183c7e7e427e3c00",
+        "alt": "Babigonsky service   painted plate 01"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kremlin_service_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Andrey Korzun",
+        "width": 2816,
+        "height": 1976,
+        "phash": "febe080808f1f9fc",
+        "alt": "Kremlin service 01"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kremlin_service_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Andrey Korzun",
+        "width": 2650,
+        "height": 1970,
+        "phash": "ff1fb9b0b011199f",
+        "alt": "Kremlin service 02"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kremlin_service_-_plate_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Andrey Korzun",
+        "width": 1964,
+        "height": 2296,
+        "phash": "f880808080c3e6fe",
+        "alt": "Kremlin service   plate 01"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Service_with_a_monogram_%22VKKN%22_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Andrey Korzun",
+        "width": 2112,
+        "height": 2816,
+        "phash": "f8f0e0f2f3f0b080",
+        "alt": "Service with a monogram \"VKKN\" 02"
+      },
+      {
+        "publicId": "sawdagar/products/pottery-dinner-set/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Service_with_a_monogram_%22VKKN%22_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Andrey Korzun",
+        "width": 2112,
+        "height": 2816,
+        "phash": "03c3e7c3c3c3e7e7",
+        "alt": "Service with a monogram \"VKKN\" 03"
       }
     ],
     "flower-vase": [
@@ -703,6 +1731,66 @@
         "height": 3631,
         "phash": "003c7e7e7c3c3800",
         "alt": "Samrong Sen Vase MHNT.PRE.2013.0.578"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_of_Flowers_MET_DP800465.jpg",
+        "license": "CC0",
+        "author": "Willem van Leen",
+        "width": 2517,
+        "height": 3844,
+        "phash": "fb830b9101977b7e",
+        "alt": "Vase of Flowers MET DP800465"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_(AM_1934.316-2).jpg",
+        "license": "CC BY 4.0",
+        "author": "Sobei KINKOZAN; Kinkozan",
+        "width": 1629,
+        "height": 2149,
+        "phash": "e7ff7c7efe000000",
+        "alt": "Vase (AM 1934.316 2)"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_(AM_1934.316-7).jpg",
+        "license": "CC BY 4.0",
+        "author": "Sobei KINKOZAN; Kinkozan",
+        "width": 253,
+        "height": 416,
+        "phash": "103c7eff7f720000",
+        "alt": "Vase (AM 1934.316 7)"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_(AM_1922.60-2).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 1944,
+        "height": 2592,
+        "phash": "000001c3e3e3e3e7",
+        "alt": "Vase (AM 1922.60 2)"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_(AM_1924.211-3).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 500,
+        "height": 653,
+        "phash": "0018183c3c007fff",
+        "alt": "Vase (AM 1924.211 3)"
+      },
+      {
+        "publicId": "sawdagar/products/flower-vase/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vase_(AM_1934.316-1).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2736,
+        "height": 3648,
+        "phash": "ffe7e7e7e7030100",
+        "alt": "Vase (AM 1934.316 1)"
       }
     ],
     "planter": [
@@ -718,6 +1806,26 @@
       },
       {
         "publicId": "sawdagar/products/planter/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:HK_Kln_Bay_Telford_Garden_Planter_2.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Sungoning",
+        "width": 1600,
+        "height": 1200,
+        "phash": "fefefef80000bcfc",
+        "alt": "HK Kln Bay Telford Garden Planter 2"
+      },
+      {
+        "publicId": "sawdagar/products/planter/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Queen_Elizabeth_II_Rose_Garden,_Titsey_Place_-_geograph.org.uk_-_899350.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Ian Capper",
+        "width": 640,
+        "height": 426,
+        "phash": "7f7d650000181c3c",
+        "alt": "The Queen Elizabeth II Rose Garden, Titsey Place   geograph.org.uk   899350"
+      },
+      {
+        "publicId": "sawdagar/products/planter/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Planter_in_the_garden_at_Whitewebbs_House,_Enfield_-_geograph.org.uk_-_1260650.jpg",
         "license": "CC BY-SA 2.0",
         "author": "Christine Matthews",
@@ -727,7 +1835,7 @@
         "alt": "Planter in the garden at Whitewebbs House, Enfield   geograph.org.uk   1260650"
       },
       {
-        "publicId": "sawdagar/products/planter/3",
+        "publicId": "sawdagar/products/planter/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Knot_Garden,_Little_Moreton_Hall_-_geograph.org.uk_-_1275930.jpg",
         "license": "CC BY-SA 2.0",
         "author": "JThomas",
@@ -735,6 +1843,46 @@
         "height": 480,
         "phash": "ffff00001c188100",
         "alt": "Knot Garden, Little Moreton Hall   geograph.org.uk   1275930"
+      },
+      {
+        "publicId": "sawdagar/products/planter/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Planter_with_roses_in_bloom_at_Eastman_Memorial_Rose_Garden_-_Hillsboro,_Oregon.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "M.O. Stevens",
+        "width": 3872,
+        "height": 2592,
+        "phash": "00000ef7f9ece0f7",
+        "alt": "Planter with roses in bloom at Eastman Memorial Rose Garden   Hillsboro, Oregon"
+      },
+      {
+        "publicId": "sawdagar/products/planter/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C_%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B3%D0%BE_%D0%94%D0%B2%D0%BE%D1%80%D1%86%D0%B0._%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Aleks G",
+        "width": 3802,
+        "height": 2336,
+        "phash": "077ffffb08000808",
+        "alt": "Церковь Большого Дворца. Петергоф"
+      },
+      {
+        "publicId": "sawdagar/products/planter/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Haus_Osthoff_--_2012_--_8846.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 3443,
+        "height": 4591,
+        "phash": "ffffe3e3db1800c1",
+        "alt": "Dülmen, Haus Osthoff   2012   8846"
+      },
+      {
+        "publicId": "sawdagar/products/planter/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Los_Angeles_(California,_USA),_South_Olive_Street_--_2012_--_4847.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 5184,
+        "height": 3456,
+        "phash": "0101e37f7f7f0101",
+        "alt": "Los Angeles (California, USA), South Olive Street   2012   4847"
       }
     ],
     "terracotta-jewellery": [
@@ -767,11 +1915,81 @@
         "height": 769,
         "phash": "003c7c7c7c201010",
         "alt": "TC 123 Majapahit Terracotta head Profile"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Painted_Terracotta_Sarcophagus_of_Seianti_Hanunia_Tlesnasa,_Etruscan_(about_150-130_BC)_-_British_Museum.jpg",
+        "license": "CC BY 2.0",
+        "author": "Andres Rueda",
+        "width": 2176,
+        "height": 1301,
+        "phash": "fbf171737df98100",
+        "alt": "Painted Terracotta Sarcophagus of Seianti Hanunia Tlesnasa, Etruscan (about 150 130 BC)   British Museum"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Female_figuirine,_small_terracotta,_before_550_BC,_Prague_Kinsky,_NM-H10_6393,_140749.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Zde",
+        "width": 2985,
+        "height": 4447,
+        "phash": "c0f0e0f0f0f8f800",
+        "alt": "Female figuirine, small terracotta, before 550 BC, Prague Kinsky, NM H10 6393, 140749"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Female_figuirine,_small_terracotta,_before_550_BC,_Prague_Kinsky,_NM-H10_6393,_151516.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Zde",
+        "width": 3259,
+        "height": 4889,
+        "phash": "3737a7c383c30317",
+        "alt": "Female figuirine, small terracotta, before 550 BC, Prague Kinsky, NM H10 6393, 151516"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Terracotta_Jewellery_by_Devika_Jacob.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Bibichayan",
+        "width": 3264,
+        "height": 1836,
+        "phash": "80e0e0f4cee7e7ff",
+        "alt": "Terracotta Jewellery by Devika Jacob"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gilt_terracotta_wreath_with_flowers_and_berries_MET_DP122055.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 4000,
+        "height": 2010,
+        "phash": "ffffe78100e7ffff",
+        "alt": "Gilt terracotta wreath with flowers and berries MET DP122055"
+      },
+      {
+        "publicId": "sawdagar/products/terracotta-jewellery/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gilt_terracotta_necklace_MET_DP122057.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 4000,
+        "height": 4000,
+        "phash": "ffffe79981e7fbe3",
+        "alt": "Gilt terracotta necklace MET DP122057"
       }
     ],
     "clay-cooking-pot": [
       {
         "publicId": "sawdagar/products/clay-cooking-pot/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Svadbarski_Kupus.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Boris Dimitrov",
+        "width": 2560,
+        "height": 1920,
+        "phash": "7fbffff7f0240701",
+        "alt": "Svadbarski Kupus"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay_cooking_pot_Bronze_II_age_01.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Hanay",
@@ -781,7 +1999,7 @@
         "alt": "Clay cooking pot Bronze II age 01"
       },
       {
-        "publicId": "sawdagar/products/clay-cooking-pot/2",
+        "publicId": "sawdagar/products/clay-cooking-pot/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay_cooking_pot_Bronze_II_age_02.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Hanay",
@@ -791,7 +2009,27 @@
         "alt": "Clay cooking pot Bronze II age 02"
       },
       {
-        "publicId": "sawdagar/products/clay-cooking-pot/3",
+        "publicId": "sawdagar/products/clay-cooking-pot/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Clay_Pot_on_Display_in_Shihsanhang_Museum_of_Archaeology.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "H. H. Tsai",
+        "width": 4032,
+        "height": 3024,
+        "phash": "c7ffe7c3c3c3c3c7",
+        "alt": "A Clay Pot on Display in Shihsanhang Museum of Archaeology"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay_Pot.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Kabiru123",
+        "width": 2168,
+        "height": 2720,
+        "phash": "03077941f3f9f9d7",
+        "alt": "Clay Pot"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay_pot_2.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Kid Keen 47",
@@ -799,6 +2037,36 @@
         "height": 4032,
         "phash": "070321e1e1e30fff",
         "alt": "Clay pot 2"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pentola_in_terracotta.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Albarubescens",
+        "width": 4505,
+        "height": 3303,
+        "phash": "0038fcffff8183c7",
+        "alt": "Pentola in terracotta"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mexican_ingredients_in_clay_pots.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "ROberto Carlos Román Don",
+        "width": 4046,
+        "height": 2188,
+        "phash": "0321febf80c0e8f0",
+        "alt": "Mexican ingredients in clay pots"
+      },
+      {
+        "publicId": "sawdagar/products/clay-cooking-pot/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Earthenware_cooking_pot.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Davidbena",
+        "width": 3648,
+        "height": 2432,
+        "phash": "307f6fc3c1ede567",
+        "alt": "Earthenware cooking pot"
       }
     ],
     "brass-bowl": [
@@ -853,11 +2121,71 @@
         "height": 5778,
         "phash": "0011183e7e7a60f8",
         "alt": "ACM Makara palanquin ornament 03605"
+      },
+      {
+        "publicId": "sawdagar/products/brass-plate/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ACM-Makara_palanquin_ornament-03607.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 3868,
+        "height": 3868,
+        "phash": "2470503c3e1e0e07",
+        "alt": "ACM Makara palanquin ornament 03607"
+      },
+      {
+        "publicId": "sawdagar/products/brass-plate/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ACM-Makara_palanquin_ornament-03606.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 3614,
+        "height": 5421,
+        "phash": "001818993d191818",
+        "alt": "ACM Makara palanquin ornament 03606"
+      },
+      {
+        "publicId": "sawdagar/products/brass-plate/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thomas_Butler_Gunn_Diaries-_Volume_16,_page_234_(newspaper_clipping_continued),_(June_1861)_-_DPLA_-_0f49644414856b6c16dd3d234ee6afdf.jpg",
+        "license": "Public domain",
+        "author": "Gunn, Thomas Butler, 1826-1903",
+        "width": 3149,
+        "height": 4509,
+        "phash": "feb2b092969280fa",
+        "alt": "Thomas Butler Gunn Diaries  Volume 16, page 234 (newspaper clipping continued), (June 1861)   DPLA   0f49644414856b6c16dd3d234ee6afdf"
       }
     ],
     "brass-lamp": [
       {
         "publicId": "sawdagar/products/brass-lamp/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:National_Museum_KL_2008_Istana_interior_pano.jpg",
+        "license": "Public domain",
+        "author": "Gryffindor",
+        "width": 1239,
+        "height": 1393,
+        "phash": "007b7300f3330800",
+        "alt": "National Museum KL 2008 Istana interior pano"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:National_Museum_KL_2008_(181).JPG",
+        "license": "Public domain",
+        "author": "Gryffindor",
+        "width": 768,
+        "height": 1024,
+        "phash": "ffff30303c000080",
+        "alt": "National Museum KL 2008 (181)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:National_Museum_KL_2008_(183).JPG",
+        "license": "Public domain",
+        "author": "Gryffindor",
+        "width": 768,
+        "height": 1024,
+        "phash": "8f7070783f000000",
+        "alt": "National Museum KL 2008 (183)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:COLLECTIE_TROPENMUSEUM_Messingen_lamp_TMnr_1259-19.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Tropenmuseum",
@@ -867,7 +2195,7 @@
         "alt": "COLLECTIE TROPENMUSEUM Messingen lamp TMnr 1259 19"
       },
       {
-        "publicId": "sawdagar/products/brass-lamp/2",
+        "publicId": "sawdagar/products/brass-lamp/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_Leviton_light_socket.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Retro00064",
@@ -877,7 +2205,17 @@
         "alt": "Old Leviton light socket"
       },
       {
-        "publicId": "sawdagar/products/brass-lamp/3",
+        "publicId": "sawdagar/products/brass-lamp/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carlo_Magini_(1720%E2%80%931806)_A_kitchen_still_life.jpg",
+        "license": "Public domain",
+        "author": "Carlo Magini",
+        "width": 1540,
+        "height": 2000,
+        "phash": "185848c0c0cefce0",
+        "alt": "Carlo Magini (1720–1806) A kitchen still life"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_lamp_by_Joseph_Maria_Olbrich,_c._1901,_brass,_glass,_beads_-_Hessisches_Landesmuseum_Darmstadt_-_Darmstadt,_Germany_-_DSC00999.jpg",
         "license": "CC0",
         "author": "Daderot",
@@ -885,6 +2223,26 @@
         "height": 5472,
         "phash": "e4a08080c0fee7f7",
         "alt": "Table lamp by Joseph Maria Olbrich, c. 1901, brass, glass, beads   Hessisches Landesmuseum Darmstadt   Darmstadt, Germany   DSC00999"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Lamp_(England),_ca._1900_(CH_18730761).jpg",
+        "license": "Public domain",
+        "author": "Made by W.A.S. Benson Ltd.",
+        "width": 2112,
+        "height": 4096,
+        "phash": "001866e7e7ffe7e7",
+        "alt": "Table Lamp (England), ca. 1900 (CH 18730761)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-lamp/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lamp,_table_(AM_615004-2).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown author",
+        "width": 1064,
+        "height": 1600,
+        "phash": "3c003c3c181c1c3f",
+        "alt": "Lamp, table (AM 615004 2)"
       }
     ],
     "brass-jug": [
@@ -917,6 +2275,26 @@
         "height": 1976,
         "phash": "ffe7c3913c2ccbc3",
         "alt": "Jug (AM 1966.202 2)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-jug/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jug_(AM_1966.202-3).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown author",
+        "width": 3456,
+        "height": 2220,
+        "phash": "0038787878b8c3ff",
+        "alt": "Jug (AM 1966.202 3)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-jug/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jug_(AM_1966.202-4).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown author",
+        "width": 3456,
+        "height": 2592,
+        "phash": "00fcfff0fe7c0000",
+        "alt": "Jug (AM 1966.202 4)"
       }
     ],
     "brass-wall-decor": [
@@ -981,21 +2359,51 @@
         "height": 4128,
         "phash": "ffff878180808387",
         "alt": "Pana bata"
+      },
+      {
+        "publicId": "sawdagar/products/brass-spice-box/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spice_Box_And_Grater_(France),_ca._1680_(CH_68730965).jpg",
+        "license": "Public domain",
+        "author": "Unknown artistUnknown artist",
+        "width": 4096,
+        "height": 2403,
+        "phash": "ffffdfcb878181ff",
+        "alt": "Spice Box And Grater (France), ca. 1680 (CH 68730965)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-spice-box/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saffron_and_Mortar_(14838708713).jpg",
+        "license": "CC BY 2.0",
+        "author": "Turku Gingerbread from Finland",
+        "width": 720,
+        "height": 1084,
+        "phash": "40043e1373f9f8c8",
+        "alt": "Saffron and Mortar (14838708713)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-spice-box/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:WW1_keepsakes_(10132620894).jpg",
+        "license": "Public domain",
+        "author": "Aussie~mobs",
+        "width": 1000,
+        "height": 1100,
+        "phash": "ff818183818d2181",
+        "alt": "WW1 keepsakes (10132620894)"
+      },
+      {
+        "publicId": "sawdagar/products/brass-spice-box/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Princess_Mary%27s_Gift_Box_-_Christmas_1914_(10132776506).jpg",
+        "license": "Public domain",
+        "author": "Aussie~mobs",
+        "width": 2703,
+        "height": 1851,
+        "phash": "ffff998181818181",
+        "alt": "Princess Mary's Gift Box   Christmas 1914 (10132776506)"
       }
     ],
     "leather-tote": [
       {
         "publicId": "sawdagar/products/leather-tote/1",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adele_Dejak_Tote_Bag_h014.jpg",
-        "license": "CC BY-SA 4.0",
-        "author": "Adele Dejak",
-        "width": 3577,
-        "height": 4379,
-        "phash": "ffffff8381818081",
-        "alt": "Adele Dejak Tote Bag h014"
-      },
-      {
-        "publicId": "sawdagar/products/leather-tote/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sarah-jessica-parker-boyy-bag.jpg",
         "license": "CC BY-SA 4.0",
         "author": "BACKGRID",
@@ -1005,7 +2413,7 @@
         "alt": "Sarah jessica parker boyy bag"
       },
       {
-        "publicId": "sawdagar/products/leather-tote/3",
+        "publicId": "sawdagar/products/leather-tote/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Last_Drip_Designs_Tote_Bag.png",
         "license": "CC BY-SA 4.0",
         "author": "Fujisun",
@@ -1018,6 +2426,26 @@
     "leather-wallet": [
       {
         "publicId": "sawdagar/products/leather-wallet/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_wallets_04.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Nicholas Gemini",
+        "width": 4000,
+        "height": 3000,
+        "phash": "ffc7c3c3c3e7ffff",
+        "alt": "Leather wallets 04"
+      },
+      {
+        "publicId": "sawdagar/products/leather-wallet/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_wallets_05.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Nicholas Gemini",
+        "width": 4000,
+        "height": 3000,
+        "phash": "ffc7c78783c1f3fb",
+        "alt": "Leather wallets 05"
+      },
+      {
+        "publicId": "sawdagar/products/leather-wallet/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_wallets_06.JPG",
         "license": "CC BY-SA 3.0",
         "author": "Nicholas Gemini",
@@ -1027,7 +2455,17 @@
         "alt": "Leather wallets 06"
       },
       {
-        "publicId": "sawdagar/products/leather-wallet/2",
+        "publicId": "sawdagar/products/leather-wallet/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_wallets_08.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Nicholas Gemini",
+        "width": 4000,
+        "height": 3000,
+        "phash": "ff9f80808095ffff",
+        "alt": "Leather wallets 08"
+      },
+      {
+        "publicId": "sawdagar/products/leather-wallet/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Python_skin_wallet,_closed,_2015-03-18.jpg",
         "license": "CC BY-SA 4.0",
         "author": "Crisco 1492",
@@ -1037,7 +2475,7 @@
         "alt": "Python skin wallet, closed, 2015 03 18"
       },
       {
-        "publicId": "sawdagar/products/leather-wallet/3",
+        "publicId": "sawdagar/products/leather-wallet/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Varanidae_skin_leather_wallet,_held_by_Polish_customs_authorities,_Warsaw_Chopin_Airport,_April,_2019.jpg",
         "license": "CC BY-SA 4.0",
         "author": "MichalPL",
@@ -1045,11 +2483,61 @@
         "height": 3024,
         "phash": "3c7c0080007f7e7c",
         "alt": "Varanidae skin leather wallet, held by Polish customs authorities, Warsaw Chopin Airport, April, 2019"
+      },
+      {
+        "publicId": "sawdagar/products/leather-wallet/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_bi-fold_wallet_by_Eugene_Pik_(2021)_04.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Eugenepik",
+        "width": 2048,
+        "height": 1152,
+        "phash": "ffc1c1818101e1ff",
+        "alt": "Leather bi fold wallet by Eugene Pik (2021) 04"
+      },
+      {
+        "publicId": "sawdagar/products/leather-wallet/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_bi-fold_wallet_by_Eugene_Pik_(2021)_06.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Eugenepik",
+        "width": 2048,
+        "height": 1151,
+        "phash": "ffc1c1c191f0e080",
+        "alt": "Leather bi fold wallet by Eugene Pik (2021) 06"
       }
     ],
     "leather-sandal": [
       {
         "publicId": "sawdagar/products/leather-sandal/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platform_Sandal_wood_Buffalo_brown-bright.jpg",
+        "license": "Public domain",
+        "author": "editied by Iainf",
+        "width": 1536,
+        "height": 1024,
+        "phash": "ffffdf11200000e7",
+        "alt": "Platform Sandal wood Buffalo brown bright"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Egyptian_-_Pair_of_Leather_Sandals_-_Walters_73110.jpg",
+        "license": "Public domain",
+        "author": "Anonymous (Egypt)Unknown author",
+        "width": 1496,
+        "height": 1800,
+        "phash": "ff9981a1919999db",
+        "alt": "Egyptian   Pair of Leather Sandals   Walters 73110"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_sandals_at_leasure_(2902045664).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "mwanasimba from La Réunion",
+        "width": 1600,
+        "height": 1200,
+        "phash": "cc88900bdaf8818f",
+        "alt": "Leather sandals at leasure (2902045664)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Egyptian_sandals,_leather,_400-600_AD_-_Bata_Shoe_Museum_-_DSC00012.JPG",
         "license": "CC0",
         "author": "Daderot",
@@ -1059,7 +2547,7 @@
         "alt": "Egyptian sandals, leather, 400 600 AD   Bata Shoe Museum   DSC00012"
       },
       {
-        "publicId": "sawdagar/products/leather-sandal/2",
+        "publicId": "sawdagar/products/leather-sandal/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_sandal_of_a_child,_Roman_period,_Roman_Empire-_Power_%26_People,_Leeds_City_Museum,_UK_(16320628336).jpg",
         "license": "CC BY-SA 2.0",
         "author": "Carole Raddato from FRANKFURT, Germany",
@@ -1069,7 +2557,7 @@
         "alt": "Leather sandal of a child, Roman period, Roman Empire  Power & People, Leeds City Museum, UK (16320628336)"
       },
       {
-        "publicId": "sawdagar/products/leather-sandal/3",
+        "publicId": "sawdagar/products/leather-sandal/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Closed_mens_leather_sandals.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Tobias \"ToMar\" Maier",
@@ -1077,6 +2565,36 @@
         "height": 2537,
         "phash": "3f23332f0f81e1ff",
         "alt": "Closed mens leather sandals"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Men%27s_Leather_Grecian_Sandals_(sandalishop)_1.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Driante70",
+        "width": 1943,
+        "height": 2897,
+        "phash": "000047c7e3f3f187",
+        "alt": "Men's Leather Grecian Sandals (sandalishop) 1"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Men%27s_Leather_Grecian_Sandals_(sandalishop)_2.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Driante70",
+        "width": 1172,
+        "height": 1873,
+        "phash": "e7c3c3c3c3dbf3e7",
+        "alt": "Men's Leather Grecian Sandals (sandalishop) 2"
+      },
+      {
+        "publicId": "sawdagar/products/leather-sandal/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leather_sandal_for_men_in_summer_2.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Geoffreyrabbit",
+        "width": 4000,
+        "height": 3000,
+        "phash": "ff8787838383cbef",
+        "alt": "Leather sandal for men in summer 2"
       }
     ],
     "leather-belt": [
@@ -1092,6 +2610,26 @@
       },
       {
         "publicId": "sawdagar/products/leather-belt/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belts.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Crazy Ivan",
+        "width": 600,
+        "height": 559,
+        "phash": "000084f0fcfcf1f2",
+        "alt": "Belts"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flachriemen_leder.jpg",
+        "license": "Public domain",
+        "author": "Ulfbastel",
+        "width": 668,
+        "height": 1002,
+        "phash": "e7000127e71fdfff",
+        "alt": "Flachriemen leder"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:1800%27s_-Masonic_Knights_Templar-_Sword_Belt_w_Chains_-1.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Asidemore",
@@ -1101,7 +2639,7 @@
         "alt": "1800's  Masonic Knights Templar  Sword Belt w Chains  1"
       },
       {
-        "publicId": "sawdagar/products/leather-belt/3",
+        "publicId": "sawdagar/products/leather-belt/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belt-clothing.jpg",
         "license": "Public domain",
         "author": "Evan-Amos",
@@ -1109,6 +2647,46 @@
         "height": 1000,
         "phash": "f7c1907cfd0183f7",
         "alt": "Belt clothing"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:StampedLeatherBelt.jpg",
+        "license": "Public domain",
+        "author": "Johan Potgieter (JPotgieter at en.wikipedia)",
+        "width": 400,
+        "height": 165,
+        "phash": "0c02ffffff4c0000",
+        "alt": "StampedLeatherBelt"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ubersicht_verzierte_Zinnranzen_aus_der_Sammlung_Martin.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Turboprinzen",
+        "width": 1330,
+        "height": 1058,
+        "phash": "397f7f3f3f003e00",
+        "alt": "Ubersicht verzierte Zinnranzen aus der Sammlung Martin"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gustave_Courbet_-_Self-Portrait_(Man_with_Leather_Belt)_-_WGA05486.jpg",
+        "license": "Public domain",
+        "author": "Gustave Courbet",
+        "width": 950,
+        "height": 1259,
+        "phash": "00181818181873ef",
+        "alt": "Gustave Courbet   Self Portrait (Man with Leather Belt)   WGA05486"
+      },
+      {
+        "publicId": "sawdagar/products/leather-belt/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Belt.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Sta.K",
+        "width": 3264,
+        "height": 2448,
+        "phash": "80e0c08281e3ffff",
+        "alt": "Black Belt"
       }
     ],
     "leather-journal": [
@@ -1141,18 +2719,78 @@
         "height": 2600,
         "phash": "1f7fe500602020cf",
         "alt": "Cover me 2009   2460 (Kessler Monrose MichaelDouglas Kollektiv)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover_me_2009_-_2477_(Monrose).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Raimond Spekking",
+        "width": 2000,
+        "height": 2800,
+        "phash": "0127efc1e8c840f9",
+        "alt": "Cover me 2009   2477 (Monrose)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover_me_2009_-_2479_(Monrose).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Raimond Spekking",
+        "width": 2000,
+        "height": 2400,
+        "phash": "0747e9b8c0c040ff",
+        "alt": "Cover me 2009   2479 (Monrose)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tapegag_(Bondage)_2_girls_in_rubber-leather_(6855).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Raimond Spekking",
+        "width": 2400,
+        "height": 1900,
+        "phash": "031b1f1f3f030330",
+        "alt": "Tapegag (Bondage) 2 girls in rubber leather (6855)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fur_%26_Leather_April_1989,_Canada.jpg",
+        "license": "Public domain",
+        "author": "Fashion Mode Communications Inc.",
+        "width": 1212,
+        "height": 1643,
+        "phash": "ff81808181817f7f",
+        "alt": "Fur & Leather April 1989, Canada"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flowers_from_Stratford_on_Avon_-_Upper_cover_(c27m10).jpg",
+        "license": "CC0",
+        "author": "Jerrard, Paul",
+        "width": 2313,
+        "height": 3246,
+        "phash": "ff010101595901ff",
+        "alt": "Flowers from Stratford on Avon   Upper cover (c27m10)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-journal/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clark_Family_Collection-_Volume_6._Elkskin_Journal._Inside_back_cover,_approximately_December_7,_1805.jpg",
+        "license": "Public domain",
+        "author": "Clark, William, 1770-1838",
+        "width": 4182,
+        "height": 5561,
+        "phash": "fe0087ffffffe700",
+        "alt": "Clark Family Collection  Volume 6. Elkskin Journal. Inside back cover, approximately December 7, 1805"
       }
     ],
     "leather-travel-bag": [
       {
         "publicId": "sawdagar/products/leather-travel-bag/1",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Encrier-de-voyage-Sac_%C3%A0_main_ferm%C3%A9.jpg",
-        "license": "CC BY-SA 3.0",
-        "author": "LessayCatus",
-        "width": 869,
-        "height": 818,
-        "phash": "ffefc3c383c3e3ff",
-        "alt": "Encrier de voyage Sac à main fermé"
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hallet%27s_Halt_-_geograph.org.uk_-_1561030.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Evelyn Simak",
+        "width": 640,
+        "height": 480,
+        "phash": "ffcf070010000078",
+        "alt": "Hallet's Halt   geograph.org.uk   1561030"
       },
       {
         "publicId": "sawdagar/products/leather-travel-bag/2",
@@ -1173,18 +2811,78 @@
         "height": 876,
         "phash": "ffffe381818181cf",
         "alt": "Belber Doctor Bag"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Behold_the_Plain_Old_Telephone_(5434539111).jpg",
+        "license": "CC BY 2.0",
+        "author": "cogdogblog",
+        "width": 4752,
+        "height": 3168,
+        "phash": "0000c0c0c0e0e0c8",
+        "alt": "Behold the Plain Old Telephone (5434539111)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Valise,_officer%27s_(AM_2005.122.1-1).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 4588,
+        "height": 3138,
+        "phash": "fff8c08001038f9f",
+        "alt": "Valise, officer's (AM 2005.122.1 1)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Valise,_officer%27s_(AM_2005.122.1-6).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2228,
+        "height": 1200,
+        "phash": "0f177f5f0101033f",
+        "alt": "Valise, officer's (AM 2005.122.1 6)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Valise,_officer%27s_(AM_2005.122.1-7).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2592,
+        "height": 1416,
+        "phash": "0b57410d01013fff",
+        "alt": "Valise, officer's (AM 2005.122.1 7)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Valise,_officer%27s_(AM_2005.122.1-8).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2164,
+        "height": 1824,
+        "phash": "1f1f0f07030307ff",
+        "alt": "Valise, officer's (AM 2005.122.1 8)"
+      },
+      {
+        "publicId": "sawdagar/products/leather-travel-bag/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Valise,_officer%27s_(AM_2005.122.1-9).jpg",
+        "license": "CC BY 4.0",
+        "author": "Unknown authorUnknown author",
+        "width": 2036,
+        "height": 1752,
+        "phash": "1f1f070b09030307",
+        "alt": "Valise, officer's (AM 2005.122.1 9)"
       }
     ],
     "cookware-set": [
       {
         "publicId": "sawdagar/products/cookware-set/1",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baking_glove.jpg",
-        "license": "CC BY-SA 3.0",
-        "author": "Lymantria",
-        "width": 2288,
-        "height": 1712,
-        "phash": "feffc1810183ffff",
-        "alt": "Baking glove"
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bamboo_steamers_in_Tiong_Bahru,_Singapore_-_20060414.jpg",
+        "license": "CC BY 2.0",
+        "author": "etoile from Tiong Bahru, Singapore.",
+        "width": 1504,
+        "height": 1000,
+        "phash": "7f7f417efee0c201",
+        "alt": "Bamboo steamers in Tiong Bahru, Singapore   20060414"
       },
       {
         "publicId": "sawdagar/products/cookware-set/2",
@@ -1198,6 +2896,16 @@
       },
       {
         "publicId": "sawdagar/products/cookware-set/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pg094_Utensiles_employ%C3%A9s_%C3%A0_Kourala.jpg",
+        "license": "Public domain",
+        "author": "Unknown author",
+        "width": 893,
+        "height": 705,
+        "phash": "df8f81c1c7c581ef",
+        "alt": "Pg094 Utensiles employés à Kourala"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Set_de_refractarias.JPG",
         "license": "CC BY-SA 3.0",
         "author": "Diana 8220",
@@ -1205,11 +2913,71 @@
         "height": 1200,
         "phash": "387e5ec0f880f0c0",
         "alt": "Set de refractarias"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Women%27s_Royal_Naval_Service_on_the_Home_Front,_1917-1918_Q18915.jpg",
+        "license": "Public domain",
+        "author": "Royal Navy official photographer",
+        "width": 800,
+        "height": 626,
+        "phash": "fdf0f0c0c1c1c3c7",
+        "alt": "The Women's Royal Naval Service on the Home Front, 1917 1918 Q18915"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_woman_preparing_food.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Deo photographer",
+        "width": 5184,
+        "height": 3456,
+        "phash": "c7879fdfdfc78381",
+        "alt": "A woman preparing food"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9paration_du_beurre_clarifi%C3%A9_dans_le_d%C3%A9sert_du_Thar_(Rajasthan)_(3).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ji-Elle",
+        "width": 3648,
+        "height": 5472,
+        "phash": "0008206ceef03dff",
+        "alt": "Préparation du beurre clarifié dans le désert du Thar (Rajasthan) (3)"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9paration_du_beurre_clarifi%C3%A9_dans_le_d%C3%A9sert_du_Thar_(Rajasthan)_(4).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ji-Elle",
+        "width": 2448,
+        "height": 1749,
+        "phash": "1c0e2018073fbf9f",
+        "alt": "Préparation du beurre clarifié dans le désert du Thar (Rajasthan) (4)"
+      },
+      {
+        "publicId": "sawdagar/products/cookware-set/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banana%27s_Foster_-_Brennan%27s.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Chris McCorkle",
+        "width": 3872,
+        "height": 2592,
+        "phash": "f8f8e8f8f8fee280",
+        "alt": "Banana's Foster   Brennan's"
       }
     ],
     "storage-jar": [
       {
         "publicId": "sawdagar/products/storage-jar/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fort_Ancient_Storage_jar_HRoe_2011.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Herb Roe, www.chromesun.com",
+        "width": 700,
+        "height": 553,
+        "phash": "fcfee0f0f8e0a1b0",
+        "alt": "Fort Ancient Storage jar HRoe 2011"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_storage_jar.jpg",
         "license": "Public domain",
         "author": "Unknown Japanese artist",
@@ -1219,7 +2987,37 @@
         "alt": "Japanese storage jar"
       },
       {
-        "publicId": "sawdagar/products/storage-jar/2",
+        "publicId": "sawdagar/products/storage-jar/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Storage_jar_from_Iran,_c._9th_century,_glazed_earthenware,_HAA.JPG",
+        "license": "CC0",
+        "author": "Hiart",
+        "width": 1035,
+        "height": 1446,
+        "phash": "0080383c7efebcff",
+        "alt": "Storage jar from Iran, c. 9th century, glazed earthenware, HAA"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Storage_Jar_from_Thailand,_15th_century,_glazed_stoneware,_Honolulu_Academy_of_Arts.JPG",
+        "license": "CC0",
+        "author": "Hiart",
+        "width": 1825,
+        "height": 2375,
+        "phash": "001e7f3e00c1c3ff",
+        "alt": "Storage Jar from Thailand, 15th century, glazed stoneware, Honolulu Academy of Arts"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_storage_jar,_Tamba_ware,_Honolulu_Museum_of_Art,_3485.1.JPG",
+        "license": "CC0",
+        "author": "Hiart",
+        "width": 2574,
+        "height": 3114,
+        "phash": "f7ffc18081c0c2c3",
+        "alt": "Japanese storage jar, Tamba ware, Honolulu Museum of Art, 3485.1"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aegina_middle_bronze_age_storage_jar_with_geometric_painted_decorations.jpg",
         "license": "CC0",
         "author": "Jebulon",
@@ -1229,7 +3027,7 @@
         "alt": "Aegina middle bronze age storage jar with geometric painted decorations"
       },
       {
-        "publicId": "sawdagar/products/storage-jar/3",
+        "publicId": "sawdagar/products/storage-jar/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Storage_jar_Aegina_Greece.png",
         "license": "CC0",
         "author": "Jebulon",
@@ -1237,6 +3035,26 @@
         "height": 3186,
         "phash": "7e6e7e0f0e220000",
         "alt": "Storage jar Aegina Greece"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:One-handled_storage_jar_(albarello)_MET_DP314802.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 3082,
+        "height": 3873,
+        "phash": "0000180c4f4f9fff",
+        "alt": "One handled storage jar (albarello) MET DP314802"
+      },
+      {
+        "publicId": "sawdagar/products/storage-jar/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:One-handled_storage_jar_(albarello)_MET_DP314801.jpg",
+        "license": "CC0",
+        "author": "Unknown author",
+        "width": 3915,
+        "height": 2599,
+        "phash": "0e0e1e1e1e9f8f8f",
+        "alt": "One handled storage jar (albarello) MET DP314801"
       }
     ],
     "bedding-set": [
@@ -1262,13 +3080,73 @@
       },
       {
         "publicId": "sawdagar/products/bedding-set/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pillowcase,_set_(AM_1996.72.41-4).jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-2).jpg",
         "license": "CC BY 4.0",
         "author": "Vincenzina Vietri",
         "width": 2592,
         "height": 1944,
-        "phash": "3f3f3f0303070703",
-        "alt": "Pillowcase, set (AM 1996.72.41 4)"
+        "phash": "ffff0f0703030100",
+        "alt": "Cover, bed, set (AM 1996.72.40 2)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-3).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "fefefcfc7c382800",
+        "alt": "Cover, bed, set (AM 1996.72.40 3)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-4).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "ffffff1f07070300",
+        "alt": "Cover, bed, set (AM 1996.72.40 4)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-6).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "1068747a7c7e7f7e",
+        "alt": "Cover, bed, set (AM 1996.72.40 6)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-7).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "1c1f7f3f1f1e0e00",
+        "alt": "Cover, bed, set (AM 1996.72.40 7)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cover,_bed,_set_(AM_1996.72.40-10).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "3f1f1f270f0f0f07",
+        "alt": "Cover, bed, set (AM 1996.72.40 10)"
+      },
+      {
+        "publicId": "sawdagar/products/bedding-set/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sham,_pillow,_set_(AM_1996.72.36-1).jpg",
+        "license": "CC BY 4.0",
+        "author": "Vincenzina Vietri",
+        "width": 2592,
+        "height": 1944,
+        "phash": "7f7f7f7f7fff0f00",
+        "alt": "Sham, pillow, set (AM 1996.72.36 1)"
       }
     ],
     "table-linen": [
@@ -1301,11 +3179,81 @@
         "height": 800,
         "phash": "00b0f0f3f1f37ffc",
         "alt": "Sofre"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Linen_Hall_Library,_Belfast,_March_2011_(06).JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Ardfern",
+        "width": 4272,
+        "height": 2848,
+        "phash": "1f1f1e1c1c060600",
+        "alt": "Linen Hall Library, Belfast, March 2011 (06)"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Freshly_laundered_shirts_and_table_linen_on_bed_in_miner%27s_home._U.S._Coal_%26_Coke_Company,_Gary_Mines,_Gary,_McDowell..._-_NARA_-_540677.tif",
+        "license": "Public domain",
+        "author": "Russell Lee",
+        "width": 3000,
+        "height": 2401,
+        "phash": "0030787f7f7fff7a",
+        "alt": "Freshly laundered shirts and table linen on bed in miner's home. U.S. Coal & Coke Company, Gary Mines, Gary, McDowell...   NARA   540677"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Croos_stitch_table_matt.JPG",
+        "license": "CC BY 3.0",
+        "author": "Umaranishanmugam ,shanmugamstudio,Kollam",
+        "width": 780,
+        "height": 486,
+        "phash": "1e5f3e3c3c7cf838",
+        "alt": "Croos stitch table matt"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Croos_stitch_table_matt2.JPG",
+        "license": "CC BY 3.0",
+        "author": "Umaranishanmugam ,shanmugamstudio,Kollam",
+        "width": 733,
+        "height": 542,
+        "phash": "fe18fe34b43e9830",
+        "alt": "Croos stitch table matt2"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Recuerdos_de_mi_infancia_1.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Rosina Peixoto",
+        "width": 2110,
+        "height": 1420,
+        "phash": "0c1e1f6f2f3f7f0f",
+        "alt": "Recuerdos de mi infancia 1"
+      },
+      {
+        "publicId": "sawdagar/products/table-linen/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Individuales_con_servilletas.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Rosina Peixoto",
+        "width": 2592,
+        "height": 1589,
+        "phash": "007cfcfefffffe00",
+        "alt": "Individuales con servilletas"
       }
     ],
     "kitchen-tools": [
       {
         "publicId": "sawdagar/products/kitchen-tools/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen_tools_store_by_matsuyuki_in_Nishiki_Ichiba,_Kyoto.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "matsuyuki from Nishiki Ichiba, Kyoto",
+        "width": 2448,
+        "height": 3264,
+        "phash": "ff0000ff970f010e",
+        "alt": "Kitchen tools store by matsuyuki in Nishiki Ichiba, Kyoto"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen_utensils-01.jpg",
         "license": "CC BY-SA 2.0",
         "author": "Jeppestown",
@@ -1315,7 +3263,7 @@
         "alt": "Kitchen utensils 01"
       },
       {
-        "publicId": "sawdagar/products/kitchen-tools/2",
+        "publicId": "sawdagar/products/kitchen-tools/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:HK_Wan_Chai_Road_night_Kitchen_tools_on_sale_Jan-2014_Hing_Kee_shop.JPG",
         "license": "CC BY-SA 3.0",
         "author": "Isirajohtauol",
@@ -1325,7 +3273,7 @@
         "alt": "HK Wan Chai Road night Kitchen tools on sale Jan 2014 Hing Kee shop"
       },
       {
-        "publicId": "sawdagar/products/kitchen-tools/3",
+        "publicId": "sawdagar/products/kitchen-tools/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen_renovation_project_mostly_finished_tools_still_on_counter.JPG",
         "license": "CC0",
         "author": "Tomwsulcer",
@@ -1333,6 +3281,56 @@
         "height": 1944,
         "phash": "80c7fd703836f060",
         "alt": "Kitchen renovation project mostly finished tools still on counter"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Judges%27_Lodgings_2014_GLAM_Kitchen_2590c.JPG",
+        "license": "CC BY-SA 3.0",
+        "author": "Photograph by Clem Rutter, Rochester, Kent. (www.clemrutter.net).",
+        "width": 3364,
+        "height": 2517,
+        "phash": "ff7e42270018197f",
+        "alt": "Judges' Lodgings 2014 GLAM Kitchen 2590c"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen_tools,_2012.jpg",
+        "license": "CC BY 2.0",
+        "author": "Patty Ho",
+        "width": 4272,
+        "height": 2848,
+        "phash": "fffffb3909010000",
+        "alt": "Kitchen tools, 2012"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:HK_%E9%8A%85%E9%91%BC%E7%81%A3_CWB_%E5%AE%9C%E5%AE%B6%E5%AE%B6%E5%B1%85_IKEA_shop_kitchen_tools_July_2017_IX1.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ausi TCHEm Lamiw",
+        "width": 2048,
+        "height": 1368,
+        "phash": "00007efef8f8fe00",
+        "alt": "HK 銅鑼灣 CWB 宜家家居 IKEA shop kitchen tools July 2017 IX1"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olive_cookware_in_Montenegro.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Milica Buha",
+        "width": 5152,
+        "height": 3864,
+        "phash": "d6ce98b2f2203f7f",
+        "alt": "Olive cookware in Montenegro"
+      },
+      {
+        "publicId": "sawdagar/products/kitchen-tools/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Making_puff_pastry,_New_Orleans_home_kitchen,_Feb_2021_-_Tools.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Infrogmation of New Orleans",
+        "width": 5184,
+        "height": 3888,
+        "phash": "e0e3e1b013076718",
+        "alt": "Making puff pastry, New Orleans home kitchen, Feb 2021   Tools"
       }
     ],
     "serveware": [
@@ -1348,6 +3346,46 @@
       },
       {
         "publicId": "sawdagar/products/serveware/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tableware_for_one_time_use.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "דוד שי",
+        "width": 1033,
+        "height": 790,
+        "phash": "36f878bc3c3c38c0",
+        "alt": "Tableware for one time use"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20090920_Tongli_Imgp5761.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Jakub Hałun",
+        "width": 2721,
+        "height": 1839,
+        "phash": "000000fcf3e1e1e1",
+        "alt": "20090920 Tongli Imgp5761"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tableware_at_Udelnaya_flea_market.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Варвара Каминская",
+        "width": 3264,
+        "height": 2172,
+        "phash": "173f37377f7f731d",
+        "alt": "Tableware at Udelnaya flea market"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cream_and_red_coffee_cup-shaped_balconies,_Niimi_Tableware,_Kappabashi_Dougu_Street,_Tokyo,_Japan.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Basile Morin",
+        "width": 4989,
+        "height": 3991,
+        "phash": "e0fefee000fec6c0",
+        "alt": "Cream and red coffee cup shaped balconies, Niimi Tableware, Kappabashi Dougu Street, Tokyo, Japan"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exhibition-with-furniture-from-Swedish-factories-and-tableware-from-Gefle-porcelain-142436999536.jpeg",
         "license": "Public domain",
         "author": "Unknown photographer",
@@ -1357,14 +3395,34 @@
         "alt": "Exhibition with furniture from Swedish factories and tableware from Gefle porcelain 142436999536"
       },
       {
-        "publicId": "sawdagar/products/serveware/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitchen,_Tableware,_Rostov-on-Don,_Russia.jpg",
-        "license": "CC BY 4.0",
-        "author": "Vyacheslav Argenberg",
-        "width": 4912,
-        "height": 3264,
-        "phash": "0f3f0f1f13100008",
-        "alt": "Kitchen, Tableware, Rostov on Don, Russia"
+        "publicId": "sawdagar/products/serveware/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tableware_from_EpicentrK_03.jpg",
+        "license": "CC0",
+        "author": "Ата",
+        "width": 4608,
+        "height": 2592,
+        "phash": "00017f7f00beff3e",
+        "alt": "Tableware from EpicentrK 03"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tableware_from_EpicentrK_02.jpg",
+        "license": "CC0",
+        "author": "Ата",
+        "width": 4608,
+        "height": 2592,
+        "phash": "00009b3d7ef603ff",
+        "alt": "Tableware from EpicentrK 02"
+      },
+      {
+        "publicId": "sawdagar/products/serveware/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tableware_from_EpicentrK_01.jpg",
+        "license": "CC0",
+        "author": "Ата",
+        "width": 4608,
+        "height": 2592,
+        "phash": "3e1f1612303270bc",
+        "alt": "Tableware from EpicentrK 01"
       }
     ],
     "handmade-soap": [
@@ -1380,16 +3438,6 @@
       },
       {
         "publicId": "sawdagar/products/handmade-soap/2",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Soap_in_blue_dish.JPG",
-        "license": "Public domain",
-        "author": "TheLewisRepublic",
-        "width": 1365,
-        "height": 1024,
-        "phash": "1f1f1f1e010307cf",
-        "alt": "Soap in blue dish"
-      },
-      {
-        "publicId": "sawdagar/products/handmade-soap/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aleppo_soap_01.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Bernard Gagnon",
@@ -1397,11 +3445,91 @@
         "height": 1715,
         "phash": "30039999999c6f6b",
         "alt": "Aleppo soap 01"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aleppo_soap_03.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Bernard Gagnon",
+        "width": 3456,
+        "height": 2592,
+        "phash": "81f9f1f9f921010f",
+        "alt": "Aleppo soap 03"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bar_of_carbolic_soap_with_price_sticker_affixed.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "SamBlob",
+        "width": 1198,
+        "height": 800,
+        "phash": "ff81b1a1010181ff",
+        "alt": "Bar of carbolic soap with price sticker affixed"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cold_Cream_Soap_Hilko,_soap_bar,_pic2.JPG",
+        "license": "CC0",
+        "author": "Alf van Beem",
+        "width": 2418,
+        "height": 1105,
+        "phash": "0000fefefefe0000",
+        "alt": "Cold Cream Soap Hilko, soap bar, pic2"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cold_Cream_Soap_Hilko,_soap_bar,_pic5.JPG",
+        "license": "CC0",
+        "author": "Alf van Beem",
+        "width": 3312,
+        "height": 2869,
+        "phash": "00707c7e7c3c0400",
+        "alt": "Cold Cream Soap Hilko, soap bar, pic5"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Overvette_Grondzeep,_Brocacef,_soap_bar,_pic.JPG",
+        "license": "CC0",
+        "author": "Alf van Beem",
+        "width": 2256,
+        "height": 1588,
+        "phash": "ffde9e9880e080ff",
+        "alt": "Overvette Grondzeep, Brocacef, soap bar, pic"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pineco_zeep,_Clovers_soap_works,_soap_bar,_pic3.JPG",
+        "license": "CC0",
+        "author": "Alf van Beem",
+        "width": 2352,
+        "height": 1105,
+        "phash": "00007e7f7f7e7e00",
+        "alt": "Pineco zeep, Clovers soap works, soap bar, pic3"
+      },
+      {
+        "publicId": "sawdagar/products/handmade-soap/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nizza-Soap-4070848.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ermell",
+        "width": 4331,
+        "height": 3361,
+        "phash": "00cce8fefef8f0c0",
+        "alt": "Nizza Soap 4070848"
       }
     ],
     "massage-oil": [
       {
         "publicId": "sawdagar/products/massage-oil/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage_Bench.jpg",
+        "license": "CC BY 2.0",
+        "author": "Gabi from Frankfurt, Germany",
+        "width": 1024,
+        "height": 766,
+        "phash": "ffcf0f00030b0f08",
+        "alt": "Massage Bench"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage-foot.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Lubyanka",
@@ -1411,7 +3539,7 @@
         "alt": "Massage foot"
       },
       {
-        "publicId": "sawdagar/products/massage-oil/2",
+        "publicId": "sawdagar/products/massage-oil/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage-hand-1.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Lubyanka",
@@ -1421,7 +3549,7 @@
         "alt": "Massage hand 1"
       },
       {
-        "publicId": "sawdagar/products/massage-oil/3",
+        "publicId": "sawdagar/products/massage-oil/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage-hand-2.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Lubyanka",
@@ -1429,11 +3557,91 @@
         "height": 1944,
         "phash": "808081fdfe9f9fff",
         "alt": "Massage hand 2"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage-hand-3.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Lubyanka",
+        "width": 2315,
+        "height": 1944,
+        "phash": "80009fffbf1f89f0",
+        "alt": "Massage hand 3"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Massage-hand-4.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Lubyanka",
+        "width": 2273,
+        "height": 1944,
+        "phash": "0083e47f3ebe1703",
+        "alt": "Massage hand 4"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_lets_himself_massaging_in_Thailand_by_masseuse.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Peter van der Sluijs",
+        "width": 480,
+        "height": 302,
+        "phash": "0101010322227fff",
+        "alt": "Man lets himself massaging in Thailand by masseuse"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_in_Thailand_with_a_masseuse.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Peter van der Sluijs",
+        "width": 480,
+        "height": 332,
+        "phash": "8181818182c07fff",
+        "alt": "Man in Thailand with a masseuse"
+      },
+      {
+        "publicId": "sawdagar/products/massage-oil/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Le_massage_au_Hamam_par_Edouard_Debat-Ponsan_1883_(3).jpg",
+        "license": "Public domain",
+        "author": "Édouard Debat-Ponsan",
+        "width": 800,
+        "height": 477,
+        "phash": "40c0e0c1c1fdfdfc",
+        "alt": "Le massage au Hamam par Edouard Debat Ponsan 1883 (3)"
       }
     ],
     "hair-oil": [
       {
         "publicId": "sawdagar/products/hair-oil/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:William-Adolphe_Bouguereau_(1825-1905)_-_At_the_Edge_of_the_Brook_(1875).jpg",
+        "license": "Public domain",
+        "author": "William-Adolphe Bouguereau",
+        "width": 1146,
+        "height": 1808,
+        "phash": "00f0383d5dc9c063",
+        "alt": "William Adolphe Bouguereau (1825 1905)   At the Edge of the Brook (1875)"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leighton-God_Speed!.jpg",
+        "license": "Public domain",
+        "author": "Edmund Blair Leighton",
+        "width": 2904,
+        "height": 4000,
+        "phash": "0340523a786fe700",
+        "alt": "Leighton God Speed!"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pierre-Auguste_Renoir_-_Suzanne_Valadon_-_La_Natte_-_Girl_Braiding_Her_Hair.jpg",
+        "license": "Public domain",
+        "author": "Pierre-Auguste Renoir",
+        "width": 1664,
+        "height": 2048,
+        "phash": "801018317bfcfcb8",
+        "alt": "Pierre Auguste Renoir   Suzanne Valadon   La Natte   Girl Braiding Her Hair"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:William-Adolphe_Bouguereau_-_Gabrielle_Cot_-_Sotheby%27s.jpg",
         "license": "Public domain",
         "author": "William-Adolphe Bouguereau",
@@ -1443,7 +3651,7 @@
         "alt": "William Adolphe Bouguereau   Gabrielle Cot   Sotheby's"
       },
       {
-        "publicId": "sawdagar/products/hair-oil/2",
+        "publicId": "sawdagar/products/hair-oil/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marie-Antoinette,_1775_-_Mus%C3%A9e_Antoine_L%C3%A9cuyer.jpg",
         "license": "Public domain",
         "author": "After Jean-Baptiste André Gautier-Dagoty",
@@ -1453,7 +3661,7 @@
         "alt": "Marie Antoinette, 1775   Musée Antoine Lécuyer"
       },
       {
-        "publicId": "sawdagar/products/hair-oil/3",
+        "publicId": "sawdagar/products/hair-oil/6",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_-_Tiered_Hair-Oil_Container_with_Pine_and_Plum_Trees_by_a_Stream_-_Walters_67186.jpg",
         "license": "Public domain",
         "author": "Anonymous (Japan)Unknown author",
@@ -1461,6 +3669,36 @@
         "height": 1799,
         "phash": "ffc38199818183ff",
         "alt": "Japanese   Tiered Hair Oil Container with Pine and Plum Trees by a Stream   Walters 67186"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sun_Club_Hot_Oil_Wrestling_2012.jpg",
+        "license": "CC BY 2.0",
+        "author": "Stinkie Pinkie",
+        "width": 2048,
+        "height": 1365,
+        "phash": "a8c8783918183e7e",
+        "alt": "Sun Club Hot Oil Wrestling 2012"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mira_hair_oil.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Jeffkoo84",
+        "width": 640,
+        "height": 480,
+        "phash": "0742606c7ef0f0fc",
+        "alt": "Mira hair oil"
+      },
+      {
+        "publicId": "sawdagar/products/hair-oil/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Edgar_Degas_-_Women_Combing_Their_Hair_-_Google_Art_Project.jpg",
+        "license": "Public domain",
+        "author": "Edgar Degas",
+        "width": 4001,
+        "height": 2807,
+        "phash": "009eafacfcffe3c0",
+        "alt": "Edgar Degas   Women Combing Their Hair   Google Art Project"
       }
     ],
     "face-pack": [
@@ -1486,18 +3724,88 @@
       },
       {
         "publicId": "sawdagar/products/face-pack/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Taiwan_KFC_sugar_pack_20121221_face.jpg",
-        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colorado_River_Relocation_Center,_Poston,_Arizona._After_the_final_plans_have_been_made,_boxes_pack_._._._-_NARA_-_539897.jpg",
+        "license": "Public domain",
+        "author": "Hikaru Iwasaki",
+        "width": 3000,
+        "height": 2979,
+        "phash": "04001c1b1f3b7f78",
+        "alt": "Colorado River Relocation Center, Poston, Arizona. After the final plans have been made, boxes pack . . .   NARA   539897"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:There_goes_the_Mexican_railroad_-_p.078.jpg",
+        "license": "Public domain",
+        "author": "Fanny Chambers Gooch Iglehart",
+        "width": 609,
+        "height": 285,
+        "phash": "ffe79fbf6100c0d9",
+        "alt": "There goes the Mexican railroad   p.078"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Providence_Bruins_vs_Connecticut_Whale_Ceremonial_Face_Off.jpg",
+        "license": "CC BY 2.0",
+        "author": "Sarah Connors",
+        "width": 1600,
+        "height": 1099,
+        "phash": "000018988597973f",
+        "alt": "Providence Bruins vs Connecticut Whale Ceremonial Face Off"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Joe_Colborne_face_off.jpg",
+        "license": "CC BY 2.0",
+        "author": "Sarah Connors",
+        "width": 1600,
+        "height": 1052,
+        "phash": "0000fef290d8fafa",
+        "alt": "Joe Colborne face off"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Providence_Bruins_vs_Connecticut_-_face_off.jpg",
+        "license": "CC BY 2.0",
+        "author": "Sarah Connors",
+        "width": 1600,
+        "height": 979,
+        "phash": "00003c378784fdfd",
+        "alt": "Providence Bruins vs Connecticut   face off"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Face_of_Defense,_Infantry_Soldier_Takes_Pride_in_Iraq_Service_DVIDS76487.jpg",
+        "license": "Public domain",
+        "author": "Sgt. Brad Willeford",
+        "width": 700,
+        "height": 366,
+        "phash": "ffefcccecf080c0c",
+        "alt": "Face of Defense, Infantry Soldier Takes Pride in Iraq Service DVIDS76487"
+      },
+      {
+        "publicId": "sawdagar/products/face-pack/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gigastone_4194DGVCZOWD_BH_pack_face_2015-06.jpg",
+        "license": "CC BY-SA 4.0",
         "author": "Solomon203",
-        "width": 2045,
-        "height": 1152,
-        "phash": "08007effff000000",
-        "alt": "Taiwan KFC sugar pack 20121221 face"
+        "width": 1950,
+        "height": 2600,
+        "phash": "ff89e785818181f3",
+        "alt": "Gigastone 4194DGVCZOWD BH pack face 2015 06"
       }
     ],
     "attar": [
       {
         "publicId": "sawdagar/products/attar/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Attar_mausoleum0.jpg",
+        "license": "CC BY-SA 2.5",
+        "author": "Nik_Pendaar",
+        "width": 2592,
+        "height": 1944,
+        "phash": "7e7e2400002c7efe",
+        "alt": "Attar mausoleum0"
+      },
+      {
+        "publicId": "sawdagar/products/attar/2",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chaim_ibn_Attar_grave.JPG",
         "license": "CC BY-SA 3.0",
         "author": "Attribution for use of this image: Chesdovi (London, UK)",
@@ -1507,7 +3815,7 @@
         "alt": "Chaim ibn Attar grave"
       },
       {
-        "publicId": "sawdagar/products/attar/2",
+        "publicId": "sawdagar/products/attar/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Minyak_atar_(attar)_yang_dijual_di_dataran_puncak_Jabal_Rahmah,_Mekah.jpg",
         "license": "CC0",
         "author": "Kerina yin",
@@ -1517,7 +3825,17 @@
         "alt": "Minyak atar (attar) yang dijual di dataran puncak Jabal Rahmah, Mekah"
       },
       {
-        "publicId": "sawdagar/products/attar/3",
+        "publicId": "sawdagar/products/attar/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Attar-1.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Nasser-sadeghi",
+        "width": 1500,
+        "height": 2000,
+        "phash": "ffdfcfcf87000007",
+        "alt": "Attar 1"
+      },
+      {
+        "publicId": "sawdagar/products/attar/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sibille_Attar_Popaganda_2013.jpg",
         "license": "CC BY-SA 3.0",
         "author": "Kim Metso",
@@ -1525,6 +3843,46 @@
         "height": 2195,
         "phash": "0080f0f0f0f0fbff",
         "alt": "Sibille Attar Popaganda 2013"
+      },
+      {
+        "publicId": "sawdagar/products/attar/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sibille_Attar_Popaganda_2013_(cropped).jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Kim Metso",
+        "width": 874,
+        "height": 1213,
+        "phash": "0038fcfe1880c38f",
+        "alt": "Sibille Attar Popaganda 2013 (cropped)"
+      },
+      {
+        "publicId": "sawdagar/products/attar/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Layla_Al-Attar,_2014.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Eng Omer Akram",
+        "width": 250,
+        "height": 292,
+        "phash": "c383813d3d3c9c9c",
+        "alt": "Layla Al Attar, 2014"
+      },
+      {
+        "publicId": "sawdagar/products/attar/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anwar_Al_Attar_and_President_Gamal_Abdel_Nasser.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "AnwarAlattar",
+        "width": 1337,
+        "height": 1797,
+        "phash": "fbffe9a020000000",
+        "alt": "Anwar Al Attar and President Gamal Abdel Nasser"
+      },
+      {
+        "publicId": "sawdagar/products/attar/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anwar_Al_Attar_-_Early_Life.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Unknown author",
+        "width": 1345,
+        "height": 1202,
+        "phash": "ff1f1f09010100e0",
+        "alt": "Anwar Al Attar   Early Life"
       }
     ],
     "beauty-gift-set": [
@@ -1540,6 +3898,36 @@
       },
       {
         "publicId": "sawdagar/products/beauty-gift-set/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:1838_Woodblock_Ino_Tadataka_Atlas_of_Japan_or_Kokugun_Zenzu_(_2_volumes_)_-_Geographicus_-_KokugunZenzu-InoTadatka-1838.jpg",
+        "license": "Public domain",
+        "author": "http://www.geographicus.com/mm5/cartographers/inotadataka.txt",
+        "width": 4849,
+        "height": 3841,
+        "phash": "e7f7f7063c3c3c38",
+        "alt": "1838 Woodblock Ino Tadataka Atlas of Japan or Kokugun Zenzu ( 2 volumes )   Geographicus   KokugunZenzu InoTadatka 1838"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:1839_Woodblock_Ino_Tadataka_Atlas_of_Japan_or_Kokugun_Zenzu_(_2_volumes_)_-_Geographicus_-_KokugunZenzu-InoTadatka-1839.jpg",
+        "license": "Public domain",
+        "author": "http://www.geographicus.com/mm5/cartographers/inotadataka.txt",
+        "width": 5170,
+        "height": 3881,
+        "phash": "046e6e04667f7e66",
+        "alt": "1839 Woodblock Ino Tadataka Atlas of Japan or Kokugun Zenzu ( 2 volumes )   Geographicus   KokugunZenzu InoTadatka 1839"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Balarama_Kills_the_Ass_Demon,_Page_from_a_Dispersed_Bhagavata_Purana_Series.jpg",
+        "license": "Public domain",
+        "author": "Unknown author",
+        "width": 768,
+        "height": 573,
+        "phash": "ff898101212133ff",
+        "alt": "Balarama Kills the Ass Demon, Page from a Dispersed Bhagavata Purana Series"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/5",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:12-player_Circular_Chess.jpg",
         "license": "CC BY-SA 3.0",
         "author": "My son Hridayeshwar Singh Bhati of 11 years is the owner author and inventor of circular chess for 12 players",
@@ -1549,7 +3937,17 @@
         "alt": "12 player Circular Chess"
       },
       {
-        "publicId": "sawdagar/products/beauty-gift-set/3",
+        "publicId": "sawdagar/products/beauty-gift-set/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Woman_by_A._Tyranov_(priv.coll).jpg",
+        "license": "Public domain",
+        "author": "Alexey Vassilievich Tyranov",
+        "width": 1986,
+        "height": 2500,
+        "phash": "00c0d8bcf8e4c8e0",
+        "alt": "Woman by A. Tyranov (priv.coll)"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reflected,_Hamer_Tribe,_Ethiopia_(21623591816).jpg",
         "license": "CC BY-SA 2.0",
         "author": "Rod Waddington",
@@ -1557,6 +3955,26 @@
         "height": 4512,
         "phash": "f767676e0e3480c0",
         "alt": "Reflected, Hamer Tribe, Ethiopia (21623591816)"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Snow,_Oak_Glen,_CA_12-16_(31102385084).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "inkknife_2000 (7.5 million views +)",
+        "width": 1765,
+        "height": 1179,
+        "phash": "00387f9d9c1c18ff",
+        "alt": "Christmas Snow, Oak Glen, CA 12 16 (31102385084)"
+      },
+      {
+        "publicId": "sawdagar/products/beauty-gift-set/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tioga_Lake_Reflections,_Yosemite_5-15_(23547961683).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "inkknife_2000 (7.5 million views +)",
+        "width": 1831,
+        "height": 2450,
+        "phash": "6fdfff29004f0300",
+        "alt": "Tioga Lake Reflections, Yosemite 5 15 (23547961683)"
       }
     ],
     "notebook": [
@@ -1582,6 +4000,16 @@
       },
       {
         "publicId": "sawdagar/products/notebook/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camera_keys_notebook_coffee_(Unsplash).jpg",
+        "license": "CC0",
+        "author": "Melinda Pack melindapack",
+        "width": 4368,
+        "height": 2912,
+        "phash": "fff9f8f0bfa5802f",
+        "alt": "Camera keys notebook coffee (Unsplash)"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Small_blue_notepad_-_8_x_11_cm_-_D.jpg",
         "license": "CC0",
         "author": "Fructibus",
@@ -1589,6 +4017,56 @@
         "height": 3456,
         "phash": "ffe3e3e3e383c3e7",
         "alt": "Small blue notepad   8 x 11 cm   D"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Notebook_writing.jpg",
+        "license": "Public domain",
+        "author": "Jairus Monilla",
+        "width": 4032,
+        "height": 2268,
+        "phash": "3e3e3e3e3e3e1400",
+        "alt": "Notebook writing"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tsubamenote.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "8joKeaton",
+        "width": 900,
+        "height": 1200,
+        "phash": "087e7e3e3e3e3e04",
+        "alt": "Tsubamenote"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Espiral_de_libreta.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ehécatl Cabrera",
+        "width": 1600,
+        "height": 900,
+        "phash": "0f07070fcfcf8310",
+        "alt": "Espiral de libreta"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Y%E3%83%8E%E3%83%BC%E3%83%88%EF%BC%9A%E5%8F%96%E6%9D%90%E8%80%85Y%E3%81%8C%E9%8C%B2%E9%9F%B3%E3%83%86%E3%83%BC%E3%83%97%E3%81%AE%E3%81%99%E3%81%B9%E3%81%A6%E3%82%92%E8%B5%B7%E3%81%93%E3%81%97%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%9F%E3%82%82%E3%81%AE.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Morishita Natural Medicine",
+        "width": 722,
+        "height": 1000,
+        "phash": "5f7f5f5f1f5f1f1f",
+        "alt": "Yノート：取材者Yが録音テープのすべてを起こし記録したもの"
+      },
+      {
+        "publicId": "sawdagar/products/notebook/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spiralbinder%C3%BCcken_--_2022_--_9722.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dietmar Rabich",
+        "width": 6576,
+        "height": 4384,
+        "phash": "f7f7e7e7e7ef0000",
+        "alt": "Spiralbinderücken   2022   9722"
       }
     ],
     "pen": [
@@ -1614,6 +4092,16 @@
       },
       {
         "publicId": "sawdagar/products/pen/3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:03-BICcristal2008-03-26.jpg",
+        "license": "CC BY 3.0",
+        "author": "Trounce",
+        "width": 2512,
+        "height": 1682,
+        "phash": "ffff3f99e0f0ffff",
+        "alt": "03 BICcristal2008 03 26"
+      },
+      {
+        "publicId": "sawdagar/products/pen/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Livestock_Pen_-_geograph.org.uk_-_1415428.jpg",
         "license": "CC BY-SA 2.0",
         "author": "jeff collins",
@@ -1621,11 +4109,81 @@
         "height": 428,
         "phash": "9fdf1f0f00000000",
         "alt": "Livestock Pen   geograph.org.uk   1415428"
+      },
+      {
+        "publicId": "sawdagar/products/pen/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spiaggia_di_Pen_Had2.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Llorenzi",
+        "width": 5430,
+        "height": 1761,
+        "phash": "ffffff001c1c3830",
+        "alt": "Spiaggia di Pen Had2"
+      },
+      {
+        "publicId": "sawdagar/products/pen/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rotring_S0214750_with_Rapidograph_0.5_mm_drawing_1.5%E2%80%9315_mm_circles.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Lucasbosch",
+        "width": 2852,
+        "height": 5071,
+        "phash": "0004044424341cff",
+        "alt": "Rotring S0214750 with Rapidograph 0.5 mm drawing 1.5–15 mm circles"
+      },
+      {
+        "publicId": "sawdagar/products/pen/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fountain_pen_writing_(literacy).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Petar Milošević",
+        "width": 4620,
+        "height": 3388,
+        "phash": "f8f8f9f0c2f4ecff",
+        "alt": "Fountain pen writing (literacy)"
+      },
+      {
+        "publicId": "sawdagar/products/pen/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exercise_pen_for_dogs.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Ellen Finch",
+        "width": 3496,
+        "height": 2422,
+        "phash": "3f3f3f7d00100000",
+        "alt": "Exercise pen for dogs"
+      },
+      {
+        "publicId": "sawdagar/products/pen/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nana_Phadnavis%27_Pen_and_it%27s_box.jpg",
+        "license": "Public domain",
+        "author": "AnonymousUnknown author",
+        "width": 1732,
+        "height": 1457,
+        "phash": "ff81bdbdbdbf01ff",
+        "alt": "Nana Phadnavis' Pen and it's box"
       }
     ],
     "sketchbook": [
       {
         "publicId": "sawdagar/products/sketchbook/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketchbook_AC_2006.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "GreenReaper",
+        "width": 1380,
+        "height": 1136,
+        "phash": "3777de0e0301c16f",
+        "alt": "Sketchbook AC 2006"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketchbookpro3.png",
+        "license": "CC BY-SA 3.0",
+        "author": "Autodesk",
+        "width": 1285,
+        "height": 754,
+        "phash": "ffffe607030181ff",
+        "alt": "Sketchbookpro3"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketch-book.jpg",
         "license": "Public domain",
         "author": "sanya",
@@ -1635,7 +4193,37 @@
         "alt": "Sketch book"
       },
       {
-        "publicId": "sawdagar/products/sketchbook/2",
+        "publicId": "sawdagar/products/sketchbook/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eug%C3%A8ne_Delacroix_-_Page_of_a_sketchbook_-_WGA6254.jpg",
+        "license": "Public domain",
+        "author": "Eugène Delacroix",
+        "width": 691,
+        "height": 1015,
+        "phash": "ffb93fe3c30f0f1f",
+        "alt": "Eugène Delacroix   Page of a sketchbook   WGA6254"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketchbook_Page_(USA),_1864%E2%80%9378_(CH_18692177).jpg",
+        "license": "Public domain",
+        "author": "Unknown artistUnknown artist",
+        "width": 4096,
+        "height": 3190,
+        "phash": "00f0dede7e7e7e00",
+        "alt": "Sketchbook Page (USA), 1864–78 (CH 18692177)"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketchbook,_Sketchbook_of_twenty-one_leaves_of_pencil_drawings,_1885%E2%80%9386_(CH_18418323).jpg",
+        "license": "Public domain",
+        "author": "Bessie Beebe",
+        "width": 3515,
+        "height": 2727,
+        "phash": "81bcfee6eefe0081",
+        "alt": "Sketchbook, Sketchbook of twenty one leaves of pencil drawings, 1885–86 (CH 18418323)"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sanford_Robinson_Gifford_-_Sketchbook_-_1971.116_-_Cleveland_Museum_of_Art.tif",
         "license": "CC0",
         "author": "Sanford Robinson Gifford",
@@ -1645,14 +4233,24 @@
         "alt": "Sanford Robinson Gifford   Sketchbook   1971.116   Cleveland Museum of Art"
       },
       {
-        "publicId": "sawdagar/products/sketchbook/3",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%27Rex%27_in_medieval_style.jpg",
+        "publicId": "sawdagar/products/sketchbook/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ernest_Meissonier_-_Sketchbook_-_1992.344_-_Cleveland_Museum_of_Art.tif",
+        "license": "CC0",
+        "author": "Jean-Louis-Ernest Meissonier",
+        "width": 6668,
+        "height": 3606,
+        "phash": "e3e1f0f0e0e0f300",
+        "alt": "Ernest Meissonier   Sketchbook   1992.344   Cleveland Museum of Art"
+      },
+      {
+        "publicId": "sawdagar/products/sketchbook/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rylsee-sketchbook-2018.jpg",
         "license": "CC BY-SA 4.0",
-        "author": "Sfyxboh",
-        "width": 2448,
-        "height": 3264,
-        "phash": "7afebebebabebe00",
-        "alt": "'Rex' in medieval style"
+        "author": "Aline Savioz",
+        "width": 1080,
+        "height": 788,
+        "phash": "ff7f7e7e7f733100",
+        "alt": "Rylsee sketchbook 2018"
       }
     ],
     "childrens-book": [
@@ -1685,6 +4283,66 @@
         "height": 3216,
         "phash": "838f891c1f03c780",
         "alt": "US Navy 071215 N 7286M 095 Lt. Christopher T. Auger reads a storybook as Lt. j.g. Darren E. Denyar, dressed as Santa Claus, greets children at MEIN College"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carpark_and_entrance_to_Storybook_Glen_-_geograph.org.uk_-_13725.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Colin Walker",
+        "width": 640,
+        "height": 480,
+        "phash": "fffcf00038000000",
+        "alt": "Carpark and entrance to Storybook Glen   geograph.org.uk   13725"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ted_Cassidy_Cheeta_Storybook_Squares_1969.JPG",
+        "license": "Public domain",
+        "author": "NBC Television",
+        "width": 714,
+        "height": 949,
+        "phash": "ffff8f8f00000014",
+        "alt": "Ted Cassidy Cheeta Storybook Squares 1969"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Team_Mildenhall_member_brings_Asian-Pacific_culture_to_children_through_storybooks_130507-F-DL987-013.jpg",
+        "license": "Public domain",
+        "author": "Airman 1st Class Preston Webb",
+        "width": 4256,
+        "height": 2720,
+        "phash": "cfccccdc9c9c0420",
+        "alt": "Team Mildenhall member brings Asian Pacific culture to children through storybooks 130507 F DL987 013"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Your_storybook_dreams_come_true_(3935560973).jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Loozrboy from Toronto, Canada",
+        "width": 2000,
+        "height": 1500,
+        "phash": "f0f0f8c20060c2e0",
+        "alt": "Your storybook dreams come true (3935560973)"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boys,_1941,_Children%27s_book,_Walt_Disney-brand,_storybook,_cabinet_Fortepan_71723.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "FOTO:Fortepan — ID 71723: Adományozó/Donor: Lissák Tivadar. archive copy at the Wayback Machine",
+        "width": 8715,
+        "height": 6619,
+        "phash": "808c0c0031737f7f",
+        "alt": "Boys, 1941, Children's book, Walt Disney brand, storybook, cabinet Fortepan 71723"
+      },
+      {
+        "publicId": "sawdagar/products/childrens-book/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reading,_storybook,_beret,_sweater_Fortepan_93850.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "FOTO:Fortepan — ID 93850: Adományozó/Donor: Fortepan/Album004. archive copy at the Wayback Machine",
+        "width": 5600,
+        "height": 3626,
+        "phash": "f878787830311373",
+        "alt": "Reading, storybook, beret, sweater Fortepan 93850"
       }
     ],
     "planner": [
@@ -1717,11 +4375,91 @@
         "height": 2000,
         "phash": "fff7cb0000387c7e",
         "alt": "FEMA   31031   Community planner working to rebuild Greensubrg, KS"
+      },
+      {
+        "publicId": "sawdagar/products/planner/4",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carlos_de_Chapeaurouge.JPG",
+        "license": "Public domain",
+        "author": "Desconozco",
+        "width": 1173,
+        "height": 873,
+        "phash": "ffffffcbfb100000",
+        "alt": "Carlos de Chapeaurouge"
+      },
+      {
+        "publicId": "sawdagar/products/planner/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Torus_knot_planner_(1,1).png",
+        "license": "CC BY-SA 4.0",
+        "author": "Sghaier mohamed",
+        "width": 319,
+        "height": 325,
+        "phash": "833d7e7e7e7e3d83",
+        "alt": "Torus knot planner (1,1)"
+      },
+      {
+        "publicId": "sawdagar/products/planner/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dariush_Borbor,_Architect_and_Urban_Planner_(2013).jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Dariushborbor",
+        "width": 635,
+        "height": 768,
+        "phash": "004f303078787c0f",
+        "alt": "Dariush Borbor, Architect and Urban Planner (2013)"
+      },
+      {
+        "publicId": "sawdagar/products/planner/7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peisazh_urban,_Ferizaj.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Shkurte ramushi",
+        "width": 5184,
+        "height": 3456,
+        "phash": "0626e7e7ff772103",
+        "alt": "Peisazh urban, Ferizaj"
+      },
+      {
+        "publicId": "sawdagar/products/planner/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elements_of_Low-Carbon_Urban_Development.png",
+        "license": "CC BY-SA 4.0",
+        "author": "Transformative Urban Mobility Initiative (TUMI)",
+        "width": 3718,
+        "height": 4159,
+        "phash": "e7e7e7ffb818fdff",
+        "alt": "Elements of Low Carbon Urban Development"
+      },
+      {
+        "publicId": "sawdagar/products/planner/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ge%C3%B3grafo_Urbanista_Jordi_Borja_y_Arquitecto_Jorge_Rocchi._Conferencia_Espacio_P%C3%BAblico_y_Ciudadan%C3%ADa._SCA._Ciudad_Aut%C3%B3noma_de_Buenos_Aires._12.11.2013.jpg",
+        "license": "CC BY-SA 4.0",
+        "author": "Architectscommission",
+        "width": 3264,
+        "height": 2448,
+        "phash": "f8fc7c3e1e1a0800",
+        "alt": "Geógrafo Urbanista Jordi Borja y Arquitecto Jorge Rocchi. Conferencia Espacio Público y Ciudadanía. SCA. Ciudad Autónoma de Buenos Aires. 12.11.2013"
       }
     ],
     "wrapping-paper": [
       {
         "publicId": "sawdagar/products/wrapping-paper/1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gifts_xmas.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "Kelvin Kay, en:user:kkmd",
+        "width": 800,
+        "height": 565,
+        "phash": "1020261f1b3f3e07",
+        "alt": "Gifts xmas"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/2",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Decorative_gift_wrapping_knots.jpg",
+        "license": "CC BY-SA 2.0",
+        "author": "Alpha from Melbourne, Australia",
+        "width": 652,
+        "height": 492,
+        "phash": "1cd4d9fdb81c3e10",
+        "alt": "Decorative gift wrapping knots"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/3",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Traditional_Japanese_wrapping_cloth,huroshiki,katori-city,japan.JPG",
         "license": "CC BY 3.0",
         "author": "katorisi",
@@ -1731,7 +4469,7 @@
         "alt": "Traditional Japanese wrapping cloth,huroshiki,katori city,japan"
       },
       {
-        "publicId": "sawdagar/products/wrapping-paper/2",
+        "publicId": "sawdagar/products/wrapping-paper/4",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coloured_gift_paper.jpg",
         "license": "CC BY 2.0",
         "author": "Åsta",
@@ -1741,7 +4479,27 @@
         "alt": "Coloured gift paper"
       },
       {
-        "publicId": "sawdagar/products/wrapping-paper/3",
+        "publicId": "sawdagar/products/wrapping-paper/5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:US_Navy_100609-N-7643B-073_Lt._Mark_Hughes,_chaplain_for_Destroyer_Squadron_(DESRON)_31,_presents_a_gift_basket_to_a_girl_from_the_Rumah_Wawasan_Children%27s_Home.jpg",
+        "license": "Public domain",
+        "author": "U.S. Navy photo by Mass Communication Specialist 2nd Class David A. Brandenburg",
+        "width": 2100,
+        "height": 1500,
+        "phash": "7f7e4c3e3ebe1313",
+        "alt": "US Navy 100609 N 7643B 073 Lt. Mark Hughes, chaplain for Destroyer Squadron (DESRON) 31, presents a gift basket to a girl from the Rumah Wawasan Children's Home"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/6",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2006wrapping_paper.PNG",
+        "license": "CC BY-SA 3.0",
+        "author": "Anwar (talk)",
+        "width": 1425,
+        "height": 625,
+        "phash": "db91a1e387d5d5f7",
+        "alt": "2006wrapping paper"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/7",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gift-wraping.jpg",
         "license": "CC BY-SA 3.0",
         "author": "BlairSnow",
@@ -1749,6 +4507,26 @@
         "height": 298,
         "phash": "ffc10100808187df",
         "alt": "Gift wraping"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/8",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sch%C3%B6ne_Geschenke.jpg",
+        "license": "CC BY-SA 3.0",
+        "author": "geschenkhamster.de",
+        "width": 1803,
+        "height": 1200,
+        "phash": "080e0e0e6e761600",
+        "alt": "Schöne Geschenke"
+      },
+      {
+        "publicId": "sawdagar/products/wrapping-paper/9",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McDonalds_wrapping_paper_with_various_languages,_Bucharest,_Romania.JPG",
+        "license": "CC BY-SA 4.0",
+        "author": "User: (WT-shared) Shoestring at  wts wikivoyage",
+        "width": 640,
+        "height": 480,
+        "phash": "0e4b293b0f0f2f3f",
+        "alt": "McDonalds wrapping paper with various languages, Bucharest, Romania"
       }
     ]
   }
