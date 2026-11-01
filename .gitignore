@@ -9,3 +9,5 @@ apps/web/generated/
 !.env.example
 .vercel/
 .lighthouseci/
+test-results/
+playwright-report/

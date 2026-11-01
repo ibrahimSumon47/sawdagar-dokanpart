@@ -1,13 +1,14 @@
 import { hasArea, type PlatformRole } from '@sd/domain';
 import Link from 'next/link';
+import { Heart, UserRound } from 'lucide-react';
 import { BrandMark, MegaMenu } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { LocaleSwitcher } from '../../../preferences/components/LocaleSwitcher';
 import { ThemeToggle } from '../../../preferences/components/ThemeToggle';
 import { CartTrigger } from '../../../shop/components/CartTrigger';
-import { CompareTrigger } from '../../../shop/components/CompareTrigger';
 import type { Theme } from '../../../preferences/theme';
 import { MobileMenu } from './MobileMenu';
+import { HeaderSearch } from './HeaderSearch';
 
 export interface SiteHeaderProps {
   copy: Dictionary;
@@ -21,7 +22,7 @@ export interface SiteHeaderProps {
 
 /**
  * Sticky storefront header: wordmark, catalog and category navigation, search,
- * and the language, theme, compare, cart and account controls. Project links
+ * and the language, theme, wishlist, cart and account controls. Project links
  * live in the footer instead, so the header reads as a shop.
  */
 export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHeaderProps) {
@@ -60,7 +61,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           </span>
         </Link>
 
-        <nav aria-label={copy.nav.label} className="hidden items-center gap-1 md:flex">
+        <nav aria-label={copy.nav.label} className="hidden items-center gap-1 xl:flex">
           <Link
             href="/catalog"
             className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
@@ -76,22 +77,12 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           </Link>
         </nav>
 
-        <form
-          action="/catalog"
-          role="search"
+        <HeaderSearch
+          id="header-search"
+          label={copy.nav.search}
+          placeholder={copy.catalog.searchPlaceholder}
           className="ml-auto hidden max-w-xs items-center gap-2 xl:flex"
-        >
-          <label htmlFor="header-search" className="sr-only">
-            {copy.nav.search}
-          </label>
-          <input
-            id="header-search"
-            name="q"
-            type="search"
-            placeholder={copy.catalog.searchPlaceholder}
-            className="min-h-11 w-full rounded-sm border border-line bg-surface px-3 text-sm text-ink placeholder:text-ink-muted focus:border-accent focus:outline-none"
-          />
-        </form>
+        />
 
         <div className="ml-auto flex items-center gap-1 xl:ml-0">
           <LocaleSwitcher locale={locale} label={copy.preferences.language} />
@@ -99,8 +90,21 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
             theme={theme}
             labels={{ useLight: copy.preferences.useLight, useDark: copy.preferences.useDark }}
           />
-          <CompareTrigger />
+          <Link
+            href="/wishlist"
+            aria-label={copy.nav.wishlist}
+            className="hidden size-11 items-center justify-center rounded-sm text-ink hover:bg-surface focus-visible:outline-2 xl:inline-flex"
+          >
+            <Heart aria-hidden="true" className="size-5" />
+          </Link>
           <CartTrigger />
+          <Link
+            href={viewer ? '/account' : '/sign-in'}
+            aria-label={viewer ? copy.nav.account : copy.nav.signIn}
+            className="hidden size-11 items-center justify-center rounded-sm text-ink hover:bg-surface focus-visible:outline-2 xl:inline-flex"
+          >
+            <UserRound aria-hidden="true" className="size-5" />
+          </Link>
           <MobileMenu
             links={menuLinks}
             labels={{
@@ -111,9 +115,9 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           />
         </div>
       </div>
-      <div className="border-t border-line md:hidden">
+      <div className="border-t border-line xl:hidden">
         <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
-          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="md:hidden" />
+          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="xl:hidden" />
           <Link
             href="/seller"
             className="text-sm font-medium text-ink-muted transition-colors hover:text-accent"
@@ -121,6 +125,12 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
             {copy.nav.sell}
           </Link>
         </div>
+        <HeaderSearch
+          id="mobile-header-search"
+          label={copy.nav.search}
+          placeholder={copy.catalog.searchPlaceholder}
+          className="mx-auto w-full max-w-7xl px-4 pb-2 sm:px-6"
+        />
       </div>
     </header>
   );

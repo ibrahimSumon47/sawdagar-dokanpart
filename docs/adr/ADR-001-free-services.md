@@ -17,6 +17,7 @@ The project is a non-commercial portfolio demo, with sandbox payments only. Serv
 - [Upstash Redis](https://upstash.com/pricing/redis) offers a no-card $0 tier with usage limits. Its [billing documentation](https://upstash.com/docs/redis/overall/billing) warns that adding a payment method upgrades free resources to paid plans. No cache account is connected; the app has no cache dependency.
 - [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces-overview) now states that creating a Docker Space running on compute requires a paid plan, even though CPU Basic has no hourly charge. The Java settlement module is therefore a reference implementation exercised by CI, not a hosted service.
 - [Stripe sandboxes](https://docs.stripe.com/sandboxes) and the [SSLCOMMERZ sandbox](https://developer.sslcommerz.com/registration/) support simulated payments without real transactions. The reviewed pages do not establish all card, expiry, or branding requirements; no payment provider is integrated. Checkout offers cash on delivery and the MockPay sandbox.
+- [Playwright](https://github.com/microsoft/playwright) is an Apache-2.0-licensed open-source browser testing tool; it requires no account or paid service. The deployed-site suite uses the existing public GitHub Actions runners.
 - [Prettier 3.9.10](https://www.npmjs.com/package/prettier) is an MIT-licensed open-source formatter. It is a development dependency and requires no hosted service, account, or payment.
 
 ## Decision and alternatives

@@ -35,7 +35,7 @@ export function MobileMenu({ links, labels, className }: MobileMenuProps) {
   }, [open]);
 
   return (
-    <div className={cn('lg:hidden', className)}>
+    <div className={cn('xl:hidden', className)}>
       <button
         type="button"
         aria-expanded={open}

@@ -41,7 +41,8 @@
 - Phase 12 production check: `/case-study` returned 200 with a self-referencing canonical, structured data and a footer link, and the sitemap listed 473 URLs including it. `/llms.txt` returned 200 as plain text and matched the root copy byte for byte. The six README screenshots were recaptured from production in a fresh headless browser at 1280 × 860 and 390 × 844, so they show no signed-in state or browser overlay. The new case-study page was checked at 360 px in dark theme and in the Bangla shell: no horizontal overflow, every section rendered, and the localized footer held its layout. Local lint, typecheck, 170 tests, build, asset budgets and both drift checks passed. The first CI run failed only on Windows in `facts:check` because the generated JSON was checked out with CRLF; both checks now normalise line endings and the generated files are pinned to LF, and the final CI run and Vercel deployment are green.
 
 ## Now
-- Revision 1, phase R1 (remove the demo framing): the notice strip, header project links and demo disclaimers are gone; the header carries Catalog, Categories, Sell on Sawdagar and search; project links live in the footer Project column and on `/about/project`; the footer shows one test-mode payments line and the checkout payment method carries a test-mode label. Verified on the deployment at 375 and 768 px with no horizontal overflow, header links limited to Catalog, Categories and Sell on Sawdagar, and the home, catalog and `/about/project` routes returning 200. Lint, typecheck, 170 tests, build and both drift checks pass. R2 (product images) is next.
+- Revision 1, phase R1 remains in progress: the earlier verification did not include the required deployed Playwright screenshots or feature evidence. Local changes add responsive header search, wishlist and account access, correct sign-in wording, and add a GitHub Actions Playwright workflow. Local lint, typecheck, 186 unit tests, build and generated-file checks pass; Playwright was only listed, not run, and these changes are not deployed. R2 work is uncommitted and incomplete; its empty manifest does not enforce published images.
+- Earlier R1 implementation: the notice strip and header project links were removed; the header carries Catalog, Categories, Sell on Sawdagar and search; project links live in the footer Project column and on `/about/project`; the footer shows one test-mode payments line and the checkout payment method carries a test-mode label. Verified on the deployment at 375 and 768 px with no horizontal overflow, header links limited to Catalog, Categories and Sell on Sawdagar, and the home, catalog and `/about/project` routes returning 200. At that time lint, typecheck, 170 tests, build and both drift checks passed; remaining R1 acceptance is not yet verified.
 
 ## Next
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
@@ -50,7 +51,8 @@
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
 
 ## Blocked
-- No confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
+- R1 deployed Playwright checks and screenshots have not yet been run. R2 publication enforcement and image sourcing are not implemented; repeated category images remain on the live site.
+- No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
 - There is no marketplace REST API or OpenAPI document. The only HTTP routes are Better Auth and the MockPay callback; every other write is a Server Action, as recorded in ADR-006 and [API.md](API.md).

@@ -25,6 +25,7 @@ Versions and package licenses checked against the npm registry on 2026-10-28; ex
 | ESLint | 9.39.5 | MIT |
 | Prettier | 3.9.10 | MIT |
 | @lhci/cli | 0.15.1 | Apache-2.0 |
+| @playwright/test | 1.64.1 | Apache-2.0 |
 | Vitest | 5.0.5 | MIT |
 | Husky | 9.1.7 | MIT |
 | commitlint CLI and conventional config | 21.2.4 | MIT |

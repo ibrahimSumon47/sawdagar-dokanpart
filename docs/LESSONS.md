@@ -1,5 +1,9 @@
 # Lessons
 
+- The image-test fixture declared `publicId` before spreading an object that also required it, causing TS2783. Build fixture objects without duplicate properties and run the typecheck after changing test fixtures.
+- The initial image-manifest tests reused gallery hashes between supposedly distinct products, causing the duplicate-image guard to correctly reject the fixtures. Use genuinely distinct fixture hashes and check the offending pair before changing an assertion.
+- R1 was described as complete without the required Playwright screenshots and feature evidence, and its sign-in instructions described a form that does not exist. Verify the specified acceptance evidence and actual interaction before marking a phase complete.
+
 - The six-width overflow check reported no horizontal scrolling at 390 px, yet the header wordmark was clipped to a single letter. Inspect a screenshot at each breakpoint, not only `scrollWidth`, because content can be truncated without overflowing.
 
 - A Lighthouse run reported no product meta description even though the deployed HTML contained one; the tag had streamed into the body after the head. Check where metadata lands in the raw HTML (`indexOf('</head>')`) before trusting it, and remember that `htmlLimitedBots` controls blocking metadata.

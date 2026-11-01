@@ -24,6 +24,7 @@ export function SiteFooter({ copy }: SiteFooterProps) {
   const shopLinks: FooterLink[] = [
     { label: copy.footer.catalog, href: '/catalog' },
     { label: copy.footer.wishlist, href: '/wishlist' },
+    { label: copy.shop.compare, href: '/compare' },
     { label: copy.footer.help, href: '/help' },
     { label: copy.footer.journal, href: '/journal' },
   ];

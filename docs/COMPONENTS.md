@@ -152,8 +152,9 @@ Layout constants shared by the product card and its skeleton live in [productCar
 |---|---|---|---|
 | HomeIntro | Storefront opening, hero photograph, trust strip and build status. | `copy`, `locale` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
 | SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search and the role-aware controls. | `copy`, `locale`, `theme`, `viewer`, `categories` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
+| HeaderSearch | Search form shared by compact and desktop headers. | `id`, `label`, `placeholder`, `className` | [HeaderSearch.tsx](../apps/web/features/shell/components/SiteHeader/HeaderSearch.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
-| SiteFooter | Footer with the Shop and Project link columns and the test-mode payments line. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+| SiteFooter | Footer with Shop links including comparison, Project links and the test-mode payments line. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
 
 ## About (`apps/web/features/about`)
 
@@ -196,7 +197,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | ShopProvider | One client boundary for cart, coupons, wishlist, comparison, drawer and toast; receives the server-rendered cart, coupon and saved ids. | `children`, `initialItems`, `initialCoupon`, `initialWishlistIds`, `initialCompareIds`, `signedIn`, `locale`, `copy` | [ShopProvider.tsx](../apps/web/features/shop/components/ShopProvider/ShopProvider.tsx) |
 | ShopToast | Bottom notification with an action link and optional undo callback. | none; reads `useShop` | [ShopToast.tsx](../apps/web/features/shop/components/ShopToast/ShopToast.tsx) |
 | CartTrigger | Header cart button with a count badge and a short bump when the count grows. | none; reads `useShop` | [CartTrigger.tsx](../apps/web/features/shop/components/CartTrigger/CartTrigger.tsx) |
-| CompareTrigger | Header comparison shortcut with its count, shown only while products are selected. | none; reads `useShop` | [CompareTrigger.tsx](../apps/web/features/shop/components/CompareTrigger/CompareTrigger.tsx) |
+| CompareTrigger | Optional comparison shortcut with its count, shown only while products are selected. | none; reads `useShop` | [CompareTrigger.tsx](../apps/web/features/shop/components/CompareTrigger/CompareTrigger.tsx) |
 | CartDrawer | Native modal drawer on desktop and bottom sheet on phones; owns the empty state and vendor groups. | none; reads `useShop` | [CartDrawer.tsx](../apps/web/features/shop/components/CartDrawer/CartDrawer.tsx) |
 | CartGroup | One vendor's heading, shipping origin and cart rows. | `group` (`vendor`, `items`, `subtotalMinor`) | [CartGroup.tsx](../apps/web/features/shop/components/CartDrawer/CartGroup.tsx) |
 | CartLineItem | Thumbnail, title, variant, quantity stepper, line price, save-for-later and remove with inline stock errors. | `line` (`CartLine`) | [CartLineItem.tsx](../apps/web/features/shop/components/CartDrawer/CartLineItem.tsx) |

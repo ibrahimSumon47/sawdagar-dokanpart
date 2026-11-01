@@ -1,0 +1,16 @@
+[
+  {
+    "id": "R1",
+    "description": "Remove demo framing from the storefront",
+    "acceptance": "R1 requirements and deployed Playwright screenshots at 375, 768 and 1440 pixels pass",
+    "status": "fail",
+    "evidence": "Pending deployed Playwright run and completion of remaining R1 checks"
+  },
+  {
+    "id": "R2",
+    "description": "Use distinct, licensed images for published products",
+    "acceptance": "Image pipeline, publish guard, CI checks, catalog pagination and deployed visual checks pass",
+    "status": "fail",
+    "evidence": "Image manifest is empty; pipeline and publish enforcement are not implemented"
+  }
+]

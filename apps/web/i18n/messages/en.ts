@@ -38,13 +38,12 @@ export const en = {
     title: 'Sign in',
     description: 'Sign in to follow orders, keep addresses and hold your wishlist in one place.',
     demoTitle: 'Try a ready-made account',
-    demoBody:
-      'Each account opens only the areas its role allows. Pick one to fill the form, then press Sign in.',
+    demoBody: 'Each account opens only the areas its role allows. Choose an account to sign in.',
     tryDemo: 'Use this account',
     pending: 'Signing in…',
     notice:
       'These accounts belong to the seeded store data and cannot change their email or password.',
-    errorUnknown: 'That account is not available. Use the form below or ask support.',
+    errorUnknown: 'That account is not available. Choose another account or ask support.',
     errorFailed: 'Sign-in failed. Try again in a minute.',
     errorNotConfigured: 'Sign-in is not configured on this deployment yet.',
     notConfiguredTitle: 'Sign-in is not enabled yet',
@@ -78,7 +77,7 @@ export const en = {
     categoriesTitle: 'Browse by category',
     categoriesDescription: 'Twelve departments, from handloom textiles to books and stationery.',
     featuredTitle: 'Chosen from the workshops',
-    featuredDescription: 'The highest-rated products in the seeded catalog.',
+    featuredDescription: 'Highly rated products from independent sellers.',
     browseAll: 'Browse all products',
   },
   catalog: {
