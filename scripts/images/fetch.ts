@@ -177,7 +177,10 @@ async function uploadToCloudinary(sourceUrl: string, publicId: string): Promise<
     method: 'POST',
     body: form,
   });
-  if (!response.ok) throw new Error(`Cloudinary upload failed for ${publicId}: ${response.status}`);
+  if (!response.ok) {
+    const reason = await response.text();
+    throw new Error(`Cloudinary upload failed for ${publicId}: ${response.status} ${reason}`);
+  }
 }
 
 /** Downloads a Commons thumbnail (960px wide) and returns its bytes. */
