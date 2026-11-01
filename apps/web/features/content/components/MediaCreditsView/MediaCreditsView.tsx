@@ -1,6 +1,20 @@
 import { topLevelCategories } from '@sd/domain';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { mediaCredits } from '../../../catalog/mediaCredits';
+import manifest from '../../../../../../packages/seed/images/manifest.json';
+
+interface ProductPhotoCredit {
+  publicId: string;
+  alt: string;
+  author: string;
+  license: string;
+  sourceUrl: string;
+}
+
+/** Every product photo, credited to its author as its licence requires. */
+const productPhotoCredits = Object.values(
+  manifest.subcategories as Record<string, ProductPhotoCredit[]>,
+).flat();
 
 export interface MediaCreditsViewProps {
   copy: Dictionary['credits'];
@@ -57,6 +71,33 @@ export function MediaCreditsView({ copy, locale }: MediaCreditsViewProps) {
                 {copy.source}
               </a>
             </div>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-12 font-serif text-2xl text-ink">{copy.productPhotosTitle}</h2>
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {productPhotoCredits.map((photo) => (
+          <li key={photo.publicId} className="rounded-sm border border-line bg-surface p-4 text-sm">
+            <p className="font-medium text-ink">{photo.alt}</p>
+            <dl className="mt-2 space-y-1 text-xs text-ink-muted">
+              <div>
+                <dt className="inline">{copy.author}: </dt>
+                <dd className="inline">{photo.author}</dd>
+              </div>
+              <div>
+                <dt className="inline">{copy.license}: </dt>
+                <dd className="inline">{photo.license}</dd>
+              </div>
+            </dl>
+            <a
+              href={photo.sourceUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-2 inline-block text-xs text-accent hover:underline"
+            >
+              {copy.source}
+            </a>
           </li>
         ))}
       </ul>

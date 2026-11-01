@@ -14,7 +14,7 @@ import { ProductMedia } from '../ProductMedia';
 import { ProductVendorCard } from '../ProductVendorCard';
 import { ProductGrid, productGridLabels } from '../ProductGrid';
 import { ProductBuyBox } from '../../../shop/components/ProductBuyBox';
-import { departmentPhoto } from '../../media';
+import { productPhoto } from '../../media';
 
 export interface ProductDetailProps {
   product: Product;
@@ -39,7 +39,7 @@ export function ProductDetail({
   copy,
 }: ProductDetailProps) {
   const catalog = copy.catalog;
-  const photo = departmentPhoto(product.departmentSlug, product.slug, locale);
+  const photo = productPhoto(product.images);
 
   return (
     <article className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">

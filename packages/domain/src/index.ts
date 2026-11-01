@@ -3,6 +3,23 @@ export type { PriceLocale } from './money/formatTaka';
 export { topLevelCategories } from './catalog/categories';
 export type { Category, LocalisedName } from './catalog/categories';
 export { buildCatalogSeed, hashSeedValue, slugify } from './catalog/catalogSeed';
+export {
+  IMAGE_HASH_DISTANCE_MIN,
+  PRODUCT_IMAGE_MIN_COUNT,
+  assignProductImages,
+  hammingDistanceHex,
+  normalizeAlt,
+  publishStatusFor,
+  unpublishableProductSlugs,
+  productImageSetsBySlug,
+  validateImageManifest,
+} from './catalog/productImages';
+export type {
+  ImageManifestProblem,
+  ProductImageAsset,
+  ProductImageManifest,
+  ProductImageSet,
+} from './catalog/productImages';
 export { productTones } from './catalog/seedTypes';
 export type {
   CatalogSeed,

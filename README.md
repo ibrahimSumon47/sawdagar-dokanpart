@@ -6,7 +6,7 @@
 ![Next.js 16](https://img.shields.io/badge/Next.js-16.4.3-141414)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9.3-141414)
 
-Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Bangladesh: a catalog of 432 products from 24 fictional workshops, with carts, checkout, seller fulfillment, a double-entry ledger and an admin CMS.
+Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Bangladesh: a catalog of 142 products with their own licensed photographs from 24 fictional workshops, with carts, checkout, seller fulfillment, a double-entry ledger and an admin CMS. Products without their own photos stay unpublished rather than reusing another product's image.
 
 **[Open the demo](https://sawdagar-dokanpart.vercel.app/)** · [Case study](https://sawdagar-dokanpart.vercel.app/case-study) · [Architecture](ARCHITECTURE.md) · [Feature index](docs/FEATURES.md)
 
@@ -24,16 +24,16 @@ Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Ban
 
 Use a **Try demo** button on the [sign-in page](https://sawdagar-dokanpart.vercel.app/sign-in); no password is shown or needed.
 
-| Role | Demo email |
-|---|---|
-| Buyer | `buyer@demo.sawdagar.test` |
-| Vendor owner | `vendor@demo.sawdagar.test` |
-| Vendor staff | `staff@demo.sawdagar.test` |
-| Support agent | `support@demo.sawdagar.test` |
-| Moderator | `moderator@demo.sawdagar.test` |
-| Finance admin | `finance@demo.sawdagar.test` |
-| Content editor | `editor@demo.sawdagar.test` |
-| Super admin | `admin@demo.sawdagar.test` |
+| Role           | Demo email                     |
+| -------------- | ------------------------------ |
+| Buyer          | `buyer@demo.sawdagar.test`     |
+| Vendor owner   | `vendor@demo.sawdagar.test`    |
+| Vendor staff   | `staff@demo.sawdagar.test`     |
+| Support agent  | `support@demo.sawdagar.test`   |
+| Moderator      | `moderator@demo.sawdagar.test` |
+| Finance admin  | `finance@demo.sawdagar.test`   |
+| Content editor | `editor@demo.sawdagar.test`    |
+| Super admin    | `admin@demo.sawdagar.test`     |
 
 Demo accounts cannot change their email or password. The allowlist lives in [`packages/domain/src/auth/demoAccounts.ts`](packages/domain/src/auth/demoAccounts.ts).
 
@@ -47,7 +47,7 @@ This repository follows that path to the end, keeps every service free and repla
 
 **As a buyer**
 
-- Browse 12 departments, 84 categories and 432 products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
+- Browse 12 departments, 84 categories and 142 well-photographed products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
 - Choose a variant, add to a guest or signed-in cart, save a wishlist, compare four products, and apply a coupon.
 - Check out with a saved or new address across 64 districts, choose COD or MockPay, and see per-seller shipping.
 - Print an invoice, review a delivered product with photos, ask a question, and request a return inside seven days.
@@ -71,18 +71,18 @@ The full role matrix is in [`docs/SECURITY.md`](docs/SECURITY.md), and every fea
 
 ## Tech stack
 
-| Layer | Choice | Why |
-|---|---|---|
-| Framework | Next.js 16.4.3 App Router, React 19.3.1 | Server Components keep prices and stock on the server; Server Actions remove a hand-written API layer. |
-| Language | TypeScript 5.9.3, strict | Shared types across the app and pure domain packages; no `any` in application code. |
-| Data | PostgreSQL 18 on Neon Free, Prisma 7.10.1 with `@prisma/adapter-pg` | Relational data with transactions and conditional stock updates; Neon's free plan needs no card and scales to zero. |
-| Auth | Better Auth 1.7.14 | Self-hosted sessions with rate limits and no vendor lock-in. |
-| UI | Tailwind CSS 4.3.3, tokens in `@sd/ui` | One palette drives both themes; container queries let a card grid follow its own width. |
-| Validation | Zod 4.6.7 | The same schemas guard Server Actions and form inputs. |
-| Tests | Vitest 5.0.5 | Fast unit tests for pure rules and a small WebAssembly parity suite. |
-| Monorepo | pnpm 12.15.0, Turborepo 2.11.10, Node 24 | Shared packages with cached lint, typecheck, test and build tasks. |
-| Audit | `@lhci/cli` 0.15.1 | Lighthouse runs against the deployment in GitHub Actions, with median-of-three mobile runs. |
-| Hosting | Vercel Hobby, GitHub Actions, Neon Free | Every service is free forever and needs no credit card. |
+| Layer      | Choice                                                              | Why                                                                                                                 |
+| ---------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Framework  | Next.js 16.4.3 App Router, React 19.3.1                             | Server Components keep prices and stock on the server; Server Actions remove a hand-written API layer.              |
+| Language   | TypeScript 5.9.3, strict                                            | Shared types across the app and pure domain packages; no `any` in application code.                                 |
+| Data       | PostgreSQL 18 on Neon Free, Prisma 7.10.1 with `@prisma/adapter-pg` | Relational data with transactions and conditional stock updates; Neon's free plan needs no card and scales to zero. |
+| Auth       | Better Auth 1.7.14                                                  | Self-hosted sessions with rate limits and no vendor lock-in.                                                        |
+| UI         | Tailwind CSS 4.3.3, tokens in `@sd/ui`                              | One palette drives both themes; container queries let a card grid follow its own width.                             |
+| Validation | Zod 4.6.7                                                           | The same schemas guard Server Actions and form inputs.                                                              |
+| Tests      | Vitest 5.0.5                                                        | Fast unit tests for pure rules and a small WebAssembly parity suite.                                                |
+| Monorepo   | pnpm 12.15.0, Turborepo 2.11.10, Node 24                            | Shared packages with cached lint, typecheck, test and build tasks.                                                  |
+| Audit      | `@lhci/cli` 0.15.1                                                  | Lighthouse runs against the deployment in GitHub Actions, with median-of-three mobile runs.                         |
+| Hosting    | Vercel Hobby, GitHub Actions, Neon Free                             | Every service is free forever and needs no credit card.                                                             |
 
 Versions and licences are pinned in [`docs/TECH_VERSIONS.md`](docs/TECH_VERSIONS.md); the free-tier checks are in [`ADR-001`](docs/adr/ADR-001-free-services.md).
 
@@ -90,12 +90,12 @@ Versions and licences are pinned in [`docs/TECH_VERSIONS.md`](docs/TECH_VERSIONS
 
 Four small modules sit behind the storefront, each written twice: once in the language that shows the idea, and once in the implementation the site runs. None of them is a wrapper around a library.
 
-| Module | Language | Concept | Used by | Code |
-|---|---|---|---|---|
+| Module      | Language          | Concept                                                                                                           | Used by                                             | Code                                                         |
+| ----------- | ----------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
 | search-core | C++ → WebAssembly | Byte tokenization, weighted token scoring, optimal string alignment with a one-edit cap, coverage, integer scores | Catalog search ordering, with a TypeScript fallback | [`search_core.cpp`](packages/cs-core/native/search_core.cpp) |
-| sku-kit | C → WebAssembly | State-machine normalization, validation, position-weighted check character | New product SKUs | [`sku_kit.c`](packages/cs-core/native/sku_kit.c) |
-| insights | Python reference | Integer velocity, trend in basis points, days of cover, restock quantity | Seller demand column via the TypeScript port | [`insights.py`](packages/cs-core/python/insights.py) |
-| settlement | Java reference | Whole-taka payout rounding with carried poisha and a minimum | Admin payout preview via the TypeScript port | [`Settlement.java`](packages/cs-core/java/Settlement.java) |
+| sku-kit     | C → WebAssembly   | State-machine normalization, validation, position-weighted check character                                        | New product SKUs                                    | [`sku_kit.c`](packages/cs-core/native/sku_kit.c)             |
+| insights    | Python reference  | Integer velocity, trend in basis points, days of cover, restock quantity                                          | Seller demand column via the TypeScript port        | [`insights.py`](packages/cs-core/python/insights.py)         |
+| settlement  | Java reference    | Whole-taka payout rounding with carried poisha and a minimum                                                      | Admin payout preview via the TypeScript port        | [`Settlement.java`](packages/cs-core/java/Settlement.java)   |
 
 The compiled modules are 2.7 KB and 1.1 KB, freestanding and committed as base64 so install, test and deploy never need a compiler. CI runs the Python and Java references with `--require`. [`docs/CS_FUNDAMENTALS.md`](docs/CS_FUNDAMENTALS.md) explains each algorithm and its complexity; `/cs-lab` runs them in the browser.
 
@@ -172,32 +172,32 @@ docs/                    Product, design, architecture, data, security, testing,
 
 Lighthouse CI, median of three mobile runs on the deployed site (run [41067055369](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41067055369)):
 
-| Route | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Home | 93 | 100 | 100 | 100 | 3.06 s | 124 ms | 0 |
-| Catalog | 95 | 100 | 100 | 100 | 2.78 s | 71 ms | 0 |
-| Product | 93 | 100 | 100 | 100 | 3.19 s | 68 ms | 0 |
+| Route   | Performance | Accessibility | Best practices | SEO |    LCP |    TBT | CLS |
+| ------- | ----------: | ------------: | -------------: | --: | -----: | -----: | --: |
+| Home    |          93 |           100 |            100 | 100 | 3.06 s | 124 ms |   0 |
+| Catalog |          95 |           100 |            100 | 100 | 2.78 s |  71 ms |   0 |
+| Product |          93 |           100 |            100 | 100 | 3.19 s |  68 ms |   0 |
 
 The build ships 249.1 KiB of gzipped client JavaScript, 9.8 KiB of gzipped CSS and a 71.8 KiB largest chunk; the twelve catalog photographs total 852 KiB, with a 144.8 KiB largest file. Budgets are checked after every build.
 
 There are 170 unit tests:
 
-| Package | Tests | Focus |
-|---|---:|---|
-| `@sd/domain` | 73 | Money, seed invariants, roles, coupons, order state, reviews and returns, seller rules, ledger balance |
-| `@sd/cs-core` | 15 | WebAssembly and TypeScript parity for every fixture, including Bangla search |
-| `@sd/ui` | 17 | Rendering, skeleton parity, token contrast in both themes |
-| `@sd/web` | 65 | Filters, cart totals, comparison limits, CMS validation, admin navigation, localized places, metadata snippets, `llms.txt` |
+| Package       | Tests | Focus                                                                                                                      |
+| ------------- | ----: | -------------------------------------------------------------------------------------------------------------------------- |
+| `@sd/domain`  |    73 | Money, seed invariants, roles, coupons, order state, reviews and returns, seller rules, ledger balance                     |
+| `@sd/cs-core` |    15 | WebAssembly and TypeScript parity for every fixture, including Bangla search                                               |
+| `@sd/ui`      |    17 | Rendering, skeleton parity, token contrast in both themes                                                                  |
+| `@sd/web`     |    65 | Filters, cart totals, comparison limits, CMS validation, admin navigation, localized places, metadata snippets, `llms.txt` |
 
 axe-core 4.10.2 reported zero violations on nine template, theme and width combinations in the Phase 11 review; that review was manual. [`docs/TESTING.md`](docs/TESTING.md) records every check and its limits.
 
 ## CI/CD
 
-| Workflow | Trigger | What it does |
-|---|---|---|
-| [`CI`](.github/workflows/ci.yml) | Every push to `main` | Lint, typecheck, 170 tests, production build, asset budgets and generated-file drift checks on Ubuntu, Windows and macOS; a fourth job runs the Python and Java references with `--require` |
-| [`Database`](.github/workflows/db.yml) | Manual | `migrate`, `seed` or `status` against the direct Neon connection, serialised by a concurrency group |
-| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly | Three mobile runs per URL against the deployment; fails below 90 in any category or above 0.1 CLS |
+| Workflow                                         | Trigger              | What it does                                                                                                                                                                                |
+| ------------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`CI`](.github/workflows/ci.yml)                 | Every push to `main` | Lint, typecheck, 170 tests, production build, asset budgets and generated-file drift checks on Ubuntu, Windows and macOS; a fourth job runs the Python and Java references with `--require` |
+| [`Database`](.github/workflows/db.yml)           | Manual               | `migrate`, `seed` or `status` against the direct Neon connection, serialised by a concurrency group                                                                                         |
+| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly    | Three mobile runs per URL against the deployment; fails below 90 in any category or above 0.1 CLS                                                                                           |
 
 A Vercel deployment of `main` follows a green build. The Vercel build never touches the database: every data route is dynamic and reports a missing configuration at request time.
 
@@ -207,12 +207,12 @@ A Vercel deployment of `main` follows a green build. The Vercel build never touc
 
 Create a free Neon project, then set these variables in Vercel and in the GitHub repository (Actions secrets):
 
-| Variable | Where | Purpose |
-|---|---|---|
-| `DATABASE_URL` | Vercel, GitHub | Pooled Neon connection used by the app |
-| `DIRECT_DATABASE_URL` | GitHub only | Direct connection used by migrations and seeding |
-| `BETTER_AUTH_SECRET` | Vercel, GitHub | Signs and verifies sessions; use a long random value |
-| `DEMO_ACCOUNT_PASSWORD` | Vercel, GitHub | Password for the eight seeded demo accounts |
+| Variable                | Where          | Purpose                                              |
+| ----------------------- | -------------- | ---------------------------------------------------- |
+| `DATABASE_URL`          | Vercel, GitHub | Pooled Neon connection used by the app               |
+| `DIRECT_DATABASE_URL`   | GitHub only    | Direct connection used by migrations and seeding     |
+| `BETTER_AUTH_SECRET`    | Vercel, GitHub | Signs and verifies sessions; use a long random value |
+| `DEMO_ACCOUNT_PASSWORD` | Vercel, GitHub | Password for the eight seeded demo accounts          |
 
 After the first deploy, run the **Database** workflow with `migrate`, then `seed`. The app serves static routes without a database, but catalog, cart and account pages need one. Node 24 is required. Never commit any of these values; [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) lists the owner actions.
 
@@ -236,16 +236,16 @@ The complete list, including the reasoning behind each omission, is in [`docs/PR
 
 ## Roadmap
 
-| Phase | Scope | Status |
-|---|---|---|
-| 0–1 | Foundation, design system, shell, themes, i18n | Done |
-| 2–3 | Auth, roles, catalog, search, product pages | Done |
-| 4–5 | Cart, wishlist, compare, coupons, checkout, orders, invoices | Done |
-| 6–7 | Reviews, questions, returns, Seller Center, store CMS | Done |
-| 8–9 | Ledger, payouts, refunds, admin, CMS, flags, analytics, audit | Done |
-| 10 | C++/C WebAssembly, Python and Java references, `/cs-lab` | Done |
-| 11 | Photography, localization, accessibility, six-width review, Lighthouse | Done |
-| 12 | README, case study, ADRs, `llms.txt`, project facts, repository map | Done |
+| Phase | Scope                                                                  | Status |
+| ----- | ---------------------------------------------------------------------- | ------ |
+| 0–1   | Foundation, design system, shell, themes, i18n                         | Done   |
+| 2–3   | Auth, roles, catalog, search, product pages                            | Done   |
+| 4–5   | Cart, wishlist, compare, coupons, checkout, orders, invoices           | Done   |
+| 6–7   | Reviews, questions, returns, Seller Center, store CMS                  | Done   |
+| 8–9   | Ledger, payouts, refunds, admin, CMS, flags, analytics, audit          | Done   |
+| 10    | C++/C WebAssembly, Python and Java references, `/cs-lab`               | Done   |
+| 11    | Photography, localization, accessibility, six-width review, Lighthouse | Done   |
+| 12    | README, case study, ADRs, `llms.txt`, project facts, repository map    | Done   |
 
 Next candidates, recorded honestly rather than promised: a released-reservation job, a concurrency test for the last unit of stock, a richer search index, and staff permission sets.
 

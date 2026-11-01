@@ -258,6 +258,7 @@ model Product {
   orderItems     OrderItem[]
   reviews        Review[]
   questions      ProductQuestion[]
+  images         ProductImage[]
 
   @@index([categoryId, status])
   @@index([organizationId])
@@ -265,6 +266,27 @@ model Product {
   @@index([priceMinor])
   @@index([rating])
   @@map("products")
+}
+
+/// One licensed photograph for a product. Position 0 is the main image; the
+/// rest are gallery images. A product is published only with its own images.
+model ProductImage {
+  id         String   @id
+  productId  String
+  position   Int
+  publicId   String   @unique
+  altEn      String
+  sourceUrl  String
+  license    String
+  author     String
+  width      Int
+  height     Int
+  phash      String
+  createdAt  DateTime @default(now())
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, position])
+  @@map("product_images")
 }
 
 model ProductVariant {

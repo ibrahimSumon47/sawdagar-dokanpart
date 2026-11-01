@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Locale } from '../../../../i18n';
 import type { CatalogProduct } from '../../queries';
 import { WishlistButton } from '../../../shop/components/WishlistButton';
-import { departmentPhoto } from '../../media';
+import { productPhoto } from '../../media';
 import { productGridClass } from './productGridLayout';
 
 export interface ProductGridLabels {
@@ -46,7 +46,7 @@ export function ProductGrid({ products, locale, labels }: ProductGridProps) {
     <div className="@container min-w-0">
       <ul role="list" className={productGridClass}>
         {products.map((product) => {
-          const photo = departmentPhoto(product.departmentSlug, product.slug, locale);
+          const photo = productPhoto(product.images);
           return (
             <li key={product.id} className="relative min-w-0">
               <Link

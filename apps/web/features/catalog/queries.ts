@@ -31,6 +31,45 @@ export interface CatalogProduct {
   totalStock: number;
   /** Top-level category slug, used to pick the department photograph. */
   departmentSlug: string;
+  /** Licensed photos in gallery order; the first is the main image. */
+  images?: ProductPhoto[];
+}
+
+/** One stored product photo, with the attribution the credits page needs. */
+export interface ProductPhoto {
+  publicId: string;
+  alt: string;
+  sourceUrl: string;
+  license: string;
+  author: string;
+  width: number;
+  height: number;
+}
+
+/** Photo rows as read with `productImageInclude`, in position order. */
+export interface ProductImageRow {
+  publicId: string;
+  altEn: string;
+  sourceUrl: string;
+  license: string;
+  author: string;
+  width: number;
+  height: number;
+}
+
+/** Include clause that loads a product's photos in gallery order. */
+export const productImageInclude = { images: { orderBy: { position: 'asc' as const } } };
+
+export function toProductPhotos(rows: readonly ProductImageRow[]): ProductPhoto[] {
+  return rows.map((row) => ({
+    publicId: row.publicId,
+    alt: row.altEn,
+    sourceUrl: row.sourceUrl,
+    license: row.license,
+    author: row.author,
+    width: row.width,
+    height: row.height,
+  }));
 }
 
 export interface CatalogResult {
@@ -84,7 +123,7 @@ type ProductWithVendor = Prisma.ProductGetPayload<{
     organization: { select: { name: true; slug: true } };
     category: { select: { path: true } };
   };
-}>;
+}> & { images?: ProductImageRow[] };
 
 export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
   return {
@@ -100,6 +139,7 @@ export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
     tone: normaliseProductTone(product.tone),
     totalStock: product.totalStock,
     departmentSlug: product.category.path.split('/')[0] ?? '',
+    images: product.images ? toProductPhotos(product.images) : undefined,
   };
 }
 
@@ -235,6 +275,7 @@ export async function searchCatalog(filters: CatalogFilters): Promise<CatalogRes
     include: {
       organization: { select: { name: true, slug: true } },
       category: { select: { path: true } },
+      ...productImageInclude,
     },
   });
 
@@ -273,6 +314,7 @@ export async function getFeaturedProducts(limit = 8): Promise<CatalogProduct[]> 
     include: {
       organization: { select: { name: true, slug: true } },
       category: { select: { path: true } },
+      ...productImageInclude,
     },
   });
 
@@ -287,6 +329,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
       organization: { include: { _count: { select: { products: true } } } },
       category: { include: { parent: true } },
       variants: { orderBy: { sortOrder: 'asc' } },
+      ...productImageInclude,
     },
   });
 
@@ -307,6 +350,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
     totalStock: product.totalStock,
     departmentSlug: product.category.parent?.slug ?? product.category.slug,
     createdAt: product.createdAt,
+    images: toProductPhotos(product.images),
     category: {
       slug: product.category.slug,
       name: { en: product.category.nameEn, bn: product.category.nameBn },
@@ -356,6 +400,7 @@ export async function getRelatedProducts(
     include: {
       organization: { select: { name: true, slug: true } },
       category: { select: { path: true } },
+      ...productImageInclude,
     },
   });
 

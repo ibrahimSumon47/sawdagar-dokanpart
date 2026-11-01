@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
    * The product query behind generateMetadata is request-cached, so the page and
    * its metadata share one database read. */
   htmlLimitedBots: /.*/,
+  images: {
+    remotePatterns: [{ protocol: 'https', hostname: 'res.cloudinary.com' }],
+  },
 };
 
 export default nextConfig;

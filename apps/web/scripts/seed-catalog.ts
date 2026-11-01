@@ -1,5 +1,16 @@
-import { buildCatalogSeed, hashSeedValue, productTones } from '@sd/domain';
+import { readFileSync } from 'node:fs';
+import {
+  buildCatalogSeed,
+  hashSeedValue,
+  productTones,
+  productImageSetsBySlug,
+  publishStatusFor,
+  unpublishableProductSlugs,
+  type ProductImageManifest,
+} from '@sd/domain';
 import type { PrismaClient } from '../generated/prisma/client';
+
+const manifestPath = new URL('../../../packages/seed/images/manifest.json', import.meta.url);
 
 /**
  * Writes the curated catalog idempotently. Categories and vendors are upserted
@@ -8,6 +19,9 @@ import type { PrismaClient } from '../generated/prisma/client';
  */
 export async function seedCatalog(prisma: PrismaClient): Promise<string> {
   const seed = buildCatalogSeed();
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as ProductImageManifest;
+  const unpublishable = new Set(unpublishableProductSlugs(seed, manifest));
+  const imageSets = productImageSetsBySlug(seed, manifest);
   const categoryIds = new Map<string, string>();
   const vendorIds = new Map<string, string>();
 
@@ -120,7 +134,7 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         titleBn: product.title.bn,
         descriptionEn: product.description.en,
         descriptionBn: product.description.bn,
-        status: 'active',
+        status: publishStatusFor(product.slug, unpublishable),
         tone: product.tone,
         priceMinor: product.priceMinor,
         compareAtMinor: product.compareAtMinor,
@@ -136,7 +150,7 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         titleBn: product.title.bn,
         descriptionEn: product.description.en,
         descriptionBn: product.description.bn,
-        status: 'active',
+        status: publishStatusFor(product.slug, unpublishable),
         tone: product.tone,
         priceMinor: product.priceMinor,
         compareAtMinor: product.compareAtMinor,
@@ -148,6 +162,28 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
         createdAt: product.createdAt,
       },
     });
+
+    // Replace the product's photos with its current set, so a photo moved or
+    // dropped from the manifest is not left attached to the wrong product.
+    await prisma.productImage.deleteMany({ where: { productId: product.id } });
+    const set = imageSets.get(product.slug);
+    if (set) {
+      await prisma.productImage.createMany({
+        data: set.images.map((image, position) => ({
+          id: `${product.id}-img-${position}`,
+          productId: product.id,
+          position,
+          publicId: image.publicId,
+          altEn: image.alt,
+          sourceUrl: image.sourceUrl,
+          license: image.license,
+          author: image.author,
+          width: image.width,
+          height: image.height,
+          phash: image.phash,
+        })),
+      });
+    }
 
     for (const variant of product.variants) {
       await prisma.productVariant.upsert({

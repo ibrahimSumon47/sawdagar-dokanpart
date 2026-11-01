@@ -1022,6 +1022,7 @@ export const en = {
     author: 'Photographer',
     license: 'Licence',
     source: 'View the original file',
+    productPhotosTitle: 'Product photographs',
   },
   csLab: {
     eyebrow: 'Phase 10',

@@ -1,6 +1,8 @@
 import { topLevelCategories } from '@sd/domain';
 import type { Locale } from '../../i18n';
 import { mediaCredits } from './mediaCredits';
+import type { ProductPhoto } from './queries';
+import { cloudinaryPhotoUrl } from './cloudinaryUrl';
 
 /** A department photograph and the crop that suits a given product. */
 export interface DepartmentPhoto {
@@ -43,4 +45,15 @@ export function departmentPhoto(
         : `Representative photograph for ${category.name.en}`,
     objectPosition: crops[seedValue(seed) % crops.length] ?? '50% 50%',
   };
+}
+
+/**
+ * The product's own main photo (its first gallery image). Returns null when the
+ * product has no photo, so the card shows the pattern instead of another item's
+ * picture.
+ */
+export function productPhoto(images: readonly ProductPhoto[] | undefined): DepartmentPhoto | null {
+  const main = images?.[0];
+  if (!main) return null;
+  return { src: cloudinaryPhotoUrl(main.publicId, 800), alt: main.alt, objectPosition: '50% 50%' };
 }

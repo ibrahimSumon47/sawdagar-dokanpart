@@ -1010,6 +1010,7 @@ export const bn: Dictionary = {
     author: 'আলোকচিত্রী',
     license: 'লাইসেন্স',
     source: 'মূল ফাইল দেখুন',
+    productPhotosTitle: 'পণ্যের ছবি',
   },
   csLab: {
     eyebrow: 'পর্ব ১০',
