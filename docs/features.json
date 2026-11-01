@@ -4,7 +4,7 @@
     "description": "Remove demo framing from the storefront",
     "acceptance": "R1 requirements and deployed Playwright screenshots at 375, 768 and 1440 pixels pass",
     "status": "fail",
-    "evidence": "CI 41276370739 and Playwright 41276371190 passed; six CMS entries were updated and checked in both languages, but new copy checks and other R1 acceptance remain unverified"
+    "evidence": "CI 41276370739 and Playwright 41276371190 passed; six CMS entries updated and checked in both languages; Playwright 41279324126 (a9ab1ad) and 41279963461 (2297978) passed and attached full-page 375/768/1440 screenshots. Visual review of the 768 and 1440 captures is still pending (1440 file exceeds the viewer limit), so status stays fail"
   },
   {
     "id": "R2",
