@@ -156,31 +156,36 @@ function cloudinarySignature(params: Record<string, string>, secret: string): st
   return createHash('sha1').update(`${payload}${secret}`).digest('hex');
 }
 
-/** Uploads one remote image to Cloudinary under a fixed public ID. */
-async function uploadToCloudinary(sourceUrl: string, publicId: string): Promise<void> {
+/** Uploads image bytes to Cloudinary under a fixed public ID, retrying when Commons or Cloudinary rate-limits. */
+async function uploadToCloudinary(image: Buffer, publicId: string): Promise<void> {
   const cloud = process.env.CLOUDINARY_CLOUD_NAME;
   const key = process.env.CLOUDINARY_API_KEY;
   const secret = process.env.CLOUDINARY_API_SECRET;
   if (!cloud || !key || !secret) throw new Error('Cloudinary credentials are not set');
 
-  const timestamp = String(Math.floor(Date.now() / 1000));
-  const signed = { public_id: publicId, timestamp, overwrite: 'false' };
-  const form = new FormData();
-  form.append('file', sourceUrl);
-  form.append('public_id', publicId);
-  form.append('timestamp', timestamp);
-  form.append('overwrite', 'false');
-  form.append('api_key', key);
-  form.append('signature', cloudinarySignature(signed, secret));
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    const timestamp = String(Math.floor(Date.now() / 1000));
+    const signed = { public_id: publicId, timestamp, overwrite: 'false' };
+    const form = new FormData();
+    form.append('file', new Blob([new Uint8Array(image)]), 'photo.jpg');
+    form.append('public_id', publicId);
+    form.append('timestamp', timestamp);
+    form.append('overwrite', 'false');
+    form.append('api_key', key);
+    form.append('signature', cloudinarySignature(signed, secret));
 
-  const response = await fetch(`https://api.cloudinary.com/v1_1/${cloud}/image/upload`, {
-    method: 'POST',
-    body: form,
-  });
-  if (!response.ok) {
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloud}/image/upload`, {
+      method: 'POST',
+      body: form,
+    });
+    if (response.ok) return;
     const reason = await response.text();
-    throw new Error(`Cloudinary upload failed for ${publicId}: ${response.status} ${reason}`);
+    if (response.status !== 429 && response.status < 500) {
+      throw new Error(`Cloudinary upload failed for ${publicId}: ${response.status} ${reason}`);
+    }
+    await pause(2000 * attempt);
   }
+  throw new Error(`Cloudinary upload failed for ${publicId} after retries`);
 }
 
 /** Downloads a Commons thumbnail (960px wide) and returns its bytes. */
@@ -209,7 +214,7 @@ async function collectDistinct(
 
     const index = kept.length + 1;
     const publicId = `sawdagar/products/${slug}/${index}`;
-    if (!dryRun) await uploadToCloudinary(candidate.thumbUrl, publicId);
+    if (!dryRun) await uploadToCloudinary(buffer, publicId);
     kept.push({
       publicId,
       sourceUrl: candidate.sourceUrl,
