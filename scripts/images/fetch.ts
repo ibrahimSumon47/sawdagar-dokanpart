@@ -28,6 +28,8 @@ const manifestPath = path.join(root, 'packages', 'seed', 'images', 'manifest.jso
 const HASH_DISTANCE_MIN = 8;
 /** Main photo plus two gallery photos per product. */
 const IMAGES_PER_PRODUCT = 3;
+/** Three products' worth of distinct photos per subcategory (each of 6 products needs its own set). */
+const PHOTOS_PER_SUBCATEGORY = 9;
 /** Licence names accepted for reuse. Anything else is rejected. */
 const allowedLicence = /^(CC0|Public domain|CC BY(-SA)? \d\.\d)$/i;
 
@@ -63,7 +65,7 @@ function pause(ms: number): Promise<void> {
 }
 
 /** Searches Commons for one query and returns the files with an allowed licence. */
-export async function searchCommons(query: string, limit = 30): Promise<CommonsCandidate[]> {
+export async function searchCommons(query: string, limit = 50): Promise<CommonsCandidate[]> {
   const url = new URL('https://commons.wikimedia.org/w/api.php');
   url.search = new URLSearchParams({
     action: 'query',
@@ -204,7 +206,7 @@ async function collectDistinct(
 ): Promise<ManifestAsset[]> {
   const kept: ManifestAsset[] = [];
   for (const candidate of await searchCommons(query)) {
-    if (kept.length >= IMAGES_PER_PRODUCT) break;
+    if (kept.length >= PHOTOS_PER_SUBCATEGORY) break;
     const buffer = await download(candidate.thumbUrl);
     const phash = await averageHash(buffer);
     const clashes = [...usedHashes, ...kept.map((asset) => asset.phash)].some(
