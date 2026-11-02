@@ -74,6 +74,8 @@ packages/  Reusable packages shared by the app
       reviews/  Review, question and return-window rules
       seller/  Store approval, stock and product-status rules
       shop/  Coupon rules
+  seed/  Related code and tests.
+    images/  Related code and tests.
   ui/  Design tokens, brand mark, shared components and skeleton pairs
     src/  Token stylesheet, component sources and tests
       components/  One folder per component with styles and tests
@@ -85,6 +87,8 @@ docs/  Product, design, architecture, data, security, testing and deployment doc
   spec/  Product, design system, architecture, data and roadmap specifications
 
 scripts/  Node automation for wasm builds, budgets, facts, repository map and reference modules
+  ci/  Related code and tests.
+  images/  Related code and tests.
 
 .github/  GitHub Actions workflows and repository configuration
   workflows/  CI, Database and Lighthouse workflows
