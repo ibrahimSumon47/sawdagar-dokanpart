@@ -24,16 +24,16 @@
     "variants": 1296,
     "seededReviews": 1755,
     "demoRoles": 8,
-    "models": 38,
-    "migrations": 9,
+    "models": 39,
+    "migrations": 10,
     "pages": 51,
     "apiRoutes": 2,
-    "unitTests": 170
+    "unitTests": 185
   },
   "unitTests": {
     "domain": {
-      "files": 13,
-      "cases": 73
+      "files": 14,
+      "cases": 85
     },
     "csCore": {
       "files": 4,
@@ -44,10 +44,10 @@
       "cases": 17
     },
     "web": {
-      "files": 20,
-      "cases": 65
+      "files": 21,
+      "cases": 68
     },
-    "total": 170
+    "total": 185
   },
   "coverage": {
     "measured": false,
