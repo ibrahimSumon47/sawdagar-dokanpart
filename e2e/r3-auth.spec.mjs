@@ -59,7 +59,7 @@ test('a seeded buyer signs in and sees the account page', async ({ page }) => {
 test('registration creates a real account and asks for verification', async ({ page }) => {
   const stamp = Date.now().toString().slice(-9);
   const email = `r3-${stamp}@sawdagar.test`;
-  const phone = `019${stamp}`;
+  const phone = `017${stamp.slice(-8)}`;
   await page.goto('/register');
   await page.getByLabel('Full name').fill('R3 Check Account');
   await page.getByLabel('Email address').fill(email);
