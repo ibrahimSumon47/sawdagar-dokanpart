@@ -145,8 +145,13 @@ functions that React cannot serialise across the server/client boundary.
 | ContentEditorForm | Creates or updates one CMS entry. | `entry`, `defaultKind`, `copy` | [ContentEditorForm.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorForm.tsx) |
 | ContentEditorSkeleton | Field groups, body area and side column for the CMS editor. | `label` | [ContentEditorSkeleton.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorSkeleton.tsx) |
 | ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
-| ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
+| ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale`, `restoreAction` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
 | ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
+| CmsModuleLinks | The three CMS cards on the hub, each with its live record count and link. | `modules`, `linkLabel` | [CmsModuleLinks.tsx](../apps/web/features/admin/components/CmsModuleLinks/CmsModuleLinks.tsx) |
+| CmsSectionOrder | Homepage sections in display order with drag and arrow reordering. | `sections`, `copy`, `locale` | [CmsSectionOrder.tsx](../apps/web/features/admin/components/CmsSectionOrder/CmsSectionOrder.tsx) |
+| CmsSectionForm | Creates or updates one homepage section and links to its save notice. | `section`, `copy` | [CmsSectionForm.tsx](../apps/web/features/admin/components/CmsSectionForm/CmsSectionForm.tsx) |
+| CmsSectionFields | Kind, bilingual copy, media, link and schedule fields for a section. | `section`, `copy` | [CmsSectionFields.tsx](../apps/web/features/admin/components/CmsSectionForm/CmsSectionFields.tsx) |
+| SectionPreview | Shows the saved section copy as the storefront would read it, with its media and link. | `section`, `copy`, `locale` | [SectionPreview.tsx](../apps/web/features/admin/components/SectionPreview/SectionPreview.tsx) |
 | MailOutboxList | Verification and reset mail this site queued, each folded open to show the link it carries. | `messages`, `emptyLabel`, `locale` | [MailOutboxList.tsx](../apps/web/features/admin/components/MailOutboxList/MailOutboxList.tsx) |
 
 ## Content (`apps/web/features/content`)
@@ -178,8 +183,9 @@ functions that React cannot serialise across the server/client boundary.
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| HomeIntro | Storefront opening, hero photograph, trust strip and build status. | `copy`, `locale` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
+| HomeIntro | Storefront opening from the published CMS hero, then the trust strip and build status. | `copy`, `locale`, `hero` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
 | HomeIntroSkeleton | Matches the hero, trust strip and build status while the home page streams. | `label` | [HomeIntroSkeleton.tsx](../apps/web/features/home/components/HomeIntro/HomeIntroSkeleton.tsx) |
+| HomeBanners | Published CMS banners in a two-column strip between the opening block and the catalog. | `banners`, `locale` | [HomeBanners.tsx](../apps/web/features/home/components/HomeBanners/HomeBanners.tsx) |
 | SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search and the role-aware controls. | `copy`, `locale`, `theme`, `viewer`, `categories` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
 | HeaderSearch | Search form shared by compact and desktop headers. | `id`, `label`, `placeholder`, `className` | [HeaderSearch.tsx](../apps/web/features/shell/components/SiteHeader/HeaderSearch.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
@@ -205,7 +211,7 @@ Page containers shared by every route and its skeleton live in [pageLayout.ts](.
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| HomeCatalog | Home departments from the live category tree, then featured products. | `categories`, `featured`, `locale`, `copy` | [HomeCatalog.tsx](../apps/web/features/catalog/components/HomeCatalog/HomeCatalog.tsx) |
+| HomeCatalog | Home departments from the live category tree, then featured products, under the published collection-teaser heading. | `categories`, `featured`, `locale`, `copy`, `collectionsHeading` | [HomeCatalog.tsx](../apps/web/features/catalog/components/HomeCatalog/HomeCatalog.tsx) |
 | HomeCatalogSkeleton | Department tiles and featured product grid for the home page. | `categoriesLabel`, `productsLabel` | [HomeCatalogSkeleton.tsx](../apps/web/features/catalog/components/HomeCatalog/HomeCatalogSkeleton.tsx) |
 | CategoryTiles | Compact department grid; each tile opens the catalog filtered to that category. | `categories` (`CategoryTile[]`: `slug`, `name`), `locale` | [CategoryTiles.tsx](../apps/web/features/catalog/components/CategoryTiles/CategoryTiles.tsx) |
 | CategoryTilesSkeleton | Department tile grid placeholder. | `label`, `count` | [CategoryTilesSkeleton.tsx](../apps/web/features/catalog/components/CategoryTiles/CategoryTilesSkeleton.tsx) |

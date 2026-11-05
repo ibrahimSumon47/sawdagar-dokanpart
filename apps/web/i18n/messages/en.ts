@@ -946,7 +946,7 @@ export const en = {
     navOverview: 'Overview',
     navStores: 'Stores',
     navReviews: 'Reviews',
-    navContent: 'Content',
+    navContent: 'CMS',
     navAnalytics: 'Analytics',
     navFlags: 'Feature flags',
     navAudit: 'Audit log',
@@ -1072,6 +1072,52 @@ export const en = {
     auditOf: 'of',
     auditPrevious: 'Previous',
     auditNext: 'Next',
+    cmsTitle: 'CMS',
+    cmsDescription:
+      'Homepage sections, storefront pages and the Journal, with drafts, scheduled publishing and a version history for every save.',
+    cmsOpen: 'Open',
+    cmsSectionsCard: 'Homepage sections',
+    cmsSectionsCardBody:
+      'The opening hero, the collection teaser and banners. Drag them into the order visitors should see.',
+    cmsEntriesCard: 'Pages and Help Center',
+    cmsEntriesCardBody:
+      'Shipping, returns and policy pages, plus the articles the Help Center lists.',
+    cmsJournalCard: 'Journal',
+    cmsJournalCardBody:
+      'Seller stories and buying guides, written and scheduled like any other entry.',
+    sectionsTitle: 'Homepage sections',
+    sectionsDescription:
+      'Published sections appear on the homepage in this order. Drafts and archived sections stay here.',
+    newSection: 'New section',
+    noSections:
+      'No sections yet. The homepage keeps its built-in hero and copy until a hero is published.',
+    sectionSaved: 'The section was saved.',
+    sectionInvalid: 'Check the fields and the publish date.',
+    sectionFailed: 'The section could not be saved. Try again.',
+    sectionRestored: 'The version was restored as a new edit.',
+    sectionOrderTitle: 'Order on the homepage',
+    sectionOrderDescription:
+      'Drag a row, or use the arrow buttons. Each move is saved straight away.',
+    sectionOrderFailed:
+      'The new order could not be saved. The list was put back to the saved order.',
+    sectionOrderInvalid: 'The order could not be read. Reload the page and try again.',
+    sectionDragHint: 'Drag a row to move it.',
+    moveUp: 'Move up',
+    moveDown: 'Move down',
+    kindHero: 'Hero',
+    kindCollections: 'Collection teaser',
+    kindBanner: 'Banner',
+    statusArchived: 'Archived',
+    sectionKindLabel: 'Section type',
+    imageUrlLabel: 'Image address',
+    imageUrlHint: 'A file under /images, or an https address.',
+    ctaLabelLabel: 'Link label',
+    ctaHrefLabel: 'Link address',
+    saveSection: 'Save section',
+    sectionPreviewNote:
+      'The storefront shows the visitor’s language; this preview uses the admin language.',
+    sectionCount: 'sections',
+    entryCount: 'entries',
   },
   notFound: {
     title: 'This page could not be found',

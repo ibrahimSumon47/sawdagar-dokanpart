@@ -377,6 +377,52 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
     });
   }
 
+  // The seeded hero repeats the dictionary copy so the homepage reads the same
+  // before and after the first editor opens it.
+  const hero = {
+    id: 'cms_section_hero',
+    kind: 'hero',
+    titleEn: 'Every dokan, one marketplace.',
+    titleBn: 'প্রতিটি দোকান, এক বাজার।',
+    bodyEn:
+      'Sawdagar Dokanpat brings independent Bangladeshi sellers into one storefront, from handloom sarees to terracotta tea sets. Browse by department and order from the workshop that made the piece.',
+    bodyBn:
+      'সওদাগর দোকানপাট বাংলাদেশের স্বাধীন বিক্রেতাদের একই দোকানে মিলিয়ে দেয়—তাঁতের শাড়ি থেকে মাটির চায়ের সেট পর্যন্ত। বিভাগ অনুযায়ী ঘুরে দেখুন এবং যে কারখানা পণ্যটি বানিয়েছে তার কাছ থেকেই অর্ডার করুন।',
+    ctaLabelEn: 'Browse the catalog',
+    ctaLabelBn: 'ক্যাটালগ দেখুন',
+    ctaHref: '/catalog',
+    status: 'published',
+    publishAt: new Date('2026-10-01T09:00:00+06:00'),
+    sortOrder: 0,
+  };
+
+  await prisma.cmsSection.upsert({
+    where: { id: hero.id },
+    create: hero,
+    update: {},
+  });
+  await prisma.cmsSectionVersion.upsert({
+    where: { sectionId_version: { sectionId: hero.id, version: 1 } },
+    create: {
+      id: `${hero.id}_v1`,
+      sectionId: hero.id,
+      version: 1,
+      snapshot: {
+        titleEn: hero.titleEn,
+        titleBn: hero.titleBn,
+        bodyEn: hero.bodyEn,
+        bodyBn: hero.bodyBn,
+        ctaLabelEn: hero.ctaLabelEn,
+        ctaLabelBn: hero.ctaLabelBn,
+        ctaHref: hero.ctaHref,
+        imageUrl: null,
+      },
+      note: 'Seeded hero',
+      authorUserId: author?.id ?? null,
+    },
+    update: {},
+  });
+
   for (const flag of flags) {
     await prisma.featureFlag.upsert({
       where: { key: flag.key },
@@ -390,5 +436,5 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
     });
   }
 
-  return `${entries.length} content entries and ${flags.length} feature flags ready.`;
+  return `${entries.length} content entries, the homepage hero and ${flags.length} feature flags ready.`;
 }

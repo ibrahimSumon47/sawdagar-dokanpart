@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Revision 1, phase R5: move the homepage under the CMS. A new `cms_sections` table stores heroes, collection teasers and banners with bilingual copy, an optional image and link, draft, scheduled, published and archived states, a display order and the last ten versions. `/admin/cms` becomes the CMS hub and `/admin/cms/sections` lists the blocks with drag or arrow reordering that saves on every move; the editor adds fields for the kind, media and link, shows a preview and keeps the version history with restore. The public homepage reads the first published hero, every published banner and the published collection heading, and falls back to its built-in copy until a hero exists.
+
 - Revision 1, phase R4: give every data-loading route a skeleton that shares the page container with the component it stands in for. `pageLayout.ts` holds the container classes, the skeleton kit gains a stat tile and a table block, thirty-four routes get their own `loading.tsx`, and the home page moves into an `app/(storefront)` route group so its skeleton no longer covers the rest of the site. A deployed Playwright check throttles the connection, asserts the streamed skeleton markup per route and holds cumulative layout shift under 0.05.
 
 - Fix the deployed auth pages: the sign-in, registration, reset and security forms now receive `AuthCopy`, a plain-string slice of the dictionary, because the whole dictionary carries nineteen builder functions that React cannot pass to a client component. The pages had been returning 500 on Vercel while the storefront stayed up.

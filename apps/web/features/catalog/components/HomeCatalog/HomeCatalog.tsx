@@ -10,17 +10,25 @@ export interface HomeCatalogProps {
   featured: readonly CatalogProduct[];
   locale: Locale;
   copy: Dictionary;
+  /** Heading and description from the published collection teaser, when there is one. */
+  collectionsHeading?: { title: string; description: string } | null;
 }
 
 /** Home page catalog block: live departments followed by featured products. */
-export function HomeCatalog({ categories, featured, locale, copy }: HomeCatalogProps) {
+export function HomeCatalog({
+  categories,
+  featured,
+  locale,
+  copy,
+  collectionsHeading,
+}: HomeCatalogProps) {
   return (
     <>
       <section className={pageLayout.section}>
         <SectionHeading
           eyebrow={copy.catalog.eyebrow}
-          title={copy.home.categoriesTitle}
-          description={copy.home.categoriesDescription}
+          title={collectionsHeading?.title ?? copy.home.categoriesTitle}
+          description={collectionsHeading?.description ?? copy.home.categoriesDescription}
         />
         <div className="mt-6">
           <CategoryTiles categories={categories} locale={locale} />

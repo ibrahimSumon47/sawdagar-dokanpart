@@ -8,10 +8,20 @@ export interface ContentVersionHistoryProps {
   versions: readonly CmsVersionRecord[];
   copy: Dictionary['admin'];
   locale: Locale;
+  /** Action that restores one snapshot; defaults to the content entry action. */
+  restoreAction?: (formData: FormData) => Promise<void>;
 }
 
-/** Saved snapshots with a restore control for each one. */
-export function ContentVersionHistory({ versions, copy, locale }: ContentVersionHistoryProps) {
+/**
+ * Saved snapshots with a restore control for each one. Used by the content
+ * entry editor and by homepage sections, which pass their own restore action.
+ */
+export function ContentVersionHistory({
+  versions,
+  copy,
+  locale,
+  restoreAction = restoreContentVersionAction,
+}: ContentVersionHistoryProps) {
   return (
     <section className="rounded-sm border border-line bg-surface p-4">
       <h2 className="font-serif text-lg text-ink">{copy.versionsTitle}</h2>
@@ -37,7 +47,7 @@ export function ContentVersionHistory({ versions, copy, locale }: ContentVersion
               >
                 {formatDate(version.createdAt, locale)}
               </time>
-              <form action={restoreContentVersionAction}>
+              <form action={restoreAction}>
                 <input type="hidden" name="versionId" value={version.id} />
                 <Button type="submit" variant="secondary" size="sm">
                   {copy.restore}

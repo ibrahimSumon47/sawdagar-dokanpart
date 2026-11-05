@@ -1,17 +1,21 @@
 import { ButtonLink } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { departmentPhoto } from '../../../catalog/media';
+import type { HomeHeroContent } from '../../heroContent';
 import { TrustStrip } from '../../../shell/components/TrustStrip';
 import { pageLayout } from '../../../shell/pageLayout';
 
 export interface HomeIntroProps {
   copy: Dictionary;
   locale: Locale;
+  /** Opening copy from the published CMS hero, or the dictionary fallback. */
+  hero: HomeHeroContent;
 }
 
 /** Opening statement and the three delivery promises under the hero. */
-export function HomeIntro({ copy, locale }: HomeIntroProps) {
+export function HomeIntro({ copy, locale, hero }: HomeIntroProps) {
   const heroPhoto = departmentPhoto('handloom', 'home-hero', locale);
+  const imageUrl = hero.imageUrl ?? heroPhoto?.src ?? null;
 
   return (
     <>
@@ -19,25 +23,25 @@ export function HomeIntro({ copy, locale }: HomeIntroProps) {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              {copy.home.eyebrow}
+              {hero.eyebrow}
             </p>
             <h1 className="mt-4 text-hero font-serif leading-[1.02] tracking-tight text-ink">
-              {copy.home.title}
+              {hero.title}
             </h1>
             <p className="mt-6 max-w-xl text-lead leading-relaxed text-ink-muted">
-              {copy.home.description}
+              {hero.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/catalog">{copy.home.primaryCta}</ButtonLink>
+              <ButtonLink href={hero.primaryHref}>{hero.primaryLabel}</ButtonLink>
               <ButtonLink href="/seller" variant="secondary">
                 {copy.home.secondaryCta}
               </ButtonLink>
             </div>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line bg-accent/10 text-accent sm:aspect-[5/4] lg:aspect-[4/5]">
-            {heroPhoto ? (
+            {imageUrl ? (
               <img
-                src={heroPhoto.src}
+                src={imageUrl}
                 alt={copy.home.heroImageAlt}
                 width={800}
                 height={600}

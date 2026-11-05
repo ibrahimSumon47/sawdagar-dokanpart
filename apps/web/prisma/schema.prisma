@@ -799,6 +799,44 @@ model CmsVersion {
   @@map("cms_versions")
 }
 
+model CmsSection {
+  id           String   @id
+  // hero: homepage opening, banner: full-width strip, collections: featured collection teaser.
+  kind         String
+  titleEn      String
+  titleBn      String
+  bodyEn       String
+  bodyBn       String
+  imageUrl     String?
+  ctaLabelEn   String?
+  ctaLabelBn   String?
+  ctaHref      String?
+  status       String   @default("draft")
+  publishAt    DateTime?
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  versions     CmsSectionVersion[]
+
+  @@index([status, publishAt])
+  @@index([sortOrder])
+  @@map("cms_sections")
+}
+
+model CmsSectionVersion {
+  id           String     @id
+  sectionId    String
+  version      Int
+  snapshot     Json
+  note         String?
+  authorUserId String?
+  createdAt    DateTime   @default(now())
+  section      CmsSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@unique([sectionId, version])
+  @@map("cms_section_versions")
+}
+
 model FeatureFlag {
   key             String   @id
   labelEn         String

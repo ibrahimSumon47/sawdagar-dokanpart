@@ -55,6 +55,7 @@ erDiagram
   return_requests ||--o| refunds : settled_by
   ledger_transactions ||--o{ ledger_entries : posts
   cms_entries ||--o{ cms_versions : snapshots
+  cms_sections ||--o{ cms_section_versions : snapshots
 ```
 
 ## Tables
@@ -99,6 +100,8 @@ erDiagram
 | `refunds` | One paid refund per approved return request, with the amount, the reversed commission and the order link |
 | `cms_entries` | Storefront page, Help Center article or Journal post: bilingual title, excerpt, body and SEO fields, draft/scheduled/published status, publish instant and author |
 | `cms_versions` | Immutable JSON snapshot of one entry after each save, with a version number, note, author and time |
+| `cms_sections` | Homepage block (hero, collection teaser or banner): bilingual copy, optional image and link, draft/scheduled/published status, publish instant and display order |
+| `cms_section_versions` | Immutable JSON snapshot of one homepage section after each save, with a version number, note, author and time |
 | `feature_flags` | Storefront switches keyed by a stable string such as `help_center_enabled`, with bilingual labels and the last editor |
 
 ## Catalog shape
@@ -156,6 +159,9 @@ erDiagram
 - A scheduled entry becomes visible when `status = 'scheduled'` and `publishAt <= now()`. A published entry is visible regardless of date. Drafts are never returned by the public queries, so an unfinished article cannot leak through a direct URL.
 - The editor stores plain text. Paragraphs are split on blank lines when rendered; there is no HTML field, so admin-authored content cannot inject markup.
 - `feature_flags` rows are read by the public Help and Journal routes; a missing row falls back to the seeded default in `features/content/flags.ts`, so the storefront still builds without a database. The flag table has no delete path; disabling is the reversible state.
+- `cms_sections` is separate from `cms_entries` because the homepage reads blocks by kind and order rather than by slug. `kind` is one of `hero`, `collections` or `banner`; `sortOrder` decides the order within a kind, and the admin list renumbers it in one transaction on every move.
+- The public home page reads the first published hero, every published banner and the first published collection teaser, ordered by `sortOrder` and then by creation time. A scheduled row appears once `publishAt <= now()`, and drafts and archived rows never leave the admin list.
+- `cms_section_versions` mirrors `cms_versions`: every save appends `max + 1`, restoring an old snapshot writes its fields back and appends a new version, and the last ten versions are shown in the editor.
 
 ## Checkout and order shape
 
@@ -220,6 +226,9 @@ erDiagram
 | `cms_entries(kind, status, publish_at)` | The public index of published and due scheduled entries |
 | `cms_entries(updated_at)` | The admin content list, newest edit first |
 | `cms_versions(entry_id, version)` unique | Immutable version numbers per entry |
+| `cms_sections(status, publish_at)` | The published sections the home page reads |
+| `cms_sections(sort_order)` | Display order of the homepage blocks |
+| `cms_section_versions(section_id, version)` unique | Immutable version numbers per section |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 
@@ -229,4 +238,4 @@ Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size
 - `DIRECT_DATABASE_URL` is used by the Prisma CLI; `DATABASE_URL` is the pooled runtime connection.
 - No uploaded media library exists. The only image bytes in PostgreSQL are the bounded review thumbnails described above.
 - The seeded catalog fits comfortably in the Neon Free storage and compute budget. No database size or query-plan measurement has been recorded yet; add one if the catalog grows or a page becomes slow.
-- The seed is idempotent. It upserts users, profiles, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog, store approvals and storefront copy, 1,755 seeded reviews, three demo orders (two delivered for the buyer account and one confirmed for the demo store), eleven CMS entries with their first version, two feature flags, and recomputes product ratings from all published review rows. Because it is a demo reset, it also restores the seeded stock and product fields, so seller edits are intentionally replaced on the next seed run.
+- The seed is idempotent. It upserts users, profiles, categories, vendors and products, replaces a product's variants, and never duplicates rows. Re-running it restores the same 432-product catalog, store approvals and storefront copy, 1,755 seeded reviews, three demo orders (two delivered for the buyer account and one confirmed for the demo store), eleven CMS entries and one homepage hero with their first version, two feature flags, and recomputes product ratings from all published review rows. Because it is a demo reset, it also restores the seeded stock and product fields, so seller edits are intentionally replaced on the next seed run.

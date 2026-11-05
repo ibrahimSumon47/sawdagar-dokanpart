@@ -40,7 +40,7 @@ export function adminNavItems(copy: Dictionary['admin'], role: PlatformRole): Ad
     },
     {
       key: 'content',
-      href: '/admin/content',
+      href: '/admin/cms',
       label: copy.navContent,
       allowed: hasPermission(role, 'admin:cms:write'),
     },
