@@ -46,17 +46,24 @@
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slice (a), the homepage sections, is built.**
-`cms_sections` and `cms_section_versions` store the hero, collection teaser and banners with bilingual copy, an
-optional image and link, a status, a schedule and a display order; the editor keeps the last ten versions and restores
-one as a new save. `/admin/cms` is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move
-optimistically and putting the list back to the stored order when the action fails. The public homepage reads the
-first published hero, every published banner and the published collection heading, falls back to its built-in copy
-until a hero exists, and the section actions call `revalidatePath('/')`. `/` builds as dynamic, so an edit shows on the
-next request instead of waiting for a cache window. Playwright run 42047722255 on the deployment signed in as the content
-editor, renamed the hero in `/admin/cms`, saved it and saw the new headline on `/` within 60 s, then restored it; the list
-first came back empty because the client list received the whole admin dictionary, which carries a function, so it now
-takes `sectionOrderCopy` (`a5b492f`). Slice (b), site settings, is next; the Help Center and Journal slices follow.
+**Revision 1, phase R5 (CMS) is in progress; slices (a) and (b) are built, and (b) awaits its deployed check.**
+Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
+teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
+is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
+back to the stored order when the action fails. The public homepage reads the first published hero, every published
+banner and the published collection heading, and falls back to its built-in copy until a hero exists. Playwright run
+42047722255 on the deployment signed in as the content editor, renamed the hero in `/admin/cms`, saved it and saw the
+new headline on `/` within 60 s, then restored it.
+
+Slice (b), site settings, is written and passes lint, typecheck, the unit tests and the build, but is not yet verified on
+the deployment. `site_settings` is one row with the fixed id `site` and `site_settings_versions` keeps its last ten
+snapshots, so the editor at `/admin/cms/settings` saves the announcement bar, the header and footer links, the metadata
+defaults and the bilingual shipping and return text as one versioned record with an audit entry. The announcement is off
+unless an editor switches it on with English text, and a saved menu is limited to six header and five footer links whose
+hrefs must be a site path or an `https` address. The root layout reads the record once through `getPublicSettings()` and
+passes the announcement to `SiteAnnouncement`, the extra links to `SiteHeader` and `SiteFooter`, and the SEO defaults to
+`generateMetadata`; `/policies` renders the shipping and return text. The settings actions purge `('/', 'layout')`, so a
+save shows on the next request. The Help Center and Journal slices follow.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,

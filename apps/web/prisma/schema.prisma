@@ -837,6 +837,43 @@ model CmsSectionVersion {
   @@map("cms_section_versions")
 }
 
+model SiteSettings {
+  id                  String   @id
+  announcementEnabled Boolean  @default(false)
+  announcementEn      String?
+  announcementBn      String?
+  announcementHref    String?
+  seoTitleEn          String?
+  seoTitleBn          String?
+  seoDescriptionEn    String?
+  seoDescriptionBn    String?
+  shippingPolicyEn    String?
+  shippingPolicyBn    String?
+  returnsPolicyEn     String?
+  returnsPolicyBn     String?
+  navigation          Json     @default("[]")
+  footerLinks         Json     @default("[]")
+  updatedAt           DateTime @updatedAt
+  updatedByUserId     String?
+  versions            SiteSettingsVersion[]
+
+  @@map("site_settings")
+}
+
+model SiteSettingsVersion {
+  id           String       @id
+  settingsId   String
+  version      Int
+  snapshot     Json
+  note         String?
+  authorUserId String?
+  createdAt    DateTime     @default(now())
+  settings     SiteSettings @relation(fields: [settingsId], references: [id], onDelete: Cascade)
+
+  @@unique([settingsId, version])
+  @@map("site_settings_versions")
+}
+
 model FeatureFlag {
   key             String   @id
   labelEn         String

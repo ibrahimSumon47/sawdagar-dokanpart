@@ -45,6 +45,12 @@ export default async function AdminCmsPage() {
       count: countOf('journal'),
       countLabel: copy.admin.entryCount,
     },
+    {
+      key: 'settings',
+      title: copy.admin.cmsSettingsCard,
+      body: copy.admin.cmsSettingsCardBody,
+      href: '/admin/cms/settings',
+    },
   ];
 
   return (

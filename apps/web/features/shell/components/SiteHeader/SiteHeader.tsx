@@ -7,6 +7,7 @@ import { LocaleSwitcher } from '../../../preferences/components/LocaleSwitcher';
 import { ThemeToggle } from '../../../preferences/components/ThemeToggle';
 import { CartTrigger } from '../../../shop/components/CartTrigger';
 import type { Theme } from '../../../preferences/theme';
+import { HeaderMobileBar } from './HeaderMobileBar';
 import { MobileMenu } from './MobileMenu';
 import { HeaderSearch } from './HeaderSearch';
 
@@ -18,6 +19,8 @@ export interface SiteHeaderProps {
   viewer: { name: string; role: PlatformRole } | null;
   /** Top departments for the Categories panel, already in the active language. */
   categories: readonly { slug: string; label: string }[];
+  /** Extra links an editor added in site settings, in the active language. */
+  extraLinks?: readonly { label: string; href: string }[];
 }
 
 /**
@@ -25,7 +28,14 @@ export interface SiteHeaderProps {
  * and the language, theme, wishlist, cart and account controls. Project links
  * live in the footer instead, so the header reads as a shop.
  */
-export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHeaderProps) {
+export function SiteHeader({
+  copy,
+  locale,
+  theme,
+  viewer,
+  categories,
+  extraLinks = [],
+}: SiteHeaderProps) {
   const accountLinks = viewer
     ? [
         { label: copy.nav.account, href: '/account' },
@@ -37,6 +47,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
   const menuLinks = [
     { label: copy.nav.catalog, href: '/catalog' },
     { label: copy.nav.sell, href: '/seller' },
+    ...extraLinks.map((link) => ({ label: link.label, href: link.href })),
     { label: copy.nav.wishlist, href: '/wishlist' },
     ...accountLinks,
   ];
@@ -75,6 +86,15 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           >
             {copy.nav.sell}
           </Link>
+          {extraLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-medium text-ink transition-colors hover:text-accent"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <HeaderSearch
@@ -115,23 +135,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           />
         </div>
       </div>
-      <div className="border-t border-line xl:hidden">
-        <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
-          <MegaMenu label={copy.nav.categories} links={categoryLinks} className="xl:hidden" />
-          <Link
-            href="/seller"
-            className="text-sm font-medium text-ink-muted transition-colors hover:text-accent"
-          >
-            {copy.nav.sell}
-          </Link>
-        </div>
-        <HeaderSearch
-          id="mobile-header-search"
-          label={copy.nav.search}
-          placeholder={copy.catalog.searchPlaceholder}
-          className="mx-auto w-full max-w-7xl px-4 pb-2 sm:px-6"
-        />
-      </div>
+      <HeaderMobileBar copy={copy} categories={categoryLinks} />
     </header>
   );
 }

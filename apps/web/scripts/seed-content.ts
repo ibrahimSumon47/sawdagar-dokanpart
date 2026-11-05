@@ -377,6 +377,59 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
     });
   }
 
+  // Settings ship with the announcement off and short, real policy copy, so the
+  // storefront has a readable policy page before the first editor visits.
+  const settings = {
+    id: 'site',
+    announcementEnabled: false,
+    announcementEn: 'Eid orders close on 18 March. Standard delivery resumes on 23 March.',
+    announcementBn: 'ঈদের অর্ডার নেওয়া বন্ধ ১৮ মার্চ। স্বাভাবিক ডেলিভারি শুরু ২৩ মার্চ।',
+    announcementHref: '/help',
+    shippingPolicyEn:
+      'Orders are packed within one working day. Inside Dhaka, delivery takes one to two days at ৳60; elsewhere in Bangladesh it takes three to five days at ৳120. Cash on delivery is available for orders up to ৳5,000.',
+    shippingPolicyBn:
+      'অর্ডার এক কর্মদিবসের মধ্যে প্যাক করা হয়। ঢাকার ভিতরে ডেলিভারি এক থেকে দুই দিনে, খরচ ৬০ টাকা; ঢাকার বাইরে তিন থেকে পাঁচ দিনে, খরচ ১২০ টাকা। ৫,০০০ টাকা পর্যন্ত অর্ডারে ক্যাশ অন ডেলিভারি চালু আছে।',
+    returnsPolicyEn:
+      'Unused items in their original packaging can be returned within seven days of delivery. Handloom and made-to-order pieces are exchanged only for a defect. Write to us from your order page and we will arrange a pickup in Dhaka or a courier label elsewhere.',
+    returnsPolicyBn:
+      'ব্যবহার না করা পণ্য আসল প্যাকেজিংসহ ডেলিভারির সাত দিনের মধ্যে ফেরত দেওয়া যায়। তাঁতের ও অর্ডার অনুযায়ী বানানো পণ্য কেবল ত্রুটির ক্ষেত্রে বদলানো হয়। অর্ডার পৃষ্ঠা থেকে আমাদের লিখুন; ঢাকায় আমরা পিকআপ এবং অন্য জায়গায় কুরিয়ার লেবেলের ব্যবস্থা করব।',
+    navigation: [],
+    footerLinks: [{ labelEn: 'Shipping & returns', labelBn: 'ডেলিভারি ও ফেরত', href: '/policies' }],
+  };
+
+  await prisma.siteSettings.upsert({
+    where: { id: settings.id },
+    create: settings,
+    update: {},
+  });
+  await prisma.siteSettingsVersion.upsert({
+    where: { settingsId_version: { settingsId: settings.id, version: 1 } },
+    create: {
+      id: `${settings.id}_v1`,
+      settingsId: settings.id,
+      version: 1,
+      snapshot: {
+        announcementEnabled: settings.announcementEnabled,
+        announcementEn: settings.announcementEn,
+        announcementBn: settings.announcementBn,
+        announcementHref: settings.announcementHref,
+        seoTitleEn: null,
+        seoTitleBn: null,
+        seoDescriptionEn: null,
+        seoDescriptionBn: null,
+        shippingPolicyEn: settings.shippingPolicyEn,
+        shippingPolicyBn: settings.shippingPolicyBn,
+        returnsPolicyEn: settings.returnsPolicyEn,
+        returnsPolicyBn: settings.returnsPolicyBn,
+        navigation: settings.navigation,
+        footerLinks: settings.footerLinks,
+      },
+      note: 'Seeded settings',
+      authorUserId: author?.id ?? null,
+    },
+    update: {},
+  });
+
   // The seeded hero repeats the dictionary copy so the homepage reads the same
   // before and after the first editor opens it.
   const hero = {
@@ -436,5 +489,5 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
     });
   }
 
-  return `${entries.length} content entries, the homepage hero and ${flags.length} feature flags ready.`;
+  return `${entries.length} content entries, site settings, the homepage hero and ${flags.length} feature flags ready.`;
 }

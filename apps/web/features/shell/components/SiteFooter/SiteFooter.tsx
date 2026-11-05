@@ -5,6 +5,8 @@ import { site } from '../../../../lib/site';
 
 export interface SiteFooterProps {
   copy: Dictionary;
+  /** Extra links an editor added in site settings, in the active language. */
+  extraLinks?: readonly { label: string; href: string }[];
 }
 
 interface FooterLink {
@@ -18,7 +20,7 @@ interface FooterLink {
  * Site footer: the store blurb, shopping links, the project links that used to
  * sit in the header, and the one permitted test-payment disclosure line.
  */
-export function SiteFooter({ copy }: SiteFooterProps) {
+export function SiteFooter({ copy, extraLinks = [] }: SiteFooterProps) {
   const year = new Date().getFullYear();
 
   const shopLinks: FooterLink[] = [
@@ -27,6 +29,7 @@ export function SiteFooter({ copy }: SiteFooterProps) {
     { label: copy.shop.compare, href: '/compare' },
     { label: copy.footer.help, href: '/help' },
     { label: copy.footer.journal, href: '/journal' },
+    ...extraLinks.map((link) => ({ label: link.label, href: link.href })),
   ];
 
   const projectLinks: FooterLink[] = [

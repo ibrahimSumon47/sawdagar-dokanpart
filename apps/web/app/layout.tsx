@@ -3,9 +3,12 @@ import { Fraunces, Inter, Noto_Sans_Bengali } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { getViewer } from '../features/auth/session';
 import { getCatalogCategories } from '../features/catalog/queries';
+import { getPublicSettings } from '../features/content/settingsQueries';
+import { localisedLinks } from '../features/content/settingsLinks';
 import { getTheme } from '../features/preferences/getTheme';
 import { ShopProvider } from '../features/shop/components/ShopProvider';
 import { getShopState } from '../features/shop/queries';
+import { SiteAnnouncement } from '../features/shell/components/SiteAnnouncement';
 import { SiteFooter } from '../features/shell/components/SiteFooter';
 import { SiteHeader } from '../features/shell/components/SiteHeader';
 import { getDictionary } from '../i18n';
@@ -23,26 +26,35 @@ const notoSansBengali = Noto_Sans_Bengali({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+  const [locale, settings] = await Promise.all([getLocale(), getPublicSettings()]);
   const copy = getDictionary(locale);
+  const bangla = locale === 'bn';
+  const title =
+    (bangla
+      ? settings.seoTitleBn || settings.seoTitleEn
+      : settings.seoTitleEn || settings.seoTitleBn) || copy.meta.title;
+  const description =
+    (bangla
+      ? settings.seoDescriptionBn || settings.seoDescriptionEn
+      : settings.seoDescriptionEn || settings.seoDescriptionBn) || copy.meta.description;
 
   return {
     metadataBase: new URL(site.demoUrl),
     applicationName: site.name,
-    title: { default: copy.meta.title, template: `%s · ${copy.meta.title}` },
-    description: copy.meta.description,
+    title: { default: title, template: `%s · ${title}` },
+    description,
     openGraph: {
       type: 'website',
       siteName: site.name,
       url: site.demoUrl,
-      locale: locale === 'bn' ? 'bn_BD' : 'en_US',
-      title: copy.meta.title,
-      description: copy.meta.description,
+      locale: bangla ? 'bn_BD' : 'en_US',
+      title,
+      description,
     },
     twitter: {
       card: 'summary_large_image',
-      title: copy.meta.title,
-      description: copy.meta.description,
+      title,
+      description,
     },
     robots: { index: true, follow: true },
   };
@@ -55,15 +67,22 @@ interface RootLayoutProps {
 /** Renders the shell, theme attributes and language for every route. */
 export default async function RootLayout({ children }: RootLayoutProps) {
   const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
-  const [shopState, categories] = await Promise.all([
+  const [shopState, categories, settings] = await Promise.all([
     getShopState(viewer?.id ?? null),
     getCatalogCategories(),
+    getPublicSettings(),
   ]);
   const copy = getDictionary(locale);
+  const bangla = locale === 'bn';
   const headerCategories = categories.map((category) => ({
     slug: category.slug,
     label: category.name[locale],
   }));
+  const announcement = bangla
+    ? settings.announcementBn || settings.announcementEn
+    : settings.announcementEn || settings.announcementBn;
+  const navigationLinks = localisedLinks(settings.navigation, locale);
+  const footerLinks = localisedLinks(settings.footerLinks, locale);
 
   return (
     <html
@@ -88,17 +107,25 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           copy={copy.shop}
         >
           <div className="flex min-h-svh flex-col">
+            {settings.announcementEnabled && announcement ? (
+              <SiteAnnouncement
+                text={announcement}
+                href={settings.announcementHref}
+                label={copy.common.announcementLabel}
+              />
+            ) : null}
             <SiteHeader
               copy={copy}
               locale={locale}
               theme={theme}
               viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
               categories={headerCategories}
+              extraLinks={navigationLinks}
             />
             <main id="main" className="flex-1">
               {children}
             </main>
-            <SiteFooter copy={copy} />
+            <SiteFooter copy={copy} extraLinks={footerLinks} />
           </div>
         </ShopProvider>
       </body>

@@ -56,6 +56,7 @@ erDiagram
   ledger_transactions ||--o{ ledger_entries : posts
   cms_entries ||--o{ cms_versions : snapshots
   cms_sections ||--o{ cms_section_versions : snapshots
+  site_settings ||--o{ site_settings_versions : snapshots
 ```
 
 ## Tables
@@ -102,6 +103,8 @@ erDiagram
 | `cms_versions` | Immutable JSON snapshot of one entry after each save, with a version number, note, author and time |
 | `cms_sections` | Homepage block (hero, collection teaser or banner): bilingual copy, optional image and link, draft/scheduled/published status, publish instant and display order |
 | `cms_section_versions` | Immutable JSON snapshot of one homepage section after each save, with a version number, note, author and time |
+| `site_settings` | The singleton storefront settings row (`id = 'site'`): announcement bar, SEO defaults, shipping and return text, header links and footer links |
+| `site_settings_versions` | Immutable JSON snapshot of the settings after each save, with a version number, note, author and time |
 | `feature_flags` | Storefront switches keyed by a stable string such as `help_center_enabled`, with bilingual labels and the last editor |
 
 ## Catalog shape
@@ -162,6 +165,9 @@ erDiagram
 - `cms_sections` is separate from `cms_entries` because the homepage reads blocks by kind and order rather than by slug. `kind` is one of `hero`, `collections` or `banner`; `sortOrder` decides the order within a kind, and the admin list renumbers it in one transaction on every move.
 - The public home page reads the first published hero, every published banner and the first published collection teaser, ordered by `sortOrder` and then by creation time. A scheduled row appears once `publishAt <= now()`, and drafts and archived rows never leave the admin list.
 - `cms_section_versions` mirrors `cms_versions`: every save appends `max + 1`, restoring an old snapshot writes its fields back and appends a new version, and the last ten versions are shown in the editor.
+- `site_settings` is one row with the fixed id `site`, so the storefront reads a single record and the editor never creates a second set. Before the first save the public queries fall back to `defaultSettings()`: announcement off, no extra links, and the built-in metadata and policy copy in charge.
+- Link lists are JSON columns on `site_settings` (`navigation`, `footerLinks`), each entry holding both labels and one href. They are bounded at six header links and five footer links by the Zod schema and re-checked when a version is restored; a link must be a site path or an `https` address, so a saved menu cannot carry a `javascript:` URL.
+- `site_settings_versions` follows the same rule as the other histories: every save appends a version and restoring writes the snapshot back as a new version. The settings row keeps `updatedByUserId` for the last editor, and every save also writes an audit entry.
 
 ## Checkout and order shape
 
@@ -229,6 +235,7 @@ erDiagram
 | `cms_sections(status, publish_at)` | The published sections the home page reads |
 | `cms_sections(sort_order)` | Display order of the homepage blocks |
 | `cms_section_versions(section_id, version)` unique | Immutable version numbers per section |
+| `site_settings_versions(settings_id, version)` unique | Immutable version numbers for the settings row |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 

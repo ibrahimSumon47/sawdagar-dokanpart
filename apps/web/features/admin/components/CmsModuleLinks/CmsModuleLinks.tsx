@@ -6,8 +6,9 @@ export interface CmsModule {
   title: string;
   body: string;
   href: string;
-  count: number;
-  countLabel: string;
+  /** Items in the module, or undefined when a count says nothing useful. */
+  count?: number;
+  countLabel?: string;
 }
 
 export interface CmsModuleLinksProps {
@@ -28,9 +29,11 @@ export function CmsModuleLinks({ modules, linkLabel }: CmsModuleLinksProps) {
           >
             <h2 className="font-serif text-lg text-ink">{module.title}</h2>
             <p className="mt-1 flex-1 text-sm leading-relaxed text-ink-muted">{module.body}</p>
-            <p className="mt-3 text-xs tabular-nums text-ink-muted">
-              {module.count} {module.countLabel}
-            </p>
+            {module.count !== undefined ? (
+              <p className="mt-3 text-xs tabular-nums text-ink-muted">
+                {module.count} {module.countLabel}
+              </p>
+            ) : null}
             <span className="mt-1 text-sm font-semibold text-accent underline-offset-4 group-hover:underline">
               {linkLabel}
             </span>

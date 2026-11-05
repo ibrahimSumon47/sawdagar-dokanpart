@@ -24,11 +24,11 @@
     "variants": 1296,
     "seededReviews": 1755,
     "demoRoles": 8,
-    "models": 42,
-    "migrations": 12,
-    "pages": 62,
+    "models": 44,
+    "migrations": 13,
+    "pages": 64,
     "apiRoutes": 2,
-    "unitTests": 202
+    "unitTests": 212
   },
   "unitTests": {
     "domain": {
@@ -44,10 +44,10 @@
       "cases": 17
     },
     "web": {
-      "files": 22,
-      "cases": 77
+      "files": 23,
+      "cases": 87
     },
-    "total": 202
+    "total": 212
   },
   "coverage": {
     "measured": false,

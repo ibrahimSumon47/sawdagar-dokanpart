@@ -147,11 +147,16 @@ functions that React cannot serialise across the server/client boundary.
 | ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
 | ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale`, `restoreAction` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
 | ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
-| CmsModuleLinks | The three CMS cards on the hub, each with its live record count and link. | `modules`, `linkLabel` | [CmsModuleLinks.tsx](../apps/web/features/admin/components/CmsModuleLinks/CmsModuleLinks.tsx) |
+| CmsModuleLinks | The CMS cards on the hub, each with its live record count when it has one, and a link. | `modules`, `linkLabel` | [CmsModuleLinks.tsx](../apps/web/features/admin/components/CmsModuleLinks/CmsModuleLinks.tsx) |
 | CmsSectionOrder | Homepage sections in display order with drag and arrow reordering. | `sections`, `copy` (`SectionOrderCopy`, strings only), `locale` | [CmsSectionOrder.tsx](../apps/web/features/admin/components/CmsSectionOrder/CmsSectionOrder.tsx) |
 | CmsSectionForm | Creates or updates one homepage section and links to its save notice. | `section`, `copy` | [CmsSectionForm.tsx](../apps/web/features/admin/components/CmsSectionForm/CmsSectionForm.tsx) |
 | CmsSectionFields | Kind, bilingual copy, media, link and schedule fields for a section. | `section`, `copy` | [CmsSectionFields.tsx](../apps/web/features/admin/components/CmsSectionForm/CmsSectionFields.tsx) |
 | SectionPreview | Shows the saved section copy as the storefront would read it, with its media and link. | `section`, `copy`, `locale` | [SectionPreview.tsx](../apps/web/features/admin/components/SectionPreview/SectionPreview.tsx) |
+| SettingsForm | Saves the singleton site settings: announcement, menus, search defaults and policy text, beside the version history. | `settings`, `copy` | [SettingsForm.tsx](../apps/web/features/admin/components/SettingsForm/SettingsForm.tsx) |
+| SettingsAnnouncementFields | Switch and bilingual text for the announcement bar, with an optional link. | `settings`, `copy` | [SettingsAnnouncementFields.tsx](../apps/web/features/admin/components/SettingsForm/SettingsAnnouncementFields.tsx) |
+| SettingsSeoFields | Default title and description in both languages. | `settings`, `copy` | [SettingsSeoFields.tsx](../apps/web/features/admin/components/SettingsForm/SettingsSeoFields.tsx) |
+| SettingsPolicyFields | Shipping and return text in both languages. | `settings`, `copy` | [SettingsPolicyFields.tsx](../apps/web/features/admin/components/SettingsForm/SettingsPolicyFields.tsx) |
+| SettingsLinksEditor | Client-side list that adds, edits and removes header or footer links, up to the menu's limit. | `name`, `label`, `hint`, `initialLinks`, `maxLinks`, `copy` | [SettingsLinksEditor.tsx](../apps/web/features/admin/components/SettingsLinksEditor/SettingsLinksEditor.tsx) |
 | MailOutboxList | Verification and reset mail this site queued, each folded open to show the link it carries. | `messages`, `emptyLabel`, `locale` | [MailOutboxList.tsx](../apps/web/features/admin/components/MailOutboxList/MailOutboxList.tsx) |
 
 ## Content (`apps/web/features/content`)
@@ -186,10 +191,12 @@ functions that React cannot serialise across the server/client boundary.
 | HomeIntro | Storefront opening from the published CMS hero, then the trust strip and build status. | `copy`, `locale`, `hero` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
 | HomeIntroSkeleton | Matches the hero, trust strip and build status while the home page streams. | `label` | [HomeIntroSkeleton.tsx](../apps/web/features/home/components/HomeIntro/HomeIntroSkeleton.tsx) |
 | HomeBanners | Published CMS banners in a two-column strip between the opening block and the catalog. | `banners`, `locale` | [HomeBanners.tsx](../apps/web/features/home/components/HomeBanners/HomeBanners.tsx) |
-| SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search and the role-aware controls. | `copy`, `locale`, `theme`, `viewer`, `categories` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
+| SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search, the role-aware controls and any links an editor added. | `copy`, `locale`, `theme`, `viewer`, `categories`, `extraLinks` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
+| HeaderMobileBar | Second header row below the extra-large breakpoint: categories, the seller link and search. | `copy`, `categories` | [HeaderMobileBar.tsx](../apps/web/features/shell/components/SiteHeader/HeaderMobileBar.tsx) |
+| SiteAnnouncement | One-line notice above the header, switched on in site settings with optional link text. | `text`, `href`, `label` | [SiteAnnouncement.tsx](../apps/web/features/shell/components/SiteAnnouncement/SiteAnnouncement.tsx) |
 | HeaderSearch | Search form shared by compact and desktop headers. | `id`, `label`, `placeholder`, `className` | [HeaderSearch.tsx](../apps/web/features/shell/components/SiteHeader/HeaderSearch.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
-| SiteFooter | Footer with Shop links including comparison, Project links and the test-mode payments line. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+| SiteFooter | Footer with Shop links including comparison and editor-added links, Project links and the test-mode payments line. | `copy`, `extraLinks` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
 
 Page containers shared by every route and its skeleton live in [pageLayout.ts](../apps/web/features/shell/pageLayout.ts).
 
