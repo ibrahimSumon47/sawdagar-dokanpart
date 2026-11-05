@@ -27,19 +27,18 @@ test.describe('R5 Help Center topics, search and votes', () => {
     const topics = page.getByRole('navigation', { name: 'Topics' });
     await topics.getByRole('link', { name: /^Delivery/ }).click();
     await expect(page).toHaveURL(/\/help\?category=delivery$/);
-    await expect(page.getByRole('link', { name: /Eid delivery cut-off dates/ })).toBeVisible();
-    await expect(page.getByRole('link', { name: /How to order on Sawdagar Dokanpat/ })).toHaveCount(
-      0,
-    );
+    await expect(page.getByRole('link', { name: /Checking your order status/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Payment methods/ })).toHaveCount(0);
 
     const helpSearch = page.getByRole('search').filter({ hasText: 'Search help articles' });
-    await page.getByLabel('Search help articles').fill('payment');
+    await page.getByLabel('Search help articles').fill('status');
     await helpSearch.getByRole('button', { name: 'Search', exact: true }).click();
-    await expect(page).toHaveURL(/q=payment/);
+    await expect(page).toHaveURL(/q=status/);
     await expect(page).toHaveURL(/category=delivery/);
-    await expect(page.getByText('Results for “payment”')).toBeVisible();
+    await expect(page.getByText('Results for “status”')).toBeVisible();
+    await expect(page.getByRole('link', { name: /Checking your order status/ })).toBeVisible();
 
-    await page.getByRole('link', { name: 'Clear filters' }).click();
+    await page.getByRole('link', { name: 'Clear filters' }).first().click();
     await expect(page).toHaveURL(/\/help$/);
     await expect(
       page.getByRole('link', { name: /How to order on Sawdagar Dokanpat/ }),
@@ -84,7 +83,7 @@ test.describe('R5 Help Center topics, search and votes', () => {
     await expect(section.getByRole('status')).toBeVisible();
     await expect(no).toHaveAttribute('aria-pressed', 'true');
     await expect(
-      section.getByText(`${before.helpful + 1} of ${before.total + 1} readers`),
+      section.getByText(`${before.helpful} of ${before.total + 1} readers`),
     ).toBeVisible();
 
     await yes.click();
