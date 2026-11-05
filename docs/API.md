@@ -6,11 +6,16 @@ Better Auth serves authentication endpoints under `/api/auth/*` through [the rou
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/auth/sign-in/email` | Email and password sign-in; used server-side by the demo action and available to future forms |
+| `POST /api/auth/sign-in/email` | Email and password sign-in used by the login form |
+| `POST /api/auth/sign-up/email` | Registration used by the signup form; the action adds the phone, terms timestamp and seller application |
 | `POST /api/auth/sign-out` | Revokes the current session |
 | `GET /api/auth/get-session` | Returns the current session and user, or null |
+| `POST /api/auth/request-password-reset` | Queues a reset mail through the app's own sender |
+| `POST /api/auth/reset-password` | Sets a new password from the token in the link |
+| `POST /api/auth/send-verification-email` | Queues a verification mail |
+| `POST /api/auth/change-password` | Changes the password of the signed-in user |
 
-Requests are rate limited with a database-backed counter: 10 sign-in attempts per minute and 30 requests per minute per key. The public demo action accepts only the eight seeded demo emails; it does not accept a role or user id from the client. Next.js Server Actions handle theme, language, profile and sign-in forms; they are page actions, not versioned API endpoints.
+Requests are rate limited with a database-backed counter: 10 sign-in attempts per minute and 30 requests per minute per key. Sign-in, registration, reset and verification mail go through the same endpoints for every account, including the eight seeded demo rows. Next.js Server Actions handle theme, language, profile and auth forms; they are page actions, not versioned API endpoints. They validate with Zod, resolve the viewer from the session and return field errors, never a session token.
 
 The catalog and shop have no HTTP API yet. Listing and product pages query Prisma directly on the server and read filters from validated URL parameters. The shop client calls Server Actions, which validate every id and quantity on the server, resolve the viewer from the session and re-read stock before writing.
 

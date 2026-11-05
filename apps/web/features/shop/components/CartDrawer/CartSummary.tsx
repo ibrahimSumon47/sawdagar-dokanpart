@@ -78,7 +78,7 @@ export function CartSummary() {
       </dl>
 
       <ButtonLink
-        href={signedIn ? '/checkout' : '/sign-in?next=%2Fcheckout'}
+        href={signedIn ? '/checkout' : '/login?next=%2Fcheckout'}
         onClick={closeCart}
         className="mt-4 w-full"
       >

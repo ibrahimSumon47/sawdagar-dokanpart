@@ -42,6 +42,16 @@
 
 ## Now
 
+**Revision 1, phase R3 (real registration and login) is implemented and committed; the live check is in progress.**
+`/register` takes a name, email, Bangladeshi mobile, password, terms and a customer or seller choice; a seller gets a
+`pending` seller application instead of the vendor role. `/login` signs in with the real password and keeps the demo
+picker as a collapsed block that only fills the email. Reset, verification and resend mail go through `mail_outbox`
+and are readable at `/admin/outbox`, `/account/security` reports the verification state and changes the password, and
+`/sign-in` redirects to `/login`. Every phone number is normalised to `+8801XXXXXXXXX` by `normalizeBdPhone`, and the
+`users.phone`, `users.termsAcceptedAt` and `seller_applications` columns come from migration
+`20261105090000_real_auth`. Lint, typecheck, unit tests (193) and build pass locally; the deployed check at 375, 768
+and 1440 px and the Playwright run follow the migration.
+
 **Revision 1, phase R2 is done.** Product photos are per-product and licensed: 440 Wikimedia Commons photographs
 uploaded to Cloudinary under `sawdagar/products/<subcategory>/<n>`, with author and licence recorded per file and
 credited on `/credits`. A product publishes only with its own main image plus at least two gallery images

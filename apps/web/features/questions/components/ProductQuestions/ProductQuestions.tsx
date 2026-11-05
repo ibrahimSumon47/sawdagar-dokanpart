@@ -66,7 +66,7 @@ export function ProductQuestions({
         <AskQuestionForm productId={productId} copy={copy} />
       ) : (
         <Link
-          href={`/sign-in?next=${encodeURIComponent(`/product/${productSlug}`)}`}
+          href={`/login?next=${encodeURIComponent(`/product/${productSlug}`)}`}
           className="mt-4 inline-block text-sm font-medium text-accent underline underline-offset-4"
         >
           {signInLabel}

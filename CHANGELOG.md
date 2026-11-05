@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Revision 1, phase R3: replace the one-click demo shortcut with real accounts. Registration collects a Bangladeshi mobile number, terms acceptance and an optional seller application; sign-in uses the real password; password reset, verification and resend go through the in-app `mail_outbox` and an admin outbox page; `/account/security` reports verification state and changes the password; a shared `normalizeBdPhone` and password-strength rule live in `@sd/domain`; and the database-backed rate limiter guards sign-in, registration and reset.
+
 - Correct bilingual Help Center and static-page content through versioned CMS edits, update the seed copy and prepare deployed checks.
 
 - Add a deployed-site Playwright workflow for R1 viewport checks and screenshots, and restore responsive header search, wishlist and account access. R1 verification remains in progress.

@@ -61,7 +61,7 @@ erDiagram
 
 | Table | Purpose |
 |---|---|
-| `users` | Better Auth identity plus platform `role`, ban fields and `isDemo` |
+| `users` | Better Auth identity plus platform `role`, ban fields, `isDemo`, a unique Bangladeshi mobile in `phone` and the `termsAcceptedAt` timestamp |
 | `sessions` | Session token, expiry, client details, active organization and impersonation |
 | `accounts` | Credential and future OAuth accounts, unique by provider and account id |
 | `verifications` | Better Auth verification tokens and expiry |
@@ -70,6 +70,7 @@ erDiagram
 | `invitations` | Pending store invitations and expiry |
 | `rate_limits` | Database-backed Better Auth request counters |
 | `profiles` | Bangladeshi phone, district and short bio for an account |
+| `seller_applications` | A registration that asked to sell: user, business name, phone, `pending` or `approved` or `rejected` status, review note, reviewer and timestamps; one row per user |
 | `audit_logs` | Append-only record of demo sign-ins, profile changes and future privileged actions |
 | `categories` | Two-level catalog tree: `depth` 0 is one of 12 departments, `depth` 1 is a leaf with 6 seeded products |
 | `products` | Localised title and description, display price, compare-at price, total stock, rating and review count, seller store and leaf category |

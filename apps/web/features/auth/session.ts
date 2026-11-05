@@ -9,6 +9,7 @@ export type Viewer = {
   email: string;
   isDemo: boolean;
   role: PlatformRole;
+  emailVerified: boolean;
   createdAt: Date;
 };
 
@@ -33,6 +34,7 @@ export async function getViewer(): Promise<Viewer | null> {
     email: result.user.email,
     isDemo: Boolean(result.user.isDemo),
     role: normalizeRole(result.user.role),
+    emailVerified: Boolean(result.user.emailVerified),
     createdAt: result.user.createdAt,
   };
 }
@@ -40,7 +42,7 @@ export async function getViewer(): Promise<Viewer | null> {
 /** Redirects guests to sign in, preserving the page they asked for. */
 export async function requireViewer(nextPath: string): Promise<Viewer> {
   const viewer = await getViewer();
-  if (!viewer) redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
+  if (!viewer) redirect(`/login?next=${encodeURIComponent(nextPath)}`);
   return viewer;
 }
 

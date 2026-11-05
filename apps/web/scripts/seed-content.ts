@@ -208,6 +208,52 @@ Orders placed after the cut-off are still accepted. Sellers pack them after the 
     seoDescriptionBn: 'জেলা অনুযায়ী ঈদের ডেলিভারির শেষ তারিখ।',
   },
   {
+    id: 'cms_help_terms',
+    kind: 'help',
+    slug: 'terms',
+    titleEn: 'Terms of use',
+    titleBn: 'ব্যবহারের শর্তাবলি',
+    excerptEn: 'What an account on this marketplace allows, and what it does not.',
+    excerptBn: 'এই মার্কেটপ্লেসে একটি অ্যাকাউন্ট কী করতে পারে, আর কী করতে পারে না।',
+    bodyEn: `Sawdagar Dokanpat is a portfolio project. The catalog, sellers, reviews and orders are seeded demo data, and no real money changes hands. Payments run in test mode and no card is ever charged.
+
+One account per person. You are responsible for keeping your password private and for what happens under your account. Give a working phone number, because delivery calls use it. Do not use the marketplace to harass other members, post false reviews, scrape the catalog, or attempt to reach data that belongs to someone else.
+
+Seller applications are reviewed by a moderator before the seller area opens. We may close an account that breaks these terms. Because the data is demo data, it can be reset at any time without notice.`,
+    bodyBn: `সাওদাগর দোকানপাট একটি পোর্টফোলিও প্রকল্প। ক্যাটালগ, বিক্রেতা, রিভিউ আর অর্ডারগুলো সাজানো ডেমো ডেটা; এখানে সত্যিকারের টাকা লেনদেন হয় না। পেমেন্ট টেস্ট মোডে চলে, কোনো কার্ড থেকে টাকা কাটা হয় না।
+
+একজন ব্যক্তির জন্য একটি অ্যাকাউন্ট। পাসওয়ার্ড গোপন রাখা এবং নিজের অ্যাকাউন্টে যা হয় তার দায়িত্ব আপনার। চালু মোবাইল নম্বর দিন, কারণ ডেলিভারির ফোন ওই নম্বরেই আসে। অন্য সদস্যকে বিরক্ত করা, মিথ্যা রিভিউ লেখা, ক্যাটালগ স্ক্র্যাপ করা বা অন্যের ডেটা দেখার চেষ্টা করা যাবে না।
+
+বিক্রেতার আবেদন মডারেটর দেখে অনুমোদন করেন, তারপর বিক্রেতার অংশ খোলে। এই শর্ত ভাঙলে অ্যাকাউন্ট বন্ধ করা হতে পারে। ডেটা ডেমো হওয়ায় আগে জানানো ছাড়াই যেকোনো সময় রিসেট হতে পারে।`,
+    status: 'published',
+    publishAt: '2026-09-12T09:00:00+06:00',
+    seoDescriptionEn: 'Terms of use for accounts on the Sawdagar Dokanpat marketplace.',
+    seoDescriptionBn: 'সাওদাগর দোকানপাট মার্কেটপ্লেসে অ্যাকাউন্ট ব্যবহারের শর্তাবলি।',
+  },
+  {
+    id: 'cms_help_privacy',
+    kind: 'help',
+    slug: 'privacy',
+    titleEn: 'Privacy notice',
+    titleBn: 'গোপনীয়তা নোটিশ',
+    excerptEn: 'Which details an account stores, why, and how to have them removed.',
+    excerptBn: 'একটি অ্যাকাউন্ট কোন তথ্য রাখে, কেন, আর কীভাবে মুছে ফেলা যায়।',
+    bodyEn: `Your account stores the name, email address, phone number and a hashed password that you enter, plus the orders, addresses, reviews and wishlist you create. Passwords are hashed with scrypt and never stored or logged in readable form.
+
+Verification and password reset messages are queued in the site's own mail outbox instead of being sent to an outside provider, so no third party receives your address. The site sets one session cookie and asks nothing else of your browser; there are no advertising or analytics scripts.
+
+You can change your password from Account, then Security. To have the account and its data deleted, open an issue in the public repository; deletion is done by hand because the project has no support desk.`,
+    bodyBn: `আপনার অ্যাকাউন্ট আপনার দেওয়া নাম, ইমেইল, মোবাইল নম্বর ও হ্যাশ করা পাসওয়ার্ড রাখে, সাথে আপনার তৈরি অর্ডার, ঠিকানা, রিভিউ ও উইশলিস্ট। পাসওয়ার্ড scrypt দিয়ে হ্যাশ করা হয়; পঠনযোগ্য অবস্থায় কোথাও রাখা বা লগ করা হয় না।
+
+যাচাই ও পাসওয়ার্ড রিসেটের বার্তা বাইরের কোনো সেবায় না গিয়ে সাইটের নিজের মেইল আউটবক্সে জমা থাকে, তাই তৃতীয় পক্ষ আপনার ঠিকানা পায় না। সাইটটি একটি সেশন কুকি রাখে, আর কিছু নয়; বিজ্ঞাপন বা অ্যানালিটিক্স স্ক্রিপ্ট নেই।
+
+অ্যাকাউন্ট থেকে নিরাপত্তা পাতায় পাসওয়ার্ড বদলানো যায়। অ্যাকাউন্ট ও তার ডেটা মুছতে চাইলে পাবলিক রিপোজিটরিতে ইস্যু খুলুন; প্রকল্পে সহায়তা ডেস্ক না থাকায় মুছে ফেলা হাতে করা হয়।`,
+    status: 'published',
+    publishAt: '2026-09-12T09:00:00+06:00',
+    seoDescriptionEn: 'What data a Sawdagar Dokanpat account stores and how to remove it.',
+    seoDescriptionBn: 'সাওদাগর দোকানপাট অ্যাকাউন্ট কী তথ্য রাখে এবং কীভাবে মুছবেন।',
+  },
+  {
     id: 'cms_page_about',
     kind: 'page',
     slug: 'about',

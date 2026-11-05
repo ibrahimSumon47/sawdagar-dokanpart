@@ -32,7 +32,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
         ...(hasArea(viewer.role, 'seller') ? [{ label: copy.nav.seller, href: '/seller' }] : []),
         ...(hasArea(viewer.role, 'admin') ? [{ label: copy.nav.admin, href: '/admin' }] : []),
       ]
-    : [{ label: copy.nav.signIn, href: '/sign-in' }];
+    : [{ label: copy.nav.signIn, href: '/login' }];
 
   const menuLinks = [
     { label: copy.nav.catalog, href: '/catalog' },
@@ -99,7 +99,7 @@ export function SiteHeader({ copy, locale, theme, viewer, categories }: SiteHead
           </Link>
           <CartTrigger />
           <Link
-            href={viewer ? '/account' : '/sign-in'}
+            href={viewer ? '/account' : '/login'}
             aria-label={viewer ? copy.nav.account : copy.nav.signIn}
             className="hidden size-11 items-center justify-center rounded-sm text-ink hover:bg-surface focus-visible:outline-2 xl:inline-flex"
           >

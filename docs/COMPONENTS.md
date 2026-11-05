@@ -32,10 +32,19 @@ Layout constants shared by the product card and its skeleton live in [productCar
 
 | Component | Purpose | Props | Path |
 |---|---|---|---|
-| SubmitButton | Submit control that reports its pending state through `useFormStatus`. | `label`, `pendingLabel`, `size`, `className` | [SubmitButton.tsx](../apps/web/features/auth/components/SubmitButton/SubmitButton.tsx) |
-| DemoAccountCard | One allowlisted demo login form with role badge and email. | `email`, `name`, `roleLabel`, `next`, `labels` | [DemoAccountCard.tsx](../apps/web/features/auth/components/DemoAccountCard/DemoAccountCard.tsx) |
-| SetupNotice | Explains missing database or auth secrets and names the variables. | `title`, `body`, `hint` | [SetupNotice.tsx](../apps/web/features/auth/components/SetupNotice/SetupNotice.tsx) |
-| SignInPanel | Sign-in page body with the eight demo cards or the setup notice. | `copy`, `next`, `configured`, `error` | [SignInPanel.tsx](../apps/web/features/auth/components/SignInPanel/SignInPanel.tsx) |
+| AuthCard | Narrow centred frame with title, description and footer used by every auth page. | `title`, `description`, `footer`, `children` | [AuthCard.tsx](../apps/web/features/auth/components/AuthCard/AuthCard.tsx) |
+| AuthField | Labelled input with hint, inline error and `aria-invalid` wiring. | `name`, `label`, `type`, `hint`, `error`, `required`, `autoComplete`, `inputMode`, `defaultValue`, `inputRef` | [AuthField.tsx](../apps/web/features/auth/components/AuthField/AuthField.tsx) |
+| AuthSetupNotice | Explains that this deployment is missing the database or auth secret, and names the variables. | `copy` | [AuthSetupNotice.tsx](../apps/web/features/auth/components/AuthSetupNotice/AuthSetupNotice.tsx) |
+| DemoAccountPicker | Collapsed list of the eight seeded accounts; a button only pre-fills the email. | `copy`, `onPick` | [DemoAccountPicker.tsx](../apps/web/features/auth/components/DemoAccountPicker/DemoAccountPicker.tsx) |
+| FormMessages | Form-level success or error banner read by the server action result. | `copy`, `message` | [FormMessages.tsx](../apps/web/features/auth/components/FormMessages/FormMessages.tsx) |
+| ForgotPasswordForm | Email field that asks for a reset link and always reports the same result. | `copy` | [ForgotPasswordForm.tsx](../apps/web/features/auth/components/ForgotPasswordForm/ForgotPasswordForm.tsx) |
+| LoginForm | Email and password sign-in with remember me, reset link, setup notice and demo picker. | `copy`, `next`, `configured`, `resetDone` | [LoginForm.tsx](../apps/web/features/auth/components/LoginForm/LoginForm.tsx) |
+| PasswordStrengthMeter | Four-segment strength bar driven by `passwordStrength`. | `password`, `copy` | [PasswordStrengthMeter.tsx](../apps/web/features/auth/components/PasswordStrengthMeter/PasswordStrengthMeter.tsx) |
+| RegisterForm | Name, email, phone, password, buyer or seller choice, terms and optional business name. | `copy` | [RegisterForm.tsx](../apps/web/features/auth/components/RegisterForm/RegisterForm.tsx) |
+| ResetPasswordForm | New password and confirmation for the token in the link. | `copy`, `token` | [ResetPasswordForm.tsx](../apps/web/features/auth/components/ResetPasswordForm/ResetPasswordForm.tsx) |
+| SecurityPanel | Verified state, resend link, password change and sign-out for `/account/security`. | `copy`, `viewer` | [SecurityPanel.tsx](../apps/web/features/auth/components/SecurityPanel/SecurityPanel.tsx) |
+| SubmitButton | Submit control that reports its pending state through `useFormStatus`. | `label`, `pendingLabel`, `variant`, `size`, `className`, `disabled` | [SubmitButton.tsx](../apps/web/features/auth/components/SubmitButton/SubmitButton.tsx) |
+| VerifyEmailPanel | Reports the verification result and offers a fresh link. | `copy`, `email`, `verified`, `justSent`, `invalid` | [VerifyEmailPanel.tsx](../apps/web/features/auth/components/VerifyEmailPanel/VerifyEmailPanel.tsx) |
 | RoleBadge | Role label with a tone for buyer, vendor or admin areas. | `role`, `label` | [RoleBadge.tsx](../apps/web/features/auth/components/RoleBadge/RoleBadge.tsx) |
 
 ## Account (`apps/web/features/account`)
@@ -122,6 +131,7 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
 | ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
 | ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
+| MailOutboxList | Verification and reset mail this site queued, each folded open to show the link it carries. | `messages`, `emptyLabel`, `locale` | [MailOutboxList.tsx](../apps/web/features/admin/components/MailOutboxList/MailOutboxList.tsx) |
 
 ## Content (`apps/web/features/content`)
 

@@ -2,24 +2,37 @@
 
 ## Owner actions
 
-- None are outstanding. The Vercel production environment and the GitHub repository already contain the four variables below, set from the authenticated CLIs without exposing their values. Keep them in the dashboards only. No image host, mail provider, cache or payment account is needed.
-- The Vercel Hobby project serves the [demo](https://sawdagar-dokanpart.vercel.app/), [/catalog](https://sawdagar-dokanpart.vercel.app/catalog), a product page such as [/product/full-grain-leather-belt-black](https://sawdagar-dokanpart.vercel.app/product/full-grain-leather-belt-black), [/case-study](https://sawdagar-dokanpart.vercel.app/case-study), [/llms.txt](https://sawdagar-dokanpart.vercel.app/llms.txt), [/sign-in](https://sawdagar-dokanpart.vercel.app/sign-in), [/seller](https://sawdagar-dokanpart.vercel.app/seller), [/admin](https://sawdagar-dokanpart.vercel.app/admin) and [/design](https://sawdagar-dokanpart.vercel.app/design). Confirm Node.js 24 and Git deployments for `main` remain enabled. Keep the demo non-commercial and use sandbox payments only.
+- The Vercel production environment and GitHub repository contain the existing application variables below. Keep credentials in the dashboards only. No mail provider, cache or queue account is needed.
+- The Vercel Hobby project serves the [demo](https://sawdagar-dokanpart.vercel.app/), [/catalog](https://sawdagar-dokanpart.vercel.app/catalog), a product page such as [/product/full-grain-leather-belt-black](https://sawdagar-dokanpart.vercel.app/product/full-grain-leather-belt-black), [/case-study](https://sawdagar-dokanpart.vercel.app/case-study), [/llms.txt](https://sawdagar-dokanpart.vercel.app/llms.txt), [/login](https://sawdagar-dokanpart.vercel.app/login), [/register](https://sawdagar-dokanpart.vercel.app/register), [/seller](https://sawdagar-dokanpart.vercel.app/seller), [/admin](https://sawdagar-dokanpart.vercel.app/admin) and [/design](https://sawdagar-dokanpart.vercel.app/design). Confirm Node.js 24 and Git deployments for `main` remain enabled. Keep the demo non-commercial and use sandbox payments only.
 - The `sawdagar-dokanpat` Neon Free project holds every migration through `20261028233000_admin_cms`. The admin/CMS migration and seed ran through the `Database` workflow on 2026-10-28 (runs 40706126268 and 40706283350). The seed created 12 departments, 72 leaf categories, 24 vendors, 432 products, 1,296 variants, 1,755 reviews, three demo orders, four coupons, eleven content entries and two flags. Do not share its connection strings in chat.
 - The showcase deployment was checked on 2026-10-30: `/case-study` returned 200 with its canonical URL and structured data, `/llms.txt` returned the committed text, and the sitemap listed 473 URLs. Re-run those three checks after changing the public route list.
 - Re-running `seed` is not required for the cart migration; it restores the catalog rows and the four demo coupons.
 - If the catalog is reset, run the `Database` workflow with `migrate` only when a new migration exists, then with `seed`. The seed restores the same deterministic catalog and does not duplicate rows.
 - The deployed Phase 4 build passed the guest-cart, reload, sign-in merge, wishlist, comparison and coupon smoke checks. `BOISHAKH10` discounted the ৳3,840 cart by ৳384 to ৳3,576 and survived a reload. Re-run these after a schema or auth change; the stock-limit and four-product compare-cap edge cases still need a manual pass.
 - The `20261028230000_finance` migration added `organizations.commissionRateBps` and the ledger, payout and refund tables. It was applied by the `Database` workflow on 2026-10-28 (run 40696952497), and the seed (run 40697066479) refreshed the catalog with a 7% rate on every fourth store. The finance pass on the deployment exercised a delivery posting, a payout request, approval, payment and a refund; it left the demo data with one paid ৳1,500 payout and one ৳3,250 refund, so a reseed is needed to restore a clean balance before a fresh walkthrough.
-- Rotating the demo password requires updating `DEMO_ACCOUNT_PASSWORD` in both dashboards and re-running the `Database` workflow with `seed`, so the stored hashes match the new value.
+- Rotating the demo password requires updating `DEMO_ACCOUNT_PASSWORD` in both dashboards and re-running the `Database` workflow with `seed`, so the stored hashes match the new value. The `Playwright` workflow reads the same secret for the R3 sign-in spec, so keep it present in GitHub Actions.
+
+- The `20261105090000_real_auth` migration adds `users.phone`, `users.termsAcceptedAt` and the `seller_applications` table. Apply it with the `Database` workflow (`migrate`) before the R3 deployment is exercised; signing in or registering against a database without it fails with a server error. No reseed is required, and the eight seeded accounts keep working with `DEMO_ACCOUNT_PASSWORD`.
+- Password reset and address verification send no email. Their links are written to `mail_outbox` and read at `/admin/outbox`, so an owner walkthrough of the reset flow starts there. Wiring a real provider later means changing `queueAuthMail` in `apps/web/features/auth/authMail.ts` only.
+
+## Product images (R2)
+
+- R2 is complete: 440 licensed Wikimedia Commons photographs are uploaded to Cloudinary per product, 142 products carry their own main and gallery images, and `/credits` lists every author and licence. `scripts/ci/check-images.ts` fails CI on a shared public id, a near-duplicate average hash or a repeated alt string, so a product cannot publish with a photograph already used elsewhere.
+- `CLOUDINARY_*` credentials are used only by the sourcing and upload runs. Never paste credentials into chat; use the GitHub dashboard when re-running the upload.
 
 ## Environment variables
 
-| Variable | Where | Purpose |
-|---|---|---|
-| `DATABASE_URL` | Vercel production, GitHub Actions | Pooled Neon connection used by the app |
-| `DIRECT_DATABASE_URL` | GitHub Actions | Direct Neon connection used by Prisma migrations and seeding |
-| `BETTER_AUTH_SECRET` | Vercel production, GitHub Actions | Signs and verifies Better Auth sessions |
-| `DEMO_ACCOUNT_PASSWORD` | Vercel production, GitHub Actions | Password for the eight seeded demo accounts |
+| Variable                | Where                             | Purpose                                                      |
+| ----------------------- | --------------------------------- | ------------------------------------------------------------ |
+| `DATABASE_URL`          | Vercel production, GitHub Actions | Pooled Neon connection used by the app                       |
+| `DIRECT_DATABASE_URL`   | GitHub Actions                    | Direct Neon connection used by Prisma migrations and seeding |
+| `BETTER_AUTH_SECRET`    | Vercel production, GitHub Actions | Signs and verifies Better Auth sessions                      |
+| `DEMO_ACCOUNT_PASSWORD` | Vercel production, GitHub Actions | Password for the eight seeded demo accounts                  |
+| `PEXELS_API_KEY`        | GitHub Actions                    | Image sourcing run only; never read at runtime               |
+| `UNSPLASH_ACCESS_KEY`   | GitHub Actions                    | Image sourcing run only; never read at runtime               |
+| `CLOUDINARY_CLOUD_NAME` | GitHub Actions                    | Uploads product photographs to Cloudinary                    |
+| `CLOUDINARY_API_KEY`    | GitHub Actions                    | Cloudinary upload credential                                 |
+| `CLOUDINARY_API_SECRET` | GitHub Actions                    | Cloudinary upload credential                                 |
 
 Vercel stores the three production values as hidden secrets. `DIRECT_DATABASE_URL` is intentionally not present in Vercel, because the runtime uses the pooled connection and never runs migrations.
 

@@ -12,8 +12,15 @@
 - [ADR-008: Integer poisha for money, with pure ledger builders](adr/ADR-008-integer-money-ledger.md)
 - [ADR-009: Design tokens, skeleton parity and container-query layouts](adr/ADR-009-design-tokens-container-queries.md)
 - [ADR-010: Quality gates on three operating systems and in Actions](adr/ADR-010-ci-migrations-and-lighthouse.md)
+- [ADR-011: Real accounts with database rate limits and an in-app mail outbox](adr/ADR-011-real-accounts-and-outbox-mail.md)
 
 The dated entries below record smaller choices that did not need an ADR.
+
+- 2026-11-05: Keep `/login` and `/register` as the canonical auth paths and redirect `/sign-in` to `/login`, instead of renaming the existing page again. The rest of the site already links to `/login`, and a redirect preserves every bookmarked and documented URL.
+- 2026-11-05: Store one canonical mobile number on `users.phone` as `+8801XXXXXXXXX` and accept the local `01…` form on input. The number identifies an account across the shop, the profile and a future payout record; normalising at the edge (`normalizeBdPhone`) means no query has to guess which format was typed. A unique index makes a duplicate registration fail with a field error rather than a silent second account.
+- 2026-11-05: Record `termsAcceptedAt` on the user rather than a consent log table. There is exactly one accepted version of the terms in this revision, and the requirement is to know when an account accepted them; a versioned consent history can be added when the text starts changing.
+- 2026-11-05: Let a registration that asks to sell create a `pending` seller application and keep the `buyer` role until an admin approves it. Granting the vendor role at signup would let anyone reach the Seller Center and publish a store without review, while asking for the business name later would lose the information at the moment the person decided to sell.
+- 2026-11-05: Do not gate sign-in on a verified address in this revision. With no mail provider configured, requiring verification would lock out every new account on the deployed site; the security page reports the state and offers a resend instead.
 
 - 2026-10-30: Do not invent a `/api/v1` REST surface to satisfy the showcase checklist. The app has exactly two route handlers (Better Auth and the MockPay callback); every other write is a Server Action with the same session, Zod and ownership checks. [API.md](API.md) documents both boundaries and states that there is no OpenAPI document, rather than publishing a contract for endpoints that do not exist. Revisit when an external client needs one.
 - 2026-10-30: Measure Lighthouse and accessibility against the deployed site in GitHub Actions instead of starting a local server. The project forbids localhost development servers, and the deployment is what visitors actually load. The `Lighthouse` workflow runs on demand and weekly; axe is also checked in the browser against the deployment.

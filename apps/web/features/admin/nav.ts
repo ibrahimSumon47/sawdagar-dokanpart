@@ -3,7 +3,15 @@ import type { Dictionary } from '../../i18n';
 
 /** Sections of the admin area, in navigation order. */
 export type AdminTab =
-  'overview' | 'stores' | 'reviews' | 'content' | 'analytics' | 'flags' | 'audit' | 'finance';
+  | 'overview'
+  | 'stores'
+  | 'reviews'
+  | 'content'
+  | 'analytics'
+  | 'flags'
+  | 'audit'
+  | 'outbox'
+  | 'finance';
 
 export interface AdminNavItem {
   key: AdminTab;
@@ -47,6 +55,12 @@ export function adminNavItems(copy: Dictionary['admin'], role: PlatformRole): Ad
       key: 'audit',
       href: '/admin/audit',
       label: copy.navAudit,
+      allowed: hasPermission(role, 'admin:audit:read'),
+    },
+    {
+      key: 'outbox',
+      href: '/admin/outbox',
+      label: copy.navOutbox,
       allowed: hasPermission(role, 'admin:audit:read'),
     },
     {

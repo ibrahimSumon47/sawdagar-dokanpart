@@ -15,6 +15,7 @@ describe('adminNavItems', () => {
       'analytics',
       'flags',
       'audit',
+      'outbox',
       'finance',
     ]);
   });

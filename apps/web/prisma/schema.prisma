@@ -24,6 +24,9 @@ model User {
   banReason     String?
   banExpires    DateTime?
   isDemo        Boolean   @default(false)
+  // Registration details captured outside Better Auth's own columns.
+  phone           String?   @unique
+  termsAcceptedAt DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -42,8 +45,27 @@ model User {
   reviews       Review[]
   questions     ProductQuestion[]
   returnRequests ReturnRequest[]
+  sellerApplication SellerApplication?
 
   @@map("users")
+}
+
+/// A seller request made at registration, reviewed by an admin before the
+/// account can open a store.
+model SellerApplication {
+  id           String    @id
+  userId       String    @unique
+  businessName String
+  phone        String
+  status       String    @default("pending")
+  note         String?
+  createdAt    DateTime  @default(now())
+  reviewedAt   DateTime?
+  reviewedBy   String?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@map("seller_applications")
 }
 
 model Session {

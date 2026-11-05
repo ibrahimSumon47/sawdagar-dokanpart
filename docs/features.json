@@ -12,5 +12,12 @@
     "acceptance": "Image pipeline, publish guard, CI checks, catalog pagination and deployed visual checks pass",
     "status": "pass",
     "evidence": "440 licensed photos on Cloudinary (runs 41293512526, 41294190519); 142 publishable products; CI green on fa4602c; hosted Playwright run 41394434731 passed at 375, 768 and 1440 px"
+  },
+  {
+    "id": "R3",
+    "description": "Real registration and login with password reset and verification",
+    "acceptance": "Registration, sign-in, reset, verification and sign-out work against the deployment at 375, 768 and 1440 pixels",
+    "status": "pending",
+    "evidence": "Implemented: register/login/reset/forgot/verify pages, account security page, admin mail outbox, seller application at signup, phone normalisation and DB-backed rate limits; lint, typecheck, 193 unit tests and build pass locally; live check and Playwright run pending the migration"
   }
 ]
