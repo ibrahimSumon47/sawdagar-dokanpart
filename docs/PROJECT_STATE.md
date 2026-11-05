@@ -42,15 +42,22 @@
 
 ## Now
 
-**Revision 1, phase R3 (real registration and login) is implemented and committed; the live check is in progress.**
+**Revision 1, phase R3 (real registration and login) is done; R4 (skeleton system) is next.**
 `/register` takes a name, email, Bangladeshi mobile, password, terms and a customer or seller choice; a seller gets a
 `pending` seller application instead of the vendor role. `/login` signs in with the real password and keeps the demo
 picker as a collapsed block that only fills the email. Reset, verification and resend mail go through `mail_outbox`
 and are readable at `/admin/outbox`, `/account/security` reports the verification state and changes the password, and
 `/sign-in` redirects to `/login`. Every phone number is normalised to `+8801XXXXXXXXX` by `normalizeBdPhone`, and the
 `users.phone`, `users.termsAcceptedAt` and `seller_applications` columns come from migration
-`20261105090000_real_auth`. Lint, typecheck, unit tests (193) and build pass locally; the deployed check at 375, 768
-and 1440 px and the Playwright run follow the migration.
+`20261105090000_real_auth`, applied to Neon by Database workflow run 42015565547. Lint, typecheck, unit tests and
+build pass locally. The first deployment returned 500 on every page with an auth form: the client forms received the
+whole dictionary, whose nineteen builder functions (`basedOn`, `coverDays`, `settlementReady`, …) React cannot
+serialise, so `/login`, `/register`, `/forgot-password` and `/reset-password?token=…` died while the storefront stayed
+up. Commit `51c4b61` gives the auth forms `AuthCopy = Pick<Dictionary, 'auth' | 'roles'>` from
+`features/auth/copy.ts`; no other client component received a whole dictionary. Playwright run
+[42020265137](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42020265137) passed all fourteen checks
+on the deployment — signed-out redirect, wrong password, seeded sign-in and sign-out, buyer registration, seller
+application, reset request, and the 375, 768 and 1440 px fit checks — and `docs/features.json` records R3 as `pass`.
 
 **Revision 1, phase R2 is done.** Product photos are per-product and licensed: 440 Wikimedia Commons photographs
 uploaded to Cloudinary under `sawdagar/products/<subcategory>/<n>`, with author and licence recorded per file and
@@ -69,7 +76,6 @@ project links live in the footer Project column and on `/about/project`, and Pla
 [41279963461](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279963461) passed at 375, 768 and
 1440 px.
 
-**R3 (real registration and login) is in progress.**
 ## Next
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.

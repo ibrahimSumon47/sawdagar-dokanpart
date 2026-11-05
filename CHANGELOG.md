@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix the deployed auth pages: the sign-in, registration, reset and security forms now receive `AuthCopy`, a plain-string slice of the dictionary, because the whole dictionary carries nineteen builder functions that React cannot pass to a client component. The pages had been returning 500 on Vercel while the storefront stayed up.
+
 - Revision 1, phase R3: replace the one-click demo shortcut with real accounts. Registration collects a Bangladeshi mobile number, terms acceptance and an optional seller application; sign-in uses the real password; password reset, verification and resend go through the in-app `mail_outbox` and an admin outbox page; `/account/security` reports verification state and changes the password; a shared `normalizeBdPhone` and password-strength rule live in `@sd/domain`; and the database-backed rate limiter guards sign-in, registration and reset.
 
 - Correct bilingual Help Center and static-page content through versioned CMS edits, update the seed copy and prepare deployed checks.

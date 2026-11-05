@@ -17,7 +17,7 @@
     "id": "R3",
     "description": "Real registration and login with password reset and verification",
     "acceptance": "Registration, sign-in, reset, verification and sign-out work against the deployment at 375, 768 and 1440 pixels",
-    "status": "pending",
-    "evidence": "Implemented: register/login/reset/forgot/verify pages, account security page, admin mail outbox, seller application at signup, phone normalisation and DB-backed rate limits; lint, typecheck, 193 unit tests and build pass locally; live check and Playwright run pending the migration"
+    "status": "pass",
+    "evidence": "Migration 20261105090000_real_auth applied (Database run 42015565547); auth client forms now receive only plain-string copy (51c4b61), which removed the 19-function serialisation 500s; Playwright 42020265137 passed 14 checks on the deployment, including signed-out redirect, wrong password, seeded sign-in with sign-out, buyer registration, seller application, reset request and 375, 768 and 1440 px fit"
   }
 ]

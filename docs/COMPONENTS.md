@@ -47,6 +47,10 @@ Layout constants shared by the product card and its skeleton live in [productCar
 | VerifyEmailPanel | Reports the verification result and offers a fresh link. | `copy`, `email`, `verified`, `justSent`, `invalid` | [VerifyEmailPanel.tsx](../apps/web/features/auth/components/VerifyEmailPanel/VerifyEmailPanel.tsx) |
 | RoleBadge | Role label with a tone for buyer, vendor or admin areas. | `role`, `label` | [RoleBadge.tsx](../apps/web/features/auth/components/RoleBadge/RoleBadge.tsx) |
 
+The auth forms are client components, so they receive `AuthCopy = Pick<Dictionary, 'auth' | 'roles'>` from
+[copy.ts](../apps/web/features/auth/copy.ts) rather than the whole dictionary, whose other sections hold builder
+functions that React cannot serialise across the server/client boundary.
+
 ## Account (`apps/web/features/account`)
 
 | Component | Purpose | Props | Path |
