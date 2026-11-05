@@ -2,6 +2,8 @@ import { Button } from '@sd/ui';
 import type { Dictionary } from '../../../../i18n';
 import type { CmsEntryRecord, ContentKind } from '../../../content';
 import { saveContentAction } from '../../../content/actions';
+import type { HelpCategoryRecord } from '../../../content/helpCategoryQueries';
+import type { CategoryLanguage } from '../../../content/helpCategoryTypes';
 import { ContentFields } from './ContentFields';
 
 export interface ContentEditorFormProps {
@@ -9,15 +11,30 @@ export interface ContentEditorFormProps {
   entry: CmsEntryRecord | null;
   /** Default area for a new entry. */
   defaultKind: ContentKind;
+  /** Categories that a Help article can be filed under. */
+  categories: readonly HelpCategoryRecord[];
   copy: Dictionary['admin'];
+  locale: CategoryLanguage;
 }
 
 /** Editor form that creates or updates one CMS entry. */
-export function ContentEditorForm({ entry, defaultKind, copy }: ContentEditorFormProps) {
+export function ContentEditorForm({
+  entry,
+  defaultKind,
+  categories,
+  copy,
+  locale,
+}: ContentEditorFormProps) {
   return (
     <form action={saveContentAction} className="space-y-6">
       {entry ? <input type="hidden" name="id" value={entry.id} /> : null}
-      <ContentFields entry={entry} defaultKind={defaultKind} copy={copy} />
+      <ContentFields
+        entry={entry}
+        defaultKind={defaultKind}
+        categories={categories}
+        copy={copy}
+        locale={locale}
+      />
       <Button type="submit">{copy.saveContent}</Button>
     </form>
   );

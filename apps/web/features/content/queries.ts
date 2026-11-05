@@ -5,6 +5,7 @@ export interface CmsEntryRecord extends ContentSnapshot {
   id: string;
   kind: ContentKind;
   slug: string;
+  helpCategoryId: string | null;
   status: ContentStatus;
   publishAt: Date | null;
   createdAt: Date;
@@ -18,10 +19,12 @@ export interface CmsVersionRecord {
   createdAt: Date;
 }
 
-const entryFields = {
+/** Columns every content list and editor reads; help queries reuse them. */
+export const cmsEntryFields = {
   id: true,
   kind: true,
   slug: true,
+  helpCategoryId: true,
   titleEn: true,
   titleBn: true,
   excerptEn: true,
@@ -42,7 +45,7 @@ const entryFields = {
 export async function getCmsEntries(): Promise<CmsEntryRecord[]> {
   const rows = await getPrisma().cmsEntry.findMany({
     orderBy: { updatedAt: 'desc' },
-    select: entryFields,
+    select: cmsEntryFields,
   });
   return rows as CmsEntryRecord[];
 }
@@ -53,7 +56,7 @@ export async function getCmsEntry(
 ): Promise<{ entry: CmsEntryRecord; versions: CmsVersionRecord[] } | null> {
   const row = await getPrisma().cmsEntry.findUnique({
     where: { id },
-    select: { ...entryFields, versions: { orderBy: { version: 'desc' } } },
+    select: { ...cmsEntryFields, versions: { orderBy: { version: 'desc' } } },
   });
   if (!row) return null;
 
@@ -82,7 +85,7 @@ export async function getPublicContentList(kind: ContentKind): Promise<CmsEntryR
   const rows = await getPrisma().cmsEntry.findMany({
     where: visibleWhere(kind),
     orderBy: [{ publishAt: 'desc' }, { updatedAt: 'desc' }],
-    select: entryFields,
+    select: cmsEntryFields,
   });
   return rows as CmsEntryRecord[];
 }
@@ -94,7 +97,7 @@ export async function getPublicContentEntry(
 ): Promise<CmsEntryRecord | null> {
   const row = await getPrisma().cmsEntry.findFirst({
     where: { ...visibleWhere(kind), slug },
-    select: entryFields,
+    select: cmsEntryFields,
   });
   return row as CmsEntryRecord | null;
 }

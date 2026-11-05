@@ -1,5 +1,6 @@
 import { JamdaniPattern } from '@sd/ui';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { formatDate } from '../../../../lib/formatDate';
 import type { ContentKind } from '../../contentTypes';
@@ -12,6 +13,8 @@ export interface ContentArticleViewProps {
   kind: ContentKind;
   copy: Dictionary;
   locale: Locale;
+  /** Extra blocks shown under the body, such as the helpful-vote panel. */
+  children?: ReactNode;
 }
 
 const backHref: Record<ContentKind, string> = {
@@ -21,7 +24,13 @@ const backHref: Record<ContentKind, string> = {
 };
 
 /** One published Help article, Journal post or static page. */
-export function ContentArticleView({ entry, kind, copy, locale }: ContentArticleViewProps) {
+export function ContentArticleView({
+  entry,
+  kind,
+  copy,
+  locale,
+  children,
+}: ContentArticleViewProps) {
   const backLabel =
     kind === 'help'
       ? copy.content.backToHelp
@@ -58,6 +67,7 @@ export function ContentArticleView({ entry, kind, copy, locale }: ContentArticle
       <div className="mt-8 border-t border-line pt-8">
         <ArticleBody body={locale === 'bn' ? entry.bodyBn : entry.bodyEn} />
       </div>
+      {children}
     </article>
   );
 }

@@ -317,13 +317,122 @@ const flags = [
  * storefront feature flags. Entries are matched on kind and slug so a re-run
  * refreshes the copy without losing later admin edits to other entries.
  */
+interface SeedHelpCategory {
+  id: string;
+  slug: string;
+  nameEn: string;
+  nameBn: string;
+  descriptionEn: string;
+  descriptionBn: string;
+  sortOrder: number;
+}
+
+const helpCategories: SeedHelpCategory[] = [
+  {
+    id: 'help_cat_orders',
+    slug: 'orders',
+    nameEn: 'Orders',
+    nameBn: 'অর্ডার',
+    descriptionEn: 'Placing an order, the cart and the confirmation email.',
+    descriptionBn: 'অর্ডার দেওয়া, কার্ট আর কনফার্মেশন বার্তা।',
+    sortOrder: 1,
+  },
+  {
+    id: 'help_cat_delivery',
+    slug: 'delivery',
+    nameEn: 'Delivery',
+    nameBn: 'ডেলিভারি',
+    descriptionEn: 'Delivery times, courier updates and holiday cut-off dates.',
+    descriptionBn: 'ডেলিভারির সময়, কুরিয়ারের খবর আর ছুটির শেষ তারিখ।',
+    sortOrder: 2,
+  },
+  {
+    id: 'help_cat_returns',
+    slug: 'returns',
+    nameEn: 'Returns and refunds',
+    nameBn: 'ফেরত ও রিফান্ড',
+    descriptionEn: 'Starting a return and what happens after the seller replies.',
+    descriptionBn: 'ফেরত শুরু করা আর বিক্রেতা উত্তর দেওয়ার পরে যা হয়।',
+    sortOrder: 3,
+  },
+  {
+    id: 'help_cat_payments',
+    slug: 'payments',
+    nameEn: 'Payments',
+    nameBn: 'পেমেন্ট',
+    descriptionEn: 'Payment methods, coupons and how test-mode payments behave.',
+    descriptionBn: 'পেমেন্ট পদ্ধতি, কুপন আর টেস্ট মোডে পেমেন্টের ব্যবহার।',
+    sortOrder: 4,
+  },
+  {
+    id: 'help_cat_policies',
+    slug: 'policies',
+    nameEn: 'Terms and privacy',
+    nameBn: 'শর্ত ও গোপনীয়তা',
+    descriptionEn: 'The terms of use and what an account stores about you.',
+    descriptionBn: 'ব্যবহারের শর্ত আর অ্যাকাউন্ট আপনার সম্পর্কে কী রাখে।',
+    sortOrder: 5,
+  },
+];
+
+/** Which category each seeded Help article belongs to. */
+const helpCategoryBySlug: Record<string, string> = {
+  'how-to-order': 'orders',
+  'delivery-times': 'delivery',
+  'returns-and-refunds': 'returns',
+  payments: 'payments',
+  'eid-delivery-cutoff': 'delivery',
+  terms: 'policies',
+  privacy: 'policies',
+};
+
 export async function seedContent(prisma: PrismaClient): Promise<string> {
   const author = await prisma.user.findUnique({
     where: { email: 'editor@demo.sawdagar.test' },
     select: { id: true },
   });
 
+  const categoryIds = new Map<string, string>();
+  for (const category of helpCategories) {
+    const fields = {
+      nameEn: category.nameEn,
+      nameBn: category.nameBn,
+      descriptionEn: category.descriptionEn,
+      descriptionBn: category.descriptionBn,
+      sortOrder: category.sortOrder,
+    };
+    const saved = await prisma.helpCategory.upsert({
+      where: { slug: category.slug },
+      create: { id: category.id, slug: category.slug, ...fields },
+      update: fields,
+    });
+    categoryIds.set(category.slug, saved.id);
+
+    await prisma.helpCategoryVersion.upsert({
+      where: { categoryId_version: { categoryId: saved.id, version: 1 } },
+      create: {
+        id: `${saved.id}_v1`,
+        categoryId: saved.id,
+        version: 1,
+        snapshot: {
+          slug: category.slug,
+          nameEn: category.nameEn,
+          nameBn: category.nameBn,
+          descriptionEn: category.descriptionEn,
+          descriptionBn: category.descriptionBn,
+        },
+        note: 'Seeded category',
+        authorUserId: author?.id ?? null,
+      },
+      update: {},
+    });
+  }
+
   for (const entry of entries) {
+    const helpCategoryId =
+      entry.kind === 'help'
+        ? (categoryIds.get(helpCategoryBySlug[entry.slug] ?? '') ?? null)
+        : null;
     const publishAt = entry.publishAt ? new Date(entry.publishAt) : null;
     const data = {
       titleEn: entry.titleEn,
@@ -338,6 +447,7 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
       seoTitleBn: entry.titleBn,
       seoDescriptionEn: entry.seoDescriptionEn,
       seoDescriptionBn: entry.seoDescriptionBn,
+      helpCategoryId,
     };
 
     const saved = await prisma.cmsEntry.upsert({

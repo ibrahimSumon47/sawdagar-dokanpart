@@ -7,6 +7,7 @@ import { ContentPreview } from '../../../../features/admin/components/ContentPre
 import { ContentVersionHistory } from '../../../../features/admin/components/ContentVersionHistory';
 import { requireAdmin } from '../../../../features/admin/guard';
 import { contentEditHref, contentHref } from '../../../../features/content';
+import { getHelpCategories } from '../../../../features/content/helpCategoryQueries';
 import { getCmsEntry } from '../../../../features/content/queries';
 import { contentNotice } from '../../../../features/content/notice';
 import { SellerNotice } from '../../../../features/seller/components/SellerNotice';
@@ -29,7 +30,7 @@ export default async function EditContentPage({ params, searchParams }: EditCont
   const viewer = await requireAdmin('admin:cms:write', contentEditHref(id));
   const locale = await getLocale();
   const copy = getDictionary(locale);
-  const record = await getCmsEntry(id);
+  const [record, categories] = await Promise.all([getCmsEntry(id), getHelpCategories()]);
   if (!record) notFound();
 
   const notice = contentNotice(copy.admin, query);
@@ -56,7 +57,9 @@ export default async function EditContentPage({ params, searchParams }: EditCont
             <ContentEditorForm
               entry={record.entry}
               defaultKind={record.entry.kind}
+              categories={categories}
               copy={copy.admin}
+              locale={locale}
             />
           </div>
           <div className="space-y-4">

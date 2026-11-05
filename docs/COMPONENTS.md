@@ -142,9 +142,9 @@ functions that React cannot serialise across the server/client boundary.
 | AuditLogTable | One page of the audit log as a table. | `audit`, `copy`, `locale` | [AuditLogTable.tsx](../apps/web/features/admin/components/AuditLogTable/AuditLogTable.tsx) |
 | AuditPager | Previous and next links with the current audit page. | `page`, `pageCount`, `copy` | [AuditPager.tsx](../apps/web/features/admin/components/AuditPager/AuditPager.tsx) |
 | ContentList | All CMS entries with area, status, edit date and editor link. | `entries`, `copy`, `locale` | [ContentList.tsx](../apps/web/features/admin/components/ContentList/ContentList.tsx) |
-| ContentEditorForm | Creates or updates one CMS entry. | `entry`, `defaultKind`, `copy` | [ContentEditorForm.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorForm.tsx) |
+| ContentEditorForm | Creates or updates one CMS entry. | `entry`, `defaultKind`, `categories`, `copy`, `locale` | [ContentEditorForm.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorForm.tsx) |
 | ContentEditorSkeleton | Field groups, body area and side column for the CMS editor. | `label` | [ContentEditorSkeleton.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorSkeleton.tsx) |
-| ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
+| ContentFields | Bilingual text, SEO, status, publish-date and Help category fields for the editor. | `entry`, `defaultKind`, `categories`, `copy`, `locale` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
 | ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale`, `restoreAction` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
 | ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
 | CmsModuleLinks | The CMS cards on the hub, each with its live record count when it has one, and a link. | `modules`, `linkLabel` | [CmsModuleLinks.tsx](../apps/web/features/admin/components/CmsModuleLinks/CmsModuleLinks.tsx) |
@@ -157,6 +157,11 @@ functions that React cannot serialise across the server/client boundary.
 | SettingsSeoFields | Default title and description in both languages. | `settings`, `copy` | [SettingsSeoFields.tsx](../apps/web/features/admin/components/SettingsForm/SettingsSeoFields.tsx) |
 | SettingsPolicyFields | Shipping and return text in both languages. | `settings`, `copy` | [SettingsPolicyFields.tsx](../apps/web/features/admin/components/SettingsForm/SettingsPolicyFields.tsx) |
 | SettingsLinksEditor | Client-side list that adds, edits and removes header or footer links, up to the menu's limit. | `name`, `label`, `hint`, `initialLinks`, `maxLinks`, `copy` | [SettingsLinksEditor.tsx](../apps/web/features/admin/components/SettingsLinksEditor/SettingsLinksEditor.tsx) |
+| HelpCategoryForm | Creates or updates one Help Center category. | `category`, `copy` | [HelpCategoryForm.tsx](../apps/web/features/admin/components/HelpCategoryForm/HelpCategoryForm.tsx) |
+| HelpCategoryFields | Slug, bilingual names and descriptions for one Help category. | `category`, `copy` | [HelpCategoryFields.tsx](../apps/web/features/admin/components/HelpCategoryForm/HelpCategoryFields.tsx) |
+| HelpCategoryList | Every Help category in display order with its article count and one empty state. | `categories`, `copy`, `locale` | [HelpCategoryList.tsx](../apps/web/features/admin/components/HelpCategoryList/HelpCategoryList.tsx) |
+| HelpCategoryRow | One category row: name, article count, move-up and move-down forms and the edit link. | `category`, `isFirst`, `isLast`, `copy`, `locale` | [HelpCategoryRow.tsx](../apps/web/features/admin/components/HelpCategoryList/HelpCategoryRow.tsx) |
+| HelpCategorySelect | Category picker in the article editor, with a none option. | `categories`, `selectedId`, `copy`, `locale` | [HelpCategorySelect.tsx](../apps/web/features/admin/components/HelpCategorySelect/HelpCategorySelect.tsx) |
 | MailOutboxList | Verification and reset mail this site queued, each folded open to show the link it carries. | `messages`, `emptyLabel`, `locale` | [MailOutboxList.tsx](../apps/web/features/admin/components/MailOutboxList/MailOutboxList.tsx) |
 
 ## Content (`apps/web/features/content`)
@@ -167,7 +172,12 @@ functions that React cannot serialise across the server/client boundary.
 | ArticleBody | Renders stored plain text as paragraphs split on blank lines. | `body` | [ArticleBody.tsx](../apps/web/features/content/components/ArticleBody/ArticleBody.tsx) |
 | ContentIndexView | Public index for Help Center articles or Journal posts with a patterned card head. | `kind`, `entries`, `copy`, `locale` | [ContentIndexView.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexView.tsx) |
 | ContentIndexSkeleton | Patterned card heads and titles while a Help Center or Journal index loads. | `label` | [ContentIndexSkeleton.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexSkeleton.tsx) |
-| ContentArticleView | One published Help article, Journal post or static page with a back link and patterned hero. | `entry`, `kind`, `copy`, `locale` | [ContentArticleView.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleView.tsx) |
+| ContentArticleView | One published Help article, Journal post or static page with a back link and patterned hero. | `entry`, `kind`, `copy`, `locale`, `children` | [ContentArticleView.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleView.tsx) |
+| ContentCard | One Help article or Journal post card with a patterned head, an optional category label and the date. | `kind`, `entry`, `copy`, `locale`, `index`, `eyebrow` | [ContentCard.tsx](../apps/web/features/content/components/ContentCard/ContentCard.tsx) |
+| HelpCenterView | Help Center landing: heading, category filter, search form and the matching article cards with empty and filtered states. | `articles`, `categories`, `activeCategory`, `query`, `totalCount`, `copy`, `locale` | [HelpCenterView.tsx](../apps/web/features/content/components/HelpCenterView/HelpCenterView.tsx) |
+| HelpCategoryNav | Sidebar list of Help categories with article counts, keeping the current search phrase. | `categories`, `activeSlug`, `totalCount`, `copy`, `locale` | [HelpCategoryNav.tsx](../apps/web/features/content/components/HelpCategoryNav/HelpCategoryNav.tsx) |
+| HelpSearchForm | Plain GET search form over Help articles that keeps the chosen category. | `query`, `categorySlug`, `copy` | [HelpSearchForm.tsx](../apps/web/features/content/components/HelpSearchForm/HelpSearchForm.tsx) |
+| HelpfulVote | "Was this article helpful?" buttons, the running counts and the thank-you line, posted to a Server Action. | `entryId`, `slug`, `summary`, `copy` | [HelpfulVote.tsx](../apps/web/features/content/components/HelpfulVote/HelpfulVote.tsx) |
 | ContentArticleSkeleton | Patterned hero and paragraph lines for one article. | `label` | [ContentArticleSkeleton.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleSkeleton.tsx) |
 
 ## Finance (`apps/web/features/finance`)

@@ -3,6 +3,7 @@ import { AdminSection } from '../../../../features/admin/components/AdminSection
 import { ContentEditorForm } from '../../../../features/admin/components/ContentEditorForm';
 import { requireAdmin } from '../../../../features/admin/guard';
 import { isContentKind } from '../../../../features/content';
+import { getHelpCategories } from '../../../../features/content/helpCategoryQueries';
 import { getDictionary } from '../../../../i18n';
 import { getLocale } from '../../../../i18n/getLocale';
 
@@ -22,6 +23,7 @@ export default async function NewContentPage({ searchParams }: NewContentPagePro
   const locale = await getLocale();
   const copy = getDictionary(locale);
   const defaultKind = isContentKind(params.kind) ? params.kind : 'page';
+  const categories = await getHelpCategories();
 
   return (
     <AdminSection
@@ -31,7 +33,13 @@ export default async function NewContentPage({ searchParams }: NewContentPagePro
       role={viewer.role}
       copy={copy}
     >
-      <ContentEditorForm entry={null} defaultKind={defaultKind} copy={copy.admin} />
+      <ContentEditorForm
+        entry={null}
+        defaultKind={defaultKind}
+        categories={categories}
+        copy={copy.admin}
+        locale={locale}
+      />
     </AdminSection>
   );
 }

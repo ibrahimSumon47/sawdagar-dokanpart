@@ -774,14 +774,66 @@ model CmsEntry {
   seoDescriptionEn String?
   seoDescriptionBn String?
   authorUserId     String?
+  // Help articles only: the category this article is filed under.
+  helpCategoryId   String?
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
   versions         CmsVersion[]
+  votes            HelpArticleVote[]
+  helpCategory     HelpCategory? @relation(fields: [helpCategoryId], references: [id], onDelete: SetNull)
 
   @@unique([kind, slug])
   @@index([kind, status, publishAt])
+  @@index([helpCategoryId])
   @@index([updatedAt])
   @@map("cms_entries")
+}
+
+model HelpCategory {
+  id            String   @id
+  slug          String   @unique
+  nameEn        String
+  nameBn        String
+  descriptionEn String?
+  descriptionBn String?
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  entries       CmsEntry[]
+  versions      HelpCategoryVersion[]
+
+  @@index([sortOrder])
+  @@map("help_categories")
+}
+
+model HelpCategoryVersion {
+  id           String       @id
+  categoryId   String
+  version      Int
+  snapshot     Json
+  note         String?
+  authorUserId String?
+  createdAt    DateTime     @default(now())
+  category     HelpCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, version])
+  @@index([categoryId, version])
+  @@map("help_category_versions")
+}
+
+model HelpArticleVote {
+  id        String   @id
+  entryId   String
+  // Random per browser, kept in a first-party cookie; no account is required.
+  visitorId String
+  helpful   Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  entry     CmsEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@unique([entryId, visitorId])
+  @@index([entryId, helpful])
+  @@map("help_article_votes")
 }
 
 model CmsVersion {

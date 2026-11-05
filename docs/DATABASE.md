@@ -57,6 +57,9 @@ erDiagram
   cms_entries ||--o{ cms_versions : snapshots
   cms_sections ||--o{ cms_section_versions : snapshots
   site_settings ||--o{ site_settings_versions : snapshots
+  help_categories ||--o{ help_category_versions : snapshots
+  help_categories ||--o{ cms_entries : files
+  cms_entries ||--o{ help_article_votes : collects
 ```
 
 ## Tables
@@ -105,6 +108,9 @@ erDiagram
 | `cms_section_versions` | Immutable JSON snapshot of one homepage section after each save, with a version number, note, author and time |
 | `site_settings` | The singleton storefront settings row (`id = 'site'`): announcement bar, SEO defaults, shipping and return text, header links and footer links |
 | `site_settings_versions` | Immutable JSON snapshot of the settings after each save, with a version number, note, author and time |
+| `help_categories` | Help Center topic: unique slug, bilingual name and description and display order |
+| `help_category_versions` | Immutable JSON snapshot of one Help category after each save, with a version number, note, author and time |
+| `help_article_votes` | One visitor's answer to "was this article helpful" per article, unique by `(entry_id, visitor_id)` |
 | `feature_flags` | Storefront switches keyed by a stable string such as `help_center_enabled`, with bilingual labels and the last editor |
 
 ## Catalog shape
@@ -168,6 +174,15 @@ erDiagram
 - `site_settings` is one row with the fixed id `site`, so the storefront reads a single record and the editor never creates a second set. Before the first save the public queries fall back to `defaultSettings()`: announcement off, no extra links, and the built-in metadata and policy copy in charge.
 - Link lists are JSON columns on `site_settings` (`navigation`, `footerLinks`), each entry holding both labels and one href. They are bounded at six header links and five footer links by the Zod schema and re-checked when a version is restored; a link must be a site path or an `https` address, so a saved menu cannot carry a `javascript:` URL.
 - `site_settings_versions` follows the same rule as the other histories: every save appends a version and restoring writes the snapshot back as a new version. The settings row keeps `updatedByUserId` for the last editor, and every save also writes an audit entry.
+
+## Help Center shape
+
+- `help_categories` is its own table rather than a JSON list on a singleton, because an article points at a category row and the public list needs a count per topic. Each category has a unique slug, a bilingual name and description, and a `sortOrder` that the admin list renumbers in one transaction when an editor moves a row up or down.
+- `help_category_versions` mirrors the other histories: every save appends `max + 1`, restoring an old snapshot writes its fields back and appends a new version, and the last ten versions are listed in the editor.
+- `cms_entries.help_category_id` is nullable with `onDelete: SetNull`, so deleting a category files its articles back into all topics instead of deleting the articles. The column is set on save only for `help` entries; the other kinds store null.
+- The category is filing, not content, so it is deliberately outside the `cms_versions` snapshot. A version restore therefore never moves an article between topics; the editor changes the category itself.
+- Help search adds `contains` conditions, case-insensitively, over the title, excerpt and body in the active language, and only when the trimmed query is at least two characters. Search and the category filter are independent conditions, so both can narrow the same list.
+- `help_article_votes` holds one row per article and visitor: the visitor is a random UUID in the first-party `sd_help_visitor` cookie, so no account is needed, and `@@unique([entryId, visitorId])` lets a reader change their answer with an upsert instead of voting twice. Counts for the page come from `groupBy`, and the visitor's own answer is shown as the pressed button.
 
 ## Checkout and order shape
 
@@ -236,6 +251,11 @@ erDiagram
 | `cms_sections(sort_order)` | Display order of the homepage blocks |
 | `cms_section_versions(section_id, version)` unique | Immutable version numbers per section |
 | `site_settings_versions(settings_id, version)` unique | Immutable version numbers for the settings row |
+| `help_categories(slug)` unique | The public category lookup by path segment |
+| `help_categories(sort_order)` | Display order of the topic list and the article editor's picker |
+| `help_category_versions(category_id, version)` unique | Immutable version numbers per category |
+| `cms_entries(help_category_id)` | Articles filed under one category |
+| `help_article_votes(entry_id, visitor_id)` unique and `help_article_votes(entry_id, helpful)` | One vote per visitor, and the per-article counts |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.
 

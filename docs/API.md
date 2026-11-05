@@ -82,7 +82,7 @@ Defined in [actions.ts](../apps/web/features/finance/actions.ts) and [refundActi
 
 ## Admin and CMS Server Actions
 
-Defined in [admin/actions.ts](../apps/web/features/admin/actions.ts), [admin/flagActions.ts](../apps/web/features/admin/flagActions.ts) and [content/actions.ts](../apps/web/features/content/actions.ts). Every action resolves the session and checks a specific admin permission before reading the form: `admin:moderate:catalog` for stores, `admin:moderate:reviews` for reviews, `admin:settings:write` for flags and `admin:cms:write` for content. The target row and its current state are re-read from the database; the browser sends only ids, decisions and editable text.
+Defined in [admin/actions.ts](../apps/web/features/admin/actions.ts), [admin/flagActions.ts](../apps/web/features/admin/flagActions.ts), [content/actions.ts](../apps/web/features/content/actions.ts), [content/helpCategoryActions.ts](../apps/web/features/content/helpCategoryActions.ts) and [content/helpVoteActions.ts](../apps/web/features/content/helpVoteActions.ts). Every action resolves the session and checks a specific admin permission before reading the form: `admin:moderate:catalog` for stores, `admin:moderate:reviews` for reviews, `admin:settings:write` for flags and `admin:cms:write` for content. The target row and its current state are re-read from the database; the browser sends only ids, decisions and editable text.
 
 | Action | Input | Behaviour |
 |---|---|---|
@@ -91,8 +91,12 @@ Defined in [admin/actions.ts](../apps/web/features/admin/actions.ts), [admin/fla
 | `toggleFeatureFlagAction` | `key`, `enabled` (`on` or `off`) | Updates an existing flag and its editor; an unknown key is rejected rather than created from the form |
 | `saveContentAction` | `id` or new entry fields, kind, slug, bilingual title, excerpt, body and SEO text, status, publish date | Creates or updates one CMS entry and appends a version snapshot in one transaction; a duplicate `(kind, slug)` returns `conflict`; scheduled entries need a date, which is stored at 09:00 Dhaka time |
 | `restoreContentVersionAction` | `versionId` | Reads the snapshot from the database, updates the entry, appends a new version with a restore note and audits it; old versions stay untouched |
+| `saveHelpCategoryAction` | `id` or new category fields: slug, bilingual name and description | Creates or updates one Help category, rejecting a duplicate slug, and appends a version snapshot in the same transaction |
+| `moveHelpCategoryAction` | `id`, `direction` (`up` or `down`) | Swaps the category with its neighbour and renumbers `sortOrder` in one transaction |
+| `restoreHelpCategoryVersionAction` | `versionId` | Reads a stored category snapshot, writes it back and appends a new version with a restore note |
+| `voteHelpAction` | `entryId`, `helpful` (`yes` or `no`), `slug` | Shown to any visitor: resolves the entry through the public Help query, sets the `sd_help_visitor` cookie when missing, upserts the visitor's vote, revalidates the article and returns to it |
 
-Public content routes read only entries that are published or scheduled and due; drafts are invisible even with a direct URL. `/help` and `/journal` return 404 while their feature flag is off. The admin CMS actions and pages are covered by the `admin:cms:write` permission, which the content editor and super admin roles hold.
+Public content routes read only entries that are published or scheduled and due; drafts are invisible even with a direct URL. `/help` takes `?q=` for a search phrase of at least two characters and `?category=` for a topic slug, and `/help` and `/journal` return 404 while their feature flag is off. The admin CMS actions and pages are covered by the `admin:cms:write` permission, which the content editor and super admin roles hold.
 
 ## Not yet implemented
 

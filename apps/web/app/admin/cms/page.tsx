@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { AdminSection } from '../../../features/admin/components/AdminSection';
 import { CmsModuleLinks, type CmsModule } from '../../../features/admin/components/CmsModuleLinks';
 import { requireAdmin } from '../../../features/admin/guard';
+import { getHelpCategories } from '../../../features/content/helpCategoryQueries';
 import { getCmsEntries } from '../../../features/content/queries';
 import { getCmsSections } from '../../../features/content/sectionQueries';
 import { getDictionary } from '../../../i18n';
@@ -17,7 +18,11 @@ export default async function AdminCmsPage() {
   const viewer = await requireAdmin('admin:cms:write', '/admin/cms');
   const locale = await getLocale();
   const copy = getDictionary(locale);
-  const [sections, entries] = await Promise.all([getCmsSections(), getCmsEntries()]);
+  const [sections, entries, categories] = await Promise.all([
+    getCmsSections(),
+    getCmsEntries(),
+    getHelpCategories(),
+  ]);
   const countOf = (kind: 'page' | 'help' | 'journal') =>
     entries.filter((entry) => entry.kind === kind).length;
   const modules: CmsModule[] = [
@@ -36,6 +41,14 @@ export default async function AdminCmsPage() {
       href: '/admin/content',
       count: countOf('page') + countOf('help'),
       countLabel: copy.admin.entryCount,
+    },
+    {
+      key: 'help',
+      title: copy.admin.cmsHelpCard,
+      body: copy.admin.cmsHelpCardBody,
+      href: '/admin/cms/help',
+      count: categories.length,
+      countLabel: copy.admin.cmsHelpCount,
     },
     {
       key: 'journal',

@@ -63,11 +63,20 @@ export async function saveContentAction(formData: FormData): Promise<void> {
     seoDescriptionEn: formData.get('seoDescriptionEn'),
     seoDescriptionBn: formData.get('seoDescriptionBn'),
     status: formData.get('status'),
+    helpCategoryId: formData.get('helpCategoryId'),
     publishDate: formData.get('publishDate'),
   });
   if (!parsed.success) adminFail('/admin/content', 'invalid');
 
   const input = parsed.data;
+  const helpCategoryId = input.kind === 'help' ? input.helpCategoryId : null;
+  if (helpCategoryId) {
+    const category = await getPrisma().helpCategory.findUnique({
+      where: { id: helpCategoryId },
+      select: { id: true },
+    });
+    if (!category) adminFail('/admin/content', 'invalid');
+  }
   const publishAt =
     input.status === 'scheduled'
       ? publishDateToInstant(input.publishDate ?? null)
@@ -92,6 +101,7 @@ export async function saveContentAction(formData: FormData): Promise<void> {
         ...snapshot,
         status: input.status,
         publishAt,
+        helpCategoryId,
       };
       if (existing) {
         await tx.cmsEntry.update({ where: { id: existing.id }, data });

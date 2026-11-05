@@ -11,3 +11,5 @@ apps/web/generated/
 .lighthouseci/
 test-results/
 playwright-report/
+.cloud-attachments/
+.playwright-evidence*/

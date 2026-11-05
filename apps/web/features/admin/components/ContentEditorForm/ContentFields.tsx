@@ -1,13 +1,20 @@
 import type { Dictionary } from '../../../../i18n';
 import type { ContentKind, CmsEntryRecord } from '../../../content';
+import type { HelpCategoryRecord } from '../../../content/helpCategoryQueries';
+import type { CategoryLanguage } from '../../../content/helpCategoryTypes';
 import { instantToDateInput } from '../../../content/urls';
+import { HelpCategorySelect } from '../HelpCategorySelect';
 
 export interface ContentFieldsProps {
   /** Existing entry, or null when creating one. */
   entry: CmsEntryRecord | null;
   /** Area preselected for a new entry. */
   defaultKind: ContentKind;
+  /** Categories that a Help article can be filed under. */
+  categories: readonly HelpCategoryRecord[];
   copy: Dictionary['admin'];
+  /** Language used for the category options. */
+  locale: CategoryLanguage;
 }
 
 const control =
@@ -16,7 +23,13 @@ const area = `${control} min-h-40 leading-relaxed`;
 const label = 'text-xs font-semibold text-ink';
 
 /** Text, status and scheduling inputs shared by create and edit. */
-export function ContentFields({ entry, defaultKind, copy }: ContentFieldsProps) {
+export function ContentFields({
+  entry,
+  defaultKind,
+  categories,
+  copy,
+  locale,
+}: ContentFieldsProps) {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2">
@@ -40,6 +53,13 @@ export function ContentFields({ entry, defaultKind, copy }: ContentFieldsProps) 
           />
         </label>
       </div>
+
+      <HelpCategorySelect
+        categories={[...categories]}
+        selectedId={entry?.helpCategoryId ?? null}
+        copy={copy}
+        locale={locale}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className={label}>

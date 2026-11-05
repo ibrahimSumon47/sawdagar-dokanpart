@@ -40,6 +40,7 @@ export const contentSchema = z
     seoDescriptionEn: optionalText(200),
     seoDescriptionBn: optionalText(200),
     status: z.enum(contentStatuses),
+    helpCategoryId: optionalText(80),
     publishDate,
   })
   .refine((value) => value.status !== 'scheduled' || Boolean(value.publishDate), {

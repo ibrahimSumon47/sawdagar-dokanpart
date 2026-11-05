@@ -1,11 +1,9 @@
-import { EmptyState, JamdaniPattern } from '@sd/ui';
-import Link from 'next/link';
+import { EmptyState } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
-import { formatDate } from '../../../../lib/formatDate';
 import type { ContentKind } from '../../contentTypes';
 import type { CmsEntryRecord } from '../../queries';
 import { pageLayout } from '../../../shell/pageLayout';
-import { contentHref } from '../../urls';
+import { ContentCard } from '../ContentCard';
 
 export interface ContentIndexViewProps {
   kind: Extract<ContentKind, 'help' | 'journal'>;
@@ -36,38 +34,7 @@ export function ContentIndexView({ kind, entries, copy, locale }: ContentIndexVi
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {entries.map((entry, index) => (
             <li key={entry.id}>
-              <Link
-                href={contentHref(kind, entry.slug)}
-                className="group flex h-full flex-col overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-accent"
-              >
-                <div
-                  className={
-                    index % 3 === 0
-                      ? 'h-24 bg-accent/10 text-accent'
-                      : index % 3 === 1
-                        ? 'h-24 bg-highlight/20 text-ink'
-                        : 'h-24 bg-secondary/20 text-secondary'
-                  }
-                >
-                  <JamdaniPattern />
-                </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <h2 className="font-serif text-xl leading-snug text-ink group-hover:text-accent">
-                    {locale === 'bn' ? entry.titleBn : entry.titleEn}
-                  </h2>
-                  {entry.excerptEn || entry.excerptBn ? (
-                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-muted">
-                      {locale === 'bn' ? entry.excerptBn : entry.excerptEn}
-                    </p>
-                  ) : null}
-                  <p className="mt-auto pt-4 text-xs text-ink-muted">
-                    {copy.content.readMore}
-                    {entry.publishAt
-                      ? ` · ${copy.content.publishedOn} ${formatDate(entry.publishAt, locale)}`
-                      : ''}
-                  </p>
-                </div>
-              </Link>
+              <ContentCard kind={kind} entry={entry} copy={copy} locale={locale} index={index} />
             </li>
           ))}
         </ul>

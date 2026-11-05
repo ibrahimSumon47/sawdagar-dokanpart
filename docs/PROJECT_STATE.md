@@ -46,7 +46,7 @@
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slices (a) and (b) are built, and (b) awaits its deployed check.**
+**Revision 1, phase R5 (CMS) is in progress; slices (a) and (b) are accepted and slice (c) awaits its deployed check.**
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
@@ -67,7 +67,18 @@ save shows on the next request. Hosted Playwright run
 announcement on with a link to `/policies`, saw the line on `/` within 60s and followed it, then added and removed a footer
 link and saw both changes on `/`. The run also caught a real gap: the link schema required both labels while
 `localisedLinks` already falls back between languages, so a link labelled in one language could not be saved (`c41dab8`).
-The Help Center and Journal slices follow.
+Slice (c), Help Center topics, search and helpful votes, is built and locally checked. `help_categories` and
+`help_category_versions` store topics with bilingual names, descriptions, a unique slug and a display order, edited at
+`/admin/cms/help` with move-up and move-down forms and the last ten versions; `cms_entries.help_category_id` files an
+article under one topic and is set only for `help` entries, so restoring an entry version never moves an article and
+deleting a topic files its articles back into all topics. `/help` now takes `?q=` and `?category=`, searches
+titles, excerpts and bodies case-insensitively once the phrase reaches two characters, keeps the chosen topic across a
+search, and shows the article count per topic. `help_article_votes` counts "was this article helpful" with a random
+first-party `sd_help_visitor` cookie and a unique `(entryId, visitorId)` row, so a reader can change their answer
+without an account and one browser cannot vote twice. `pnpm lint`, `pnpm typecheck`, `pnpm test` (103 tests) and
+`pnpm build` pass. The migrations, the seed and the deployed check follow.
+
+The Journal slice (d) follows.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,
