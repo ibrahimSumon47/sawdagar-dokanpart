@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Revision 1, phase R4: give every data-loading route a skeleton that shares the page container with the component it stands in for. `pageLayout.ts` holds the container classes, the skeleton kit gains a stat tile and a table block, thirty-four routes get their own `loading.tsx`, and the home page moves into an `app/(storefront)` route group so its skeleton no longer covers the rest of the site. A deployed Playwright check throttles the connection, asserts the streamed skeleton markup per route and holds cumulative layout shift under 0.05.
+
 - Fix the deployed auth pages: the sign-in, registration, reset and security forms now receive `AuthCopy`, a plain-string slice of the dictionary, because the whole dictionary carries nineteen builder functions that React cannot pass to a client component. The pages had been returning 500 on Vercel while the storefront stayed up.
 
 - Revision 1, phase R3: replace the one-click demo shortcut with real accounts. Registration collects a Bangladeshi mobile number, terms acceptance and an optional seller application; sign-in uses the real password; password reset, verification and resend go through the in-app `mail_outbox` and an admin outbox page; `/account/security` reports verification state and changes the password; a shared `normalizeBdPhone` and password-strength rule live in `@sd/domain`; and the database-backed rate limiter guards sign-in, registration and reset.

@@ -19,5 +19,12 @@
     "acceptance": "Registration, sign-in, reset, verification and sign-out work against the deployment at 375, 768 and 1440 pixels",
     "status": "pass",
     "evidence": "Migration 20261105090000_real_auth applied (Database run 42015565547); auth client forms now receive only plain-string copy (51c4b61), which removed the 19-function serialisation 500s; Playwright 42020265137 passed 14 checks on the deployment, including signed-out redirect, wrong password, seeded sign-in with sign-out, buyer registration, seller application, reset request and 375, 768 and 1440 px fit"
+  },
+  {
+    "id": "R4",
+    "description": "Skeleton system whose placeholders share the real page layout",
+    "acceptance": "Every data route streams a skeleton that matches its loaded layout, with no perceptible layout shift on a slow connection",
+    "status": "pass",
+    "evidence": "Shared containers in apps/web/features/shell/pageLayout.ts imported by both pages and skeletons; 19 skeletons, 34 route loading.tsx files; home moved into app/(storefront) so the root fallback no longer covered other routes (43fec2c); Playwright 42030526892 passed on the deployment, asserting each route's own skeleton in the streamed HTML for /, /catalog, /help, /journal, a product and a store, holding CLS under 0.05 on a throttled connection, and capturing 12 screenshots"
   }
 ]
