@@ -91,7 +91,7 @@ for (const [locale, copy] of Object.entries(contentChecks)) {
     ]) {
       const response = await page.goto(path);
       expect(response?.status()).toBe(200);
-      const article = page.locator('article');
+      const article = page.getByRole('article');
       await expect(article).not.toContainText(/demo|sample|fictional|ডেমো|নমুনা/i);
       if (expected) await expect(article).toContainText(expected);
       if (path === '/help/payments') {
