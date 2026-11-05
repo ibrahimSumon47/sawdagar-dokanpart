@@ -32,8 +32,13 @@ export { RatingStars } from './components/RatingStars';
 export type { RatingStarsProps } from './components/RatingStars';
 export { SectionHeading } from './components/SectionHeading';
 export type { SectionHeadingProps } from './components/SectionHeading';
-export { Skeleton, SkeletonText } from './components/Skeleton';
-export type { SkeletonProps, SkeletonTextProps } from './components/Skeleton';
+export { Skeleton, SkeletonStat, SkeletonTable, SkeletonText } from './components/Skeleton';
+export type {
+  SkeletonProps,
+  SkeletonStatProps,
+  SkeletonTableProps,
+  SkeletonTextProps,
+} from './components/Skeleton';
 export { VendorRow, VendorRowSkeleton } from './components/VendorRow';
 export type { VendorRowProps, VendorRowSkeletonProps } from './components/VendorRow';
 export { cn } from './lib/cn';
