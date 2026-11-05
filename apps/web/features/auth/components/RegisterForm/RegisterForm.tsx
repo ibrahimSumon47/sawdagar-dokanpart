@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from 'react';
 import Link from 'next/link';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 import { registerAction } from '../../actions';
 import { emptyAuthState } from '../../state';
 import { authMessage } from '../../messages';
@@ -13,7 +13,7 @@ import { PasswordStrengthMeter } from '../PasswordStrengthMeter';
 import { SubmitButton } from '../SubmitButton';
 
 export interface RegisterFormProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Deployment has the database and auth secret. */
   configured: boolean;
 }

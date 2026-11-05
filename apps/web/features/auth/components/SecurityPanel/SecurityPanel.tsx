@@ -2,7 +2,7 @@
 
 import { ButtonLink } from '@sd/ui';
 import { useActionState } from 'react';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 import { changePasswordAction, signOut } from '../../actions';
 import { emptyAuthState } from '../../state';
 import { authMessage } from '../../messages';
@@ -11,7 +11,7 @@ import { FormMessages } from '../FormMessages';
 import { SubmitButton } from '../SubmitButton';
 
 export interface SecurityPanelProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Address on the account, shown so the visitor knows which one is verified. */
   email: string;
   /** Better Auth has marked the address verified. */

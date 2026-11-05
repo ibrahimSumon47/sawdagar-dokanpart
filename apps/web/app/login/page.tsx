@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { AuthCard, LoginForm } from '../../features/auth/components';
+import { authCopyFor } from '../../features/auth/copy';
 import { safeNextPath } from '../../features/auth/safeNextPath';
 import { getViewer, isAuthConfigured } from '../../features/auth/session';
 import { getDictionary } from '../../i18n';
@@ -38,7 +39,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       }
     >
       <LoginForm
-        copy={copy}
+        copy={authCopyFor(copy)}
         next={next}
         configured={isAuthConfigured()}
         resetDone={params.reset === '1'}

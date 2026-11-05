@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthCard, ResetPasswordForm } from '../../features/auth/components';
+import { authCopyFor } from '../../features/auth/copy';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
 
@@ -32,7 +33,7 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
       }
     >
       {token ? (
-        <ResetPasswordForm copy={copy} token={token} />
+        <ResetPasswordForm copy={authCopyFor(copy)} token={token} />
       ) : (
         <p role="alert" className="text-sm text-danger">
           {copy.auth.resetInvalid}

@@ -1,10 +1,10 @@
 'use client';
 
 import { demoAccounts } from '@sd/domain';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 
 export interface DemoAccountPickerProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Called with the chosen demo email; the form still submits normally. */
   onPick: (email: string) => void;
 }

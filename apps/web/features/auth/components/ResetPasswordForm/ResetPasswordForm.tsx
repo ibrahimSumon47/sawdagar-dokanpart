@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 import { resetPasswordAction } from '../../actions';
 import { emptyAuthState } from '../../state';
 import { authMessage } from '../../messages';
@@ -10,7 +10,7 @@ import { FormMessages } from '../FormMessages';
 import { SubmitButton } from '../SubmitButton';
 
 export interface ResetPasswordFormProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Token taken from the reset link. */
   token: string;
 }

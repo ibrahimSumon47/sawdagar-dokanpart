@@ -2,7 +2,7 @@
 
 import { ButtonLink } from '@sd/ui';
 import { useActionState, useRef } from 'react';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 import { signInAction } from '../../actions';
 import { emptyAuthState } from '../../state';
 import { authMessage } from '../../messages';
@@ -13,7 +13,7 @@ import { FormMessages } from '../FormMessages';
 import { SubmitButton } from '../SubmitButton';
 
 export interface LoginFormProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Internal page to open after a successful sign-in. */
   next: string;
   /** Deployment has the database and auth secret. */

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SecurityPanel } from '../../../features/auth/components';
+import { authCopyFor } from '../../../features/auth/copy';
 import { requireViewer } from '../../../features/auth/session';
 import { getDictionary } from '../../../i18n';
 import { getLocale } from '../../../i18n/getLocale';
@@ -21,7 +22,11 @@ export default async function AccountSecurityPage() {
         <p className="mt-2 text-sm text-ink-muted">{copy.auth.securityBody}</p>
       </header>
       <div className="mt-8">
-        <SecurityPanel copy={copy} email={viewer.email} verified={viewer.emailVerified} />
+        <SecurityPanel
+          copy={authCopyFor(copy)}
+          email={viewer.email}
+          verified={viewer.emailVerified}
+        />
       </div>
     </div>
   );

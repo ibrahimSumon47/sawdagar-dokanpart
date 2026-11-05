@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AuthCard, ForgotPasswordForm } from '../../features/auth/components';
+import { authCopyFor } from '../../features/auth/copy';
 import Link from 'next/link';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
@@ -23,7 +24,7 @@ export default async function ForgotPasswordPage() {
         </Link>
       }
     >
-      <ForgotPasswordForm copy={copy} />
+      <ForgotPasswordForm copy={authCopyFor(copy)} />
     </AuthCard>
   );
 }

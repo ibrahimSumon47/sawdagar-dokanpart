@@ -1,8 +1,8 @@
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 import { authMessage } from '../../messages';
 
 export interface FormMessagesProps {
-  copy: Dictionary;
+  copy: AuthCopy;
   /** Message key returned by the action's form state, if any. */
   message?: string;
   tone?: 'error' | 'success';

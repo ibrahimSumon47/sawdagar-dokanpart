@@ -1,4 +1,4 @@
-import type { Dictionary } from '../../i18n';
+import type { AuthCopy } from './copy';
 
 /** Message keys the auth forms and actions can return. */
 export type AuthMessageKey =
@@ -44,7 +44,7 @@ const messageKeys: readonly AuthMessageKey[] = [
  * back to the generic failure text so a new code path can never render an
  * empty alert.
  */
-export function authMessage(copy: Dictionary, key?: string): string {
+export function authMessage(copy: AuthCopy, key?: string): string {
   if (!key) return '';
   const camel = key.replace(/-([a-z])/g, (_, letter: string) => letter.toUpperCase());
   const auth = copy.auth as unknown as Record<string, string>;

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { AuthCard, RegisterForm } from '../../features/auth/components';
+import { authCopyFor } from '../../features/auth/copy';
 import { getViewer, isAuthConfigured } from '../../features/auth/session';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
@@ -30,7 +31,7 @@ export default async function RegisterPage() {
         </>
       }
     >
-      <RegisterForm copy={copy} configured={isAuthConfigured()} />
+      <RegisterForm copy={authCopyFor(copy)} configured={isAuthConfigured()} />
     </AuthCard>
   );
 }

@@ -1,8 +1,8 @@
 import { Database } from 'lucide-react';
-import type { Dictionary } from '../../../../i18n';
+import type { AuthCopy } from '../../copy';
 
 export interface AuthSetupNoticeProps {
-  copy: Dictionary;
+  copy: AuthCopy;
 }
 
 /**
