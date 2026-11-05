@@ -42,11 +42,13 @@
 - Revision 1, phase R4: a skeleton kit that cannot drift from the layout it stands in for. `apps/web/features/shell/pageLayout.ts` holds the container classes and both a page component and its skeleton import the same constant; `Skeleton` gained a `data-skeleton` marker, and `SkeletonStat` and `SkeletonTable` cover dashboards and admin tables; nineteen feature skeletons wrap those blocks; thirty-four routes ship their own `loading.tsx`; every skeleton honours `prefers-reduced-motion`. The home page moved into the `app/(storefront)` route group so the root fallback no longer renders the home skeleton on `/help`, `/catalog` and `/journal`.
 - Revision 1, phase R4 production check: `e2e/r4-skeletons.spec.mjs` loads `/`, `/catalog`, `/help`, `/journal`, a product and a store with the connection throttled to 350 ms latency and 50 kbit/s, asserts each route's own skeleton in the streamed HTML, captures the loading frame and the loaded page, and sums non-input `layout-shift` entries. Hosted Playwright run [42030526892](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42030526892) passed; the screenshots show the hero skeleton on `/`, filter chips and a two-column product grid on `/catalog`, and article cards on `/help`.
 - Revision 1, phase R5 (homepage sections): the `20261105140000_cms_sections` migration adds `cms_sections` and `cms_section_versions`. `/admin/cms` is now the CMS hub with counts for homepage sections, pages and Help Center, and the Journal; `/admin/cms/sections` lists the blocks with drag or arrow reordering that saves each move optimistically and reverts on failure; the editor covers kind, bilingual copy, media, link label and address, status, schedule and a preview, and keeps the last ten versions with restore-as-new-version. The public homepage reads the first published hero, every published banner and the published collection heading, and the section actions purge `/` so an edit appears on the next request.
+- Revision 1, phase R5 (site settings): `site_settings` and `site_settings_versions` keep one versioned record for the announcement bar, the header and footer menus, the metadata defaults and the bilingual shipping and return text. `/admin/cms/settings` saves it with an audit entry and purges the root layout, `/policies` renders the shipping and return copy, and a saved menu is limited to six header and five footer links whose targets are a site path or an `https` address.
+- Revision 1, phase R5 (Help Center topics): the `20261105180000_help_categories` and `20261105193000_help_article_votes` migrations add topics with their version history, an optional topic on help entries, and one vote row per article and browser cookie. `/admin/cms/help` edits and reorders topics, `/help` filters by topic and searches titles, excerpts and bodies, and article pages show and count helpful votes.
 - Phase 12 production check: `/case-study` returned 200 with a self-referencing canonical, structured data and a footer link, and the sitemap listed 473 URLs including it. `/llms.txt` returned 200 as plain text and matched the root copy byte for byte. The six README screenshots were recaptured from production in a fresh headless browser at 1280 × 860 and 390 × 844, so they show no signed-in state or browser overlay. The new case-study page was checked at 360 px in dark theme and in the Bangla shell: no horizontal overflow, every section rendered, and the localized footer held its layout. Local lint, typecheck, 170 tests, build, asset budgets and both drift checks passed. The first CI run failed only on Windows in `facts:check` because the generated JSON was checked out with CRLF; both checks now normalise line endings and the generated files are pinned to LF, and the final CI run and Vercel deployment are green.
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slices (a) and (b) are accepted and slice (c) awaits its deployed check.**
+**Revision 1, phase R5 (CMS) is in progress; slices (a), (b) and (c) are accepted and the Journal slice is next.**
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
@@ -67,7 +69,7 @@ save shows on the next request. Hosted Playwright run
 announcement on with a link to `/policies`, saw the line on `/` within 60s and followed it, then added and removed a footer
 link and saw both changes on `/`. The run also caught a real gap: the link schema required both labels while
 `localisedLinks` already falls back between languages, so a link labelled in one language could not be saved (`c41dab8`).
-Slice (c), Help Center topics, search and helpful votes, is built and locally checked. `help_categories` and
+Slice (c), Help Center topics, search and helpful votes, is accepted. `help_categories` and
 `help_category_versions` store topics with bilingual names, descriptions, a unique slug and a display order, edited at
 `/admin/cms/help` with move-up and move-down forms and the last ten versions; `cms_entries.help_category_id` files an
 article under one topic and is set only for `help` entries, so restoring an entry version never moves an article and
@@ -76,7 +78,12 @@ titles, excerpts and bodies case-insensitively once the phrase reaches two chara
 search, and shows the article count per topic. `help_article_votes` counts "was this article helpful" with a random
 first-party `sd_help_visitor` cookie and a unique `(entryId, visitorId)` row, so a reader can change their answer
 without an account and one browser cannot vote twice. `pnpm lint`, `pnpm typecheck`, `pnpm test` (103 tests) and
-`pnpm build` pass. The migrations, the seed and the deployed check follow.
+`pnpm build` pass, the migrate and seed workflows ran on `main`, and hosted Playwright run
+[42068852661](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42068852661) passed 32 checks: it filtered
+`/help` by the Delivery topic, searched inside it and cleared the filters, saw the empty state for a phrase with no
+match, voted an article helpful, changed the answer and changed it back without the reader count drifting, renamed a
+topic through the CMS and restored version 1, filed an article under another topic and put it back, and reordered two
+topics and saw the sidebar follow.
 
 The Journal slice (d) follows.
 
