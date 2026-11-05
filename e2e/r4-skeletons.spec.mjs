@@ -58,6 +58,35 @@ function expectSkeletonMarkup(html) {
   expect(html).not.toMatch(/role="status"[^>]*aria-label=""/);
 }
 
+/**
+ * Captures the loading frame, but only while the route really is still loading: a skeleton element
+ * must be laid out and the page must not have rendered its heading yet. Streaming can finish before
+ * the screenshot, and a shot of the loaded page labelled "skeleton" would be false evidence.
+ */
+async function captureSkeleton(page, testInfo, path) {
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    const loading = await page
+      .evaluate(() => {
+        if (!document.querySelector('main') || document.querySelector('main h1')) {
+          return false;
+        }
+        const skeletons = [...document.querySelectorAll('[data-skeleton]')];
+        return skeletons.some((node) => node.getClientRects().length > 0);
+      })
+      .catch(() => false);
+    if (loading) {
+      const file = testInfo.outputPath(`r4-skeleton${path.replaceAll('/', '-')}.png`);
+      await page.screenshot({ path: file });
+      await testInfo.attach(`skeleton ${path}`, { path: file, contentType: 'image/png' });
+      return true;
+    }
+    await page.waitForTimeout(100);
+  }
+
+  return false;
+}
+
 const routes = await resolveRoutes();
 
 for (const path of routes) {
@@ -75,16 +104,7 @@ for (const path of routes) {
 
     await page.goto(path, { waitUntil: 'commit' });
 
-    const visibleSkeleton = page.locator('[data-skeleton]:visible').first();
-    const painted = await visibleSkeleton
-      .waitFor({ state: 'visible', timeout: 5000 })
-      .then(() => true)
-      .catch(() => false);
-    if (painted) {
-      const skeletonShot = testInfo.outputPath(`r4-skeleton${path.replaceAll('/', '-')}.png`);
-      await page.screenshot({ path: skeletonShot });
-      await testInfo.attach(`skeleton ${path}`, { path: skeletonShot, contentType: 'image/png' });
-    }
+    await captureSkeleton(page, testInfo, path);
 
     await page.waitForLoadState('networkidle');
     await page.waitForFunction(
@@ -99,10 +119,6 @@ for (const path of routes) {
     const loadedShot = testInfo.outputPath(`r4-loaded${path.replaceAll('/', '-')}.png`);
     await page.screenshot({ path: loadedShot, fullPage: true });
     await testInfo.attach(`loaded ${path}`, { path: loadedShot, contentType: 'image/png' });
-    await testInfo.attach('skeleton painted on screen', {
-      body: String(painted),
-      contentType: 'text/plain',
-    });
 
     const cls = await page.evaluate(() => window.__cls ?? 0);
     expect(cls, `cumulative layout shift on ${path}`).toBeLessThan(CLS_BUDGET);
