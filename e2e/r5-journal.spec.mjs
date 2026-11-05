@@ -40,9 +40,9 @@ test.describe('R5 Journal covers, tags and rich text', () => {
       page.getByRole('img', { name: 'A woven jamdani saree held up to the light' }),
     ).toBeVisible();
     await expect(page.getByRole('link', { name: new RegExp(potteryTitle) })).toBeVisible();
-    await expect(
-      page.getByRole('link', { name: /What the winter market will carry/ }),
-    ).toHaveCount(0);
+    await expect(page.getByRole('link', { name: /What the winter market will carry/ })).toHaveCount(
+      0,
+    );
 
     const filters = page.getByRole('navigation', { name: 'Filter by tag' });
     await expect(filters.getByRole('link', { name: /^All posts/ })).toHaveAttribute(
@@ -56,7 +56,8 @@ test.describe('R5 Journal covers, tags and rich text', () => {
     ).toBeVisible();
     await expect(page.getByRole('link', { name: new RegExp(potteryTitle) })).toHaveCount(0);
 
-    await page.getByRole('navigation', { name: 'Filter by tag' })
+    await page
+      .getByRole('navigation', { name: 'Filter by tag' })
       .getByRole('link', { name: /^All posts/ })
       .click();
     await expect(page).toHaveURL(/\/journal$/);
@@ -66,7 +67,8 @@ test.describe('R5 Journal covers, tags and rich text', () => {
   test('an unknown tag shows the empty state', async ({ page }) => {
     await page.goto('/journal?tag=nothing-here');
     await expect(page.getByRole('heading', { name: 'No posts use that tag yet.' })).toBeVisible();
-    await page.getByRole('navigation', { name: 'Filter by tag' })
+    await page
+      .getByRole('navigation', { name: 'Filter by tag' })
       .getByRole('link', { name: /^All posts/ })
       .click();
     await expect(page).toHaveURL(/\/journal$/);
@@ -113,13 +115,17 @@ test.describe('R5 Journal covers, tags and rich text', () => {
       await openJournalEntry(page, potteryTitle);
 
       await expect(page.getByLabel('Cover image')).toHaveValue(potteryCoverId);
-      await expect(page.getByLabel('Tags')).toHaveValue(seededTags);
       await expect(page.getByRole('textbox', { name: 'English body' })).toBeVisible();
+
+      // Saving the seeded tags first gives this run its own restore target, so a
+      // repeated run finds the same version one step back instead of a stale snapshot.
+      await page.getByLabel('Tags').fill(seededTags);
+      await page.getByRole('button', { name: 'Save entry' }).click();
+      await expect(page.getByText('The entry was saved.')).toBeVisible();
 
       await page.getByLabel('Tags').fill(`${seededTags}, kiln-check`);
       await page.getByRole('button', { name: 'Save entry' }).click();
       await expect(page.getByText('The entry was saved.')).toBeVisible();
-      await expect(page.getByLabel('Tags')).toHaveValue(`${seededTags}, kiln-check`);
 
       await page.goto('/journal?tag=kiln-check');
       await expect(page.getByRole('link', { name: new RegExp(potteryTitle) })).toBeVisible();
@@ -129,6 +135,8 @@ test.describe('R5 Journal covers, tags and rich text', () => {
       await testInfo.attach('r5-journal-tag', { path: screenshot, contentType: 'image/png' });
 
       await openJournalEntry(page, potteryTitle);
+      await expect(page.getByLabel('Tags')).toHaveValue(`${seededTags}, kiln-check`);
+
       const versions = page
         .getByRole('listitem')
         .filter({ has: page.getByRole('button', { name: 'Restore' }) });
