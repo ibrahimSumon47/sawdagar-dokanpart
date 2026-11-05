@@ -55,15 +55,19 @@ banner and the published collection heading, and falls back to its built-in copy
 42047722255 on the deployment signed in as the content editor, renamed the hero in `/admin/cms`, saved it and saw the
 new headline on `/` within 60 s, then restored it.
 
-Slice (b), site settings, is written and passes lint, typecheck, the unit tests and the build, but is not yet verified on
-the deployment. `site_settings` is one row with the fixed id `site` and `site_settings_versions` keeps its last ten
+Slice (b), site settings, is accepted. `site_settings` is one row with the fixed id `site` and `site_settings_versions` keeps its last ten
 snapshots, so the editor at `/admin/cms/settings` saves the announcement bar, the header and footer links, the metadata
 defaults and the bilingual shipping and return text as one versioned record with an audit entry. The announcement is off
 unless an editor switches it on with English text, and a saved menu is limited to six header and five footer links whose
 hrefs must be a site path or an `https` address. The root layout reads the record once through `getPublicSettings()` and
 passes the announcement to `SiteAnnouncement`, the extra links to `SiteHeader` and `SiteFooter`, and the SEO defaults to
 `generateMetadata`; `/policies` renders the shipping and return text. The settings actions purge `('/', 'layout')`, so a
-save shows on the next request. The Help Center and Journal slices follow.
+save shows on the next request. Hosted Playwright run
+[42057524731](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42057524731) passed 26 checks: it switched the
+announcement on with a link to `/policies`, saw the line on `/` within 60s and followed it, then added and removed a footer
+link and saw both changes on `/`. The run also caught a real gap: the link schema required both labels while
+`localisedLinks` already falls back between languages, so a link labelled in one language could not be saved (`c41dab8`).
+The Help Center and Journal slices follow.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,
