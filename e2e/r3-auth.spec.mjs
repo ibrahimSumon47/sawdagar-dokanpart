@@ -72,3 +72,27 @@ test('registration creates a real account and asks for verification', async ({ p
   await expect(page.getByRole('status')).toContainText('not verified yet');
   await expect(page.getByText(email)).toBeVisible();
 });
+
+test('a seller applicant gives a store name and lands on verification', async ({ page }) => {
+  const stamp = Date.now().toString().slice(-9);
+  const email = `r3-seller-${stamp}@sawdagar.test`;
+  await page.goto('/register');
+  await page.getByRole('radio', { name: /Apply to sell/ }).check();
+  await page.getByLabel('Full name').fill('R3 Seller Check');
+  await page.getByLabel('Email address').fill(email);
+  await page.getByLabel('Mobile number').fill(`016${stamp.slice(-8)}`);
+  await page.getByLabel('Business or store name').fill('R3 Handloom House');
+  await page.getByLabel('Password', { exact: true }).fill('handloom-thread-2026');
+  await page.getByLabel('Confirm password').fill('handloom-thread-2026');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Create account' }).click();
+  await expect(page).toHaveURL(/\/verify-email\?email=/);
+  await expect(page.getByText(email)).toBeVisible();
+});
+
+test('a reset request confirms without naming the account', async ({ page }) => {
+  await page.goto('/forgot-password');
+  await page.getByLabel('Email address').fill(`nobody-${Date.now()}@sawdagar.test`);
+  await page.getByRole('button', { name: 'Send reset link' }).click();
+  await expect(page.getByRole('status')).toContainText('If an account uses that address');
+});
