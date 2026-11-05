@@ -104,7 +104,10 @@ test.describe('R5 Help Center topics, search and votes', () => {
       const renamed = `Orders R5 ${stamp}`;
 
       await signInAsEditor(page, '/admin/cms/help');
-      await page.getByRole('link', { name: 'Orders', exact: true }).click();
+      const ordersRow = page
+        .getByRole('row')
+        .filter({ has: page.getByText('orders', { exact: true }) });
+      await ordersRow.getByRole('link').click();
       await expect(page).toHaveURL(/\/admin\/cms\/help\/[^/]+$/);
 
       await page.getByLabel('Name (English)').fill(renamed);
@@ -121,11 +124,10 @@ test.describe('R5 Help Center topics, search and votes', () => {
       await testInfo.attach('r5-help-category', { path: screenshot, contentType: 'image/png' });
 
       await page.goBack();
-      await page
+      const firstVersion = page
         .getByRole('listitem')
-        .filter({ hasText: 'Version 1' })
-        .getByRole('button', { name: 'Restore' })
-        .click();
+        .filter({ has: page.getByText('Version 1', { exact: true }) });
+      await firstVersion.getByRole('button', { name: 'Restore' }).click();
       await expect(page.getByText('The version was restored as a new edit.')).toBeVisible();
       await expect(page.getByLabel('Name (English)')).toHaveValue('Orders');
 
