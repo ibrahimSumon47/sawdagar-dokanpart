@@ -41,9 +41,25 @@
 - Phase 12 production check: `/case-study` returned 200 with a self-referencing canonical, structured data and a footer link, and the sitemap listed 473 URLs including it. `/llms.txt` returned 200 as plain text and matched the root copy byte for byte. The six README screenshots were recaptured from production in a fresh headless browser at 1280 × 860 and 390 × 844, so they show no signed-in state or browser overlay. The new case-study page was checked at 360 px in dark theme and in the Bangla shell: no horizontal overflow, every section rendered, and the localized footer held its layout. Local lint, typecheck, 170 tests, build, asset budgets and both drift checks passed. The first CI run failed only on Windows in `facts:check` because the generated JSON was checked out with CRLF; both checks now normalise line endings and the generated files are pinned to LF, and the final CI run and Vercel deployment are green.
 
 ## Now
-- Revision 1, phase R1 remains in progress. Commit `5756643` added responsive header search, wishlist and account access, corrected sign-in wording, and added a deployed-site Playwright workflow. CI run [41275693702](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41275693702) passed on all three platforms; Vercel deployment `dpl_J6t5Yjw4Y3emPv9FL8A2tEg2ZaDb` is Ready. Playwright run [41276371190](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41276371190) passed the three viewport assertions after loading all home images and saved screenshots at 375, 768 and 1440 px; CI run [41276370739](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41276370739) passed. On 2026-11-01, six Help and static CMS entries were updated through the versioned editor with owner approval, and public responses for all six were checked in English and Bangla. Bilingual seed corrections and deployed Playwright assertions are prepared locally; the new assertions have not yet run in hosted CI. On 2026-11-01, Playwright runs [41279324126](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279324126) and [41279963461](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279963461) passed; the 768 and 1440 px full-page captures were reviewed and show no demo framing. R1 is done. R2 work is uncommitted and incomplete; its empty manifest does not enforce published images.
-- Earlier R1 implementation: the notice strip and header project links were removed; the header carries Catalog, Categories, Sell on Sawdagar and search; project links live in the footer Project column and on `/about/project`; the footer shows one test-mode payments line and the checkout payment method carries a test-mode label. Verified on the deployment at 375 and 768 px with no horizontal overflow, header links limited to Catalog, Categories and Sell on Sawdagar, and the home, catalog and `/about/project` routes returning 200. At that time lint, typecheck, 170 tests, build and both drift checks passed; remaining R1 acceptance is not yet verified.
 
+**Revision 1, phase R2 is done.** Product photos are per-product and licensed: 440 Wikimedia Commons photographs
+uploaded to Cloudinary under `sawdagar/products/<subcategory>/<n>`, with author and licence recorded per file and
+credited on `/credits`. A product publishes only with its own main image plus at least two gallery images
+(`publishStatusFor` reads `productImageSetsBySlug`), which leaves 142 publishable products and parks 22 subcategories
+as drafts instead of repeating a category picture. `scripts/ci/check-images.ts` fails the build on a shared public id,
+a near-duplicate average hash or a repeated alt string. CI run
+[41394029950](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41394029950) passed on Linux, Windows and
+macOS, and hosted Playwright run
+[41394434731](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41394434731) passed at 375, 768 and
+1440 px. `docs/features.json` records R2 as `pass`.
+
+**R1 is done** (commits through `2297978`). The demo notice strip is gone, the header carries only store navigation,
+project links live in the footer Project column and on `/about/project`, and Playwright runs
+[41279324126](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279324126) and
+[41279963461](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279963461) passed at 375, 768 and
+1440 px.
+
+**R3 (real registration and login) is in progress.**
 ## Next
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
@@ -51,16 +67,15 @@
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
 
 ## Blocked
-- Prepared Playwright copy checks have not run in hosted CI, and the remaining R1 acceptance checks are not verified. R2 publication enforcement and image sourcing are not implemented; repeated category images remain on the live site.
 - No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
 - There is no marketplace REST API or OpenAPI document. The only HTTP routes are Better Auth and the MockPay callback; every other write is a Server Action, as recorded in ADR-006 and [API.md](API.md).
 - Search matches only English and Bangla product titles and leaf-category names. Descriptions, variants and vendor names are not searched; there is no typo tolerance, stemming or autosuggest yet.
-- Catalog products share one representative locally stored photograph per department rather than a photograph of the exact product; there is no gallery or zoom. The credits are listed in [CREDITS.md](CREDITS.md).
+- Product pages show the product's own photograph plus a gallery of two to four more, all sourced per product; there is no zoom or 360 view. Four hundred and forty photographs cover 142 publishable products, so 22 subcategories stay unpublished until more distinct photographs exist. Author and licence are listed in [CREDITS.md](CREDITS.md).
 - Search ranking reorders at most 120 matches and never overrides an explicit price or rating sort. Byte tokenization has no stemming, Unicode normalization or autosuggest.
 - The Python and Java modules run in CI only; a request uses the TypeScript port. The compiled WASM artifacts are regenerated by hand with `pnpm cs:build-wasm` and CI tests the committed bytes.
-- Seeded reviews belong to synthetic demo buyers without login accounts. Reviewer names and bodies are demo content, not real customers; the storefront labels the whole site as demo data.
+- Seeded reviews belong to synthetic demo buyers without login accounts. Reviewer names and bodies are seeded content, not real customers; the storefront names no viewer as a demo user.
 - Review photos are bounded data URLs in PostgreSQL because no object-storage host is configured.
 - Vendor staff can read the Seller Center but cannot write; staff permission sets arrive with staff management in a later phase.
 - KYC is a text-only submission in this demo: there are no document uploads. Seeded stores start approved, so the admin queue shows only stores a seller has resubmitted.
