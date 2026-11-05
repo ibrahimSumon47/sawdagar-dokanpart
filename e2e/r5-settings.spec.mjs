@@ -81,8 +81,9 @@ test.describe('R5 site settings', () => {
     const label = `Order help (R5 ${stamp})`;
 
     await footer.getByRole('button', { name: 'Add link' }).click();
-    await footer.getByLabel('Label (English)').fill(label);
-    await footer.getByLabel('Address').fill('/policies');
+    const added = footer.locator('li').last();
+    await added.getByLabel('Label (English)').fill(label);
+    await added.getByLabel('Address').fill('/policies');
     await page.getByRole('button', { name: 'Save settings' }).click();
     await expect(page.getByText('The settings were saved.')).toBeVisible();
 
