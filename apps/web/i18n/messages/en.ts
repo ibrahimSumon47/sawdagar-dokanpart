@@ -7,6 +7,8 @@ export const en = {
     brand: 'Sawdagar Dokanpat',
     testMode: 'Payments run in test mode. No real money is charged.',
     skipToContent: 'Skip to content',
+    loadingLabel: 'Loading page content',
+    loadingTable: 'Loading table rows',
   },
   nav: {
     label: 'Primary navigation',

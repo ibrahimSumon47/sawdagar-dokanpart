@@ -9,6 +9,8 @@ export const bn: Dictionary = {
     brand: 'সওদাগর দোকানপাট',
     testMode: 'পেমেন্ট পরীক্ষামূলক মোডে চলে। আসল টাকা কাটা হয় না।',
     skipToContent: 'মূল কনটেন্টে যান',
+    loadingLabel: 'পৃষ্ঠার বিষয়বস্তু লোড হচ্ছে',
+    loadingTable: 'সারণির সারি লোড হচ্ছে',
   },
   nav: {
     label: 'প্রধান নেভিগেশন',
