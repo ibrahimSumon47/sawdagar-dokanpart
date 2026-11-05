@@ -1,9 +1,19 @@
 'use client';
 
+import { Skeleton } from '@sd/ui';
+import dynamic from 'next/dynamic';
 import type { ContentKind } from '../../../content';
-import { RichTextEditor } from '../RichTextEditor';
+import type { RichTextEditorProps } from '../RichTextEditor';
 import type { CmsEditorCopy } from './editorCopy';
 import { areaClass, labelClass } from './fieldStyles';
+
+// The editor bundle (Tiptap and ProseMirror, about 124 KiB gzipped) is only needed
+// where a Journal body is edited, so it loads after the rest of the form instead of
+// in the page's first chunk.
+const RichTextEditor = dynamic<RichTextEditorProps>(
+  () => import('../RichTextEditor/RichTextEditor').then((module) => module.RichTextEditor),
+  { ssr: false, loading: () => <Skeleton className="h-52" /> },
+);
 
 export interface ContentBodyFieldsProps {
   /** Journal posts use the rich editor, everything else plain paragraphs. */
@@ -34,14 +44,15 @@ export function ContentBodyFields({
       {languages.map(({ code, label }) => {
         const fieldLabel = copy[label];
         return kind === 'journal' ? (
-          <RichTextEditor
-            key={code}
-            name={code === 'en' ? 'bodyEn' : 'bodyBn'}
-            label={fieldLabel}
-            initialHtml={bodies[code]}
-            hint={copy.richTextHint}
-            onChange={(html) => onChangeBody(code, html)}
-          />
+          <div key={code}>
+            <input type="hidden" name={code === 'en' ? 'bodyEn' : 'bodyBn'} value={bodies[code]} />
+            <RichTextEditor
+              label={fieldLabel}
+              initialHtml={bodies[code]}
+              hint={copy.richTextHint}
+              onChange={(html) => onChangeBody(code, html)}
+            />
+          </div>
         ) : (
           <label key={code} className={labelClass}>
             {fieldLabel}

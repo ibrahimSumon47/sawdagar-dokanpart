@@ -178,7 +178,7 @@ Lighthouse CI, median of three mobile runs on the deployed site (run [4106705536
 | Catalog |          95 |           100 |            100 | 100 | 2.78 s |  71 ms |   0 |
 | Product |          93 |           100 |            100 | 100 | 3.19 s |  68 ms |   0 |
 
-The build ships 249.1 KiB of gzipped client JavaScript, 9.8 KiB of gzipped CSS and a 71.8 KiB largest chunk; the twelve catalog photographs total 852 KiB, with a 144.8 KiB largest file. Budgets are checked after every build.
+The build ships 394.7 KiB of gzipped client JavaScript, 10.9 KiB of gzipped CSS and a 123.6 KiB largest chunk, which is the admin-only Journal editor; the twelve catalog photographs total 852 KiB, with a 144.8 KiB largest file. Budgets are checked after every build.
 
 There are 170 unit tests:
 

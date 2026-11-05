@@ -97,7 +97,9 @@ and again when rendered, so a journal body keeps headings, lists, quotes and lin
 plain text. Tags are lowercased, hyphenated, de-duplicated and capped at six, filtering uses `tags: { has }` against the
 GIN index, `/journal` takes `?tag=`, and every card, article and the filter row link to the filtered index. Covers and
 tags are part of the `cms_versions` snapshot, so restoring an old version brings its photo and tags back; snapshots
-written before this migration restore leniently with no cover and no tags.
+written before this migration restore leniently with no cover and no tags. The editor is imported dynamically, so the
+ProseMirror bundle loads only when a Journal body is on screen; that chunk is 123.6 KiB gzipped and admin-only, which
+is why the per-chunk asset budget moved from 120 to 130 KiB while the 400 KiB total stayed put.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,
