@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { placeName } from '../../../../i18n/places';
 import { formatDate } from '../../../../lib/formatDate';
+import { pageLayout } from '../../../shell/pageLayout';
 import { orderStatusLabel, paymentStatusLabel, statusTone } from '../../labels';
 import type { OrderRecord } from '../../queries';
 import { OrderItems } from '../OrderItems';
@@ -37,7 +38,7 @@ export function OrderConfirmation({
           : null;
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className={pageLayout.wide}>
       <header className="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-6">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-accent">{copy.orderTitle}</p>

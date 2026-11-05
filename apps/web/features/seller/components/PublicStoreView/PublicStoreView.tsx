@@ -2,6 +2,7 @@ import { ProductCard } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
 import type { PublicStoreRecord } from '../../queries';
+import { pageLayout } from '../../../shell/pageLayout';
 import { PublicStoreHeader } from '../PublicStoreHeader';
 
 export interface PublicStoreViewProps {
@@ -17,7 +18,7 @@ export function PublicStoreView({ store, copy, locale }: PublicStoreViewProps) {
   const shippingPolicy = locale === 'bn' ? store.shippingPolicyBn : store.shippingPolicyEn;
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className={pageLayout.wide}>
       <PublicStoreHeader store={store} copy={copy.seller} locale={locale} />
 
       <section className="mt-10">

@@ -3,6 +3,7 @@ import { RatingStars, SectionHeading } from '@sd/ui';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { placeName } from '../../../../i18n/places';
+import { pageLayout } from '../../../shell/pageLayout';
 import type { QuestionRecord } from '../../../questions/queries';
 import type { ReviewRecord } from '../../../reviews/queries';
 import { ProductQuestions } from '../../../questions/components/ProductQuestions';
@@ -42,7 +43,7 @@ export function ProductDetail({
   const photo = productPhoto(product.images);
 
   return (
-    <article className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+    <article className={pageLayout.standard}>
       <ProductJsonLd product={product} locale={locale} />
       <ProductBreadcrumbs
         category={product.category}

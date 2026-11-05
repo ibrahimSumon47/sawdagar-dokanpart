@@ -1,5 +1,6 @@
 import { ButtonLink, SectionHeading } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
+import { pageLayout } from '../../../shell/pageLayout';
 import type { CatalogCategory, CatalogProduct } from '../../queries';
 import { CategoryTiles } from '../CategoryTiles';
 import { ProductGrid, productGridLabels } from '../ProductGrid';
@@ -15,7 +16,7 @@ export interface HomeCatalogProps {
 export function HomeCatalog({ categories, featured, locale, copy }: HomeCatalogProps) {
   return (
     <>
-      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <section className={pageLayout.section}>
         <SectionHeading
           eyebrow={copy.catalog.eyebrow}
           title={copy.home.categoriesTitle}
@@ -26,7 +27,7 @@ export function HomeCatalog({ categories, featured, locale, copy }: HomeCatalogP
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <section className={pageLayout.sectionTight}>
         <SectionHeading
           title={copy.home.featuredTitle}
           description={copy.home.featuredDescription}

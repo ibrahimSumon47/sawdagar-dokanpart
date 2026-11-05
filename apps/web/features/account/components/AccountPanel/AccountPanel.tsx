@@ -2,6 +2,7 @@ import { hasArea } from '@sd/domain';
 import type { Dictionary } from '../../../../i18n';
 import type { Locale } from '../../../../i18n';
 import type { Viewer } from '../../../auth/session';
+import { pageLayout } from '../../../shell/pageLayout';
 import { AccountHeader } from '../AccountHeader';
 import { AccountTabs } from '../AccountTabs';
 import { MembershipCard } from '../MembershipCard';
@@ -24,7 +25,7 @@ export function AccountPanel({ viewer, profile, memberships, copy, locale }: Acc
   ];
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className={pageLayout.account}>
       <header className="max-w-2xl">
         <h1 className="text-display font-serif leading-tight text-ink">{copy.account.title}</h1>
         <p className="mt-3 text-lead leading-relaxed text-ink-muted">{copy.account.description}</p>

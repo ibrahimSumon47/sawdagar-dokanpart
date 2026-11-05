@@ -3,6 +3,7 @@ import { requireViewer } from '../../features/auth/session';
 import { productGridLabels } from '../../features/catalog/components/ProductGrid';
 import { getWishlistProducts } from '../../features/shop/queries';
 import { WishlistView } from '../../features/shop/components/WishlistView';
+import { pageLayout } from '../../features/shell/pageLayout';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
 
@@ -21,7 +22,7 @@ export default async function WishlistPage() {
   const products = await getWishlistProducts(viewer.id);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+    <div className={pageLayout.standard}>
       <header className="max-w-2xl">
         <h1 className="font-serif text-title leading-tight text-ink">{copy.shop.wishlistTitle}</h1>
         <p className="mt-2 text-ink-muted">{copy.shop.wishlistDescription}</p>

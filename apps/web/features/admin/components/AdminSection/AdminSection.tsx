@@ -1,6 +1,7 @@
 import type { PlatformRole } from '@sd/domain';
 import type { ReactNode } from 'react';
 import type { Dictionary } from '../../../../i18n';
+import { pageLayout } from '../../../shell/pageLayout';
 import type { AdminTab } from '../../nav';
 import { AdminNav } from '../AdminNav';
 
@@ -28,7 +29,7 @@ export function AdminSection({
   children,
 }: AdminSectionProps) {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className={pageLayout.wide}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <header className="max-w-2xl">
           <h1 className="font-serif text-title leading-tight text-ink">{title}</h1>

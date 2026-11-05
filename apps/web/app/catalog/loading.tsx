@@ -1,5 +1,6 @@
 import { Skeleton } from '@sd/ui';
 import { ProductGridSkeleton } from '../../features/catalog/components/ProductGrid';
+import { pageLayout } from '../../features/shell/pageLayout';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
 
@@ -8,7 +9,12 @@ export default async function CatalogLoading() {
   const copy = getDictionary(await getLocale());
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+    <div
+      className={pageLayout.catalog}
+      role="status"
+      aria-busy="true"
+      aria-label={copy.common.loadingLabel}
+    >
       <div className="max-w-3xl space-y-3">
         <Skeleton className="h-3 w-20" />
         <Skeleton className="h-12 w-64" />

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { catalogHref, catalogResetHref, type CatalogFilters } from '../../catalogQuery';
 import type { CatalogCategory, CatalogCategoryDetail, CatalogResult } from '../../queries';
+import { pageLayout } from '../../../shell/pageLayout';
 import { CategoryNav } from '../CategoryNav';
 import { CatalogFilters as FilterForm } from '../CatalogFilters';
 import { CatalogSearch } from '../CatalogSearch';
@@ -34,7 +35,7 @@ export function CatalogView({
   const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB');
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+    <div className={pageLayout.catalog}>
       <header className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           {copy.catalog.eyebrow}

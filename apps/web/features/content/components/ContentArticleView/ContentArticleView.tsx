@@ -4,6 +4,7 @@ import type { Dictionary, Locale } from '../../../../i18n';
 import { formatDate } from '../../../../lib/formatDate';
 import type { ContentKind } from '../../contentTypes';
 import type { CmsEntryRecord } from '../../queries';
+import { pageLayout } from '../../../shell/pageLayout';
 import { ArticleBody } from '../ArticleBody';
 
 export interface ContentArticleViewProps {
@@ -29,7 +30,7 @@ export function ContentArticleView({ entry, kind, copy, locale }: ContentArticle
         : copy.nav.home;
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <article className={pageLayout.article}>
       <Link
         href={backHref[kind]}
         className="text-sm font-medium text-ink-muted underline-offset-4 hover:text-accent hover:underline"

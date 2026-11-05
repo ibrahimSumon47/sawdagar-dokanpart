@@ -4,6 +4,7 @@ import type { Dictionary, Locale } from '../../../../i18n';
 import { formatDate } from '../../../../lib/formatDate';
 import type { ContentKind } from '../../contentTypes';
 import type { CmsEntryRecord } from '../../queries';
+import { pageLayout } from '../../../shell/pageLayout';
 import { contentHref } from '../../urls';
 
 export interface ContentIndexViewProps {
@@ -20,7 +21,7 @@ export function ContentIndexView({ kind, entries, copy, locale }: ContentIndexVi
   const description = isHelp ? copy.content.helpDescription : copy.content.journalDescription;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className={pageLayout.content}>
       <header className="max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           {isHelp ? copy.content.helpTitle : copy.content.journalTitle}

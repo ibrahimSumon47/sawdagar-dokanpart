@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { requireViewer } from '../../features/auth/session';
 import { CheckoutView } from '../../features/checkout/components/CheckoutView';
 import { getCheckoutData } from '../../features/checkout/queries';
+import { pageLayout } from '../../features/shell/pageLayout';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
 
@@ -20,7 +21,7 @@ export default async function CheckoutPage() {
   const data = await getCheckoutData(viewer.id);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className={pageLayout.wide}>
       <header className="max-w-2xl">
         <h1 className="font-serif text-title leading-tight text-ink">{copy.checkout.title}</h1>
         <p className="mt-2 text-ink-muted">{copy.checkout.description}</p>

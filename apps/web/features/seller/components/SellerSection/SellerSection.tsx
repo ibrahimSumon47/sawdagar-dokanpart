@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Dictionary } from '../../../../i18n';
+import { pageLayout } from '../../../shell/pageLayout';
 import { SellerNav, type SellerTab } from '../SellerNav';
 
 export interface SellerSectionProps {
@@ -13,7 +14,7 @@ export interface SellerSectionProps {
 /** Page frame shared by Seller Center pages: heading, section tabs and content. */
 export function SellerSection({ active, title, description, copy, children }: SellerSectionProps) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className={pageLayout.seller}>
       <header className="max-w-2xl">
         <h1 className="font-serif text-title leading-tight text-ink">{title}</h1>
         <p className="mt-2 text-ink-muted">{description}</p>
