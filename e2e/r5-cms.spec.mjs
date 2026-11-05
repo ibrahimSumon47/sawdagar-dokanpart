@@ -36,7 +36,7 @@ test.describe('R5 CMS', () => {
 
     await page.getByRole('link', { name: /Homepage sections/ }).click();
     await expect(page).toHaveURL(/\/admin\/cms\/sections$/);
-    await page.getByRole('link', { name: 'Edit' }).first().click();
+    await page.getByRole('link', { name: 'Edit', exact: true }).first().click();
     await expect(page).toHaveURL(/\/admin\/cms\/sections\/[^/]+$/);
 
     const titleField = page.getByLabel('English title', { exact: true });
@@ -54,7 +54,7 @@ test.describe('R5 CMS', () => {
     await testInfo.attach('r5-home-hero-updated', { path: screenshot, contentType: 'image/png' });
 
     await page.goto('/admin/cms/sections');
-    await page.getByRole('link', { name: 'Edit' }).first().click();
+    await page.getByRole('link', { name: 'Edit', exact: true }).first().click();
     await page.getByLabel('English title', { exact: true }).fill(originalTitle);
     await page.getByRole('button', { name: 'Save section' }).click();
     await expect(page.getByText('The section was saved.')).toBeVisible();
