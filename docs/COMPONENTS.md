@@ -23,6 +23,8 @@ Every component has one job, a typed props interface and a short TSDoc block. Sh
 | SectionHeading | Section title with optional eyebrow, description and action. | `title`, `eyebrow`, `description`, `action`, `className` | [SectionHeading.tsx](../packages/ui/src/components/SectionHeading/SectionHeading.tsx) |
 | Skeleton | Shimmering block that reserves space. | div attributes including `className` | [Skeleton.tsx](../packages/ui/src/components/Skeleton/Skeleton.tsx) |
 | SkeletonText | Paragraph-shaped placeholder lines. | `lines`, `widths`, `className` | [SkeletonText.tsx](../packages/ui/src/components/Skeleton/SkeletonText.tsx) |
+| SkeletonStat | Bordered statistic tile placeholder for dashboards and admin panels. | `className` | [SkeletonStat.tsx](../packages/ui/src/components/Skeleton/SkeletonStat.tsx) |
+| SkeletonTable | Header plus row placeholders that match the real tables. | `rows`, `columns`, `label`, `className` | [SkeletonTable.tsx](../packages/ui/src/components/Skeleton/SkeletonTable.tsx) |
 | VendorRow | Compact store summary with initials, location, follow count, rating and verification. | `name`, `location`, `rating`, `reviewCount`, `ratingLabel`, `meta`, `verified`, `className` | [VendorRow.tsx](../packages/ui/src/components/VendorRow/VendorRow.tsx) |
 | VendorRowSkeleton | Reserves the vendor row layout while data loads. | `className` | [VendorRowSkeleton.tsx](../packages/ui/src/components/VendorRow/VendorRowSkeleton.tsx) |
 
@@ -61,8 +63,10 @@ functions that React cannot serialise across the server/client boundary.
 | AccountHeader | Avatar initials, identity, role, demo flag and account actions. | `viewer`, `copy`, `roleLabel`, `locale`, `links` | [AccountHeader.tsx](../apps/web/features/account/components/AccountHeader/AccountHeader.tsx) |
 | MembershipCard | One vendor store membership with role and join date. | `name`, `slug`, `joinedAt`, `roleLabel`, `copy`, `locale` | [MembershipCard.tsx](../apps/web/features/account/components/MembershipCard/MembershipCard.tsx) |
 | AccountPanel | Account page layout: tabs, identity, profile form and memberships. | `viewer`, `profile`, `memberships`, `copy`, `locale` | [AccountPanel.tsx](../apps/web/features/account/components/AccountPanel/AccountPanel.tsx) |
+| AccountPanelSkeleton | Profile card, tab strip and form placeholders for the account overview. | `label` | [AccountPanelSkeleton.tsx](../apps/web/features/account/components/AccountPanel/AccountPanelSkeleton.tsx) |
 | AccountTabs | Section switcher shared by every account page, with `aria-current` on the active tab. | `active`, `copy` | [AccountTabs.tsx](../apps/web/features/account/components/AccountTabs/AccountTabs.tsx) |
 | AccountSection | Account sub-page frame: heading, description, tabs and content. | `active`, `title`, `description`, `copy`, `children` | [AccountSection.tsx](../apps/web/features/account/components/AccountSection/AccountSection.tsx) |
+| AccountSectionSkeleton | Heading, tab strip and content slot for an account sub-page. | `label`, `children` | [AccountSectionSkeleton.tsx](../apps/web/features/account/components/AccountSection/AccountSectionSkeleton.tsx) |
 | AccountOrdersList | Order history rows with status, total and receipt link, or an empty state. | `orders`, `copy`, `checkoutCopy`, `locale` | [AccountOrdersList.tsx](../apps/web/features/account/components/AccountOrdersList/AccountOrdersList.tsx) |
 | AccountReviewsPanel | Delivered items awaiting a review, then the buyer's published reviews. | `awaiting`, `published`, `copy`, `reviewsCopy`, `locale` | [AccountReviewsPanel.tsx](../apps/web/features/account/components/AccountReviewsPanel/AccountReviewsPanel.tsx) |
 | AccountQuestionsPanel | The buyer's questions with product links and seller answers. | `questions`, `copy`, `questionsCopy`, `locale` | [AccountQuestionsPanel.tsx](../apps/web/features/account/components/AccountQuestionsPanel/AccountQuestionsPanel.tsx) |
@@ -88,11 +92,14 @@ functions that React cannot serialise across the server/client boundary.
 |---|---|---|---|
 | SellerNav | Horizontal section switcher for the ten Seller Center pages, with `aria-current` on the open one. | `active`, `copy` | [SellerNav.tsx](../apps/web/features/seller/components/SellerNav/SellerNav.tsx) |
 | SellerSection | Seller page frame: title, description, section tabs and content. | `active`, `title`, `description`, `copy`, `children` | [SellerSection.tsx](../apps/web/features/seller/components/SellerSection/SellerSection.tsx) |
+| SellerSectionSkeleton | Heading, section tabs and content slot for a Seller Center page. | `label`, `children` | [SellerSectionSkeleton.tsx](../apps/web/features/seller/components/SellerSection/SellerSectionSkeleton.tsx) |
 | SellerNotice | Inline success or error line above a Seller Center form or table. | `message`, `tone` | [SellerNotice.tsx](../apps/web/features/seller/components/SellerNotice/SellerNotice.tsx) |
 | SellerStat | One labelled number with an optional hint on the dashboard or analytics page. | `label`, `value`, `hint`, `className` | [SellerStat.tsx](../apps/web/features/seller/components/SellerStat/SellerStat.tsx) |
 | SellerEmpty | Shown when a vendor-area account has no store membership. | `copy` | [SellerEmpty.tsx](../apps/web/features/seller/components/SellerEmpty/SellerEmpty.tsx) |
 | SellerDashboard | Store status, six sales and queue totals and the newest sub-orders. | `store`, `dashboard`, `copy`, `checkoutCopy`, `locale` | [SellerDashboard.tsx](../apps/web/features/seller/components/SellerDashboard/SellerDashboard.tsx) |
+| SellerDashboardSkeleton | Stat tiles and the newest sub-orders table while the dashboard loads. | `label`, `tableLabel` | [SellerDashboardSkeleton.tsx](../apps/web/features/seller/components/SellerDashboard/SellerDashboardSkeleton.tsx) |
 | SellerProductTable | Product rows with category, status, price, stock and an edit link. | `products`, `copy`, `locale`, `canManage` | [SellerProductTable.tsx](../apps/web/features/seller/components/SellerProductTable/SellerProductTable.tsx) |
+| SellerTableSkeleton | Generic Seller Center table placeholder with a chosen column count. | `label`, `tableLabel`, `columns` | [SellerTableSkeleton.tsx](../apps/web/features/seller/components/SellerTableSkeleton/SellerTableSkeleton.tsx) |
 | SellerProductForm | Create or edit English and Bangla product fields, category, price, stock, tone and status. | `product?`, `categories`, `copy` | [SellerProductForm.tsx](../apps/web/features/seller/components/SellerProductForm/SellerProductForm.tsx) |
 | SellerVariantForm | Inline price and stock editor for one variant. | `variant`, `copy` | [SellerVariantForm.tsx](../apps/web/features/seller/components/SellerVariantForm/SellerVariantForm.tsx) |
 | SellerInventoryTable | Every variant with its SKU, price and stock, lowest stock first. | `variants`, `copy`, `locale` | [SellerInventoryTable.tsx](../apps/web/features/seller/components/SellerInventoryTable/SellerInventoryTable.tsx) |
@@ -110,6 +117,7 @@ functions that React cannot serialise across the server/client boundary.
 | SellerStoreView | KYC status, storefront settings and the business verification form. | `store`, `copy`, `canManage`, `locale` | [SellerStoreView.tsx](../apps/web/features/seller/components/SellerStoreView/SellerStoreView.tsx) |
 | PublicStoreHeader | Public store banner, identity, verification, rating, followers, announcement and description. | `store`, `copy`, `locale` | [PublicStoreHeader.tsx](../apps/web/features/seller/components/PublicStoreHeader/PublicStoreHeader.tsx) |
 | PublicStoreView | Public store products, about text and return and shipping policies. | `store`, `copy`, `locale` | [PublicStoreView.tsx](../apps/web/features/seller/components/PublicStoreView/PublicStoreView.tsx) |
+| PublicStoreViewSkeleton | Store banner, policies and product grid for the public storefront. | `label`, `gridLabel` | [PublicStoreViewSkeleton.tsx](../apps/web/features/seller/components/PublicStoreView/PublicStoreViewSkeleton.tsx) |
 
 ## Admin (`apps/web/features/admin`)
 
@@ -120,8 +128,11 @@ functions that React cannot serialise across the server/client boundary.
 | AuditList | Newest audit entries with actor and time. | `entries`, `copy`, `locale` | [AuditList.tsx](../apps/web/features/admin/components/AuditList/AuditList.tsx) |
 | PermissionList | Permission codes held by the signed-in admin role. | `permissions`, `copy` | [PermissionList.tsx](../apps/web/features/admin/components/PermissionList/PermissionList.tsx) |
 | AdminPanel | Admin overview whose sections, people and audit trail follow role permissions. | `role`, `permissions`, `totalUsers`, `demoUsers`, `users`, `auditEntries`, `canReadUsers`, `canReadAudit`, `copy`, `locale` | [AdminPanel.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanel.tsx) |
+| AdminPanelSkeleton | Stat tiles, people list and audit trail for the admin overview. | `label` | [AdminPanelSkeleton.tsx](../apps/web/features/admin/components/AdminPanel/AdminPanelSkeleton.tsx) |
 | AdminNav | Admin section switcher filtered by the signed-in role. | `active`, `role`, `copy` | [AdminNav.tsx](../apps/web/features/admin/components/AdminNav/AdminNav.tsx) |
 | AdminSection | Shared admin page frame: heading, role-filtered tabs and content. | `active`, `title`, `description`, `role`, `copy`, `actions`, `children` | [AdminSection.tsx](../apps/web/features/admin/components/AdminSection/AdminSection.tsx) |
+| AdminSectionSkeleton | Heading, role-filtered tabs and content slot for an admin page. | `label`, `children` | [AdminSectionSkeleton.tsx](../apps/web/features/admin/components/AdminSection/AdminSectionSkeleton.tsx) |
+| AdminTableSkeleton | Admin table placeholder with a chosen column count. | `label`, `tableLabel`, `columns` | [AdminTableSkeleton.tsx](../apps/web/features/admin/components/AdminTableSkeleton/AdminTableSkeleton.tsx) |
 | StoreApprovalCard | One store's business record with approve and reject controls. | `store`, `copy`, `locale` | [StoreApprovalCard.tsx](../apps/web/features/admin/components/StoreApprovalCard/StoreApprovalCard.tsx) |
 | StoreApprovalList | Pending stores first, then the decided stores. | `stores`, `copy`, `locale` | [StoreApprovalList.tsx](../apps/web/features/admin/components/StoreApprovalList/StoreApprovalList.tsx) |
 | ReviewModerationRow | One review with product, author and a publish or hide control. | `review`, `copy`, `locale` | [ReviewModerationRow.tsx](../apps/web/features/admin/components/ReviewModerationRow/ReviewModerationRow.tsx) |
@@ -132,6 +143,7 @@ functions that React cannot serialise across the server/client boundary.
 | AuditPager | Previous and next links with the current audit page. | `page`, `pageCount`, `copy` | [AuditPager.tsx](../apps/web/features/admin/components/AuditPager/AuditPager.tsx) |
 | ContentList | All CMS entries with area, status, edit date and editor link. | `entries`, `copy`, `locale` | [ContentList.tsx](../apps/web/features/admin/components/ContentList/ContentList.tsx) |
 | ContentEditorForm | Creates or updates one CMS entry. | `entry`, `defaultKind`, `copy` | [ContentEditorForm.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorForm.tsx) |
+| ContentEditorSkeleton | Field groups, body area and side column for the CMS editor. | `label` | [ContentEditorSkeleton.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentEditorSkeleton.tsx) |
 | ContentFields | Bilingual text, SEO, status and publish-date fields for the editor. | `entry`, `defaultKind`, `copy` | [ContentFields.tsx](../apps/web/features/admin/components/ContentEditorForm/ContentFields.tsx) |
 | ContentVersionHistory | Saved snapshots with a restore control for each version. | `versions`, `copy`, `locale` | [ContentVersionHistory.tsx](../apps/web/features/admin/components/ContentVersionHistory/ContentVersionHistory.tsx) |
 | ContentPreview | Shows the stored entry as it reads on the storefront. | `entry`, `copy`, `locale` | [ContentPreview.tsx](../apps/web/features/admin/components/ContentPreview/ContentPreview.tsx) |
@@ -144,7 +156,9 @@ functions that React cannot serialise across the server/client boundary.
 | MediaCreditsView | Displays photograph attribution and localized department names. | `copy`, `locale` | [MediaCreditsView.tsx](../apps/web/features/content/components/MediaCreditsView/MediaCreditsView.tsx) |
 | ArticleBody | Renders stored plain text as paragraphs split on blank lines. | `body` | [ArticleBody.tsx](../apps/web/features/content/components/ArticleBody/ArticleBody.tsx) |
 | ContentIndexView | Public index for Help Center articles or Journal posts with a patterned card head. | `kind`, `entries`, `copy`, `locale` | [ContentIndexView.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexView.tsx) |
+| ContentIndexSkeleton | Patterned card heads and titles while a Help Center or Journal index loads. | `label` | [ContentIndexSkeleton.tsx](../apps/web/features/content/components/ContentIndexView/ContentIndexSkeleton.tsx) |
 | ContentArticleView | One published Help article, Journal post or static page with a back link and patterned hero. | `entry`, `kind`, `copy`, `locale` | [ContentArticleView.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleView.tsx) |
+| ContentArticleSkeleton | Patterned hero and paragraph lines for one article. | `label` | [ContentArticleSkeleton.tsx](../apps/web/features/content/components/ContentArticleView/ContentArticleSkeleton.tsx) |
 
 ## Finance (`apps/web/features/finance`)
 
@@ -165,10 +179,13 @@ functions that React cannot serialise across the server/client boundary.
 | Component | Purpose | Props | Path |
 |---|---|---|---|
 | HomeIntro | Storefront opening, hero photograph, trust strip and build status. | `copy`, `locale` | [HomeIntro.tsx](../apps/web/features/home/components/HomeIntro/HomeIntro.tsx) |
+| HomeIntroSkeleton | Matches the hero, trust strip and build status while the home page streams. | `label` | [HomeIntroSkeleton.tsx](../apps/web/features/home/components/HomeIntro/HomeIntroSkeleton.tsx) |
 | SiteHeader | Sticky storefront header: wordmark, Catalog, the Categories mega menu, Sell on Sawdagar, search and the role-aware controls. | `copy`, `locale`, `theme`, `viewer`, `categories` | [SiteHeader.tsx](../apps/web/features/shell/components/SiteHeader/SiteHeader.tsx) |
 | HeaderSearch | Search form shared by compact and desktop headers. | `id`, `label`, `placeholder`, `className` | [HeaderSearch.tsx](../apps/web/features/shell/components/SiteHeader/HeaderSearch.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
 | SiteFooter | Footer with Shop links including comparison, Project links and the test-mode payments line. | `copy` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+
+Page containers shared by every route and its skeleton live in [pageLayout.ts](../apps/web/features/shell/pageLayout.ts).
 
 ## About (`apps/web/features/about`)
 
@@ -189,7 +206,9 @@ functions that React cannot serialise across the server/client boundary.
 | Component | Purpose | Props | Path |
 |---|---|---|---|
 | HomeCatalog | Home departments from the live category tree, then featured products. | `categories`, `featured`, `locale`, `copy` | [HomeCatalog.tsx](../apps/web/features/catalog/components/HomeCatalog/HomeCatalog.tsx) |
+| HomeCatalogSkeleton | Department tiles and featured product grid for the home page. | `categoriesLabel`, `productsLabel` | [HomeCatalogSkeleton.tsx](../apps/web/features/catalog/components/HomeCatalog/HomeCatalogSkeleton.tsx) |
 | CategoryTiles | Compact department grid; each tile opens the catalog filtered to that category. | `categories` (`CategoryTile[]`: `slug`, `name`), `locale` | [CategoryTiles.tsx](../apps/web/features/catalog/components/CategoryTiles/CategoryTiles.tsx) |
+| CategoryTilesSkeleton | Department tile grid placeholder. | `label`, `count` | [CategoryTilesSkeleton.tsx](../apps/web/features/catalog/components/CategoryTiles/CategoryTilesSkeleton.tsx) |
 | CategoryNav | Department chips and, when one is active, its leaf-category row with product counts. | `categories`, `filters`, `locale`, `copy` | [CategoryNav.tsx](../apps/web/features/catalog/components/CategoryNav/CategoryNav.tsx) |
 | CatalogSearch | GET search form that carries the active facets in hidden fields. | `filters`, `copy` | [CatalogSearch.tsx](../apps/web/features/catalog/components/CatalogSearch/CatalogSearch.tsx) |
 | CatalogFilters | Price, rating, stock and sort facets as a plain GET form, so every value stays in the URL. | `filters`, `copy` | [CatalogFilters.tsx](../apps/web/features/catalog/components/CatalogFilters/CatalogFilters.tsx) |
@@ -231,11 +250,13 @@ functions that React cannot serialise across the server/client boundary.
 | Component | Purpose | Props | Path |
 |---|---|---|---|
 | CheckoutView | Client checkout form with saved-address choice, new-address fields, payment selection and live totals. | `items`, `coupon`, `addresses`, `copy`, `locale` | [CheckoutView.tsx](../apps/web/features/checkout/components/CheckoutView/CheckoutView.tsx) |
+| CheckoutViewSkeleton | Address fields, delivery options and the order summary column. | `label` | [CheckoutViewSkeleton.tsx](../apps/web/features/checkout/components/CheckoutView/CheckoutViewSkeleton.tsx) |
 | AddressFields | Name, phone, division, district, upazila, area and street fields with localized division and district options. | `value`, `onChange`, `copy`, `locale` | [AddressFields.tsx](../apps/web/features/checkout/components/AddressFields/AddressFields.tsx) |
 | PaymentOptions | Accessible radio cards for cash on delivery and MockPay. | `value`, `onChange`, `copy` | [PaymentOptions.tsx](../apps/web/features/checkout/components/PaymentOptions/PaymentOptions.tsx) |
 | CheckoutSummary | Server-priced subtotal, shipping, coupon, included VAT and total beside the form. | `totals`, `count`, `couponCode`, `locale`, `copy` | [CheckoutSummary.tsx](../apps/web/features/checkout/components/CheckoutSummary/CheckoutSummary.tsx) |
 | MockPayPanel | The sandbox gateway page with pay and cancel actions. | `paymentId`, `token`, `orderNumber`, `amountMinor`, `locale`, `copy` | [MockPayPanel.tsx](../apps/web/features/checkout/components/MockPayPanel/MockPayPanel.tsx) |
 | OrderConfirmation | Receipt with placed/payment banners, seller groups, totals, address and invoice link. | `order`, `copy`, `locale`, `placed`, `paymentNotice`, `paymentHref` | [OrderConfirmation.tsx](../apps/web/features/checkout/components/OrderConfirmation/OrderConfirmation.tsx) |
+| OrderConfirmationSkeleton | Receipt header, item list and payment summary for a loading order page. | `label` | [OrderConfirmationSkeleton.tsx](../apps/web/features/checkout/components/OrderConfirmation/OrderConfirmationSkeleton.tsx) |
 | OrderItems | Seller sub-orders with item thumbnails, variant, SKU, quantity and line totals. | `order`, `copy`, `locale` | [OrderItems.tsx](../apps/web/features/checkout/components/OrderItems/OrderItems.tsx) |
 | OrderTotals | Subtotal, shipping, coupon, included VAT and total for a stored order. | `order`, `copy`, `locale`, `className` | [OrderTotals.tsx](../apps/web/features/checkout/components/OrderTotals/OrderTotals.tsx) |
 | InvoiceView | Printable invoice with bill-to, payment state, item table and totals. | `order`, `copy`, `locale` | [InvoiceView.tsx](../apps/web/features/checkout/components/InvoiceView/InvoiceView.tsx) |
