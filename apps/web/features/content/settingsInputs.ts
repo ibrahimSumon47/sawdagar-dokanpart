@@ -18,11 +18,16 @@ const linkHref = z
     message: 'Use a site path or an https link',
   });
 
-const linkSchema = z.object({
-  labelEn: z.string().trim().min(1).max(60),
-  labelBn: z.string().trim().min(1).max(60),
-  href: linkHref,
-});
+const linkSchema = z
+  .object({
+    labelEn: z.string().trim().max(60),
+    labelBn: z.string().trim().max(60),
+    href: linkHref,
+  })
+  .refine((link) => Boolean(link.labelEn || link.labelBn), {
+    message: 'Every link needs a label in at least one language',
+    path: ['labelEn'],
+  });
 
 const linkList = (limit: number) =>
   z

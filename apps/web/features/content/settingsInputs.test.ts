@@ -54,6 +54,20 @@ describe('settingsSchema', () => {
     );
   });
 
+  it('accepts a link labelled in one language only', () => {
+    const englishOnly = { labelEn: 'Refunds', labelBn: '', href: '/policies' };
+    expect(
+      settingsSchema.safeParse({ ...valid, navigation: JSON.stringify([englishOnly]) }).success,
+    ).toBe(true);
+  });
+
+  it('rejects a link with no label in either language', () => {
+    const unlabelled = { labelEn: '  ', labelBn: '', href: '/policies' };
+    expect(
+      settingsSchema.safeParse({ ...valid, navigation: JSON.stringify([unlabelled]) }).success,
+    ).toBe(false);
+  });
+
   it('rejects a link that is neither a site path nor https', () => {
     const unsafe = [{ ...link, href: 'javascript:alert(1)' }];
     expect(settingsSchema.safeParse({ ...valid, navigation: JSON.stringify(unsafe) }).success).toBe(
