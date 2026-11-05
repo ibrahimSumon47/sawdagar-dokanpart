@@ -36,7 +36,13 @@ test.describe('R5 CMS', () => {
 
     await page.getByRole('link', { name: /Homepage sections/ }).click();
     await expect(page).toHaveURL(/\/admin\/cms\/sections$/);
-    await page.getByRole('link', { name: 'Edit', exact: true }).first().click();
+    const editLinks = page.getByRole('link', { name: 'Edit', exact: true });
+    if ((await editLinks.count()) === 0) {
+      const text = await page.locator('main').innerText();
+      console.log(`DIAGNOSTIC sections page: ${text.slice(0, 1200)}`);
+      throw new Error('No homepage section rows rendered.');
+    }
+    await editLinks.first().click();
     await expect(page).toHaveURL(/\/admin\/cms\/sections\/[^/]+$/);
 
     const titleField = page.getByLabel('English title', { exact: true });
