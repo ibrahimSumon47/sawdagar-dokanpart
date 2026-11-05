@@ -3,14 +3,15 @@
 import { Badge, Button } from '@sd/ui';
 import Link from 'next/link';
 import { useState, useTransition } from 'react';
-import type { Dictionary, Locale } from '../../../../i18n';
+import type { Locale } from '../../../../i18n';
 import { reorderSectionsAction } from '../../../content/sectionActions';
+import type { SectionOrderCopy } from '../../../content/sectionCopy';
 import type { CmsSectionRecord } from '../../../content/sectionQueries';
 
 export interface CmsSectionOrderProps {
   /** Sections in their saved display order. */
   sections: readonly CmsSectionRecord[];
-  copy: Dictionary['admin'];
+  copy: SectionOrderCopy;
   locale: Locale;
 }
 

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { AdminSection } from '../../../../features/admin/components/AdminSection';
 import { CmsSectionOrder } from '../../../../features/admin/components/CmsSectionOrder';
 import { requireAdmin } from '../../../../features/admin/guard';
+import { sectionOrderCopy } from '../../../../features/content/sectionCopy';
 import { getCmsSections } from '../../../../features/content/sectionQueries';
 import { getDictionary } from '../../../../i18n';
 import { getLocale } from '../../../../i18n/getLocale';
@@ -33,7 +34,7 @@ export default async function AdminSectionsPage() {
           {copy.admin.noSections}
         </p>
       ) : (
-        <CmsSectionOrder sections={sections} copy={copy.admin} locale={locale} />
+        <CmsSectionOrder sections={sections} copy={sectionOrderCopy(copy.admin)} locale={locale} />
       )}
     </AdminSection>
   );
