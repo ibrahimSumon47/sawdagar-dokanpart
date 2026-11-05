@@ -26,5 +26,12 @@
     "acceptance": "Every data route streams a skeleton that matches its loaded layout, with no perceptible layout shift on a slow connection",
     "status": "pass",
     "evidence": "Shared containers in apps/web/features/shell/pageLayout.ts imported by both pages and skeletons; 19 skeletons, 34 route loading.tsx files; home moved into app/(storefront) so the root fallback no longer covered other routes (43fec2c); Playwright 42030526892 passed on the deployment, asserting each route's own skeleton in the streamed HTML for /, /catalog, /help, /journal, a product and a store, holding CLS under 0.05 on a throttled connection, and capturing 12 screenshots"
+  },
+  {
+    "id": "R5",
+    "description": "Content management for the homepage and the Help Center and Journal copy",
+    "acceptance": "An editor changes the homepage hero in /admin/cms and the public homepage updates within 60s without redeploy; a Playwright test proves it",
+    "status": "pass",
+    "evidence": "cms_sections and cms_section_versions store bilingual hero, collection and banner sections with status, schedule, order, last-10 versions and a revalidated public homepage (5d3d819); the client list needed a strings-only copy object because the admin dictionary carries a function (a5b492f); Playwright 42047722255 passed on the deployment, signing in as the content editor, renaming the hero in /admin/cms/sections, saving, seeing the new headline on / within 60s, restoring it, and checking the CMS routes at 375, 768 and 1440px. Site settings, Help Center and Journal slices still to come."
   }
 ]

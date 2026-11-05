@@ -1,6 +1,7 @@
 # Project state
 
 ## Done
+
 - Product, design, architecture, data and roadmap specifications are documented.
 - Phase 0: pnpm/Turborepo workspace, CI on Linux/Windows/macOS, Vercel deployment, pinned formatting and the documentation baseline.
 - Phase 1: Editorial Heritage tokens and themes, fonts, server-rendered theme and language cookies, English and Bangla catalogs, storefront shell, shared components with skeleton pairs, and the `/design` gallery at six widths.
@@ -52,8 +53,10 @@ one as a new save. `/admin/cms` is the hub and `/admin/cms/sections` reorders ro
 optimistically and putting the list back to the stored order when the action fails. The public homepage reads the
 first published hero, every published banner and the published collection heading, falls back to its built-in copy
 until a hero exists, and the section actions call `revalidatePath('/')`. `/` builds as dynamic, so an edit shows on the
-next request instead of waiting for a cache window. Every CMS entity still needs its settings, Help Center and Journal
-slices.
+next request instead of waiting for a cache window. Playwright run 42047722255 on the deployment signed in as the content
+editor, renamed the hero in `/admin/cms`, saved it and saw the new headline on `/` within 60 s, then restored it; the list
+first came back empty because the client list received the whole admin dictionary, which carries a function, so it now
+takes `sectionOrderCopy` (`a5b492f`). Slice (b), site settings, is next; the Help Center and Journal slices follow.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,
@@ -101,15 +104,18 @@ project links live in the footer Project column and on `/about/project`, and Pla
 1440 px.
 
 ## Next
+
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
 - Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
 - Add a catalog query integration test once there is a disposable test database or a Prisma mock.
 - Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
 
 ## Blocked
+
 - No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
+
 - There is no marketplace REST API or OpenAPI document. The only HTTP routes are Better Auth and the MockPay callback; every other write is a Server Action, as recorded in ADR-006 and [API.md](API.md).
 - Search matches only English and Bangla product titles and leaf-category names. Descriptions, variants and vendor names are not searched; there is no typo tolerance, stemming or autosuggest yet.
 - Product pages show the product's own photograph plus a gallery of two to four more, all sourced per product; there is no zoom or 360 view. Four hundred and forty photographs cover 142 publishable products, so 22 subcategories stay unpublished until more distinct photographs exist. Author and licence are listed in [CREDITS.md](CREDITS.md).
