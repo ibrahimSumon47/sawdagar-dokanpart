@@ -15,6 +15,12 @@ interface SeedEntry {
   publishAt?: string;
   seoDescriptionEn: string;
   seoDescriptionBn: string;
+  /** Cloudinary public ID shown as the cover of a Journal post. */
+  coverImageUrl?: string;
+  coverImageAltEn?: string;
+  coverImageAltBn?: string;
+  /** Lowercase tag slugs used by the Journal filter. */
+  tags?: string[];
 }
 
 const entries: SeedEntry[] = [
@@ -103,16 +109,20 @@ Coupons are applied in the cart before checkout. Only one coupon can be used per
     titleBn: 'টাঙ্গাইলের তাঁতিদের এক সকাল',
     excerptEn: 'Six looms, one family courtyard, and a saree that takes eleven days.',
     excerptBn: 'ছয়টি তাঁত, এক পরিবারের উঠান, আর এগারো দিনে তৈরি একটি শাড়ি।',
-    bodyEn: `The first loom starts before the fog lifts. In a courtyard in Tangail, three generations of one family work the same pit looms their grandparents used, with a wooden beater and a basket of bobbins beside each frame.
+    bodyEn: `<p>The first loom starts before the fog lifts. In a courtyard in Tangail, three generations of one family work the same pit looms their grandparents used, with a wooden beater and a basket of bobbins beside each frame.</p>
 
-A jamdani saree with a full body motif takes about eleven working days. The weaver draws the motif from memory, lifting individual threads by hand while the shuttle passes underneath. A single mistake means unpicking a row that took an hour.
+<p>A jamdani saree with a full body motif takes about eleven working days. The weaver draws the motif from memory, lifting individual threads by hand while the shuttle passes underneath. A single mistake means unpicking a row that took an hour.</p>
 
-The store on this marketplace belongs to one such family. They price by the days a piece takes, not by the season, which is why the same saree costs the same in June and in November.`,
-    bodyBn: `কুয়াশা কাটার আগেই প্রথম তাঁত শুরু হয়। টাঙ্গাইলের এক উঠানে একই পরিবারের তিন প্রজন্ম দাদা-দাদির ব্যবহৃত পিট-তাঁতে কাজ করেন; পাশে কাঠের বীম আর সুতার নাটাইয়ের ঝুড়ি।
+<p>The store on this marketplace belongs to one such family. They price by the days a piece takes, not by the season, which is why the same saree costs the same in June and in November.</p>`,
+    bodyBn: `<p>কুয়াশা কাটার আগেই প্রথম তাঁত শুরু হয়। টাঙ্গাইলের এক উঠানে একই পরিবারের তিন প্রজন্ম দাদা-দাদির ব্যবহৃত পিট-তাঁতে কাজ করেন; পাশে কাঠের বীম আর সুতার নাটাইয়ের ঝুড়ি।</p>
 
-পুরো শরীরে নকশা থাকা একটি জামদানি শাড়ি বুনতে প্রায় এগারো কর্মদিবস লাগে। তাঁতি স্মৃতি থেকে নকশা আঁকেন, মাঝে মাঝে একটি একটি সুতা তুলে ধরেন, আর নিচ দিয়ে চলে মাকু। একটিমাত্র ভুল হলে ঘণ্টাখিক এক সারি খুলে ফেলতে হয়।
+<p>পুরো শরীরে নকশা থাকা একটি জামদানি শাড়ি বুনতে প্রায় এগারো কর্মদিবস লাগে। তাঁতি স্মৃতি থেকে নকশা আঁকেন, মাঝে মাঝে একটি একটি সুতা তুলে ধরেন, আর নিচ দিয়ে চলে মাকু। একটিমাত্র ভুল হলে ঘণ্টাখিক এক সারি খুলে ফেলতে হয়।</p>
 
-এই মার্কেটপ্লেসের দোকানটি এমনই এক পরিবারের। তারা ঋতু নয়, একটি পণ্যে যত দিন লাগে তার ওপর দাম ঠিক করেন; তাই একই শাড়ির দাম জুনে আর নভেম্বরে একই থাকে।`,
+<p>এই মার্কেটপ্লেসের দোকানটি এমনই এক পরিবারের। তারা ঋতু নয়, একটি পণ্যে যত দিন লাগে তার ওপর দাম ঠিক করেন; তাই একই শাড়ির দাম জুনে আর নভেম্বরে একই থাকে।</p>`,
+    coverImageUrl: 'sawdagar/products/jamdani-saree/2',
+    coverImageAltEn: 'A jamdani saree with a full-body motif',
+    coverImageAltBn: 'পুরো শরীরে নকশা করা জামদানি শাড়ি',
+    tags: ['handloom', 'tangail', 'weaving'],
     status: 'published',
     publishAt: '2026-10-08T09:00:00+06:00',
     seoDescriptionEn:
@@ -127,16 +137,20 @@ The store on this marketplace belongs to one such family. They price by the days
     titleBn: 'হাতে না নিয়েই জামদানি বাছবেন যেভাবে',
     excerptEn: 'Thread count, motif density and the difference between woven and printed.',
     excerptBn: 'সুতার ঘনত্ব, নকশার বুনন আর তাঁতেরกับ প্রিন্টের পার্থক্য।',
-    bodyEn: `A photograph cannot tell you how a saree falls, but it can show whether the motif is woven or printed. In a woven jamdani the pattern has the same texture as the ground cloth and slight irregularities where the weaver lifted threads. A printed motif sits flat and repeats with machine precision.
+    bodyEn: `<p>A photograph cannot tell you how a saree falls, but it can show whether the motif is woven or printed. In a woven jamdani the pattern has the same texture as the ground cloth and slight irregularities where the weaver lifted threads. A printed motif sits flat and repeats with machine precision.</p>
 
-Ask for the thread count. Cotton jamdani usually runs between 80 and 100 counts; a higher count feels lighter and costs more. Motif density matters too: a full-body design uses several times the work of a border-and-pallu piece.
+<p>Ask for the thread count. Cotton jamdani usually runs between 80 and 100 counts; a higher count feels lighter and costs more. Motif density matters too: a full-body design uses several times the work of a border-and-pallu piece.</p>
 
-Finally, ask how the piece should be washed. Most handloom cotton prefers cold water and shade drying. A seller who answers these questions clearly is usually a seller who knows the loom.`,
-    bodyBn: `ছবি দেখে শাড়ি কেমন পড়ে তা বোঝা যায় না, তবে নকশা বোনা না ছাপা তা বোঝা যায়। বোনা জামদানিতে নকশার গঠন কাপড়ের সমান, আর তাঁতি সুতা তোলার জায়গায় সামান্য অসমতা থাকে। ছাপা নকশা সমানভাবে বসে এবং মেশিনের নিখুঁত নিয়মে বারবার আসে।
+<p>Finally, ask how the piece should be washed. Most handloom cotton prefers cold water and shade drying. A seller who answers these questions clearly is usually a seller who knows the loom.</p>`,
+    bodyBn: `<p>ছবি দেখে শাড়ি কেমন পড়ে তা বোঝা যায় না, তবে নকশা বোনা না ছাপা তা বোঝা যায়। বোনা জামদানিতে নকশার গঠন কাপড়ের সমান, আর তাঁতি সুতা তোলার জায়গায় সামান্য অসমতা থাকে। ছাপা নকশা সমানভাবে বসে এবং মেশিনের নিখুঁত নিয়মে বারবার আসে।</p>
 
-সুতার কাউন্ট জিজ্ঞেস করুন। সুতির জামদানি সাধারণত ৮০ থেকে ১০০ কাউন্টের হয়; বেশি কাউন্ট হালকা লাগে এবং দামও বেশি। নকশার ঘনত্বও গুরুত্বপূর্ণ: পুরো শরীরে নকশার কাজ পাড়-পাল্লার চেয়ে কয়েক গুণ বেশি।
+<p>সুতার কাউন্ট জিজ্ঞেস করুন। সুতির জামদানি সাধারণত ৮০ থেকে ১০০ কাউন্টের হয়; বেশি কাউন্ট হালকা লাগে এবং দামও বেশি। নকশার ঘনত্বও গুরুত্বপূর্ণ: পুরো শরীরে নকশার কাজ পাড়-পাল্লার চেয়ে কয়েক গুণ বেশি।</p>
 
-সবশেষে জেনে নিন ধোয়ার নিয়ম। বেশিরভাগ হাতেকরা সুতির কাপড় ঠান্ডা পানিতে ও ছায়ায় শুকানো ভালো। যে বিক্রেতা এসব প্রশ্নের স্পষ্ট উত্তর দেন, তিনি সাধারণত তাঁতও ভালো বোঝেন।`,
+<p>সবশেষে জেনে নিন ধোয়ার নিয়ম। বেশিরভাগ হাতেকরা সুতির কাপড় ঠান্ডা পানিতে ও ছায়ায় শুকানো ভালো। যে বিক্রেতা এসব প্রশ্নের স্পষ্ট উত্তর দেন, তিনি সাধারণত তাঁতও ভালো বোঝেন।</p>`,
+    coverImageUrl: 'sawdagar/products/jamdani-saree/1',
+    coverImageAltEn: 'A woven jamdani saree held up to the light',
+    coverImageAltBn: 'আলোয় ধরা বোনা জামদানি শাড়ি',
+    tags: ['jamdani', 'buying-guide', 'handloom'],
     status: 'published',
     publishAt: '2026-10-14T09:00:00+06:00',
     seoDescriptionEn:
@@ -151,16 +165,20 @@ Finally, ask how the piece should be washed. Most handloom cotton prefers cold w
     titleBn: 'ধামরাইয়ের কুমোররা আবার পোড়াচ্ছেন',
     excerptEn: 'A clay shortage, a new kiln, and why the mugs cost what they cost.',
     excerptBn: 'মাটির সংকট, নতুন ভাটা, আর মগের দাম কেন এত।',
-    bodyEn: `Dhamrai's pottery workshops sit along a road that floods most monsoons. When the water comes, the drying shelves have to be emptied and the kiln raised on bricks. This year the potters rebuilt with a shared gas kiln, which fires evenly and wastes less than the old wood stacks.
+    bodyEn: `<p>Dhamrai's pottery workshops sit along a road that floods most monsoons. When the water comes, the drying shelves have to be emptied and the kiln raised on bricks. This year the potters rebuilt with a shared gas kiln, which fires evenly and wastes less than the old wood stacks.</p>
 
-Clay is the harder problem. Good grey clay now arrives by truck from several districts away, and the price changes with the diesel rate. A potter can throw thirty mugs in a morning but only fire once a week, so every batch carries the cost of the wait.
+<p>Clay is the harder problem. Good grey clay now arrives by truck from several districts away, and the price changes with the diesel rate. A potter can throw thirty mugs in a morning but only fire once a week, so every batch carries the cost of the wait.</p>
 
-The store's listings show the weight and capacity of each piece. Those numbers came from the workshop's own scale, not a supplier catalogue.`,
-    bodyBn: `ধামরাইয়ের মৃৎশিল্পের কারখানাগুলো এমন এক রাস্তার পাশে, যেটি প্রায় প্রতি বর্ষায় পানিতে ডোবে। পানি এলে শুকানোর তাক খালি করতে হয়, ভাটা ইটের ওপর তুলতে হয়। এ বছর কুমোররা একটি শেয়ার করা গ্যাসভাটা বানিয়েছেন, যা সমানভাবে পোড়ায় এবং পুরোনো কাঠের চুলার চেয়ে কম নষ্ট করে।
+<p>The store's listings show the weight and capacity of each piece. Those numbers came from the workshop's own scale, not a supplier catalogue.</p>`,
+    bodyBn: `<p>ধামরাইয়ের মৃৎশিল্পের কারখানাগুলো এমন এক রাস্তার পাশে, যেটি প্রায় প্রতি বর্ষায় পানিতে ডোবে। পানি এলে শুকানোর তাক খালি করতে হয়, ভাটা ইটের ওপর তুলতে হয়। এ বছর কুমোররা একটি শেয়ার করা গ্যাসভাটা বানিয়েছেন, যা সমানভাবে পোড়ায় এবং পুরোনো কাঠের চুলার চেয়ে কম নষ্ট করে।</p>
 
-আসল সমস্যা মাটি। ভালো ধূসর মাটি এখন কয়েক জেলা দূর থেকে ট্রাকে আসে, আর দাম ডিজেলের দরের সাথে বদলায়। একজন কুমোর সকালে ত্রিশটি মগ বানাতে পারেন, কিন্তু সপ্তাহে একবারই পোড়াতে পারেন; তাই প্রতিটি ব্যাচে অপেক্ষার খরচও থাকে।
+<p>আসল সমস্যা মাটি। ভালো ধূসর মাটি এখন কয়েক জেলা দূর থেকে ট্রাকে আসে, আর দাম ডিজেলের দরের সাথে বদলায়। একজন কুমোর সকালে ত্রিশটি মগ বানাতে পারেন, কিন্তু সপ্তাহে একবারই পোড়াতে পারেন; তাই প্রতিটি ব্যাচে অপেক্ষার খরচও থাকে।</p>
 
-দোকানের তালিকায় প্রতিটি পণ্যের ওজন ও ধারণক্ষমতা লেখা। সংখ্যাগুলো সরবরাহকারীর তালিকা নয়, কারখানার নিজের দাঁড়িপাল্লা থেকে।`,
+<p>দোকানের তালিকায় প্রতিটি পণ্যের ওজন ও ধারণক্ষমতা লেখা। সংখ্যাগুলো সরবরাহকারীর তালিকা নয়, কারখানার নিজের দাঁড়িপাল্লা থেকে।</p>`,
+    coverImageUrl: 'sawdagar/products/pottery-dinner-set/2',
+    coverImageAltEn: 'Clay mugs and bowls from a Dhamrai workshop',
+    coverImageAltBn: 'ধামরাইয়ের কারখানার মাটির মগ ও বাটি',
+    tags: ['pottery', 'dhamrai', 'craft'],
     status: 'published',
     publishAt: '2026-10-21T09:00:00+06:00',
     seoDescriptionEn: 'How Dhamrai potters fire their work and what drives the price of a mug.',
@@ -174,12 +192,12 @@ The store's listings show the weight and capacity of each piece. Those numbers c
     titleBn: 'শীতের বাজারে কী থাকবে',
     excerptEn: 'A working note on the blankets and shawls arriving in November.',
     excerptBn: 'নভেম্বরে আসা কম্বল ও শাল নিয়ে একটি খসড়া নোট।',
-    bodyEn: `This is a working draft for the winter market note. It lists the kantha blankets, wool shawls and cotton quilts that three stores plan to send in November, with the sizes and colours each one can supply.
+    bodyEn: `<p>This is a working draft for the winter market note. It lists the kantha blankets, wool shawls and cotton quilts that three stores plan to send in November, with the sizes and colours each one can supply.</p>
 
-The draft is here to show how the CMS keeps an unfinished entry out of the storefront. It will be rewritten with photographs and prices before it is scheduled.`,
-    bodyBn: `এটি শীতের বাজারের নোটের একটি খসড়া। এতে তিনটি দোকানের নভেম্বরে পাঠানোর পরিকল্পনা করা কাঁথা কম্বল, উলের শাল ও সুতির লেপের তালিকা আছে—সাইজ ও রঙসহ।
+<p>The draft is here to show how the CMS keeps an unfinished entry out of the storefront. It will be rewritten with photographs and prices before it is scheduled.</p>`,
+    bodyBn: `<p>এটি শীতের বাজারের নোটের একটি খসড়া। এতে তিনটি দোকানের নভেম্বরে পাঠানোর পরিকল্পনা করা কাঁথা কম্বল, উলের শাল ও সুতির লেপের তালিকা আছে—সাইজ ও রঙসহ।</p>
 
-খসড়াটি এখানে আছে দেখানোর জন্য যে সিএমএস কীভাবে অসম্পূর্ণ লেখা স্টোরফ্রন্টের বাইরে রাখে। ছবি ও দাম যোগ করে সময় নির্ধারণের আগে এটি আবার লেখা হবে।`,
+<p>খসড়াটি এখানে আছে দেখানোর জন্য যে সিএমএস কীভাবে অসম্পূর্ণ লেখা স্টোরফ্রন্টের বাইরে রাখে। ছবি ও দাম যোগ করে সময় নির্ধারণের আগে এটি আবার লেখা হবে।</p>`,
     status: 'draft',
     seoDescriptionEn: 'Draft preview of the winter market note.',
     seoDescriptionBn: 'শীতের বাজারের নোটের খসড়া।',
@@ -447,6 +465,10 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
       seoTitleBn: entry.titleBn,
       seoDescriptionEn: entry.seoDescriptionEn,
       seoDescriptionBn: entry.seoDescriptionBn,
+      coverImageUrl: entry.coverImageUrl ?? null,
+      coverImageAltEn: entry.coverImageAltEn ?? null,
+      coverImageAltBn: entry.coverImageAltBn ?? null,
+      tags: entry.tags ?? [],
       helpCategoryId,
     };
 
@@ -479,6 +501,10 @@ export async function seedContent(prisma: PrismaClient): Promise<string> {
           seoTitleBn: entry.titleBn,
           seoDescriptionEn: entry.seoDescriptionEn,
           seoDescriptionBn: entry.seoDescriptionBn,
+          coverImageUrl: entry.coverImageUrl ?? null,
+          coverImageAltEn: entry.coverImageAltEn ?? null,
+          coverImageAltBn: entry.coverImageAltBn ?? null,
+          tags: entry.tags ?? [],
         },
         note: 'Seeded entry',
         authorUserId: author?.id ?? null,

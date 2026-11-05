@@ -31,6 +31,10 @@ export const cmsEntryFields = {
   excerptBn: true,
   bodyEn: true,
   bodyBn: true,
+  coverImageUrl: true,
+  coverImageAltEn: true,
+  coverImageAltBn: true,
+  tags: true,
   seoTitleEn: true,
   seoTitleBn: true,
   seoDescriptionEn: true,
@@ -80,14 +84,37 @@ function visibleWhere(kind?: ContentKind) {
   };
 }
 
-/** Visible entries for a public index, newest first. */
-export async function getPublicContentList(kind: ContentKind): Promise<CmsEntryRecord[]> {
+/**
+ * Visible entries for a public index, newest first. Pass a `tag` to keep only entries carrying
+ * that tag slug.
+ */
+export async function getPublicContentList(
+  kind: ContentKind,
+  options: { tag?: string } = {},
+): Promise<CmsEntryRecord[]> {
   const rows = await getPrisma().cmsEntry.findMany({
-    where: visibleWhere(kind),
+    where: { ...visibleWhere(kind), ...(options.tag ? { tags: { has: options.tag } } : {}) },
     orderBy: [{ publishAt: 'desc' }, { updatedAt: 'desc' }],
     select: cmsEntryFields,
   });
   return rows as CmsEntryRecord[];
+}
+
+/** Tag slugs used by the visible entries of one kind, most used first. */
+export async function getPublicContentTags(
+  kind: ContentKind,
+): Promise<{ tag: string; count: number }[]> {
+  const rows = await getPrisma().cmsEntry.findMany({
+    where: visibleWhere(kind),
+    select: { tags: true },
+  });
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    for (const tag of row.tags ?? []) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+  return [...counts]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
 
 /** One visible entry by kind and slug, or null. */

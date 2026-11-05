@@ -15,6 +15,9 @@
 - The `20261105090000_real_auth` migration adds `users.phone`, `users.termsAcceptedAt` and the `seller_applications` table. Apply it with the `Database` workflow (`migrate`) before the R3 deployment is exercised; signing in or registering against a database without it fails with a server error. No reseed is required, and the eight seeded accounts keep working with `DEMO_ACCOUNT_PASSWORD`.
 - Password reset and address verification send no email. Their links are written to `mail_outbox` and read at `/admin/outbox`, so an owner walkthrough of the reset flow starts there. Wiring a real provider later means changing `queueAuthMail` in `apps/web/features/auth/authMail.ts` only.
 
+- **Owner action, Journal cover uploads:** create an unsigned upload preset in the Cloudinary dashboard (Settings → Upload → Add upload preset, signing mode Unsigned, folder `sawdagar/covers`), then add `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` to the Vercel production environment and redeploy. Until both are set, the cover field in `/admin/content` accepts a Cloudinary public ID, an `https` address or a site path and shows a note that the upload button needs the preset; nothing else breaks, and the seeded posts already carry covers. Both values are public by design (a browser upload cannot hide them); the API key and secret stay in GitHub Actions only.
+- The `20261105200000_journal_media` migration adds `cms_entries.coverImageUrl`, the two cover alt columns, `tags` and a GIN index on `tags`. Apply it with the `Database` workflow (`migrate`), then run `seed` so the three published Journal posts get their covers, alt text and `<p>` bodies. Old version snapshots without the new fields still restore.
+
 ## Product images (R2)
 
 - R2 is complete: 440 licensed Wikimedia Commons photographs are uploaded to Cloudinary per product, 142 products carry their own main and gallery images, and `/credits` lists every author and licence. `scripts/ci/check-images.ts` fails CI on a shared public id, a near-duplicate average hash or a repeated alt string, so a product cannot publish with a photograph already used elsewhere.
@@ -33,6 +36,8 @@
 | `CLOUDINARY_CLOUD_NAME` | GitHub Actions                    | Uploads product photographs to Cloudinary                    |
 | `CLOUDINARY_API_KEY`    | GitHub Actions                    | Cloudinary upload credential                                 |
 | `CLOUDINARY_API_SECRET` | GitHub Actions                    | Cloudinary upload credential                                 |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Vercel production    | Browser cover uploads and image delivery                     |
+| `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | Vercel production  | Unsigned preset the Journal cover button posts to            |
 
 Vercel stores the three production values as hidden secrets. `DIRECT_DATABASE_URL` is intentionally not present in Vercel, because the runtime uses the pooled connection and never runs migrations.
 

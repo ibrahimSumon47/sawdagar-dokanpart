@@ -25,7 +25,10 @@ export function ContentPreview({ entry, copy, locale }: ContentPreviewProps) {
             </p>
           ) : null}
           <div className="mt-3 max-h-96 overflow-y-auto">
-            <ArticleBody body={locale === 'bn' ? entry.bodyBn : entry.bodyEn} />
+            <ArticleBody
+              body={locale === 'bn' ? entry.bodyBn : entry.bodyEn}
+              format={entry.kind === 'journal' ? 'rich' : 'plain'}
+            />
           </div>
         </article>
       ) : (

@@ -21,6 +21,12 @@ export interface ContentSnapshot {
   excerptBn: string | null;
   bodyEn: string;
   bodyBn: string;
+  /** Journal cover: a Cloudinary public ID, a https URL or a site path. */
+  coverImageUrl: string | null;
+  coverImageAltEn: string | null;
+  coverImageAltBn: string | null;
+  /** Lowercase tag slugs, at most six. */
+  tags: string[];
   seoTitleEn: string | null;
   seoTitleBn: string | null;
   seoDescriptionEn: string | null;

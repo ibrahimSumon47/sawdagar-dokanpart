@@ -32,11 +32,14 @@ Versions and package licenses checked against the npm registry on 2026-10-28; ex
 | @types/node | 24.19.2 | MIT |
 | @types/react and @types/react-dom | 19.3.0 | MIT |
 | @types/pg | 8.23.1 | MIT |
+| @tiptap/react, @tiptap/starter-kit and @tiptap/pm | 3.32.2 | MIT |
+| sanitize-html | 2.18.1 | MIT |
+| @types/sanitize-html | 2.16.2 | MIT |
 | @sd/cs-core (workspace package) | 0.1.0 | private, no third-party code |
 | clang and wasm-ld (LLVM) | 23.1.4 locally; CI runner default | Apache-2.0 with LLVM exception |
 | Fraunces, Inter, Noto Sans Bengali | current Google Fonts releases fetched by `next/font` | SIL Open Font License 1.1 |
 
-Packages are open-source and locally installed. Prisma 7 uses the Rust-free client with the `pg` driver adapter; the generated client is produced during build and seed, and is not committed. Better Auth is MIT-licensed and self-hosted, with no paid tier needed. The font files are downloaded at build time by `next/font` and served from the deployment; they are not committed. ESLint 9 is pinned because the Next.js ESLint plugins do not yet declare support for ESLint 10. The MIT-licensed `unrs-resolver` native-binding installer is allowed by pnpm. Prettier 3.9.10 is a development-only formatter (registry unpacked size 9,959,033 bytes); it is not shipped to users. No application bundle-size budget has yet been measured; Tailwind emitted 34 KB of uncompressed CSS in the Phase 1 build.
+Packages are open-source and locally installed. Prisma 7 uses the Rust-free client with the `pg` driver adapter; the generated client is produced during build and seed, and is not committed. Better Auth is MIT-licensed and self-hosted, with no paid tier needed. The font files are downloaded at build time by `next/font` and served from the deployment; they are not committed. Tiptap is the rich-text editor for Journal bodies; it is MIT-licensed, has no paid tier, and its ProseMirror dependencies are installed with it. `sanitize-html` is the server-side allow-list and is also MIT. ESLint 9 is pinned because the Next.js ESLint plugins do not yet declare support for ESLint 10. The MIT-licensed `unrs-resolver` native-binding installer is allowed by pnpm. Prettier 3.9.10 is a development-only formatter (registry unpacked size 9,959,033 bytes); it is not shipped to users. No application bundle-size budget has yet been measured; Tailwind emitted 34 KB of uncompressed CSS in the Phase 1 build.
 
 `@lhci/cli` is a development-only Lighthouse runner. The `Lighthouse` workflow uses the Chrome already installed on the Ubuntu runner to audit the deployed URLs; it is not part of the install or build path and adds nothing to the application bundle.
 

@@ -5,6 +5,8 @@ import { saveContentAction } from '../../../content/actions';
 import type { HelpCategoryRecord } from '../../../content/helpCategoryQueries';
 import type { CategoryLanguage } from '../../../content/helpCategoryTypes';
 import { ContentFields } from './ContentFields';
+import { coverUploadConfig } from './coverUpload';
+import { toEditorCopy } from './editorCopy';
 
 export interface ContentEditorFormProps {
   /** Existing entry to edit, or null to create a new one. */
@@ -32,8 +34,9 @@ export function ContentEditorForm({
         entry={entry}
         defaultKind={defaultKind}
         categories={categories}
-        copy={copy}
+        copy={toEditorCopy(copy)}
         locale={locale}
+        upload={coverUploadConfig()}
       />
       <Button type="submit">{copy.saveContent}</Button>
     </form>

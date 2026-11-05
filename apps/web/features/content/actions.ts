@@ -8,6 +8,7 @@ import { getPrisma } from '../../lib/prisma';
 import { adminFail, auditAdmin, requireAdmin } from '../admin/guard';
 import { contentSchema, restoreVersionSchema, snapshotSchema } from './inputs';
 import type { ContentSnapshot } from './contentTypes';
+import { hasRichTextContent, sanitizeRichText } from './richText';
 import { publishDateToInstant } from './urls';
 
 function isUniqueViolation(error: unknown): boolean {
@@ -19,18 +20,7 @@ function isUniqueViolation(error: unknown): boolean {
   );
 }
 
-function snapshotOf(input: {
-  titleEn: string;
-  titleBn: string;
-  excerptEn: string | null;
-  excerptBn: string | null;
-  bodyEn: string;
-  bodyBn: string;
-  seoTitleEn: string | null;
-  seoTitleBn: string | null;
-  seoDescriptionEn: string | null;
-  seoDescriptionBn: string | null;
-}): ContentSnapshot {
+function snapshotOf(input: ContentSnapshot): ContentSnapshot {
   return {
     titleEn: input.titleEn,
     titleBn: input.titleBn,
@@ -38,6 +28,10 @@ function snapshotOf(input: {
     excerptBn: input.excerptBn,
     bodyEn: input.bodyEn,
     bodyBn: input.bodyBn,
+    coverImageUrl: input.coverImageUrl,
+    coverImageAltEn: input.coverImageAltEn,
+    coverImageAltBn: input.coverImageAltBn,
+    tags: input.tags,
     seoTitleEn: input.seoTitleEn,
     seoTitleBn: input.seoTitleBn,
     seoDescriptionEn: input.seoDescriptionEn,
@@ -58,6 +52,10 @@ export async function saveContentAction(formData: FormData): Promise<void> {
     excerptBn: formData.get('excerptBn'),
     bodyEn: formData.get('bodyEn'),
     bodyBn: formData.get('bodyBn'),
+    coverImageUrl: formData.get('coverImageUrl'),
+    coverImageAltEn: formData.get('coverImageAltEn'),
+    coverImageAltBn: formData.get('coverImageAltBn'),
+    tags: formData.get('tags'),
     seoTitleEn: formData.get('seoTitleEn'),
     seoTitleBn: formData.get('seoTitleBn'),
     seoDescriptionEn: formData.get('seoDescriptionEn'),
@@ -85,7 +83,14 @@ export async function saveContentAction(formData: FormData): Promise<void> {
         : null;
   if (input.status === 'scheduled' && !publishAt) adminFail('/admin/content', 'invalid');
 
-  const snapshot = snapshotOf(input);
+  // Journal bodies are editor HTML; clean it before it is stored or versioned.
+  const bodyEn = input.kind === 'journal' ? sanitizeRichText(input.bodyEn) : input.bodyEn;
+  const bodyBn = input.kind === 'journal' ? sanitizeRichText(input.bodyBn) : input.bodyBn;
+  if (input.kind === 'journal' && (!hasRichTextContent(bodyEn) || !hasRichTextContent(bodyBn))) {
+    adminFail('/admin/content', 'invalid');
+  }
+
+  const snapshot = snapshotOf({ ...input, bodyEn, bodyBn });
   const prisma = getPrisma();
   const existing = input.id
     ? await prisma.cmsEntry.findUnique({ where: { id: input.id }, select: { id: true } })

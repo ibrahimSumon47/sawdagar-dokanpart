@@ -44,11 +44,12 @@
 - Revision 1, phase R5 (homepage sections): the `20261105140000_cms_sections` migration adds `cms_sections` and `cms_section_versions`. `/admin/cms` is now the CMS hub with counts for homepage sections, pages and Help Center, and the Journal; `/admin/cms/sections` lists the blocks with drag or arrow reordering that saves each move optimistically and reverts on failure; the editor covers kind, bilingual copy, media, link label and address, status, schedule and a preview, and keeps the last ten versions with restore-as-new-version. The public homepage reads the first published hero, every published banner and the published collection heading, and the section actions purge `/` so an edit appears on the next request.
 - Revision 1, phase R5 (site settings): `site_settings` and `site_settings_versions` keep one versioned record for the announcement bar, the header and footer menus, the metadata defaults and the bilingual shipping and return text. `/admin/cms/settings` saves it with an audit entry and purges the root layout, `/policies` renders the shipping and return copy, and a saved menu is limited to six header and five footer links whose targets are a site path or an `https` address.
 - Revision 1, phase R5 (Help Center topics): the `20261105180000_help_categories` and `20261105193000_help_article_votes` migrations add topics with their version history, an optional topic on help entries, and one vote row per article and browser cookie. `/admin/cms/help` edits and reorders topics, `/help` filters by topic and searches titles, excerpts and bodies, and article pages show and count helpful votes.
+- Revision 1, phase R5 (Journal): the `20261105200000_journal_media` migration adds a cover photo with per-language alt text and a `tags TEXT[]` column with a GIN index to `cms_entries`. Journal bodies are edited in Tiptap and cleaned with `sanitize-html` on save and on render; `/journal` filters by `?tag=`, cards and articles show the cover and tag links, and covers and tags travel with each `cms_versions` snapshot so a restore brings them back.
 - Phase 12 production check: `/case-study` returned 200 with a self-referencing canonical, structured data and a footer link, and the sitemap listed 473 URLs including it. `/llms.txt` returned 200 as plain text and matched the root copy byte for byte. The six README screenshots were recaptured from production in a fresh headless browser at 1280 × 860 and 390 × 844, so they show no signed-in state or browser overlay. The new case-study page was checked at 360 px in dark theme and in the Bangla shell: no horizontal overflow, every section rendered, and the localized footer held its layout. Local lint, typecheck, 170 tests, build, asset budgets and both drift checks passed. The first CI run failed only on Windows in `facts:check` because the generated JSON was checked out with CRLF; both checks now normalise line endings and the generated files are pinned to LF, and the final CI run and Vercel deployment are green.
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slices (a), (b) and (c) are accepted and the Journal slice is next.**
+**Revision 1, phase R5 (CMS) is in progress; slices (a), (b) and (c) are accepted and slice (d), the Journal, is implemented.**
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
@@ -85,7 +86,18 @@ match, voted an article helpful, changed the answer and changed it back without 
 topic through the CMS and restored version 1, filed an article under another topic and put it back, and reordered two
 topics and saw the sidebar follow.
 
-The Journal slice (d) follows.
+Slice (d), the Journal, is implemented and awaiting its deployed check. Journal entries gain a cover photo, tags and a
+rich body: `cms_entries.coverImageUrl`, `coverImageAltEn`, `coverImageAltBn` and a `tags TEXT[]` column with a GIN index
+come from migration `20261105200000_journal_media`. A cover is stored as a Cloudinary public id, an `https` address or a
+site path and is resolved at render time by `coverImageSrc(value, width)`, with required per-language alt text so a
+screen reader never gets the title twice; the editor offers a direct Cloudinary upload when
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` are set and otherwise explains that the
+address has to be pasted. Bodies for `kind === 'journal'` are edited in Tiptap and cleaned with `sanitize-html` on save
+and again when rendered, so a journal body keeps headings, lists, quotes and links while Help and page entries stay
+plain text. Tags are lowercased, hyphenated, de-duplicated and capped at six, filtering uses `tags: { has }` against the
+GIN index, `/journal` takes `?tag=`, and every card, article and the filter row link to the filtered index. Covers and
+tags are part of the `cms_versions` snapshot, so restoring an old version brings its photo and tags back; snapshots
+written before this migration restore leniently with no cover and no tags.
 
 **Revision 1, phase R4 (skeleton system) is done.**
 `pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,

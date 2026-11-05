@@ -102,7 +102,7 @@ erDiagram
 | `ledger_entries` | Debit or credit line in poisha against an account code such as `platform:cash` or `seller:<id>:payable` |
 | `payouts` | A store's withdrawal request: number, amount, requested and processing users, status and note |
 | `refunds` | One paid refund per approved return request, with the amount, the reversed commission and the order link |
-| `cms_entries` | Storefront page, Help Center article or Journal post: bilingual title, excerpt, body and SEO fields, draft/scheduled/published status, publish instant and author |
+| `cms_entries` | Storefront page, Help Center article or Journal post: bilingual title, excerpt, body and SEO fields, an optional cover image and tags, draft/scheduled/published status, publish instant and author |
 | `cms_versions` | Immutable JSON snapshot of one entry after each save, with a version number, note, author and time |
 | `cms_sections` | Homepage block (hero, collection teaser or banner): bilingual copy, optional image and link, draft/scheduled/published status, publish instant and display order |
 | `cms_section_versions` | Immutable JSON snapshot of one homepage section after each save, with a version number, note, author and time |
@@ -166,7 +166,7 @@ erDiagram
 - `cms_entries` holds three areas in one table: `page` (a static storefront page at `/pages/[slug]`), `help` (a Help Center article at `/help/[slug]`) and `journal` (a post at `/journal/[slug]`). The unique pair `(kind, slug)` means the same slug can exist in two areas without colliding, and the public query filters by kind.
 - Every save writes a `cms_versions` snapshot of the editable fields inside the same transaction as the entry update. The version number is `max + 1`, guarded by a unique `(entryId, version)`. Restoring an old snapshot writes its fields back to the entry and appends a **new** version with the note `Restored from version N`; history is never rewritten.
 - A scheduled entry becomes visible when `status = 'scheduled'` and `publishAt <= now()`. A published entry is visible regardless of date. Drafts are never returned by the public queries, so an unfinished article cannot leak through a direct URL.
-- The editor stores plain text. Paragraphs are split on blank lines when rendered; there is no HTML field, so admin-authored content cannot inject markup.
+- Pages and Help articles store plain text: paragraphs are split on blank lines when rendered. Journal posts store editor HTML (`<p>`, `<h2>`, lists, quotes, links, code) in the same `body` columns; the server sanitises it with a fixed allow-list on save and again before rendering, so a Journal body cannot carry scripts, event handlers, images or inline styles.
 - `feature_flags` rows are read by the public Help and Journal routes; a missing row falls back to the seeded default in `features/content/flags.ts`, so the storefront still builds without a database. The flag table has no delete path; disabling is the reversible state.
 - `cms_sections` is separate from `cms_entries` because the homepage reads blocks by kind and order rather than by slug. `kind` is one of `hero`, `collections` or `banner`; `sortOrder` decides the order within a kind, and the admin list renumbers it in one transaction on every move.
 - The public home page reads the first published hero, every published banner and the first published collection teaser, ordered by `sortOrder` and then by creation time. A scheduled row appears once `publishAt <= now()`, and drafts and archived rows never leave the admin list.
@@ -183,6 +183,15 @@ erDiagram
 - The category is filing, not content, so it is deliberately outside the `cms_versions` snapshot. A version restore therefore never moves an article between topics; the editor changes the category itself.
 - Help search adds `contains` conditions, case-insensitively, over the title, excerpt and body in the active language, and only when the trimmed query is at least two characters. Search and the category filter are independent conditions, so both can narrow the same list.
 - `help_article_votes` holds one row per article and visitor: the visitor is a random UUID in the first-party `sd_help_visitor` cookie, so no account is needed, and `@@unique([entryId, visitorId])` lets a reader change their answer with an upsert instead of voting twice. Counts for the page come from `groupBy`, and the visitor's own answer is shown as the pressed button.
+
+## Journal shape
+
+- A Journal post keeps a cover and tags in `cms_entries` rather than in a second table: the values belong to one entry, and the public index already reads the row. The columns are `cover_image_url`, `cover_image_alt_en`, `cover_image_alt_bn` and `tags`, all optional except `tags`, which defaults to an empty array.
+- `cover_image_url` holds one of three things: the Cloudinary public ID we uploaded (`sawdagar/products/jamdani-saree/1`), an `https` address, or a site path starting with `/`. `coverImageSrc` turns the public ID into a delivery URL at the width the layout needs, so the same row serves a 400 px card and a 1200 px article without copying the URL. A site path stays local, which keeps a post renderable when the CDN is unreachable.
+- Alt text is stored per language and required once a cover is set, because an image without alt text is unusable for a screen-reader reader. The editor's Zod schema refuses a cover without both alt strings.
+- Tags are lowercase slugs, deduplicated, at most six per post. The public index filters with `tags: { has: tag }` and the `cms_entries_tags_idx` GIN index keeps that cheap as the archive grows; `/journal` reads `?tag=` and lists the tags that are actually in use with their counts.
+- Cover and tags are part of the `cms_versions` snapshot, so restoring a version restores the picture and the tags with the text. A snapshot written before this slice has no cover and no tags; the restore schema treats both as optional, so an old version still restores and simply clears the cover.
+- `body` for a Journal post is editor HTML, not plain text. `richText.ts` holds the allow-list (paragraph, headings two and three, lists, blockquote, pre and code, emphasis, links) and the sanitiser runs on save and again in `ArticleBody`. Headings are normalised to `h2`/`h3` so a post cannot break the page outline, and links gain `rel="noopener noreferrer"`.
 
 ## Checkout and order shape
 
@@ -255,6 +264,7 @@ erDiagram
 | `help_categories(sort_order)` | Display order of the topic list and the article editor's picker |
 | `help_category_versions(category_id, version)` unique | Immutable version numbers per category |
 | `cms_entries(help_category_id)` | Articles filed under one category |
+| `cms_entries` GIN on `tags` | The Journal tag filter and the per-tag counts |
 | `help_article_votes(entry_id, visitor_id)` unique and `help_article_votes(entry_id, helpful)` | One vote per visitor, and the per-article counts |
 
 Search uses `ILIKE '%term%'` over 432 products, which is acceptable at this size. A trigram index or PostgreSQL full-text search is a later optimisation; the query is capped at 80 characters and the page size is fixed.

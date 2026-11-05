@@ -767,6 +767,12 @@ model CmsEntry {
   excerptBn        String?
   bodyEn           String
   bodyBn           String
+  // Journal only: the card and article cover. A Cloudinary public ID or an https URL.
+  coverImageUrl    String?
+  coverImageAltEn  String?
+  coverImageAltBn  String?
+  // Journal only: lowercase slugs a reader can filter the index by.
+  tags             String[]     @default([])
   status           String       @default("draft")
   publishAt        DateTime?
   seoTitleEn       String?
@@ -786,6 +792,7 @@ model CmsEntry {
   @@index([kind, status, publishAt])
   @@index([helpCategoryId])
   @@index([updatedAt])
+  @@index([tags], type: Gin)
   @@map("cms_entries")
 }
 
