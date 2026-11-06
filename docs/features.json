@@ -39,6 +39,6 @@
     "description": "Guest checkout and order ID",
     "acceptance": "A signed-out visitor checks out without an account, sees the account prompt and the /order/confirmed page with the SD-YYMMDD-XXXX order code, a guest order is claimed when the same email registers and verifies, and a Playwright test covers the full path at 375, 768 and 1440 px",
     "status": "todo",
-    "evidence": "Slice (a) schema: migration 20261106100000_guest_orders (Database run 42173447526 applied it); orderCode generator in @sd/domain with unit tests; userId nullable, guestEmail and guestPhone added; existing order numbers unchanged. Slices (b) to (e) pending."
+    "evidence": "Slice (a) schema: migration 20261106100000_guest_orders (Database run 42173447526 applied it); orderCode generator in @sd/domain with unit tests; userId nullable, guestEmail and guestPhone added; existing order numbers unchanged. Slice (b) guest checkout form and hold release: commit 22e00f8. Slices (c) to (e) pending."
   }
 ]
