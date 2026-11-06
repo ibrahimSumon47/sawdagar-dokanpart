@@ -41,6 +41,12 @@ test.describe('reduced motion', () => {
   });
 });
 
+test('the footer motion link is translated into Bangla', async ({ page, context, baseURL }) => {
+  await context.addCookies([{ name: 'sd_locale', value: 'bn', url: baseURL }]);
+  await page.goto(catalogPath);
+  await expect(page.locator('footer').getByRole('link', { name: 'মোশন', exact: true })).toHaveAttribute('href', motionPath);
+});
+
 test('motion catalog is linked from the footer only', async ({ page }) => {
   await page.goto(catalogPath);
   const footerLink = page.locator('footer').getByRole('link', { name: 'Motion', exact: true });
