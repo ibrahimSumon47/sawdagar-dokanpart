@@ -29,11 +29,13 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   const locale = await getLocale();
   const copy = getDictionary(locale);
 
-  const [categories, category, vendor, result] = await Promise.all([
+  // The search is not awaited here: the page shell streams first and the results
+  // arrive through the Suspense boundary inside CatalogView.
+  const resultPromise = searchCatalog(filters);
+  const [categories, category, vendor] = await Promise.all([
     getCatalogCategories(),
     filters.category ? getCatalogCategory(filters.category) : Promise.resolve(null),
     filters.vendor ? getCatalogVendor(filters.vendor) : Promise.resolve(null),
-    searchCatalog(filters),
   ]);
 
   return (
@@ -42,7 +44,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
       categories={categories}
       category={category}
       vendor={vendor}
-      result={result}
+      resultPromise={resultPromise}
       copy={copy}
       locale={locale}
     />

@@ -1,21 +1,22 @@
-import { ButtonLink, EmptyState } from '@sd/ui';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '../../../../i18n';
-import { catalogHref, catalogResetHref, type CatalogFilters } from '../../catalogQuery';
+import { catalogHref, type CatalogFilters } from '../../catalogQuery';
 import type { CatalogCategory, CatalogCategoryDetail, CatalogResult } from '../../queries';
 import { pageLayout } from '../../../shell/pageLayout';
 import { CategoryNav } from '../CategoryNav';
 import { CatalogFilters as FilterForm } from '../CatalogFilters';
+import { CatalogResults } from '../CatalogResults';
 import { CatalogSearch } from '../CatalogSearch';
-import { Pagination } from '../Pagination';
-import { ProductGrid, productGridLabels } from '../ProductGrid';
+import { ProductGridSkeleton } from '../ProductGrid';
 
 export interface CatalogViewProps {
   filters: CatalogFilters;
   categories: readonly CatalogCategory[];
   category: CatalogCategoryDetail | null;
   vendor: { name: string } | null;
-  result: CatalogResult;
+  /** Pending search; the results stream in behind a Suspense boundary. */
+  resultPromise: Promise<CatalogResult>;
   copy: Dictionary;
   locale: Locale;
 }
@@ -26,13 +27,12 @@ export function CatalogView({
   categories,
   category,
   vendor,
-  result,
+  resultPromise,
   copy,
   locale,
 }: CatalogViewProps) {
   const title = category ? category.name[locale] : copy.catalog.title;
   const description = category ? category.description[locale] : copy.catalog.description;
-  const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB');
 
   return (
     <div className={pageLayout.catalog}>
@@ -65,51 +65,14 @@ export function CatalogView({
           <FilterForm filters={filters} copy={copy.catalog} />
         </aside>
 
-        <section aria-live="polite">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-sm tabular-nums text-ink-muted">
-              {copy.catalog.results(number.format(result.total))}
-            </p>
-            {filters.q ? (
-              <p className="text-sm text-ink">{copy.catalog.matchesFor(filters.q)}</p>
-            ) : null}
-          </div>
-          {result.searchEngine ? (
-            <p className="mt-1 text-xs text-ink-muted">
-              {result.searchEngine === 'wasm'
-                ? copy.catalog.rankedByWasm
-                : copy.catalog.rankedByFallback}
-            </p>
-          ) : null}
-
-          <div className="mt-5">
-            {result.products.length === 0 ? (
-              <EmptyState
-                title={copy.catalog.noResultsTitle}
-                description={copy.catalog.noResultsBody}
-                action={
-                  <ButtonLink href={catalogResetHref} variant="secondary">
-                    {copy.catalog.noResultsAction}
-                  </ButtonLink>
-                }
-              />
-            ) : (
-              <ProductGrid
-                products={result.products}
-                locale={locale}
-                labels={productGridLabels(result.products, copy.catalog)}
-              />
-            )}
-          </div>
-
-          <Pagination
+        <Suspense fallback={<ProductGridSkeleton label={copy.catalog.loading} />}>
+          <CatalogResults
             filters={filters}
-            page={result.page}
-            pageCount={result.pageCount}
+            resultPromise={resultPromise}
+            copy={copy}
             locale={locale}
-            copy={copy.catalog}
           />
-        </section>
+        </Suspense>
       </div>
     </div>
   );
