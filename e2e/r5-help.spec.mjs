@@ -35,7 +35,7 @@ test.describe('R5 Help Center topics, search and votes', () => {
     await helpSearch.getByRole('button', { name: 'Search', exact: true }).click();
     await expect(page).toHaveURL(/q=status/);
     await expect(page).toHaveURL(/category=delivery/);
-    await expect(page.getByText('Results for “status”')).toBeVisible();
+    await expect(page.getByText('Results for “status”', { exact: true }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /Checking your order status/ })).toBeVisible();
 
     await page.getByRole('link', { name: 'Clear filters' }).first().click();

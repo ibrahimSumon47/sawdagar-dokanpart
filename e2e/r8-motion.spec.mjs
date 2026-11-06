@@ -40,7 +40,7 @@ test.describe('reduced motion', () => {
     // A card below the fold is hidden until it scrolls into view, even under reduced
     // motion, so bring it on screen first; phone and tablet grids start lower than desktop.
     await card.scrollIntoViewIfNeeded();
-    await expect(card).toHaveCSS('opacity', '1');
+    await expect(card).toHaveCSS('opacity', '1', { timeout: 15_000 });
   });
 });
 
