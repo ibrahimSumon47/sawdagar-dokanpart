@@ -52,6 +52,7 @@
 **Revision 1, phase R5 (CMS) is closed. Slices (a) to (d) are accepted and the closing check (e) passed.** Playwright run 42171733613 passed 37 checks on the deployment, including every R5 CMS entity at 375, 768 and 1440 px.
 
 **Next: Revision 1, phase R6 (guest checkout and order ID).**
+Slice (a), schema migration, is done (`037f756`). `Order.userId` is nullable and `guestEmail`, `guestPhone` and a unique, indexed `orderCode` (`SD-YYMMDD-XXXX`, alphabet without 0, O, 1, I, L) were added in migration `20261106100000_guest_orders`. The existing `number` is unchanged, so old order numbers still work. The generator in `@sd/domain` has 4 unit tests. The Database workflow (run 42173447526) applied the migration. Lint, typecheck, tests and build passed. Slices (b) to (e) are still to do.
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
