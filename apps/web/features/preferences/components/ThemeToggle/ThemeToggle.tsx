@@ -1,6 +1,7 @@
 import { Moon, Sun } from 'lucide-react';
 import { setTheme } from '../../actions';
 import type { Theme } from '../../theme';
+import { ThemeRevealForm } from './ThemeRevealForm';
 
 export interface ThemeToggleProps {
   /** Theme currently rendered by the server. */
@@ -10,15 +11,15 @@ export interface ThemeToggleProps {
 
 /**
  * Sun/moon button that stores the opposite theme in a cookie. It is a plain
- * form submission, so it works before client JavaScript loads.
+ * form submission, so it works before client JavaScript loads. The client
+ * wrapper only adds the circular reveal when the browser supports it.
  */
 export function ThemeToggle({ theme, labels }: ThemeToggleProps) {
   const next: Theme = theme === 'light' ? 'dark' : 'light';
   const label = next === 'light' ? labels.useLight : labels.useDark;
 
   return (
-    <form action={setTheme}>
-      <input type="hidden" name="theme" value={next} />
+    <ThemeRevealForm action={setTheme} theme={next}>
       <button
         type="submit"
         aria-label={label}
@@ -31,6 +32,6 @@ export function ThemeToggle({ theme, labels }: ThemeToggleProps) {
           <Sun aria-hidden="true" className="size-5" />
         )}
       </button>
-    </form>
+    </ThemeRevealForm>
   );
 }

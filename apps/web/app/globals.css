@@ -73,6 +73,12 @@
   }
 }
 
+/* Browsers without the circular reveal get a 200ms cross-fade on the root view transition. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+}
+
 /* Every animation and transition the site adds is switched off for readers who ask for less motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
