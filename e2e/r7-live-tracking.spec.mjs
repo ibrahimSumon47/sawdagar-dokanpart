@@ -46,7 +46,7 @@ test.describe('R7 live order tracking', () => {
 
         await signIn(buyerPage, buyerEmail, orderPath);
         await expect(buyerPage.getByRole('list', { name: 'Tracking', exact: true })).toBeVisible();
-        await expect(buyerPage.getByText('Live', { exact: true })).toBeVisible();
+        await expect(buyerPage.getByText('Live', { exact: true }).first()).toBeVisible();
 
         await signIn(sellerPage, vendorEmail, sellerPath);
         const markPacked = sellerPage.getByRole('button', { name: 'Mark packed', exact: true });
