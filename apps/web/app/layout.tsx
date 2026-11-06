@@ -91,6 +91,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       data-theme={theme}
       className={`${inter.variable} ${fraunces.variable} ${notoSansBengali.variable}`}
     >
+      <head>
+        {/* Opens the image host's connection early, so the product photo (the LCP image) starts sooner. */}
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+      </head>
       <body className="antialiased">
         <a
           href="#main"
