@@ -42,14 +42,14 @@ test.describe('R7 live order tracking', () => {
       await expect(buyerPage.getByText('Live', { exact: true })).toBeVisible();
 
       await signIn(sellerPage, vendorEmail, sellerPath);
-      const confirm = sellerPage.getByRole('button', { name: 'Confirm order', exact: true });
-      await expect(confirm).toBeVisible();
+      const markPacked = sellerPage.getByRole('button', { name: 'Mark packed', exact: true });
+      await expect(markPacked).toBeVisible();
 
       const changedAt = Date.now();
-      await confirm.click();
+      await markPacked.click();
       await expect(sellerPage).toHaveURL(/saved=1/);
 
-      await expect(completedStep(buyerPage, 'Confirmed')).toBeVisible({
+      await expect(completedStep(buyerPage, 'Packed')).toBeVisible({
         timeout: liveDeadlineMs,
       });
       expect(Date.now() - changedAt).toBeLessThan(liveDeadlineMs);
