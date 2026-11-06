@@ -199,3 +199,10 @@ project links live in the footer Project column and on `/about/project`, and Pla
 - MockPay reservations are held for 30 minutes but no scheduled job releases abandoned ones yet; a later job must restore stock and cancel the pending order.
 - SSLCommerz sandbox and Stripe test mode are not wired because both need owner accounts and sandbox credentials. The checkout currently offers COD and MockPay only.
 - Order emails are captured in the in-app outbox; no mail provider is configured.
+
+## Next step (Revision 1, performance gate still open)
+
+- Lighthouse medians of five mobile runs, latest run 42227143151: home 0.77, catalog 0.84, product 0.87. Gate is 0.9. The 0.85 fallback does not apply yet, because home is below 0.85.
+- Done so far: hero `next/image` priority, request-cached viewer, product reviews/questions/related streamed behind Suspense, image-host preconnect. Full numbers in `docs/reports/performance.md`.
+- Exact next step: find why home swings from 0.69 to 0.94 between runs. Read the home JS and the Lighthouse home audits (LCP element, unused JS, long tasks), then lazy-load the non-above-fold client code (R8 animation, toast, cart drawer) and re-measure.
+- After the gate: README test counts and CI rows, this file's Known issues cleanup, drift regen, final audit, git hygiene report, and R10 in `docs/features.json`.
