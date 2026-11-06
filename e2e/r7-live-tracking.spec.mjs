@@ -83,8 +83,9 @@ test.describe('R7 live order tracking', () => {
         const page = await context.newPage();
         await signIn(page, buyerEmail, orderPath);
         await expect(page.getByRole('list', { name: 'Tracking', exact: true })).toBeVisible();
-        // The sign-in redirect can still be settling; wait so evaluate does not race a navigation.
-        await page.waitForLoadState('networkidle');
+        // The live stream keeps a connection open, so 'networkidle' never settles here.
+        // Waiting for the Live label shows the client has hydrated before we measure.
+        await expect(page.getByText('Live', { exact: true }).first()).toBeVisible();
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
         );
