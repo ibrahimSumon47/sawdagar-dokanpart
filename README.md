@@ -184,24 +184,26 @@ Lighthouse CI, median of three mobile runs on the deployed site (run [4106705536
 
 The build ships 394.7 KiB of gzipped client JavaScript, 10.9 KiB of gzipped CSS and a 123.6 KiB largest chunk, which is the admin-only Journal editor; the twelve catalog photographs total 852 KiB, with a 144.8 KiB largest file. Budgets are checked after every build.
 
-There are 170 unit tests:
+There are 261 unit tests:
 
 | Package       | Tests | Focus                                                                                                                      |
 | ------------- | ----: | -------------------------------------------------------------------------------------------------------------------------- |
-| `@sd/domain`  |    73 | Money, seed invariants, roles, coupons, order state, reviews and returns, seller rules, ledger balance                     |
+| `@sd/domain`  |   102 | Money, seed invariants, roles, coupons, order state, reviews and returns, seller rules, ledger balance                     |
 | `@sd/cs-core` |    15 | WebAssembly and TypeScript parity for every fixture, including Bangla search                                               |
 | `@sd/ui`      |    17 | Rendering, skeleton parity, token contrast in both themes                                                                  |
-| `@sd/web`     |    65 | Filters, cart totals, comparison limits, CMS validation, admin navigation, localized places, metadata snippets, `llms.txt` |
+| `@sd/web`     |   127 | Filters, cart totals, comparison limits, CMS validation, admin navigation, localized places, metadata snippets, `llms.txt` |
 
 axe-core 4.10.2 reported zero violations on nine template, theme and width combinations in the Phase 11 review; that review was manual. [`docs/TESTING.md`](docs/TESTING.md) records every check and its limits.
 
 ## CI/CD
 
-| Workflow                                         | Trigger              | What it does                                                                                                                                                                                |
-| ------------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`CI`](.github/workflows/ci.yml)                 | Every push to `main` | Lint, typecheck, 170 tests, production build, asset budgets and generated-file drift checks on Ubuntu, Windows and macOS; a fourth job runs the Python and Java references with `--require` |
-| [`Database`](.github/workflows/db.yml)           | Manual               | `migrate`, `seed` or `status` against the direct Neon connection, serialised by a concurrency group                                                                                         |
-| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly    | Three mobile runs per URL against the deployment; fails below 90 in any category or above 0.1 CLS                                                                                           |
+| Workflow                                         | Trigger               | What it does                                                                                                                                                                                |
+| ------------------------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`CI`](.github/workflows/ci.yml)                 | Every push to `main`  | Lint, typecheck, 261 tests, production build, asset budgets and generated-file drift checks on Ubuntu, Windows and macOS; a fourth job runs the Python and Java references with `--require` |
+| [`Playwright`](.github/workflows/playwright.yml) | Manual                | End-to-end browser checks (150 tests) against a base URL, by default the deployment, covering skeletons, layout shift, help, motion and the shop path                                       |
+| [`Security`](.github/workflows/security.yml)     | Every push and manual | `pnpm audit --audit-level=high --prod` and the security checks; the high-severity audit gate fails the run                                                                                  |
+| [`Database`](.github/workflows/db.yml)           | Manual                | `migrate`, `seed` or `status` against the direct Neon connection, serialised by a concurrency group                                                                                         |
+| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly     | Three mobile runs per URL against the deployment; fails below 90 in any category or above 0.1 CLS                                                                                           |
 
 A Vercel deployment of `main` follows a green build. The Vercel build never touches the database: every data route is dynamic and reports a missing configuration at request time.
 
@@ -233,7 +235,7 @@ After the first deploy, run the **Database** workflow with `migrate`, then `seed
 - The CMS edits plain text without rich text or embedded images. Feature flags cover only the Help Center and Journal.
 - Finance balances are summed in JavaScript from every ledger entry, which is fine at demo volume but should become a SQL aggregate.
 - There is no marketplace REST API or OpenAPI document. Writes are Server Actions, and the only HTTP routes are Better Auth and the MockPay callback; [docs/API.md](docs/API.md) records the boundary instead of publishing a contract for endpoints that do not exist.
-- There is no automated browser or visual-regression suite. axe and the six-width review were manual; Lighthouse is the only browser check that runs in CI.
+- There is no visual-regression suite. The Playwright suite checks behaviour and layout shift, not pixels, and axe and the six-width review were manual.
 - Seeded reviews belong to synthetic buyers without login accounts. The storefront labels the whole site as demo data.
 
 The complete list, including the reasoning behind each omission, is in [`docs/PROJECT_STATE.md`](docs/PROJECT_STATE.md#known-issues).
