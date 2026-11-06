@@ -23,10 +23,19 @@ async function fillGuestCheckout(page, email) {
 
 test.describe('R6 guest checkout and confirmation', () => {
   test('a guest places an order, sees the code and skips the account prompt', async ({ page }) => {
+    // The full flow (cart, one-page checkout, confirmation) can exceed the 30 s default.
+    test.setTimeout(90_000);
     const email = uniqueEmail();
 
     await page.goto(productPath);
-    await page.getByRole('button', { name: 'Add to cart', exact: true }).click();
+    // The first variant (Small) is out of stock on the seeded belt, so pick an in-stock size.
+    await page
+      .getByText(/^Medium/)
+      .first()
+      .click();
+    const addToCart = page.getByRole('button', { name: 'Add to cart', exact: true });
+    await expect(addToCart).toBeEnabled();
+    await addToCart.click();
     await expect(page.getByRole('button', { name: 'Added', exact: true })).toBeVisible();
 
     await page.goto('/checkout');
