@@ -127,12 +127,13 @@ test.describe('R5 Help Center topics, search and votes', () => {
       await testInfo.attach('r5-help-category', { path: screenshot, contentType: 'image/png' });
 
       await page.goBack();
-      const firstVersion = page
-        .getByRole('listitem')
-        .filter({ has: page.getByText('Version 1', { exact: true }) });
-      await firstVersion.getByRole('button', { name: 'Restore' }).click();
+      // Only the last 10 snapshots are kept, so restore the oldest one still listed.
+      const oldestVersion = page.getByRole('listitem').filter({
+        has: page.getByRole('button', { name: 'Restore' }),
+      });
+      await oldestVersion.last().getByRole('button', { name: 'Restore' }).click();
       await expect(page.getByText('The version was restored as a new edit.')).toBeVisible();
-      await expect(page.getByLabel('Name (English)')).toHaveValue('Orders');
+      await expect(page.getByLabel('Name (English)')).not.toHaveValue(renamed);
 
       await page.goto('/help');
       await expect(topics.getByRole('link', { name: /^Orders/ })).toBeVisible();
