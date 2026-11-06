@@ -66,6 +66,7 @@ export {
 } from './checkout/orderState';
 export type { OrderStatus, PaymentStatus, SubOrderStatus } from './checkout/orderState';
 export { formatOrderNumber, formatSubOrderNumber } from './checkout/orderNumber';
+export { formatOrderCode, isOrderCode, orderCodeAlphabet } from './checkout/orderCode';
 export {
   allocateAmount,
   calculateCheckoutTotals,

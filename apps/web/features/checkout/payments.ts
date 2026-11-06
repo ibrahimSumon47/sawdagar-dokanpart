@@ -31,6 +31,7 @@ export async function completeMockPayment(
           number: true,
           status: true,
           userId: true,
+          guestEmail: true,
           user: { select: { email: true } },
         },
       },
@@ -92,7 +93,8 @@ export async function completeMockPayment(
       data: {
         id: randomUUID(),
         actorUserId: payment.order.userId,
-        actorEmail: payment.order.user.email,
+        // Guest orders have no account; record the checkout email so the trail still names the buyer.
+        actorEmail: payment.order.user?.email ?? payment.order.guestEmail ?? '',
         action: 'payment.paid',
         targetType: 'order',
         targetId: payment.order.number,

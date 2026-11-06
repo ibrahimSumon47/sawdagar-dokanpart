@@ -409,7 +409,12 @@ model Address {
 model Order {
   id             String          @id
   number         String          @unique
-  userId         String
+  // Guest-facing code such as SD-261105-K7QM. Nullable so orders placed before R6 keep their old number.
+  orderCode      String?         @unique
+  // Null for a guest order; the guest email and phone identify it until the buyer registers.
+  userId         String?
+  guestEmail     String?
+  guestPhone     String?
   status         String          @default("pending_payment")
   // Set after the order is placed; the snapshot above keeps the address readable.
   paymentStatus  String          @default("pending")
@@ -433,7 +438,7 @@ model Order {
   placedAt       DateTime        @default(now())
   confirmedAt    DateTime?
   cancelledAt    DateTime?
-  user           User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  user           User?           @relation(fields: [userId], references: [id], onDelete: Restrict)
   address        Address?        @relation(fields: [addressId], references: [id], onDelete: SetNull)
   items          OrderItem[]
   subOrders      SubOrder[]
@@ -445,6 +450,7 @@ model Order {
 
   @@index([userId, placedAt])
   @@index([status, placedAt])
+  @@index([guestEmail])
   @@map("orders")
 }
 
