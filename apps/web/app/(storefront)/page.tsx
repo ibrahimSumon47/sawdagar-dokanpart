@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { HomeCatalog } from '../../features/catalog/components/HomeCatalog';
+import { HomeCatalog, HomeCatalogSkeleton } from '../../features/catalog/components/HomeCatalog';
 import { getCatalogCategories, getFeaturedProducts } from '../../features/catalog/queries';
 import { getPublishedSections } from '../../features/content/sectionQueries';
 import { HomeBanners } from '../../features/home/components/HomeBanners';
-import { HomeIntro } from '../../features/home/components/HomeIntro';
+import { HomeIntro, HomeIntroSkeleton } from '../../features/home/components/HomeIntro';
 import { homeHeroContent } from '../../features/home/heroContent';
 import { getDictionary, type Locale } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
@@ -23,13 +23,20 @@ export default async function HomePage() {
 
   return (
     <>
-      <Suspense fallback={null}>
+      <Suspense fallback={<HomeIntroSkeleton label={copy.common.loadingLabel} />}>
         <HomeIntroSection locale={locale} copy={copy} />
       </Suspense>
       <Suspense fallback={null}>
         <HomeBannersSection locale={locale} />
       </Suspense>
-      <Suspense fallback={null}>
+      <Suspense
+        fallback={
+          <HomeCatalogSkeleton
+            categoriesLabel={copy.common.loadingLabel}
+            productsLabel={copy.catalog.loading}
+          />
+        }
+      >
         <HomeCatalogSection locale={locale} copy={copy} />
       </Suspense>
     </>

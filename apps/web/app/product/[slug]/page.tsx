@@ -2,7 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getViewer } from '../../../features/auth/session';
 import { Suspense } from 'react';
-import { ProductBelowFold } from '../../../features/catalog/components/ProductBelowFold';
+import {
+  ProductBelowFold,
+  ProductBelowFoldSkeleton,
+} from '../../../features/catalog/components/ProductBelowFold';
 import { ProductDetail } from '../../../features/catalog/components/ProductDetail';
 import { getProductBySlug } from '../../../features/catalog/queries';
 import { getDictionary } from '../../../i18n';
@@ -43,7 +46,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <ProductDetail product={product} locale={locale} copy={copy} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<ProductBelowFoldSkeleton label={copy.common.loadingLabel} />}>
         <ProductBelowFold
           product={product}
           signedIn={viewer !== null}
