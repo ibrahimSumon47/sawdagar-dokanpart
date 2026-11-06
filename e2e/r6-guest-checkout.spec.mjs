@@ -17,6 +17,7 @@ async function fillGuestCheckout(page, email) {
   await page.getByLabel('District', { exact: true }).selectOption({ index: 1 });
   await page.getByLabel('Upazila', { exact: true }).selectOption({ index: 1 });
   await page.getByLabel('Postcode', { exact: true }).fill('1212');
+  await page.getByLabel('Street address', { exact: true }).fill('House 12, Road 4');
   await page.getByLabel('Area (optional)', { exact: true }).fill('Mirpur 10');
 }
 
