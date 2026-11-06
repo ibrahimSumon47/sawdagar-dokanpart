@@ -69,3 +69,16 @@ Product findings (run with five samples):
 Change in this round: `getViewer` is now request-cached, so the root layout and the page share one session lookup. Home moved from 0.94 to 0.92 (within run noise) and product moved from 0.88 to 0.87, so this change did not move product. The product gap is server work: the page awaits reviews, questions, related products and the product query in one `Promise.all` before any HTML is sent, and the LCP phase shows about 636 ms of time to first byte.
 
 Next step for product: stream the reviews, questions and related grid behind a `Suspense` boundary so the title and photo are sent first. This is not yet done.
+
+## Rounds 3 and 4 (commits f05b391 and 2f1a745, runs 42225808152 and 42227143151)
+
+Changes: the reviews, questions and related grid now stream behind `Suspense` (`f05b391`), and the layout preconnects to `res.cloudinary.com` (`2f1a745`).
+
+| Run         | Home median | Catalog median | Product median | Product scores (five runs)   |
+| ----------- | ----------- | -------------- | -------------- | ---------------------------- |
+| 42225808152 | 0.78        | 0.83           | 0.85           | 0.84, 0.84, 0.85, 0.86, 0.87 |
+| 42227143151 | 0.77        | 0.84           | 0.87           | 0.86, 0.87, 0.87, 0.87, 0.88 |
+
+Product audit values in the latest run (five runs): time to first byte fell from 636 ms to 25–29 ms, total blocking time is 36–65 ms, and unused JavaScript is 170–330 ms. Largest Contentful Paint is still about 3.9 s, and the element is the Cloudinary product photo (800 px, `f_auto,q_auto`). Its load time depends on the image host, which is outside this repository.
+
+Home and catalog show a wide spread between runs (home 0.69 to 0.94 within one run), so the runner, not the code, sets much of the variance.
