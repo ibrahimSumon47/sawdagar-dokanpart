@@ -3,6 +3,7 @@ import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { nextCookies } from 'better-auth/next-js';
 import { admin } from 'better-auth/plugins/admin';
 import { organization } from 'better-auth/plugins/organization';
+import { claimGuestOrders } from '../features/checkout/claimGuestOrders';
 import { queueAuthMail } from '../features/auth/authMail';
 import { getPrisma } from './prisma';
 import { site } from './site';
@@ -42,6 +43,25 @@ function createAuth() {
           subject: `Verify your ${site.name} email address`,
           bodyText: `Open this link to verify your address:\n${url}`,
         });
+      },
+    },
+    databaseHooks: {
+      user: {
+        update: {
+          // Earlier guest orders are attached once the address is proven. A
+          // failed claim is logged and never blocks verification itself.
+          after: async (user) => {
+            if (!user.emailVerified) return;
+            try {
+              await claimGuestOrders(user);
+            } catch (error) {
+              console.error(
+                'auth.guest_claim_failed',
+                error instanceof Error ? error.message : 'unknown',
+              );
+            }
+          },
+        },
       },
     },
     socialProviders: googleConfigured()
