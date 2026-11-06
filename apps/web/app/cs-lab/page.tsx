@@ -5,7 +5,12 @@ import { getLocale } from '../../i18n/getLocale';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
-  return { title: copy.csLab.title, description: copy.csLab.description };
+  // Developer page: kept out of search results and the sitemap.
+  return {
+    title: copy.csLab.title,
+    description: copy.csLab.description,
+    robots: { index: false, follow: true },
+  };
 }
 
 /** Developer page showing the CS core modules' real output. */

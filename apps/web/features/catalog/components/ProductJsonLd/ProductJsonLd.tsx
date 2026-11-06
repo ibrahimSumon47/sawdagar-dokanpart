@@ -29,11 +29,17 @@ export function ProductJsonLd({ product, locale }: ProductJsonLdProps) {
         product.totalStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: product.vendorName },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-    },
+    // Search engines reject a rating with no reviews behind it, so the field is
+    // only emitted once there is at least one review.
+    ...(product.reviewCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.rating,
+            reviewCount: product.reviewCount,
+          },
+        }
+      : {}),
   };
 
   const json = JSON.stringify(data)

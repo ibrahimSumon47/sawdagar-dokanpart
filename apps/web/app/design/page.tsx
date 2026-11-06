@@ -5,7 +5,12 @@ import { getLocale } from '../../i18n/getLocale';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
-  return { title: copy.design.title, description: copy.design.description };
+  // Developer page: kept out of search results and the sitemap.
+  return {
+    title: copy.design.title,
+    description: copy.design.description,
+    robots: { index: false, follow: true },
+  };
 }
 
 /** Component gallery for the design system. */

@@ -95,6 +95,7 @@ packages/  Reusable packages shared by the app
 docs/  Product, design, architecture, data, security, testing and deployment documentation
   adr/  Ten architecture decision records with alternatives and consequences
   diagrams/  Related code and tests.
+  reports/  Related code and tests.
   research/  Related code and tests.
   screenshots/  Light, dark and mobile screenshots used in the README and case study
   spec/  Product, design system, architecture, data and roadmap specifications

@@ -9,10 +9,15 @@ import {
 } from '../../features/content/helpCategoryQueries';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
+import { publicPageMetadata } from '../../lib/meta';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
-  return { title: copy.content.helpTitle, description: copy.content.helpDescription };
+  return publicPageMetadata({
+    title: copy.content.helpTitle,
+    description: copy.content.helpDescription,
+    path: '/help',
+  });
 }
 
 interface HelpPageProps {

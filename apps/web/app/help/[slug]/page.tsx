@@ -12,6 +12,7 @@ import {
 import { getPublicContentEntry } from '../../../features/content/queries';
 import { getDictionary } from '../../../i18n';
 import { getLocale } from '../../../i18n/getLocale';
+import { publicPageMetadata } from '../../../lib/meta';
 
 interface HelpArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -20,15 +21,17 @@ interface HelpArticlePageProps {
 export async function generateMetadata({ params }: HelpArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const locale = await getLocale();
+  const path = `/help/${slug}`;
   const entry = await getPublicContentEntry('help', slug);
-  if (!entry) return { title: getDictionary(locale).content.helpTitle };
+  if (!entry) return publicPageMetadata({ title: getDictionary(locale).content.helpTitle, path });
 
   const title = locale === 'bn' ? entry.seoTitleBn : entry.seoTitleEn;
   const description = locale === 'bn' ? entry.seoDescriptionBn : entry.seoDescriptionEn;
-  return {
+  return publicPageMetadata({
     title: title ?? (locale === 'bn' ? entry.titleBn : entry.titleEn),
-    description: description ?? undefined,
-  };
+    description,
+    path,
+  });
 }
 
 /** One published Help Center article. */

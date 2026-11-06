@@ -5,6 +5,7 @@ import { isFeatureEnabled } from '../../../features/content/flags';
 import { getPublicContentEntry } from '../../../features/content/queries';
 import { getDictionary } from '../../../i18n';
 import { getLocale } from '../../../i18n/getLocale';
+import { publicPageMetadata } from '../../../lib/meta';
 
 interface JournalPostPageProps {
   params: Promise<{ slug: string }>;
@@ -13,15 +14,18 @@ interface JournalPostPageProps {
 export async function generateMetadata({ params }: JournalPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const locale = await getLocale();
+  const path = `/journal/${slug}`;
   const entry = await getPublicContentEntry('journal', slug);
-  if (!entry) return { title: getDictionary(locale).content.journalTitle };
+  if (!entry)
+    return publicPageMetadata({ title: getDictionary(locale).content.journalTitle, path });
 
   const title = locale === 'bn' ? entry.seoTitleBn : entry.seoTitleEn;
   const description = locale === 'bn' ? entry.seoDescriptionBn : entry.seoDescriptionEn;
-  return {
+  return publicPageMetadata({
     title: title ?? (locale === 'bn' ? entry.titleBn : entry.titleEn),
-    description: description ?? undefined,
-  };
+    description,
+    path,
+  });
 }
 
 /** One published Journal post. */

@@ -6,10 +6,15 @@ import { tagFilterSchema } from '../../features/content/inputs';
 import { getPublicContentList, getPublicContentTags } from '../../features/content/queries';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
+import { publicPageMetadata } from '../../lib/meta';
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getDictionary(await getLocale());
-  return { title: copy.content.journalTitle, description: copy.content.journalDescription };
+  return publicPageMetadata({
+    title: copy.content.journalTitle,
+    description: copy.content.journalDescription,
+    path: '/journal',
+  });
 }
 
 interface JournalPageProps {

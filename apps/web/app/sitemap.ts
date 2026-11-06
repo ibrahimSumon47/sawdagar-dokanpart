@@ -12,8 +12,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${site.demoUrl}/journal`, changeFrequency: 'weekly', priority: 0.6 },
   { url: `${site.demoUrl}/case-study`, changeFrequency: 'monthly', priority: 0.7 },
   { url: `${site.demoUrl}/about/project`, changeFrequency: 'monthly', priority: 0.5 },
-  { url: `${site.demoUrl}/design`, changeFrequency: 'yearly', priority: 0.3 },
-  { url: `${site.demoUrl}/cs-lab`, changeFrequency: 'monthly', priority: 0.4 },
   { url: `${site.demoUrl}/credits`, changeFrequency: 'yearly', priority: 0.2 },
 ];
 

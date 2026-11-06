@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { metaDescription } from './meta';
+import { metaDescription, publicPageMetadata } from './meta';
 
 describe('metaDescription', () => {
   it('keeps short text and collapses whitespace', () => {
@@ -23,5 +23,14 @@ describe('metaDescription', () => {
 
     expect(result).toHaveLength(160);
     expect(result.endsWith('…')).toBe(true);
+  });
+});
+
+describe('publicPageMetadata', () => {
+  it('sets its own canonical and Open Graph URL so pages do not inherit the home page', () => {
+    const metadata = publicPageMetadata({ title: 'Returns', path: '/help/returns' });
+
+    expect(metadata.alternates?.canonical).toBe('/help/returns');
+    expect(metadata.openGraph).toMatchObject({ url: '/help/returns', title: 'Returns' });
   });
 });
