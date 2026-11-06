@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { requireViewer } from '../../features/auth/session';
+import { getViewer } from '../../features/auth/session';
 import { CheckoutView } from '../../features/checkout/components/CheckoutView';
-import { getCheckoutData } from '../../features/checkout/queries';
+import { getCheckoutData, getGuestCheckoutData } from '../../features/checkout/queries';
 import { pageLayout } from '../../features/shell/pageLayout';
 import { getDictionary } from '../../i18n';
 import { getLocale } from '../../i18n/getLocale';
@@ -13,12 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: copy.checkout.title, description: copy.checkout.description };
 }
 
-/** Signed-in checkout with saved addresses and two sandbox payment methods. */
+/** Checkout for signed-in buyers (saved addresses) and guests (single-page form). */
 export default async function CheckoutPage() {
-  const viewer = await requireViewer('/checkout');
+  const viewer = await getViewer();
   const locale = await getLocale();
   const copy = getDictionary(locale);
-  const data = await getCheckoutData(viewer.id);
+  const data = viewer ? await getCheckoutData(viewer.id) : await getGuestCheckoutData();
 
   return (
     <div className={pageLayout.wide}>
@@ -31,6 +31,7 @@ export default async function CheckoutPage() {
           items={data.items}
           coupon={data.coupon}
           addresses={data.addresses}
+          isGuest={viewer === null}
           copy={copy.checkout}
           locale={locale}
         />

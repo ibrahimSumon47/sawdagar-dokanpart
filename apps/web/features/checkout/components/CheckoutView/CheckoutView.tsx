@@ -8,19 +8,21 @@ import { initialCheckoutState } from '../../state';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { placeName } from '../../../../i18n/places';
 import { placeOrder } from '../../actions';
-import type { PaymentMethod } from '../../inputs';
+import type { DeliveryMethod, PaymentMethod } from '../../inputs';
 import type { AddressRecord } from '../../queries';
 import type { CartLine } from '../../../shop/types';
 import { formatTemplate } from '../../../shop/formatTemplate';
 import { SubmitButton } from '../../../auth/components/SubmitButton';
 import { AddressFields, type AddressDraft } from '../AddressFields';
 import { CheckoutSummary } from '../CheckoutSummary';
+import { DeliveryOptions } from '../DeliveryOptions';
 import { PaymentOptions } from '../PaymentOptions';
 
 export interface CheckoutViewProps {
   items: CartLine[];
   coupon: CouponRule | null;
   addresses: AddressRecord[];
+  isGuest: boolean;
   copy: Dictionary['checkout'];
   locale: Locale;
 }
@@ -33,16 +35,26 @@ function blankDraft(address?: AddressRecord): AddressDraft {
     district: address?.district ?? 'Dhaka',
     upazila: address?.upazila ?? '',
     area: address?.area ?? '',
+    postcode: '',
+    landmark: '',
     addressLine: address?.addressLine ?? '',
   };
 }
 
-/** Checkout form, saved-address picker and server-priced summary. */
-export function CheckoutView({ items, coupon, addresses, copy, locale }: CheckoutViewProps) {
+/** Checkout form, saved-address picker (signed-in only), guest contact fields and server-priced summary. */
+export function CheckoutView({
+  items,
+  coupon,
+  addresses,
+  isGuest,
+  copy,
+  locale,
+}: CheckoutViewProps) {
   const [state, formAction] = useActionState(placeOrder, initialCheckoutState);
   const [addressId, setAddressId] = useState(addresses[0]?.id ?? '');
   const [draft, setDraft] = useState<AddressDraft>(() => blankDraft(addresses[0]));
   const [payment, setPayment] = useState<PaymentMethod>('cod');
+  const [delivery, setDelivery] = useState<DeliveryMethod>('standard');
   const now = useMemo(() => new Date(), []);
   const savedAddress = addresses.find((address) => address.id === addressId);
   const activeDistrict = savedAddress?.district ?? draft.district;
@@ -80,7 +92,7 @@ export function CheckoutView({ items, coupon, addresses, copy, locale }: Checkou
           <h2 className="font-serif text-xl text-ink">{copy.addressTitle}</h2>
           <p className="mt-1 text-sm text-ink-muted">{copy.addressDescription}</p>
 
-          {addresses.length > 0 ? (
+          {!isGuest && addresses.length > 0 ? (
             <fieldset className="mt-4 space-y-2">
               <legend className="text-sm font-medium text-ink">{copy.savedAddress}</legend>
               {addresses.map((address) => (
@@ -123,11 +135,32 @@ export function CheckoutView({ items, coupon, addresses, copy, locale }: Checkou
             <input type="hidden" name="addressId" value="" />
           )}
 
+          {isGuest ? (
+            <div className="mt-4">
+              <label htmlFor="checkout-email" className="text-sm font-medium text-ink">
+                {copy.guestEmail}
+              </label>
+              <input
+                id="checkout-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="mt-1 w-full rounded-sm border border-line bg-background px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              />
+            </div>
+          ) : null}
+
           {addressId === '' ? (
             <div className="mt-4">
               <AddressFields value={draft} onChange={setDraft} copy={copy} locale={locale} />
             </div>
           ) : null}
+        </section>
+
+        <section className="rounded-sm border border-line bg-surface p-5">
+          <h2 className="font-serif text-xl text-ink">{copy.deliveryTitle}</h2>
+          <DeliveryOptions value={delivery} onChange={setDelivery} copy={copy} />
         </section>
 
         <section className="rounded-sm border border-line bg-surface p-5">

@@ -1,9 +1,10 @@
 'use client';
 
-import { districtsForDivision, divisions } from '@sd/domain';
+import { districtsForDivision, divisions, upazilasByDistrict } from '@sd/domain';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { placeName } from '../../../../i18n/places';
 
+/** Address values as the checkout form holds them before submission. */
 export interface AddressDraft {
   recipientName: string;
   phone: string;
@@ -12,6 +13,8 @@ export interface AddressDraft {
   upazila: string;
   area: string;
   addressLine: string;
+  postcode: string;
+  landmark: string;
 }
 
 export interface AddressFieldsProps {
@@ -26,10 +29,15 @@ const inputClass =
 
 const labelClass = 'text-sm font-medium text-ink';
 
-/** The address form fields shared by checkout and future account pages. */
+/**
+ * The delivery address fields shared by checkout and future account pages.
+ * Division, district and upazila are chosen from lists; changing a parent
+ * level clears the child so a stale pair can never be submitted.
+ */
 export function AddressFields({ value, onChange, copy, locale }: AddressFieldsProps) {
   const set = (field: keyof AddressDraft, next: string) => onChange({ ...value, [field]: next });
   const districts = districtsForDivision(value.division);
+  const upazilas = upazilasByDistrict[value.district] ?? [];
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
@@ -81,7 +89,7 @@ export function AddressFields({ value, onChange, copy, locale }: AddressFieldsPr
           onChange={(event) => {
             const division = event.target.value;
             const firstDistrict = districtsForDivision(division)[0] ?? '';
-            onChange({ ...value, division, district: firstDistrict });
+            onChange({ ...value, division, district: firstDistrict, upazila: '' });
           }}
           required
           className={inputClass}
@@ -102,7 +110,7 @@ export function AddressFields({ value, onChange, copy, locale }: AddressFieldsPr
           id="checkout-district"
           name="district"
           value={value.district}
-          onChange={(event) => set('district', event.target.value)}
+          onChange={(event) => onChange({ ...value, district: event.target.value, upazila: '' })}
           required
           className={inputClass}
         >
@@ -118,18 +126,39 @@ export function AddressFields({ value, onChange, copy, locale }: AddressFieldsPr
         <label htmlFor="checkout-upazila" className={labelClass}>
           {copy.upazila}
         </label>
-        <input
+        <select
           id="checkout-upazila"
           name="upazila"
           value={value.upazila}
           onChange={(event) => set('upazila', event.target.value)}
-          autoComplete="address-level2"
           required
+          className={inputClass}
+        >
+          <option value="">{copy.upazilaPlaceholder}</option>
+          {upazilas.map((upazila) => (
+            <option key={upazila} value={upazila}>
+              {upazila}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="checkout-postcode" className={labelClass}>
+          {copy.postcode}
+        </label>
+        <input
+          id="checkout-postcode"
+          name="postcode"
+          value={value.postcode}
+          onChange={(event) => set('postcode', event.target.value)}
+          inputMode="numeric"
+          autoComplete="postal-code"
           className={inputClass}
         />
       </div>
 
-      <div>
+      <div className="sm:col-span-2">
         <label htmlFor="checkout-area" className={labelClass}>
           {copy.area}
         </label>
@@ -160,6 +189,19 @@ export function AddressFields({ value, onChange, copy, locale }: AddressFieldsPr
         <p id="checkout-line-hint" className="mt-1 text-xs text-ink-muted">
           {copy.addressLineHint}
         </p>
+      </div>
+
+      <div className="sm:col-span-2">
+        <label htmlFor="checkout-landmark" className={labelClass}>
+          {copy.landmark}
+        </label>
+        <input
+          id="checkout-landmark"
+          name="landmark"
+          value={value.landmark}
+          onChange={(event) => set('landmark', event.target.value)}
+          className={inputClass}
+        />
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import { ButtonLink, ErrorState } from '@sd/ui';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { requireViewer } from '../../../../features/auth/session';
+import { getViewer } from '../../../../features/auth/session';
 import { MockPayPanel } from '../../../../features/checkout/components/MockPayPanel';
 import { verifyMockPayToken } from '../../../../features/checkout/mockPayToken';
-import { getPaymentForViewer } from '../../../../features/checkout/queries';
+import { getPaymentById, getPaymentForViewer } from '../../../../features/checkout/queries';
 import { getDictionary } from '../../../../i18n';
 import { getLocale } from '../../../../i18n/getLocale';
 
@@ -20,20 +20,15 @@ interface MockPayPageProps {
   searchParams: Promise<{ token?: string }>;
 }
 
-/** Sandbox gateway page. The signed token is checked before any action shows. */
+/**
+ * Sandbox gateway page. The signed token is the credential, so a guest can pay
+ * without a session. A signed-in buyer must also own the order.
+ */
 export default async function MockPayPage({ params, searchParams }: MockPayPageProps) {
   const [{ paymentId }, query] = await Promise.all([params, searchParams]);
-  const viewer = await requireViewer(`/checkout/pay/${paymentId}`);
-  const payment = await getPaymentForViewer(paymentId, viewer.id);
-  if (!payment) notFound();
-
-  if (payment.status === 'paid') {
-    redirect(`/orders/${payment.order.number}?payment=paid`);
-  }
-
+  const token = query.token ?? '';
   const locale = await getLocale();
   const copy = getDictionary(locale);
-  const token = query.token ?? '';
 
   if (!verifyMockPayToken(paymentId, token)) {
     return (
@@ -41,13 +36,23 @@ export default async function MockPayPage({ params, searchParams }: MockPayPageP
         <ErrorState
           title={copy.checkout.paymentInvalidToken}
           description={copy.checkout.paymentPendingBody}
-          action={
-            <ButtonLink href={`/orders/${payment.order.number}`}>
-              {copy.checkout.orderTitle}
-            </ButtonLink>
-          }
+          action={<ButtonLink href="/checkout">{copy.checkout.title}</ButtonLink>}
         />
       </div>
+    );
+  }
+
+  const viewer = await getViewer();
+  const payment = viewer
+    ? await getPaymentForViewer(paymentId, viewer.id)
+    : await getPaymentById(paymentId);
+  if (!payment) notFound();
+
+  if (payment.status === 'paid') {
+    redirect(
+      viewer
+        ? `/orders/${payment.order.number}?payment=paid`
+        : `/order/confirmed?code=${payment.order.number}`,
     );
   }
 

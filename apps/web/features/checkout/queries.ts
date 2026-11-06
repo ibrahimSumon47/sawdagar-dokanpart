@@ -122,6 +122,15 @@ export async function getCheckoutData(userId: string): Promise<CheckoutData> {
   return { cartId, items, coupon, addresses };
 }
 
+/** Checkout data for a guest: the guest cart from the cookie and no saved addresses. */
+export async function getGuestCheckoutData(): Promise<CheckoutData> {
+  const cartId = await getCartId(null);
+  const items = cartId ? await readCartItems(cartId) : [];
+  const coupon = await getCartCoupon(cartId, items);
+
+  return { cartId, items, coupon, addresses: [] };
+}
+
 /** Loads one order only when it belongs to the viewer. */
 export async function getOrderForViewer(
   number: string,
@@ -235,6 +244,18 @@ export async function getMailForUser(userId: string): Promise<MailRecord[]> {
     createdAt: row.createdAt,
     orderNumber: row.order?.number ?? null,
   }));
+}
+
+/** Loads a payment by id for a verified MockPay token; the token is the credential. */
+export async function getPaymentById(paymentId: string) {
+  return getPrisma().payment.findUnique({
+    where: { id: paymentId },
+    include: {
+      order: {
+        select: { number: true, totalMinor: true, status: true, userId: true, placedAt: true },
+      },
+    },
+  });
 }
 
 /** Payment page data, including the buyer id used to check ownership. */

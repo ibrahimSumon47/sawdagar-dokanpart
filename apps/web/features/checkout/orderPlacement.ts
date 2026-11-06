@@ -17,8 +17,14 @@ export interface RequestDetails {
 }
 
 export interface PlaceOrderParams {
-  userId: string;
+  /** Signed-in buyer id; null for a guest checkout. */
+  userId: string | null;
+  /** Buyer email: the account email, or the guest email on the form. */
   email: string;
+  /** Guest phone from the form; unused for signed-in buyers. */
+  guestPhone?: string;
+  /** Guest order code such as SD-261106-K7QM; required when userId is null. */
+  orderCode?: string;
   cartId: string;
   items: CartLine[];
   coupon: CouponRule | null;
@@ -69,16 +75,21 @@ export async function placeOrderInDatabase(params: PlaceOrderParams): Promise<st
   const orderStatus = paidOnline ? 'pending_payment' : 'confirmed';
   const subOrderStatus = paidOnline ? 'pending' : 'confirmed';
   const reservationStatus = paidOnline ? 'held' : 'confirmed';
-  const reservationExpiry = paidOnline
-    ? new Date(now.getTime() + 30 * 60 * 1000)
-    : new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const isGuest = params.userId === null;
+  if (isGuest && !params.orderCode) throw new CheckoutFailure('empty');
+  // Guest stock is held for 15 minutes so a released cart does not block other buyers.
+  const reservationExpiry = isGuest
+    ? new Date(now.getTime() + 15 * 60 * 1000)
+    : paidOnline
+      ? new Date(now.getTime() + 30 * 60 * 1000)
+      : new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
   return getPrisma().$transaction(
     async (tx) => {
       const orderId = randomUUID();
       let addressId = params.addressId;
 
-      if (!addressId) {
+      if (!addressId && params.userId) {
         const addressCount = await tx.address.count({ where: { userId: params.userId } });
         const created = await tx.address.create({
           data: {
@@ -121,6 +132,9 @@ export async function placeOrderInDatabase(params: PlaceOrderParams): Promise<st
           id: orderId,
           number: params.orderNumber,
           userId: params.userId,
+          orderCode: params.orderCode ?? null,
+          guestEmail: isGuest ? params.email : null,
+          guestPhone: isGuest ? (params.guestPhone ?? null) : null,
           status: orderStatus,
           paymentStatus: 'pending',
           paymentMethod: method,
@@ -212,7 +226,8 @@ export async function placeOrderInDatabase(params: PlaceOrderParams): Promise<st
         })),
       });
 
-      if (params.coupon) {
+      // Coupon redemptions are recorded per account, so guest orders skip them.
+      if (params.coupon && params.userId) {
         const coupon = await tx.coupon.findUniqueOrThrow({
           where: { code: params.coupon.code },
           select: { id: true },

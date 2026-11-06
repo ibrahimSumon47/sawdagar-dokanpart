@@ -10,6 +10,8 @@ function address(overrides: Record<string, string> = {}) {
     upazila: 'Tangail Sadar',
     area: 'Santosh',
     addressLine: 'House 12, Road 4, near the bazaar',
+    postcode: '1900',
+    landmark: '',
     label: '',
     ...overrides,
   };

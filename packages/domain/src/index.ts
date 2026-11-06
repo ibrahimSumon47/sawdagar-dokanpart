@@ -46,6 +46,7 @@ export {
   findDivisionForDistrict,
 } from './checkout/bangladesh';
 export type { Division } from './checkout/bangladesh';
+export { upazilasByDistrict } from './checkout/upazilas';
 export {
   FREE_DELIVERY_THRESHOLD_MINOR,
   shippingFeeForZone,
