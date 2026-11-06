@@ -51,7 +51,9 @@
 
 **Revision 1, phase R5 (CMS) is closed. Slices (a) to (d) are accepted and the closing check (e) passed.** Playwright run 42171733613 passed 37 checks on the deployment, including every R5 CMS entity at 375, 768 and 1440 px.
 
-**Next: Revision 1, phase R6 (guest checkout and order ID).**
+**Revision 1, phase R6 (guest checkout and order ID) is closed.** Slices (a) to (e) are done. Playwright run 42178834834 passed 39 checks on the deployment, including the guest COD order, the `SD-` code on `/order/confirmed`, the account-prompt skip and the register email prefill, all at 375, 768 and 1440 px. Limitation: the claim of guest orders after email verification is covered by code and unit-level review only; the verification link is reachable only through the admin outbox, so the spec does not follow it.
+
+Revision 1, phase R6 history:
 Slice (a), schema migration, is done (`037f756`). `Order.userId` is nullable and `guestEmail`, `guestPhone` and a unique, indexed `orderCode` (`SD-YYMMDD-XXXX`, alphabet without 0, O, 1, I, L) were added in migration `20261106100000_guest_orders`. The existing `number` is unchanged, so old order numbers still work. The generator in `@sd/domain` has 4 unit tests. The Database workflow (run 42173447526) applied the migration. Lint, typecheck, tests and build passed.
 Slice (b), guest checkout form, is done (`22e00f8`). `/checkout` is one page with contact, Division, District and Upazila (495 upazilas from open-admin-data, CC BY 4.0), address, postcode, landmark, delivery notes, delivery method, payment, summary and coupon. Guests get a 15-minute hold, skip coupon redemption and the account address write. Release-holds route and workflow restock expired holds. Slices (c) to (e) are still to do.
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection

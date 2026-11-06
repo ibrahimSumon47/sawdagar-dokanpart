@@ -38,7 +38,7 @@
     "id": "R6",
     "description": "Guest checkout and order ID",
     "acceptance": "A signed-out visitor checks out without an account, sees the account prompt and the /order/confirmed page with the SD-YYMMDD-XXXX order code, a guest order is claimed when the same email registers and verifies, and a Playwright test covers the full path at 375, 768 and 1440 px",
-    "status": "todo",
-    "evidence": "Slice (a) schema: migration 20261106100000_guest_orders (Database run 42173447526 applied it); orderCode generator in @sd/domain with unit tests; userId nullable, guestEmail and guestPhone added; existing order numbers unchanged. Slice (b) guest checkout form and hold release: commit 22e00f8. Slices (c) to (e) pending."
+    "status": "pass",
+    "evidence": "Slice (a) schema: migration 20261106100000_guest_orders (Database run 42173447526 applied it); orderCode generator in @sd/domain with unit tests. Slice (b) guest checkout form and hold release: commit 22e00f8. Slice (c) confirmation page and account prompt: bfa684e. Slice (d) claim on verified register: 09dbf81. Slice (e) Playwright run 42178834834 passed 39 checks, including the guest COD order, code, modal skip and register email prefill. Limitation: the claim after verification is not covered end to end; the verification link is only reachable through the admin outbox."
   }
 ]
