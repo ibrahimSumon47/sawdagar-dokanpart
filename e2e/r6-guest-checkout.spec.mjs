@@ -26,6 +26,7 @@ test.describe('R6 guest checkout and confirmation', () => {
 
     await page.goto(productPath);
     await page.getByRole('button', { name: 'Add to cart', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Added', exact: true })).toBeVisible();
 
     await page.goto('/checkout');
     await fillGuestCheckout(page, email);
