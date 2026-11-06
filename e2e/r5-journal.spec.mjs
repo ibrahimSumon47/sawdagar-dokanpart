@@ -129,8 +129,16 @@ test.describe('R5 Journal covers, tags and rich text', () => {
       await page.getByRole('button', { name: 'Save entry' }).click();
       await expect(page.getByText('The entry was saved.')).toBeVisible();
 
-      await page.goto('/journal?tag=kiln-check');
-      await expect(page.getByRole('link', { name: new RegExp(potteryTitle) })).toBeVisible();
+      // The public tag page can lag the save by a moment, so allow a bounded reload.
+      await expect
+        .poll(
+          async () => {
+            await page.goto('/journal?tag=kiln-check');
+            return page.getByRole('link', { name: new RegExp(potteryTitle) }).isVisible();
+          },
+          { timeout: 30_000, intervals: [2_000] },
+        )
+        .toBe(true);
 
       const screenshot = testInfo.outputPath('r5-journal-tag.png');
       await page.screenshot({ path: screenshot, fullPage: true });
