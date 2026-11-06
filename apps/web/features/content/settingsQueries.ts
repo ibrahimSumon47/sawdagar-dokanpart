@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import { cache } from 'react';
 import { getPrisma } from '../../lib/prisma';
 import {
@@ -64,10 +65,33 @@ export const getSiteSettings = cache(async (): Promise<SiteSettingsRecord | null
   };
 });
 
+/** Cache tag shared by the settings actions, so a save or restore refreshes the storefront at once. */
+export const SETTINGS_CACHE_TAG = 'site-settings';
+
+/*
+ * The storefront reads settings on every page (header, footer, metadata).
+ * Caching them keeps those pages off the database; the 60-second window is a
+ * fallback in case a save path is ever missed, the tag is the normal refresh.
+ */
+const loadPublicSettings = unstable_cache(
+  async (): Promise<SiteSettingsRecord> => {
+    const saved = await getSiteSettings();
+    return (
+      saved ?? { ...defaultSettings(), id: SETTINGS_ID, updatedAt: null, updatedByUserId: null }
+    );
+  },
+  ['public-settings'],
+  { tags: [SETTINGS_CACHE_TAG], revalidate: 60 },
+);
+
 /** Settings for the storefront, falling back to the built-in defaults. */
 export async function getPublicSettings(): Promise<SiteSettingsRecord> {
-  const saved = await getSiteSettings();
-  return saved ?? { ...defaultSettings(), id: SETTINGS_ID, updatedAt: null, updatedByUserId: null };
+  const settings = await loadPublicSettings();
+  // The cache stores JSON, so dates come back as strings; restore them.
+  return {
+    ...settings,
+    updatedAt: settings.updatedAt ? new Date(settings.updatedAt) : null,
+  };
 }
 
 /** The saved settings with their ten most recent versions. */

@@ -4,6 +4,7 @@ import { skuWithCheckCharacter } from '@sd/cs-core';
 import { canSell, slugify } from '@sd/domain';
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
+import { purgeCatalogCategories } from '../catalog/queries';
 import { redirect } from 'next/navigation';
 import { getPrisma } from '../../lib/prisma';
 import { auditSeller, isUniqueViolation, toMinor } from './actionHelpers';
@@ -111,6 +112,7 @@ export async function saveProductAction(formData: FormData): Promise<void> {
 
     revalidatePath('/seller/products');
     revalidatePath('/catalog');
+    purgeCatalogCategories();
     revalidatePath('/');
   } catch (error) {
     if (isUniqueViolation(error)) fail(returnPath, 'conflict');

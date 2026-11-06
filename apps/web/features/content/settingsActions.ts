@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getPrisma } from '../../lib/prisma';
 import type { Prisma } from '../../generated/prisma/client';
@@ -11,7 +11,7 @@ import {
   settingsSnapshotSchema,
   type SettingsInput,
 } from './settingsInputs';
-import { SETTINGS_ID } from './settingsQueries';
+import { SETTINGS_CACHE_TAG, SETTINGS_ID } from './settingsQueries';
 import type { SettingsSnapshot } from './settingsTypes';
 import { appendSettingsVersion } from './settingsVersions';
 
@@ -95,6 +95,7 @@ export async function saveSettingsAction(formData: FormData): Promise<void> {
       footerLinks: snapshot.footerLinks.length,
     },
   );
+  revalidateTag(SETTINGS_CACHE_TAG, { expire: 0 });
   revalidatePath(SETTINGS_HREF);
   revalidatePath('/', 'layout');
   revalidatePath('/policies');
@@ -139,6 +140,7 @@ export async function restoreSettingsVersionAction(formData: FormData): Promise<
   await auditAdmin(viewer, 'cms.settings.restored', 'siteSettings', SETTINGS_ID, {
     fromVersion: version.version,
   });
+  revalidateTag(SETTINGS_CACHE_TAG, { expire: 0 });
   revalidatePath(SETTINGS_HREF);
   revalidatePath('/', 'layout');
   revalidatePath('/policies');

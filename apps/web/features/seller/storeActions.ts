@@ -2,6 +2,7 @@
 
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
+import { purgeCatalogCategories } from '../catalog/queries';
 import { redirect } from 'next/navigation';
 import { getPrisma } from '../../lib/prisma';
 import { auditSeller, isUniqueViolation, parseOptionalDate, toMinor } from './actionHelpers';
@@ -132,6 +133,7 @@ export async function savePromotionAction(formData: FormData): Promise<void> {
     });
     revalidatePath('/seller/promotions');
     revalidatePath('/catalog');
+    purgeCatalogCategories();
   } catch (error) {
     if (isUniqueViolation(error)) fail('/seller/promotions', 'conflict');
     fail('/seller/promotions', 'failed');

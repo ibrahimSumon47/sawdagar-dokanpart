@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { purgeCatalogCategories } from '../catalog/queries';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { getPrisma } from '../../lib/prisma';
@@ -103,5 +104,6 @@ export async function moderateReviewAction(formData: FormData): Promise<void> {
   revalidatePath('/admin/reviews');
   revalidatePath(`/product/${review.product.slug}`);
   revalidatePath('/catalog');
+  purgeCatalogCategories();
   redirect('/admin/reviews?saved=1');
 }

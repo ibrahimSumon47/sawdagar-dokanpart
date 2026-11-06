@@ -1,4 +1,5 @@
 import { productTones, type LocalisedName, type ProductTone } from '@sd/domain';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { cache } from 'react';
 import type { Prisma } from '../../generated/prisma/client';
 import { rankCatalogMatches } from '@sd/cs-core';
@@ -143,8 +144,21 @@ export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
   };
 }
 
+/** Cache tag for the category tree; catalog, product and seller actions purge it when counts change. */
+export const CATALOG_CATEGORIES_TAG = 'catalog-categories';
+
+/** Drops the cached category tree; call after any change to product status or category. */
+export function purgeCatalogCategories(): void {
+  revalidateTag(CATALOG_CATEGORIES_TAG, { expire: 0 });
+}
+
 /** Top-level categories and their leaf categories, with active product counts. */
-export async function getCatalogCategories(): Promise<CatalogCategory[]> {
+export const getCatalogCategories = unstable_cache(loadCatalogCategories, ['catalog-categories'], {
+  tags: [CATALOG_CATEGORIES_TAG],
+  revalidate: 60,
+});
+
+async function loadCatalogCategories(): Promise<CatalogCategory[]> {
   const prisma = getPrisma();
   const [categories, counts] = await Promise.all([
     prisma.category.findMany({
