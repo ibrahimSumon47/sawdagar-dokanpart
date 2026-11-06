@@ -24,6 +24,7 @@ apps/  The deployable web application
       journal/  Journal index and posts
       llms.txt/  Plain-text route serving the root llms.txt
       login/  Related code and tests.
+      order/  Related code and tests.
       orders/  Order receipt and printable invoice
       pages/  Static CMS pages
       policies/  Related code and tests.

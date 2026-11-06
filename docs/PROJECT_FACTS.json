@@ -25,15 +25,15 @@
     "seededReviews": 1755,
     "demoRoles": 8,
     "models": 47,
-    "migrations": 16,
-    "pages": 66,
-    "apiRoutes": 2,
-    "unitTests": 245
+    "migrations": 17,
+    "pages": 67,
+    "apiRoutes": 3,
+    "unitTests": 250
   },
   "unitTests": {
     "domain": {
-      "files": 15,
-      "cases": 93
+      "files": 16,
+      "cases": 97
     },
     "csCore": {
       "files": 4,
@@ -45,9 +45,9 @@
     },
     "web": {
       "files": 25,
-      "cases": 120
+      "cases": 121
     },
-    "total": 245
+    "total": 250
   },
   "coverage": {
     "measured": false,
