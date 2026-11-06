@@ -22,7 +22,7 @@ describe('QuantityStepper', () => {
     expect(html).toContain('aria-label="Quantity"');
     expect(html).toContain('aria-label="Decrease quantity"');
     expect(html).toContain('aria-label="Increase quantity"');
-    expect(html).toContain('>2</output>');
+    expect(html).toMatch(/<output[^>]*>.*>2<\/span><\/output>/);
   });
 
   it('disables decreasing at the minimum and increasing at the maximum', () => {

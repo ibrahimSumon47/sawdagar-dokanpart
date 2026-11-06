@@ -1341,6 +1341,7 @@ export const bn: Dictionary = {
     projectTitle: 'প্রকল্প',
     aboutProject: 'প্রকল্প সম্পর্কে',
     design: 'ডিজাইন সিস্টেম',
+    motion: 'মোশন',
     csLab: 'সিএস কোর',
     caseStudy: 'কেস স্টাডি',
     credits: 'ছবির স্বীকৃতি',

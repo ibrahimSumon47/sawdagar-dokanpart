@@ -1360,6 +1360,7 @@ export const en = {
     projectTitle: 'Project',
     aboutProject: 'About the project',
     design: 'Design system',
+    motion: 'Motion',
     csLab: 'CS core',
     caseStudy: 'Case study',
     credits: 'Image credits',
