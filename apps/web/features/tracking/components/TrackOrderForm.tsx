@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@sd/ui';
 import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { trackOrderAction, type TrackingFormState } from '../actions';
@@ -45,7 +46,10 @@ export function TrackOrderForm({ labels }: TrackOrderFormProps) {
           spellCheck={false}
           required
           aria-invalid={state.fieldError === 'code' || undefined}
-          className="mt-1 block w-full rounded-sm border border-line bg-surface px-3 py-2 font-mono uppercase tracking-wider text-ink"
+          className={cn(
+            'mt-1 block w-full rounded-sm border border-line bg-surface px-3 py-2 font-mono uppercase tracking-wider text-ink',
+            state.fieldError === 'code' && 'field-shake border-danger',
+          )}
         />
         {state.fieldError === 'code' ? (
           <span className="mt-1 block text-sm text-danger">{labels.codeInvalid}</span>
@@ -58,7 +62,10 @@ export function TrackOrderForm({ labels }: TrackOrderFormProps) {
           autoComplete="off"
           required
           aria-invalid={state.fieldError === 'contact' || undefined}
-          className="mt-1 block w-full rounded-sm border border-line bg-surface px-3 py-2 text-ink"
+          className={cn(
+            'mt-1 block w-full rounded-sm border border-line bg-surface px-3 py-2 text-ink',
+            state.fieldError === 'contact' && 'field-shake border-danger',
+          )}
         />
         {state.fieldError === 'contact' ? (
           <span className="mt-1 block text-sm text-danger">{labels.contactInvalid}</span>
