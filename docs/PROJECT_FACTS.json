@@ -26,14 +26,14 @@
     "demoRoles": 8,
     "models": 47,
     "migrations": 17,
-    "pages": 67,
+    "pages": 68,
     "apiRoutes": 3,
-    "unitTests": 250
+    "unitTests": 255
   },
   "unitTests": {
     "domain": {
-      "files": 16,
-      "cases": 97
+      "files": 17,
+      "cases": 102
     },
     "csCore": {
       "files": 4,
@@ -47,7 +47,7 @@
       "files": 25,
       "cases": 121
     },
-    "total": 250
+    "total": 255
   },
   "coverage": {
     "measured": false,

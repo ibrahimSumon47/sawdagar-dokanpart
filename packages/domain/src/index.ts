@@ -68,6 +68,8 @@ export {
 export type { OrderStatus, PaymentStatus, SubOrderStatus } from './checkout/orderState';
 export { formatOrderNumber, formatSubOrderNumber } from './checkout/orderNumber';
 export { formatOrderCode, isOrderCode, orderCodeAlphabet } from './checkout/orderCode';
+export { normalizeTrackingCode, normalizeTrackingContact } from './checkout/tracking';
+export type { TrackingContact } from './checkout/tracking';
 export {
   allocateAmount,
   calculateCheckoutTotals,

@@ -40,5 +40,12 @@
     "acceptance": "A signed-out visitor checks out without an account, sees the account prompt and the /order/confirmed page with the SD-YYMMDD-XXXX order code, a guest order is claimed when the same email registers and verifies, and a Playwright test covers the full path at 375, 768 and 1440 px",
     "status": "pass",
     "evidence": "Slice (a) schema: migration 20261106100000_guest_orders (Database run 42173447526 applied it); orderCode generator in @sd/domain with unit tests. Slice (b) guest checkout form and hold release: commit 22e00f8. Slice (c) confirmation page and account prompt: bfa684e. Slice (d) claim on verified register: 09dbf81. Slice (e) Playwright run 42178834834 passed 39 checks, including the guest COD order, code, modal skip and register email prefill. Limitation: the claim after verification is not covered end to end; the verification link is only reachable through the admin outbox."
+  },
+  {
+    "id": "R7",
+    "description": "Public live order tracking",
+    "acceptance": "A visitor enters an order ID with a phone or email and sees the timeline; a wrong detail gets the generic message; a signed-in buyer sees the same timeline at /account/orders/[id]; updates arrive live within about 5 seconds; a Playwright test with two browser contexts passes at 375, 768 and 1440 px",
+    "status": "in_progress",
+    "evidence": "Slice (a): /track form and trackOrderAction with Zod-validated input, a generic failure for any wrong detail, Upstash sliding-window limits per IP and per order code, and failed attempts written to the audit log (ADR-012). Unit tests cover contact and code normalisation."
   }
 ]

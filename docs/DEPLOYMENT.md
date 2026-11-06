@@ -19,6 +19,7 @@
 - The `20261105200000_journal_media` migration adds `cms_entries.coverImageUrl`, the two cover alt columns, `tags` and a GIN index on `tags`. Apply it with the `Database` workflow (`migrate`), then run `seed` so the three published Journal posts get their covers, alt text and `<p>` bodies. Old version snapshots without the new fields still restore.
 
 - **Owner action, guest checkout holds (R6):** add `CRON_SECRET` (a random string of at least 32 characters) to the Vercel production environment and to GitHub Actions secrets, and add `SITE_URL` (the production origin, `https://sawdagar-dokanpart.vercel.app`) as a GitHub Actions variable. The `Release holds` workflow posts to `/api/checkout/release-holds` every 10 minutes with the bearer token; the route returns 401 until `CRON_SECRET` is set on Vercel, and the workflow fails until both values exist. The job releases expired 15-minute guest holds and 30-minute signed-in holds, restocks the variants and cancels the pending orders.
+- **Owner action, order tracking (R7):** create a free Upstash Redis database at upstash.com (no card; do not add a payment method, since that moves the free resources to a paid plan). Copy its REST URL and REST token, then add `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` to the Vercel production environment and to GitHub Actions secrets, and redeploy. Until both are set, the `/track` form returns an error. See [ADR-012](adr/ADR-012-upstash-tracking-rate-limit.md).
 
 ## Product images (R2)
 
@@ -40,6 +41,8 @@
 | `CLOUDINARY_API_SECRET` | GitHub Actions                    | Cloudinary upload credential                                 |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Vercel production    | Browser cover uploads and image delivery                     |
 | `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | Vercel production  | Unsigned preset the Journal cover button posts to            |
+| `UPSTASH_REDIS_REST_URL` | Vercel production, GitHub Actions | Upstash database REST endpoint for tracking limits |
+| `UPSTASH_REDIS_REST_TOKEN` | Vercel production, GitHub Actions | Upstash REST token (secret) for tracking limits |
 
 Vercel stores the three production values as hidden secrets. `DIRECT_DATABASE_URL` is intentionally not present in Vercel, because the runtime uses the pooled connection and never runs migrations.
 

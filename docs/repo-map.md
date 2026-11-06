@@ -34,6 +34,7 @@ apps/  The deployable web application
       seller/  Seller Center pages
       sign-in/  Demo sign-in
       store/  Public vendor storefront
+      track/  Related code and tests.
       verify-email/  Related code and tests.
       wishlist/  Saved products
     features/  One folder per capability, each with components, actions and queries
@@ -56,6 +57,7 @@ apps/  The deployable web application
       shell/  Header, mobile menu, footer and trust strip
       shop/  Cart, wishlist, comparison, coupons and the shop provider
       showcase/  Public case study content and components
+      tracking/  Related code and tests.
     i18n/  English and Bangla dictionaries, localised places and locale lookup
       messages/  The two message catalogs
     lib/  Prisma client, site constants, metadata helpers and auth plumbing
