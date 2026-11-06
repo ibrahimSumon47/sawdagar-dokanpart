@@ -94,6 +94,8 @@ test.describe('R5 Help Center topics, search and votes', () => {
   });
 
   test.describe('editor', () => {
+    // These tests write to shared seeded topics, so they run one after another.
+    test.describe.configure({ mode: 'serial' });
     test.skip(!demoPassword, 'DEMO_ACCOUNT_PASSWORD is not set for this run.');
 
     test('an editor renames a topic through a version and the storefront follows', async ({

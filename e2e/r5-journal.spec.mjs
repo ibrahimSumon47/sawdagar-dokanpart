@@ -105,6 +105,8 @@ test.describe('R5 Journal covers, tags and rich text', () => {
   });
 
   test.describe('editor', () => {
+    // These tests write to shared seeded entries, so they run one after another.
+    test.describe.configure({ mode: 'serial' });
     test.skip(!demoPassword, 'DEMO_ACCOUNT_PASSWORD is not set for this run.');
 
     test('an editor adds a tag, then restores the version that still has the cover', async ({
