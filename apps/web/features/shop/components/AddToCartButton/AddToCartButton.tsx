@@ -64,7 +64,7 @@ export function AddToCartButton({
         onClick={() => void handleClick()}
         disabled={disabled || state === 'adding'}
         aria-busy={state === 'adding'}
-        className="w-full active:scale-[0.97] sm:w-auto"
+        className="w-full min-w-44 justify-center active:scale-[0.97] sm:w-auto"
       >
         {state === 'adding' ? (
           <Loader2 aria-hidden="true" className="size-4 animate-spin" />
