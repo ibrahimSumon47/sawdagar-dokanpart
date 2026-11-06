@@ -49,7 +49,9 @@
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slices (a), (b), (c) and (d) are accepted. Slice (e), the R5 closing check, is next.**
+**Revision 1, phase R5 (CMS) is closed. Slices (a) to (d) are accepted and the closing check (e) passed.** Playwright run 42171733613 passed 37 checks on the deployment, including every R5 CMS entity at 375, 768 and 1440 px.
+
+**Next: Revision 1, phase R6 (guest checkout and order ID).**
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
