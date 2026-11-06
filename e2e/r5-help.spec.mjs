@@ -181,7 +181,8 @@ test.describe('R5 Help Center topics, search and votes', () => {
       test.setTimeout(240_000);
       await signInAsEditor(page, '/admin/cms/help');
 
-      await page.getByRole('button', { name: 'Orders: move down' }).click();
+      // The rename test leaves the topic titled "Orders R5 <stamp>", so match the prefix.
+      await page.getByRole('button', { name: /^Orders.*: move down$/ }).click();
       const rows = page.locator('tbody tr');
       await expect(rows.first()).toContainText('Delivery');
 
@@ -191,7 +192,7 @@ test.describe('R5 Help Center topics, search and votes', () => {
       await expect(links.nth(2)).toContainText('Orders');
 
       await page.goto('/admin/cms/help');
-      await page.getByRole('button', { name: 'Orders: move up' }).click();
+      await page.getByRole('button', { name: /^Orders.*: move up$/ }).click();
       await expect(page.locator('tbody tr').first()).toContainText('Orders');
     });
   });
