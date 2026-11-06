@@ -92,7 +92,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <div className="flex min-h-svh flex-col">
             {/* One boundary for the announcement and header, so the top bar arrives as one block
                 instead of two separate shifts that push the page down. */}
-            <Suspense fallback={<div className="h-16 border-b border-line" aria-hidden />}>
+            {/* The fallback reserves the header's real height at each breakpoint (it wraps to
+                two rows below lg), so the top bar does not push the page down when it arrives. */}
+            <Suspense
+              fallback={<div className="h-[178px] border-b border-line lg:h-16" aria-hidden />}
+            >
               <ShellAnnouncement locale={locale} />
               <ShellHeader locale={locale} theme={theme} />
             </Suspense>
