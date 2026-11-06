@@ -166,6 +166,7 @@ project links live in the footer Project column and on `/about/project`, and Pla
 ## Blocked
 
 - No blocker is open. An earlier entry said every product was out of stock; that was wrong. The R6 test failed because the belt's default variant (Small) has no stock, and the test never chose a variant. The test now selects Medium (stock 16).
+- Lighthouse performance is below the CI gate of 0.9 on the current deployment. Runs 42220347738 (commit ea69478) and 42221516081 (commit 9e152a7) both scored Home 0.77 and catalog 0.84–0.85, and product 0.86, so the `Lighthouse` workflow fails. Earlier passing run 41067055369 (93/95/93) predates R9. The hero image was optimized in 9e152a7 (LCP element now the 37 KB `next/image` file), but Home scores did not move. The remaining cause is not yet identified; the gate is not lowered. Next step: trace the Home main thread and render-blocking resources before changing the budget.
 - No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
