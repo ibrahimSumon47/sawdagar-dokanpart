@@ -90,10 +90,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         </a>
         <ShopProvider locale={locale} copy={copy.shop}>
           <div className="flex min-h-svh flex-col">
-            <Suspense fallback={null}>
-              <ShellAnnouncement locale={locale} />
-            </Suspense>
+            {/* One boundary for the announcement and header, so the top bar arrives as one block
+                instead of two separate shifts that push the page down. */}
             <Suspense fallback={<div className="h-16 border-b border-line" aria-hidden />}>
+              <ShellAnnouncement locale={locale} />
               <ShellHeader locale={locale} theme={theme} />
             </Suspense>
             <main id="main" className="flex-1">
