@@ -144,9 +144,10 @@
   animation: field-error-in var(--duration-fast) var(--ease-out-soft);
 }
 
+/* Starts fully visible: an opacity fade would hide the hero (the LCP element) until hydration
+   finished, which Lighthouse measured as a 6 s LCP. Only the small lift is kept. */
 @keyframes page-enter {
   from {
-    opacity: 0;
     transform: translateY(8px);
   }
 }
