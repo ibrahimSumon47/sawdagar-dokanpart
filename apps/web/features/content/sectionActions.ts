@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getPrisma } from '../../lib/prisma';
 import { adminFail, auditAdmin, requireAdmin } from '../admin/guard';
+import { purgePublishedSections } from './sectionQueries';
 import {
   restoreSectionVersionSchema,
   sectionOrderSchema,
@@ -105,6 +106,7 @@ export async function saveSectionAction(formData: FormData): Promise<void> {
     },
   );
   revalidatePath(CMS_HREF);
+  purgePublishedSections();
   revalidatePath('/');
   redirect(`/admin/cms/sections/${savedId}?saved=1`);
 }
@@ -138,6 +140,7 @@ export async function reorderSectionsAction(
     count: parsed.data.ids.length,
   });
   revalidatePath(CMS_HREF);
+  purgePublishedSections();
   revalidatePath('/');
   return { ok: true };
 }
@@ -173,6 +176,7 @@ export async function restoreSectionVersionAction(formData: FormData): Promise<v
     fromVersion: version.version,
   });
   revalidatePath(CMS_HREF);
+  purgePublishedSections();
   revalidatePath('/');
   redirect(`/admin/cms/sections/${version.sectionId}?restored=1`);
 }

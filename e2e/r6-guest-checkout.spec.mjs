@@ -28,12 +28,15 @@ test.describe('R6 guest checkout and confirmation', () => {
     const email = uniqueEmail();
 
     await page.goto(productPath);
-    // The first variant (Small) is out of stock on the seeded belt, so pick an in-stock size.
-    await page
-      .getByText(/^Medium/)
-      .first()
-      .click();
+    // Stock is seeded at random, so pick the first size that is in stock. The picker
+    // shows no stock text, so keep trying options until Add to cart becomes enabled.
     const addToCart = page.getByRole('button', { name: 'Add to cart', exact: true });
+    const variantOptions = page.locator('label:has(input[type="radio"])');
+    const optionCount = await variantOptions.count();
+    for (let index = 0; index < optionCount; index += 1) {
+      await variantOptions.nth(index).click();
+      if (await addToCart.isEnabled()) break;
+    }
     await expect(addToCart).toBeEnabled();
     await addToCart.click();
     await expect(page.getByRole('button', { name: 'Added', exact: true })).toBeVisible();

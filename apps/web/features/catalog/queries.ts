@@ -147,9 +147,13 @@ export function toCatalogProduct(product: ProductWithVendor): CatalogProduct {
 /** Cache tag for the category tree; catalog, product and seller actions purge it when counts change. */
 export const CATALOG_CATEGORIES_TAG = 'catalog-categories';
 
-/** Drops the cached category tree; call after any change to product status or category. */
+/** Cache tag for the home page featured grid; stock, rating and status changes purge it. */
+export const FEATURED_PRODUCTS_TAG = 'featured-products';
+
+/** Drops the cached category tree and featured grid; call after any change to product status, stock or category. */
 export function purgeCatalogCategories(): void {
   revalidateTag(CATALOG_CATEGORIES_TAG, { expire: 0 });
+  revalidateTag(FEATURED_PRODUCTS_TAG, { expire: 0 });
 }
 
 /** Top-level categories and their leaf categories, with active product counts. */
@@ -319,8 +323,22 @@ export async function getCatalogVendor(slug: string) {
   });
 }
 
-/** Highest-rated in-stock products for the home page. */
-export async function getFeaturedProducts(limit = 8): Promise<CatalogProduct[]> {
+/**
+ * Highest-rated in-stock products for the home page. Cached per limit so the
+ * home page does not wait on the database; the tag is purged on catalog changes.
+ */
+export const getFeaturedProducts = (limit = 8): Promise<CatalogProduct[]> =>
+  loadFeaturedProducts(limit);
+
+const loadFeaturedProducts = unstable_cache(
+  async (limit: number): Promise<CatalogProduct[]> => {
+    return queryFeaturedProducts(limit);
+  },
+  ['featured-products'],
+  { tags: [FEATURED_PRODUCTS_TAG], revalidate: 60 },
+);
+
+async function queryFeaturedProducts(limit: number): Promise<CatalogProduct[]> {
   const products = await getPrisma().product.findMany({
     where: { status: 'active', totalStock: { gt: 0 } },
     orderBy: [{ rating: 'desc' }, { reviewCount: 'desc' }],

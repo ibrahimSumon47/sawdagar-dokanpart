@@ -5,6 +5,7 @@ import { formatOrderCode, formatOrderNumber } from '@sd/domain';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { purgeCatalogCategories } from '../catalog/queries';
 import { getPrisma } from '../../lib/prisma';
 import { requestDetails } from '../auth/audit';
 import { getViewer } from '../auth/session';
@@ -129,6 +130,8 @@ export async function placeOrder(
   }
 
   revalidatePath('/checkout');
+  // Stock changed, so the cached featured grid must be dropped too.
+  purgeCatalogCategories();
   revalidatePath('/');
   revalidatePath('/account');
 

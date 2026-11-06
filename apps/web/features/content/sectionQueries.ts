@@ -1,5 +1,18 @@
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { getPrisma } from '../../lib/prisma';
 import type { SectionKind, SectionSnapshot, SectionStatus } from './sectionTypes';
+
+/**
+ * Cache tag for the visitor-facing homepage sections. CMS actions purge it on
+ * every save, publish, archive or reorder; the 60-second revalidate covers
+ * scheduled sections whose publish time is reached without an edit.
+ */
+export const PUBLISHED_SECTIONS_TAG = 'published-sections';
+
+/** Drops the cached homepage sections; call after any CMS section write. */
+export function purgePublishedSections(): void {
+  revalidateTag(PUBLISHED_SECTIONS_TAG, { expire: 0 });
+}
 
 /** A homepage section as stored. */
 export interface CmsSectionRecord extends SectionSnapshot {
@@ -69,7 +82,12 @@ export async function getCmsSection(
 }
 
 /** Sections a visitor may see: published, or scheduled with the date reached. */
-export async function getPublishedSections(): Promise<CmsSectionRecord[]> {
+export const getPublishedSections = unstable_cache(loadPublishedSections, ['published-sections'], {
+  tags: [PUBLISHED_SECTIONS_TAG],
+  revalidate: 60,
+});
+
+async function loadPublishedSections(): Promise<CmsSectionRecord[]> {
   const rows = await getPrisma().cmsSection.findMany({
     where: {
       OR: [{ status: 'published' }, { status: 'scheduled', publishAt: { lte: new Date() } }],

@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import { getPrisma } from '../../lib/prisma';
+import { purgeCatalogCategories } from '../catalog/queries';
 import { recordAuditLog, requestDetails } from '../auth/audit';
 import { requireViewer } from '../auth/session';
 import { reviewSchema } from './inputs';
@@ -106,6 +107,8 @@ export async function submitReview(
     revalidatePath(`/product/${item.product.slug}`);
     revalidatePath('/account/reviews');
     revalidatePath('/catalog');
+    // Ratings decide the featured grid order, so drop its cached copy.
+    purgeCatalogCategories();
     revalidatePath('/');
     return { status: 'success' };
   } catch (error) {
