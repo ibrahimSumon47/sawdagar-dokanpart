@@ -258,6 +258,7 @@ export async function getCompareProducts(ids: readonly string[]): Promise<Compar
 }
 
 export interface ShopState {
+  signedIn: boolean;
   cartItems: CartLine[];
   cartCoupon: CouponRule | null;
   wishlistIds: string[];
@@ -274,5 +275,5 @@ export async function getShopState(viewerId: string | null): Promise<ShopState> 
   ]);
   const cartCoupon = await getCartCoupon(cartId, cartItems);
 
-  return { cartItems, cartCoupon, wishlistIds, compareIds };
+  return { signedIn: viewerId !== null, cartItems, cartCoupon, wishlistIds, compareIds };
 }

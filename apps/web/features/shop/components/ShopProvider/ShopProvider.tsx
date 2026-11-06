@@ -13,7 +13,6 @@ import { useWishlistController } from './useWishlistController';
 
 export interface ShopProviderProps {
   children: ReactNode;
-  signedIn: boolean;
   locale: Locale;
   copy: ShopCopy;
 }
@@ -26,8 +25,9 @@ const CartDrawer = dynamic(() => import('../CartDrawer').then((m) => m.CartDrawe
 const ShopToast = dynamic(() => import('../ShopToast').then((m) => m.ShopToast), { ssr: false });
 
 /** One client boundary for the cart, wishlist, comparison, drawer and toast. */
-export function ShopProvider({ children, signedIn, locale, copy }: ShopProviderProps) {
+export function ShopProvider({ children, locale, copy }: ShopProviderProps) {
   const bootstrap = useShopBootstrap();
+  const signedIn = bootstrap.signedIn;
   const [cartOpen, setCartOpen] = useState(false);
   // Mounts the drawer the first time it is opened and keeps it mounted after that.
   const [drawerRequested, setDrawerRequested] = useState(false);

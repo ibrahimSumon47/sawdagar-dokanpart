@@ -1,16 +1,13 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter, Noto_Sans_Bengali } from 'next/font/google';
 import type { ReactNode } from 'react';
-import { getViewer } from '../features/auth/session';
-import { getCatalogCategories } from '../features/catalog/queries';
+import { Suspense } from 'react';
 import { getPublicSettings } from '../features/content/settingsQueries';
-import { localisedLinks } from '../features/content/settingsLinks';
 import { getTheme } from '../features/preferences/getTheme';
 import { ShopProvider } from '../features/shop/components/ShopProvider';
 import { PageEnter } from '../features/shell/components/PageEnter';
-import { SiteAnnouncement } from '../features/shell/components/SiteAnnouncement';
-import { SiteFooter } from '../features/shell/components/SiteFooter';
-import { SiteHeader } from '../features/shell/components/SiteHeader';
+import { ShellAnnouncement, ShellFooter } from '../features/shell/components/ShellSettings';
+import { ShellHeader } from '../features/shell/components/ShellHeader';
 import { getDictionary } from '../i18n';
 import { getLocale } from '../i18n/getLocale';
 import { site } from '../lib/site';
@@ -64,21 +61,15 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-/** Renders the shell, theme attributes and language for every route. */
+/**
+ * Renders the shell, theme attributes and language for every route.
+ * Only the cookie reads (locale and theme) run here. The header, announcement and
+ * footer read the database inside Suspense, so the shell streams without waiting
+ * on those queries.
+ */
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
-  const [categories, settings] = await Promise.all([getCatalogCategories(), getPublicSettings()]);
+  const [locale, theme] = await Promise.all([getLocale(), getTheme()]);
   const copy = getDictionary(locale);
-  const bangla = locale === 'bn';
-  const headerCategories = categories.map((category) => ({
-    slug: category.slug,
-    label: category.name[locale],
-  }));
-  const announcement = bangla
-    ? settings.announcementBn || settings.announcementEn
-    : settings.announcementEn || settings.announcementBn;
-  const navigationLinks = localisedLinks(settings.navigation, locale);
-  const footerLinks = localisedLinks(settings.footerLinks, locale);
 
   return (
     <html
@@ -97,27 +88,20 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         >
           {copy.common.skipToContent}
         </a>
-        <ShopProvider signedIn={Boolean(viewer)} locale={locale} copy={copy.shop}>
+        <ShopProvider locale={locale} copy={copy.shop}>
           <div className="flex min-h-svh flex-col">
-            {settings.announcementEnabled && announcement ? (
-              <SiteAnnouncement
-                text={announcement}
-                href={settings.announcementHref}
-                label={copy.common.announcementLabel}
-              />
-            ) : null}
-            <SiteHeader
-              copy={copy}
-              locale={locale}
-              theme={theme}
-              viewer={viewer ? { name: viewer.name, role: viewer.role } : null}
-              categories={headerCategories}
-              extraLinks={navigationLinks}
-            />
+            <Suspense fallback={null}>
+              <ShellAnnouncement locale={locale} />
+            </Suspense>
+            <Suspense fallback={<div className="h-16 border-b border-line" aria-hidden />}>
+              <ShellHeader locale={locale} theme={theme} />
+            </Suspense>
             <main id="main" className="flex-1">
               <PageEnter>{children}</PageEnter>
             </main>
-            <SiteFooter copy={copy} extraLinks={footerLinks} />
+            <Suspense fallback={null}>
+              <ShellFooter locale={locale} />
+            </Suspense>
           </div>
         </ShopProvider>
       </body>

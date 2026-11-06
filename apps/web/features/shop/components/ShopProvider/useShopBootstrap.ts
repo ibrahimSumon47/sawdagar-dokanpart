@@ -6,6 +6,7 @@ import { loadShopState } from '../../actions';
 
 /** Empty state shown until the visitor's cart and lists have loaded in the browser. */
 const EMPTY_SHOP_STATE: ShopState = {
+  signedIn: false,
   cartItems: [],
   cartCoupon: null,
   wishlistIds: [],
