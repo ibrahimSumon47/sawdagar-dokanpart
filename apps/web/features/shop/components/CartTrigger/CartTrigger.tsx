@@ -4,6 +4,7 @@ import { ShoppingBag } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { CART_DRAWER_ID } from '../CartDrawer';
 import { useShop } from '../ShopProvider';
+import { CART_FLY_EVENT, flyToCart } from './flyToCart';
 
 /** Header cart control; opens the drawer and bumps when the count grows. */
 export function CartTrigger() {
@@ -11,6 +12,16 @@ export function CartTrigger() {
   const [bump, setBump] = useState(false);
   const previous = useRef(summary.count);
   const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-GB');
+  const iconRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const onFly = (event: Event) => {
+      const source = (event as CustomEvent<{ source: HTMLElement | null }>).detail?.source ?? null;
+      flyToCart(source, iconRef.current);
+    };
+    window.addEventListener(CART_FLY_EVENT, onFly);
+    return () => window.removeEventListener(CART_FLY_EVENT, onFly);
+  }, []);
 
   useEffect(() => {
     if (summary.count > previous.current) {
@@ -32,7 +43,7 @@ export function CartTrigger() {
       aria-controls={CART_DRAWER_ID}
       className="relative grid size-11 place-items-center rounded-sm text-ink transition-colors hover:bg-surface hover:text-accent"
     >
-      <span className={bump ? 'cart-bump inline-flex' : 'inline-flex'}>
+      <span ref={iconRef} className={bump ? 'cart-bump inline-flex' : 'inline-flex'}>
         <ShoppingBag aria-hidden="true" className="size-5" />
       </span>
       {summary.count > 0 ? (

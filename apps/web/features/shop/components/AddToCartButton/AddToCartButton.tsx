@@ -2,7 +2,8 @@
 
 import { Button } from '@sd/ui';
 import { Check, Loader2, ShoppingBag } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { CART_FLY_EVENT } from '../CartTrigger/flyToCart';
 import { useShop } from '../ShopProvider';
 
 type AddState = 'idle' | 'adding' | 'added';
@@ -24,6 +25,7 @@ export function AddToCartButton({
   const { copy, addItem } = useShop();
   const [state, setState] = useState<AddState>('idle');
   const [error, setError] = useState<string | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (state !== 'added') return;
@@ -41,6 +43,9 @@ export function AddToCartButton({
       return;
     }
     setState('added');
+    window.dispatchEvent(
+      new CustomEvent(CART_FLY_EVENT, { detail: { source: buttonRef.current } }),
+    );
   };
 
   const label = disabled
@@ -54,6 +59,7 @@ export function AddToCartButton({
   return (
     <div className={className}>
       <Button
+        ref={buttonRef}
         type="button"
         onClick={() => void handleClick()}
         disabled={disabled || state === 'adding'}
