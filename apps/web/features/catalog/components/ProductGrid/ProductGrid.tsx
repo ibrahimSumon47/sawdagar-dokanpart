@@ -48,7 +48,7 @@ export function ProductGrid({ products, locale, labels }: ProductGridProps) {
         {products.map((product) => {
           const photo = productPhoto(product.images);
           return (
-            <li key={product.id} className="relative min-w-0">
+            <li key={product.id} className="reveal-on-scroll relative min-w-0">
               <Link
                 href={`/product/${product.slug}`}
                 aria-label={product.title[locale]}

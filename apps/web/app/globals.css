@@ -143,6 +143,23 @@
   animation: page-enter var(--duration-slow) var(--ease-out-soft);
 }
 
+@keyframes reveal-once {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* Scroll-driven reveal: each card rises once as it enters the viewport. Browsers without
+   animation-timeline support keep the cards visible, so nothing is hidden by default. */
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll {
+    animation: reveal-once linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
 /* Small accent dot that flies from the add button to the cart; created and removed by flyToCart. */
 .cart-fly-dot {
   position: fixed;
