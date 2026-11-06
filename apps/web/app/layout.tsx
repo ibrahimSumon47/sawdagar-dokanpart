@@ -8,6 +8,7 @@ import { localisedLinks } from '../features/content/settingsLinks';
 import { getTheme } from '../features/preferences/getTheme';
 import { ShopProvider } from '../features/shop/components/ShopProvider';
 import { getShopState } from '../features/shop/queries';
+import { PageEnter } from '../features/shell/components/PageEnter';
 import { SiteAnnouncement } from '../features/shell/components/SiteAnnouncement';
 import { SiteFooter } from '../features/shell/components/SiteFooter';
 import { SiteHeader } from '../features/shell/components/SiteHeader';
@@ -123,7 +124,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               extraLinks={navigationLinks}
             />
             <main id="main" className="flex-1">
-              {children}
+              <PageEnter>{children}</PageEnter>
             </main>
             <SiteFooter copy={copy} extraLinks={footerLinks} />
           </div>
