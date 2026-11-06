@@ -28,7 +28,7 @@
     "migrations": 17,
     "pages": 71,
     "apiRoutes": 4,
-    "unitTests": 256
+    "unitTests": 261
   },
   "unitTests": {
     "domain": {
@@ -44,10 +44,10 @@
       "cases": 17
     },
     "web": {
-      "files": 25,
-      "cases": 122
+      "files": 26,
+      "cases": 127
     },
-    "total": 256
+    "total": 261
   },
   "coverage": {
     "measured": false,
