@@ -82,3 +82,15 @@ Changes: the reviews, questions and related grid now stream behind `Suspense` (`
 Product audit values in the latest run (five runs): time to first byte fell from 636 ms to 25–29 ms, total blocking time is 36–65 ms, and unused JavaScript is 170–330 ms. Largest Contentful Paint is still about 3.9 s, and the element is the Cloudinary product photo (800 px, `f_auto,q_auto`). Its load time depends on the image host, which is outside this repository.
 
 Home and catalog show a wide spread between runs (home 0.69 to 0.94 within one run), so the runner, not the code, sets much of the variance.
+
+## Round 5 (commit 4a278f7 with 5760622 and 1770a25, run 42257392714)
+
+Changes: the layout shell (announcement, header, footer) and the home sections and product below-fold now render behind `Suspense` with skeleton fallbacks. The root layout awaits only locale and theme, and the header top bar reserves its real height so the shell does not shift.
+
+| Page    | Median | Scores (five runs)           | LCP (five runs)       | CLS (five runs)       | TBT (five runs)              |
+| ------- | ------ | ---------------------------- | --------------------- | --------------------- | ---------------------------- |
+| Home    | 0.87   | 0.79, 0.87, 0.88, 0.87, 0.90 | 4.0, 3.9, 3.9, 3.9, 3.5 s | 0 all                 | 340, 120, 90, 70, 120 ms     |
+| Catalog | 0.87   | 0.86, 0.90, 0.87, 0.91, 0.85 | 3.0, 3.4, 3.4, 3.3, 4.3 s | 0.128, 0, 0.128, 0, 0 | 220, 160, 90, 150, 50 ms     |
+| Product | 0.84   | 0.81, 0.84, 0.77, 0.85, 0.86 | 4.0, 3.9, 4.0, 4.0, 4.0 s | 0, 0, 0.128, 0, 0     | 210, 210, 290, 190, 170 ms   |
+
+Home rose from 0.77 to 0.87. Catalog and product are 0.87 and 0.84, still below the 0.90 gate. Catalog CLS is 0.128 in two of five runs, which is above the 0.1 limit and needs a fix before the next round. LCP stays at 3.5 to 4.3 s on all three pages. The product LCP element is the Cloudinary product photo, which the repository does not control.
