@@ -70,7 +70,7 @@ export function MegaMenu({ label, links, className }: MegaMenuProps) {
       {open ? (
         <div
           id={panelId}
-          className="absolute left-0 top-full z-50 w-[min(38rem,calc(100vw-2rem))] rounded-md border border-line bg-surface-elevated p-5 shadow-float"
+          className="mega-menu-panel absolute left-0 top-full z-50 w-[min(38rem,calc(100vw-2rem))] rounded-md border border-line bg-surface-elevated p-5 shadow-float"
         >
           <ul className="grid grid-cols-3 gap-x-4 gap-y-1">
             {links.map((link) => (
