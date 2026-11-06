@@ -35,3 +35,25 @@ Home was the weakest page. Its first run had TBT 3,700 ms because the run was af
 - Department photos below the fold keep `loading="lazy"`; the hero image keeps `priority` and `fetchPriority="high"`.
 
 Results of each round are appended below as they are measured.
+
+## Round 1 result (commit 476f57b, five runs per URL)
+
+Duplicate report files in the download were removed before computing medians.
+
+| URL     | Scores (five runs)           | Median |
+| ------- | ---------------------------- | ------ |
+| Home    | 0.75, 0.75, 0.78, 0.94, 0.94 | 0.94   |
+| Catalog | 0.84, 0.84, 0.85, 0.94, 0.94 | 0.94   |
+| Product | 0.88, 0.88, 0.88, 0.88, 0.88 | 0.88   |
+
+Home and catalog pass the 0.9 gate at the median; the low home runs were the cold-start samples, while the other runs were 0.94. Product is stable at 0.88 and is the remaining gap.
+
+Product findings (run with five samples):
+
+- **LCP element:** the product photo (Cloudinary, `img` with `fetchpriority="high"`). LCP 3.8 s. Phase timing: TTFB 636 ms is 17% of LCP, and the rest is load delay and download.
+- **Server response:** the Lighthouse "server response time" audit reports 20 ms, but the LCP phase breakdown reports 636 ms TTFB. The product route is dynamic and runs several reads per request (`getProductBySlug`, reviews, questions, related products and the viewer session).
+- **Unused JavaScript:** about 56 KiB. The chunk `2o11l69ntvj4q.js` (75 KB) is 40% unused and `2pw8-z4935wv5.js` (37 KB) is 75% unused. Legacy JavaScript costs 14 KiB (`Array.prototype.at` polyfill).
+- **Long tasks:** 3. The largest is 92 ms on the document, then 88 ms and 63 ms in `2o11l69ntvj4q.js`.
+- **Third-party code:** Cloudinary, 59 KB transferred for product images; zero main-thread time.
+- **Render-blocking resources:** none.
+- **Layout shift:** CLS 0.
