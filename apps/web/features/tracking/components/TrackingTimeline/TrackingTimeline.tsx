@@ -41,7 +41,8 @@ export function TrackingTimeline({ steps, terminal, copy, locale }: TrackingTime
           <span
             aria-hidden="true"
             className={cn(
-              'mt-1 size-3 shrink-0 rounded-full border-2 transition-colors duration-500 motion-reduce:transition-none',
+              'mt-1 size-3 shrink-0 rounded-full border-2 transition-[background-color,border-color,transform] duration-500 motion-reduce:transition-none',
+              state.done && 'scale-110',
               state.done ? 'border-accent bg-accent' : 'border-line bg-surface',
             )}
           />
