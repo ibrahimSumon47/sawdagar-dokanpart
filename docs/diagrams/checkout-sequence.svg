@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="t d">
+  <title id="t">Checkout sequence</title>
+  <desc id="d">The shopper places an order. The server writes the order, sub-orders, stock reservation and payment in one transaction. The shopper is sent to the mock payment page with a signed token, then back to the order status page.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#57534e"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#faf7f2"/>
+  <text x="40" y="44" font-family="Georgia, serif" font-size="26" fill="#141414">Checkout sequence</text>
+
+  <!-- Lifelines -->
+  <g font-family="system-ui, sans-serif" font-size="14" fill="#141414" text-anchor="middle">
+    <rect x="30" y="64" width="160" height="40" rx="6" fill="#ffffff" stroke="#e7e1d8"/><text x="110" y="89">Shopper</text>
+    <rect x="260" y="64" width="180" height="40" rx="6" fill="#ffffff" stroke="#e7e1d8"/><text x="350" y="89">placeOrder action</text>
+    <rect x="510" y="64" width="200" height="40" rx="6" fill="#ffffff" stroke="#e7e1d8"/><text x="610" y="89">Database transaction</text>
+    <rect x="780" y="64" width="160" height="40" rx="6" fill="#ffffff" stroke="#e7e1d8"/><text x="860" y="89">MockPay gateway</text>
+  </g>
+  <g stroke="#e7e1d8" stroke-width="2" stroke-dasharray="4 4">
+    <line x1="110" y1="104" x2="110" y2="530"/>
+    <line x1="350" y1="104" x2="350" y2="530"/>
+    <line x1="610" y1="104" x2="610" y2="530"/>
+    <line x1="860" y1="104" x2="860" y2="530"/>
+  </g>
+
+  <g stroke="#57534e" stroke-width="2" marker-end="url(#arr)" fill="none">
+    <line x1="110" y1="150" x2="350" y2="150"/>
+    <line x1="350" y1="190" x2="610" y2="190"/>
+    <line x1="350" y1="240" x2="610" y2="240"/>
+    <line x1="350" y1="290" x2="110" y2="290"/>
+    <line x1="110" y1="340" x2="860" y2="340"/>
+    <line x1="860" y1="390" x2="350" y2="390"/>
+    <line x1="350" y1="440" x2="110" y2="440"/>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="13" fill="#141414">
+    <text x="120" y="142">1. Submit address, delivery and payment</text>
+    <text x="360" y="182">2. Re-price cart, check stock</text>
+    <text x="360" y="232">3. Insert order, sub-orders, items</text>
+    <text x="360" y="282">4. Return order id and redirect URL</text>
+    <text x="120" y="332">5. Open pay page with signed token</text>
+    <text x="620" y="382">6. Payment paid (token checked)</text>
+    <text x="360" y="432">7. Mark paid, confirm order, clear cart</text>
+    <text x="120" y="482">8. Show order status page</text>
+  </g>
+  <rect x="30" y="500" width="900" height="40" rx="8" fill="#ffffff" stroke="#e7e1d8"/>
+  <text x="50" y="525" font-family="system-ui, sans-serif" font-size="13" fill="#141414">Cash on delivery skips steps 5 and 6: the order is confirmed in the same transaction. Stock is decremented conditionally, so an oversold item fails the whole order.</text>
+</svg>

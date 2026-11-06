@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="t d">
+  <title id="t">CI pipeline</title>
+  <desc id="d">A push or pull request runs the reference-module check and the Checks job (lint, typecheck, test, image check, build, performance budget, drift checks). Separate workflows run Lighthouse, Playwright on the deployment, and the security scans.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#57534e"/>
+    </marker>
+  </defs>
+  <rect width="960" height="420" fill="#faf7f2"/>
+  <text x="40" y="44" font-family="Georgia, serif" font-size="26" fill="#141414">CI pipeline</text>
+  <text x="40" y="68" font-family="system-ui, sans-serif" font-size="13" fill="#57534e">CI runs on every push to main; Lighthouse, Playwright and database jobs run on schedule or on demand.</text>
+
+  <rect x="40" y="160" width="160" height="60" rx="8" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+  <text x="120" y="196" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#141414">Push or PR</text>
+
+  <rect x="260" y="100" width="200" height="60" rx="8" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="360" y="128" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Reference modules</text>
+  <text x="360" y="148" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">check-reference-modules</text>
+
+  <rect x="260" y="200" width="200" height="110" rx="8" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="360" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Checks job</text>
+  <text x="360" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">lint, typecheck, test</text>
+  <text x="360" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">check-images, build</text>
+  <text x="360" y="284" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">perf budget, facts, repo map</text>
+
+  <rect x="540" y="60" width="180" height="60" rx="8" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="630" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Lighthouse workflow</text>
+  <text x="630" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">scheduled, mobile</text>
+
+  <rect x="540" y="160" width="180" height="60" rx="8" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="630" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Playwright workflow</text>
+  <text x="630" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">manual, on the deployment</text>
+
+  <rect x="540" y="260" width="180" height="60" rx="8" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="630" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Database workflow</text>
+  <text x="630" y="308" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">manual: migrate, seed</text>
+
+  <rect x="780" y="160" width="150" height="60" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <text x="855" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Vercel deploy</text>
+  <text x="855" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">from main (Vercel)</text>
+
+  <g stroke="#57534e" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <line x1="200" y1="190" x2="260" y2="130"/>
+    <line x1="200" y1="190" x2="260" y2="255"/>
+    <line x1="460" y1="255" x2="540" y2="90"/>
+    <line x1="460" y1="255" x2="540" y2="190"/>
+    <line x1="460" y1="255" x2="540" y2="290"/>
+    <line x1="720" y1="255" x2="780" y2="190"/>
+  </g>
+  <rect x="40" y="350" width="880" height="50" rx="8" fill="#ffffff" stroke="#e7e1d8"/>
+  <text x="60" y="380" font-family="system-ui, sans-serif" font-size="13" fill="#141414">A failed check blocks the merge. Lighthouse and Playwright results are linked from PROJECT_STATE.md.</text>
+</svg>

@@ -64,6 +64,7 @@ apps/  The deployable web application
     prisma/  Schema, nine SQL migrations and migration configuration
       migrations/  One dated SQL migration per schema change
     public/  Locally stored department photographs, icons and static assets
+      diagrams/  Related code and tests.
       media/  Licensed department photographs
     scripts/  Idempotent seeds for demo accounts, catalog, orders, reviews and coupons
 
@@ -93,6 +94,8 @@ packages/  Reusable packages shared by the app
 
 docs/  Product, design, architecture, data, security, testing and deployment documentation
   adr/  Ten architecture decision records with alternatives and consequences
+  diagrams/  Related code and tests.
+  research/  Related code and tests.
   screenshots/  Light, dark and mobile screenshots used in the README and case study
   spec/  Product, design system, architecture, data and roadmap specifications
 

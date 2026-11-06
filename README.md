@@ -101,6 +101,10 @@ The compiled modules are 2.7 KB and 1.1 KB, freestanding and committed as base64
 
 ## Architecture
 
+![System architecture: browser, Next.js on Vercel, Neon Postgres, Cloudinary and the mail outbox](docs/diagrams/architecture.svg)
+
+The checkout sequence, order status state machine, entity relationship diagram and CI pipeline are in [docs/diagrams](docs/diagrams). The Mermaid version of the system is kept below for editing.
+
 ```mermaid
 flowchart LR
   Browser -->|RSC, Server Actions| Web[Next.js App Router]

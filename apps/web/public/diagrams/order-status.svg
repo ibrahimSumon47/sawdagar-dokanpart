@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="t d">
+  <title id="t">Order status state machine</title>
+  <desc id="d">An order moves from pending payment to confirmed when paid, then to completed. Cancelled is reachable from pending payment and confirmed. Completed and cancelled are final.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#57534e"/>
+    </marker>
+  </defs>
+  <rect width="960" height="460" fill="#faf7f2"/>
+  <text x="40" y="50" font-family="Georgia, serif" font-size="26" fill="#141414">Order status</text>
+  <text x="40" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Payment status drives the order status. Transitions come from orderState.ts.</text>
+
+  <!-- States -->
+  <rect x="40" y="180" width="200" height="80" rx="40" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+  <text x="140" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#141414">pending_payment</text>
+  <text x="140" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">Placed, awaiting payment</text>
+
+  <rect x="380" y="180" width="200" height="80" rx="40" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <text x="480" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#141414">confirmed</text>
+  <text x="480" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">Paid, sellers fulfil</text>
+
+  <rect x="720" y="110" width="200" height="80" rx="40" fill="#ffffff" stroke="#166534" stroke-width="2"/>
+  <text x="820" y="146" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#141414">completed</text>
+  <text x="820" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">Final</text>
+
+  <rect x="720" y="300" width="200" height="80" rx="40" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
+  <text x="820" y="336" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#141414">cancelled</text>
+  <text x="820" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">Final, stock released</text>
+
+  <!-- Transitions -->
+  <path d="M240 205 L380 205" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="310" y="196" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">payment paid</text>
+
+  <path d="M580 200 Q650 150 720 150" stroke="#57534e" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="650" y="160" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">order completes</text>
+
+  <path d="M140 262 Q140 292 180 292 L260 292" stroke="#57534e" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+  <text x="120" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">payment failed: retry</text>
+
+  <path d="M380 240 Q500 330 720 340" stroke="#57534e" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="560" y="318" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#57534e">refunded or cancelled</text>
+
+  <path d="M240 236 Q480 300 720 340" stroke="#57534e" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Sub-order note -->
+  <rect x="40" y="380" width="880" height="50" rx="8" fill="#ffffff" stroke="#e7e1d8"/>
+  <text x="60" y="410" font-family="system-ui, sans-serif" font-size="13" fill="#141414">Each seller sub-order moves pending, confirmed, packed, shipped, delivered. It can be cancelled before shipping.</text>
+</svg>

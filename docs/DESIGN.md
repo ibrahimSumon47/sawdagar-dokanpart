@@ -10,34 +10,35 @@ Editorial Heritage reads like a printed Bangladeshi bazaar catalogue: warm paper
 
 Every colour is a Tailwind utility generated from a `--color-*` variable. Components never use hex values.
 
-| Utility | Light | Dark | Use |
-| --- | --- | --- | --- |
-| `bg-background` | #FAF7F2 | #0F0E0C | page background |
-| `bg-surface` | #FFFFFF | #1A1816 | cards, panels |
-| `bg-surface-elevated` | #FFFFFF | #24211E | drawers, menus, popovers |
-| `text-ink` | #141414 | #F5F1EA | primary text |
-| `text-ink-muted` | #57534E | #A8A29E | secondary text |
-| `border-line` | #E7E1D8 | #2E2A26 | hairline borders |
-| `accent` / `accent-hover` | #C2410C / #9A3412 | #F97316 / #FB923C | primary buttons, links, price highlights |
-| `accent-contrast` | #FFFFFF | #1A0D05 | text on accent |
-| `secondary` | #166534 | #4ADE80 | padma green, positive states |
-| `highlight` | #B45309 | #FBBF24 | gold, badges |
-| `success`, `warning`, `danger`, `info` | #15803D, #B45309, #B91C1C, #1D4ED8 | #4ADE80, #FBBF24, #F87171, #60A5FA | status |
-| `*-strong` variants | darker shades | same as base | status text on tinted backgrounds |
-| `skeleton-base` / `skeleton-shine` | #ECE5DA / #F6F1E8 | #25211D / #332E29 | loading placeholders only |
+| Utility                                | Light                              | Dark                               | Use                                      |
+| -------------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------------- |
+| `bg-background`                        | #FAF7F2                            | #0F0E0C                            | page background                          |
+| `bg-surface`                           | #FFFFFF                            | #1A1816                            | cards, panels                            |
+| `bg-surface-elevated`                  | #FFFFFF                            | #24211E                            | drawers, menus, popovers                 |
+| `text-ink`                             | #141414                            | #F5F1EA                            | primary text                             |
+| `text-ink-muted`                       | #57534E                            | #A8A29E                            | secondary text                           |
+| `border-line`                          | #E7E1D8                            | #2E2A26                            | hairline borders                         |
+| `accent` / `accent-hover`              | #C2410C / #9A3412                  | #F97316 / #FB923C                  | primary buttons, links, price highlights |
+| `accent-contrast`                      | #FFFFFF                            | #1A0D05                            | text on accent                           |
+| `secondary`                            | #166534                            | #4ADE80                            | padma green, positive states             |
+| `highlight`                            | #B45309                            | #FBBF24                            | gold, badges                             |
+| `success`, `warning`, `danger`, `info` | #15803D, #B45309, #B91C1C, #1D4ED8 | #4ADE80, #FBBF24, #F87171, #60A5FA | status                                   |
+| `*-strong` variants                    | darker shades                      | same as base                       | status text on tinted backgrounds        |
+| `skeleton-base` / `skeleton-shine`     | #ECE5DA / #F6F1E8                  | #25211D / #332E29                  | loading placeholders only                |
 
 Rules:
+
 - Accent is used sparingly: primary actions, links, active states, price highlights and badges.
 - Text and interactive colours meet WCAG 2.2 AA in both themes. Status labels use the `*-strong` shades on tinted backgrounds, which was the fix for the Phase 11 contrast finding.
 - The theme is set by a cookie and rendered on the server, so there is no flash on load.
 
 ## 3. Typography
 
-| Role | Family | Token |
-| --- | --- | --- |
-| Headings, prices | Fraunces | `font-serif` |
-| UI text | Inter | `font-sans` |
-| Bangla | Noto Sans Bengali | `font-bangla`, applied with `:lang(bn)` |
+| Role             | Family            | Token                                   |
+| ---------------- | ----------------- | --------------------------------------- |
+| Headings, prices | Fraunces          | `font-serif`                            |
+| UI text          | Inter             | `font-sans`                             |
+| Bangla           | Noto Sans Bengali | `font-bangla`, applied with `:lang(bn)` |
 
 - Loaded with `next/font`, subset, `display: swap`.
 - Fluid scale: `text-hero`, `text-display`, `text-title`, `text-lead`, using `clamp()`. Body text uses Tailwind's default sizes.
@@ -65,16 +66,17 @@ Mobile first at 360, 640, 768, 1024, 1280 and 1536 px, and checked from 320 to 1
 
 Motion is CSS only (no animation library). Animate transform and opacity only.
 
-| Token | Value |
-| --- | --- |
-| `--duration-fast` | 120 ms |
-| `--duration-base` | 200 ms |
-| `--duration-slow` | 320 ms |
-| `--ease-out-soft` | cubic-bezier(0.22, 1, 0.36, 1) |
-| Drawer spring | stiffness about 300, damping about 30 |
-| Page maximum | 520 ms |
+| Token             | Value                                 |
+| ----------------- | ------------------------------------- |
+| `--duration-fast` | 120 ms                                |
+| `--duration-base` | 200 ms                                |
+| `--duration-slow` | 320 ms                                |
+| `--ease-out-soft` | cubic-bezier(0.22, 1, 0.36, 1)        |
+| Drawer spring     | stiffness about 300, damping about 30 |
+| Page maximum      | 520 ms                                |
 
 Rules:
+
 - Nothing runs longer than 600 ms, except the decorative marquee.
 - Every animation is disabled under `prefers-reduced-motion`. The global rule in `theme.css` shortens durations, and skeleton shimmer is removed.
 - The catalogue of animations lives at `/design/motion` and is linked from the footer only.

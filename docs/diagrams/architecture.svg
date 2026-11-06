@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="t d">
+  <title id="t">Sawdagar Dokanpat architecture</title>
+  <desc id="d">Browser talks to a Next.js app on Vercel. The app uses Prisma with Postgres (Neon), Cloudinary for images, and a mail outbox. GitHub Actions runs checks and the Playwright and Lighthouse jobs against the deployment.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#57534e"/>
+    </marker>
+  </defs>
+  <rect width="960" height="600" fill="#faf7f2"/>
+  <text x="40" y="50" font-family="Georgia, serif" font-size="26" fill="#141414">Sawdagar Dokanpat: system architecture</text>
+  <text x="40" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Free-tier services only. Catalogue data is seeded for this portfolio project.</text>
+
+  <!-- Client -->
+  <rect x="40" y="120" width="220" height="380" rx="10" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141414">Client</text>
+  <rect x="60" y="170" width="180" height="70" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="150" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Shopper, seller,</text>
+  <text x="150" y="220" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">admin (browser)</text>
+  <rect x="60" y="270" width="180" height="70" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="150" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Bangla and English</text>
+  <text x="150" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">responsive UI</text>
+
+  <!-- Vercel app -->
+  <rect x="320" y="120" width="330" height="380" rx="10" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+  <text x="340" y="150" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141414">Vercel: Next.js App Router</text>
+  <rect x="340" y="170" width="290" height="50" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="485" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Server components and server actions</text>
+  <rect x="340" y="240" width="290" height="50" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="485" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Zod validation and role checks</text>
+  <rect x="340" y="310" width="290" height="50" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="485" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Domain package (pricing, order states)</text>
+  <rect x="340" y="380" width="290" height="50" rx="8" fill="#faf7f2" stroke="#e7e1d8"/>
+  <text x="485" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#141414">Mock payment gateway (test mode)</text>
+
+  <!-- Data -->
+  <rect x="720" y="120" width="200" height="180" rx="10" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="740" y="150" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141414">Neon Postgres</text>
+  <text x="740" y="180" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Prisma ORM</text>
+  <text x="740" y="202" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Orders, stock, audit</text>
+  <text x="740" y="224" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Mail outbox</text>
+
+  <rect x="720" y="320" width="200" height="90" rx="10" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="740" y="350" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141414">Cloudinary</text>
+  <text x="740" y="374" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Uploaded cover images</text>
+
+  <rect x="720" y="430" width="200" height="70" rx="10" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="740" y="460" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141414">Mail (outbox)</text>
+  <text x="740" y="482" font-family="system-ui, sans-serif" font-size="14" fill="#57534e">Sent by a job</text>
+
+  <!-- CI -->
+  <rect x="40" y="520" width="880" height="60" rx="10" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+  <text x="60" y="556" font-family="system-ui, sans-serif" font-size="15" fill="#141414">GitHub Actions: lint, typecheck, test, build, Lighthouse, Playwright, drift checks</text>
+
+  <!-- Arrows -->
+  <path d="M260 205 L320 205" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M320 295 L260 295" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M650 205 L720 205" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M650 365 L720 365" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M650 465 L720 465" stroke="#57534e" stroke-width="2" marker-end="url(#arr)"/>
+</svg>

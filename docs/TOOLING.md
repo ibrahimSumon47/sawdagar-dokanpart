@@ -92,3 +92,5 @@ npx -y skills list -g
 ```
 
 Then copy the chosen cybersecurity skill folders from `~/.agents/skill-library` with `node skill-library.mjs activate <group/skill>` (see the list above). Check the result with `node skill-library.mjs validate`.
+
+- Diagram PNGs: rendered with the Playwright Chromium already in node_modules (via @playwright/test), from a script outside the repo. No new package installed.

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="t d">
+  <title id="t">Core data model (ER)</title>
+  <desc id="d">Users own carts, addresses and orders. Orders split into sub-orders per organisation, hold order items, payments and stock reservations. Products have variants and images; order items reference a product and a variant.</desc>
+  <rect width="960" height="620" fill="#faf7f2"/>
+  <text x="40" y="44" font-family="Georgia, serif" font-size="26" fill="#141414">Core data model</text>
+  <text x="40" y="68" font-family="system-ui, sans-serif" font-size="13" fill="#57534e">Core commerce tables only. Crow's foot: one to many.</text>
+
+  <g font-family="system-ui, sans-serif" font-size="13">
+    <!-- User -->
+    <rect x="40" y="100" width="170" height="92" rx="6" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+    <text x="125" y="122" text-anchor="middle" font-weight="700" fill="#141414">User</text>
+    <line x1="40" y1="130" x2="210" y2="130" stroke="#e7e1d8"/>
+    <text x="54" y="150" fill="#57534e">id, email, role</text>
+    <text x="54" y="172" fill="#57534e">name, locale</text>
+
+    <!-- Address -->
+    <rect x="40" y="250" width="170" height="92" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="125" y="272" text-anchor="middle" font-weight="700" fill="#141414">Address</text>
+    <line x1="40" y1="280" x2="210" y2="280" stroke="#e7e1d8"/>
+    <text x="54" y="300" fill="#57534e">id, userId, district</text>
+    <text x="54" y="322" fill="#57534e">addressLine, isDefault</text>
+
+    <!-- Cart -->
+    <rect x="40" y="400" width="170" height="92" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="125" y="422" text-anchor="middle" font-weight="700" fill="#141414">Cart</text>
+    <line x1="40" y1="430" x2="210" y2="430" stroke="#e7e1d8"/>
+    <text x="54" y="450" fill="#57534e">id, userId, guestToken</text>
+    <text x="54" y="472" fill="#57534e">couponCode, expiresAt</text>
+
+    <!-- Order -->
+    <rect x="300" y="100" width="200" height="130" rx="6" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+    <text x="400" y="122" text-anchor="middle" font-weight="700" fill="#141414">Order</text>
+    <line x1="300" y1="130" x2="500" y2="130" stroke="#e7e1d8"/>
+    <text x="314" y="150" fill="#57534e">id, number, orderCode</text>
+    <text x="314" y="172" fill="#57534e">status, paymentStatus</text>
+    <text x="314" y="194" fill="#57534e">totalMinor, placedAt</text>
+    <text x="314" y="216" fill="#57534e">shipping snapshot</text>
+
+    <!-- SubOrder -->
+    <rect x="300" y="290" width="200" height="110" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="400" y="312" text-anchor="middle" font-weight="700" fill="#141414">SubOrder</text>
+    <line x1="300" y1="320" x2="500" y2="320" stroke="#e7e1d8"/>
+    <text x="314" y="340" fill="#57534e">id, orderId, organizationId</text>
+    <text x="314" y="362" fill="#57534e">status, trackingNumber</text>
+    <text x="314" y="384" fill="#57534e">totalMinor</text>
+
+    <!-- Payment -->
+    <rect x="300" y="450" width="200" height="92" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="400" y="472" text-anchor="middle" font-weight="700" fill="#141414">Payment</text>
+    <line x1="300" y1="480" x2="500" y2="480" stroke="#e7e1d8"/>
+    <text x="314" y="500" fill="#57534e">id, orderId, provider</text>
+    <text x="314" y="522" fill="#57534e">status, providerRef</text>
+
+    <!-- OrderItem -->
+    <rect x="580" y="290" width="170" height="110" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="665" y="312" text-anchor="middle" font-weight="700" fill="#141414">OrderItem</text>
+    <line x1="580" y1="320" x2="750" y2="320" stroke="#e7e1d8"/>
+    <text x="594" y="340" fill="#57534e">orderId, subOrderId</text>
+    <text x="594" y="362" fill="#57534e">productId, variantId</text>
+    <text x="594" y="384" fill="#57534e">unitPriceMinor, qty</text>
+
+    <!-- Product -->
+    <rect x="780" y="100" width="150" height="110" rx="6" fill="#ffffff" stroke="#c2410c" stroke-width="2"/>
+    <text x="855" y="122" text-anchor="middle" font-weight="700" fill="#141414">Product</text>
+    <line x1="780" y1="130" x2="930" y2="130" stroke="#e7e1d8"/>
+    <text x="794" y="150" fill="#57534e">slug, titleEn, titleBn</text>
+    <text x="794" y="172" fill="#57534e">priceMinor, totalStock</text>
+    <text x="794" y="194" fill="#57534e">organizationId</text>
+
+    <!-- Variant -->
+    <rect x="780" y="250" width="150" height="92" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="855" y="272" text-anchor="middle" font-weight="700" fill="#141414">ProductVariant</text>
+    <line x1="780" y1="280" x2="930" y2="280" stroke="#e7e1d8"/>
+    <text x="794" y="300" fill="#57534e">sku, productId</text>
+    <text x="794" y="322" fill="#57534e">stock, priceMinor</text>
+
+    <!-- Image -->
+    <rect x="780" y="400" width="150" height="70" rx="6" fill="#ffffff" stroke="#e7e1d8" stroke-width="2"/>
+    <text x="855" y="422" text-anchor="middle" font-weight="700" fill="#141414">ProductImage</text>
+    <text x="794" y="446" fill="#57534e">position, publicId</text>
+    <text x="794" y="464" fill="#57534e">license, author</text>
+  </g>
+
+  <g stroke="#57534e" stroke-width="2" fill="none">
+    <line x1="210" y1="150" x2="300" y2="150"/>
+    <line x1="210" y1="300" x2="300" y2="300" stroke-dasharray="4 4"/>
+    <line x1="210" y1="440" x2="300" y2="440" stroke-dasharray="4 4"/>
+    <line x1="400" y1="230" x2="400" y2="290"/>
+    <line x1="400" y1="400" x2="400" y2="450"/>
+    <line x1="500" y1="345" x2="580" y2="345"/>
+    <line x1="750" y1="345" x2="780" y2="345" stroke-dasharray="4 4"/>
+    <line x1="500" y1="165" x2="780" y2="165" stroke-dasharray="4 4"/>
+    <line x1="855" y1="210" x2="855" y2="250"/>
+    <line x1="855" y1="342" x2="855" y2="400"/>
+  </g>
+  <rect x="40" y="540" width="880" height="54" rx="8" fill="#ffffff" stroke="#e7e1d8"/>
+  <text x="60" y="572" font-family="system-ui, sans-serif" font-size="13" fill="#141414">Money is stored in minor units (paisa) as integers. Order item prices are copied at purchase, so later price changes do not alter past orders.</text>
+</svg>

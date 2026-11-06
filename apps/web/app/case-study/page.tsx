@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { CaseStudyChallenges } from '../../features/showcase/components/CaseStudyChallenges';
+import { CaseStudyDiagrams } from '../../features/showcase/components/CaseStudyDiagrams';
 import { CaseStudyDecisions } from '../../features/showcase/components/CaseStudyDecisions';
 import { CaseStudyHero } from '../../features/showcase/components/CaseStudyHero';
 import { CaseStudyJsonLd } from '../../features/showcase/components/CaseStudyJsonLd';
@@ -26,6 +27,7 @@ export default function CaseStudyPage() {
       <CaseStudyJsonLd />
       <CaseStudyHero />
       <CaseStudyMetrics metrics={caseStudyMetrics} />
+      <CaseStudyDiagrams />
       <CaseStudyDecisions decisions={caseStudyDecisions} />
       <CaseStudyChallenges challenges={caseStudyChallenges} />
       <CaseStudyLinks links={caseStudyLinks} />

@@ -23,6 +23,10 @@ The deployment is deliberately free-forever: the web app runs on Vercel Hobby, P
 
 ## System diagram
 
+![System architecture: browser, Next.js on Vercel, Neon Postgres, Cloudinary and the mail outbox](docs/diagrams/architecture.svg)
+
+The other hand-drawn diagrams are in [docs/diagrams](docs/diagrams): the checkout sequence, the order status state machine, the entity relationship diagram and the CI pipeline. The Mermaid version below is kept for editing.
+
 ```mermaid
 flowchart LR
   Browser -->|HTML, RSC payload, Server Actions| Next[Next.js App Router]
@@ -116,12 +120,12 @@ Feature flags gate the Help Center and Journal, fall back to seeded defaults whe
 
 [packages/cs-core](packages/cs-core) exists to show the algorithms, not to hide them behind a library.
 
-| Module | Written in | Runs in the product as | Used by |
-|---|---|---|---|
-| search-core | C++ to WebAssembly (2.7 KB) | the compiled module, TypeScript port as fallback | catalog search ordering |
-| sku-kit | C to WebAssembly (1.1 KB) | the compiled module, TypeScript port as fallback | product SKUs and their check character |
-| insights | Python reference | TypeScript port | seller demand column |
-| settlement | Java reference | TypeScript port | admin payout preview |
+| Module      | Written in                  | Runs in the product as                           | Used by                                |
+| ----------- | --------------------------- | ------------------------------------------------ | -------------------------------------- |
+| search-core | C++ to WebAssembly (2.7 KB) | the compiled module, TypeScript port as fallback | catalog search ordering                |
+| sku-kit     | C to WebAssembly (1.1 KB)   | the compiled module, TypeScript port as fallback | product SKUs and their check character |
+| insights    | Python reference            | TypeScript port                                  | seller demand column                   |
+| settlement  | Java reference              | TypeScript port                                  | admin payout preview                   |
 
 `/cs-lab` runs every module and reports the active engine. CI runs the Python and Java references with `--require`, so a missing runtime fails the build. [CS_FUNDAMENTALS.md](docs/CS_FUNDAMENTALS.md) explains each algorithm and its complexity.
 
