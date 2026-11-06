@@ -53,3 +53,22 @@ dangerous sinks. This is a static review; no live penetration test was run.
 
 - Dependency vulnerabilities: `pnpm audit` in CI (added with R9 item 6).
 - Secret scan: gitleaks in CI (added with R9 item 6).
+
+## Dependency audit (R9 item 6)
+
+- `pnpm audit --audit-level=high --prod`: **no known vulnerabilities** in the
+  shipped dependency tree. This is the CI gate (`.github/workflows/security.yml`).
+- `pnpm audit --audit-level=high` (including dev tools): 5 high advisories, all
+  in dev-only Lighthouse tooling (`@lhci/cli` and its `lighthouse` and
+  `puppeteer-core` chain): `basic-ftp` (fix in 6.2.1), `zod` (fix in 4.6.6, used
+  by `chromium-bidi`), `tmp` (fix in 0.2.6), and two `extract-zip` symlink
+  advisories with no patched release. None of these run in the deployed app or
+  on user input. Decision: keep them out of the blocking gate and record them
+  here, because forcing overrides into the Lighthouse chain could break the
+  Lighthouse budget run. Re-check when `@lhci/cli` is updated.
+
+## Secret scan
+
+- gitleaks runs in CI on the full git history (`fetch-depth: 0`). A local
+  pattern search of the working tree found no key-shaped strings, and no
+  `.env` file is tracked.
