@@ -103,7 +103,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             <main id="main" className="flex-1">
               <PageEnter>{children}</PageEnter>
             </main>
-            <Suspense fallback={null}>
+            <Suspense fallback={<div className="min-h-48 border-t border-line" aria-hidden />}>
               <ShellFooter locale={locale} />
             </Suspense>
           </div>
