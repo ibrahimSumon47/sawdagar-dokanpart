@@ -57,3 +57,15 @@ Product findings (run with five samples):
 - **Third-party code:** Cloudinary, 59 KB transferred for product images; zero main-thread time.
 - **Render-blocking resources:** none.
 - **Layout shift:** CLS 0.
+
+## Round 2 result (commit 85aef7c, five runs per URL, run 42224577604)
+
+| URL     | Scores (five runs)           | Median | Gate 0.9 |
+| ------- | ---------------------------- | ------ | -------- |
+| Home    | 0.77, 0.91, 0.92, 0.94, 0.94 | 0.92   | pass     |
+| Catalog | 0.94, 0.94, 0.94, 0.95, 0.95 | 0.94   | pass     |
+| Product | 0.85, 0.87, 0.87, 0.87, 0.88 | 0.87   | fail     |
+
+Change in this round: `getViewer` is now request-cached, so the root layout and the page share one session lookup. Home moved from 0.94 to 0.92 (within run noise) and product moved from 0.88 to 0.87, so this change did not move product. The product gap is server work: the page awaits reviews, questions, related products and the product query in one `Promise.all` before any HTML is sent, and the LCP phase shows about 636 ms of time to first byte.
+
+Next step for product: stream the reviews, questions and related grid behind a `Suspense` boundary so the title and photo are sent first. This is not yet done.
