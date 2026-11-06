@@ -52,7 +52,9 @@ export function TrackOrderForm({ labels }: TrackOrderFormProps) {
           )}
         />
         {state.fieldError === 'code' ? (
-          <span className="mt-1 block text-sm text-danger">{labels.codeInvalid}</span>
+          <span className="field-error-in mt-1 block text-sm text-danger">
+            {labels.codeInvalid}
+          </span>
         ) : null}
       </label>
       <label className="block text-sm font-medium text-ink">
@@ -68,7 +70,9 @@ export function TrackOrderForm({ labels }: TrackOrderFormProps) {
           )}
         />
         {state.fieldError === 'contact' ? (
-          <span className="mt-1 block text-sm text-danger">{labels.contactInvalid}</span>
+          <span className="field-error-in mt-1 block text-sm text-danger">
+            {labels.contactInvalid}
+          </span>
         ) : null}
       </label>
       {state.failed ? (

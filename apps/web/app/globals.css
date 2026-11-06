@@ -132,6 +132,18 @@
   animation: field-shake var(--duration-base) linear;
 }
 
+@keyframes field-error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Field error messages ease in under the input instead of appearing all at once. */
+.field-error-in {
+  animation: field-error-in var(--duration-fast) var(--ease-out-soft);
+}
+
 @keyframes page-enter {
   from {
     opacity: 0;
