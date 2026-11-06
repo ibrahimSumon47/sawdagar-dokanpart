@@ -10,6 +10,7 @@ import type { Theme } from '../../../preferences/theme';
 import { HeaderMobileBar } from './HeaderMobileBar';
 import { MobileMenu } from './MobileMenu';
 import { HeaderSearch } from './HeaderSearch';
+import { ScrollHideHeader } from './ScrollHideHeader';
 
 export interface SiteHeaderProps {
   copy: Dictionary;
@@ -59,7 +60,7 @@ export function SiteHeader({
   }));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur">
+    <ScrollHideHeader className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur transition-transform duration-200 ease-out data-[hidden=true]:-translate-y-full">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -136,6 +137,6 @@ export function SiteHeader({
         </div>
       </div>
       <HeaderMobileBar copy={copy} categories={categoryLinks} />
-    </header>
+    </ScrollHideHeader>
   );
 }
