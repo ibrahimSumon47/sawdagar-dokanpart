@@ -1,11 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import type { CouponRule } from '@sd/domain';
 import type { Locale } from '../../../../i18n';
 import type { CartLine, ShopCopy } from '../../types';
-import { CartDrawer } from '../CartDrawer';
-import { ShopToast } from '../ShopToast';
 import { ShopContext, type ShopToastState, type ShowShopToast } from './context';
 import { useCartController } from './useCartController';
 import { useCompareController } from './useCompareController';
@@ -23,6 +22,13 @@ export interface ShopProviderProps {
   copy: ShopCopy;
 }
 
+// The drawer and toast are hidden on most page views, so their code is fetched
+// on first use instead of being part of every page's client bundle.
+const CartDrawer = dynamic(() => import('../CartDrawer').then((m) => m.CartDrawer), {
+  ssr: false,
+});
+const ShopToast = dynamic(() => import('../ShopToast').then((m) => m.ShopToast), { ssr: false });
+
 /** One client boundary for the cart, wishlist, comparison, drawer and toast. */
 export function ShopProvider({
   children,
@@ -35,10 +41,15 @@ export function ShopProvider({
   copy,
 }: ShopProviderProps) {
   const [cartOpen, setCartOpen] = useState(false);
+  // Mounts the drawer the first time it is opened and keeps it mounted after that.
+  const [drawerRequested, setDrawerRequested] = useState(false);
   const [toast, setToast] = useState<ShopToastState | null>(null);
   const toastSequence = useRef(0);
 
-  const openCart = useCallback(() => setCartOpen(true), []);
+  const openCart = useCallback(() => {
+    setDrawerRequested(true);
+    setCartOpen(true);
+  }, []);
   const closeCart = useCallback(() => setCartOpen(false), []);
   const dismissToast = useCallback(() => setToast(null), []);
 
@@ -128,8 +139,8 @@ export function ShopProvider({
   return (
     <ShopContext.Provider value={value}>
       {children}
-      <CartDrawer />
-      <ShopToast />
+      {drawerRequested && <CartDrawer />}
+      {toast && <ShopToast />}
     </ShopContext.Provider>
   );
 }
