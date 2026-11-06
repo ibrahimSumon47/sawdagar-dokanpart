@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ButtonLink } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { departmentPhoto } from '../../../catalog/media';
@@ -15,7 +16,6 @@ export interface HomeIntroProps {
 /** Opening statement and the three delivery promises under the hero. */
 export function HomeIntro({ copy, locale, hero }: HomeIntroProps) {
   const heroPhoto = departmentPhoto('handloom', 'home-hero', locale);
-  const imageUrl = hero.imageUrl ?? heroPhoto?.src ?? null;
 
   return (
     <>
@@ -39,14 +39,23 @@ export function HomeIntro({ copy, locale, hero }: HomeIntroProps) {
             </div>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line bg-accent/10 text-accent sm:aspect-[5/4] lg:aspect-[4/5]">
-            {imageUrl ? (
+            {hero.imageUrl ? (
               <img
-                src={imageUrl}
+                src={hero.imageUrl}
                 alt={copy.home.heroImageAlt}
                 width={800}
                 height={600}
                 fetchPriority="high"
                 className="h-full w-full object-cover"
+              />
+            ) : heroPhoto ? (
+              <Image
+                src={heroPhoto.src}
+                alt={copy.home.heroImageAlt}
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
               />
             ) : null}
             <div className="absolute inset-x-0 bottom-0 border-t border-line bg-surface/95 p-4 text-ink backdrop-blur">
