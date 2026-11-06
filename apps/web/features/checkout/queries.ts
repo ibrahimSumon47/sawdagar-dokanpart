@@ -47,6 +47,13 @@ export interface SubOrderRecord {
   shippingMinor: number;
   discountMinor: number;
   totalMinor: number;
+  courier: string | null;
+  trackingNumber: string | null;
+  confirmedAt: Date | null;
+  packedAt: Date | null;
+  shippedAt: Date | null;
+  deliveredAt: Date | null;
+  cancelledAt: Date | null;
   items: OrderItemRecord[];
 }
 
@@ -209,6 +216,13 @@ async function findOrderRecord(
       shippingMinor: subOrder.shippingMinor,
       discountMinor: subOrder.discountMinor,
       totalMinor: subOrder.totalMinor,
+      courier: subOrder.courier,
+      trackingNumber: subOrder.trackingNumber,
+      confirmedAt: subOrder.confirmedAt,
+      packedAt: subOrder.packedAt,
+      shippedAt: subOrder.shippedAt,
+      deliveredAt: subOrder.deliveredAt,
+      cancelledAt: subOrder.cancelledAt,
       items: subOrder.items.map((item) => ({
         id: item.id,
         titleEn: item.titleEn,

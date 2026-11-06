@@ -49,7 +49,7 @@
 
 ## Now
 
-**Revision 1, phase R7 (public live order tracking) is in progress.** Slice (a) is done locally: the `/track` form takes an order code and the phone or email used at checkout, returns one generic message for any wrong detail, limits lookups per IP and per order code with Upstash (ADR-012), and logs failed attempts to the audit log. Slices (b) to (d) are still to do. The owner must add the Upstash variables before the form works on the deployment (see Owner actions in docs/DEPLOYMENT.md).
+**Revision 1, phase R7 (public live order tracking) is in progress.** Slice (a) is done locally: the `/track` form takes an order code and the phone or email used at checkout, returns one generic message for any wrong detail, limits lookups per IP and per order code with Upstash (ADR-012), and logs failed attempts to the audit log. Slice (b) is done locally: the guest timeline at `/track/[code]` opens only with a signed 30-minute cookie that the lookup sets on a correct contact, and the signed-in view is at `/account/orders/[number]`. Slices (c) and (d) are still to do. The owner must add the Upstash variables before the form works on the deployment (see Owner actions in docs/DEPLOYMENT.md).
 
 **Revision 1, phase R5 (CMS) is closed. Slices (a) to (d) are accepted and the closing check (e) passed.** Playwright run 42171733613 passed 37 checks on the deployment, including every R5 CMS entity at 375, 768 and 1440 px.
 

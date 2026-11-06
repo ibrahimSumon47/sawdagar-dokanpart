@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { z } from 'zod';
 import { normalizeTrackingCode, normalizeTrackingContact } from '@sd/domain';
 import { recordAuditLog, requestDetails } from '../auth/audit';
+import { grantTrackAccess } from './guestAccess';
 import { findOrderForTracking } from './lookup';
 import { isTrackingLimited } from './rateLimit';
 
@@ -58,6 +59,7 @@ export async function trackOrderAction(
     return { failed: true };
   }
 
+  await grantTrackAccess(order.orderCode);
   return { redirectTo: `/track/${encodeURIComponent(order.orderCode)}` };
 }
 
