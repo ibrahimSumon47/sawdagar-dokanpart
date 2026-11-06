@@ -14,7 +14,7 @@ export function SellerStat({ label, value, hint, className }: SellerStatProps) {
   return (
     <div className={cn('rounded-sm border border-line bg-surface p-4', className)}>
       <p className="text-xs uppercase tracking-wider text-ink-muted">{label}</p>
-      <p className="mt-2 font-serif text-2xl text-ink">{value}</p>
+      <p className="stat-settle mt-2 font-serif text-2xl text-ink">{value}</p>
       {hint ? <p className="mt-1 text-xs text-ink-muted">{hint}</p> : null}
     </div>
   );
