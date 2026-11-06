@@ -64,10 +64,21 @@ test.describe('R5 CMS', () => {
   });
 
   for (const width of [375, 768, 1440]) {
-    test(`the CMS hub fits ${width}px`, async ({ page }, testInfo) => {
+    test(`every R5 CMS entity fits ${width}px`, async ({ page }, testInfo) => {
+      test.setTimeout(180_000);
       await signInAsEditor(page);
       await page.setViewportSize({ width, height: 900 });
-      for (const path of ['/admin/cms', '/admin/cms/sections']) {
+      const paths = [
+        '/admin/cms',
+        '/admin/cms/sections',
+        '/admin/cms/settings',
+        '/admin/cms/help',
+        '/',
+        '/help',
+        '/journal',
+        '/policies',
+      ];
+      for (const path of paths) {
         const response = await page.goto(path, { waitUntil: 'networkidle' });
         expect(response?.status()).toBe(200);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
