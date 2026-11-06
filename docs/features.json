@@ -46,6 +46,6 @@
     "description": "Public live order tracking",
     "acceptance": "A visitor enters an order ID with a phone or email and sees the timeline; a wrong detail gets the generic message; a signed-in buyer sees the same timeline at /account/orders/[id]; updates arrive live within about 5 seconds; a Playwright test with two browser contexts passes at 375, 768 and 1440 px",
     "status": "pass",
-    "evidence": "Playwright run https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42202423796 passed 44 of 44, including both R7 tests and signed-in order view overflow checks at 375, 768 and 1440 px. Guest post-verification claim is not covered by a Playwright test (needs a verification mail link on the live database)."
+    "evidence": "Playwright run https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42202967029 passed 46 of 46: both R7 tests at 375, 768 and 1440 px (seller-to-buyer live update, wrong-contact generic message), plus signed-in order view overflow checks at each width."
   }
 ]
