@@ -157,8 +157,9 @@ export async function payMockPaymentAction(formData: FormData): Promise<void> {
 
   const result = await completeMockPayment(paymentId, token);
   if (!result.ok || !result.orderNumber) {
-    redirect(`/orders/${payment.order.number}?payment=failed`);
+    redirect(viewer ? `/orders/${payment.order.number}?payment=failed` : '/checkout');
   }
+  if (!viewer) redirect(`/order/confirmed?code=${payment.order.orderCode ?? ''}`);
   redirect(`/orders/${result.orderNumber}?payment=paid`);
 }
 
@@ -175,5 +176,5 @@ export async function failMockPaymentAction(formData: FormData): Promise<void> {
   if (!payment) redirect(viewer ? '/account' : '/checkout');
 
   await failMockPayment(paymentId, token);
-  redirect(`/orders/${payment.order.number}?payment=cancelled`);
+  redirect(viewer ? `/orders/${payment.order.number}?payment=cancelled` : '/checkout');
 }

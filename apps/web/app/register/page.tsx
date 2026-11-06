@@ -12,8 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: copy.auth.registerTitle, description: copy.auth.registerBody };
 }
 
+interface RegisterPageProps {
+  searchParams: Promise<{ email?: string }>;
+}
+
 /** Creates a real buyer account or a seller application. */
-export default async function RegisterPage() {
+export default async function RegisterPage({ searchParams }: RegisterPageProps) {
+  const query = await searchParams;
   if (await getViewer()) redirect('/account');
 
   const copy = getDictionary(await getLocale());
@@ -31,7 +36,11 @@ export default async function RegisterPage() {
         </>
       }
     >
-      <RegisterForm copy={authCopyFor(copy)} configured={isAuthConfigured()} />
+      <RegisterForm
+        copy={authCopyFor(copy)}
+        configured={isAuthConfigured()}
+        defaultEmail={typeof query.email === 'string' ? query.email.slice(0, 254) : undefined}
+      />
     </AuthCard>
   );
 }

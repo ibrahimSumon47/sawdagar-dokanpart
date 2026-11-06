@@ -52,7 +52,7 @@ export default async function MockPayPage({ params, searchParams }: MockPayPageP
     redirect(
       viewer
         ? `/orders/${payment.order.number}?payment=paid`
-        : `/order/confirmed?code=${payment.order.number}`,
+        : `/order/confirmed?code=${payment.order.orderCode ?? ''}`,
     );
   }
 

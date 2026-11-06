@@ -64,6 +64,10 @@ export interface PaymentRecord {
 export interface OrderRecord {
   id: string;
   number: string;
+  /** Guest-facing code (SD-YYMMDD-XXXX); null for signed-in orders placed before R6. */
+  orderCode: string | null;
+  /** Email typed at guest checkout; null for signed-in orders. */
+  guestEmail: string | null;
   status: string;
   paymentStatus: string;
   paymentMethod: string;
@@ -136,8 +140,22 @@ export async function getOrderForViewer(
   number: string,
   userId: string,
 ): Promise<OrderRecord | null> {
+  return findOrderRecord({ number, userId });
+}
+
+/**
+ * Loads a guest order by its SD-YYMMDD-XXXX code. Orders with a user are
+ * never returned here, so a signed-in order cannot leak through the guest page.
+ */
+export async function getGuestOrderByCode(orderCode: string): Promise<OrderRecord | null> {
+  return findOrderRecord({ orderCode, userId: null });
+}
+
+async function findOrderRecord(
+  where: { number: string; userId: string } | { orderCode: string; userId: null },
+): Promise<OrderRecord | null> {
   const order = await getPrisma().order.findFirst({
-    where: { number, userId },
+    where,
     include: {
       subOrders: {
         orderBy: { number: 'asc' },
@@ -179,6 +197,8 @@ export async function getOrderForViewer(
     placedAt: order.placedAt,
     confirmedAt: order.confirmedAt,
     cancelledAt: order.cancelledAt,
+    orderCode: order.orderCode,
+    guestEmail: order.guestEmail,
     subOrders: order.subOrders.map((subOrder) => ({
       id: subOrder.id,
       number: subOrder.number,
@@ -252,7 +272,14 @@ export async function getPaymentById(paymentId: string) {
     where: { id: paymentId },
     include: {
       order: {
-        select: { number: true, totalMinor: true, status: true, userId: true, placedAt: true },
+        select: {
+          number: true,
+          orderCode: true,
+          totalMinor: true,
+          status: true,
+          userId: true,
+          placedAt: true,
+        },
       },
     },
   });
@@ -264,7 +291,14 @@ export async function getPaymentForViewer(paymentId: string, userId: string) {
     where: { id: paymentId, order: { userId } },
     include: {
       order: {
-        select: { number: true, totalMinor: true, status: true, userId: true, placedAt: true },
+        select: {
+          number: true,
+          orderCode: true,
+          totalMinor: true,
+          status: true,
+          userId: true,
+          placedAt: true,
+        },
       },
     },
   });

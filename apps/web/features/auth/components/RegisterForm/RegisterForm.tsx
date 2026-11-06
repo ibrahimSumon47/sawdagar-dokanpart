@@ -16,13 +16,15 @@ export interface RegisterFormProps {
   copy: AuthCopy;
   /** Deployment has the database and auth secret. */
   configured: boolean;
+  /** Prefills the email field, for example from a guest order's email. */
+  defaultEmail?: string;
 }
 
 const roleCard =
   'flex cursor-pointer gap-3 rounded-sm border border-line p-3 text-sm transition-colors has-checked:border-accent has-checked:bg-accent/5';
 
 /** Buyer or seller registration. Seller requests are reviewed before approval. */
-export function RegisterForm({ copy, configured }: RegisterFormProps) {
+export function RegisterForm({ copy, configured, defaultEmail }: RegisterFormProps) {
   const [state, formAction] = useActionState(registerAction, emptyAuthState);
   const [role, setRole] = useState<'buyer' | 'seller'>('buyer');
   const [password, setPassword] = useState('');
@@ -45,6 +47,7 @@ export function RegisterForm({ copy, configured }: RegisterFormProps) {
         type="email"
         autoComplete="email"
         inputMode="email"
+        defaultValue={defaultEmail}
         error={authMessage(copy, errors.email)}
         required
       />
