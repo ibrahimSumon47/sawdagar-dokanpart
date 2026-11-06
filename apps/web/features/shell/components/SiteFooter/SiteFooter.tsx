@@ -35,6 +35,7 @@ export function SiteFooter({ copy, extraLinks = [] }: SiteFooterProps) {
   const projectLinks: FooterLink[] = [
     { label: copy.footer.aboutProject, href: '/about/project' },
     { label: copy.footer.design, href: '/design' },
+    { label: 'Motion', href: '/design/motion' },
     { label: copy.footer.csLab, href: '/cs-lab' },
     { label: copy.footer.caseStudy, href: '/case-study' },
     { label: copy.footer.credits, href: '/credits' },
