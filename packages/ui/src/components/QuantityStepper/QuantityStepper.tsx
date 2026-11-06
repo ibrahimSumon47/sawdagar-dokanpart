@@ -46,7 +46,10 @@ export function QuantityStepper({
         <Minus aria-hidden="true" className="size-4" />
       </button>
       <output aria-live="polite" className="w-8 text-center text-sm tabular-nums">
-        {value}
+        {/* Keyed on the value so the number re-mounts and plays the roll on each change. */}
+        <span key={value} className="number-roll inline-block">
+          {value}
+        </span>
       </output>
       <button
         type="button"

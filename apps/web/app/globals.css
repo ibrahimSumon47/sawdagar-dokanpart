@@ -59,6 +59,38 @@
   animation: cart-bump var(--duration-slow) var(--ease-out-soft);
 }
 
+@keyframes heart-burst {
+  40% {
+    transform: scale(1.35);
+  }
+}
+
+.heart-burst {
+  animation: heart-burst var(--duration-base) var(--ease-out-soft);
+}
+
+@keyframes number-roll {
+  from {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+}
+
+.number-roll {
+  animation: number-roll var(--duration-fast) var(--ease-out-soft);
+}
+
+@keyframes price-tick {
+  from {
+    transform: translateY(-30%);
+    opacity: 0.3;
+  }
+}
+
+.price-tick {
+  animation: price-tick var(--duration-base) var(--ease-out-soft);
+}
+
 /* Small accent dot that flies from the add button to the cart; created and removed by flyToCart. */
 .cart-fly-dot {
   position: fixed;

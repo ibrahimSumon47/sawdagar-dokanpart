@@ -37,7 +37,11 @@ export function Price({
 
   return (
     <span className={cn('inline-flex flex-wrap items-baseline gap-2', className)}>
-      <span className={cn('font-serif tabular-nums text-ink', sizeClass[size])}>
+      {/* Keyed on the amount so a changed price re-mounts and plays the tick. */}
+      <span
+        key={amountMinor}
+        className={cn('price-tick font-serif tabular-nums text-ink', sizeClass[size])}
+      >
         {allowNegative ? formatTakaSigned(amountMinor, locale) : formatTaka(amountMinor, locale)}
       </span>
       {originalPrice !== undefined ? (

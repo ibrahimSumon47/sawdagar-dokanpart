@@ -2,6 +2,7 @@
 
 import { cn } from '@sd/ui';
 import { Heart } from 'lucide-react';
+import { useState } from 'react';
 import { useShop } from '../ShopProvider';
 
 export interface WishlistButtonProps {
@@ -15,11 +16,15 @@ export interface WishlistButtonProps {
 export function WishlistButton({ productId, showLabel = false, className }: WishlistButtonProps) {
   const { copy, wishlistIds, toggleWishlist } = useShop();
   const saved = wishlistIds.includes(productId);
+  const [burst, setBurst] = useState(false);
 
   return (
     <button
       type="button"
-      onClick={() => void toggleWishlist(productId)}
+      onClick={() => {
+        if (!saved) setBurst(true);
+        void toggleWishlist(productId);
+      }}
       aria-pressed={saved}
       aria-label={saved ? copy.removeFromWishlist : copy.saveToWishlist}
       className={cn(
@@ -28,7 +33,11 @@ export function WishlistButton({ productId, showLabel = false, className }: Wish
         className,
       )}
     >
-      <Heart aria-hidden="true" className={saved ? 'size-4 fill-accent text-accent' : 'size-4'} />
+      <Heart
+        aria-hidden="true"
+        onAnimationEnd={() => setBurst(false)}
+        className={cn(saved ? 'size-4 fill-accent text-accent' : 'size-4', burst && 'heart-burst')}
+      />
       {showLabel ? <span>{saved ? copy.savedForLater : copy.wishlist}</span> : null}
     </button>
   );
