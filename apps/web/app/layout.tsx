@@ -7,7 +7,6 @@ import { getPublicSettings } from '../features/content/settingsQueries';
 import { localisedLinks } from '../features/content/settingsLinks';
 import { getTheme } from '../features/preferences/getTheme';
 import { ShopProvider } from '../features/shop/components/ShopProvider';
-import { getShopState } from '../features/shop/queries';
 import { PageEnter } from '../features/shell/components/PageEnter';
 import { SiteAnnouncement } from '../features/shell/components/SiteAnnouncement';
 import { SiteFooter } from '../features/shell/components/SiteFooter';
@@ -68,11 +67,7 @@ interface RootLayoutProps {
 /** Renders the shell, theme attributes and language for every route. */
 export default async function RootLayout({ children }: RootLayoutProps) {
   const [locale, theme, viewer] = await Promise.all([getLocale(), getTheme(), getViewer()]);
-  const [shopState, categories, settings] = await Promise.all([
-    getShopState(viewer?.id ?? null),
-    getCatalogCategories(),
-    getPublicSettings(),
-  ]);
+  const [categories, settings] = await Promise.all([getCatalogCategories(), getPublicSettings()]);
   const copy = getDictionary(locale);
   const bangla = locale === 'bn';
   const headerCategories = categories.map((category) => ({
@@ -102,15 +97,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         >
           {copy.common.skipToContent}
         </a>
-        <ShopProvider
-          initialItems={shopState.cartItems}
-          initialCoupon={shopState.cartCoupon}
-          initialWishlistIds={shopState.wishlistIds}
-          initialCompareIds={shopState.compareIds}
-          signedIn={Boolean(viewer)}
-          locale={locale}
-          copy={copy.shop}
-        >
+        <ShopProvider signedIn={Boolean(viewer)} locale={locale} copy={copy.shop}>
           <div className="flex min-h-svh flex-col">
             {settings.announcementEnabled && announcement ? (
               <SiteAnnouncement

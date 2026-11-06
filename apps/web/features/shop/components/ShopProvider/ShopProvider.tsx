@@ -2,21 +2,17 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
-import type { CouponRule } from '@sd/domain';
 import type { Locale } from '../../../../i18n';
-import type { CartLine, ShopCopy } from '../../types';
+import type { ShopCopy } from '../../types';
 import { ShopContext, type ShopToastState, type ShowShopToast } from './context';
 import { useCartController } from './useCartController';
 import { useCompareController } from './useCompareController';
 import { useCouponController } from './useCouponController';
+import { useShopBootstrap } from './useShopBootstrap';
 import { useWishlistController } from './useWishlistController';
 
 export interface ShopProviderProps {
   children: ReactNode;
-  initialItems: CartLine[];
-  initialCoupon: CouponRule | null;
-  initialWishlistIds: string[];
-  initialCompareIds: string[];
   signedIn: boolean;
   locale: Locale;
   copy: ShopCopy;
@@ -30,16 +26,8 @@ const CartDrawer = dynamic(() => import('../CartDrawer').then((m) => m.CartDrawe
 const ShopToast = dynamic(() => import('../ShopToast').then((m) => m.ShopToast), { ssr: false });
 
 /** One client boundary for the cart, wishlist, comparison, drawer and toast. */
-export function ShopProvider({
-  children,
-  initialItems,
-  initialCoupon,
-  initialWishlistIds,
-  initialCompareIds,
-  signedIn,
-  locale,
-  copy,
-}: ShopProviderProps) {
+export function ShopProvider({ children, signedIn, locale, copy }: ShopProviderProps) {
+  const bootstrap = useShopBootstrap();
   const [cartOpen, setCartOpen] = useState(false);
   // Mounts the drawer the first time it is opened and keeps it mounted after that.
   const [drawerRequested, setDrawerRequested] = useState(false);
@@ -64,9 +52,14 @@ export function ShopProvider({
     return () => window.clearTimeout(timer);
   }, [toast]);
 
-  const coupon = useCouponController({ initialCoupon, locale, copy, showToast });
+  const coupon = useCouponController({
+    initialCoupon: bootstrap.cartCoupon,
+    locale,
+    copy,
+    showToast,
+  });
   const cart = useCartController({
-    initialItems,
+    initialItems: bootstrap.cartItems,
     coupon: coupon.coupon,
     locale,
     copy,
@@ -74,12 +67,12 @@ export function ShopProvider({
     openCart,
   });
   const wishlist = useWishlistController({
-    initialIds: initialWishlistIds,
+    initialIds: bootstrap.wishlistIds,
     signedIn,
     copy,
     showToast,
   });
-  const compare = useCompareController({ initialIds: initialCompareIds, copy, showToast });
+  const compare = useCompareController({ initialIds: bootstrap.compareIds, copy, showToast });
 
   const value = useMemo(
     () => ({

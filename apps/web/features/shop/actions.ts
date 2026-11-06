@@ -7,11 +7,21 @@ import { summariseCart } from './cartTotals';
 import { addToCart, removeFromCart, setCartQuantity } from './cartMutations';
 import { clearCompareForVisitor, toggleCompareForVisitor } from './compareMutations';
 import { couponCodeSchema, productIdSchema, quantitySchema, variantIdSchema } from './inputs';
-import { findCouponRule, getCartId, readCartItems } from './queries';
+import { findCouponRule, getCartId, getShopState, readCartItems, type ShopState } from './queries';
 import type { CartResult, CouponApplyResult, IdsResult } from './types';
 import { toggleWishlistForUser } from './wishlistMutations';
 
 const invalid: CartResult = { ok: false, code: 'failed' };
+
+/**
+ * Loads the cart, coupon, wishlist and compare state for the current visitor.
+ * The shell calls this after first paint so the root layout never waits on the
+ * database before it can send HTML.
+ */
+export async function loadShopState(): Promise<ShopState> {
+  const viewer = await getViewer();
+  return getShopState(viewer?.id ?? null);
+}
 
 /** Adds a variant to the viewer's cart, creating a guest cart when needed. */
 export async function addCartItem(variantId: string, quantity: number): Promise<CartResult> {
