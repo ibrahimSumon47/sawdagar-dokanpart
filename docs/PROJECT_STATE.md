@@ -49,7 +49,7 @@
 
 ## Now
 
-**Revision 1, phase R5 (CMS) is in progress; slices (a), (b) and (c) are accepted and slice (d), the Journal, is implemented.**
+**Revision 1, phase R5 (CMS) is in progress; slices (a), (b), (c) and (d) are accepted. Slice (e), the R5 closing check, is next.**
 Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
 teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
 is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
@@ -86,7 +86,7 @@ match, voted an article helpful, changed the answer and changed it back without 
 topic through the CMS and restored version 1, filed an article under another topic and put it back, and reordered two
 topics and saw the sidebar follow.
 
-Slice (d), the Journal, is implemented and awaiting its deployed check. Journal entries gain a cover photo, tags and a
+Slice (d), the Journal, is accepted. Hosted Playwright run [42170834094](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42170834094) passed all 35 checks on the deployment. It adds a cover and tags to a journal post, filters `/journal` by tag, opens a post with its cover, tag links and rich body, restores an older version with its cover and tags, and checks the layout at 375, 768 and 1440 px. Three checks were fixed to match the data they run on rather than the app: the editor specs now run serially so they cannot interleave writes to shared seeded entries, the public tag page is polled briefly after a save, and the Help rename restores the oldest kept version instead of assuming `Version 1` still exists, since only the last ten snapshots are kept. Journal entries gain a cover photo, tags and a rich body: `cms_entries.coverImageUrl`, `coverImageAltEn`, `coverImageAltBn` and a `tags TEXT[]` column with a GIN index gain a cover photo, tags and a
 rich body: `cms_entries.coverImageUrl`, `coverImageAltEn`, `coverImageAltBn` and a `tags TEXT[]` column with a GIN index
 come from migration `20261105200000_journal_media`. A cover is stored as a Cloudinary public id, an `https` address or a
 site path and is resolved at render time by `coverImageSrc(value, width)`, with required per-language alt text so a
