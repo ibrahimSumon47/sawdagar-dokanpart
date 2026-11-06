@@ -73,9 +73,9 @@ const pages = walk('apps/web/app', (file) => file.endsWith(`${path.sep}page.tsx`
 const apiRoutes = walk('apps/web/app/api', (file) => file.endsWith('route.ts')).length;
 
 const demoSource = read('packages/domain/src/auth/demoAccounts.ts');
-const demoAccounts = [...demoSource.matchAll(/email: '([^']+)',\s*\n\s*name: '([^']+)',\s*\n\s*role: '([^']+)'/g)].map(
-  ([, email, name, role]) => ({ email, name, role }),
-);
+const demoAccounts = [
+  ...demoSource.matchAll(/email: '([^']+)',\s*\n\s*name: '([^']+)',\s*\n\s*role: '([^']+)'/g),
+].map(([, email, name, role]) => ({ email, name, role }));
 
 const featureList = [
   {
@@ -161,7 +161,11 @@ const featureList = [
   },
   {
     name: 'Bilingual interface and localized places',
-    paths: ['apps/web/i18n/messages/en.ts', 'apps/web/i18n/messages/bn.ts', 'apps/web/i18n/places.ts'],
+    paths: [
+      'apps/web/i18n/messages/en.ts',
+      'apps/web/i18n/messages/bn.ts',
+      'apps/web/i18n/places.ts',
+    ],
   },
   {
     name: 'AI-readable summary, project facts and repository map',
@@ -200,6 +204,7 @@ const facts = {
     categories: 84,
     vendors: 24,
     products: 432,
+    publishedProducts: 142,
     variants: 1296,
     seededReviews: 1755,
     demoRoles: demoAccounts.length,
@@ -244,5 +249,7 @@ if (check) {
   }
 } else {
   writeFileSync(outputPath, serialised);
-  console.log(`Wrote ${path.relative(root, outputPath)} (${unitTests.total} tests, ${models} models).`);
+  console.log(
+    `Wrote ${path.relative(root, outputPath)} (${unitTests.total} tests, ${models} models).`,
+  );
 }

@@ -6,7 +6,7 @@ Demo store: payments are sandbox only. No real money is accepted, and every prod
 
 ## What this is
 
-Sawdagar Dokanpat gives independent Bangladeshi sellers one shared storefront. The seeded catalog has 12 departments, 84 categories, 24 vendors, 432 products and 1,296 variants, all written in English and Bangla.
+Sawdagar Dokanpat gives independent Bangladeshi sellers one shared storefront. The seeded catalog has 12 departments, 84 categories and 24 vendors. Of its 432 seeded products, 142 are published with their own photos; the storefront shows only those. Everything is written in English and Bangla.
 
 Buyers can browse and search the catalog, choose a variant, keep a cart as a guest or signed-in user, save a wishlist, compare four products, apply a coupon, check out with a saved or new 64-district address, pay by cash on delivery or the MockPay sandbox, print an invoice, review a delivered product, ask a question and request a return within seven days.
 
