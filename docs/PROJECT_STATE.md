@@ -166,7 +166,8 @@ project links live in the footer Project column and on `/about/project`, and Pla
 ## Blocked
 
 - No blocker is open. An earlier entry said every product was out of stock; that was wrong. The R6 test failed because the belt's default variant (Small) has no stock, and the test never chose a variant. The test now selects Medium (stock 16).
-- Lighthouse performance is below the CI gate of 0.9 on the current deployment. Runs 42220347738 (commit ea69478) and 42221516081 (commit 9e152a7) both scored Home 0.77 and catalog 0.84–0.85, and product 0.86, so the `Lighthouse` workflow fails. Earlier passing run 41067055369 (93/95/93) predates R9. The hero image was optimized in 9e152a7 (LCP element now the 37 KB `next/image` file), but Home scores did not move. The remaining cause is not yet identified; the gate is not lowered. Next step: trace the Home main thread and render-blocking resources before changing the budget.
+- Lighthouse performance is below the CI gate of 0.9 on all three pages. Round 5 medians of five (run 42257392714, commit 4a278f7): home 0.87, catalog 0.87, product 0.84. The gate is not lowered. Full history in `docs/reports/performance.md`.
+- Open CI items from Playwright run 42264793983 (production, 144 of 150 passed): R4 CLS on `/` at 768 and 1440 px and on the product page at 768 and 1440 px; R5 empty-state locator matched twice at 375 and 768 px (not reproduced on the live page); R8 product card reveal timed out at 375 px. Each is undiagnosed or suspected to be CI timing. Assertions are unchanged.
 - No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
 
 ## Known issues
@@ -202,7 +203,8 @@ project links live in the footer Project column and on `/about/project`, and Pla
 
 ## Next step (Revision 1, performance gate still open)
 
-- Lighthouse medians of five mobile runs, latest run 42227143151: home 0.77, catalog 0.84, product 0.87. Gate is 0.9. The 0.85 fallback does not apply yet, because home is below 0.85.
-- Done so far: hero `next/image` priority, request-cached viewer, product reviews/questions/related streamed behind Suspense, image-host preconnect. Full numbers in `docs/reports/performance.md`.
-- Exact next step: find why home swings from 0.69 to 0.94 between runs. Read the home JS and the Lighthouse home audits (LCP element, unused JS, long tasks), then lazy-load the non-above-fold client code (R8 animation, toast, cart drawer) and re-measure.
+- Lighthouse medians of five mobile runs, round 5 (run 42257392714): home 0.87, catalog 0.87, product 0.84. Gate is 0.9. The 0.85 fallback does not apply yet: product is below 0.85, and the fallback also needs the remaining cause to be outside the repo.
+- Done so far: hero `next/image` priority, request-cached viewer, product reviews/questions/related streamed behind Suspense, image-host preconnect, cached catalog categories and settings, home sections streamed behind Suspense, cart drawer and toast loaded on demand, skeleton fallbacks in the root shell. Full numbers in `docs/reports/performance.md`.
+- Product LCP is the Cloudinary photo, already `fetchPriority="high"` with `f_auto,q_auto,w_800`; the remaining cost is the image host. Catalog CLS of 0.128 appears in two of five runs; the cause is the header height during the shell swap, not yet confirmed.
+- Exact next step: read the Lighthouse `layout-shifts` audit on a new run to confirm the catalog CLS source; then run the bundle analyser and defer non-critical client code (step e); then verify the theme script before paint (step c) and the Neon pooled connection string (step f). Re-measure after each round.
 - After the gate: README test counts and CI rows, this file's Known issues cleanup, drift regen, final audit, git hygiene report, and R10 in `docs/features.json`.
