@@ -13,6 +13,8 @@
 - [ADR-009: Design tokens, skeleton parity and container-query layouts](adr/ADR-009-design-tokens-container-queries.md)
 - [ADR-010: Quality gates on three operating systems and in Actions](adr/ADR-010-ci-migrations-and-lighthouse.md)
 - [ADR-011: Real accounts with database rate limits and an in-app mail outbox](adr/ADR-011-real-accounts-and-outbox-mail.md)
+- [ADR-012: Upstash rate limits for public order tracking](adr/ADR-012-upstash-tracking-rate-limit.md)
+- [ADR-013: Live order updates with server-sent events and an ETag fallback](adr/ADR-013-live-order-updates.md)
 
 The dated entries below record smaller choices that did not need an ADR.
 

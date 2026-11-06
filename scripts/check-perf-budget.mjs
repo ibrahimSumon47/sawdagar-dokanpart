@@ -50,11 +50,20 @@ let css = 0;
 let largestChunk = 0;
 let largestChunkName = '';
 
+/**
+ * The admin rich-text editor (ProseMirror, about 124 KiB gzipped) is loaded only
+ * by the admin content form through `next/dynamic`, never by a storefront visitor.
+ * It is therefore excluded from the storefront total. Its own per-chunk cap still applies.
+ */
+const lazyAdminEditorMarker = 'ProseMirror';
+
 for (const name of readdirSync(chunksDir)) {
   if (!name.endsWith('.js') && !name.endsWith('.css')) continue;
-  const size = gzipSize(path.join(chunksDir, name));
+  const file = path.join(chunksDir, name);
+  const size = gzipSize(file);
   if (name.endsWith('.js')) {
-    js += size;
+    const isAdminEditor = readFileSync(file, 'utf8').includes(lazyAdminEditorMarker);
+    if (!isAdminEditor) js += size;
     if (size > largestChunk) {
       largestChunk = size;
       largestChunkName = name;
@@ -82,7 +91,11 @@ const checks = [
   { label: 'CSS', actual: css, budget: budgets.css },
   { label: `Largest chunk (${largestChunkName})`, actual: largestChunk, budget: budgets.chunk },
   { label: 'Catalog photography', actual: media, budget: budgets.media },
-  { label: `Largest photograph (${largestImageName})`, actual: largestImage, budget: budgets.image },
+  {
+    label: `Largest photograph (${largestImageName})`,
+    actual: largestImage,
+    budget: budgets.image,
+  },
 ];
 
 let failed = false;

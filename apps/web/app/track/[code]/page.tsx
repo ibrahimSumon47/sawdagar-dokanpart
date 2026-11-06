@@ -32,5 +32,12 @@ export default async function TrackCodePage({ params }: TrackCodePageProps) {
   if (!order) notFound();
 
   const locale = await getLocale();
-  return <OrderTracking order={order} copy={getDictionary(locale).checkout} locale={locale} />;
+  return (
+    <OrderTracking
+      order={order}
+      copy={getDictionary(locale).checkout}
+      locale={locale}
+      live={{ code: orderCode }}
+    />
+  );
 }

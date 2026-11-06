@@ -25,5 +25,12 @@ export default async function AccountOrderTrackingPage({ params }: AccountOrderT
   if (!order) notFound();
 
   const locale = await getLocale();
-  return <OrderTracking order={order} copy={getDictionary(locale).checkout} locale={locale} />;
+  return (
+    <OrderTracking
+      order={order}
+      copy={getDictionary(locale).checkout}
+      locale={locale}
+      live={{ number: order.number }}
+    />
+  );
 }
