@@ -1,4 +1,5 @@
 import { hasArea, normalizeRole, type PlatformArea, type PlatformRole } from '@sd/domain';
+import { cache } from 'react';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getAuth } from '../../lib/auth';
@@ -21,8 +22,11 @@ export function isAuthConfigured(): boolean {
 /**
  * Returns the signed-in user or null. When the deployment has no database or
  * auth secret, pages render signed-out instead of failing at build or on load.
+ *
+ * Wrapped in `cache` so the root layout and the page share one session lookup
+ * per request instead of querying the database twice.
  */
-export async function getViewer(): Promise<Viewer | null> {
+export const getViewer = cache(async (): Promise<Viewer | null> => {
   if (!isAuthConfigured()) return null;
 
   const result = await getAuth().api.getSession({ headers: await headers() });
@@ -37,7 +41,7 @@ export async function getViewer(): Promise<Viewer | null> {
     emailVerified: Boolean(result.user.emailVerified),
     createdAt: result.user.createdAt,
   };
-}
+});
 
 /** Redirects guests to sign in, preserving the page they asked for. */
 export async function requireViewer(nextPath: string): Promise<Viewer> {
