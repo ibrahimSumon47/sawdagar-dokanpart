@@ -68,6 +68,25 @@ test.describe('R7 live order tracking', () => {
     }
   });
 
+  for (const width of [375, 768, 1440]) {
+    test(`the signed-in order view has no horizontal overflow at ${width} px`, async ({
+      browser,
+    }) => {
+      const context = await browser.newContext({ viewport: { width, height: 900 } });
+      try {
+        const page = await context.newPage();
+        await signIn(page, buyerEmail, orderPath);
+        await expect(page.getByRole('list', { name: 'Tracking', exact: true })).toBeVisible();
+        const overflow = await page.evaluate(
+          () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        );
+        expect(overflow).toBeLessThanOrEqual(0);
+      } finally {
+        await context.close();
+      }
+    });
+  }
+
   test('a wrong phone or email on the public tracker shows the generic message', async ({
     page,
   }) => {
