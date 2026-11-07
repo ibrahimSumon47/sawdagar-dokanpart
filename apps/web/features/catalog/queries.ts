@@ -180,20 +180,26 @@ async function loadCatalogCategories(): Promise<CatalogCategory[]> {
 
   const countById = new Map(counts.map((row) => [row.categoryId, row._count._all]));
 
-  return categories.map((category) => {
-    const children = category.children.map((child) => ({
-      slug: child.slug,
-      name: { en: child.nameEn, bn: child.nameBn },
-      productCount: countById.get(child.id) ?? 0,
-    }));
+  /* A department with no photographed product would open an empty page, so it
+   * is left out of the menu and sitemap until it has something to sell. */
+  return categories
+    .map((category) => {
+      const children = category.children
+        .map((child) => ({
+          slug: child.slug,
+          name: { en: child.nameEn, bn: child.nameBn },
+          productCount: countById.get(child.id) ?? 0,
+        }))
+        .filter((child) => child.productCount > 0);
 
-    return {
-      slug: category.slug,
-      name: { en: category.nameEn, bn: category.nameBn },
-      productCount: children.reduce((total, child) => total + child.productCount, 0),
-      children,
-    };
-  });
+      return {
+        slug: category.slug,
+        name: { en: category.nameEn, bn: category.nameBn },
+        productCount: children.reduce((total, child) => total + child.productCount, 0),
+        children,
+      };
+    })
+    .filter((category) => category.productCount > 0);
 }
 
 /** One category with its parent, used for headings and breadcrumbs. */

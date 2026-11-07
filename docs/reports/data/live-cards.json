@@ -1,0 +1,408 @@
+[
+  {
+    "category": "nakshi-kantha",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/pinwheel-patchwork-quilt",
+        "alt": "Pinwheel patchwork quilt in bright colours",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/4"
+      },
+      {
+        "href": "/product/quilted-cotton-throw-blue-white",
+        "alt": "Blue and white quilted cotton spread",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/3"
+      },
+      {
+        "href": "/product/patchwork-cotton-quilt-multicolour",
+        "alt": "Bright patchwork squares on quilted cotton",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/2"
+      }
+    ]
+  },
+  {
+    "category": "baby-quilt",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/pinwheel-patchwork-quilt",
+        "alt": "Pinwheel patchwork quilt in bright colours",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/4"
+      },
+      {
+        "href": "/product/quilted-cotton-throw-blue-white",
+        "alt": "Blue and white quilted cotton spread",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/3"
+      },
+      {
+        "href": "/product/patchwork-cotton-quilt-multicolour",
+        "alt": "Bright patchwork squares on quilted cotton",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/baby-quilt/2"
+      }
+    ]
+  },
+  {
+    "category": "pottery",
+    "count": 7,
+    "cards": [
+      {
+        "href": "/product/porcelain-vase-floral",
+        "alt": "Tall porcelain vase with floral painting",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/6"
+      },
+      {
+        "href": "/product/earthen-cooking-pot-grey",
+        "alt": "Grey earthen pot with wide mouth",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/6"
+      },
+      {
+        "href": "/product/enamelled-vase-blue-gold",
+        "alt": "Blue and gold enamelled rounded vase",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/1"
+      },
+      {
+        "href": "/product/earthen-cooking-pot-terracotta",
+        "alt": "Terracotta clay pot, rounded belly",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/5"
+      },
+      {
+        "href": "/product/earthen-cooking-pot-black",
+        "alt": "Dark round clay pot on stone",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/3"
+      },
+      {
+        "href": "/product/porcelain-vase-ivory",
+        "alt": "Ivory porcelain vase with painted scene",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/7"
+      },
+      {
+        "href": "/product/clay-cooking-pot-with-lid",
+        "alt": "Clay pot with lid over fire",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/9"
+      }
+    ]
+  },
+  {
+    "category": "flower-vase",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/porcelain-vase-floral",
+        "alt": "Tall porcelain vase with floral painting",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/6"
+      },
+      {
+        "href": "/product/enamelled-vase-blue-gold",
+        "alt": "Blue and gold enamelled rounded vase",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/1"
+      },
+      {
+        "href": "/product/porcelain-vase-ivory",
+        "alt": "Ivory porcelain vase with painted scene",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/flower-vase/7"
+      }
+    ]
+  },
+  {
+    "category": "clay-cooking-pot",
+    "count": 4,
+    "cards": [
+      {
+        "href": "/product/earthen-cooking-pot-grey",
+        "alt": "Grey earthen pot with wide mouth",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/6"
+      },
+      {
+        "href": "/product/earthen-cooking-pot-terracotta",
+        "alt": "Terracotta clay pot, rounded belly",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/5"
+      },
+      {
+        "href": "/product/earthen-cooking-pot-black",
+        "alt": "Dark round clay pot on stone",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/3"
+      },
+      {
+        "href": "/product/clay-cooking-pot-with-lid",
+        "alt": "Clay pot with lid over fire",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/clay-cooking-pot/9"
+      }
+    ]
+  },
+  {
+    "category": "brassware",
+    "count": 2,
+    "cards": [
+      {
+        "href": "/product/brass-kettle-antique",
+        "alt": "Antique brass kettle with curved spout",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/brass-jug/2"
+      },
+      {
+        "href": "/product/brass-oil-lamp-twin-spout",
+        "alt": "Brass twin-spout oil lamp on stand",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/brass-lamp/4"
+      }
+    ]
+  },
+  {
+    "category": "brass-lamp",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/brass-oil-lamp-twin-spout",
+        "alt": "Brass twin-spout oil lamp on stand",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/brass-lamp/4"
+      }
+    ]
+  },
+  {
+    "category": "brass-jug",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/brass-kettle-antique",
+        "alt": "Antique brass kettle with curved spout",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/brass-jug/2"
+      }
+    ]
+  },
+  {
+    "category": "leather",
+    "count": 7,
+    "cards": [
+      {
+        "href": "/product/leather-belt-classic-black",
+        "alt": "Plain black belt laid flat",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/9"
+      },
+      {
+        "href": "/product/leather-bifold-wallet-black",
+        "alt": "Black leather bifold wallet with notes",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/1"
+      },
+      {
+        "href": "/product/leather-belt-steel-buckle",
+        "alt": "Black belt with steel buckle close-up",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/3"
+      },
+      {
+        "href": "/product/leather-belt-black",
+        "alt": "Black leather belt coiled on floor",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/1"
+      },
+      {
+        "href": "/product/leather-card-wallet-black",
+        "alt": "Slim black wallet holding cards",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/7"
+      },
+      {
+        "href": "/product/leather-sandals-brown",
+        "alt": "Pair of brown leather cross-strap sandals",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-sandal/9"
+      },
+      {
+        "href": "/product/leather-wallet-brown",
+        "alt": "Open brown leather wallet on cloth",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/4"
+      }
+    ]
+  },
+  {
+    "category": "leather-wallet",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/leather-bifold-wallet-black",
+        "alt": "Black leather bifold wallet with notes",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/1"
+      },
+      {
+        "href": "/product/leather-card-wallet-black",
+        "alt": "Slim black wallet holding cards",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/7"
+      },
+      {
+        "href": "/product/leather-wallet-brown",
+        "alt": "Open brown leather wallet on cloth",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-wallet/4"
+      }
+    ]
+  },
+  {
+    "category": "leather-belt",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/leather-belt-classic-black",
+        "alt": "Plain black belt laid flat",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/9"
+      },
+      {
+        "href": "/product/leather-belt-steel-buckle",
+        "alt": "Black belt with steel buckle close-up",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/3"
+      },
+      {
+        "href": "/product/leather-belt-black",
+        "alt": "Black leather belt coiled on floor",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-belt/1"
+      }
+    ]
+  },
+  {
+    "category": "leather-sandal",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/leather-sandals-brown",
+        "alt": "Pair of brown leather cross-strap sandals",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/leather-sandal/9"
+      }
+    ]
+  },
+  {
+    "category": "beauty-care",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/handmade-soap-herbal-green",
+        "alt": "Green herbal soap bars stacked in tray",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/3"
+      },
+      {
+        "href": "/product/handmade-soap-white",
+        "alt": "White soap bar in blue dish",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/2"
+      },
+      {
+        "href": "/product/handmade-soap-cream",
+        "alt": "Cream handmade soap bar on rock",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/1"
+      }
+    ]
+  },
+  {
+    "category": "handmade-soap",
+    "count": 3,
+    "cards": [
+      {
+        "href": "/product/handmade-soap-herbal-green",
+        "alt": "Green herbal soap bars stacked in tray",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/3"
+      },
+      {
+        "href": "/product/handmade-soap-white",
+        "alt": "White soap bar in blue dish",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/2"
+      },
+      {
+        "href": "/product/handmade-soap-cream",
+        "alt": "Cream handmade soap bar on rock",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/handmade-soap/1"
+      }
+    ]
+  },
+  {
+    "category": "books-stationery",
+    "count": 4,
+    "cards": [
+      {
+        "href": "/product/sketchbook-a5",
+        "alt": "Open sketchbook with ink sketches",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/sketchbook/9"
+      },
+      {
+        "href": "/product/fountain-pen-gold-nib",
+        "alt": "Black fountain pen with gold nib",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/pen/7"
+      },
+      {
+        "href": "/product/hardcover-notebook-cream",
+        "alt": "Cream hardcover notebook with ornate border",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/notebook/6"
+      },
+      {
+        "href": "/product/spiral-notebook-blue",
+        "alt": "Blue spiral notebook on plain background",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/notebook/3"
+      }
+    ]
+  },
+  {
+    "category": "notebook",
+    "count": 2,
+    "cards": [
+      {
+        "href": "/product/hardcover-notebook-cream",
+        "alt": "Cream hardcover notebook with ornate border",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/notebook/6"
+      },
+      {
+        "href": "/product/spiral-notebook-blue",
+        "alt": "Blue spiral notebook on plain background",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/notebook/3"
+      }
+    ]
+  },
+  {
+    "category": "pen",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/fountain-pen-gold-nib",
+        "alt": "Black fountain pen with gold nib",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/pen/7"
+      }
+    ]
+  },
+  {
+    "category": "sketchbook",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/sketchbook-a5",
+        "alt": "Open sketchbook with ink sketches",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/sketchbook/9"
+      }
+    ]
+  },
+  {
+    "category": "home-kitchen",
+    "count": 2,
+    "cards": [
+      {
+        "href": "/product/camping-cookware-set-blue",
+        "alt": "Blue nesting cookware set with lid",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/cookware-set/2"
+      },
+      {
+        "href": "/product/ceramic-storage-jar-grey",
+        "alt": "Large grey ceramic jar, incised lines",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/storage-jar/3"
+      }
+    ]
+  },
+  {
+    "category": "storage-jar",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/ceramic-storage-jar-grey",
+        "alt": "Large grey ceramic jar, incised lines",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/storage-jar/3"
+      }
+    ]
+  },
+  {
+    "category": "cookware-set",
+    "count": 1,
+    "cards": [
+      {
+        "href": "/product/camping-cookware-set-blue",
+        "alt": "Blue nesting cookware set with lid",
+        "src": "https://res.cloudinary.com/uapiw50d/image/upload/c_limit,f_auto,q_auto,w_800/sawdagar/products/cookware-set/2"
+      }
+    ]
+  }
+]

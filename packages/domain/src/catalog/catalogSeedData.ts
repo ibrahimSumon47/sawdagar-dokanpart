@@ -661,10 +661,10 @@ export const catalogSpec: TopCategorySpec[] = [
       },
       {
         slug: 'brass-lamp',
-        name: { en: 'Brass table lamp', bn: 'পিতলের টেবিল ল্যাম্প' },
+        name: { en: 'Brass oil lamp', bn: 'পিতলের প্রদীপ' },
         priceTaka: 4200,
       },
-      { slug: 'brass-jug', name: { en: 'Brass water jug', bn: 'পিতলের জগ' }, priceTaka: 2450 },
+      { slug: 'brass-jug', name: { en: 'Brass kettle', bn: 'পিতলের কেটলি' }, priceTaka: 2450 },
       {
         slug: 'brass-wall-decor',
         name: { en: 'Brass wall decor', bn: 'পিতলের দেয়ালসজ্জা' },
