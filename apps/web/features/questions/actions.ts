@@ -9,8 +9,7 @@ import { requireViewer } from '../auth/session';
 import { questionSchema } from './inputs';
 import type { QuestionState } from './state';
 
-/** A buyer may ask five questions per hour; exported so the limit is tested. */
-export const HOURLY_QUESTION_LIMIT = 5;
+import { HOURLY_QUESTION_LIMIT } from './limits';
 
 /**
  * Stores one buyer question about a product. Questions are public once asked;
