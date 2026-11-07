@@ -107,3 +107,22 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 - axe-core 4.14.0, WCAG 2.0/2.1/2.2 A and AA, on `/`, `/catalog` and one product at 375, 768 and 1440 px in the light and dark theme: no violations in 18 page loads. `node scripts/ci/axe-audit.mjs` repeats it.
 - Git hygiene: one branch, 224 commits before this audit, all authored and committed by the owner, 24 older commits carry a `Co-Authored-By` trailer that the owner may remove by rewriting history; [git-hygiene.md](reports/git-hygiene.md) lists them.
 - The metrics come from the deployed site, not a local server: `npm`-free checks run on the deployment and the numbers above are medians, not single samples.
+
+## Hardening pass (in progress, started 2026-11-07)
+
+The exit check is `node scripts/ci/hardening-check.mjs`; it is **not green** yet.
+
+What is done:
+
+- `scripts/ci/hardening-check.mjs` records every part A to D item as DONE or TODO from artefacts, not from notes.
+- `scripts/images/clip-check.py` scores each manifest photo with `openai/clip-vit-base-patch32` (CPU) against its subcategory label, twelve junk labels and every other subcategory label; thresholds live in `packages/seed/images/clip-thresholds.json`.
+- `.github/workflows/image-check.yml` installs CPU torch and CLIP, scores the manifest, and uploads `clip-scores.json`.
+- `packages/seed/images/keywords.json` holds a label, required words and forbidden words for all 72 leaf subcategories.
+- `scripts/images/audit-sheets.ts` writes one contact sheet per subcategory; `jamdani-saree.png` in `docs/screenshots/image-audit` is the first sheet reviewed by eye.
+- First full CLIP pass: **87 of 440 photos pass**; **67 of 440** pass CLIP and the keyword rules; only **12 subcategories** (10 products) still have three passing photos. The raw scores are in `docs/reports/data/clip-scores.json`.
+
+What the first pass proved: the Commons-sourced photograph set is not usable for a product catalogue. The jamdani sheet shows shop fronts, press photographs, a weaver and a fabric close-up; the keyword scan found portraits, paintings, temples, gardens and markets in 22 subcategories. Re-sourcing is the only way to keep the catalogue honest.
+
+Next step (exact): re-source photos subcategory by subcategory with product-photo queries, two rounds maximum, and keep a product only when its three photos pass CLIP and keywords. Then apply `productMatch` in `packages/seed/images/manifest.json`, make `check-images.ts` read it, run the `Database` seed workflow, and continue with parts B, C and D of `hardening-check.mjs`.
+
+Do not lower `correctMin` or `junkMax`, and do not publish a product whose photo failed.
