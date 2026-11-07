@@ -40,11 +40,26 @@ async function throttle(page) {
 async function trackLayoutShifts(page) {
   await page.addInitScript(() => {
     window.__cls = 0;
+    window.__shifts = [];
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (!entry.hadRecentInput) {
-          window.__cls += entry.value;
-        }
+        if (entry.hadRecentInput) continue;
+        window.__cls += entry.value;
+        // The source node names the element that moved, which is the only way to tell a
+        // header swap from a skeleton mismatch when a run fails on another machine.
+        window.__shifts.push({
+          value: Number(entry.value.toFixed(4)),
+          at: Math.round(entry.startTime),
+          sources: entry.sources.map((source) => ({
+            node: source.node
+              ? `${source.node.nodeName}.${String(source.node.className ?? '').slice(0, 48)}`
+              : 'detached',
+            moved:
+              source.previousRect && source.currentRect
+                ? Math.round(source.currentRect.top - source.previousRect.top)
+                : null,
+          })),
+        });
       }
     }).observe({ type: 'layout-shift', buffered: true });
   });
@@ -149,6 +164,8 @@ for (const path of routes) {
     await testInfo.attach(`loaded ${path}`, { path: loadedShot, contentType: 'image/png' });
 
     const cls = await page.evaluate(() => window.__cls ?? 0);
+    const shifts = await page.evaluate(() => window.__shifts ?? []);
+    console.log(`[r4] ${path} cls=${cls.toFixed(3)} ${JSON.stringify(shifts).slice(0, 900)}`);
     expect(cls, `cumulative layout shift on ${path}`).toBeLessThan(CLS_BUDGET);
   });
 }

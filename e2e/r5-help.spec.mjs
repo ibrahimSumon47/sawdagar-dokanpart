@@ -115,6 +115,10 @@ test.describe('R5 Help Center topics, search and votes', () => {
       await ordersRow.getByRole('link').click();
       await expect(page).toHaveURL(/\/admin\/cms\/help\/[^/]+$/);
 
+      // The name stored before this test saves anything. Earlier runs leave their own names
+      // behind, so the restore check compares against this value rather than assuming "Orders".
+      const stored = await page.getByLabel('Name (English)').inputValue();
+
       await page.getByLabel('Name (English)').fill(renamed);
       await page.getByRole('button', { name: 'Save category' }).click();
       await expect(page.getByText('The category was saved.')).toBeVisible();
@@ -130,13 +134,18 @@ test.describe('R5 Help Center topics, search and votes', () => {
       await testInfo.attach('r5-help-category', { path: screenshot, contentType: 'image/png' });
 
       await page.goBack();
-      // Only the last 10 snapshots are kept, so restore the oldest one still listed.
-      const oldestVersion = page.getByRole('listitem').filter({
-        has: page.getByRole('button', { name: 'Restore' }),
+      // Restore the snapshot that held `stored`: the save above appended one version, so the
+      // highest number belongs to this test and the one below it is the previous state.
+      const numbers = (await page.getByText(/^Version \d+$/).allTextContents()).map((label) =>
+        Number(label.replace(/\D+/g, '')),
+      );
+      const previous = Math.max(...numbers) - 1;
+      const previousVersion = page.getByRole('listitem').filter({
+        has: page.getByText(`Version ${previous}`, { exact: true }),
       });
-      await oldestVersion.last().getByRole('button', { name: 'Restore' }).click();
+      await previousVersion.getByRole('button', { name: 'Restore' }).click();
       await expect(page.getByText('The version was restored as a new edit.')).toBeVisible();
-      await expect(page.getByLabel('Name (English)')).not.toHaveValue(renamed);
+      await expect(page.getByLabel('Name (English)')).toHaveValue(stored);
 
       await page.goto('/help');
       await expect(topics.getByRole('link', { name: /^Orders/ })).toBeVisible();
