@@ -2,13 +2,20 @@ name: Product images
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/images/source.ts'
+      - '.github/workflows/product-images.yml'
 
 permissions:
   contents: read
 
 jobs:
   source:
+    name: Source photos
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -16,14 +23,36 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --dir apps/web exec tsx ../../scripts/images/fetch.ts
+      - name: Source and upload
+        run: pnpm --dir apps/web exec tsx ../../scripts/images/source.ts
         env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+      - name: Install CLIP
+        run: |
+          python -m pip install --upgrade pip
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+          pip install transformers pillow
+      - name: Score the sourced photos
+        env:
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+        run: |
+          python scripts/images/clip-check.py \
+            packages/seed/images/manifest.json \
+            packages/seed/images/clip-thresholds.json \
+            packages/seed/images/keywords.json \
+            clip-scores.json
       - uses: actions/upload-artifact@v4
         with:
-          name: product-image-manifest
-          path: packages/seed/images/manifest.json
+          name: product-image-run
+          path: |
+            packages/seed/images/manifest.json
+            clip-scores.json
           retention-days: 30

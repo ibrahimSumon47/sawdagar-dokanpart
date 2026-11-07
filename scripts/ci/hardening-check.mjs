@@ -10,6 +10,8 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 
 const results = [];
+const partFlag = process.argv.indexOf('--part');
+const onlyPart = partFlag >= 0 ? (process.argv[partFlag + 1] ?? '').toUpperCase() : null;
 
 function record(title, done, detail = '') {
   results.push({ title, done: Boolean(done), detail });
@@ -247,8 +249,12 @@ record(
   'trailer check',
 );
 
+const selected = results.filter((result) =>
+  onlyPart ? result.title.toUpperCase().startsWith(onlyPart) : true,
+);
+
 let failed = 0;
-for (const [index, result] of results.entries()) {
+for (const [index, result] of selected.entries()) {
   const label = result.done ? 'DONE' : 'TODO';
   if (!result.done) failed += 1;
   process.stdout.write(`${label} ${index + 1}. ${result.title}\n       ${result.detail}\n`);
