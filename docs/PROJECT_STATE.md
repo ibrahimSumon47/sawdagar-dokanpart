@@ -110,7 +110,7 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 
 ## Hardening pass (in progress, started 2026-11-07)
 
-The exit check is `node scripts/ci/hardening-check.mjs`; it is **not green** yet.
+The exit check is `node scripts/ci/hardening-check.mjs`; it is **not green** yet (16 items open). CI itself is green again: the repo map and project facts are regenerated, and the banner, README, llms.txt, case study and facts pitch now describe a real storefront with test-mode payments.
 
 What is done:
 
