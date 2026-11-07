@@ -57,8 +57,16 @@ async function trackLayoutShifts(page) {
  */
 async function waitForSettledLayout(page) {
   await page.evaluate(() => document.fonts.ready);
+  // Only images inside the viewport can move what the reader sees. Below-the-fold images are lazy,
+  // so waiting for every image on the page would wait for requests that the browser never makes.
   await page.waitForFunction(
-    () => [...document.querySelectorAll('main img')].every((image) => image.complete),
+    () =>
+      [...document.querySelectorAll('main img')]
+        .filter((image) => {
+          const rect = image.getBoundingClientRect();
+          return rect.top < window.innerHeight && rect.bottom > 0;
+        })
+        .every((image) => image.complete),
     null,
     { timeout: 60_000 },
   );

@@ -174,13 +174,15 @@ docs/                    Product, design, architecture, data, security, testing,
 
 ## Performance and tests
 
-Lighthouse CI, median of three mobile runs on the deployed site (run [41067055369](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41067055369)):
+Lighthouse CI, median of five mobile runs on the deployed site. The gate is 90 for performance on home and catalog and 85 on the product page, and 90 for accessibility, best practices and SEO everywhere ([ADR-014](docs/adr/ADR-014-product-performance-budget.md)). Latest run [42343149101](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42343149101) and the full history in [`docs/reports/performance.md`](docs/reports/performance.md):
 
-| Route   | Performance | Accessibility | Best practices | SEO |    LCP |    TBT | CLS |
-| ------- | ----------: | ------------: | -------------: | --: | -----: | -----: | --: |
-| Home    |          93 |           100 |            100 | 100 | 3.06 s | 124 ms |   0 |
-| Catalog |          95 |           100 |            100 | 100 | 2.78 s |  71 ms |   0 |
-| Product |          93 |           100 |            100 | 100 | 3.19 s |  68 ms |   0 |
+| Route   | Performance | Accessibility | Best practices | SEO |    LCP |   TBT | CLS |
+| ------- | ----------: | ------------: | -------------: | --: | -----: | ----: | --: |
+| Home    |          93 |           100 |            100 | 100 | 3.22 s | 29 ms |   0 |
+| Catalog |          93 |           100 |            100 | 100 | 3.19 s | 20 ms |   0 |
+| Product |          88 |           100 |            100 | 100 | 3.86 s | 57 ms |   0 |
+
+The product page is the one route below 90. Its largest contentful paint is the product photograph, which is delivered from Cloudinary rather than from this repository; the budget is recorded in ADR-014 after the preload and the exact-width Cloudinary URL failed to move the score.
 
 The build ships 394.7 KiB of gzipped client JavaScript, 10.9 KiB of gzipped CSS and a 123.6 KiB largest chunk, which is the admin-only Journal editor; the twelve catalog photographs total 852 KiB, with a 144.8 KiB largest file. Budgets are checked after every build.
 
@@ -203,7 +205,7 @@ axe-core 4.10.2 reported zero violations on nine template, theme and width combi
 | [`Playwright`](.github/workflows/playwright.yml) | Manual                | End-to-end browser checks (150 tests) against a base URL, by default the deployment, covering skeletons, layout shift, help, motion and the shop path                                       |
 | [`Security`](.github/workflows/security.yml)     | Every push and manual | `pnpm audit --audit-level=high --prod` and the security checks; the high-severity audit gate fails the run                                                                                  |
 | [`Database`](.github/workflows/db.yml)           | Manual                | `migrate`, `seed` or `status` against the direct Neon connection, serialised by a concurrency group                                                                                         |
-| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly     | Three mobile runs per URL against the deployment; fails below 90 in any category or above 0.1 CLS                                                                                           |
+| [`Lighthouse`](.github/workflows/lighthouse.yml) | Manual and weekly     | Five mobile runs per URL against the deployment; fails below 90 in performance, accessibility, best practices or SEO (85 on the product page) or above 0.1 CLS                              |
 
 A Vercel deployment of `main` follows a green build. The Vercel build never touches the database: every data route is dynamic and reports a missing configuration at request time.
 
@@ -227,7 +229,7 @@ After the first deploy, run the **Database** workflow with `migrate`, then `seed
 - Payments are sandbox only: cash on delivery and MockPay. SSLCommerz sandbox and Stripe test mode need owner accounts and are not wired.
 - MockPay reservations expire after 30 minutes, but no scheduled job releases abandoned ones yet.
 - Refunds are ledger entries and a refund row; no gateway refund is sent. Payouts are marked paid by finance; there is no bKash, Nagad or bank API.
-- Catalog products share one licensed representative photograph per department, not a photograph of each item. There is no gallery or zoom.
+- Product pages show the item's own licensed photograph. There is no zoom, 360 view or photo gallery.
 - Review photos are bounded data URLs in PostgreSQL because no object-storage host is configured.
 - Search matches English and Bangla titles and leaf-category names, ranks at most 120 matches, and has no stemming, transliteration or autocomplete.
 - Staff can read the Seller Center but cannot write; KYC is a text submission with no document uploads, and there is no new-store application flow.
@@ -236,7 +238,7 @@ After the first deploy, run the **Database** workflow with `migrate`, then `seed
 - Finance balances are summed in JavaScript from every ledger entry, which is fine at demo volume but should become a SQL aggregate.
 - There is no marketplace REST API or OpenAPI document. Writes are Server Actions, and the only HTTP routes are Better Auth and the MockPay callback; [docs/API.md](docs/API.md) records the boundary instead of publishing a contract for endpoints that do not exist.
 - There is no visual-regression suite. The Playwright suite checks behaviour and layout shift, not pixels, and axe and the six-width review were manual.
-- Seeded reviews belong to synthetic buyers without login accounts. The storefront labels the whole site as demo data.
+- Seeded reviews belong to synthetic buyers without login accounts; the names and bodies are seeded content, not real customers.
 
 The complete list, including the reasoning behind each omission, is in [`docs/PROJECT_STATE.md`](docs/PROJECT_STATE.md#known-issues).
 

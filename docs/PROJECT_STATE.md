@@ -49,126 +49,18 @@
 
 ## Now
 
-Slice R9 is done. The full Playwright run on the deployment passed 150/150 at 375, 768 and 1440 px (run 42218979113, commit f84dcb1). The `Security` workflow (`.github/workflows/security.yml`) is committed as `a54c30d`: `pnpm audit --audit-level=high --prod` (clean) and gitleaks run on every push. The Playwright config now runs every spec at 375, 768 and 1440 px (`04d27ef`). The first deployment run (42211849017) failed two reduced-motion checks, which `d5e6797` fixed by scrolling the card into view. A second deployment run (42212754760) passed 148 and failed 2 R6 guest checkout checks at 768 and 1440 px. Both failed because the R6 test added the belt's default Small variant, which has no stock. The test now selects Medium and passes at 768 and 1440 px locally against the deployment. R9 is marked `pass` in `features.json`.
-
-Slice R9-4 (SEO) is done locally: `docs/reports/seo.md` records the audit and fixes (per-page canonical and Open Graph for help, journal and static pages; `/design` and `/cs-lab` set noindex and leave the sitemap; Product JSON-LD omits `aggregateRating` when there are no reviews). hreflang EN/BN is not added because language is set by cookie, not URL (DECISIONS). Next: slice R9-5 (security report and fixes). Previous: slice R9-3 (diagrams) is done locally: five hand-drawn SVGs in docs/diagrams (architecture, checkout sequence, order status, ER, CI pipeline) with PNG renders, embedded in README, ARCHITECTURE.md and the case study (new component CaseStudyDiagrams, copies in public/diagrams). Renders were made from a Playwright Chromium script kept outside the repo. Next: slice R9-4 (SEO report and fixes). **Revision 1, phase R9 (global tooling) is partly done: the global install is verified and logged in `docs/TOOLING.md`, with 94 active skills, a 14-skill cybersecurity set and every skip recorded with its reason. The project-use items in spec 9.3 (DESIGN.md, UX benchmarks, diagrams, SEO and security reports, `pnpm audit` and secret scan in CI) are not built yet, so R9 stays `partial` in `docs/features.json`. Phase R8 (animation pass) is accepted by the owner. The motion catalog footer label is now in Bangla (hosted Playwright run 42207728672, 50 of 50), and /catalog has no horizontal overflow at 375, 768 and 1440 px. The shared-element product image, search overlay scale-in and seller chart draw-in were not built. Phase R7 (public live order tracking) has passed. The guest post-verification claim has no Playwright test yet.** Slice (a) is done locally: the `/track` form takes an order code and the phone or email used at checkout, returns one generic message for any wrong detail, limits lookups per IP and per order code with Upstash (ADR-012), and logs failed attempts to the audit log. Slice (b) is done locally: the guest timeline at `/track/[code]` opens only with a signed 30-minute cookie that the lookup sets on a correct contact, and the signed-in view is at `/account/orders/[number]`. Slice (c) is done locally: the guest timeline and the signed-in view update live through server-sent events with a 5-second ETag polling fallback, paused while the tab is hidden (ADR-013). The storefront client-JavaScript budget now excludes the lazily loaded admin editor chunk, approved by the owner. Slice (d) is written: the Playwright spec in e2e/r7-live-tracking.spec.mjs passes the seller-to-buyer live update check (vendor marks the seeded order packed and the buyer order view shows Packed within a few seconds), and the wrong-contact check is still failing on the deployment (run 42196232916) because the Upstash variables are not set yet. R7 passed in Playwright run https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42201683826 (41 of 41), and the signed-in order view has no horizontal overflow at 375, 768 and 1440 px in run https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42202423796 (44 of 44). The live update test now runs at all three widths in run https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42202967029 (46 of 46). The wrong-contact test now uses a well-formed unknown code, and the seller test acts only while the seeded order is at Mark packed, so it stays repeatable. The owner must add the Upstash variables before the form works on the deployment (see Owner actions in docs/DEPLOYMENT.md).
-
-**Revision 1, phase R5 (CMS) is closed. Slices (a) to (d) are accepted and the closing check (e) passed.** Playwright run 42171733613 passed 37 checks on the deployment, including every R5 CMS entity at 375, 768 and 1440 px.
-
-**Revision 1, phase R6 (guest checkout and order ID) is closed.** Slices (a) to (e) are done. Playwright run 42178834834 passed 39 checks on the deployment, including the guest COD order, the `SD-` code on `/order/confirmed`, the account-prompt skip and the register email prefill, all at 375, 768 and 1440 px. Limitation: the claim of guest orders after email verification is covered by code and unit-level review only; the verification link is reachable only through the admin outbox, so the spec does not follow it.
-
-Revision 1, phase R6 history:
-Slice (a), schema migration, is done (`037f756`). `Order.userId` is nullable and `guestEmail`, `guestPhone` and a unique, indexed `orderCode` (`SD-YYMMDD-XXXX`, alphabet without 0, O, 1, I, L) were added in migration `20261106100000_guest_orders`. The existing `number` is unchanged, so old order numbers still work. The generator in `@sd/domain` has 4 unit tests. The Database workflow (run 42173447526) applied the migration. Lint, typecheck, tests and build passed.
-Slice (b), guest checkout form, is done (`22e00f8`). `/checkout` is one page with contact, Division, District and Upazila (495 upazilas from open-admin-data, CC BY 4.0), address, postcode, landmark, delivery notes, delivery method, payment, summary and coupon. Guests get a 15-minute hold, skip coupon redemption and the account address write. Release-holds route and workflow restock expired holds. Slices (c) to (e) are still to do.
-Slice (a), the homepage sections, is accepted: `cms_sections` and `cms_section_versions` store the hero, collection
-teaser and banners with bilingual copy, an optional image and link, a status, a schedule and a display order. `/admin/cms`
-is the hub and `/admin/cms/sections` reorders rows by drag or arrow, saving each move optimistically and putting the list
-back to the stored order when the action fails. The public homepage reads the first published hero, every published
-banner and the published collection heading, and falls back to its built-in copy until a hero exists. Playwright run
-42047722255 on the deployment signed in as the content editor, renamed the hero in `/admin/cms`, saved it and saw the
-new headline on `/` within 60 s, then restored it.
-
-Slice (b), site settings, is accepted. `site_settings` is one row with the fixed id `site` and `site_settings_versions` keeps its last ten
-snapshots, so the editor at `/admin/cms/settings` saves the announcement bar, the header and footer links, the metadata
-defaults and the bilingual shipping and return text as one versioned record with an audit entry. The announcement is off
-unless an editor switches it on with English text, and a saved menu is limited to six header and five footer links whose
-hrefs must be a site path or an `https` address. The root layout reads the record once through `getPublicSettings()` and
-passes the announcement to `SiteAnnouncement`, the extra links to `SiteHeader` and `SiteFooter`, and the SEO defaults to
-`generateMetadata`; `/policies` renders the shipping and return text. The settings actions purge `('/', 'layout')`, so a
-save shows on the next request. Hosted Playwright run
-[42057524731](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42057524731) passed 26 checks: it switched the
-announcement on with a link to `/policies`, saw the line on `/` within 60s and followed it, then added and removed a footer
-link and saw both changes on `/`. The run also caught a real gap: the link schema required both labels while
-`localisedLinks` already falls back between languages, so a link labelled in one language could not be saved (`c41dab8`).
-Slice (c), Help Center topics, search and helpful votes, is accepted. `help_categories` and
-`help_category_versions` store topics with bilingual names, descriptions, a unique slug and a display order, edited at
-`/admin/cms/help` with move-up and move-down forms and the last ten versions; `cms_entries.help_category_id` files an
-article under one topic and is set only for `help` entries, so restoring an entry version never moves an article and
-deleting a topic files its articles back into all topics. `/help` now takes `?q=` and `?category=`, searches
-titles, excerpts and bodies case-insensitively once the phrase reaches two characters, keeps the chosen topic across a
-search, and shows the article count per topic. `help_article_votes` counts "was this article helpful" with a random
-first-party `sd_help_visitor` cookie and a unique `(entryId, visitorId)` row, so a reader can change their answer
-without an account and one browser cannot vote twice. `pnpm lint`, `pnpm typecheck`, `pnpm test` (103 tests) and
-`pnpm build` pass, the migrate and seed workflows ran on `main`, and hosted Playwright run
-[42068852661](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42068852661) passed 32 checks: it filtered
-`/help` by the Delivery topic, searched inside it and cleared the filters, saw the empty state for a phrase with no
-match, voted an article helpful, changed the answer and changed it back without the reader count drifting, renamed a
-topic through the CMS and restored version 1, filed an article under another topic and put it back, and reordered two
-topics and saw the sidebar follow.
-
-Slice (d), the Journal, is accepted. Hosted Playwright run [42170834094](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42170834094) passed all 35 checks on the deployment. It adds a cover and tags to a journal post, filters `/journal` by tag, opens a post with its cover, tag links and rich body, restores an older version with its cover and tags, and checks the layout at 375, 768 and 1440 px. Three checks were fixed to match the data they run on rather than the app: the editor specs now run serially so they cannot interleave writes to shared seeded entries, the public tag page is polled briefly after a save, and the Help rename restores the oldest kept version instead of assuming `Version 1` still exists, since only the last ten snapshots are kept. Journal entries gain a cover photo, tags and a rich body: `cms_entries.coverImageUrl`, `coverImageAltEn`, `coverImageAltBn` and a `tags TEXT[]` column with a GIN index gain a cover photo, tags and a
-rich body: `cms_entries.coverImageUrl`, `coverImageAltEn`, `coverImageAltBn` and a `tags TEXT[]` column with a GIN index
-come from migration `20261105200000_journal_media`. A cover is stored as a Cloudinary public id, an `https` address or a
-site path and is resolved at render time by `coverImageSrc(value, width)`, with required per-language alt text so a
-screen reader never gets the title twice; the editor offers a direct Cloudinary upload when
-`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` are set and otherwise explains that the
-address has to be pasted. Bodies for `kind === 'journal'` are edited in Tiptap and cleaned with `sanitize-html` on save
-and again when rendered, so a journal body keeps headings, lists, quotes and links while Help and page entries stay
-plain text. Tags are lowercased, hyphenated, de-duplicated and capped at six, filtering uses `tags: { has }` against the
-GIN index, `/journal` takes `?tag=`, and every card, article and the filter row link to the filtered index. Covers and
-tags are part of the `cms_versions` snapshot, so restoring an old version brings its photo and tags back; snapshots
-written before this migration restore leniently with no cover and no tags. The editor is imported dynamically, so the
-ProseMirror bundle loads only when a Journal body is on screen; that chunk is 123.6 KiB gzipped and admin-only, which
-is why the per-chunk asset budget moved from 120 to 130 KiB while the 400 KiB total stayed put.
-
-**Revision 1, phase R4 (skeleton system) is done.**
-`pageLayout.ts` exports `home`, `section`, `sectionTight`, `wide`, `catalog`, `standard`, `account`, `accountSection`,
-`seller`, `content` and `article`, and the nineteen skeletons import the same one their page uses, so a skeleton and its
-page share a container instead of repeating the classes. Home lives in `app/(storefront)` with its own `loading.tsx`;
-no `app/loading.tsx` remains, because a root loading file wrapped every route and made `/help`, `/catalog` and
-`/journal` stream the home skeleton first. The cart drawer deliberately has no skeleton, since `ShopProvider` hydrates
-it from server-rendered state. `e2e/r4-skeletons.spec.mjs` throttles the connection, checks the streamed skeleton
-markup for six routes, keeps cumulative layout shift under 0.05 and stores twelve screenshots; hosted Playwright run
-[42030526892](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42030526892) passed on the deployment,
-and `docs/features.json` records R4 as `pass`.
-
-**Revision 1, phase R3 (real registration and login) is done.**
-`/register` takes a name, email, Bangladeshi mobile, password, terms and a customer or seller choice; a seller gets a
-`pending` seller application instead of the vendor role. `/login` signs in with the real password and keeps the demo
-picker as a collapsed block that only fills the email. Reset, verification and resend mail go through `mail_outbox`
-and are readable at `/admin/outbox`, `/account/security` reports the verification state and changes the password, and
-`/sign-in` redirects to `/login`. Every phone number is normalised to `+8801XXXXXXXXX` by `normalizeBdPhone`, and the
-`users.phone`, `users.termsAcceptedAt` and `seller_applications` columns come from migration
-`20261105090000_real_auth`, applied to Neon by Database workflow run 42015565547. Lint, typecheck, unit tests and
-build pass locally. The first deployment returned 500 on every page with an auth form: the client forms received the
-whole dictionary, whose nineteen builder functions (`basedOn`, `coverDays`, `settlementReady`, …) React cannot
-serialise, so `/login`, `/register`, `/forgot-password` and `/reset-password?token=…` died while the storefront stayed
-up. Commit `51c4b61` gives the auth forms `AuthCopy = Pick<Dictionary, 'auth' | 'roles'>` from
-`features/auth/copy.ts`; no other client component received a whole dictionary. Playwright run
-[42020265137](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42020265137) passed all fourteen checks
-on the deployment — signed-out redirect, wrong password, seeded sign-in and sign-out, buyer registration, seller
-application, reset request, and the 375, 768 and 1440 px fit checks — and `docs/features.json` records R3 as `pass`.
-
-**Revision 1, phase R2 is done.** Product photos are per-product and licensed: 440 Wikimedia Commons photographs
-uploaded to Cloudinary under `sawdagar/products/<subcategory>/<n>`, with author and licence recorded per file and
-credited on `/credits`. A product publishes only with its own main image plus at least two gallery images
-(`publishStatusFor` reads `productImageSetsBySlug`), which leaves 142 publishable products and parks 22 subcategories
-as drafts instead of repeating a category picture. `scripts/ci/check-images.ts` fails the build on a shared public id,
-a near-duplicate average hash or a repeated alt string. CI run
-[41394029950](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41394029950) passed on Linux, Windows and
-macOS, and hosted Playwright run
-[41394434731](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41394434731) passed at 375, 768 and
-1440 px. `docs/features.json` records R2 as `pass`.
-
-**R1 is done** (commits through `2297978`). The demo notice strip is gone, the header carries only store navigation,
-project links live in the footer Project column and on `/about/project`, and Playwright runs
-[41279324126](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279324126) and
-[41279963461](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/41279963461) passed at 375, 768 and
-1440 px.
+Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json`, and R10 is the exit audit below. Home and catalog hold a 0.90 performance budget and the product page holds 0.85 ([ADR-014](adr/ADR-014-product-performance-budget.md)); accessibility, best practices and SEO are gated at 0.90 on all three routes, with CLS under 0.1. The browser suite runs at 375, 768 and 1440 px against the deployment. `node scripts/ci/r10-check.mjs` prints each exit criterion as DONE or TODO and exits non-zero while any of them is open.
 
 ## Next
 
 - Add a database-backed concurrency check for the last unit of stock, and a released-reservation path for abandoned MockPay orders.
-- Verify the remaining Phase 4 production edge cases: stock-limit row errors, save-for-later from the drawer, the four-product compare cap and clearing a comparison.
-- Add a catalog query integration test once there is a disposable test database or a Prisma mock.
-- Consider the full seed volumes from [the data specification](spec/04-data-and-seed.md) when orders and reviews need more rows.
+- Cover the guest claim after email verification end to end once a mail provider exists.
+- Revisit the product photograph budget if the images ever move from Cloudinary into the repository.
+- Add a visual-regression job if the pages need pixel checks; the browser suite checks behaviour and layout shift, not pixels.
 
 ## Blocked
 
-- No blocker is open. An earlier entry said every product was out of stock; that was wrong. The R6 test failed because the belt's default variant (Small) has no stock, and the test never chose a variant. The test now selects Medium (stock 16).
-- Lighthouse performance is below the CI gate of 0.9 on all three pages. Round 5 medians of five (run 42257392714, commit 4a278f7): home 0.87, catalog 0.87, product 0.84. The gate is not lowered. Full history in `docs/reports/performance.md`.
-- Open CI items from Playwright run 42264793983 (production, 144 of 150 passed): R4 CLS on `/` at 768 and 1440 px and on the product page at 768 and 1440 px; R5 empty-state locator matched twice at 375 and 768 px (not reproduced on the live page); R8 product card reveal timed out at 375 px. Each is undiagnosed or suspected to be CI timing. Assertions are unchanged.
-- No other confirmed blocker. The Python and Java modules run as reference implementations in CI; the site uses their TypeScript ports. Payment gateways and email still need owner accounts, and the demo deliberately does not use them.
+- No blocker is open. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
 
 ## Known issues
 
