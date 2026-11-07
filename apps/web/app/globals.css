@@ -214,4 +214,11 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* A scroll-driven reveal keeps its animation timeline even at a 0.01 ms duration, so a card that
+     has not been scrolled into view would stay transparent. Switching the animation off is the only
+     way to guarantee that a reduced-motion reader sees every card. */
+  .reveal-on-scroll {
+    animation: none;
+  }
 }

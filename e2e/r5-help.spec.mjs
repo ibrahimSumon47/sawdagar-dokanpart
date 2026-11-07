@@ -47,11 +47,14 @@ test.describe('R5 Help Center topics, search and votes', () => {
 
   test('a phrase with no match shows the empty state', async ({ page }) => {
     await page.goto('/help?q=zzzznothing');
-    await expect(page.getByRole('heading', { name: 'No articles match' })).toBeVisible();
+    // Scope to the named region: the same copy also appears in the streamed RSC payload, so an
+    // unscoped text locator resolves to more than one element on a slow connection.
+    const empty = page.getByRole('region', { name: 'No articles match' });
+    await expect(empty.getByRole('heading', { name: 'No articles match' })).toBeVisible();
     await expect(
-      page.getByText('Try another word, or browse a topic from the list.'),
+      empty.getByText('Try another word, or browse a topic from the list.'),
     ).toBeVisible();
-    await page.getByRole('link', { name: 'Clear filters' }).first().click();
+    await empty.getByRole('link', { name: 'Clear filters' }).click();
     await expect(page).toHaveURL(/\/help$/);
   });
 

@@ -14,9 +14,12 @@ async function resolveRoutes() {
   if (!response.ok) {
     throw new Error(`Sitemap request failed with ${response.status}.`);
   }
-  const paths = [...(await response.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map(
-    ([, loc]) => new URL(loc).pathname,
-  );
+  const paths = [...(await response.text()).matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map(([, loc]) => new URL(loc).pathname)
+    // The sitemap order follows the database, which has no ORDER BY, so sorting keeps every
+    // worker on the same product and store: a test title that changes between the runner and
+    // the worker makes Playwright report "Test not found in the worker process".
+    .sort();
   const product = paths.find((path) => path.startsWith('/product/'));
   const store = paths.find((path) => path.startsWith('/store/'));
   if (!product || !store) {
@@ -45,6 +48,21 @@ async function trackLayoutShifts(page) {
       }
     }).observe({ type: 'layout-shift', buffered: true });
   });
+}
+
+/**
+ * Waits for the settled page without `networkidle`: the live status widget polls, so the network is
+ * never idle and that wait timed out. Fonts and the images inside `main` are the two things that can
+ * still move content after the skeleton is gone, so wait for exactly those and then one more frame.
+ */
+async function waitForSettledLayout(page) {
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForFunction(
+    () => [...document.querySelectorAll('main img')].every((image) => image.complete),
+    null,
+    { timeout: 60_000 },
+  );
+  await page.waitForTimeout(250);
 }
 
 /**
@@ -94,6 +112,8 @@ for (const path of routes) {
     page,
     request,
   }, testInfo) => {
+    // The connection is throttled on purpose, so the route needs more than the default 30 s.
+    test.setTimeout(150_000);
     const streamed = await request.get(path);
     expect(streamed.status()).toBe(200);
     expectSkeletonMarkup(await streamed.text());
@@ -106,7 +126,7 @@ for (const path of routes) {
 
     await captureSkeleton(page, testInfo, path);
 
-    await page.waitForLoadState('networkidle');
+    await waitForSettledLayout(page);
     await page.waitForFunction(
       () => document.querySelector('[data-skeleton]:not([hidden])') === null,
       null,

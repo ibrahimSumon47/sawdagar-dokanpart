@@ -74,12 +74,16 @@ export function HelpCenterView({
           </p>
 
           {articles.length === 0 ? (
-            <EmptyState
-              className="mt-6"
-              title={copy.content.helpNoResultsTitle}
-              description={copy.content.helpNoResultsBody}
-              action={<ButtonLink href="/help">{copy.content.helpSearchClear}</ButtonLink>}
-            />
+            // A named region keeps the empty state findable by assistive technology and by a
+            // test that must not match the same copy inside the streamed RSC payload.
+            <section aria-label={copy.content.helpNoResultsTitle}>
+              <EmptyState
+                className="mt-6"
+                title={copy.content.helpNoResultsTitle}
+                description={copy.content.helpNoResultsBody}
+                action={<ButtonLink href="/help">{copy.content.helpSearchClear}</ButtonLink>}
+              />
+            </section>
           ) : (
             <ul className="mt-4 grid gap-4 sm:grid-cols-2">
               {articles.map((article, index) => (

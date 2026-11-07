@@ -1,5 +1,6 @@
 import { RatingStars } from '@sd/ui';
 import Link from 'next/link';
+import { preload } from 'react-dom';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { placeName } from '../../../../i18n/places';
 import { pageLayout } from '../../../shell/pageLayout';
@@ -24,6 +25,13 @@ export interface ProductDetailProps {
 export function ProductDetail({ product, locale, copy }: ProductDetailProps) {
   const catalog = copy.catalog;
   const photo = productPhoto(product.images);
+
+  // The product photo is the largest contentful paint on this page. Asking the browser for it from
+  // the head starts the request before the streamed body reaches that <img>, which is the largest
+  // remaining slice of LCP after the server response.
+  if (photo) {
+    preload(photo.src, { as: 'image', fetchPriority: 'high' });
+  }
 
   return (
     <article className={pageLayout.standard}>
