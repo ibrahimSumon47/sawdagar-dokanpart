@@ -16,3 +16,11 @@ playwright-report/
 
 # Lighthouse artifacts downloaded from CI
 .lh*/
+
+# Candidate sourcing intermediates (reviewed photo manifest is committed)
+.imgsrc/
+.review/
+candidate-scores.json
+packages/seed/images/candidates.json
+docs/reports/data/candidate-sources.json
+docs/screenshots/image-audit/candidates/

@@ -6,7 +6,7 @@
 ![Next.js 16](https://img.shields.io/badge/Next.js-16.4.3-141414)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9.3-141414)
 
-Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Bangladesh: a catalog of 28 products, each published with the licensed photograph it was written around, from 24 fictional workshops, with carts, checkout, seller fulfillment, a double-entry ledger and an admin CMS. Categories without a matching photograph stay hidden rather than showing a borrowed image.
+Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Bangladesh: a catalog of 83 products, each published with the licensed photograph it was written around, from 24 fictional workshops, with carts, checkout, seller fulfillment, a double-entry ledger and an admin CMS. Categories without a matching photograph stay hidden rather than showing a borrowed image.
 
 **[Open the store](https://sawdagar-dokanpart.vercel.app/)** · [Case study](https://sawdagar-dokanpart.vercel.app/case-study) · [Architecture](ARCHITECTURE.md) · [Feature index](docs/FEATURES.md)
 
@@ -47,7 +47,7 @@ This repository follows that path to the end, keeps every service free and repla
 
 **As a buyer**
 
-- Browse 7 departments, 84 categories and 28 photographed products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
+- Browse 8 departments, 84 categories and 83 photographed products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
 - Choose a variant, add to a guest or signed-in cart, save a wishlist, compare four products, and apply a coupon.
 - Check out with a saved or new address across 64 districts, choose COD or MockPay, and see per-seller shipping.
 - Print an invoice, review a delivered product with photos, ask a question, and request a return inside seven days.

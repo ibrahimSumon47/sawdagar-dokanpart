@@ -6,7 +6,7 @@ Test-mode payments, seeded data: no real money is accepted, and the catalog, sel
 
 ## What this is
 
-Sawdagar Dokanpat gives independent Bangladeshi sellers one shared storefront. The seeded catalog has 84 categories and 24 vendors. Its 28 products are published with the reviewed photo each one was written around; categories without a matching photo are hidden. Everything is written in English and Bangla.
+Sawdagar Dokanpat gives independent Bangladeshi sellers one shared storefront. The seeded catalog has 84 categories and 24 vendors. Its 83 products are published with the reviewed photo each one was written around; categories without a matching photo are hidden. Everything is written in English and Bangla.
 
 Buyers can browse and search the catalog, choose a variant, keep a cart as a guest or signed-in user, save a wishlist, compare four products, apply a coupon, check out with a saved or new 64-district address, pay by cash on delivery or the MockPay sandbox, print an invoice, review a delivered product, ask a question and request a return within seven days.
 

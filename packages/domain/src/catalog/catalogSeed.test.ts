@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildCatalogSeed, slugify } from './catalogSeed';
+import { curatedProducts } from './curatedProducts';
 
 describe('catalog seed', () => {
   const seed = buildCatalogSeed();
@@ -16,8 +17,10 @@ describe('catalog seed', () => {
   });
 
   it('builds one product per curated photo, with three variants each', () => {
-    expect(seed.products).toHaveLength(28);
-    expect(seed.products.flatMap((product) => product.variants)).toHaveLength(84);
+    expect(seed.products).toHaveLength(curatedProducts.length);
+    expect(seed.products.flatMap((product) => product.variants)).toHaveLength(
+      curatedProducts.length * 3,
+    );
   });
 
   it('keeps ids, slugs and SKUs unique', () => {

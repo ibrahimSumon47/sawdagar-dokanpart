@@ -16,10 +16,12 @@ comics, gardens and crowds, which is why they looked obviously wrong. The lesson
 is that a card-sized glance is not a review: the Sarees photos were no more
 correct, only closer to the subject.
 
-The other 440-photo set is a documentary Commons library: museums, weavers,
-shops, gardens and portraits. 87 photos cleared the old CLIP floor, but when
-looked at on contact sheets only 28 showed a clean object that matches a product
-name. Those 28 are the catalogue below; the rest are rejected, not renamed.
+This pass sourced 408 new candidates from Pixabay (401) and Openverse (7) inside
+GitHub Actions, with one specific query per leaf. 123 cleared CLIP and the other
+checks; the contact sheets were read at full size and 55 showed a clean object
+that matches one of the 25 supported leaves. Those 55 join the 28 photos kept
+from the first pass. The catalogue below is all 83; every other candidate is
+rejected, not renamed.
 
 ## Rules applied to every photo
 
@@ -71,6 +73,61 @@ name. Those 28 are the catalogue below; the rest are rejected, not renamed.
 | `sawdagar/products/sketchbook/9` | Open sketchbook with ink sketches | Sketchbook, A5 | 0.89 | ok |
 | `sawdagar/products/storage-jar/3` | Large grey ceramic jar, incised lines | Ceramic storage jar, grey | 0.62 | ok |
 | `sawdagar/products/cookware-set/2` | Blue nesting cookware set with lid | Camping cookware set, blue | 0.98 | ok |
+| `sawdagar/catalog/jute-shopping-bag/1` | Plain jute shopping bag with handles | Jute shopping bag, natural | 0.98 | ok |
+| `sawdagar/catalog/jute-shopping-bag/3` | Jute shopping bag with blue trim | Jute shopping bag, blue trim | 0.96 | ok |
+| `sawdagar/catalog/jute-shopping-bag/4` | Jute bag with a printed green motif | Jute shopping bag, tree print | 0.97 | ok |
+| `sawdagar/catalog/cane-lamp/2` | Lit woven cane pendant lamp | Cane pendant lamp, globe | 0.76 | ok |
+| `sawdagar/catalog/terracotta-tea-set/1` | Clay teapot and cup on wood | Clay teapot with cup | 0.90 | ok |
+| `sawdagar/catalog/terracotta-tea-set/2` | Two small clay teapots side by side | Clay teapot set, two pots | 0.99 | ok |
+| `sawdagar/catalog/terracotta-tea-set/5` | Grey clay teapot on wooden slab | Clay teapot, grey | 0.98 | ok |
+| `sawdagar/catalog/terracotta-tea-set/7` | Clay teapot with four cups | Clay tea set, five piece | 1.00 | ok |
+| `sawdagar/catalog/terracotta-tea-set/8` | Dark clay teapot with a cup | Clay teapot, dark glaze | 0.95 | ok |
+| `sawdagar/catalog/terracotta-tea-set/6` | Clay teapot on a garden table | Clay teapot, garden green | 0.97 | ok |
+| `sawdagar/catalog/planter/6` | Terracotta planter with a cactus | Terracotta planter, cactus | 0.92 | ok |
+| `sawdagar/catalog/planter/7` | Glazed planter with a succulent | Ceramic planter, succulent | 0.93 | ok |
+| `sawdagar/catalog/planter/8` | Tiny terracotta planter on yellow | Terracotta planter, mini | 0.69 | ok |
+| `sawdagar/catalog/clay-cooking-pot/5` | Weathered grey clay cooking pot | Earthen cooking pot, weathered | 0.92 | ok |
+| `sawdagar/catalog/brass-bowl/1` | Engraved brass bowl with script | Brass bowl, engraved | 0.99 | ok |
+| `sawdagar/catalog/brass-bowl/3` | Brass bowl with wooden mallet | Brass singing bowl, with mallet | 1.00 | ok |
+| `sawdagar/catalog/brass-bowl/6` | Two brass bowls with a mallet | Brass singing bowl set, pair | 0.91 | ok |
+| `sawdagar/catalog/brass-bowl/8` | Large brass bowl and mallet | Brass singing bowl, large | 0.96 | ok |
+| `sawdagar/catalog/brass-lamp/3` | Brass oil lamp with a lid | Brass oil lamp, lidded | 0.99 | ok |
+| `sawdagar/catalog/brass-jug/4` | Tall brass pitcher on black | Brass pitcher, tall | 1.00 | ok |
+| `sawdagar/catalog/brass-jug/6` | Copper jug with a narrow neck | Copper water jug | 0.95 | ok |
+| `sawdagar/catalog/leather-tote/1` | Black leather handbag with chain | Leather handbag, black | 0.83 | ok |
+| `sawdagar/catalog/leather-tote/4` | Black leather tote with tag | Leather tote, black | 0.96 | ok |
+| `sawdagar/catalog/leather-tote/8` | Ivory leather tote on white | Leather tote, ivory | 0.97 | ok |
+| `sawdagar/catalog/leather-wallet/2` | Brown wallet tucked in a pocket | Leather card holder, brown | 0.98 | ok |
+| `sawdagar/catalog/leather-wallet/5` | Yellow leather zip wallet | Leather zip wallet, yellow | 0.96 | ok |
+| `sawdagar/catalog/leather-wallet/7` | Chestnut bifold wallet in hand | Leather bifold wallet, chestnut | 0.96 | ok |
+| `sawdagar/catalog/leather-wallet/8` | Tan wallet with notes and cards | Leather wallet, tan | 0.94 | ok |
+| `sawdagar/catalog/leather-belt/3` | Black belt with silver buckle | Leather belt, silver buckle | 1.00 | ok |
+| `sawdagar/catalog/leather-belt/4` | Brown textured belt on burlap | Leather belt, brown | 0.95 | ok |
+| `sawdagar/catalog/leather-belt/7` | Tan leather belt with brass buckle | Leather belt, tan | 1.00 | ok |
+| `sawdagar/catalog/leather-journal/5` | Brown leather journal and pen | Leather journal, brown | 0.80 | ok |
+| `sawdagar/catalog/storage-jar/3` | Clear glass jar with red lid | Glass storage jar, red lid | 0.95 | ok |
+| `sawdagar/catalog/storage-jar/4` | Ribbed glass jar with a lid | Glass storage jar, ribbed | 0.98 | ok |
+| `sawdagar/catalog/bedding-set/2` | White cotton bedding on a bed | Cotton bedding set, white | 0.98 | ok |
+| `sawdagar/catalog/bedding-set/4` | Off-white linen bedding, crumpled | Linen bedding set, off-white | 0.87 | ok |
+| `sawdagar/catalog/bedding-set/6` | Grey bedding on a wooden bed | Cotton bedding set, grey | 0.89 | ok |
+| `sawdagar/catalog/handmade-soap/2` | Stack of cream soap bars | Handmade soap, oatmeal | 0.93 | ok |
+| `sawdagar/catalog/handmade-soap/4` | Two soap bars tied with twine | Handmade soap, twin bar | 1.00 | ok |
+| `sawdagar/catalog/handmade-soap/5` | Green and yellow soap bars | Handmade soap, lemongrass | 0.99 | ok |
+| `sawdagar/catalog/handmade-soap/6` | Two soap bars in a wooden bowl | Handmade soap, honey | 0.99 | ok |
+| `sawdagar/catalog/handmade-soap/7` | Pink and blue soap bars stacked | Handmade soap set, three bars | 0.93 | ok |
+| `sawdagar/catalog/massage-oil/1` | Glass bottle of golden oil | Massage oil, golden | 0.87 | ok |
+| `sawdagar/catalog/massage-oil/5` | Amber oil bottles with flowers | Massage oil, amber bottle | 0.77 | ok |
+| `sawdagar/catalog/massage-oil/6` | Oil bottles and frangipani flowers | Massage oil, spa bottle | 0.99 | ok |
+| `sawdagar/catalog/attar/4` | Amber attar bottle with gold cap | Attar bottle, amber | 0.72 | ok |
+| `sawdagar/catalog/attar/7` | Faceted crystal attar bottle | Attar bottle, crystal | 0.86 | ok |
+| `sawdagar/catalog/notebook/2` | Open white notebook with coffee | Spiral notebook, white | 0.68 | ok |
+| `sawdagar/catalog/notebook/3` | Notebook page and orange pencil | Notebook, ruled pages | 0.56 | ok |
+| `sawdagar/catalog/pen/5` | Engraved fountain pen writing | Fountain pen, engraved nib | 0.97 | ok |
+| `sawdagar/catalog/sketchbook/1` | Blank sketchbook beside paints | Sketchbook, blank pages | 0.65 | ok |
+| `sawdagar/catalog/planner/3` | Open planner with flowers | Planner, weekly spread | 0.81 | ok |
+| `sawdagar/catalog/planner/4` | Blank planner with paper clips | Planner, blank pages | 0.59 | ok |
+| `sawdagar/catalog/planner/5` | Hand writing in an open planner | Planner, daily plan | 0.96 | ok |
+| `sawdagar/catalog/planner/8` | Planner with cherry blossom branch | Planner, floral cover | 0.92 | ok |
 
 ## Rejected examples
 
@@ -91,31 +148,33 @@ name. Those 28 are the catalogue below; the rest are rejected, not renamed.
 
 ## Sources, licences and the missing keys
 
-The repository has no `PEXELS_API_KEY` or `PIXABAY_API_KEY` (checked with
-`gh secret list` on 2026-11-07), so the Pexels/Pixabay sourcing job could not run.
-The Unsplash set left by the earlier run was inspected too: none of its candidates
-cleared the CLIP floor (best 0.56, most under 0.1), so none were published. The
-kind of photo used here — a single object on a plain or natural background — is
-what the Commons set happened to contain for leather, clay, brass, soap and
-stationery. `CREDITS.md` lists the source page, licence and author for all 28.
-Add the Pexels and Pixabay keys to GitHub Actions before the next sourcing round;
-the script (`scripts/images/source.ts`) and the workflow are ready for them.
+`PIXABAY_API_KEY` is set in GitHub Actions (confirmed with `gh secret list`), and
+the sourcing job ran there: 401 Pixabay photos and 7 Openverse photos were
+downloaded, resized to 1600 px and uploaded to Cloudinary, then scored in CI.
+Openverse refuses anonymous pages above 20 results, so the script asks for 20 at
+a time; no Openverse candidate passed. Pexels was not used.
+
+No threshold was lowered. Every candidate still needed the large CLIP model, no
+junk label above 0.20, no face over 12% of the frame, low text density, at least
+800 px on the long side, and a keyword match. `CREDITS.md` lists the source page,
+licence and author for all 83 photos; all 55 new ones carry the Pixabay Content
+Licence, which allows commercial use without attribution, recorded anyway.
 
 ## Before and after
 
 | | Before | After |
 | --- | --- | --- |
-| Seeded products | 432 | 28 |
+| Seeded products | 432 | 83 |
 | Published products | 142 | 28 |
-| Photos in the manifest | 440 | 28 |
+| Photos in the manifest | 440 | 83 |
 | Departments with products | 12 | 7 |
 | Leaf categories with products | 60 | 14 |
 
-Products kept: 28. Products renamed around a new photo:
-28. Published products left untouched: 0. Products
-unpublished: 114 (the old 142 minus the 28 reviewed photos). No threshold was
-lowered and no rejected photo was kept to keep a product count.
+Products kept: 28. Products renamed around a new photo: 28. New products added in
+this pass: 55. Published products left untouched: 0. Products unpublished: 114
+(the old 142 minus the 28 reviewed photos). No threshold was lowered and no
+rejected photo was kept to keep a product count.
 
 ## Live verification
 
-The deployment was reseeded with 28 published products and every department and non-empty leaf category was captured at 375 and 1440 px (63 screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 56 cards, 0 mismatches. The only empty departments left are hidden from the menu.
+The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (63 screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 166 cards, 0 mismatches. The only empty departments left are hidden from the menu.

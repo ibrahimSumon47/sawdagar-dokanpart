@@ -137,6 +137,20 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 1
+      },
+      {
+        "publicId": "sawdagar/catalog/clay-cooking-pot/5",
+        "sourceUrl": "https://pixabay.com/photos/clay-pots-pots-pottery-terracotta-4461671/",
+        "license": "Pixabay Content License",
+        "author": "pixel2013",
+        "provider": "pixabay",
+        "width": 853,
+        "height": 1280,
+        "phash": "00000e9f7efe3f3f",
+        "alt": "Weathered grey clay cooking pot",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9232
       }
     ],
     "brass-lamp": [
@@ -152,6 +166,20 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.81
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-lamp/3",
+        "sourceUrl": "https://pixabay.com/photos/oil-lamp-lamp-wick-nostalgic-510755/",
+        "license": "Pixabay Content License",
+        "author": "succo",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "fffff50183e0f0f8",
+        "alt": "Brass oil lamp with a lid",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9873
       }
     ],
     "brass-jug": [
@@ -167,6 +195,34 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.74
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-jug/4",
+        "sourceUrl": "https://pixabay.com/photos/tableware-service-wineglass-wine-3239477/",
+        "license": "Pixabay Content License",
+        "author": "AlLes",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 689,
+        "phash": "b39693dbdbdad3c3",
+        "alt": "Tall brass pitcher on black",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9993
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-jug/6",
+        "sourceUrl": "https://pixabay.com/photos/copper-jug-decorative-urn-ornament-2716154/",
+        "license": "Pixabay Content License",
+        "author": "Buntysmum",
+        "provider": "pixabay",
+        "width": 637,
+        "height": 1280,
+        "phash": "5767b6b578787890",
+        "alt": "Copper jug with a narrow neck",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9521
       }
     ],
     "leather-wallet": [
@@ -208,6 +264,62 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.89
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-wallet/2",
+        "sourceUrl": "https://pixabay.com/photos/wallet-cash-pocket-credit-card-1013789/",
+        "license": "Pixabay Content License",
+        "author": "stevepb",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "9f80c4ff8787c7ff",
+        "alt": "Brown wallet tucked in a pocket",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9842
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-wallet/5",
+        "sourceUrl": "https://pixabay.com/photos/zipper-wallet-cramp-small-teeth-4802469/",
+        "license": "Pixabay Content License",
+        "author": "Myriams-Fotos",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 854,
+        "phash": "fffff0c690e0c000",
+        "alt": "Yellow leather zip wallet",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9593
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-wallet/7",
+        "sourceUrl": "https://pixabay.com/photos/wallet-empty-poverty-bankrupt-3548021/",
+        "license": "Pixabay Content License",
+        "author": "Chronomarchie",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "00070f062023737b",
+        "alt": "Chestnut bifold wallet in hand",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9559
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-wallet/8",
+        "sourceUrl": "https://pixabay.com/photos/credit-squeeze-taxation-purse-tax-522549/",
+        "license": "Pixabay Content License",
+        "author": "stevepb",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 977,
+        "phash": "efe7c38383899cff",
+        "alt": "Tan wallet with notes and cards",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9402
       }
     ],
     "leather-belt": [
@@ -249,6 +361,48 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.98
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-belt/3",
+        "sourceUrl": "https://pixabay.com/photos/belt-belt-buckle-denim-denim-jeans-1286399/",
+        "license": "Pixabay Content License",
+        "author": "Couleur",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 767,
+        "phash": "00010f07cfffffff",
+        "alt": "Black belt with silver buckle",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9986
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-belt/4",
+        "sourceUrl": "https://pixabay.com/photos/belt-belt-buckle-leather-metal-1688017/",
+        "license": "Pixabay Content License",
+        "author": "Couleur",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "0000e0f0f0f0ffff",
+        "alt": "Brown textured belt on burlap",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9506
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-belt/7",
+        "sourceUrl": "https://pixabay.com/photos/belt-belt-buckle-leather-belt-2735438/",
+        "license": "Pixabay Content License",
+        "author": "Ralphs_Fotos",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 782,
+        "phash": "0c30bebf7ffff200",
+        "alt": "Tan leather belt with brass buckle",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9991
       }
     ],
     "leather-sandal": [
@@ -305,6 +459,76 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.94
+      },
+      {
+        "publicId": "sawdagar/catalog/handmade-soap/2",
+        "sourceUrl": "https://pixabay.com/photos/soap-home-made-soap-hand-milled-soap-8429699/",
+        "license": "Pixabay Content License",
+        "author": "IndigoBunting",
+        "provider": "pixabay",
+        "width": 853,
+        "height": 1280,
+        "phash": "0014183c7efcfcfc",
+        "alt": "Stack of cream soap bars",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9303
+      },
+      {
+        "publicId": "sawdagar/catalog/handmade-soap/4",
+        "sourceUrl": "https://pixabay.com/photos/soap-gift-hygiene-flatlay-handmade-3123468/",
+        "license": "Pixabay Content License",
+        "author": "heyerlein",
+        "provider": "pixabay",
+        "width": 853,
+        "height": 1280,
+        "phash": "00c0fc7c3e1e0006",
+        "alt": "Two soap bars tied with twine",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9983
+      },
+      {
+        "publicId": "sawdagar/catalog/handmade-soap/5",
+        "sourceUrl": "https://pixabay.com/photos/handmade-soap-honey-cinnamon-4926842/",
+        "license": "Pixabay Content License",
+        "author": "phuonghoangthuy",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 750,
+        "phash": "6808181b3834fe67",
+        "alt": "Green and yellow soap bars",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9867
+      },
+      {
+        "publicId": "sawdagar/catalog/handmade-soap/6",
+        "sourceUrl": "https://pixabay.com/photos/soap-soap-cube-wellness-spa-8227622/",
+        "license": "Pixabay Content License",
+        "author": "Ylanite",
+        "provider": "pixabay",
+        "width": 853,
+        "height": 1280,
+        "phash": "c0f0fcc389c1ffff",
+        "alt": "Two soap bars in a wooden bowl",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9856
+      },
+      {
+        "publicId": "sawdagar/catalog/handmade-soap/7",
+        "sourceUrl": "https://pixabay.com/photos/handmade-soap-cold-process-craft-1139554/",
+        "license": "Pixabay Content License",
+        "author": "jussiak",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 850,
+        "phash": "ffe3e3a38383ffff",
+        "alt": "Pink and blue soap bars stacked",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9253
       }
     ],
     "notebook": [
@@ -333,6 +557,34 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.81
+      },
+      {
+        "publicId": "sawdagar/catalog/notebook/2",
+        "sourceUrl": "https://pixabay.com/photos/coffee-pen-notebook-open-notebook-2306471/",
+        "license": "Pixabay Content License",
+        "author": "Engin_Akyurt",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 854,
+        "phash": "e7feff9e8e0f0c80",
+        "alt": "Open white notebook with coffee",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.6805
+      },
+      {
+        "publicId": "sawdagar/catalog/notebook/3",
+        "sourceUrl": "https://pixabay.com/photos/pencil-notebook-crumpled-paper-1891732/",
+        "license": "Pixabay Content License",
+        "author": "congerdesign",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 775,
+        "phash": "707e181f5fffff00",
+        "alt": "Notebook page and orange pencil",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.5591
       }
     ],
     "pen": [
@@ -348,6 +600,20 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.88
+      },
+      {
+        "publicId": "sawdagar/catalog/pen/5",
+        "sourceUrl": "https://pixabay.com/photos/fountain-pen-filler-ink-write-1393979/",
+        "license": "Pixabay Content License",
+        "author": "A_Different_Perspective",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "000102fefffffc7e",
+        "alt": "Engraved fountain pen writing",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9715
       }
     ],
     "sketchbook": [
@@ -363,6 +629,20 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.89
+      },
+      {
+        "publicId": "sawdagar/catalog/sketchbook/1",
+        "sourceUrl": "https://pixabay.com/photos/art-watercolors-arts-and-crafts-1851483/",
+        "license": "Pixabay Content License",
+        "author": "Pexels",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 764,
+        "phash": "e0eece8e1e0e0e00",
+        "alt": "Blank sketchbook beside paints",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.6471
       }
     ],
     "storage-jar": [
@@ -378,6 +658,34 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.62
+      },
+      {
+        "publicId": "sawdagar/catalog/storage-jar/3",
+        "sourceUrl": "https://pixabay.com/photos/glass-containers-glass-empty-clean-1205611/",
+        "license": "Pixabay Content License",
+        "author": "ha11ok",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "ffff9f878181e9ff",
+        "alt": "Clear glass jar with red lid",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9477
+      },
+      {
+        "publicId": "sawdagar/catalog/storage-jar/4",
+        "sourceUrl": "https://pixabay.com/photos/cookie-jar-glass-candy-jar-4292358/",
+        "license": "Pixabay Content License",
+        "author": "Alexas_Fotos",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 824,
+        "phash": "093b377700000034",
+        "alt": "Ribbed glass jar with a lid",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9804
       }
     ],
     "cookware-set": [
@@ -393,6 +701,490 @@
         "productMatch": true,
         "reviewed": true,
         "clipScore": 0.98
+      }
+    ],
+    "jute-shopping-bag": [
+      {
+        "publicId": "sawdagar/catalog/jute-shopping-bag/1",
+        "sourceUrl": "https://pixabay.com/photos/bag-shopping-weave-jute-ecological-421456/",
+        "license": "Pixabay Content License",
+        "author": "articonn",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 1280,
+        "phash": "387e7e7e7e7c7c78",
+        "alt": "Plain jute shopping bag with handles",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9849
+      },
+      {
+        "publicId": "sawdagar/catalog/jute-shopping-bag/3",
+        "sourceUrl": "https://pixabay.com/photos/bag-shopping-weave-handle-421457/",
+        "license": "Pixabay Content License",
+        "author": "articonn",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 1280,
+        "phash": "3c363e3e3e3e3e3e",
+        "alt": "Jute shopping bag with blue trim",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9557
+      },
+      {
+        "publicId": "sawdagar/catalog/jute-shopping-bag/4",
+        "sourceUrl": "https://pixabay.com/photos/jute-cotton-handle-bag-3411533/",
+        "license": "Pixabay Content License",
+        "author": "Goldencreation",
+        "provider": "pixabay",
+        "width": 1041,
+        "height": 1280,
+        "phash": "ffffffc181818187",
+        "alt": "Jute bag with a printed green motif",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9663
+      }
+    ],
+    "cane-lamp": [
+      {
+        "publicId": "sawdagar/catalog/cane-lamp/2",
+        "sourceUrl": "https://pixabay.com/photos/light-christmas-lighting-640768/",
+        "license": "Pixabay Content License",
+        "author": "Tabeajaichhalt",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "0f1f1f1f0f0f0700",
+        "alt": "Lit woven cane pendant lamp",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.7595
+      }
+    ],
+    "terracotta-tea-set": [
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/1",
+        "sourceUrl": "https://pixabay.com/photos/gr%C3%BCner-tee-tee-teekanne-japan-7807229/",
+        "license": "Pixabay Content License",
+        "author": "mirkostoedter",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "00037f73f3f3cecc",
+        "alt": "Clay teapot and cup on wood",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.895
+      },
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/2",
+        "sourceUrl": "https://pixabay.com/photos/teapot-ceramic-cup-tea-7941793/",
+        "license": "Pixabay Content License",
+        "author": "ERICKZHOU",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 854,
+        "phash": "fec8dae8c0012140",
+        "alt": "Two small clay teapots side by side",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9924
+      },
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/5",
+        "sourceUrl": "https://pixabay.com/photos/tea-set-teapot-2064504/",
+        "license": "Pixabay Content License",
+        "author": "4537668",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 833,
+        "phash": "2300081818787f33",
+        "alt": "Grey clay teapot on wooden slab",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9781
+      },
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/7",
+        "sourceUrl": "https://pixabay.com/photos/teapot-tea-cup-tea-ware-zen-680552/",
+        "license": "Pixabay Content License",
+        "author": "namoliang",
+        "provider": "pixabay",
+        "width": 853,
+        "height": 1280,
+        "phash": "66ccfce099988c80",
+        "alt": "Clay teapot with four cups",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9984
+      },
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/8",
+        "sourceUrl": "https://pixabay.com/photos/tea-set-teapot-2064506/",
+        "license": "Pixabay Content License",
+        "author": "4537668",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 854,
+        "phash": "0672001b7c7f3700",
+        "alt": "Dark clay teapot with a cup",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9456
+      },
+      {
+        "publicId": "sawdagar/catalog/terracotta-tea-set/6",
+        "sourceUrl": "https://pixabay.com/photos/tea-chado-dado-teapot-korea-4817851/",
+        "license": "Pixabay Content License",
+        "author": "hana_chado",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 719,
+        "phash": "f0fd3d1e198131a3",
+        "alt": "Clay teapot on a garden table",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.97
+      }
+    ],
+    "planter": [
+      {
+        "publicId": "sawdagar/catalog/planter/6",
+        "sourceUrl": "https://pixabay.com/photos/cactus-watering-can-houseplant-4161380/",
+        "license": "Pixabay Content License",
+        "author": "suju-foto",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "2070c084841effff",
+        "alt": "Terracotta planter with a cactus",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9186
+      },
+      {
+        "publicId": "sawdagar/catalog/planter/7",
+        "sourceUrl": "https://pixabay.com/photos/cacti-flora-flowers-pot-1846147/",
+        "license": "Pixabay Content License",
+        "author": "Pexels",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 851,
+        "phash": "0202fefe7e380c00",
+        "alt": "Glazed planter with a succulent",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9313
+      },
+      {
+        "publicId": "sawdagar/catalog/planter/8",
+        "sourceUrl": "https://pixabay.com/photos/ceramic-earth-pot-clay-pot-5510008/",
+        "license": "Pixabay Content License",
+        "author": "olbergeron",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "fffff3879f3fe3e2",
+        "alt": "Tiny terracotta planter on yellow",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.6936
+      }
+    ],
+    "brass-bowl": [
+      {
+        "publicId": "sawdagar/catalog/brass-bowl/1",
+        "sourceUrl": "https://pixabay.com/photos/singing-bowl-buddha-prayer-2576487/",
+        "license": "Pixabay Content License",
+        "author": "52schnecke",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "8080801ebf7f7f1c",
+        "alt": "Engraved brass bowl with script",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9882
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-bowl/3",
+        "sourceUrl": "https://pixabay.com/photos/singing-bowl-racket-therapy-top-4595928/",
+        "license": "Pixabay Content License",
+        "author": "ha11ok",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "ffffc181c3c38303",
+        "alt": "Brass bowl with wooden mallet",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9967
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-bowl/6",
+        "sourceUrl": "https://pixabay.com/photos/singing-bowls-quigong-792558/",
+        "license": "Pixabay Content License",
+        "author": "maria-anne",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 850,
+        "phash": "7f7f0701018177bf",
+        "alt": "Two brass bowls with a mallet",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9143
+      },
+      {
+        "publicId": "sawdagar/catalog/brass-bowl/8",
+        "sourceUrl": "https://pixabay.com/photos/singing-bowl-tibetan-bowl-relaxation-4749805/",
+        "license": "Pixabay Content License",
+        "author": "Dremati",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "ffffc3c3c3c3819f",
+        "alt": "Large brass bowl and mallet",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9552
+      }
+    ],
+    "leather-tote": [
+      {
+        "publicId": "sawdagar/catalog/leather-tote/1",
+        "sourceUrl": "https://pixabay.com/photos/handbag-purse-fashion-bag-female-883122/",
+        "license": "Pixabay Content License",
+        "author": "jumpinjake",
+        "provider": "pixabay",
+        "width": 968,
+        "height": 1280,
+        "phash": "e7ffd3818101038f",
+        "alt": "Black leather handbag with chain",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8255
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-tote/4",
+        "sourceUrl": "https://pixabay.com/photos/handbag-purse-fashion-bag-female-883113/",
+        "license": "Pixabay Content License",
+        "author": "jumpinjake",
+        "provider": "pixabay",
+        "width": 929,
+        "height": 1280,
+        "phash": "ffffffdf000000fd",
+        "alt": "Black leather tote with tag",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9602
+      },
+      {
+        "publicId": "sawdagar/catalog/leather-tote/8",
+        "sourceUrl": "https://pixabay.com/photos/purse-handbag-luxury-coach-product-2597948/",
+        "license": "Pixabay Content License",
+        "author": "1139623",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 851,
+        "phash": "181c1c3e3e3e7f7f",
+        "alt": "Ivory leather tote on white",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9719
+      }
+    ],
+    "leather-journal": [
+      {
+        "publicId": "sawdagar/catalog/leather-journal/5",
+        "sourceUrl": "https://pixabay.com/photos/book-pen-notebook-diary-desk-4806076/",
+        "license": "Pixabay Content License",
+        "author": "mylns65hoasphn",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 1021,
+        "phash": "80187e7e9e001804",
+        "alt": "Brown leather journal and pen",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8007
+      }
+    ],
+    "bedding-set": [
+      {
+        "publicId": "sawdagar/catalog/bedding-set/2",
+        "sourceUrl": "https://pixabay.com/photos/pillows-sheets-bed-linen-820149/",
+        "license": "Pixabay Content License",
+        "author": "JayMantri",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "04373f1f1f1f03fb",
+        "alt": "White cotton bedding on a bed",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9809
+      },
+      {
+        "publicId": "sawdagar/catalog/bedding-set/4",
+        "sourceUrl": "https://pixabay.com/photos/read-sunday-bedroom-book-sleep-3667768/",
+        "license": "Pixabay Content License",
+        "author": "LUM3N",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "3f3fff7d7d380000",
+        "alt": "Off-white linen bedding, crumpled",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.867
+      },
+      {
+        "publicId": "sawdagar/catalog/bedding-set/6",
+        "sourceUrl": "https://pixabay.com/photos/bed-comforter-cats-paw-cat-duvet-1358907/",
+        "license": "Pixabay Content License",
+        "author": "tvjoern",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 857,
+        "phash": "ff671f1905617900",
+        "alt": "Grey bedding on a wooden bed",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8899
+      }
+    ],
+    "massage-oil": [
+      {
+        "publicId": "sawdagar/catalog/massage-oil/1",
+        "sourceUrl": "https://pixabay.com/photos/glass-bottle-oil-wellness-flowers-4108085/",
+        "license": "Pixabay Content License",
+        "author": "silviarita",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "4f3fc7c7470787c7",
+        "alt": "Glass bottle of golden oil",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8714
+      },
+      {
+        "publicId": "sawdagar/catalog/massage-oil/5",
+        "sourceUrl": "https://pixabay.com/photos/essential-oils-aromatherapy-spa-oil-1433694/",
+        "license": "Pixabay Content License",
+        "author": "monicore",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "ffe7c3c387818107",
+        "alt": "Amber oil bottles with flowers",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.7701
+      },
+      {
+        "publicId": "sawdagar/catalog/massage-oil/6",
+        "sourceUrl": "https://pixabay.com/photos/essential-oil-spa-treatment-1731518/",
+        "license": "Pixabay Content License",
+        "author": "Nawalescape",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "f0fcfd21040000a8",
+        "alt": "Oil bottles and frangipani flowers",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9948
+      }
+    ],
+    "attar": [
+      {
+        "publicId": "sawdagar/catalog/attar/4",
+        "sourceUrl": "https://pixabay.com/photos/bottle-perfume-cosmetics-liquid-8352498/",
+        "license": "Pixabay Content License",
+        "author": "AestheticJourney",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 717,
+        "phash": "7c7c707078f87878",
+        "alt": "Amber attar bottle with gold cap",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.7219
+      },
+      {
+        "publicId": "sawdagar/catalog/attar/7",
+        "sourceUrl": "https://pixabay.com/photos/perfume-bottle-fragrance-3635207/",
+        "license": "Pixabay Content License",
+        "author": "Sponchia",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "fecfe0c0c7f4e440",
+        "alt": "Faceted crystal attar bottle",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8589
+      }
+    ],
+    "planner": [
+      {
+        "publicId": "sawdagar/catalog/planner/3",
+        "sourceUrl": "https://pixabay.com/photos/new-year-background-organizer-791939/",
+        "license": "Pixabay Content License",
+        "author": "kaboompics",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "70703010da3f7b3b",
+        "alt": "Open planner with flowers",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.8134
+      },
+      {
+        "publicId": "sawdagar/catalog/planner/4",
+        "sourceUrl": "https://pixabay.com/photos/notebook-desk-paper-desktop-3820634/",
+        "license": "Pixabay Content License",
+        "author": "JessBaileyDesign",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "b4debefcbd98083c",
+        "alt": "Blank planner with paper clips",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.5923
+      },
+      {
+        "publicId": "sawdagar/catalog/planner/5",
+        "sourceUrl": "https://pixabay.com/photos/arm-hand-write-planner-planning-1284248/",
+        "license": "Pixabay Content License",
+        "author": "Pexels",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 853,
+        "phash": "7c7870f8fefcf8f0",
+        "alt": "Hand writing in an open planner",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.9561
+      },
+      {
+        "publicId": "sawdagar/catalog/planner/8",
+        "sourceUrl": "https://pixabay.com/photos/planner-march-calendar-schedule-4884740/",
+        "license": "Pixabay Content License",
+        "author": "hudsoncrafted",
+        "provider": "pixabay",
+        "width": 1280,
+        "height": 960,
+        "phash": "00f0f0f0f0f1f8f6",
+        "alt": "Planner with cherry blossom branch",
+        "productMatch": true,
+        "reviewed": true,
+        "clipScore": 0.921
       }
     ]
   }

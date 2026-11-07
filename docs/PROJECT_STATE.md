@@ -117,17 +117,18 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 
 ## Hardening pass (Part A complete, 2026-11-07)
 
-Part A, the photo rebuild, is finished. The catalogue is now 28 products, each
-published with exactly one reviewed main photo, and only 14 leaf categories in 7
-departments have products. The other five departments are hidden from the menu
-instead of showing comics, shop fronts, portraits or gardens.
+Part A, the photo rebuild, is finished. The catalogue is now 83 products, each
+published with exactly one reviewed main photo, in 25 leaf categories across 8
+departments. Jute joins the seven departments from the first pass; the four other
+empty departments are hidden from the menu instead of showing comics, shop
+fronts, portraits or gardens.
 
 What changed:
 
-- `packages/domain/src/catalog/curatedProducts.ts` is the catalogue: 28 entries,
+- `packages/domain/src/catalog/curatedProducts.ts` is the catalogue: 83 entries,
   each with its exact Cloudinary photo, a six-word description of what the photo
   shows, and bilingual copy written from that photo.
-- `packages/seed/images/manifest.json` holds 28 photos with `productMatch`,
+- `packages/seed/images/manifest.json` holds 83 photos with `productMatch`,
   `reviewed` and the recorded `clipScore`; `enforced` is true.
 - `scripts/ci/check-images.ts` requires one reviewed photo per curated product, a
   keyword match and no duplicate photo, hash or alt text.
@@ -139,10 +140,13 @@ What changed:
   was written around and the verdict, plus the rejected examples and the answer
   to why Sarees looked correct.
 
-Blocker recorded honestly: `PEXELS_API_KEY` and `PIXABAY_API_KEY` are still absent
-from the GitHub secrets, so no new Pexels or Pixabay photos could be sourced. The
-Unsplash candidates from the earlier run were inspected and none cleared CLIP,
-so the catalogue uses only the clean Commons photographs that passed every rule.
+Second sourcing pass: `PIXABAY_API_KEY` is set in GitHub Actions (confirmed with
+`gh secret list`), and candidate run
+[42391749446](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42391749446)
+sourced 408 photos (401 Pixabay, 7 Openverse) across 51 leaves. 123 passed CLIP
+and the face, text, size and keyword rules; 55 showed a clean matching object on
+the contact sheets and were written into products. No Openverse candidate
+passed, so every new photo is Pixabay Content Licence. No threshold was lowered.
 
 Verified on the deployment (2026-11-07): Database run
 [42387120867](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42387120867)

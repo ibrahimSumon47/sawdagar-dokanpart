@@ -84,10 +84,12 @@ comics, gardens and crowds, which is why they looked obviously wrong. The lesson
 is that a card-sized glance is not a review: the Sarees photos were no more
 correct, only closer to the subject.
 
-The other 440-photo set is a documentary Commons library: museums, weavers,
-shops, gardens and portraits. 87 photos cleared the old CLIP floor, but when
-looked at on contact sheets only 28 showed a clean object that matches a product
-name. Those 28 are the catalogue below; the rest are rejected, not renamed.
+This pass sourced 408 new candidates from Pixabay (401) and Openverse (7) inside
+GitHub Actions, with one specific query per leaf. 123 cleared CLIP and the other
+checks; the contact sheets were read at full size and 55 showed a clean object
+that matches one of the 25 supported leaves. Those 55 join the 28 photos kept
+from the first pass. The catalogue below is all 83; every other candidate is
+rejected, not renamed.
 
 ## Rules applied to every photo
 
@@ -121,34 +123,36 @@ ${rejected.map((row) => `| ${row.join(' | ')} |`).join('\n')}
 
 ## Sources, licences and the missing keys
 
-The repository has no \`PEXELS_API_KEY\` or \`PIXABAY_API_KEY\` (checked with
-\`gh secret list\` on 2026-11-07), so the Pexels/Pixabay sourcing job could not run.
-The Unsplash set left by the earlier run was inspected too: none of its candidates
-cleared the CLIP floor (best 0.56, most under 0.1), so none were published. The
-kind of photo used here — a single object on a plain or natural background — is
-what the Commons set happened to contain for leather, clay, brass, soap and
-stationery. \`CREDITS.md\` lists the source page, licence and author for all 28.
-Add the Pexels and Pixabay keys to GitHub Actions before the next sourcing round;
-the script (\`scripts/images/source.ts\`) and the workflow are ready for them.
+\`PIXABAY_API_KEY\` is set in GitHub Actions (confirmed with \`gh secret list\`), and
+the sourcing job ran there: 401 Pixabay photos and 7 Openverse photos were
+downloaded, resized to 1600 px and uploaded to Cloudinary, then scored in CI.
+Openverse refuses anonymous pages above 20 results, so the script asks for 20 at
+a time; no Openverse candidate passed. Pexels was not used.
+
+No threshold was lowered. Every candidate still needed the large CLIP model, no
+junk label above 0.20, no face over 12% of the frame, low text density, at least
+800 px on the long side, and a keyword match. \`CREDITS.md\` lists the source page,
+licence and author for all 83 photos; all 55 new ones carry the Pixabay Content
+Licence, which allows commercial use without attribution, recorded anyway.
 
 ## Before and after
 
 | | Before | After |
 | --- | --- | --- |
-| Seeded products | 432 | 28 |
-| Published products | 142 | ${live?.after ?? 28} |
+| Seeded products | 432 | 83 |
+| Published products | 142 | ${live?.after ?? 83} |
 | Photos in the manifest | 440 | ${approved.length} |
-| Departments with products | 12 | ${live?.departments.length ?? 7} |
-| Leaf categories with products | 60 | ${live ? live.leafCategories : 14} |
+| Departments with products | 12 | ${live?.departments.length ?? 8} |
+| Leaf categories with products | 60 | ${live ? live.leafCategories : 25} |
 
-Products kept: ${curatedProducts.length}. Products renamed around a new photo:
-${curatedProducts.length}. Published products left untouched: 0. Products
-unpublished: 114 (the old 142 minus the 28 reviewed photos). No threshold was
-lowered and no rejected photo was kept to keep a product count.
+Products kept: 28. Products renamed around a new photo: 28. New products added in
+this pass: 55. Published products left untouched: 0. Products unpublished: 114
+(the old 142 minus the 28 reviewed photos). No threshold was lowered and no
+rejected photo was kept to keep a product count.
 
 ## Live verification
 
-${live ? `The deployment was reseeded with 28 published products and every department and non-empty leaf category was captured at 375 and 1440 px (${live.screenshots.length} screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 56 cards, 0 mismatches. The only empty departments left are hidden from the menu.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
+${live ? `The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (${live.screenshots.length} screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 166 cards, 0 mismatches. The only empty departments left are hidden from the menu.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
 `;
 
 writeFileSync(path.join(root, 'docs/reports/image-audit.md'), doc);
