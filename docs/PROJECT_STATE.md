@@ -49,7 +49,7 @@
 
 ## Now
 
-Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`. The first ignore rule skipped every build because the project root is `apps/web` and its pathspecs matched nothing there; the corrected command runs from the repository root. CI and security are green on aea8b7d.
+Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`. The first ignore rule skipped every build because the project root is `apps/web` and its pathspecs matched nothing there; 22c4109 runs the check from the repository root. CI and security are green, and Vercel deployed 22c4109 as Ready.
 
 ## Owner must add
 

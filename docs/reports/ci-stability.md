@@ -28,13 +28,11 @@ Evidence is added after the verification runs.
 
 `git ls-remote --heads origin` lists only `refs/heads/main`. Pull requests #1 to #7 were closed with `--delete-branch` and a comment saying dependency updates are handled manually; `gh pr list --state open` returns nothing.
 
-### Code commit aea8b7d
+### Code commits
 
-- CI [42379798199](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798199): success on Linux, Windows and macOS.
-- Security [42379798185](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798185): success, including the audit and the full-history secret scan.
-- Image check [42379798176](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798176): the CLIP job runs with `continue-on-error` until the photo rebuild.
-- Vercel created production deployment `dpl_5NYowH22cKJmW5KWSWZrXyEUfu8L` and canceled it after five seconds. The first `ignoreCommand` was the cause, not the deployment allowance: the project root directory is `apps/web`, so Vercel ran `git diff` there, the `apps` and `packages` pathspecs matched nothing, and git returned 0, which Vercel reads as "skip". The command now changes to the repository root with `git rev-parse --show-toplevel` before diffing, and a missing parent revision fails open (a non-zero exit builds rather than skips).
-- The docs-only commit 4a10ba8 hit the same false skip (`The deployment was canceled because the Ignored Build Step command returned exit code 0`), which confirmed the cause. The corrected command is verified by the commit that carries this report and by the docs-only commit that follows it.
+- aea8b7d: CI [42379798199](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798199) success on Linux, Windows and macOS; Security [42379798185](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798185) success; Image check [42379798176](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798176) success.
+- The first Vercel run for aea8b7d was canceled by the Ignored Build Step, not by the deployment allowance. The project root directory is `apps/web`, so Vercel ran `git diff` there and the `apps` and `packages` pathspecs matched nothing, which returns 0 and means "skip".
+- 22c4109 corrects the command to change to the repository root before diffing. CI [42380788042](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42380788042) and Security [42380788043](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42380788043) are green, and Vercel deployed it in 53 seconds as [sawdagar-dokanpart-kw8ljnle1](https://sawdagar-dokanpart-kw8ljnle1-ibrahimsumon47s-projects.vercel.app), status Ready.
 
 ### Release guest holds
 
