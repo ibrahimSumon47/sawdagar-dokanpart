@@ -146,7 +146,11 @@
     },
     {
       "name": "AI-readable summary, project facts and repository map",
-      "paths": ["llms.txt", "docs/PROJECT_FACTS.json", "docs/repo-map.md"]
+      "paths": [
+        "llms.txt",
+        "docs/PROJECT_FACTS.json",
+        "docs/repo-map.md"
+      ]
     }
   ],
   "lighthouses": {

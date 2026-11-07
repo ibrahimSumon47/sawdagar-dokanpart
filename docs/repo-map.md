@@ -112,12 +112,12 @@ scripts/  Node automation for wasm builds, budgets, facts, repository map and re
 
 ## Root files
 
-| File                 | Purpose                                                          |
-| -------------------- | ---------------------------------------------------------------- |
-| `README.md`          | Project overview, screenshots, demo roles, stack and limitations |
-| `ARCHITECTURE.md`    | Request flow, each business flow and the deployment model        |
-| `CHANGELOG.md`       | Dated change log, grouped by area rather than by commit          |
-| `AGENTS.md`          | Working agreement for human and AI contributors                  |
-| `LICENSE`            | MIT licence                                                      |
-| `llms.txt`           | Plain-text repository summary for assistants and crawlers        |
-| `.lighthouserc.json` | Lighthouse URLs and assertions for the deployment                |
+| File | Purpose |
+|---|---|
+| `README.md` | Project overview, screenshots, demo roles, stack and limitations |
+| `ARCHITECTURE.md` | Request flow, each business flow and the deployment model |
+| `CHANGELOG.md` | Dated change log, grouped by area rather than by commit |
+| `AGENTS.md` | Working agreement for human and AI contributors |
+| `LICENSE` | MIT licence |
+| `llms.txt` | Plain-text repository summary for assistants and crawlers |
+| `.lighthouserc.json` | Lighthouse URLs and assertions for the deployment |
