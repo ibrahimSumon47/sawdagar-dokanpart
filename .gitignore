@@ -15,8 +15,4 @@ playwright-report/
 .playwright-evidence*/
 
 # Lighthouse artifacts downloaded from CI
-.lh5/
-.lh-tmp/
-.lh2/
-.lh3/
-.lh4/
+.lh*/
