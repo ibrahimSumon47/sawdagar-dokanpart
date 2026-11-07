@@ -129,7 +129,7 @@ Do not lower `correctMin` or `junkMax`, and do not publish a product whose photo
 
 ### Sourcing round 1 (2026-11-07, run 42367330209)
 
-- The repository has no or ; only exists. therefore ran on Unsplash alone (50 requests/hour on the free app).
-- The run uploaded 253 candidate photos to and scored them: **18 of 253 passed CLIP**. Most queries returned people, rooms or lifestyle scenes, and ambiguous labels lost to a sibling subcategory (a belt photo scored as a wallet and so on).
+- The repository has no `PEXELS_API_KEY` or `PIXABAY_API_KEY`; only `UNSPLASH_ACCESS_KEY` exists. `scripts/images/source.ts` therefore ran on Unsplash alone (50 requests/hour on the free app).
+- The run uploaded 253 candidate photos to `sawdagar/hardening/<subcategory>/<n>` and scored them: **18 of 253 passed CLIP**. Most queries returned people, rooms or lifestyle scenes, and ambiguous labels lost to a sibling subcategory (a belt photo scored as a wallet and so on).
 - The manifest was left untouched, so the live catalogue and its 142 products are unchanged. No product was renamed, unpublished or reseeded.
-- Next step: add the Pexels and Pixabay keys as repository secrets (they are not present), run again, and only then merge the artifact manifest, rename products and continue part A. Do not lower or .
+- Next step: add the Pexels and Pixabay keys as repository secrets (they are not present), run `Product images` again, and only then merge the artifact manifest, rename products and continue part A. Do not lower `correctMin` or `junkMax`.
