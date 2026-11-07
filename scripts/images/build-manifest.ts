@@ -19,11 +19,23 @@ import type {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const manifestPath = path.join(root, 'packages/seed/images/manifest.json');
 const current = JSON.parse(readFileSync(manifestPath, 'utf8')) as ProductImageManifest;
-const known = new Map(
+const known = new Map<string, ProductImageAsset>(
   Object.values(current.subcategories)
     .flat()
     .map((asset) => [asset.publicId, asset] as const),
 );
+
+/* Photos produced by the candidate workflow are not in the committed manifest
+ * yet; their size, hash and licence metadata lives in candidates.json. */
+const candidatesPath = path.join(root, 'packages', 'seed', 'images', 'candidates.json');
+try {
+  const candidates = JSON.parse(readFileSync(candidatesPath, 'utf8')) as ProductImageManifest;
+  for (const asset of Object.values(candidates.subcategories).flat()) {
+    if (!known.has(asset.publicId)) known.set(asset.publicId, asset);
+  }
+} catch {
+  // No candidate run yet: the committed manifest is still the only source.
+}
 
 const subcategories: Record<string, ProductImageAsset[]> = {};
 const used = new Set<string>();

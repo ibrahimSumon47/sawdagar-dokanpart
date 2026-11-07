@@ -159,7 +159,8 @@ async function searchOpenverse(query: string): Promise<Candidate[]> {
     q: query,
     license_type: 'commercial',
     category: 'photograph',
-    page_size: '40',
+    // Anonymous requests are capped at 20 results; a larger page returns 401.
+    page_size: '20',
     mature: 'false',
   }).toString();
   const response = await fetch(url, {
@@ -233,7 +234,7 @@ async function uploadToCloudinary(image: Buffer, publicId: string): Promise<void
 
   for (let attempt = 1; attempt <= 5; attempt += 1) {
     const timestamp = String(Math.floor(Date.now() / 1000));
-    const signed = { public_id: publicId, timestamp, overwrite: 'false' };
+    const signed = { public_id: publicId, timestamp, overwrite: 'true' };
     const form = new FormData();
     form.append('file', new Blob([new Uint8Array(image)]), 'photo.jpg');
     for (const [name, value] of Object.entries(signed)) form.append(name, value);
@@ -267,13 +268,24 @@ async function main(): Promise<void> {
   const bySubcategory: Record<string, CandidateAsset[]> = {};
   const metadata: Record<string, Candidate> = {};
   const usedHashes: string[] = [];
-  let counts = { pixabay: 0, openverse: 0 };
+  const counts = { pixabay: 0, openverse: 0 };
+  let warnedOpenverse = false;
 
   for (const [slug, queries] of Object.entries(targets)) {
     const kept: CandidateAsset[] = [];
     for (const query of queries) {
       if (kept.length >= PHOTOS_PER_SUBCATEGORY) break;
-      const found = [...(await searchPixabay(query, pixabay)), ...(await searchOpenverse(query))];
+      let openverse: Candidate[] = [];
+      try {
+        openverse = await searchOpenverse(query);
+      } catch (error) {
+        // Pixabay alone still has to finish; the run reports what Openverse did.
+        if (!warnedOpenverse) {
+          console.warn(`Openverse unavailable: ${(error as Error).message}`);
+          warnedOpenverse = true;
+        }
+      }
+      const found = [...(await searchPixabay(query, pixabay)), ...openverse];
       for (const candidate of found) {
         if (kept.length >= PHOTOS_PER_SUBCATEGORY) break;
         let buffer: Buffer;
