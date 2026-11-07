@@ -33,7 +33,8 @@ Evidence is added after the verification runs.
 - CI [42379798199](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798199): success on Linux, Windows and macOS.
 - Security [42379798185](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798185): success, including the audit and the full-history secret scan.
 - Image check [42379798176](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798176): the CLIP job runs with `continue-on-error` until the photo rebuild.
-- Vercel created production deployment `dpl_5NYowH22cKJmW5KWSWZrXyEUfu8L` and canceled it after five seconds. The daily Hobby allowance had already been spent by the 93 and 31 pushes; `vercel usage` reports that billing data is unavailable for this team. The `ignoreCommand` path is checked by the docs-only commit that follows, which must produce no deployment at all.
+- Vercel created production deployment `dpl_5NYowH22cKJmW5KWSWZrXyEUfu8L` and canceled it after five seconds. The first `ignoreCommand` was the cause, not the deployment allowance: the project root directory is `apps/web`, so Vercel ran `git diff` there, the `apps` and `packages` pathspecs matched nothing, and git returned 0, which Vercel reads as "skip". The command now changes to the repository root with `git rev-parse --show-toplevel` before diffing, and a missing parent revision fails open (a non-zero exit builds rather than skips).
+- The docs-only commit 4a10ba8 hit the same false skip (`The deployment was canceled because the Ignored Build Step command returned exit code 0`), which confirmed the cause. The corrected command is verified by the commit that carries this report and by the docs-only commit that follows it.
 
 ### Release guest holds
 

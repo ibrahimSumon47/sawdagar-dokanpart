@@ -49,7 +49,7 @@
 
 ## Now
 
-Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`. The Hobby deployment allowance was already spent before this pass, so Vercel canceled the production build for aea8b7d; CI and security are green, and the docs-only commit confirms the new ignore path.
+Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`. The first ignore rule skipped every build because the project root is `apps/web` and its pathspecs matched nothing there; the corrected command runs from the repository root. CI and security are green on aea8b7d.
 
 ## Owner must add
 
@@ -67,7 +67,7 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 ## Blocked
 
 - Part A of the hardening pass (photo rebuild) waits on `PEXELS_API_KEY` and `PIXABAY_API_KEY`; the image check stays informational until then.
-- Vercel `usage` cannot read billing data for the team, so the deployment allowance is inferred from the deployment list; a successful production deploy of the next code slice will confirm the quota has reset. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
+- Vercel `usage` cannot read billing data for this team, so the allowance is inferred from the deployment list; the next production build will show whether the quota has room. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
 
 ## Known issues
 
