@@ -35,7 +35,9 @@ test.describe('R6 guest checkout and confirmation', () => {
     const optionCount = await variantOptions.count();
     for (let index = 0; index < optionCount; index += 1) {
       await variantOptions.nth(index).click();
-      if (await addToCart.isEnabled()) break;
+      // A bounded probe: isEnabled waits for the locator to resolve, so an unbounded call on a
+      // page that sold out would sit here until the test timeout instead of saying why.
+      if (await addToCart.isEnabled({ timeout: 2_000 }).catch(() => false)) break;
     }
     await expect(addToCart).toBeEnabled();
     await addToCart.click();

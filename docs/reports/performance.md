@@ -123,3 +123,17 @@ The product page stayed at 0.88 in all four rounds, which is the measured basis 
 Cause: `next/image` caches each optimized size for 60 seconds by default. A Lighthouse round spaces its five runs about 13 seconds apart, so the first run transforms the hero, the result expires, and later runs pay again or catch a stale entry. `2bfc1d9` sets `images.minimumCacheTTL` to 30 days for the committed source files, which removes that transform from the LCP path for every run after the first warm one.
 
 The gate now asserts the median of the five runs, which is the number this report has always published. Lighthouse CI defaults to the best run, and that default would have shown a green home at 0.94 while the median was 0.86.
+
+## Round 9 (commits 2bfc1d9 to 15f7f3d, run 42349157321)
+
+Changes: the home hero is served straight from the CDN instead of through the image optimizer, which had answered every request with `must-revalidate`; and the first four catalog cards stay out of the scroll reveal, because a reveal starts them at opacity 0 and the largest contentful paint waited for the animation.
+
+| Page    | Median | Scores (five runs)           | LCP (five runs)                | CLS (five runs) | TBT (five runs)     |
+| ------- | ------ | ---------------------------- | ------------------------------ | --------------- | ------------------- |
+| Home    | 0.92   | 0.68, 0.92, 0.90, 0.92, 0.92 | 3.69, 3.34, 3.70, 3.32, 3.34 s | 0 all           | 56 ms at the median |
+| Catalog | 0.94   | 0.95, 0.94, 0.94, 0.94, 0.97 | 2.86, 3.02, 3.03, 3.01, 2.57 s | 0 all           | 64 ms at the median |
+| Product | 0.88   | 0.88, 0.89, 0.86, 0.88, 0.87 | 3.81, 3.71, 3.94, 3.92, 3.96 s | 0 all           | 96 ms at the median |
+
+Home and catalog clear the 0.90 budget at the median, and the product page clears its 0.85 budget ([ADR-014](adr/ADR-014-product-performance-budget.md)). Accessibility, best practices and SEO are 100 on all three URLs.
+
+Two things this round showed: running the browser suite at the same time as the audit pushes the deployment hard enough to move every score down by five to ten points, so Lighthouse now runs on its own; and the first run of a round can still be an outlier (home 0.68 here) while the median stays where the page actually sits.

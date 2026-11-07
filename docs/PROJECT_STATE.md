@@ -100,3 +100,10 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 - Product LCP is the Cloudinary photo, already `fetchPriority="high"` with `f_auto,q_auto,w_800`; the remaining cost is the image host. Catalog CLS of 0.128 appears in two of five runs; the cause is the header height during the shell swap, not yet confirmed.
 - Exact next step: read the Lighthouse `layout-shifts` audit on a new run to confirm the catalog CLS source; then run the bundle analyser and defer non-critical client code (step e); then verify the theme script before paint (step c) and the Neon pooled connection string (step f). Re-measure after each round.
 - After the gate: README test counts and CI rows, this file's Known issues cleanup, drift regen, final audit, git hygiene report, and R10 in `docs/features.json`.
+
+## Final audit (Revision 1, 2026-11-07)
+
+- Lighthouse, five mobile runs per URL, median aggregation (run [42349157321](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42349157321)): home 0.92, catalog 0.94, product 0.88, with 100 accessibility, best practices and SEO on all three and CLS 0. Home and catalog hold 0.90, the product page holds its 0.85 budget ([ADR-014](adr/ADR-014-product-performance-budget.md)).
+- axe-core 4.14.0, WCAG 2.0/2.1/2.2 A and AA, on `/`, `/catalog` and one product at 375, 768 and 1440 px in the light and dark theme: no violations in 18 page loads. `node scripts/ci/axe-audit.mjs` repeats it.
+- Git hygiene: one branch, 224 commits before this audit, all authored and committed by the owner, 24 older commits carry a `Co-Authored-By` trailer that the owner may remove by rewriting history; [git-hygiene.md](reports/git-hygiene.md) lists them.
+- The metrics come from the deployed site, not a local server: `npm`-free checks run on the deployment and the numbers above are medians, not single samples.
