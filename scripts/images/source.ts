@@ -33,7 +33,7 @@ const PHOTOS_PER_SUBCATEGORY = 12;
 const MIN_LONG_SIDE = 800;
 
 interface Candidate {
-  provider: 'pexels' | 'pixabay';
+  provider: 'pexels' | 'pixabay' | 'unsplash';
   providerId: string;
   title: string;
   sourceUrl: string;
@@ -151,6 +151,47 @@ async function searchPexels(query: string, key: string): Promise<Candidate[]> {
     }));
 }
 
+let unsplashLimited = false;
+
+async function searchUnsplash(query: string, key: string): Promise<Candidate[]> {
+  if (unsplashLimited) return [];
+  const url = new URL('https://api.unsplash.com/search/photos');
+  url.search = new URLSearchParams({ query, per_page: '30', orientation: 'squarish' }).toString();
+  const response = await fetch(url, { headers: { Authorization: `Client-ID ${key}` } });
+  if (response.status === 403 || response.status === 429) {
+    // The demo app allows 50 requests an hour; stop asking instead of burning the rest.
+    unsplashLimited = true;
+    console.warn(`Unsplash rate limit reached (${response.status}); keeping what was found`);
+    return [];
+  }
+  if (!response.ok) throw new Error(`Unsplash ${response.status}`);
+  const body = (await response.json()) as {
+    results?: Array<{
+      id: string;
+      width: number;
+      height: number;
+      alt_description?: string | null;
+      description?: string | null;
+      links?: { html?: string };
+      urls?: { regular?: string; full?: string };
+      user?: { name?: string };
+    }>;
+  };
+  return (body.results ?? [])
+    .filter((photo) => Math.max(photo.width, photo.height) >= MIN_LONG_SIDE && photo.urls?.regular)
+    .map((photo) => ({
+      provider: 'unsplash' as const,
+      providerId: photo.id,
+      title: photo.alt_description ?? photo.description ?? query,
+      sourceUrl: photo.links?.html ?? `https://unsplash.com/photos/${photo.id}`,
+      license: 'Unsplash License',
+      author: photo.user?.name ?? 'Unsplash contributor',
+      width: photo.width,
+      height: photo.height,
+      downloadUrl: photo.urls?.regular as string,
+    }));
+}
+
 async function searchPixabay(query: string, key: string): Promise<Candidate[]> {
   const url = new URL('https://pixabay.com/api/');
   url.search = new URLSearchParams({
@@ -255,7 +296,8 @@ async function download(url: string): Promise<Buffer> {
 async function main(): Promise<void> {
   const pexels = process.env.PEXELS_API_KEY;
   const pixabay = process.env.PIXABAY_API_KEY;
-  if (!pexels && !pixabay) throw new Error('No photo provider key is set');
+  const unsplash = process.env.UNSPLASH_ACCESS_KEY;
+  if (!pexels && !pixabay && !unsplash) throw new Error('No photo provider key is set');
 
   const labels = JSON.parse(
     await (
@@ -275,6 +317,7 @@ async function main(): Promise<void> {
       const found = [
         ...(pexels ? await searchPexels(query, pexels) : []),
         ...(pixabay ? await searchPixabay(query, pixabay) : []),
+        ...(unsplash ? await searchUnsplash(query, unsplash) : []),
       ];
       for (const candidate of found) {
         if (kept.length >= PHOTOS_PER_SUBCATEGORY) break;
