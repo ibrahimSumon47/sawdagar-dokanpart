@@ -294,11 +294,20 @@ async function main(): Promise<void> {
         } catch {
           continue;
         }
-        const decoded = await sharp(buffer).metadata();
-        const width = decoded.width ?? 0;
-        const height = decoded.height ?? 0;
-        if (Math.max(width, height) < MIN_LONG_SIDE) continue;
-        const phash = await averageHash(buffer);
+        let width = 0;
+        let height = 0;
+        let phash = '';
+        try {
+          // Some provider URLs answer with HTML or a format sharp cannot read;
+          // skip that result instead of losing the whole batch.
+          const decoded = await sharp(buffer).metadata();
+          width = decoded.width ?? 0;
+          height = decoded.height ?? 0;
+          if (Math.max(width, height) < MIN_LONG_SIDE) continue;
+          phash = await averageHash(buffer);
+        } catch {
+          continue;
+        }
         if (
           [...usedHashes, ...kept.map((asset) => asset.phash)].some(
             (other) => hashDistance(phash, other) < HASH_DISTANCE_MIN,
