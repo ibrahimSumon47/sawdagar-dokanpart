@@ -19,9 +19,10 @@ export function ProductVendorCard({ vendor, locale, copy }: ProductVendorCardPro
       <h2 id="product-vendor-title" className="font-serif text-xl text-ink">
         {copy.vendorTitle}
       </h2>
+      {/* No aria-label: the row already names the store, its district, its rating and its
+          product count, and a shorter name would fail WCAG 2.5.3. */}
       <Link
         href={`/catalog?vendor=${vendor.slug}`}
-        aria-label={vendor.name}
         className="mt-3 block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <VendorRow

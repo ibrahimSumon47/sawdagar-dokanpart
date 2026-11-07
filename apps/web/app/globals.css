@@ -80,10 +80,11 @@
   animation: number-roll var(--duration-fast) var(--ease-out-soft);
 }
 
+/* Transform only: fading the price made it briefly unreadable against the card and failed a
+   contrast audit that sampled it mid-animation. */
 @keyframes price-tick {
   from {
     transform: translateY(-30%);
-    opacity: 0.3;
   }
 }
 

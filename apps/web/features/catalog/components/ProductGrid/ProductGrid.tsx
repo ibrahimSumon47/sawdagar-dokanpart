@@ -49,9 +49,10 @@ export function ProductGrid({ products, locale, labels }: ProductGridProps) {
           const photo = productPhoto(product.images);
           return (
             <li key={product.id} className="reveal-on-scroll relative min-w-0">
+              {/* No aria-label: WCAG 2.5.3 wants the accessible name to contain the visible text,
+                  and the card shows the vendor and the price beside the title. */}
               <Link
                 href={`/product/${product.slug}`}
-                aria-label={product.title[locale]}
                 className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
                 <ProductCard
