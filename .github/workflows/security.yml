@@ -37,6 +37,6 @@ jobs:
           fetch-depth: 0
       # gitleaks is MIT-licensed and free for this use. The action needs no
       # licence key for a personal repository.
-      - uses: gitleaks/gitleaks-action@v2
+      - uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
