@@ -86,9 +86,22 @@ test.describe('R7 live order tracking', () => {
         // The live stream keeps a connection open, so 'networkidle' never settles here.
         // Waiting for the Live label shows the client has hydrated before we measure.
         await expect(page.getByText('Live', { exact: true }).first()).toBeVisible();
-        const overflow = await page.evaluate(
-          () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        );
+        // A status change reloads the page (ADR-013), which can destroy the execution context
+        // between the assertions above and the measurement. Retrying the measurement keeps the
+        // check strict: it still asserts that the settled page does not overflow.
+        let overflow = Number.POSITIVE_INFINITY;
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          try {
+            overflow = await page.evaluate(
+              () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+            );
+            break;
+          } catch (error) {
+            if (!String(error).includes('Execution context was destroyed')) throw error;
+            await page.waitForLoadState('load');
+            await expect(page.getByRole('list', { name: 'Tracking', exact: true })).toBeVisible();
+          }
+        }
         expect(overflow).toBeLessThanOrEqual(0);
       } finally {
         await context.close();

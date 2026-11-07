@@ -22,7 +22,9 @@ export function ProductBreadcrumbs({
 }: ProductBreadcrumbsProps) {
   return (
     <nav aria-label={copy.breadcrumbLabel} className="text-sm text-ink-muted">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      {/* One line, always. A wrapping breadcrumb changed height when the web font arrived and
+          moved the whole product page by a row, which is the layout shift the R4 check found. */}
+      <ol className="flex flex-nowrap items-center gap-x-2 overflow-hidden whitespace-nowrap">
         <li>
           <Link href="/" className="hover:text-accent">
             {copy.breadcrumbHome}
@@ -54,7 +56,7 @@ export function ProductBreadcrumbs({
           </Link>
         </li>
         <li aria-hidden="true">/</li>
-        <li aria-current="page" className="line-clamp-1 text-ink">
+        <li aria-current="page" className="min-w-0 truncate text-ink">
           {productTitle}
         </li>
       </ol>

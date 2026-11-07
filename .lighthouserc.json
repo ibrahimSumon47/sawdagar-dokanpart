@@ -13,22 +13,74 @@
         {
           "matchingUrlPattern": "^https://sawdagar-dokanpart\\.vercel\\.app/product/",
           "assertions": {
-            "categories:performance": ["error", { "minScore": 0.85 }],
-            "categories:accessibility": ["error", { "minScore": 0.9 }],
-            "categories:best-practices": ["error", { "minScore": 0.9 }],
-            "categories:seo": ["error", { "minScore": 0.9 }],
-            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
-          }
+            "categories:performance": [
+              "error",
+              {
+                "minScore": 0.85
+              }
+            ],
+            "categories:accessibility": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "categories:best-practices": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "categories:seo": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "cumulative-layout-shift": [
+              "error",
+              {
+                "maxNumericValue": 0.1
+              }
+            ]
+          },
+          "aggregationMethod": "median"
         },
         {
           "matchingUrlPattern": "^https://sawdagar-dokanpart\\.vercel\\.app/(catalog)?$",
           "assertions": {
-            "categories:performance": ["error", { "minScore": 0.9 }],
-            "categories:accessibility": ["error", { "minScore": 0.9 }],
-            "categories:best-practices": ["error", { "minScore": 0.9 }],
-            "categories:seo": ["error", { "minScore": 0.9 }],
-            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
-          }
+            "categories:performance": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "categories:accessibility": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "categories:best-practices": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "categories:seo": [
+              "error",
+              {
+                "minScore": 0.9
+              }
+            ],
+            "cumulative-layout-shift": [
+              "error",
+              {
+                "maxNumericValue": 0.1
+              }
+            ]
+          },
+          "aggregationMethod": "median"
         }
       ]
     },
