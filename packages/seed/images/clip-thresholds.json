@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "correctMin": 0.5,
+  "junkMax": 0.2,
+  "junkLabels": [
+    "a comic book page",
+    "a portrait of a person",
+    "a group of people",
+    "a bamboo plant",
+    "a building",
+    "a landscape",
+    "a drawing",
+    "a logo",
+    "a map",
+    "a screenshot of text",
+    "a bundle of unrelated items",
+    "a tree in a field"
+  ]
+}
