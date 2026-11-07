@@ -168,6 +168,11 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
     await prisma.productImage.deleteMany({ where: { productId: product.id } });
     const set = imageSets.get(product.slug);
     if (set) {
+      // A photo that used to belong to an older product still holds its unique
+      // public ID, so detach it there before attaching it to the curated row.
+      await prisma.productImage.deleteMany({
+        where: { publicId: { in: set.images.map((image) => image.publicId) } },
+      });
       await prisma.productImage.createMany({
         data: set.images.map((image, position) => ({
           id: `${product.id}-img-${position}`,

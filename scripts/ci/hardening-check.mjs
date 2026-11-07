@@ -149,12 +149,17 @@ record(
 
 /* A7 - department and category screenshots at two widths, reviewed by eye. */
 const screenshots = existsSync('docs/screenshots/image-audit')
-  ? readdirSync('docs/screenshots/image-audit').filter((name) => name.endsWith('.png'))
+  ? readdirSync('docs/screenshots/image-audit', { recursive: true })
+      .map((entry) => String(entry))
+      .filter((name) => name.endsWith('.png'))
   : [];
+const hasBothWidths =
+  screenshots.some((name) => name.includes('-375')) &&
+  screenshots.some((name) => name.includes('-1440'));
 record(
   'A7 category screenshots captured at 375 and 1440 px',
-  screenshots.length >= 20 && /reviewed/i.test(audit),
-  `${screenshots.length} screenshots`,
+  screenshots.length >= 20 && hasBothWidths && /reviewed/i.test(audit),
+  `${screenshots.length} screenshots, both widths ${hasBothWidths}`,
 );
 
 /* B - security hardening. */
