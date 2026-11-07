@@ -1,21 +1,18 @@
-name: Product images
+name: Product image candidates
 
+# Sourcing only runs here so the Pixabay and Cloudinary secrets never touch a
+# developer machine and a candidate never goes straight into the manifest.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/images/source.ts'
-      - '.github/workflows/product-images.yml'
 
 permissions:
   contents: read
 
 jobs:
   source:
-    name: Source photos
+    name: Source candidates
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -27,33 +24,47 @@ jobs:
         with:
           python-version: '3.12'
       - run: pnpm install --frozen-lockfile
-      - name: Source and upload
+
+      - name: Source and upload candidates
         run: pnpm --dir apps/web exec tsx ../../scripts/images/source.ts
         env:
-          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-      - name: Install CLIP
+
+      - name: Install CLIP and OpenCV
         run: |
           python -m pip install --upgrade pip
           pip install --index-url https://download.pytorch.org/whl/cpu torch
-          pip install transformers pillow
-      - name: Score the sourced photos
+          pip install transformers pillow opencv-python-headless
+
+      - name: Score every candidate
         env:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLIP_MODEL: openai/clip-vit-large-patch14
         run: |
           python scripts/images/clip-check.py \
-            packages/seed/images/manifest.json \
+            packages/seed/images/candidates.json \
             packages/seed/images/clip-thresholds.json \
             packages/seed/images/keywords.json \
-            clip-scores.json
+            candidate-scores.json
+
+      - name: Build contact sheets for the passing candidates
+        env:
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          MANIFEST_PATH: packages/seed/images/candidates.json
+          SCORES_PATH: candidate-scores.json
+          SHEET_DIR: docs/screenshots/image-audit/candidates
+          SHEET_PREFIX: candidate
+        run: pnpm --dir apps/web exec tsx ../../scripts/images/contact-sheets.ts
+
       - uses: actions/upload-artifact@v4
         with:
-          name: product-image-run
+          name: product-image-candidates
           path: |
-            packages/seed/images/manifest.json
-            clip-scores.json
+            packages/seed/images/candidates.json
+            docs/reports/data/candidate-sources.json
+            candidate-scores.json
+            docs/screenshots/image-audit/candidates/candidate-*.png
           retention-days: 30
