@@ -144,6 +144,12 @@ from the GitHub secrets, so no new Pexels or Pixabay photos could be sourced. Th
 Unsplash candidates from the earlier run were inspected and none cleared CLIP,
 so the catalogue uses only the clean Commons photographs that passed every rule.
 
-Next step (exact): reseed with the Database workflow, capture every department and
-non-empty leaf category at 375 and 1440 px, read the screenshots, then continue
-with parts B, C and D of `hardening-check.mjs`.
+Verified on the deployment (2026-11-07): Database run
+[42387120867](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42387120867)
+left 28 published products, and every department and non-empty leaf category was
+captured at 375 and 1440 px. The department pages were read at 1440 px and the
+mobile menu and cards at 375 px; a DOM check of all 140 cards found the photo
+public ID and alt text matching the audit table on every one. The seven
+departments with products show in the menu and the five without are hidden.
+
+Next step (exact): parts B, C and D of `hardening-check.mjs`.

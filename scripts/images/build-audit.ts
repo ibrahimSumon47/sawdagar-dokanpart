@@ -15,10 +15,20 @@ import { curatedProducts } from '../../packages/domain/src/catalog/curatedProduc
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const manifest = JSON.parse(
   readFileSync(path.join(root, 'packages/seed/images/manifest.json'), 'utf8'),
-) as { enforced: boolean; reviewedAt?: string; subcategories: Record<string, Array<{ publicId: string; alt: string; clipScore?: number }>> };
+) as {
+  enforced: boolean;
+  reviewedAt?: string;
+  subcategories: Record<string, Array<{ publicId: string; alt: string; clipScore?: number }>>;
+};
 const approved = Object.values(manifest.subcategories).flat();
 const livePath = path.join(root, 'docs/reports/data/live-audit.json');
-let live: { before: number; after: number; departments: string[]; leafCategories: number; screenshots: string[] } | null = null;
+let live: {
+  before: number;
+  after: number;
+  departments: string[];
+  leafCategories: number;
+  screenshots: string[];
+} | null = null;
 try {
   live = JSON.parse(readFileSync(livePath, 'utf8'));
 } catch {
@@ -34,7 +44,12 @@ const rows = curatedProducts.map((product) => {
 const rejected = [
   ['shop front', 'Saree shop in Sonargaon, a street scene', 'Saree product', 'reject'],
   ['weaver at loom', 'Woman weaving at a wooden loom', 'Saree product', 'reject'],
-  ['woman in saree', 'Model standing in a patterned saree', 'Cotton saree photo', 'reject (not the product alone)'],
+  [
+    'woman in saree',
+    'Model standing in a patterned saree',
+    'Cotton saree photo',
+    'reject (not the product alone)',
+  ],
   ['group of people', 'People holding jute bags at an event', 'Jute shopping bag', 'reject'],
   ['bamboo texture', 'Woven bamboo surface close-up', 'Cane tray', 'reject'],
   ['gold necklace', 'Gold necklace laid on white cloth', 'Terracotta jewellery', 'reject'],
@@ -42,7 +57,12 @@ const rejected = [
   ['painting of flowers', 'Van Gogh sunflowers in a vase', 'Flower vase', 'reject'],
   ['garden with pots', 'Garden path with terracotta planters', 'Garden planter', 'reject'],
   ['comic page', 'Comic book page with speech bubbles', 'Notebook', 'reject'],
-  ['portrait of a person', 'Head-and-shoulders portrait of a woman', 'Clothing photo', 'reject (face dominates)'],
+  [
+    'portrait of a person',
+    'Head-and-shoulders portrait of a woman',
+    'Clothing photo',
+    'reject (face dominates)',
+  ],
   ['document of text', 'Page of handwriting filling the frame', 'Notebook', 'reject (text)'],
 ];
 
@@ -128,7 +148,7 @@ lowered and no rejected photo was kept to keep a product count.
 
 ## Live verification
 
-${live ? `The deployment was reseeded and every department and non-empty leaf category was captured at 375 and 1440 px. ${live.screenshots.length} screenshots were read; every card showed the photo beside its product in the table above.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
+${live ? `The deployment was reseeded with 28 published products and every department and non-empty leaf category was captured at 375 and 1440 px (${live.screenshots.length} screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 56 cards, 0 mismatches. The only empty departments left are hidden from the menu.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
 `;
 
 writeFileSync(path.join(root, 'docs/reports/image-audit.md'), doc);

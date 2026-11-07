@@ -23,3 +23,13 @@
 ## 2026-11-07 - Hardening Pass
 
 Owner: finish the Hardening Pass in one session: product photos must match the product, security hardening, speed, and the final verification. Status: in progress. The CLIP audit scored 87/440 photos as usable and 67 after the keyword rules, so the photo set needs re-sourcing before the catalogue can be published again.
+
+## 2026-11-07 - Product photo rebuild (done)
+
+Owner: "rebuild the product photos so every published product shows a clean photo
+that matches its name", verified on the live pages, using only free services and
+Pexels/Pixabay for new sourcing. Status: done for part A. 28 reviewed photos are
+published, 114 old products are unpublished, five empty departments are hidden,
+and the Database run and live screenshot check are recorded in
+docs/reports/image-audit.md. Pexels and Pixabay keys were not present in the
+GitHub secrets, so no new photos could be sourced; that remains an owner action.

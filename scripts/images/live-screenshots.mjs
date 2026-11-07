@@ -51,6 +51,13 @@ for (const width of [375, 1440]) {
     const file = `${outDir}/${slug}-${width}.png`;
     await page.screenshot({ path: file, fullPage: true });
     shots.push(file);
+    if (width === 375) {
+      /* The full-page phone shot is too tall to review comfortably, so keep a
+       * viewport copy that shows the header, the menu and the first cards. */
+      const viewportFile = `${outDir}/${slug}-${width}-viewport.png`;
+      await page.screenshot({ path: viewportFile });
+      shots.push(viewportFile);
+    }
     process.stdout.write(`${file}\n`);
   }
   await context.close();
