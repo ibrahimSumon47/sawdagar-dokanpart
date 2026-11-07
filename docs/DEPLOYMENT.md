@@ -18,31 +18,32 @@
 - **Owner action, Journal cover uploads:** create an unsigned upload preset in the Cloudinary dashboard (Settings → Upload → Add upload preset, signing mode Unsigned, folder `sawdagar/covers`), then add `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` to the Vercel production environment and redeploy. Until both are set, the cover field in `/admin/content` accepts a Cloudinary public ID, an `https` address or a site path and shows a note that the upload button needs the preset; nothing else breaks, and the seeded posts already carry covers. Both values are public by design (a browser upload cannot hide them); the API key and secret stay in GitHub Actions only.
 - The `20261105200000_journal_media` migration adds `cms_entries.coverImageUrl`, the two cover alt columns, `tags` and a GIN index on `tags`. Apply it with the `Database` workflow (`migrate`), then run `seed` so the three published Journal posts get their covers, alt text and `<p>` bodies. Old version snapshots without the new fields still restore.
 
-- **Owner action, guest checkout holds (R6):** add `CRON_SECRET` (a random string of at least 32 characters) to the Vercel production environment and to GitHub Actions secrets, and add `SITE_URL` (the production origin, `https://sawdagar-dokanpart.vercel.app`) as a GitHub Actions variable. The `Release holds` workflow posts to `/api/checkout/release-holds` every 10 minutes with the bearer token; the route returns 401 until `CRON_SECRET` is set on Vercel, and the workflow fails until both values exist. The job releases expired 15-minute guest holds and 30-minute signed-in holds, restocks the variants and cancels the pending orders.
+- **Owner action, guest checkout holds (R6):** add `CRON_SECRET` (a random string of at least 32 characters) to the Vercel production environment and to GitHub Actions secrets, and add `SITE_URL` (the production origin, `https://sawdagar-dokanpart.vercel.app`) as a GitHub Actions variable. The `Release guest holds` workflow reads `vars.SITE_URL || secrets.SITE_URL`, fails with a clear message when either value is empty, and runs hourly at minute 17. It retries a transient failure twice and treats a 5xx response as a warning, because the next run repairs the rows. Availability already counts expired holds as released, so the scheduler only normalises rows and cancels abandoned orders; a missed hour cannot oversell or block a buyer.
 - **Owner action, order tracking (R7):** create a free Upstash Redis database at upstash.com (no card; do not add a payment method, since that moves the free resources to a paid plan). Copy its REST URL and REST token, then add `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` to the Vercel production environment and to GitHub Actions secrets, and redeploy. Until both are set, the `/track` form returns an error. See [ADR-012](adr/ADR-012-upstash-tracking-rate-limit.md).
 
 ## Product images (R2)
 
 - R2 is complete: 440 licensed Wikimedia Commons photographs are uploaded to Cloudinary per product, 142 products carry their own main and gallery images, and `/credits` lists every author and licence. `scripts/ci/check-images.ts` fails CI on a shared public id, a near-duplicate average hash or a repeated alt string, so a product cannot publish with a photograph already used elsewhere.
+- `Image check` runs the CLIP scorer on every push and is informational (`continue-on-error: true`) until the photo rebuild, because the current manifest still contains photographs the stricter thresholds would reject. Remove that flag in the commit that ships the rebuilt manifest.
 - `CLOUDINARY_*` credentials are used only by the sourcing and upload runs. Never paste credentials into chat; use the GitHub dashboard when re-running the upload.
 
 ## Environment variables
 
-| Variable                | Where                             | Purpose                                                      |
-| ----------------------- | --------------------------------- | ------------------------------------------------------------ |
-| `DATABASE_URL`          | Vercel production, GitHub Actions | Pooled Neon connection used by the app                       |
-| `DIRECT_DATABASE_URL`   | GitHub Actions                    | Direct Neon connection used by Prisma migrations and seeding |
-| `BETTER_AUTH_SECRET`    | Vercel production, GitHub Actions | Signs and verifies Better Auth sessions                      |
-| `DEMO_ACCOUNT_PASSWORD` | Vercel production, GitHub Actions | Password for the eight seeded demo accounts                  |
-| `PEXELS_API_KEY`        | GitHub Actions                    | Image sourcing run only; never read at runtime               |
-| `UNSPLASH_ACCESS_KEY`   | GitHub Actions                    | Image sourcing run only; never read at runtime               |
-| `CLOUDINARY_CLOUD_NAME` | GitHub Actions                    | Uploads product photographs to Cloudinary                    |
-| `CLOUDINARY_API_KEY`    | GitHub Actions                    | Cloudinary upload credential                                 |
-| `CLOUDINARY_API_SECRET` | GitHub Actions                    | Cloudinary upload credential                                 |
-| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Vercel production    | Browser cover uploads and image delivery                     |
-| `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | Vercel production  | Unsigned preset the Journal cover button posts to            |
-| `UPSTASH_REDIS_REST_URL` | Vercel production, GitHub Actions | Upstash database REST endpoint for tracking limits |
-| `UPSTASH_REDIS_REST_TOKEN` | Vercel production, GitHub Actions | Upstash REST token (secret) for tracking limits |
+| Variable                               | Where                             | Purpose                                                      |
+| -------------------------------------- | --------------------------------- | ------------------------------------------------------------ |
+| `DATABASE_URL`                         | Vercel production, GitHub Actions | Pooled Neon connection used by the app                       |
+| `DIRECT_DATABASE_URL`                  | GitHub Actions                    | Direct Neon connection used by Prisma migrations and seeding |
+| `BETTER_AUTH_SECRET`                   | Vercel production, GitHub Actions | Signs and verifies Better Auth sessions                      |
+| `DEMO_ACCOUNT_PASSWORD`                | Vercel production, GitHub Actions | Password for the eight seeded demo accounts                  |
+| `PEXELS_API_KEY`                       | GitHub Actions                    | Image sourcing run only; never read at runtime               |
+| `UNSPLASH_ACCESS_KEY`                  | GitHub Actions                    | Image sourcing run only; never read at runtime               |
+| `CLOUDINARY_CLOUD_NAME`                | GitHub Actions                    | Uploads product photographs to Cloudinary                    |
+| `CLOUDINARY_API_KEY`                   | GitHub Actions                    | Cloudinary upload credential                                 |
+| `CLOUDINARY_API_SECRET`                | GitHub Actions                    | Cloudinary upload credential                                 |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`    | Vercel production                 | Browser cover uploads and image delivery                     |
+| `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | Vercel production                 | Unsigned preset the Journal cover button posts to            |
+| `UPSTASH_REDIS_REST_URL`               | Vercel production, GitHub Actions | Upstash database REST endpoint for tracking limits           |
+| `UPSTASH_REDIS_REST_TOKEN`             | Vercel production, GitHub Actions | Upstash REST token (secret) for tracking limits              |
 
 Vercel stores the three production values as hidden secrets. `DIRECT_DATABASE_URL` is intentionally not present in Vercel, because the runtime uses the pooled connection and never runs migrations.
 

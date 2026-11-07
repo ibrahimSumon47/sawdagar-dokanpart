@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { cookies } from 'next/headers';
 import { getPrisma } from '../../lib/prisma';
+import { availableVariantStock } from '../checkout/availableStock';
 import { CART_COOKIE, SHOP_COOKIE_MAX_AGE, shopCookieOptions } from './cookieState';
 import { readCartItems } from './queries';
 import type { CartResult } from './types';
@@ -129,7 +130,8 @@ export async function addToCart(
   if (!variant || variant.product.status !== 'active') {
     return { ok: false, code: 'unavailable' };
   }
-  if (variant.stock <= 0) return { ok: false, code: 'out-of-stock', available: 0 };
+  const available = await availableVariantStock(variant.id);
+  if (available <= 0) return { ok: false, code: 'out-of-stock', available: 0 };
 
   const cart = await resolveCart(userId);
   const prisma = getPrisma();
@@ -139,8 +141,8 @@ export async function addToCart(
   });
   const nextQuantity = (existing?.quantity ?? 0) + quantity;
 
-  if (nextQuantity > variant.stock) {
-    return { ok: false, code: 'stock-limit', available: variant.stock };
+  if (nextQuantity > available) {
+    return { ok: false, code: 'stock-limit', available };
   }
 
   await prisma.cartItem.upsert({
@@ -165,8 +167,9 @@ export async function setCartQuantity(
   if (!variant || variant.product.status !== 'active') {
     return { ok: false, code: 'unavailable' };
   }
-  if (quantity > variant.stock) {
-    return { ok: false, code: 'stock-limit', available: variant.stock };
+  const available = await availableVariantStock(variant.id);
+  if (quantity > available) {
+    return { ok: false, code: 'stock-limit', available };
   }
 
   const cart = await resolveCart(userId);

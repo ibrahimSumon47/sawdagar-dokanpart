@@ -1,23 +1,18 @@
 version: 2
 
-# Weekly dependency and action updates. Grouped so one pull request covers a
-# family of packages instead of opening a dozen at once. Free for public repos.
+# Version updates are handled in a manual monthly review. The pnpm audit job in
+# security.yml still fails CI on a high or critical advisory, and GitHub security
+# alerts stay on. Both update entries keep their schedule so Dependabot remains
+# valid, but a limit of zero stops it from opening branches or pull requests.
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 5
-    groups:
-      production-dependencies:
-        dependency-type: production
-      development-dependencies:
-        dependency-type: development
+      interval: monthly
+    open-pull-requests-limit: 0
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 5
+      interval: monthly
+    open-pull-requests-limit: 0

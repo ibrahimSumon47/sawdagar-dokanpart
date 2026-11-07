@@ -49,6 +49,12 @@
 
 ## Now
 
+Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`.
+
+## Owner must add
+
+- `PEXELS_API_KEY` and `PIXABAY_API_KEY` are not in the GitHub secrets, so the `Product images` sourcing job cannot run its two primary providers; the Unsplash key alone returned far fewer usable photographs. Add both in the GitHub dashboard. `CRON_SECRET`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `SITE_URL` (variable) and the Cloudinary keys exist.
+
 Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json`, and R10 is the exit audit below. Home and catalog hold a 0.90 performance budget and the product page holds 0.85 ([ADR-014](adr/ADR-014-product-performance-budget.md)); accessibility, best practices and SEO are gated at 0.90 on all three routes, with CLS under 0.1. The browser suite runs at 375, 768 and 1440 px against the deployment. `node scripts/ci/r10-check.mjs` prints each exit criterion as DONE or TODO and exits non-zero while any of them is open.
 
 ## Next
@@ -60,7 +66,7 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 
 ## Blocked
 
-- No blocker is open. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
+- Part A of the hardening pass (photo rebuild) waits on `PEXELS_API_KEY` and `PIXABAY_API_KEY`; the image check stays informational until then. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
 
 ## Known issues
 

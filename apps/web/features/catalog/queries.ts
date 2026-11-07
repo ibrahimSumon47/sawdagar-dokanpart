@@ -4,6 +4,7 @@ import { cache } from 'react';
 import type { Prisma } from '../../generated/prisma/client';
 import { rankCatalogMatches } from '@sd/cs-core';
 import { getPrisma } from '../../lib/prisma';
+import { expiredHoldAdjustments } from '../checkout/availableStock';
 import type { CatalogFilters } from './catalogQuery';
 
 export const CATALOG_PAGE_SIZE = 12;
@@ -297,7 +298,13 @@ export async function searchCatalog(filters: CatalogFilters): Promise<CatalogRes
     },
   });
 
-  const mapped = products.map(toCatalogProduct);
+  const adjustments = await expiredHoldAdjustments(products.map((product) => product.id));
+  const mapped = products.map((product) =>
+    toCatalogProduct({
+      ...product,
+      totalStock: product.totalStock + (adjustments.byProduct.get(product.id) ?? 0),
+    }),
+  );
   if (!ranked) return { products: mapped, total, page, pageCount };
 
   const result = rankCatalogMatches(
@@ -350,7 +357,13 @@ async function queryFeaturedProducts(limit: number): Promise<CatalogProduct[]> {
     },
   });
 
-  return products.map(toCatalogProduct);
+  const adjustments = await expiredHoldAdjustments(products.map((product) => product.id));
+  return products.map((product) =>
+    toCatalogProduct({
+      ...product,
+      totalStock: product.totalStock + (adjustments.byProduct.get(product.id) ?? 0),
+    }),
+  );
 }
 
 /** One product with variants, vendor and category for the detail page. */
@@ -367,6 +380,8 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
 
   if (!product || product.status !== 'active') return null;
 
+  const adjustments = await expiredHoldAdjustments([product.id]);
+
   return {
     id: product.id,
     slug: product.slug,
@@ -379,7 +394,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
     rating: product.rating,
     reviewCount: product.reviewCount,
     tone: normaliseProductTone(product.tone),
-    totalStock: product.totalStock,
+    totalStock: product.totalStock + (adjustments.byProduct.get(product.id) ?? 0),
     departmentSlug: product.category.parent?.slug ?? product.category.slug,
     createdAt: product.createdAt,
     images: toProductPhotos(product.images),
@@ -409,7 +424,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
       name: { en: variant.nameEn, bn: variant.nameBn },
       priceMinor: variant.priceMinor,
       compareAtMinor: variant.compareAtMinor ?? undefined,
-      stock: variant.stock,
+      stock: variant.stock + (adjustments.byVariant.get(variant.id) ?? 0),
       isDefault: variant.isDefault,
     })),
   };

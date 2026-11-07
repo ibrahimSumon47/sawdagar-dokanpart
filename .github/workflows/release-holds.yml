@@ -1,25 +1,58 @@
 name: Release guest holds
 
+# Correctness does not depend on this job: stock availability adds back any hold
+# whose expiry has passed at read time. The hourly sweep only normalises the rows
+# and cancels the abandoned orders, so one run per hour is enough.
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: release-guest-holds
+  cancel-in-progress: false
 
 jobs:
   release:
     name: Release expired guest stock holds
     runs-on: ubuntu-latest
     steps:
-      - name: Call the release route
+      - name: Check configuration
         env:
-          SITE_URL: ${{ vars.SITE_URL }}
+          SITE_URL: ${{ vars.SITE_URL || secrets.SITE_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error \
+          if [ -z "${SITE_URL}" ]; then
+            echo "SITE_URL is empty: set the repository variable SITE_URL (or the secret) to the production origin." >&2
+            exit 1
+          fi
+          if [ -z "${CRON_SECRET}" ]; then
+            echo "CRON_SECRET is empty: add the same value to GitHub Actions secrets and the Vercel production environment." >&2
+            exit 1
+          fi
+
+      - name: Call the release route
+        env:
+          SITE_URL: ${{ vars.SITE_URL || secrets.SITE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          set -euo pipefail
+          status=$(curl --silent --show-error --retry 2 --retry-delay 5 \
+            --output release-holds.json --write-out '%{http_code}' \
             --request POST \
             --header "Authorization: Bearer ${CRON_SECRET}" \
-            "${SITE_URL}/api/checkout/release-holds"
+            "${SITE_URL}/api/checkout/release-holds")
+          cat release-holds.json
+          echo
+          if [ "${status}" -ge 500 ]; then
+            echo "::warning::Release route returned HTTP ${status}; the next hourly run will retry."
+            exit 0
+          fi
+          if [ "${status}" != "200" ]; then
+            echo "Release route returned HTTP ${status}." >&2
+            exit 1
+          fi
