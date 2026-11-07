@@ -94,7 +94,10 @@ const gates = [
 let testOutput = '';
 for (const [script, title] of gates) {
   const result = run('pnpm', [script]);
-  if (script === 'test') testOutput = `${result.stdout ?? ''}${result.stderr ?? ''}`;
+  // Turbo colours its task prefixes, so strip ANSI escapes before reading the counts out.
+  if (script === 'test') {
+    testOutput = `${result.stdout ?? ''}${result.stderr ?? ''}`.replace(/\u001b\[[0-9;]*m/g, '');
+  }
   record(title, result.status === 0, `pnpm ${script} exited ${result.status ?? 'null'}`);
 }
 
@@ -122,11 +125,21 @@ const counts = [...testOutput.matchAll(/@sd\/([\w-]+):test:\s+Tests\s+(\d+) pass
 );
 const readme = read('README.md');
 const total = counts.reduce((sum, entry) => sum + entry.passed, 0);
+const declared = new Map();
+for (const line of readme.split(String.fromCharCode(10))) {
+  const cells = line.split('|').map((cell) => cell.trim());
+  const label = cells[1] ?? '';
+  if (label.startsWith('`@sd/') && label.endsWith('`')) {
+    const value = Number(cells[2]);
+    if (Number.isInteger(value)) declared.set(label.slice(5, -1), value);
+  }
+}
+
 const countsMatch =
   counts.length > 0 &&
   total > 0 &&
-  readme.includes(`${total} unit tests`) &&
-  counts.every((entry) => new RegExp(`${entry.name}\\s*\\|\\s*${entry.passed}\\b`).test(readme));
+  readme.includes(String(total) + ' unit tests') &&
+  counts.every((entry) => declared.get(entry.name) === entry.passed);
 record(
   'README test counts match the measured totals',
   countsMatch,
