@@ -96,8 +96,10 @@ docs/  Product, design, architecture, data, security, testing and deployment doc
   adr/  Ten architecture decision records with alternatives and consequences
   diagrams/  Related code and tests.
   reports/  Related code and tests.
+    data/  Related code and tests.
   research/  Related code and tests.
   screenshots/  Light, dark and mobile screenshots used in the README and case study
+    image-audit/  Related code and tests.
   spec/  Product, design system, architecture, data and roadmap specifications
 
 scripts/  Node automation for wasm builds, budgets, facts, repository map and reference modules
@@ -110,12 +112,12 @@ scripts/  Node automation for wasm builds, budgets, facts, repository map and re
 
 ## Root files
 
-| File | Purpose |
-|---|---|
-| `README.md` | Project overview, screenshots, demo roles, stack and limitations |
-| `ARCHITECTURE.md` | Request flow, each business flow and the deployment model |
-| `CHANGELOG.md` | Dated change log, grouped by area rather than by commit |
-| `AGENTS.md` | Working agreement for human and AI contributors |
-| `LICENSE` | MIT licence |
-| `llms.txt` | Plain-text repository summary for assistants and crawlers |
-| `.lighthouserc.json` | Lighthouse URLs and assertions for the deployment |
+| File                 | Purpose                                                          |
+| -------------------- | ---------------------------------------------------------------- |
+| `README.md`          | Project overview, screenshots, demo roles, stack and limitations |
+| `ARCHITECTURE.md`    | Request flow, each business flow and the deployment model        |
+| `CHANGELOG.md`       | Dated change log, grouped by area rather than by commit          |
+| `AGENTS.md`          | Working agreement for human and AI contributors                  |
+| `LICENSE`            | MIT licence                                                      |
+| `llms.txt`           | Plain-text repository summary for assistants and crawlers        |
+| `.lighthouserc.json` | Lighthouse URLs and assertions for the deployment                |

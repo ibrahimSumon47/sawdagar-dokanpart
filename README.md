@@ -1,4 +1,4 @@
-![Sawdagar Dokanpat: a multi-vendor marketplace demonstration for Bangladesh](docs/banner.svg)
+![Sawdagar Dokanpat: a bilingual multi-vendor marketplace for Bangladesh](docs/banner.svg)
 
 [![CI](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/workflows/ci.yml)
 [![Lighthouse](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/workflows/lighthouse.yml)
@@ -8,9 +8,9 @@
 
 Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Bangladesh: a catalog of 142 products with their own licensed photographs from 24 fictional workshops, with carts, checkout, seller fulfillment, a double-entry ledger and an admin CMS. Products without their own photos stay unpublished rather than reusing another product's image.
 
-**[Open the demo](https://sawdagar-dokanpart.vercel.app/)** · [Case study](https://sawdagar-dokanpart.vercel.app/case-study) · [Architecture](ARCHITECTURE.md) · [Feature index](docs/FEATURES.md)
+**[Open the store](https://sawdagar-dokanpart.vercel.app/)** · [Case study](https://sawdagar-dokanpart.vercel.app/case-study) · [Architecture](ARCHITECTURE.md) · [Feature index](docs/FEATURES.md)
 
-> **Demo store: sandbox payments.** This is a portfolio project, not a shop. No real money is accepted, no order is fulfilled, and every product, seller, review and order is seeded demo data. Payments are cash on delivery or the MockPay sandbox only.
+> **Test-mode payments, seeded data.** This is a portfolio project, not a shop. No real money is accepted, no order is fulfilled, and the catalog, sellers, reviews and orders are seeded data. Payments run in test mode only.
 
 ## Screenshots
 
@@ -20,9 +20,9 @@ Sawdagar Dokanpat is a bilingual, multi-vendor marketplace demonstration for Ban
 
 <img src="docs/screenshots/product-light.png" alt="Product page for a leather belt with variant prices, stock status, wishlist and add-to-cart controls" width="49%"> <img src="docs/screenshots/case-study-light.png" alt="Case study page opening with the project pitch and demo notice" width="49%">
 
-## Demo accounts
+## Ready-made accounts
 
-Use a **Try demo** button on the [sign-in page](https://sawdagar-dokanpart.vercel.app/sign-in); no password is shown or needed.
+Each ready-made account signs in through the normal form. The buttons beside the table only fill the email and password fields; the password itself lives in the deployment variables, never in this repository.
 
 | Role           | Demo email                     |
 | -------------- | ------------------------------ |
@@ -35,7 +35,7 @@ Use a **Try demo** button on the [sign-in page](https://sawdagar-dokanpart.verce
 | Content editor | `editor@demo.sawdagar.test`    |
 | Super admin    | `admin@demo.sawdagar.test`     |
 
-Demo accounts cannot change their email or password. The allowlist lives in [`packages/domain/src/auth/demoAccounts.ts`](packages/domain/src/auth/demoAccounts.ts).
+These accounts cannot change their email or password. The allowlist lives in [`packages/domain/src/auth/demoAccounts.ts`](packages/domain/src/auth/demoAccounts.ts).
 
 ## Why this project exists
 

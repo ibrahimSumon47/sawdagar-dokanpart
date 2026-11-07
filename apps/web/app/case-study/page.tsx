@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: 'Case study',
   description:
-    'How a bilingual multi-vendor marketplace demonstration was built: catalog, checkout, Seller Center, ledger, CMS and the engineering decisions behind them.',
+    'How a bilingual multi-vendor marketplace for Bangladesh was built: catalog, checkout, Seller Center, ledger, CMS and the engineering decisions behind them.',
   alternates: { canonical: '/case-study' },
 };
 

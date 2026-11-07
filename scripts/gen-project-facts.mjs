@@ -183,7 +183,7 @@ for (const feature of featureList) {
 
 const facts = {
   name: 'Sawdagar Dokanpat',
-  pitch: 'A non-commercial, bilingual multi-vendor marketplace demonstration for Bangladesh.',
+  pitch: 'A bilingual multi-vendor marketplace for Bangladeshi sellers.',
   demoUrl: 'https://sawdagar-dokanpart.vercel.app',
   repositoryUrl: 'https://github.com/ibrahimSumon47/sawdagar-dokanpart',
   license: 'MIT',

@@ -3,7 +3,7 @@ const structuredData = {
   '@type': 'SoftwareSourceCode',
   name: 'Sawdagar Dokanpat',
   description:
-    'A non-commercial, bilingual multi-vendor marketplace demonstration for Bangladesh, built with Next.js, Prisma and Better Auth.',
+    'A bilingual multi-vendor marketplace for Bangladeshi sellers, built with Next.js, Prisma and Better Auth.',
   codeRepository: 'https://github.com/ibrahimSumon47/sawdagar-dokanpart',
   programmingLanguage: ['TypeScript', 'C++', 'C', 'Python', 'Java'],
   runtimePlatform: 'Node.js 24',

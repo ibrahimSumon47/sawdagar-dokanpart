@@ -1,8 +1,8 @@
 # Sawdagar Dokanpat
 
-> A non-commercial, bilingual multi-vendor marketplace demonstration for Bangladesh, built as a portfolio project with Next.js 16, Prisma 7, Better Auth and Tailwind CSS 4.
+> A bilingual multi-vendor marketplace for Bangladeshi sellers, built as a portfolio project with Next.js 16, Prisma 7, Better Auth and Tailwind CSS 4.
 
-Demo store: payments are sandbox only. No real money is accepted, and every product, seller, review and order is seeded demo data.
+Test-mode payments, seeded data: no real money is accepted, and the catalog, sellers, reviews and orders are seeded data.
 
 ## What this is
 
@@ -19,12 +19,12 @@ The repository is a pnpm workspace orchestrated by Turborepo:
 - packages/domain: pure money, category, seed, role, coupon, order, finance and seller rules.
 - packages/cs-core: a C++ search ranker and C SKU kit compiled to WebAssembly, with Python and Java reference modules and TypeScript ports.
 
-## Live demo
+## Live store
 
 - Home: https://sawdagar-dokanpart.vercel.app/
 - Catalog: https://sawdagar-dokanpart.vercel.app/catalog
 - Product page: https://sawdagar-dokanpart.vercel.app/product/full-grain-leather-belt-black
-- Sign in with a demo role: https://sawdagar-dokanpart.vercel.app/sign-in
+- Sign in with a ready-made role: https://sawdagar-dokanpart.vercel.app/sign-in
 - Seller Center: https://sawdagar-dokanpart.vercel.app/seller
 - Admin: https://sawdagar-dokanpart.vercel.app/admin
 - Design system gallery: https://sawdagar-dokanpart.vercel.app/design
@@ -38,7 +38,7 @@ The repository is a pnpm workspace orchestrated by Turborepo:
 - Next.js 16 App Router with React 19. Pages are Server Components; client components hold only interaction state such as the cart drawer and variant picker.
 - Mutations are Server Actions that validate input with Zod, resolve the viewer from the session and re-read prices and stock on the server. No price, role, user id or total is accepted from the browser.
 - Prisma 7 with the pg driver adapter on Neon PostgreSQL. Migrations and seeds run only through the Database GitHub Actions workflow, never from a developer machine.
-- Better Auth provides email/password sessions and rate limits. Role areas are enforced by server guards, and the eight demo accounts are allowlisted.
+- Better Auth provides email/password sessions and rate limits. Role areas are enforced by server guards, and the eight ready-made accounts are allowlisted.
 - Tailwind CSS 4 tokens in packages/ui/src/theme.css drive both themes. The theme and locale are read from cookies before the first paint, so there is no flash or client-side patch.
 - Catalog search is ordered by a C++ relevance ranker compiled to WebAssembly, with an integer-only TypeScript port as the fallback. SKU check characters come from a C module; demand signals and payout settlement have Python and Java reference implementations.
 - CI runs lint, typecheck, 170 unit tests and a production build on Linux, Windows and macOS, plus a reference-module job. A manual and weekly Lighthouse workflow audits the deployment with three mobile runs per URL.
@@ -70,9 +70,9 @@ More documentation:
 - CS fundamentals behind the four modules: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/CS_FUNDAMENTALS.md
 - Machine-readable project facts: https://github.com/ibrahimSumon47/sawdagar-dokanpart/blob/main/docs/PROJECT_FACTS.json
 
-## Demo accounts
+## Ready-made accounts
 
-Open https://sawdagar-dokanpart.vercel.app/sign-in and use a Try demo button. No password is shown or needed. The allowlist is:
+Open https://sawdagar-dokanpart.vercel.app/sign-in and sign in with one of the ready-made accounts below through the normal form; the buttons only fill the fields. The allowlist is:
 
 - Buyer: buyer@demo.sawdagar.test
 - Vendor owner: vendor@demo.sawdagar.test

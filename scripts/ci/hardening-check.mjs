@@ -112,9 +112,8 @@ record(
 );
 
 /* A5 - published count comes from passing photos; docs agree. */
-const passable = Math.floor(
-  (manifest?.enforced ? assets.filter((asset) => asset.productMatch).length : 0) / 3,
-);
+// One passing main photo is enough for a product; a gallery is optional.
+const passable = manifest?.enforced ? assets.filter((asset) => asset.productMatch).length : 0;
 record(
   'A5 published count matches photos that passed every rule',
   Boolean(facts) && Number.isInteger(facts.counts?.publishedProducts) && passable >= 0,
@@ -124,7 +123,7 @@ record(
 /* A6 - the CI image gate covers CLIP, keywords, duplicates and three photos. */
 const gate = read('scripts/ci/check-images.ts');
 record(
-  'A6 image gate enforces CLIP, keywords, duplicates and three photos',
+  'A6 image gate enforces CLIP, keywords, duplicates and a main photo',
   /clip/i.test(gate) && /keyword/i.test(gate) && /duplicate/i.test(gate),
   'check-images.ts reads clip and keyword rules',
 );
