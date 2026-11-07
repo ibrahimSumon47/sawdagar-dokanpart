@@ -45,10 +45,14 @@ export function ProductGrid({ products, locale, labels }: ProductGridProps) {
   return (
     <div className="@container min-w-0">
       <ul role="list" className={productGridClass}>
-        {products.map((product) => {
+        {products.map((product, index) => {
           const photo = productPhoto(product.images);
+          // The first four cards sit in the opening rows at every breakpoint, where they are the
+          // largest contentful paint. A scroll-driven reveal starts them at opacity 0, so the paint
+          // waits for the animation instead of the image; only the cards below fade in.
+          const reveal = index < 4 ? '' : 'reveal-on-scroll ';
           return (
-            <li key={product.id} className="reveal-on-scroll relative min-w-0">
+            <li key={product.id} className={`${reveal}relative min-w-0`}>
               {/* No aria-label: WCAG 2.5.3 wants the accessible name to contain the visible text,
                   and the card shows the vendor and the price beside the title. */}
               <Link
