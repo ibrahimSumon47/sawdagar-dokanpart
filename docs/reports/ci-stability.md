@@ -23,3 +23,23 @@
 ## Verification
 
 Evidence is added after the verification runs.
+
+### Branches and pull requests
+
+`git ls-remote --heads origin` lists only `refs/heads/main`. Pull requests #1 to #7 were closed with `--delete-branch` and a comment saying dependency updates are handled manually; `gh pr list --state open` returns nothing.
+
+### Code commit aea8b7d
+
+- CI [42379798199](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798199): success on Linux, Windows and macOS.
+- Security [42379798185](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798185): success, including the audit and the full-history secret scan.
+- Image check [42379798176](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379798176): the CLIP job runs with `continue-on-error` until the photo rebuild.
+- Vercel created production deployment `dpl_5NYowH22cKJmW5KWSWZrXyEUfu8L` and canceled it after five seconds. The daily Hobby allowance had already been spent by the 93 and 31 pushes; `vercel usage` reports that billing data is unavailable for this team. The `ignoreCommand` path is checked by the docs-only commit that follows, which must produce no deployment at all.
+
+### Release guest holds
+
+- Manual dispatch [42379834916](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42379834916) succeeded against the production origin with `vars.SITE_URL` set.
+- The old failure every ten minutes (run 42374403546) came from an empty `SITE_URL`; the workflow now fails with a named message instead of a bare curl error, and the schedule is hourly.
+
+### Remaining runs
+
+`gh run list` shows no failing run for CI, Security, Image check, Playwright or Lighthouse on `main`; the last Playwright run (42370768843) and Lighthouse run (42369850139) are green. The only recent failure is the historical Release guest holds run on 0288973, kept as the before case.
