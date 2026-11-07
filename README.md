@@ -47,7 +47,7 @@ This repository follows that path to the end, keeps every service free and repla
 
 **As a buyer**
 
-- Browse 8 departments, 84 categories and 83 photographed products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
+- Browse 9 departments, 84 categories and 83 photographed products in English or Bangla; search, filter by category, vendor, price, rating and stock, and sort.
 - Choose a variant, add to a guest or signed-in cart, save a wishlist, compare four products, and apply a coupon.
 - Check out with a saved or new address across 64 districts, choose COD or MockPay, and see per-seller shipping.
 - Print an invoice, review a delivered product with photos, ask a question, and request a return inside seven days.

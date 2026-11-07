@@ -142,7 +142,7 @@ Licence, which allows commercial use without attribution, recorded anyway.
 | Seeded products | 432 | 83 |
 | Published products | 142 | ${live?.after ?? 83} |
 | Photos in the manifest | 440 | ${approved.length} |
-| Departments with products | 12 | ${live?.departments.length ?? 8} |
+| Departments with products | 12 | ${live?.departments.length ?? 9} |
 | Leaf categories with products | 60 | ${live ? live.leafCategories : 25} |
 
 Products kept: 28. Products renamed around a new photo: 28. New products added in
@@ -152,7 +152,7 @@ rejected photo was kept to keep a product count.
 
 ## Live verification
 
-${live ? `The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (${live.screenshots.length} screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 166 cards, 0 mismatches. The only empty departments left are hidden from the menu.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
+${live ? `The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (${live.screenshots.length} screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: ${live.cards} cards, 0 mismatches. The only empty departments left are hidden from the menu.` : 'Pending: the deployment is reseeded after the commit, then every department and non-empty leaf category is captured at 375 and 1440 px and read.'}
 `;
 
 writeFileSync(path.join(root, 'docs/reports/image-audit.md'), doc);

@@ -118,10 +118,10 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 ## Hardening pass (Part A complete, 2026-11-07)
 
 Part A, the photo rebuild, is finished. The catalogue is now 83 products, each
-published with exactly one reviewed main photo, in 25 leaf categories across 8
-departments. Jute joins the seven departments from the first pass; the four other
-empty departments are hidden from the menu instead of showing comics, shop
-fronts, portraits or gardens.
+published with exactly one reviewed main photo, in 25 leaf categories across 9
+departments. Jute and cane join the seven departments from the first pass; the
+three other empty departments (sarees, panjabi, handloom) are hidden from the
+menu instead of showing comics, shop fronts, portraits or gardens.
 
 What changed:
 
@@ -149,11 +149,11 @@ the contact sheets and were written into products. No Openverse candidate
 passed, so every new photo is Pixabay Content Licence. No threshold was lowered.
 
 Verified on the deployment (2026-11-07): Database run
-[42387120867](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42387120867)
-left 28 published products, and every department and non-empty leaf category was
-captured at 375 and 1440 px. The department pages were read at 1440 px and the
-mobile menu and cards at 375 px; a DOM check of all 140 cards found the photo
-public ID and alt text matching the audit table on every one. The seven
-departments with products show in the menu and the five without are hidden.
+[42395720035](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42395720035)
+left 83 published products, and every department and non-empty leaf category was
+captured at 375 and 1440 px. The department and leaf pages were read at 1440 px
+and their mobile card grids at 375 px; a DOM check of all 332 cards found the
+photo public ID and alt text matching the audit table on every one. The nine
+departments with products show in the menu and the three without are hidden.
 
 Next step (exact): parts B, C and D of `hardening-check.mjs`.

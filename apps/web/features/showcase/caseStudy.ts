@@ -31,7 +31,7 @@ export const caseStudyMetrics: readonly CaseStudyMetric[] = [
   {
     label: 'Catalog',
     value: '83 products',
-    hint: '83 published of 83 seeded, across 8 departments, 84 categories and 24 vendors, in English and Bangla.',
+    hint: '83 published of 83 seeded, across 9 departments, 84 categories and 24 vendors, in English and Bangla.',
   },
   {
     label: 'Demo roles',

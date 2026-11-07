@@ -165,10 +165,10 @@ Licence, which allows commercial use without attribution, recorded anyway.
 | | Before | After |
 | --- | --- | --- |
 | Seeded products | 432 | 83 |
-| Published products | 142 | 28 |
+| Published products | 142 | 83 |
 | Photos in the manifest | 440 | 83 |
-| Departments with products | 12 | 7 |
-| Leaf categories with products | 60 | 14 |
+| Departments with products | 12 | 9 |
+| Leaf categories with products | 60 | 25 |
 
 Products kept: 28. Products renamed around a new photo: 28. New products added in
 this pass: 55. Published products left untouched: 0. Products unpublished: 114
@@ -177,4 +177,4 @@ rejected photo was kept to keep a product count.
 
 ## Live verification
 
-The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (63 screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 166 cards, 0 mismatches. The only empty departments left are hidden from the menu.
+The deployment was reseeded with 83 published products and every department and non-empty leaf category was captured at 375 and 1440 px (170 screenshots). Every department page was read at 1440 px, the mobile menu and first cards were read at 375 px, and every card's photo public ID and alt text was compared with this table in the DOM: 332 cards, 0 mismatches. The only empty departments left are hidden from the menu.
