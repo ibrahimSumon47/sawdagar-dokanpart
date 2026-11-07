@@ -37,9 +37,9 @@ test.describe('reduced motion', () => {
     const card = page.locator('.reveal-on-scroll').first();
     await expect(card).toBeAttached();
     expect(await longestAnimationSeconds(page)).toBeLessThanOrEqual(0.01);
-    // A card below the fold is hidden until it scrolls into view, even under reduced
-    // motion, so bring it on screen first; phone and tablet grids start lower than desktop.
-    await card.scrollIntoViewIfNeeded();
+    // Under reduced motion the scroll reveal is switched off in CSS, so the card is opaque
+    // where it stands. Scrolling first would move the page under the assertion and, while the
+    // grid streams, could detach the node the locator resolved to.
     await expect(card).toHaveCSS('opacity', '1', { timeout: 15_000 });
   });
 });

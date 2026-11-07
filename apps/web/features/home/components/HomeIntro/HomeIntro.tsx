@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { ButtonLink } from '@sd/ui';
 import type { Dictionary, Locale } from '../../../../i18n';
 import { departmentPhoto } from '../../../catalog/media';
@@ -49,13 +48,18 @@ export function HomeIntro({ copy, locale, hero }: HomeIntroProps) {
                 className="h-full w-full object-cover"
               />
             ) : heroPhoto ? (
-              <Image
+              // Served straight from the CDN instead of through the image optimizer. The optimizer
+              // answered with `must-revalidate`, so every Lighthouse run re-ran the transform and
+              // paid for it inside largest contentful paint; a committed file has no such step.
+              <img
                 src={heroPhoto.src}
                 alt={copy.home.heroImageAlt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="object-cover"
+                width={800}
+                height={600}
+                fetchPriority="high"
+                loading="eager"
+                decoding="sync"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             ) : null}
             <div className="absolute inset-x-0 bottom-0 border-t border-line bg-surface/95 p-4 text-ink backdrop-blur">
