@@ -5,8 +5,11 @@ import { Redis } from '@upstash/redis';
  * Tracking lookups are capped per client IP and per order code. Both limits use
  * a sliding window in Upstash Redis, so a counter survives serverless cold starts.
  */
-const attemptsPerIp = { requests: 20, window: '10 m' } as const;
-const attemptsPerOrder = { requests: 8, window: '10 m' } as const;
+/** The two tracking windows, exported so a test can hold them in place. */
+export const TRACKING_LIMITS = {
+  perIp: { requests: 20, window: '10 m' },
+  perOrder: { requests: 8, window: '10 m' },
+} as const;
 
 let limiters: { ip: Ratelimit; order: Ratelimit } | null = null;
 
@@ -17,12 +20,18 @@ function getLimiters(): { ip: Ratelimit; order: Ratelimit } {
   limiters = {
     ip: new Ratelimit({
       redis,
-      limiter: Ratelimit.slidingWindow(attemptsPerIp.requests, attemptsPerIp.window),
+      limiter: Ratelimit.slidingWindow(
+        TRACKING_LIMITS.perIp.requests,
+        TRACKING_LIMITS.perIp.window,
+      ),
       prefix: 'sd:track:ip',
     }),
     order: new Ratelimit({
       redis,
-      limiter: Ratelimit.slidingWindow(attemptsPerOrder.requests, attemptsPerOrder.window),
+      limiter: Ratelimit.slidingWindow(
+        TRACKING_LIMITS.perOrder.requests,
+        TRACKING_LIMITS.perOrder.window,
+      ),
       prefix: 'sd:track:order',
     }),
   };

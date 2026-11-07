@@ -53,6 +53,7 @@ apps/  The deployable web application
       questions/  Product questions and seller answers
       returns/  Return-request rules and views
       reviews/  Reviews, product questions and return requests
+      security/  Related code and tests.
       seller/  Seller Center, store settings, KYC and public store pages
       shell/  Header, mobile menu, footer and trust strip
       shop/  Cart, wishlist, comparison, coupons and the shop provider

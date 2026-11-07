@@ -4,6 +4,8 @@ import { hasArea, normalizeRole } from '@sd/domain';
 import { safeNextPath } from '../auth/safeNextPath';
 import { reviewPhotoSchema, reviewSchema, MAX_REVIEW_PHOTOS } from '../reviews/inputs';
 import { sanitizeRichText } from '../content/richText';
+import { shopCookieOptions } from '../shop/cookieState';
+import { TRACKING_LIMITS } from '../tracking/rateLimit';
 
 const jpeg = `data:image/jpeg;base64,${'A'.repeat(64)}`;
 
@@ -76,6 +78,30 @@ describe('rich text', () => {
     expect(sanitizeRichText('<a href="https://example.test">x</a>')).toContain(
       'rel="noopener noreferrer"',
     );
+  });
+});
+
+describe('session cookies', () => {
+  it('marks guest cookies httpOnly, sameSite lax and secure in production', () => {
+    expect(shopCookieOptions.httpOnly).toBe(true);
+    expect(shopCookieOptions.sameSite).toBe('lax');
+    expect(shopCookieOptions.secure).toBe(process.env.NODE_ENV === 'production');
+    expect(shopCookieOptions.path).toBe('/');
+  });
+});
+
+describe('abuse limits', () => {
+  it('caps tracking lookups per IP and per order code', () => {
+    expect(TRACKING_LIMITS.perIp.requests).toBe(20);
+    expect(TRACKING_LIMITS.perOrder.requests).toBe(8);
+    expect(TRACKING_LIMITS.perIp.window).toBe('10 m');
+  });
+
+  it('keeps the review payload bounded', () => {
+    expect(MAX_REVIEW_PHOTOS).toBe(3);
+    expect(
+      reviewPhotoSchema.safeParse(`data:image/png;base64,${'A'.repeat(300_000)}`).success,
+    ).toBe(false);
   });
 });
 
