@@ -1,1 +1,5 @@
+# Attribution trailers are not used in this repository: drop them before commitlint reads the message.
+grep -v '^Co-Authored-By:' "$1" > "$1.tmp" || true
+mv "$1.tmp" "$1"
+
 pnpm exec commitlint --edit "$1"

@@ -10,12 +10,12 @@ not, and the gap has not moved across five rounds:
 
 | Round | Commit    | Home median | Catalog median | Product median | Product runs (five) |
 | ----- | --------- | ----------- | -------------- | -------------- | ------------------- |
-| 1     | `476f57b` | 0.94        | 0.94           | 0.88           | 0.88 all            |
-| 2     | `85aef7c` | 0.92        | 0.94           | 0.87           | 0.85 to 0.88        |
-| 3     | `f05b391` | 0.78        | 0.83           | 0.85           | 0.84 to 0.87        |
-| 4     | `2f1a745` | 0.77        | 0.84           | 0.87           | 0.86 to 0.88        |
-| 5     | `4a278f7` | 0.87        | 0.87           | 0.84           | 0.77 to 0.86        |
-| 6     | `3dee82a` | 0.93        | 0.93           | 0.88           | 0.85 to 0.89        |
+| 1     | `b54d9f3` | 0.94        | 0.94           | 0.88           | 0.88 all            |
+| 2     | `ef0b29a` | 0.92        | 0.94           | 0.87           | 0.85 to 0.88        |
+| 3     | `562ec3a` | 0.78        | 0.83           | 0.85           | 0.84 to 0.87        |
+| 4     | `376f2b0` | 0.77        | 0.84           | 0.87           | 0.86 to 0.88        |
+| 5     | `6fda849` | 0.87        | 0.87           | 0.84           | 0.77 to 0.86        |
+| 6     | `66c42fa` | 0.93        | 0.93           | 0.88           | 0.85 to 0.89        |
 
 The product page has been the slowest route in every round, and its largest contentful paint has been
 the same element every time: the product photograph.
@@ -36,11 +36,11 @@ the same element every time: the product photograph.
 
 ## What was tried
 
-- The product photo became `fetchPriority="high"` with the rest of the page (`f05b391`).
-- The layout preconnected to `res.cloudinary.com` (`2f1a745`).
+- The product photo became `fetchPriority="high"` with the rest of the page (`562ec3a`).
+- The layout preconnected to `res.cloudinary.com` (`376f2b0`).
 - The product page streams its reviews, questions and related grid so the photo arrives in the first
-  HTML (`f05b391`).
-- React now emits a head preload for the exact photo URL and asks for it at high priority (`82dd626`).
+  HTML (`562ec3a`).
+- React now emits a head preload for the exact photo URL and asks for it at high priority (`a905425`).
 - The Cloudinary URL already asks for `f_auto,q_auto` and an 800 px width, which covers the frame at
   the emulated device pixel ratio; requesting 640 px was rejected because it would soften the photo on
   a retina screen for a saving the measurements did not justify.

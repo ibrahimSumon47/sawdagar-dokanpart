@@ -2,7 +2,7 @@
 
 This report records the Lighthouse findings behind the performance gate in `.lighthouserc.json`. The gate is 0.9 for the median of five mobile runs on home (`/`), catalog (`/catalog`) and product (`/product/handwoven-jamdani-saree-indigo`).
 
-## Baseline (run 42221516081, commit 9e152a7)
+## Baseline (run 42221516081, commit af07921)
 
 Three runs per URL, mobile emulation, Lighthouse 13.
 
@@ -36,7 +36,7 @@ Home was the weakest page. Its first run had TBT 3,700 ms because the run was af
 
 Results of each round are appended below as they are measured.
 
-## Round 1 result (commit 476f57b, five runs per URL)
+## Round 1 result (commit b54d9f3, five runs per URL)
 
 Duplicate report files in the download were removed before computing medians.
 
@@ -58,7 +58,7 @@ Product findings (run with five samples):
 - **Render-blocking resources:** none.
 - **Layout shift:** CLS 0.
 
-## Round 2 result (commit 85aef7c, five runs per URL, run 42224577604)
+## Round 2 result (commit ef0b29a, five runs per URL, run 42224577604)
 
 | URL     | Scores (five runs)           | Median | Gate 0.9 |
 | ------- | ---------------------------- | ------ | -------- |
@@ -70,9 +70,9 @@ Change in this round: `getViewer` is now request-cached, so the root layout and 
 
 Next step for product: stream the reviews, questions and related grid behind a `Suspense` boundary so the title and photo are sent first. This is not yet done.
 
-## Rounds 3 and 4 (commits f05b391 and 2f1a745, runs 42225808152 and 42227143151)
+## Rounds 3 and 4 (commits 562ec3a and 376f2b0, runs 42225808152 and 42227143151)
 
-Changes: the reviews, questions and related grid now stream behind `Suspense` (`f05b391`), and the layout preconnects to `res.cloudinary.com` (`2f1a745`).
+Changes: the reviews, questions and related grid now stream behind `Suspense` (`562ec3a`), and the layout preconnects to `res.cloudinary.com` (`376f2b0`).
 
 | Run         | Home median | Catalog median | Product median | Product scores (five runs)   |
 | ----------- | ----------- | -------------- | -------------- | ---------------------------- |
@@ -83,7 +83,7 @@ Product audit values in the latest run (five runs): time to first byte fell from
 
 Home and catalog show a wide spread between runs (home 0.69 to 0.94 within one run), so the runner, not the code, sets much of the variance.
 
-## Round 5 (commit 4a278f7 with 5760622 and 1770a25, run 42257392714)
+## Round 5 (commit 6fda849 with 5760622 and 2d0e003, run 42257392714)
 
 Changes: the layout shell (announcement, header, footer) and the home sections and product below-fold now render behind `Suspense` with skeleton fallbacks. The root layout awaits only locale and theme, and the header top bar reserves its real height so the shell does not shift.
 
@@ -95,7 +95,7 @@ Changes: the layout shell (announcement, header, footer) and the home sections a
 
 Home rose from 0.77 to 0.87. Catalog and product are 0.87 and 0.84, still below the 0.90 gate. Catalog CLS is 0.128 in two of five runs, which is above the 0.1 limit and needs a fix before the next round. LCP stays at 3.5 to 4.3 s on all three pages. The product LCP element is the Cloudinary product photo, which the repository does not control.
 
-## Round 6 (commit 3dee82a, run 42269898017)
+## Round 6 (commit 66c42fa, run 42269898017)
 
 Change: the footer boundary reserves its height while it streams, so the footer no longer pushes the page down. Catalog CLS was 0.128 in two of five runs in round 5; it is 0 in all five runs here.
 
@@ -107,9 +107,9 @@ Change: the footer boundary reserves its height while it streams, so the footer 
 
 Home and catalog reach 0.93 at the median, and product reaches 0.88. The run still fails the 0.90 gate on the product page, so the workflow is red. The product median is above the 0.85 fallback, but the fallback needs an ADR, a remaining cause outside the repository, and all three pages at 0.85 to 0.90. The product LCP photo is hosted on Cloudinary and is outside this repository. The artifact lists each run twice; the table uses the five unique runs.
 
-## Rounds 7 and 8 (commits 82dd626 to 2bfc1d9, runs 42343149101, 42343796909, 42345819246, 42346321279)
+## Rounds 7 and 8 (commits a905425 to 0a074d9, runs 42343149101, 42343796909, 42345819246, 42346321279)
 
-Changes: React preloads the product photo from the head (`82dd626`); the product and home rules moved into an `assertMatrix` with its own budgets and `aggregationMethod: "median"` (ADR-014).
+Changes: React preloads the product photo from the head (`a905425`); the product and home rules moved into an `assertMatrix` with its own budgets and `aggregationMethod: "median"` (ADR-014).
 
 | Run         | Home median | Catalog median | Product median | Home runs (five)         |
 | ----------- | ----------- | -------------- | -------------- | ------------------------ |
@@ -120,11 +120,11 @@ Changes: React preloads the product photo from the head (`82dd626`); the product
 
 The product page stayed at 0.88 in all four rounds, which is the measured basis for its 0.85 budget. Home is the problem in these rounds: its first two or three runs score 0.72 to 0.87 and its last two score 0.93 to 0.95, in every round. The split tracks the order of the runs, not the page, so the first audits pay for something the later ones reuse.
 
-Cause: `next/image` caches each optimized size for 60 seconds by default. A Lighthouse round spaces its five runs about 13 seconds apart, so the first run transforms the hero, the result expires, and later runs pay again or catch a stale entry. `2bfc1d9` sets `images.minimumCacheTTL` to 30 days for the committed source files, which removes that transform from the LCP path for every run after the first warm one.
+Cause: `next/image` caches each optimized size for 60 seconds by default. A Lighthouse round spaces its five runs about 13 seconds apart, so the first run transforms the hero, the result expires, and later runs pay again or catch a stale entry. `0a074d9` sets `images.minimumCacheTTL` to 30 days for the committed source files, which removes that transform from the LCP path for every run after the first warm one.
 
 The gate now asserts the median of the five runs, which is the number this report has always published. Lighthouse CI defaults to the best run, and that default would have shown a green home at 0.94 while the median was 0.86.
 
-## Round 9 (commits 2bfc1d9 to 15f7f3d, run 42349157321)
+## Round 9 (commits 0a074d9 to 20ec3a3, run 42349157321)
 
 Changes: the home hero is served straight from the CDN instead of through the image optimizer, which had answered every request with `must-revalidate`; and the first four catalog cards stay out of the scroll reveal, because a reveal starts them at opacity 0 and the largest contentful paint waited for the animation.
 

@@ -1,18 +1,46 @@
 # Git hygiene report
 
-Audited on 2026-11-07 at commit `82dd626`, with `git` 2.x on the owner's Windows machine.
+Audited on 2026-11-07 after the attribution cleanup, with `git` 2.x on the owner's Windows machine.
 
 ## Summary
 
-| Check                         | Result                                                                     |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| Branches                      | One: `main` (tracking `origin/main`). No feature branches, forks or tags.  |
-| Commits                       | 224                                                                        |
-| Distinct authors              | 1: `Md Ibrahim Hossain Sumon <ibrahimsumon005@gmail.com>`                  |
-| Distinct committers           | 1: the same identity                                                       |
-| Commits with `Co-Authored-By` | 24, all from 2026-11-06                                                    |
-| Commits after this audit      | None carry a trailer; every commit from `82dd626` onward is authored alone |
-| History rewritten             | Never. No force-push, amend or rebase of pushed commits was performed      |
+| Check                         | Result                                                                    |
+| ----------------------------- | ------------------------------------------------------------------------- |
+| Branches                      | One: `main` (tracking `origin/main`). No feature branches, forks or tags. |
+| Commits                       | 235                                                                       |
+| Distinct authors              | 1: `Md Ibrahim Hossain Sumon <ibrahimsumon005@gmail.com>`                 |
+| Distinct committers           | 1: the same identity                                                      |
+| Commits with `Co-Authored-By` | 0                                                                         |
+| History rewritten             | Once, on 2026-11-07, at the owner's request, to remove tool attribution   |
+
+## The cleanup
+
+24 commits from 2026-11-06, during the animation pass (R7 and R8), ended with
+`Co-Authored-By: Codebuff <noreply@codebuff.com>`. The owner asked for the line to be removed from
+every message, so the whole of `main` was rewritten with:
+
+```bash
+git filter-branch -f --msg-filter 'sh .git/trailer-filter.sh' -- main
+git push --force-with-lease origin main
+```
+
+The message filter dropped the trailer line and any blank lines it left at the end of a message. No
+file content changed: `git diff backup/before-trailer-cleanup HEAD --stat` was empty, the commit
+count stayed at 235, and every author and committer line stayed the owner's. Every commit hash
+changed, so references to old short hashes in these documents were regenerated from the rewrite.
+
+The pre-rewrite history is kept in two places: a mirror clone outside the repository at
+`../sawdagar-dokanpart-backup.git`, and the local tag `backup/before-trailer-cleanup`, which is not
+pushed. `refs/original/refs/heads/main` was deleted and the repository was repacked afterwards.
+
+## How this is enforced now
+
+- `.husky/commit-msg` deletes any `Co-Authored-By:` line from the message before commitlint reads it,
+  so a new commit cannot carry one even if the line is typed.
+- `scripts/ci/check-trailers.mjs` scans the full history (`git log -i --grep=Co-Authored-By`) and exits
+  non-zero on a match; the `Commit trailers` job in `.github/workflows/ci.yml` runs it on every push.
+- `scripts/ci/r10-check.mjs` still requires this report to state the count, so the number stays
+  visible rather than only living in the workflow log.
 
 ## How this was measured
 
@@ -21,32 +49,6 @@ git branch -a --format='%(refname:short)'
 git rev-list --count HEAD
 git log --format='%an <%ae>' | sort | uniq -c
 git log --format='%cn <%ce>' | sort | uniq -c
-git log --grep='Co-Authored-By' -i --format='%h %ad %s' --date=short
+git log --format=%B | grep -ci 'co-authored'
+git diff backup/before-trailer-cleanup HEAD --stat
 ```
-
-## The 24 commits with a `Co-Authored-By` trailer
-
-Every one of them is dated 2026-11-06, during the animation pass (R7 and R8). Newest first:
-
-```
-c887adb bd3026d 4e02190 a67ab96 eed2d78 d0b10ad c3e327b de0cb47
-ba0cccc 3e7e9c1 306b49c 1d7d0be b202af5 5154a51 06d6832 5a0373f
-0aa4acb 120dae3 a1472a2 b6b0d91 2000024 dd055d6 bde3a24 d8f0094
-```
-
-They add no author: the trailer names a tool, and every one of the 224 commits was authored and
-committed by the owner's own identity.
-
-## What the owner may want to do
-
-Git history is not rewritten by an agent. Removing the trailer from those 24 commits means an
-interactive rebase over the range `d8f0094^..c887adb` followed by a force-push, which the working
-agreement forbids unless the owner asks for it. Up to the owner:
-
-```bash
-git rebase -i d8f0094^   # drop every Co-Authored-By line in the listed commits
-git push --force-with-lease origin main
-```
-
-If the history stays as it is, the repository still shows one human author for every commit; the
-trailer only explains which tool helped write the code.

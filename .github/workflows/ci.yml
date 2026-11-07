@@ -22,6 +22,18 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: node scripts/check-reference-modules.mjs --require
 
+  trailers:
+    name: Commit trailers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/ci/check-trailers.mjs
+
   checks:
     name: Checks (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
