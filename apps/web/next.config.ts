@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
   htmlLimitedBots: /.*/,
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'res.cloudinary.com' }],
+    /* The next/image optimizer caches each size for 60 seconds by default, so a repeat audit a
+     * minute later re-runs the transform and pays for it during largest contentful paint. Every
+     * source here is a committed file that never changes under its name, so the optimized result
+     * can live for 30 days. */
+    minimumCacheTTL: 2592000,
   },
 };
 
