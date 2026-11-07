@@ -101,6 +101,7 @@ docs/  Product, design, architecture, data, security, testing and deployment doc
   research/  Related code and tests.
   screenshots/  Light, dark and mobile screenshots used in the README and case study
     image-audit/  Related code and tests.
+      candidates/  Related code and tests.
   spec/  Product, design system, architecture, data and roadmap specifications
 
 scripts/  Node automation for wasm builds, budgets, facts, repository map and reference modules

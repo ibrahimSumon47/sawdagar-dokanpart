@@ -94,3 +94,14 @@ npx -y skills list -g
 Then copy the chosen cybersecurity skill folders from `~/.agents/skill-library` with `node skill-library.mjs activate <group/skill>` (see the list above). Check the result with `node skill-library.mjs validate`.
 
 - Diagram PNGs: rendered with the Playwright Chromium already in node_modules (via @playwright/test), from a script outside the repo. No new package installed.
+
+## Image-rebuild tool search
+
+On 2026-11-07 the image rebuild searched the skills registry with
+`npx skills find "image product photography visual QA curation vision clip ocr"`.
+The only match was `inference-sh/skills@ai-image-generation`, which generates new
+pictures rather than checking existing ones and needs a paid inference account,
+so nothing was installed. The rebuild instead uses the tools already in the
+repository: `sharp` for contact sheets, `openai/clip-vit-large-patch14` on CPU,
+OpenCV Haar face detection, a Canny edge text check, and the agent's own image
+viewer for the eye review. These are free and need no account.

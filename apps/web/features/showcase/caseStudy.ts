@@ -30,8 +30,8 @@ const repository = 'https://github.com/ibrahimSumon47/sawdagar-dokanpart';
 export const caseStudyMetrics: readonly CaseStudyMetric[] = [
   {
     label: 'Catalog',
-    value: '142 products',
-    hint: '142 published of 432 seeded, across 12 departments, 84 categories and 24 vendors, in English and Bangla.',
+    value: '28 products',
+    hint: '28 published of 28 seeded, across 7 departments, 84 categories and 24 vendors, in English and Bangla.',
   },
   {
     label: 'Demo roles',
@@ -71,7 +71,7 @@ export const caseStudyDecisions: readonly CaseStudyDecision[] = [
   },
   {
     title: 'The seed is deterministic and idempotent',
-    body: 'Twelve departments expand through fixed rules and an FNV-1a hash into the same 432 seeded products and 1,296 variants on every run; only the 142 with their own photos are published. Upserts let the seed run after any migration without duplicates, and CI only ever runs it through the manual Database workflow.',
+    body: 'The catalog is built from a curated product list: 28 products and 84 variants on every run, each published only with the photo it was written around. Upserts let the seed run after any migration without duplicates, and CI only ever runs it through the manual Database workflow.',
   },
   {
     title: 'Loading states share the layout they replace',

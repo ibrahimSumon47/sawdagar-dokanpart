@@ -20,23 +20,23 @@ jobs:
     name: CLIP relevance
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    # Informational until the photo rebuild: the current manifest still holds
-    # photographs the stricter checks would reject. Remove this once the
-    # rebuilt manifest has passed the gate.
+    # The score run reports; the publish gate is scripts/ci/check-images.ts,
+    # which refuses a manifest with an unrecorded or failing review.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install CPU torch and CLIP
+      - name: Install CPU torch, CLIP and OpenCV
         run: |
           python -m pip install --upgrade pip
           pip install --index-url https://download.pytorch.org/whl/cpu torch
-          pip install transformers pillow
+          pip install transformers pillow opencv-python-headless
       - name: Score every product photo
         env:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLIP_MODEL: openai/clip-vit-large-patch14
         run: |
           python scripts/images/clip-check.py \
             packages/seed/images/manifest.json \

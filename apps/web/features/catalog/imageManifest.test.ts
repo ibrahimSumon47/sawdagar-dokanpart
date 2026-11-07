@@ -25,11 +25,11 @@ describe('product image manifest', () => {
     expect(unknown).toEqual([]);
   });
 
-  it('leaves unpublished every product without its own three photos', () => {
+  it('leaves unpublished every product without its own photo', () => {
     const unpublished = new Set(unpublishableProductSlugs(buildCatalogSeed(), manifest));
     for (const product of buildCatalogSeed().products) {
       const photos = manifest.subcategories[product.categorySlug] ?? [];
-      if (photos.length < 3) expect(unpublished.has(product.slug)).toBe(true);
+      if (photos.length < 1) expect(unpublished.has(product.slug)).toBe(true);
     }
   });
 });

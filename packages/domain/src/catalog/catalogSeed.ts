@@ -1,8 +1,8 @@
 import { catalogSpec, seedVendors } from './catalogSeedData';
+import { curatedProducts } from './curatedProducts';
 import type { CatalogSeed, SeedCategory, SeedProduct, SeedVariant } from './seedTypes';
 
 const DAY_MS = 86_400_000;
-const styleFactors = [0.85, 1, 1.25] as const;
 
 /** Normalises a title into a stable, URL-safe product or vendor slug. */
 export function slugify(value: string): string {
@@ -26,10 +26,6 @@ export function hashSeedValue(value: string): number {
     result = Math.imul(result, 0x01000193) >>> 0;
   }
   return result;
-}
-
-function lowerFirst(value: string): string {
-  return value.charAt(0).toLowerCase() + value.slice(1);
 }
 
 /** Rounds a taka amount to the nearest ten so prices read like shop prices. */
@@ -98,69 +94,63 @@ function buildVariants(
   });
 }
 
-/** Builds the full catalog exactly the same way on every run. */
+/**
+ * Builds the catalog from the curated product list. Every product was written
+ * around a photograph that passed the image review, so the seed never creates
+ * a product whose picture has to be borrowed from somewhere else. Products in
+ * categories with no reviewed photo are simply absent and their categories are
+ * hidden in the storefront.
+ */
 export function buildCatalogSeed(): CatalogSeed {
   const categories = buildCategories();
   const products: SeedProduct[] = [];
+  const categoryBySlug = new Map(categories.map((category) => [category.slug, category]));
+  const topBySubcategory = new Map(
+    catalogSpec.flatMap((top) => top.subcategories.map((sub) => [sub.slug, top] as const)),
+  );
   const usedSlugs = new Set<string>();
-  let productNumber = 0;
 
-  for (const top of catalogSpec) {
-    for (const sub of top.subcategories) {
-      for (let styleIndex = 0; styleIndex < top.styles.length; styleIndex += 1) {
-        for (let colourIndex = 0; colourIndex < top.colours.length; colourIndex += 1) {
-          const style = top.styles[styleIndex];
-          const colour = top.colours[colourIndex];
-          const titleEn = `${style.en} ${lowerFirst(sub.name.en)}, ${colour.en}`;
-          const baseSlug = slugify(`${style.en} ${sub.name.en} ${colour.en}`);
-          let slug = baseSlug;
-          let suffix = 2;
-          while (usedSlugs.has(slug)) {
-            slug = `${baseSlug}-${suffix}`;
-            suffix += 1;
-          }
-          usedSlugs.add(slug);
+  for (const [index, entry] of curatedProducts.entries()) {
+    if (usedSlugs.has(entry.slug)) throw new Error(`Duplicate curated slug: ${entry.slug}`);
+    usedSlugs.add(entry.slug);
 
-          const baseTaka = sub.priceTaka * styleFactors[styleIndex] * (1 + colourIndex * 0.04);
-          const priceMinor = toMinor(baseTaka);
-          const compareAtMinor = productNumber % 4 === 0 ? toMinor(baseTaka * 1.2) : undefined;
-          const vendorSlug = top.vendorSlugs[(styleIndex * top.colours.length + colourIndex) % 2];
-          const vendor = seedVendors.find((entry) => entry.slug === vendorSlug);
-          if (!vendor) throw new Error(`Unknown vendor in catalog seed: ${vendorSlug}`);
-
-          const variants = buildVariants(
-            { slug, priceMinor, compareAtMinor },
-            productNumber,
-            top.variants,
-          );
-
-          products.push({
-            id: `prd_${slug}`,
-            slug,
-            title: {
-              en: titleEn,
-              bn: `${style.bn} ${sub.name.bn}, ${colour.bn}`,
-            },
-            description: {
-              en: `From ${vendor.name} in ${vendor.district}. ${top.description.en} ${top.craftNote.en} This ${lowerFirst(sub.name.en)} comes in ${colour.en}. Each piece is made in small batches, so slight differences in finish and colour are part of the work.`,
-              bn: `${vendor.name}-এর ${vendor.district} কারখানা থেকে। ${top.description.bn} ${top.craftNote.bn} এই ${sub.name.bn} ${colour.bn} রঙে তৈরি। ছোট ব্যাচে তৈরি হয়, তাই রঙ ও ফিনিশে সামান্য পার্থক্য থাকতে পারে।`,
-            },
-            categorySlug: sub.slug,
-            vendorSlug,
-            tone: top.tone,
-            priceMinor,
-            compareAtMinor,
-            totalStock: variants.reduce((total, variant) => total + variant.stock, 0),
-            rating: Number((4.2 + (hashSeedValue(slug) % 8) / 10).toFixed(1)),
-            reviewCount: 6 + (hashSeedValue(`${slug}-reviews`) % 145),
-            createdAt: new Date(Date.UTC(2026, 4, 10) + ((productNumber * 37) % 160) * DAY_MS),
-            variants,
-          });
-
-          productNumber += 1;
-        }
-      }
+    const category = categoryBySlug.get(entry.subcategory);
+    const top = topBySubcategory.get(entry.subcategory);
+    const vendor = seedVendors.find((candidate) => candidate.slug === entry.vendorSlug);
+    if (!category || category.depth !== 1) {
+      throw new Error(`Curated product ${entry.slug} has no leaf category ${entry.subcategory}`);
     }
+    if (!top) throw new Error(`Curated product ${entry.slug} has no department`);
+    if (!vendor)
+      throw new Error(`Curated product ${entry.slug} has unknown vendor ${entry.vendorSlug}`);
+
+    const priceMinor = toMinor(entry.priceTaka);
+    const compareAtMinor = index % 4 === 0 ? toMinor(entry.priceTaka * 1.2) : undefined;
+    const variants = buildVariants(
+      { slug: entry.slug, priceMinor, compareAtMinor },
+      index,
+      top.variants,
+    );
+
+    products.push({
+      id: `prd_${entry.slug}`,
+      slug: entry.slug,
+      title: entry.title,
+      description: {
+        en: `${entry.description.en} Made by ${vendor.name} in ${vendor.district}. Small batches mean slight differences in finish and colour.`,
+        bn: `${entry.description.bn} ${vendor.name}, ${vendor.district}-এ তৈরি। ছোট ব্যাচে তৈরি হয়, তাই রঙ ও ফিনিশে সামান্য পার্থক্য থাকতে পারে।`,
+      },
+      categorySlug: entry.subcategory,
+      vendorSlug: entry.vendorSlug,
+      tone: top.tone,
+      priceMinor,
+      compareAtMinor,
+      totalStock: variants.reduce((total, variant) => total + variant.stock, 0),
+      rating: Number((4.2 + (hashSeedValue(entry.slug) % 8) / 10).toFixed(1)),
+      reviewCount: 6 + (hashSeedValue(`${entry.slug}-reviews`) % 145),
+      createdAt: new Date(Date.UTC(2026, 4, 10) + ((index * 37) % 160) * DAY_MS),
+      variants,
+    });
   }
 
   return { categories, vendors: seedVendors, products };

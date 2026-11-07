@@ -17,12 +17,12 @@
     "zod": "4.6.7"
   },
   "counts": {
-    "departments": 12,
+    "departments": 7,
     "categories": 84,
     "vendors": 24,
-    "products": 432,
-    "publishedProducts": 142,
-    "variants": 1296,
+    "products": 28,
+    "publishedProducts": 28,
+    "variants": 84,
     "seededReviews": 1755,
     "demoRoles": 8,
     "models": 47,

@@ -114,12 +114,23 @@ record(
 );
 
 /* A5 - published count comes from passing photos; docs agree. */
-// One passing main photo is enough for a product; a gallery is optional.
-const passable = manifest?.enforced ? assets.filter((asset) => asset.productMatch).length : 0;
+// One reviewed main photo is enough for a product; a gallery is optional.
+const passable = manifest?.enforced
+  ? assets.filter(
+      (asset) =>
+        asset.productMatch === true &&
+        asset.reviewed === true &&
+        Number.isFinite(asset.clipScore) &&
+        asset.clipScore >= 0.5,
+    ).length
+  : 0;
 record(
   'A5 published count matches photos that passed every rule',
-  Boolean(facts) && Number.isInteger(facts.counts?.publishedProducts) && passable >= 0,
-  `manifest allows ${passable} products, facts say ${facts?.counts?.publishedProducts}`,
+  Boolean(facts) &&
+    passable > 0 &&
+    facts.counts?.products === passable &&
+    facts.counts?.publishedProducts === passable,
+  `approved photos ${passable}, facts say ${facts?.counts?.products} seeded and ${facts?.counts?.publishedProducts} published`,
 );
 
 /* A6 - the CI image gate covers CLIP, keywords, duplicates and three photos. */

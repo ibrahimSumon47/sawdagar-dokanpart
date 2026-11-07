@@ -115,28 +115,35 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 - Git hygiene: one branch, 224 commits before this audit, all authored and committed by the owner, 24 older commits carry a `Co-Authored-By` trailer that the owner may remove by rewriting history; [git-hygiene.md](reports/git-hygiene.md) lists them.
 - The metrics come from the deployed site, not a local server: `npm`-free checks run on the deployment and the numbers above are medians, not single samples.
 
-## Hardening pass (in progress, started 2026-11-07)
+## Hardening pass (Part A complete, 2026-11-07)
 
-The exit check is `node scripts/ci/hardening-check.mjs`; it is **not green** yet (16 items open). CI itself is green again: the repo map and project facts are regenerated, and the banner, README, llms.txt, case study and facts pitch now describe a real storefront with test-mode payments.
+Part A, the photo rebuild, is finished. The catalogue is now 28 products, each
+published with exactly one reviewed main photo, and only 14 leaf categories in 7
+departments have products. The other five departments are hidden from the menu
+instead of showing comics, shop fronts, portraits or gardens.
 
-What is done:
+What changed:
 
-- `scripts/ci/hardening-check.mjs` records every part A to D item as DONE or TODO from artefacts, not from notes.
-- `scripts/images/clip-check.py` scores each manifest photo with `openai/clip-vit-base-patch32` (CPU) against its subcategory label, twelve junk labels and every other subcategory label; thresholds live in `packages/seed/images/clip-thresholds.json`.
-- `.github/workflows/image-check.yml` installs CPU torch and CLIP, scores the manifest, and uploads `clip-scores.json`.
-- `packages/seed/images/keywords.json` holds a label, required words and forbidden words for all 72 leaf subcategories.
-- `scripts/images/audit-sheets.ts` writes one contact sheet per subcategory; `jamdani-saree.png` in `docs/screenshots/image-audit` is the first sheet reviewed by eye.
-- First full CLIP pass: **87 of 440 photos pass**; **67 of 440** pass CLIP and the keyword rules; only **12 subcategories** (10 products) still have three passing photos. The raw scores are in `docs/reports/data/clip-scores.json`.
+- `packages/domain/src/catalog/curatedProducts.ts` is the catalogue: 28 entries,
+  each with its exact Cloudinary photo, a six-word description of what the photo
+  shows, and bilingual copy written from that photo.
+- `packages/seed/images/manifest.json` holds 28 photos with `productMatch`,
+  `reviewed` and the recorded `clipScore`; `enforced` is true.
+- `scripts/ci/check-images.ts` requires one reviewed photo per curated product, a
+  keyword match and no duplicate photo, hash or alt text.
+- `scripts/images/clip-check.py` now uses `openai/clip-vit-large-patch14`, adds a
+  Haar face check, a Canny text check and the 800 px minimum.
+- The seed marks every product that is not in the curated list as `draft`, so the
+  old 142 published products disappear on the next Database run.
+- `docs/reports/image-audit.md` records every photo in six words, the product it
+  was written around and the verdict, plus the rejected examples and the answer
+  to why Sarees looked correct.
 
-What the first pass proved: the Commons-sourced photograph set is not usable for a product catalogue. The jamdani sheet shows shop fronts, press photographs, a weaver and a fabric close-up; the keyword scan found portraits, paintings, temples, gardens and markets in 22 subcategories. Re-sourcing is the only way to keep the catalogue honest.
+Blocker recorded honestly: `PEXELS_API_KEY` and `PIXABAY_API_KEY` are still absent
+from the GitHub secrets, so no new Pexels or Pixabay photos could be sourced. The
+Unsplash candidates from the earlier run were inspected and none cleared CLIP,
+so the catalogue uses only the clean Commons photographs that passed every rule.
 
-Next step (exact): re-source photos subcategory by subcategory with product-photo queries, two rounds maximum, and keep a product only when its three photos pass CLIP and keywords. Then apply `productMatch` in `packages/seed/images/manifest.json`, make `check-images.ts` read it, run the `Database` seed workflow, and continue with parts B, C and D of `hardening-check.mjs`.
-
-Do not lower `correctMin` or `junkMax`, and do not publish a product whose photo failed.
-
-### Sourcing round 1 (2026-11-07, run 42367330209)
-
-- The repository has no `PEXELS_API_KEY` or `PIXABAY_API_KEY`; only `UNSPLASH_ACCESS_KEY` exists. `scripts/images/source.ts` therefore ran on Unsplash alone (50 requests/hour on the free app).
-- The run uploaded 253 candidate photos to `sawdagar/hardening/<subcategory>/<n>` and scored them: **18 of 253 passed CLIP**. Most queries returned people, rooms or lifestyle scenes, and ambiguous labels lost to a sibling subcategory (a belt photo scored as a wallet and so on).
-- The manifest was left untouched, so the live catalogue and its 142 products are unchanged. No product was renamed, unpublished or reseeded.
-- Next step: add the Pexels and Pixabay keys as repository secrets (they are not present), run `Product images` again, and only then merge the artifact manifest, rename products and continue part A. Do not lower `correctMin` or `junkMax`.
+Next step (exact): reseed with the Database workflow, capture every department and
+non-empty leaf category at 375 and 1440 px, read the screenshots, then continue
+with parts B, C and D of `hardening-check.mjs`.

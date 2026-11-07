@@ -1,10 +1,11 @@
-"""Scores every product photo in the manifest with CLIP.
+"""Scores every product photo in the manifest with CLIP and geometry checks.
 
-For each photo the model compares it with one "correct" label built from the
-subcategory and a set of junk labels (comic, portrait, landscape, and every
-other subcategory). A photo passes only when the correct label wins and clears
-the probability floor while no junk label clears the ceiling. Thresholds live in
-packages/seed/images/clip-thresholds.json so they can be tuned without code.
+The model compares each photo with its product label, a set of junk labels, and
+every other product label. A photo passes only when the correct label wins,
+clears the probability floor, no junk label clears the ceiling, no large face
+is detected, the page is not mostly text and the long side is at least 800 px.
+Thresholds live in packages/seed/images/clip-thresholds.json so the gate can be
+tuned without touching this file.
 
 Run: python scripts/images/clip-check.py <manifest> <thresholds> <keywords> <out>
 """
@@ -19,11 +20,18 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+import cv2
+import numpy as np
 import torch
 from PIL import Image
 from transformers import CLIPModel, CLIPProcessor
 
-MODEL_NAME = "openai/clip-vit-base-patch32"
+MODEL_NAME = os.environ.get("CLIP_MODEL", "openai/clip-vit-large-patch14")
+MIN_LONG_SIDE = 800
+# A face covering more than this share of the frame is treated as a portrait,
+# except for the clothing labels where the garment is expected on a body.
+FACE_LIMIT = 0.12
+CLOTHING_LABELS = {"cotton saree", "short kurta", "pathani kurta", "boys panjabi", "lungi"}
 
 
 def load_image(url: str) -> Image.Image:
@@ -35,6 +43,31 @@ def load_image(url: str) -> Image.Image:
 def photo_url(cloud: str, public_id: str) -> str:
     """Builds a 512 px delivery URL, enough detail for CLIP and quick to fetch."""
     return f"https://res.cloudinary.com/{cloud}/image/upload/c_limit,w_512/{public_id}"
+
+
+def face_share(image: Image.Image) -> float:
+    """Largest detected face as a share of the frame; 0 when OpenCV finds none."""
+    cascade = cv2.CascadeClassifier(
+        cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+    )
+    grey = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    faces = cascade.detectMultiScale(grey, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
+    if len(faces) == 0:
+        return 0.0
+    frame = float(image.width * image.height)
+    return max(float(width * height) / frame for x, y, width, height in faces)
+
+
+def text_heavy(image: Image.Image) -> bool:
+    """True when sharp edges cover a large part of the frame.
+
+    Product photos have a few strong outlines; a page of text is edges almost
+    everywhere. The ratio is deliberately conservative so a printed label on a
+    jar does not reject an otherwise clean object photo.
+    """
+    grey = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    edges = cv2.Canny(grey, 80, 180)
+    return float(np.count_nonzero(edges)) / float(edges.size) > 0.16
 
 
 def main() -> int:
@@ -76,7 +109,11 @@ def main() -> int:
             continue
         labels = [correct_label, *junk_labels, *[l for l in other_labels if l != correct_label]]
         junk_indexes = range(1, len(labels))
+
         for photo in photos:
+            width = int(photo.get("width") or 0)
+            height = int(photo.get("height") or 0)
+            too_small = max(width, height) < MIN_LONG_SIDE
             try:
                 image = load_image(photo_url(cloud, photo["publicId"]))
             except Exception as error:  # noqa: BLE001 - report the URL, keep going
@@ -93,10 +130,17 @@ def main() -> int:
             correct = probs[0]
             junk_best = max(junk_indexes, key=lambda index: probs[index])
             junk_max = probs[junk_best]
+            face = face_share(image)
+            clothing = keywords.get(subcategory, {}).get("label") in CLOTHING_LABELS
+            face_allowed = clothing and face <= 0.35
+            text = text_heavy(image)
             passes = (
                 correct >= thresholds["correctMin"]
                 and probs.index(max(probs)) == 0
                 and junk_max < thresholds["junkMax"]
+                and (face <= FACE_LIMIT or face_allowed)
+                and not text
+                and not too_small
             )
             results.append(
                 {
@@ -108,10 +152,17 @@ def main() -> int:
                     "topProb": round(max(probs), 4),
                     "junkMax": round(junk_max, 4),
                     "junkLabel": labels[junk_best],
+                    "faceShare": round(face, 4),
+                    "textHeavy": bool(text),
+                    "tooSmall": bool(too_small),
                     "pass": bool(passes),
                 }
             )
-            print(f"{photo['publicId']}: {correct:.3f} vs {junk_max:.3f} -> {passes}", flush=True)
+            print(
+                f"{photo['publicId']}: {correct:.3f} vs {junk_max:.3f} "
+                f"face {face:.3f} text {text} -> {passes}",
+                flush=True,
+            )
 
     payload = {
         "model": MODEL_NAME,

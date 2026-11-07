@@ -15,9 +15,9 @@ describe('catalog seed', () => {
     expect(seed.categories.filter((category) => category.depth === 1)).toHaveLength(72);
   });
 
-  it('builds a product with three variants for every style and colour combination', () => {
-    expect(seed.products).toHaveLength(432);
-    expect(seed.products.flatMap((product) => product.variants)).toHaveLength(1296);
+  it('builds one product per curated photo, with three variants each', () => {
+    expect(seed.products).toHaveLength(28);
+    expect(seed.products.flatMap((product) => product.variants)).toHaveLength(84);
   });
 
   it('keeps ids, slugs and SKUs unique', () => {
@@ -57,7 +57,7 @@ describe('catalog seed', () => {
       expect(product.rating).toBeLessThanOrEqual(4.9);
       expect(product.title.en.length).toBeGreaterThan(10);
       expect(product.title.bn.length).toBeGreaterThan(5);
-      expect(product.description.bn).toContain('কারখানা');
+      expect(product.description.bn).toContain('তৈরি');
     }
   });
 

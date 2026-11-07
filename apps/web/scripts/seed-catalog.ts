@@ -214,5 +214,13 @@ export async function seedCatalog(prisma: PrismaClient): Promise<string> {
     }
   }
 
-  return `Catalog ready: ${seed.categories.length} categories, ${seed.vendors.length} vendors, ${seed.products.length} products, ${seed.products.reduce((total, product) => total + product.variants.length, 0)} variants.`;
+  // Products that are no longer in the curated list must disappear from the
+  // storefront; leaving them active would show a photo that was rejected.
+  const curatedSlugs = seed.products.map((product) => product.slug);
+  const unpublished = await prisma.product.updateMany({
+    where: { slug: { notIn: curatedSlugs }, status: 'active' },
+    data: { status: 'draft' },
+  });
+
+  return `Catalog ready: ${seed.categories.length} categories, ${seed.vendors.length} vendors, ${seed.products.length} products, ${seed.products.reduce((total, product) => total + product.variants.length, 0)} variants, ${unpublished.count} older products unpublished.`;
 }

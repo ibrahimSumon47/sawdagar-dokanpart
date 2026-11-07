@@ -16,6 +16,12 @@ export interface ProductImageAsset {
   phash: string;
   /** Specific description of this photograph, never shared with another photo. */
   alt: string;
+  /** True only when the photo was checked against the product it is sold with. */
+  productMatch?: boolean;
+  /** True only after a person looked at the photo and accepted it. */
+  reviewed?: boolean;
+  /** CLIP probability for the product label, recorded when the photo was reviewed. */
+  clipScore?: number;
 }
 
 /**
@@ -36,8 +42,8 @@ export interface ProductImageManifest {
 /** Two photographs closer than this Hamming distance are treated as the same picture. */
 export const IMAGE_HASH_DISTANCE_MIN = 8;
 
-/** A published product needs its own main photo and at least two gallery photos. */
-export const PRODUCT_IMAGE_MIN_COUNT = 3;
+/** A published product needs one reviewed main photo; a gallery is optional. */
+export const PRODUCT_IMAGE_MIN_COUNT = 1;
 
 /** The three photos a product owns: one main image and two gallery images. */
 export interface ProductImageSet {
@@ -52,7 +58,10 @@ export type ImageManifestProblem =
   | { kind: 'near-duplicate-hash'; distance: number; publicIds: [string, string] }
   | { kind: 'duplicate-alt'; alt: string; publicIds: string[] }
   | { kind: 'invalid-phash'; publicId: string }
-  | { kind: 'empty-alt'; publicId: string };
+  | { kind: 'empty-alt'; publicId: string }
+  | { kind: 'not-reviewed'; publicId: string }
+  | { kind: 'low-clip-score'; publicId: string; score: number }
+  | { kind: 'no-product-match'; publicId: string };
 
 /**
  * Counts the differing bits between two hexadecimal perceptual hashes.
@@ -123,6 +132,19 @@ export function validateImageManifest(manifest: ProductImageManifest): ImageMani
     for (const asset of photos) {
       all.push(asset);
       publicIdCount.set(asset.publicId, (publicIdCount.get(asset.publicId) ?? 0) + 1);
+
+      if (manifest.enforced) {
+        if (asset.reviewed !== true || asset.productMatch !== true) {
+          problems.push({ kind: 'not-reviewed', publicId: asset.publicId });
+        }
+        if ((asset.clipScore ?? 0) < 0.5) {
+          problems.push({
+            kind: 'low-clip-score',
+            publicId: asset.publicId,
+            score: asset.clipScore ?? 0,
+          });
+        }
+      }
 
       const alt = normalizeAlt(asset.alt);
       if (alt.length === 0) {

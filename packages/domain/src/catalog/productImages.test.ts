@@ -49,17 +49,16 @@ describe('normalizeAlt', () => {
 });
 
 describe('assignProductImages', () => {
-  it('gives each product its own three photos in order', () => {
-    const photos = [1, 2, 3, 4, 5, 6].map((n) => asset({ publicId: `p${n}` }));
+  it('gives each product its own main photo in order', () => {
+    const photos = [1, 2, 3].map((n) => asset({ publicId: `p${n}` }));
     const sets = assignProductImages(['a', 'b'], photos);
     expect(sets.map((set) => set.productSlug)).toEqual(['a', 'b']);
-    expect(sets[0]?.images.map((image) => image.publicId)).toEqual(['p1', 'p2', 'p3']);
-    expect(sets[1]?.images.map((image) => image.publicId)).toEqual(['p4', 'p5', 'p6']);
+    expect(sets[0]?.images.map((image) => image.publicId)).toEqual(['p1']);
+    expect(sets[1]?.images.map((image) => image.publicId)).toEqual(['p2']);
   });
 
-  it('leaves products without three photos unassigned', () => {
-    const photos = [1, 2, 3, 4].map((n) => asset({ publicId: `p${n}` }));
-    expect(assignProductImages(['a', 'b', 'c'], photos)).toHaveLength(1);
+  it('leaves products without a photo unassigned', () => {
+    expect(assignProductImages(['a', 'b'], [])).toHaveLength(0);
   });
 });
 
@@ -75,12 +74,12 @@ describe('validateImageManifest', () => {
     expect(validateImageManifest(clean)).toEqual([]);
   });
 
-  it('flags a subcategory with fewer than three photos', () => {
-    const short = manifest({ jamdani: [asset({ publicId: 'j1' })] });
+  it('flags a subcategory with no photos', () => {
+    const short = manifest({ jamdani: [] });
     expect(validateImageManifest(short)).toContainEqual({
       kind: 'too-few-images',
       subcategory: 'jamdani',
-      count: 1,
+      count: 0,
     });
   });
 
@@ -130,7 +129,7 @@ describe('validateImageManifest', () => {
 });
 
 describe('unpublishableProductSlugs', () => {
-  it('returns every seed product that lacks its own three photos', () => {
+  it('returns every seed product that lacks its own photo', () => {
     const seed = buildCatalogSeed();
     const empty = manifest({});
     expect(unpublishableProductSlugs(seed, empty)).toHaveLength(seed.products.length);
