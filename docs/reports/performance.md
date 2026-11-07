@@ -137,3 +137,15 @@ Changes: the home hero is served straight from the CDN instead of through the im
 Home and catalog clear the 0.90 budget at the median, and the product page clears its 0.85 budget ([ADR-014](adr/ADR-014-product-performance-budget.md)). Accessibility, best practices and SEO are 100 on all three URLs.
 
 Two things this round showed: running the browser suite at the same time as the audit pushes the deployment hard enough to move every score down by five to ten points, so Lighthouse now runs on its own; and the first run of a round can still be an outlier (home 0.68 here) while the median stays where the page actually sits.
+
+## Round 10 (hardening pass, run 42369850139)
+
+No rendering change this round: the run re-measures the same code after the security hardening and documentation work, to confirm the budgets still hold.
+
+| Page    | Median | Scores (five runs)           | LCP (five runs)              | CLS   | TBT (median) |
+| ------- | ------ | ---------------------------- | ---------------------------- | ----- | ------------ |
+| Home    | 0.92   | 0.55, 0.92, 0.92, 0.92, 0.92 | 3.37 s (median of five runs) | 0 all | 36 ms        |
+| Catalog | 0.95   | 0.95, 0.83, 0.95, 0.96, 0.94 | 2.96 s (median of five runs) | 0 all | 39 ms        |
+| Product | 0.88   | 0.87, 0.88, 0.89, 0.88, 0.89 | 3.82 s (median of five runs) | 0 all | 66 ms        |
+
+Before this run the medians were 0.92 home, 0.94 catalog and 0.88 product (round 9); after it they are 0.92, 0.95 and 0.88, so the hardening changes cost nothing. Home and catalog stay above 0.90 and the product page stays above its documented 0.85 gate ([ADR-014](adr/ADR-014-product-performance-budget.md)). Accessibility and SEO are 1.00 on all three; best practices is 0.96 because of one flagged audit on the deployment, not a regression in this repository.

@@ -174,13 +174,13 @@ docs/                    Product, design, architecture, data, security, testing,
 
 ## Performance and tests
 
-Lighthouse CI, median of five mobile runs on the deployed site. The gate is 90 for performance on home and catalog and 85 on the product page, and 90 for accessibility, best practices and SEO everywhere ([ADR-014](docs/adr/ADR-014-product-performance-budget.md)). Latest run [42349157321](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42349157321) and the full history in [`docs/reports/performance.md`](docs/reports/performance.md):
+Lighthouse CI, median of five mobile runs on the deployed site. The gate is 90 for performance on home and catalog and 85 on the product page, and 90 for accessibility, best practices and SEO everywhere ([ADR-014](docs/adr/ADR-014-product-performance-budget.md)). Latest run [42369850139](https://github.com/ibrahimSumon47/sawdagar-dokanpart/actions/runs/42369850139) and the full history in [`docs/reports/performance.md`](docs/reports/performance.md):
 
 | Route   | Performance | Accessibility | Best practices | SEO |    LCP |   TBT | CLS |
 | ------- | ----------: | ------------: | -------------: | --: | -----: | ----: | --: |
-| Home    |          92 |           100 |            100 | 100 | 3.34 s | 56 ms |   0 |
-| Catalog |          94 |           100 |            100 | 100 | 3.01 s | 64 ms |   0 |
-| Product |          88 |           100 |            100 | 100 | 3.92 s | 96 ms |   0 |
+| Home    |          92 |           100 |             96 | 100 | 3.37 s | 36 ms |   0 |
+| Catalog |          95 |           100 |             96 | 100 | 2.96 s | 39 ms |   0 |
+| Product |          88 |           100 |             96 | 100 | 3.82 s | 66 ms |   0 |
 
 The product page is the one route below 90. Its largest contentful paint is the product photograph, which is delivered from Cloudinary rather than from this repository; the budget is recorded in ADR-014 after the preload and the exact-width Cloudinary URL failed to move the score.
 
