@@ -1,11 +1,13 @@
 name: Release guest holds
 
+# Disabled while the Vercel team is paused; re-enable with
+#   gh workflow enable "Release guest holds"
 # Correctness does not depend on this job: stock availability adds back any hold
-# whose expiry has passed at read time. The hourly sweep only normalises the rows
-# and cancels the abandoned orders, so one run per hour is enough.
+# whose expiry has passed at read time. The sweep only normalises rows, so one
+# weekly run is enough and keeps production calls away from the free-tier limit.
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17 3 * * 1'
   workflow_dispatch:
 
 permissions:

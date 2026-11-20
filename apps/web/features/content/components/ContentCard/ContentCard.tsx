@@ -34,6 +34,7 @@ export function ContentCard({ kind, entry, copy, locale, index, eyebrow }: Conte
   return (
     <Link
       href={contentHref(kind, entry.slug)}
+      prefetch={false}
       className="group flex h-full flex-col overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-accent"
     >
       {kind === 'journal' && entry.coverImageUrl ? (

@@ -11,7 +11,17 @@ export const TRACKING_LIMITS = {
   perOrder: { requests: 8, window: '10 m' },
 } as const;
 
+/**
+ * Live polling is cheaper than the old stream but still finishes a function on
+ * every call, so one address gets 90 checks per ten minutes: three tabs polling
+ * every 25 seconds fit, while a script cannot drive a busy loop.
+ */
+export const LIVE_POLL_LIMITS = {
+  perIp: { requests: 90, window: '10 m' },
+} as const;
+
 let limiters: { ip: Ratelimit; order: Ratelimit } | null = null;
+let liveLimiter: Ratelimit | null = null;
 
 /** Builds the two limiters once per isolate. Throws a clear error when Upstash is not configured. */
 function getLimiters(): { ip: Ratelimit; order: Ratelimit } {
@@ -36,6 +46,30 @@ function getLimiters(): { ip: Ratelimit; order: Ratelimit } {
     }),
   };
   return limiters;
+}
+
+/**
+ * Returns true when one address is polling too often. It fails open when Redis is
+ * unavailable: this is a read-only endpoint and access still needs the signed
+ * cookie or the viewer's session.
+ */
+export async function isLiveTrackingLimited(ipAddress: string): Promise<boolean> {
+  try {
+    if (!liveLimiter) {
+      liveLimiter = new Ratelimit({
+        redis: Redis.fromEnv(),
+        limiter: Ratelimit.slidingWindow(
+          LIVE_POLL_LIMITS.perIp.requests,
+          LIVE_POLL_LIMITS.perIp.window,
+        ),
+        prefix: 'sd:track:poll',
+      });
+    }
+    const result = await liveLimiter.limit(ipAddress || 'unknown');
+    return !result.success;
+  } catch {
+    return false;
+  }
 }
 
 /** Returns true when either the client IP or the order code is over its limit. */

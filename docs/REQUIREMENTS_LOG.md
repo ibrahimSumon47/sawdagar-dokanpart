@@ -33,3 +33,14 @@ published, 114 old products are unpublished, five empty departments are hidden,
 and the Database run and live screenshot check are recorded in
 docs/reports/image-audit.md. Pexels and Pixabay keys were not present in the
 GitHub secrets, so no new photos could be sourced; that remains an owner action.
+
+## 2026-11-20 - Vercel usage incident
+
+Owner: "The Vercel free team was paused for exceeding Fluid Active CPU (4h25m of
+4h). Function invocations (731K) and CDN requests (776K) are almost equal... Find
+and fix the causes in this repository; do not touch production while the team is
+paused." Status: done in the repository. Tracking streams were replaced with
+visible-tab ETag polling, a Redis snapshot cache and a per-IP limit; the route
+and cache audit is in docs/reports/usage-audit.md; release-holds, Lighthouse and
+Playwright are disabled until the unpause; docs/USAGE.md and OWNER_TODO.md cover
+the limits, firewall rule and re-enable steps. Production was not touched.

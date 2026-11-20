@@ -17,7 +17,13 @@ Better Auth serves authentication endpoints under `/api/auth/*` through [the rou
 
 Requests are rate limited with a database-backed counter: 10 sign-in attempts per minute and 30 requests per minute per key. Sign-in, registration, reset and verification mail go through the same endpoints for every account, including the eight seeded demo rows. Next.js Server Actions handle theme, language, profile and auth forms; they are page actions, not versioned API endpoints. They validate with Zod, resolve the viewer from the session and return field errors, never a session token.
 
-The catalog and shop have no HTTP API yet. Listing and product pages query Prisma directly on the server and read filters from validated URL parameters. The shop client calls Server Actions, which validate every id and quantity on the server, resolve the viewer from the session and re-read stock before writing.
+## Tracking polling endpoint
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/track/live?code=` or `?number=` | One short order-status snapshot for the tracking page. Requires the signed `sd_track` cookie for a guest code or the owner's session for an order number. Returns `{ fingerprint, status, final }` with an `ETag`; an unchanged `If-None-Match` gets `304`. The fingerprint and final flag are cached in Upstash for 8 seconds, and one IP may poll 90 times per 10 minutes. There is no streaming response. |
+
+The catalog and shop have no HTTP API yet. Listing and product pages query Prisma directly on the server and read filters from validated URL parameters. Apart from the tracking poll and the MockPay callback, writes remain Server Actions. The shop client calls Server Actions, which validate every id and quantity on the server, resolve the viewer from the session and re-read stock before writing.
 
 ## Shop Server Actions
 

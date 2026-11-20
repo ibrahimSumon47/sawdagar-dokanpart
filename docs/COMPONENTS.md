@@ -221,6 +221,7 @@ functions that React cannot serialise across the server/client boundary.
 | HeaderSearch | Search form shared by compact and desktop headers. | `id`, `label`, `placeholder`, `className` | [HeaderSearch.tsx](../apps/web/features/shell/components/SiteHeader/HeaderSearch.tsx) |
 | MobileMenu | Disclosure navigation for narrow screens; closes with Escape or a chosen link. | `links`, `labels`, `className` | [MobileMenu.tsx](../apps/web/features/shell/components/SiteHeader/MobileMenu.tsx) |
 | SiteFooter | Footer with Shop links including comparison and editor-added links, Project links and the test-mode payments line. | `copy`, `extraLinks` | [SiteFooter.tsx](../apps/web/features/shell/components/SiteFooter/SiteFooter.tsx) |
+| LiveStatus | Tracks one order with a visible-tab ETag poll and shows live, paused, final or offline states with a refresh control. | `query`, `copy` | [LiveStatus.tsx](../apps/web/features/tracking/components/LiveStatus/LiveStatus.tsx) |
 
 Page containers shared by every route and its skeleton live in [pageLayout.ts](../apps/web/features/shell/pageLayout.ts).
 

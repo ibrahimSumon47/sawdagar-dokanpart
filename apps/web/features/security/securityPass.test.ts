@@ -5,7 +5,7 @@ import { safeNextPath } from '../auth/safeNextPath';
 import { reviewPhotoSchema, reviewSchema, MAX_REVIEW_PHOTOS } from '../reviews/inputs';
 import { sanitizeRichText } from '../content/richText';
 import { shopCookieOptions } from '../shop/cookieState';
-import { TRACKING_LIMITS } from '../tracking/rateLimit';
+import { LIVE_POLL_LIMITS, TRACKING_LIMITS } from '../tracking/rateLimit';
 
 const jpeg = `data:image/jpeg;base64,${'A'.repeat(64)}`;
 
@@ -95,6 +95,11 @@ describe('abuse limits', () => {
     expect(TRACKING_LIMITS.perIp.requests).toBe(20);
     expect(TRACKING_LIMITS.perOrder.requests).toBe(8);
     expect(TRACKING_LIMITS.perIp.window).toBe('10 m');
+  });
+
+  it('caps live polling per IP instead of streaming', () => {
+    expect(LIVE_POLL_LIMITS.perIp.requests).toBe(90);
+    expect(LIVE_POLL_LIMITS.perIp.window).toBe('10 m');
   });
 
   it('keeps the review payload bounded', () => {

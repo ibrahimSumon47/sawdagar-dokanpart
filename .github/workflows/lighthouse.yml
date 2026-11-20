@@ -1,9 +1,13 @@
 name: Lighthouse
 
+# Disabled while the Vercel team is paused; re-enable with
+#   gh workflow enable "Lighthouse"
+# A manual run after a performance slice is enough. The monthly schedule keeps a
+# regression signal without auditing production every week.
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * 1'
+    - cron: '0 4 1 * *'
 
 permissions:
   contents: read

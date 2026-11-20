@@ -2,7 +2,7 @@ import type { Dictionary, Locale } from '../../../../i18n';
 import { formatDate } from '../../../../lib/formatDate';
 import { pageLayout } from '../../../shell/pageLayout';
 import type { OrderRecord } from '../../../checkout/queries';
-import { LiveStatus, type LiveStatusProps } from '../LiveStatus';
+import { LiveStatus, type LiveStatusCopy, type LiveStatusProps } from '../LiveStatus';
 import { SellerPackage } from '../SellerPackage';
 
 export interface OrderTrackingProps {
@@ -18,6 +18,16 @@ export interface OrderTrackingProps {
  * timeline per seller package, so a buyer can see each seller's progress.
  */
 export function OrderTracking({ order, copy, locale, live }: OrderTrackingProps) {
+  const liveCopy: LiveStatusCopy = {
+    liveLabel: copy.liveLabel,
+    liveUpdatedAgo: copy.liveUpdatedAgo,
+    liveUpdatedNow: copy.liveUpdatedNow,
+    livePaused: copy.livePaused,
+    liveFinal: copy.liveFinal,
+    liveOffline: copy.liveOffline,
+    liveRefresh: copy.liveRefresh,
+  };
+
   return (
     <div className={pageLayout.wide}>
       <header className="border-b border-line pb-6">
@@ -27,7 +37,7 @@ export function OrderTracking({ order, copy, locale, live }: OrderTrackingProps)
           {copy.placedOn} {formatDate(order.placedAt, locale)}
         </p>
         <div className="mt-3">
-          <LiveStatus query={live} copy={copy} />
+          <LiveStatus query={live} copy={liveCopy} />
         </div>
       </header>
 

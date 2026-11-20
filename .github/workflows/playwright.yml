@@ -1,12 +1,16 @@
 name: Playwright
 
+# Disabled while the Vercel team is paused; re-enable with
+#   gh workflow enable "Playwright"
+# Point this at a preview deployment or a locally built server. Do not run a
+# loop against the production origin.
 on:
   workflow_dispatch:
     inputs:
       base_url:
-        description: HTTPS deployment URL to test
+        description: HTTPS preview URL to test (not production)
         required: true
-        default: https://sawdagar-dokanpart.vercel.app
+        default: ''
 
 permissions:
   contents: read
@@ -23,6 +27,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
+      - name: Require a non-production target
+        run: |
+          if [ -z "${{ inputs.base_url }}" ]; then
+            echo "Enter a preview deployment URL; production loops are disabled." >&2
+            exit 1
+          fi
       - run: pnpm exec playwright test
         env:
           PLAYWRIGHT_BASE_URL: ${{ inputs.base_url }}

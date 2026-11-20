@@ -64,6 +64,7 @@ export function SiteFooter({ copy, extraLinks = [] }: SiteFooterProps) {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  prefetch={false}
                   className="text-ink-muted transition-colors hover:text-accent"
                 >
                   {link.label}
@@ -90,6 +91,7 @@ export function SiteFooter({ copy, extraLinks = [] }: SiteFooterProps) {
                 ) : (
                   <Link
                     href={link.href}
+                    prefetch={false}
                     className="text-ink-muted transition-colors hover:text-accent"
                   >
                     {link.label}

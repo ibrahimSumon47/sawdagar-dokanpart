@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { getOrderForViewer, getGuestOrderByCode } from '../checkout/queries';
 import type { OrderRecord } from '../checkout/queries';
+import { isFinalOrder } from './finalStatus';
 import { hasTrackAccess } from './guestAccess';
 
 /** What a live client follows: a guest order code, or a signed-in order number. */
@@ -11,6 +12,8 @@ export type TrackingReference =
 export interface TrackingSnapshot {
   fingerprint: string;
   order: OrderRecord;
+  /** True once no further timeline update can arrive. */
+  final: boolean;
 }
 
 /**
@@ -53,5 +56,12 @@ export function toSnapshot(order: OrderRecord): TrackingSnapshot {
     })),
   };
   const fingerprint = createHash('sha256').update(JSON.stringify(visible)).digest('base64url');
-  return { fingerprint, order };
+  return {
+    fingerprint,
+    order,
+    final: isFinalOrder(
+      order.status,
+      order.subOrders.map((sub) => sub.status),
+    ),
+  };
 }

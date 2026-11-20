@@ -25,6 +25,7 @@ export function CategoryTiles({ categories, locale }: CategoryTilesProps) {
           <li key={category.slug}>
             <Link
               href={`/catalog?category=${category.slug}`}
+              prefetch={false}
               className="group block overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {photo ? (

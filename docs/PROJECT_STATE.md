@@ -49,6 +49,18 @@
 
 ## Now
 
+Usage incident (2026-11-20): the Vercel team was paused after 4h25m of Fluid
+Active CPU. Function invocations (731K) were almost equal to CDN requests
+(776K), so the cause was programmatic traffic. Live tracking no longer streams:
+it polls every 25 seconds only while visible, answers with an ETag and a 304,
+caches the fingerprint for 8 seconds, backs off on errors, stops after ten quiet
+minutes or a final status, and has a per-IP limit. The release-holds, Lighthouse
+and Playwright workflows are disabled until the team is unpaused; Lighthouse is
+now monthly and Playwright requires a preview URL. The full route audit and
+saving estimates are in [reports/usage-audit.md](reports/usage-audit.md); the
+limits and weekly routine are in [USAGE.md](USAGE.md). Local lint, typecheck,
+tests and build pass, but no production check was run while the team is paused.
+
 Repository and deployment hygiene (2026-11-07): Dependabot no longer opens branches or pull requests, only `main` exists on the remote, `SITE_URL` is a repository variable, the hold sweep runs hourly with a read-time release fallback, docs-only commits skip the Vercel build, and CI, security and image-check carry concurrency groups and path filters. Evidence lives in `docs/reports/ci-stability.md`. The first ignore rule skipped every build because the project root is `apps/web` and its pathspecs matched nothing there; 22c4109 runs the check from the repository root. CI and security are green, and Vercel deployed 22c4109 as Ready.
 
 ## Owner must add
@@ -66,6 +78,7 @@ Revision 1 is closed: every phase from R1 to R9 is `pass` in `docs/features.json
 
 ## Blocked
 
+- Vercel paused the team after the Fluid Active CPU allowance ran out on 2026-11-20. Do not deploy, reseed or run production checks until the owner confirms the unpause; the three production-calling workflows are disabled meanwhile.
 - Part A of the hardening pass (photo rebuild) waits on `PEXELS_API_KEY` and `PIXABAY_API_KEY`; the image check stays informational until then.
 - Vercel `usage` cannot read billing data for this team, so the allowance is inferred from the deployment list; the next production build will show whether the quota has room. Payment gateways and email need owner accounts, so the checkout offers COD and MockPay and mail lands in the in-app outbox.
 

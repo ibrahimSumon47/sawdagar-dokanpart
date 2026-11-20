@@ -57,6 +57,7 @@ export function ProductGrid({ products, locale, labels }: ProductGridProps) {
                   and the card shows the vendor and the price beside the title. */}
               <Link
                 href={`/product/${product.slug}`}
+                prefetch={false}
                 className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
                 <ProductCard
